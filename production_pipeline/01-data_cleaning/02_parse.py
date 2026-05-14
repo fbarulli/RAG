@@ -18,13 +18,14 @@ import tempfile
 from typing import Dict, Generator, Optional, Tuple, TypedDict
 
 import yaml
+from rag_pipeline.paths import Paths
 
 # ---------------------------------------------------------------------------
 # Constants
 # ---------------------------------------------------------------------------
 
-DEFAULT_RAW_DIR = "data_cleaning/data/raw"
-DEFAULT_OUTPUT = "data_cleaning/data/processed/parsed.jsonl"
+DEFAULT_RAW_DIR = str(Paths.raw_dir())
+DEFAULT_OUTPUT = str(Paths.output_file("parse"))
 
 # Minimum consecutive newlines to collapse into two newlines.
 _NEWLINE_COLLAPSE_THRESHOLD = 3

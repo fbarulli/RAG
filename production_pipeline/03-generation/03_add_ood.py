@@ -11,12 +11,11 @@ Run:    uv run python 03_add_ood.py
 import json, os
 from pathlib import Path
 from datetime import datetime
+from rag_pipeline.paths import Paths
 
-BASE = Path(__file__).parent.parent.parent
-sys.path.insert(0, str(BASE))
 
-INPUT = BASE / 'experiments/eval_queries.json'
-OUTPUT = BASE / 'experiments/eval_queries_with_ood.json'
+INPUT = Paths.experiments_dir() / 'eval_queries.json'
+OUTPUT = Paths.experiments_dir() / 'eval_queries_with_ood.json'
 
 OOD_QUERIES = [
     # Pure out-of-domain (should score <0.60)

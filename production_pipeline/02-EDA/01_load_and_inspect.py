@@ -17,15 +17,14 @@ import hashlib
 import argparse
 from pathlib import Path
 from collections import Counter
+from rag_pipeline.paths import Paths
 
-BASE = Path(__file__).parent.parent.parent
-sys.path.insert(0, str(BASE))
 
-INPUT = BASE / '01-data-cleaning/data/processed/clean.jsonl'
-OUTPUT = BASE / 'experiments/eda_summary.json'
+INPUT = Paths.input_file("eda")
+OUTPUT = Paths.output_file("eda")
 
-logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
-logger = logging.getLogger(__name__)
+from rag_pipeline.logging import get_logger
+logger = get_logger(__name__)
 
 STOPWORDS = {
     'the','a','an','how','do','i','my','to','is','in','of','and','it','me',

@@ -15,8 +15,9 @@ import os
 import urllib.request
 import zipfile
 import shutil
+from rag_pipeline.paths import Paths
 
-RAW_DIR = 'data_cleaning/data/raw'
+RAW_DIR = str(Paths.raw_dir())
 REPO_URL = 'https://github.com/DataTalksClub/faq/archive/refs/heads/main.zip'
 COURSES = [
     'llm-zoomcamp',

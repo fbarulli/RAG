@@ -20,13 +20,14 @@ import tempfile
 from collections import defaultdict
 from difflib import SequenceMatcher
 from typing import TypedDict
+from rag_pipeline.paths import Paths
 
 # ---------------------------------------------------------------------------
 # Constants
 # ---------------------------------------------------------------------------
 
-DEFAULT_INPUT = "data_cleaning/data/processed/parsed.jsonl"
-DEFAULT_OUTPUT = "data_cleaning/data/processed/clean.jsonl"
+DEFAULT_INPUT = str(Paths.input_file("dedup"))
+DEFAULT_OUTPUT = str(Paths.output_file("dedup"))
 
 # Answers with similarity at or above this threshold are considered duplicates.
 SIMILARITY_THRESHOLD = 0.95
