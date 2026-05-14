@@ -60,32 +60,32 @@ _RE_EXCESS_NEWLINES = re.compile(
 # ---------------------------------------------------------------------------
 
 
+
 def clean_answer(text: str) -> str:
     """Remove markdown formatting while preserving fenced code blocks."""
-    # Step 1: Extract and protect fenced code blocks (```lang\n...\n```)
+
     code_blocks = []
     def protect_fenced_code(match):
-        """Save code block content and return a placeholder."""
         code_blocks.append(match.group(1).strip())
         return f"__FENCED_CODE_{len(code_blocks)-1}__"
     
-    # Match ```lang\ncontent\n``` or ```\ncontent\n``` (case-insensitive lang)
+
     text = re.sub(r'```(?:\w+)?\n(.*?)```', protect_fenced_code, text, flags=re.DOTALL | re.IGNORECASE)
     
-    # Step 2: Apply existing cleaning steps (now safe — fenced blocks are protected)
+    # Step 2: Apply existing cleaning steps
     text = _RE_IMAGE_PLACEHOLDER.sub("", text)
     text = _RE_HEADERS.sub("", text)
     text = _RE_MD_IMAGE.sub("", text)
     text = _RE_BOLD.sub(r"\1", text)
     text = _RE_ITALIC.sub(r"\1", text)
-    text = _RE_INLINE_CODE.sub(r"\1", text)  # Now only affects inline `code`, not fenced blocks
+    text = _RE_INLINE_CODE.sub(r"\1", text)
     text = _RE_MD_LINK.sub(r"\1", text)
     text = _RE_HTML_TAG.sub("", text)
     text = _RE_JINJA_BLOCK.sub("", text)
     text = _RE_JINJA_VAR.sub("", text)
     text = _RE_EXCESS_NEWLINES.sub("\n\n", text)
     
-    # Step 3: Restore fenced code blocks with markdown formatting
+    # Step 3: Restore fenced code blocks
     for i, code in enumerate(code_blocks):
         text = text.replace(f"__FENCED_CODE_{i}__", f"```{code}```")
     
