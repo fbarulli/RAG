@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ course_name }} FAQ</h1>
+
+<div class="contribute-banner">
+    <p>💡 <strong>Have a question to add?</strong>
+    <a href="https://github.com/DataTalksClub/faq/blob/main/CONTRIBUTING.md" target="_blank">Learn how to contribute</a>
+    to this FAQ!</p>
+</div>
+
+{% if sections %}
+<div class="table-of-contents">
+    <h2>Table of Contents</h2>
+    <ul>
+    {% for section in sections %}
+        <li><a href="#{{ section.id }}">{{ section.name }}</a></li>
+    {% endfor %}
+    </ul>
+</div>
+
+{% for section in sections %}
+<div class="section" id="{{ section.id }}">
+    <h2>{{ section.name }}</h2>
+    
+    {% for question in section.questions %}
+    <div class="question" id="{{ question.id }}">
+        <h3>
+            <a href="#{{ question.id }}" class="anchor-link">#</a>
+            {{ question.question }}
+        </h3>
+        <div class="question-content">
+            {{ question.content | safe }}
+        </div>
+        <div class="question-meta">
+            <a href="https://github.com/DataTalksClub/faq/blob/main/_questions/{{ question.file_path }}" class="edit-link" target="_blank">edit on GitHub</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endfor %}
+
+{% else %}
+<p>No questions found for this course.</p>
+{% endif %}
+{% endblock %}

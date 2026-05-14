@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page_title %}{{ page_title }} - {% endif %}DataTalks.Club FAQ</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/syntax.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>DataTalks.Club FAQ</h1>
+        </div>
+    </header>
+    
+    <div class="container">
+        {% if show_nav %}
+        <nav class="course-nav">
+            <a href="index.html">Home</a>
+            {% for course in courses %}
+            <a href="{{ course.id }}.html">{{ course.name }}</a>
+            {% endfor %}
+        </nav>
+        {% endif %}
+        
+        <main class="content">
+            {% block content %}{% endblock %}
+        </main>
+        
+        <footer>
+            <p>Generated on {{ generation_time }} | <a href="https://github.com/DataTalksClub/faq">DataTalks.Club FAQ</a></p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -28,11 +28,11 @@ class Paths:
     
     @classmethod
     def raw_dir(cls) -> Path:
-        return cls.base() / "production_pipeline" / "01-data_cleaning" / "data" / "raw"
+        return cls.base() / "production_pipeline" / "01_data_cleaning" / "data" / "raw"
     
     @classmethod
     def processed_dir(cls) -> Path:
-        return cls.base() / "production_pipeline" / "01-data_cleaning" / "data" / "processed"
+        return cls.base() / "production_pipeline" / "01_data_cleaning" / "data" / "processed"
     
     @classmethod
     def experiments_dir(cls) -> Path:
