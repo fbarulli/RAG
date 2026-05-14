@@ -18,6 +18,7 @@ import tempfile
 from typing import Dict, Generator, Optional, Tuple, TypedDict
 
 import yaml
+from rag_pipeline.schemas import FAQDocument
 from rag_pipeline.paths import Paths
 
 # ---------------------------------------------------------------------------
@@ -59,13 +60,6 @@ _RE_EXCESS_NEWLINES = re.compile(
 # ---------------------------------------------------------------------------
 
 
-class Document(TypedDict):
-    id: str
-    question: str
-    answer: str
-    course: str
-    section: str
-
 
 # ---------------------------------------------------------------------------
 # Core logic
@@ -95,7 +89,7 @@ def clean_answer(text: str) -> str:
 
 def parse_file(
     filepath: str, course: str, section: str
-) -> Tuple[Optional[Document], Optional[str]]:
+) -> Tuple[Optional[FAQDocument], Optional[str]]:
     """Parse a single markdown file into a structured document.
 
     Returns:
@@ -137,8 +131,8 @@ def parse_file(
         )
         question = str(question)
 
-    return (
-        Document(
+        return (
+        FAQDocument(
             id=doc_id,
             question=question.strip(),
             answer=clean_answer(body),
@@ -195,7 +189,7 @@ def main(raw_dir: str = DEFAULT_RAW_DIR, output: str = DEFAULT_OUTPUT) -> None:
                     skipped += 1
                     continue
 
-                out.write(json.dumps(doc) + "\n")
+                out.write(doc.to_json() + "\n")
                 total += 1
 
         os.replace(tmp_path, output)

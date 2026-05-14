@@ -18,7 +18,7 @@ import argparse
 from pathlib import Path
 from collections import Counter
 from rag_pipeline.paths import Paths
-
+from rag_pipeline.schemas import FAQDocument
 
 INPUT = Paths.input_file("eda")
 OUTPUT = Paths.output_file("eda")
@@ -36,8 +36,8 @@ STOPWORDS = {
 }
 
 
-def load_docs(path: Path) -> list[dict]:
-    """Load and validate JSONL dataset."""
+def load_docs(path: Path) -> list[FAQDocument]:
+    """Load and validate JSONL dataset into FAQDocument objects."""
     if not path.exists():
         raise FileNotFoundError(f"Dataset not found: {path}")
     
@@ -49,21 +49,11 @@ def load_docs(path: Path) -> list[dict]:
                 continue
             try:
                 doc = json.loads(line)
-                # Validate required fields
-                missing = {'id', 'question', 'answer', 'course'} - doc.keys()
-                if missing:
-                    logger.warning(f"Line {line_num}: missing fields {missing} — skipping")
-                    continue
-                if len(doc['question']) < 5:
-                    logger.warning(f"Line {line_num}: question too short — skipping")
-                    continue
-                if len(doc['answer']) < 10:
-                    logger.warning(f"Line {line_num}: answer too short — skipping")
-                    continue
-                docs.append(doc)
+                docs.append(FAQDocument.from_dict(doc))
             except json.JSONDecodeError as e:
                 logger.warning(f"Line {line_num}: malformed JSON — {e}")
-                continue
+            except Exception as e:
+                logger.warning(f"Line {line_num}: schema validation failed — {e}")
     return docs
 
 
@@ -131,11 +121,11 @@ def main():
         logger.error("No valid documents loaded.")
         return
     
-    questions = [d['question'] for d in docs]
-    answers = [d['answer'] for d in docs]
-    courses = [d['course'] for d in docs]
-    sections = [d.get('section', 'unknown') for d in docs]
-    ids = [d['id'] for d in docs]
+    questions = [d.question for d in docs]
+    answers = [d.answer for d in docs]
+    courses = [d.course for d in docs]
+    sections = [d.section or 'unknown' for d in docs]
+    ids = [d.id for d in docs]
 
     # ── Basic counts ──────────────────────────────────────────────────────
     logger.info(f"{'='*60}")
@@ -204,9 +194,9 @@ def main():
     logger.info("PER-COURSE SECTIONS")
     logger.info(f"{'='*60}")
     for course in sorted(course_counts.keys()):
-        course_docs = [d for d in docs if d['course'] == course]
-        course_sections = Counter(d.get('section', '?') for d in course_docs)
-        tech_count = sum(1 for d in course_docs if 'module' in d.get('section', '').lower())
+        course_docs = [d for d in docs if d.course == course]
+        course_sections = Counter(d.section or '?' for d in course_docs)
+        tech_count = sum(1 for d in course_docs if 'module' in (d.section or '').lower())
         logger.info(f"\n  [{course}] {len(course_docs)} questions")
         logger.info(f"    Technical (module sections): {tech_count} ({tech_count/len(course_docs):.0%})")
         logger.info(f"    Top sections:")
