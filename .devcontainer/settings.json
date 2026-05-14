@@ -1,0 +1,6 @@
+{
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+    "jupyter.notebookEditor.defaultKernel": "python3",
+    "python.terminal.activateEnvInSelectedTerminal": false,
+    "git.ignoreLimitWarning": true
+}
