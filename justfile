@@ -25,10 +25,10 @@ test extra_args='':
 run stage args='':
   @echo "▶ Running stage: {{stage}}"
   @case "{{stage}}" in \
-    download) uv run python production_pipeline/01_data_cleaning/01_download.py ;; \
-    parse)    uv run python production_pipeline/01_data_cleaning/02_parse.py {{args}} ;; \
-    dedup)    uv run python production_pipeline/01_data_cleaning/03_dedup.py {{args}} ;; \
-    eda)      uv run python production_pipeline/02_eda/01_load_and_inspect.py {{args}} ;; \
+    download) uv run python production_pipeline/p01_data_cleaning/p01_download.py ;; \
+    parse)    uv run python production_pipeline/p01_data_cleaning/p02_parse.py {{args}} ;; \
+    dedup)    uv run python production_pipeline/p01_data_cleaning/p03_dedup.py {{args}} ;; \
+    eda)      uv run python production_pipeline/p02_eda/p01_load_and_inspect.py {{args}} ;; \
     all)      just run download && just run parse && just run dedup && just run eda ;; \
     *) echo "Unknown stage: {{stage}}. Use: download | parse | dedup | eda | all"; exit 1 ;; \
   esac
@@ -36,14 +36,14 @@ run stage args='':
 # ── Data Management ───────────────────────────────────────────────────
 clean-data:
   @echo "⚠️  Removing processed data (keep raw)..."
-  rm -rf production_pipeline/01_data_cleaning/data/processed/*
+  rm -rf production_pipeline/p01_data_cleaning/data/processed/*
   rm -rf production_pipeline/experiments/*
   @echo "✓ Cleaned"
 
 clean-all:
   @echo "⚠️  Removing ALL data..."
-  rm -rf production_pipeline/01_data_cleaning/data/raw/*
-  rm -rf production_pipeline/01_data_cleaning/data/processed/*
+  rm -rf production_pipeline/p01_data_cleaning/data/raw/*
+  rm -rf production_pipeline/p01_data_cleaning/data/processed/*
   rm -rf production_pipeline/experiments/*
   @echo "✓ Fully cleaned"
 

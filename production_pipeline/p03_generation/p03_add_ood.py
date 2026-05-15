@@ -1,12 +1,12 @@
 """
-2-generation/03_add_ood.py
+2-generation/p03_add_ood.py
 ===========================
 Adds out-of-distribution queries to the eval set for guardrail testing.
 These queries have no correct answer in the FAQ corpus.
 
 Output: experiments/eval_queries_with_ood.json
 
-Run:    uv run python 03_add_ood.py
+Run:    uv run python p03_add_ood.py
 """
 import json, os
 from pathlib import Path

@@ -1,12 +1,12 @@
 """
-02_eda/01_load_and_inspect.py
+p02_eda/p01_load_and_inspect.py
 ==============================
 Load the cleaned FAQ dataset and print comprehensive statistics.
 Validates required fields, logs issues, saves summary JSON.
 
 Output: prints to terminal, saves experiments/eda_summary.json
 
-Run:    uv run python 01_load_and_inspect.py [--dry-run]
+Run:    uv run python p01_load_and_inspect.py [--dry-run]
 """
 import sys
 import os

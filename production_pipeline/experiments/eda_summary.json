@@ -250,25 +250,25 @@
     ],
     "code_signals": {
       "by_course": {
-        "machine-learning-zoomcamp": {
-          "total": 472,
-          "with_code": 237,
-          "code_pct": 50.21
+        "llm-zoomcamp": {
+          "total": 79,
+          "with_code": 32,
+          "code_pct": 40.51
         },
         "data-engineering-zoomcamp": {
           "total": 402,
           "with_code": 238,
           "code_pct": 59.2
         },
+        "machine-learning-zoomcamp": {
+          "total": 472,
+          "with_code": 237,
+          "code_pct": 50.21
+        },
         "mlops-zoomcamp": {
           "total": 251,
           "with_code": 145,
           "code_pct": 57.77
-        },
-        "llm-zoomcamp": {
-          "total": 79,
-          "with_code": 32,
-          "code_pct": 40.51
         }
       },
       "potential_code_misses": [

@@ -63,29 +63,37 @@ _RE_EXCESS_NEWLINES = re.compile(
 
 def clean_answer(text: str) -> str:
     """Remove markdown formatting while preserving fenced code blocks."""
+    # Robust regex: captures optional language and content, tolerates whitespace/newlines
+    # Group 1: Language (optional), Group 2: Content
+    pattern = re.compile(r'```\s*(\w+)?\s*(.*?)\s*```', re.DOTALL | re.IGNORECASE)
     
     code_blocks = []
     def protect_fenced_code(match):
-        code_blocks.append(match.group(1).strip())
+        lang = match.group(1)
+        content = match.group(2).strip()
+        code_blocks.append((lang, content))  # Store both lang and content
         return f"__FENCED_CODE_{len(code_blocks)-1}__"
     
+    # Extract blocks
+    text = pattern.sub(protect_fenced_code, text)
     
-    text = re.sub(r'```(?:\w+)?\n(.*?)```', protect_fenced_code, text, flags=re.DOTALL | re.IGNORECASE)
+    # Apply cleaning steps (safe now)
     text = _RE_IMAGE_PLACEHOLDER.sub("", text)
     text = _RE_HEADERS.sub("", text)
     text = _RE_MD_IMAGE.sub("", text)
     text = _RE_BOLD.sub(r"\1", text)
     text = _RE_ITALIC.sub(r"\1", text)
-    text = _RE_INLINE_CODE.sub(r"\1", text)
+    text = _RE_INLINE_CODE.sub(r"\1", text)  # Strips only inline `code`
     text = _RE_MD_LINK.sub(r"\1", text)
     text = _RE_HTML_TAG.sub("", text)
     text = _RE_JINJA_BLOCK.sub("", text)
     text = _RE_JINJA_VAR.sub("", text)
     text = _RE_EXCESS_NEWLINES.sub("\n\n", text)
     
-    # Step 3: Restore fenced code blocks
-    for i, code in enumerate(code_blocks):
-        text = text.replace(f"__FENCED_CODE_{i}__", f"```{code}```")
+    # Restore blocks
+    for i, (lang, content) in enumerate(code_blocks):
+        lang_str = f"{lang}\n" if lang else ""
+        text = text.replace(f"__FENCED_CODE_{i}__", f"```{lang_str}{content}```")
     
     return text.strip()
 
