@@ -1,0 +1,17 @@
+{
+  "stratify_by": [
+    "course"
+  ],
+  "seed": 42,
+  "min_per_group": 3,
+  "max_per_group": null,
+  "exclude_outliers": false,
+  "metrics": {
+    "chi2_statistic": 0.05,
+    "p_value": 0.9971,
+    "max_deviation_pct": 0.32,
+    "mean_deviation_pct": 0.16,
+    "groups_matched": 4,
+    "total_groups": 4
+  }
+}

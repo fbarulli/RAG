@@ -1,0 +1,23 @@
+{
+  "model": "nomic-ai/nomic-embed-text-v1.5",
+  "total_documents": 1204,
+  "num_topics": 91,
+  "outlier_count": 147,
+  "outlier_ratio": 0.1221,
+  "avg_keyword_overlap": 0.0002,
+  "mean_confidence": 0.7236,
+  "low_confidence_count": 317,
+  "low_confidence_ratio": 0.2633,
+  "topic_size_stats": {
+    "min": 5,
+    "max": 44,
+    "mean": 11.6,
+    "median": 9.0,
+    "std": 7.6
+  },
+  "silhouette_score": 0.0943,
+  "davies_bouldin_index": 2.6308,
+  "runtime_seconds": 72.9,
+  "peak_memory_mb": 24.6,
+  "embedding_dim": 768
+}

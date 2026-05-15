@@ -11,3 +11,4 @@ src/rag_pipeline/logging.py
 src/rag_pipeline/paths.py
 src/rag_pipeline/schemas.py
 tests/test_cleaning.py
+tests/test_dedup_logic.py

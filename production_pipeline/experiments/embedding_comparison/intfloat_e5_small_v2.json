@@ -1,0 +1,23 @@
+{
+  "model": "intfloat/e5-small-v2",
+  "total_documents": 1204,
+  "num_topics": 95,
+  "outlier_count": 185,
+  "outlier_ratio": 0.1537,
+  "avg_keyword_overlap": 0.0004,
+  "mean_confidence": 0.7458,
+  "low_confidence_count": 286,
+  "low_confidence_ratio": 0.2375,
+  "topic_size_stats": {
+    "min": 5,
+    "max": 39,
+    "mean": 10.7,
+    "median": 8.0,
+    "std": 7.3
+  },
+  "silhouette_score": 0.0884,
+  "davies_bouldin_index": 2.6442,
+  "runtime_seconds": 25.7,
+  "peak_memory_mb": 20.0,
+  "embedding_dim": 384
+}

@@ -1,0 +1,117 @@
+[
+  {
+    "model": "BAAI/bge-small-en-v1.5",
+    "total_documents": 1204,
+    "num_topics": 96,
+    "outlier_count": 156,
+    "outlier_ratio": 0.1296,
+    "avg_keyword_overlap": 0.0003,
+    "mean_confidence": 0.7303,
+    "low_confidence_count": 281,
+    "low_confidence_ratio": 0.2334,
+    "topic_size_stats": {
+      "min": 5,
+      "max": 38,
+      "mean": 10.9,
+      "median": 9.5,
+      "std": 6.2
+    },
+    "silhouette_score": 0.1077,
+    "davies_bouldin_index": 2.451,
+    "runtime_seconds": 42.5,
+    "peak_memory_mb": 51.4,
+    "embedding_dim": 384
+  },
+  {
+    "model": "BAAI/bge-base-en-v1.5",
+    "total_documents": 1204,
+    "num_topics": 100,
+    "outlier_count": 158,
+    "outlier_ratio": 0.1312,
+    "avg_keyword_overlap": 0.0004,
+    "mean_confidence": 0.722,
+    "low_confidence_count": 320,
+    "low_confidence_ratio": 0.2658,
+    "topic_size_stats": {
+      "min": 5,
+      "max": 28,
+      "mean": 10.5,
+      "median": 9.0,
+      "std": 5.4
+    },
+    "silhouette_score": 0.1077,
+    "davies_bouldin_index": 2.4951,
+    "runtime_seconds": 11.8,
+    "peak_memory_mb": 24.5,
+    "embedding_dim": 768
+  },
+  {
+    "model": "sentence-transformers/all-mpnet-base-v2",
+    "total_documents": 1204,
+    "num_topics": 96,
+    "outlier_count": 154,
+    "outlier_ratio": 0.1279,
+    "avg_keyword_overlap": 0.0003,
+    "mean_confidence": 0.723,
+    "low_confidence_count": 330,
+    "low_confidence_ratio": 0.2741,
+    "topic_size_stats": {
+      "min": 5,
+      "max": 41,
+      "mean": 10.9,
+      "median": 9.0,
+      "std": 6.6
+    },
+    "silhouette_score": 0.1099,
+    "davies_bouldin_index": 2.3932,
+    "runtime_seconds": 53.4,
+    "peak_memory_mb": 24.3,
+    "embedding_dim": 768
+  },
+  {
+    "model": "nomic-ai/nomic-embed-text-v1.5",
+    "total_documents": 1204,
+    "num_topics": 91,
+    "outlier_count": 147,
+    "outlier_ratio": 0.1221,
+    "avg_keyword_overlap": 0.0002,
+    "mean_confidence": 0.7236,
+    "low_confidence_count": 317,
+    "low_confidence_ratio": 0.2633,
+    "topic_size_stats": {
+      "min": 5,
+      "max": 44,
+      "mean": 11.6,
+      "median": 9.0,
+      "std": 7.6
+    },
+    "silhouette_score": 0.0943,
+    "davies_bouldin_index": 2.6308,
+    "runtime_seconds": 72.9,
+    "peak_memory_mb": 24.6,
+    "embedding_dim": 768
+  },
+  {
+    "model": "intfloat/e5-small-v2",
+    "total_documents": 1204,
+    "num_topics": 95,
+    "outlier_count": 185,
+    "outlier_ratio": 0.1537,
+    "avg_keyword_overlap": 0.0004,
+    "mean_confidence": 0.7458,
+    "low_confidence_count": 286,
+    "low_confidence_ratio": 0.2375,
+    "topic_size_stats": {
+      "min": 5,
+      "max": 39,
+      "mean": 10.7,
+      "median": 8.0,
+      "std": 7.3
+    },
+    "silhouette_score": 0.0884,
+    "davies_bouldin_index": 2.6442,
+    "runtime_seconds": 25.7,
+    "peak_memory_mb": 20.0,
+    "embedding_dim": 384
+  }
+]

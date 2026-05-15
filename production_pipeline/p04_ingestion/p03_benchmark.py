@@ -44,11 +44,12 @@ def main():
     parser = argparse.ArgumentParser(description="Benchmark retrieval configurations")
     parser.add_argument("--model", type=str, default=None, help="Single model to test")
     parser.add_argument("--config", type=str, default=None, help="Single config to test")
+    parser.add_argument("--test-set", type=Path, default=None, help="Override default test set path")
     args = parser.parse_args()
 
     try:
         logger.info("Step 1/4: Loading test set, topics, and configs...")
-        test_set = load_test_set(DEFAULT_TEST_SET)
+        test_set = load_test_set(args.test_set if args.test_set else DEFAULT_TEST_SET)
         topic_map = load_topic_assignments(DEFAULT_TOPIC_ASSIGNMENTS)
         configs = load_configs(DEFAULT_CONFIGS)
 

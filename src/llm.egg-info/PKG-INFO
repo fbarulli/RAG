@@ -37,6 +37,7 @@ Requires-Dist: qdrant-client>=1.17.1
 Requires-Dist: ragas>=0.4.3
 Requires-Dist: redis>=7.4.0
 Requires-Dist: scikit-learn>=1.8.0
+Requires-Dist: scipy>=1.17.1
 Requires-Dist: seaborn>=0.13.2
 Requires-Dist: sentence-transformers>=5.4.1
 Requires-Dist: statsmodels>=0.14.6
