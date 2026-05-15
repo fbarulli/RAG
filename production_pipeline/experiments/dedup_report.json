@@ -1,0 +1,39 @@
+{
+  "input_count": 1207,
+  "output_count": 1204,
+  "removed_count": 3,
+  "threshold": 0.95,
+  "course_aware": false,
+  "removed": [
+    {
+      "kept_id": "900f60fd25",
+      "removed_id": "b047f348bc",
+      "question": "Certificate - Can I follow the course in a self-paced mode and get a certificate?",
+      "similarity": "1.0000",
+      "course": "mlops-zoomcamp",
+      "section": "general",
+      "kept_answer": "No, you can only get a certificate if you finish the course with a “live” cohort. We don't award certificates for the self-paced mode. The reason is you need to peer-review capstone(s) after submitting a project. You can only peer-review projects at the time the course is running.",
+      "removed_answer": "No, you can only get a certificate if you finish the course with a “live” cohort. We don't award certificates for the self-paced mode. The reason is you need to peer-review capstone(s) after submitting a project. You can only peer-review projects at the time the course is running."
+    },
+    {
+      "kept_id": "0a7c21fee9",
+      "removed_id": "0fab61eca2",
+      "question": "Is it a group project?",
+      "similarity": "1.0000",
+      "course": "llm-zoomcamp",
+      "section": "project",
+      "kept_answer": "No, the capstone is a solo project.",
+      "removed_answer": "No, the capstone is a solo project."
+    },
+    {
+      "kept_id": "9ae63755b8",
+      "removed_id": "d5fc98925d",
+      "question": "Do we submit 2 projects, what does attempt 1 and 2 mean?",
+      "similarity": "0.9963",
+      "course": "llm-zoomcamp",
+      "section": "project",
+      "kept_answer": "You only need to submit one project. If the submission at the first attempt fails, you can improve it and re-submit during the attempt 2 submission window.\n\n- If you want to submit two projects for the experience and exposure, you must use different datasets and problem statements.\n- If you can’t make it to the attempt 1 submission window, you still have time to catch up to meet the attempt 2 submission window.\n\nRemember that the submission does not count towards the certification if you do not participate in the peer review of three peers in your cohort.",
+      "removed_answer": "You only need to submit one project. If the submission at the first attempt fails, you can improve it and re-submit during the attempt#2 submission window.\n\n- If you want to submit two projects for the experience and exposure, you must use different datasets and problem statements.\n- If you can’t make it to the attempt#1 submission window, you still have time to catch up to meet the attempt#2 submission window.\n\nRemember that the submission does not count towards the certification if you do not participate in the peer-review of three peers in your cohort."
+    }
+  ]
+}
