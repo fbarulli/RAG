@@ -1,0 +1,12 @@
+{
+    "es_host": "http://localhost:9200",
+    "index_name": "faqs_complete",
+    "search_type": "vector",
+    "use_vector": true,
+    "use_evaluators": true,
+    "use_llama_llm": true,
+    "llama_llm_model": "nvidia_nim/meta/llama-3.1-8b-instruct",
+    "embedding_model": "all-MiniLM-L6-v2",
+    "boost_question": 1.0,
+    "boost_text": 1.0
+}

@@ -11,10 +11,11 @@ Run:    uv run python -m production_pipeline.p02_eda.p03_topic_validation
 """
 import argparse
 import json
+import random
 from collections import Counter, defaultdict
 from pathlib import Path
 from statistics import mean, median, stdev
-from typing import Any, Optional
+from typing import Any
 
 from rag_pipeline.logging import get_logger
 from rag_pipeline.paths import Paths
@@ -24,54 +25,118 @@ logger = get_logger(__name__)
 DEFAULT_INPUT = Paths.experiments_dir() / "topic_assignments.json"
 DEFAULT_OUTPUT = Paths.experiments_dir() / "topic_validation.json"
 
+# Maximum number of topics before keyword overlap switches to random-pair sampling.
+_OVERLAP_EXACT_LIMIT = 100
+# Number of random pairs to sample when above the exact limit.
+_OVERLAP_SAMPLE_PAIRS = 2_000
+
 
 # ---------------------------------------------------------------------------
-# Load & Validate
+# Load & validate
 # ---------------------------------------------------------------------------
+
+class ValidationError(Exception):
+    """Raised when the input file is missing or structurally invalid."""
+
 
 def load_assignments(path: Path) -> list[dict]:
-    """Load and validate topic assignment records from JSON."""
-    if not path.exists():
-        logger.error(f"Input file not found: {path}")
-        raise SystemExit(1)
+    """
+    Load and validate topic assignment records from JSON.
 
-    with open(path, encoding="utf-8") as f:
-        data = json.load(f)
+    Raises:
+        ValidationError: if the file is missing, unparseable, or lacks 'assignments'.
+    """
+    if not path.exists():
+        raise ValidationError(f"Input file not found: {path}")
+
+    try:
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+    except json.JSONDecodeError as exc:
+        raise ValidationError(f"Invalid JSON in {path}: {exc}") from exc
 
     assignments = data.get("assignments")
     if not assignments:
-        logger.error("No assignments loaded — check input file structure (expected key: 'assignments')")
-        raise SystemExit(1)
+        raise ValidationError(
+            "No assignments found — check input file structure (expected key: 'assignments')"
+        )
 
     return assignments
 
 
 # ---------------------------------------------------------------------------
-# Core Metrics (Pure Computation)
+# Core metrics (pure computation)
 # ---------------------------------------------------------------------------
 
-def _compute_keyword_overlap(topic_keywords: dict[int, set[str]]) -> Optional[float]:
+def _extract_keywords(record: dict) -> list[str]:
     """
-    Average pairwise Jaccard similarity across all topic keyword sets.
-    Returns None if fewer than 2 topics or more than 100 (too expensive).
+    Return a normalised list of keyword strings from a single assignment record.
+
+    Handles both flat ``["word", ...]`` and BERTopic-style ``[["word", weight], ...]``
+    formats transparently.
+    """
+    raw = record.get("subtopic_keywords") or record.get("keywords") or []
+    if raw and isinstance(raw[0], (list, tuple)):
+        # BERTopic format: [(word, weight), ...]
+        return [item[0] for item in raw if isinstance(item, (list, tuple)) and len(item) >= 1 and isinstance(item[0], str)]
+    return [kw for kw in raw if isinstance(kw, str)]
+
+
+def _compute_keyword_overlap(topic_keywords: dict[int, set[str]]) -> float | None:
+    """
+    Average pairwise Jaccard similarity across topic keyword sets.
+
+    - Fewer than 2 topics → ``None`` (undefined).
+    - Up to ``_OVERLAP_EXACT_LIMIT`` topics → exact O(n²) calculation.
+    - More than ``_OVERLAP_EXACT_LIMIT`` topics → Monte-Carlo estimate over
+      ``_OVERLAP_SAMPLE_PAIRS`` random pairs, which is far cheaper while still
+      giving a useful signal instead of silently returning ``None``.
+
     A score < 0.1 indicates well-separated topics.
     """
     ids = list(topic_keywords.keys())
-    if len(ids) < 2:
-        return None
-    if len(ids) > 100:
-        logger.warning(f"Skipping keyword overlap for {len(ids)} topics (>100, too expensive)")
+    n = len(ids)
+
+    if n < 2:
         return None
 
-    pairs, total = 0, 0.0
-    for i in range(len(ids)):
-        for j in range(i + 1, len(ids)):
-            a, b = topic_keywords[ids[i]], topic_keywords[ids[j]]
-            if a or b:
-                total += len(a & b) / len(a | b)
-            pairs += 1
+    def _jaccard(a: set[str], b: set[str]) -> float:
+        union = a | b
+        return len(a & b) / len(union) if union else 0.0
 
-    return round(total / pairs, 4) if pairs else None
+    if n <= _OVERLAP_EXACT_LIMIT:
+        pairs, total = 0, 0.0
+        for i in range(n):
+            for j in range(i + 1, n):
+                total += _jaccard(topic_keywords[ids[i]], topic_keywords[ids[j]])
+                pairs += 1
+        return round(total / pairs, 4) if pairs else None
+
+    # Approximate via random sampling for large topic counts.
+    logger.info(
+        f"Topic count {n} exceeds exact limit ({_OVERLAP_EXACT_LIMIT}); "
+        f"estimating keyword overlap from {_OVERLAP_SAMPLE_PAIRS} random pairs."
+    )
+    total = 0.0
+    for _ in range(_OVERLAP_SAMPLE_PAIRS):
+        i, j = random.sample(ids, 2)
+        total += _jaccard(topic_keywords[i], topic_keywords[j])
+    return round(total / _OVERLAP_SAMPLE_PAIRS, 4)
+
+
+def _build_cross_course_topic_count(assignments: list[dict]) -> int:
+    """
+    Count topics that appear in more than one course.
+
+    Iterates over assignments and, for each real topic (not -1), records which
+    courses it is present in. A topic is "cross-course" if that set has size > 1.
+    """
+    topic_courses: dict[int, set[str]] = defaultdict(set)
+    for a in assignments:
+        t = a.get("topic", -1)
+        if t != -1:
+            topic_courses[t].add(a.get("course", "unknown"))
+    return sum(1 for courses in topic_courses.values() if len(courses) > 1)
 
 
 def compute_raw_metrics(assignments: list[dict]) -> dict[str, Any]:
@@ -82,15 +147,16 @@ def compute_raw_metrics(assignments: list[dict]) -> dict[str, Any]:
         total_documents        : int
         num_topics             : int
         outlier_count          : int
-        outlier_ratio          : float
-        topic_sizes            : dict[str, int]  — string keys for JSON round-trip safety
-        topic_size_stats       : dict with min, max, mean, median, std (all float)
-        largest_topic_share    : float
+        outlier_ratio          : float   — outliers / total_documents
+        topic_sizes            : dict[str, int]  — string keys for JSON round-trip
+        topic_size_stats       : dict with min, max, mean, median, std (float)
+        largest_topic_share    : float   — largest topic size / total_documents
         tiny_topic_count       : int
         tiny_topic_ids         : list[int]
-        confidence_stats       : Optional[dict]  — None if no probability field present
-        cross_course_topics    : int
-        avg_keyword_overlap    : Optional[float] — None if <2 topics or >100 topics
+        confidence_stats       : dict | None  — None if no 'topic_probability' field
+                                 present; excludes outlier (topic -1) assignments
+        cross_course_topics    : int  — number of topics spanning >1 course
+        avg_keyword_overlap    : float | None  — None if <2 topics
     """
     topics = [a.get("topic", -1) for a in assignments]
     topic_counts = Counter(topics)
@@ -102,7 +168,6 @@ def compute_raw_metrics(assignments: list[dict]) -> dict[str, Any]:
     real_topics = {t: c for t, c in topic_counts.items() if t != -1}
     sizes = list(real_topics.values())
 
-    # Size statistics (consistent float types)
     size_stats: dict[str, float] = {
         "min": float(min(sizes)) if sizes else 0.0,
         "max": float(max(sizes)) if sizes else 0.0,
@@ -111,19 +176,20 @@ def compute_raw_metrics(assignments: list[dict]) -> dict[str, Any]:
         "std": round(stdev(sizes), 1) if len(sizes) > 1 else 0.0,
     }
 
-    total_in_topics = sum(sizes) if sizes else 0
-    largest_topic_share = (max(sizes) / total_in_topics) if sizes else 0.0
+    # Share of *all* documents occupied by the single largest topic, consistent
+    # with how outlier_ratio is defined (denominator = total_documents).
+    largest_topic_share = (max(sizes) / total) if sizes and total > 0 else 0.0
 
-    tiny_topic_ids = sorted([t for t, c in real_topics.items() if c <= 3])
+    tiny_topic_ids = sorted(t for t, c in real_topics.items() if c <= 3)
     tiny_topic_count = len(tiny_topic_ids)
 
-    # Confidence stats — only if probability field exists in data
+    # Confidence stats — only non-outlier assignments with a probability field.
     probs = [
         a["topic_probability"]
         for a in assignments
         if a.get("topic", -1) != -1 and "topic_probability" in a
     ]
-    confidence_stats: Optional[dict[str, Any]] = None
+    confidence_stats: dict[str, Any] | None = None
     if probs:
         low_conf = sum(1 for p in probs if p < 0.5)
         confidence_stats = {
@@ -132,20 +198,17 @@ def compute_raw_metrics(assignments: list[dict]) -> dict[str, Any]:
             "low_confidence_ratio": round(low_conf / len(probs), 4),
         }
 
-    # Per-course topic distribution
-    course_topic_map: dict[str, set] = defaultdict(set)
-    for a in assignments:
-        course_topic_map[a.get("course", "unknown")].add(a.get("topic", -1))
-    cross_course_count = sum(1 for t_set in course_topic_map.values() if len(t_set) > 1)
+    cross_course_count = _build_cross_course_topic_count(assignments)
 
-    # Keyword overlap (uses subtopic_keywords or keywords if present)
-    topic_kw: dict[int, set[str]] = defaultdict(set)
+    # Build per-topic keyword sets (real topics only).
+    topic_kw: defaultdict[int, set[str]] = defaultdict(set)
     for a in assignments:
         t = a.get("topic", -1)
         if t != -1:
-            for kw in (a.get("subtopic_keywords") or a.get("keywords") or []):
+            for kw in _extract_keywords(a):
                 topic_kw[t].add(kw.lower())
-    keyword_overlap = _compute_keyword_overlap(topic_kw)
+
+    keyword_overlap = _compute_keyword_overlap(dict(topic_kw))
 
     return {
         "total_documents": total,
@@ -164,7 +227,7 @@ def compute_raw_metrics(assignments: list[dict]) -> dict[str, Any]:
 
 
 # ---------------------------------------------------------------------------
-# Evaluation Logic (Threshold Interpretation)
+# Evaluation logic (threshold interpretation)
 # ---------------------------------------------------------------------------
 
 def evaluate_status(
@@ -172,14 +235,31 @@ def evaluate_status(
     outlier_thresh: float,
     tiny_thresh: int,
     conc_thresh: float,
+    confidence_fail_thresh: float = 0.4,
 ) -> tuple[str, list[str]]:
     """
     Determine OK / WARN / FAIL status based on configurable thresholds.
-    Collects all violations rather than returning on first match.
+
+    All violations are collected before the status is assigned so that the
+    final grade reflects the full picture rather than the order checks run.
+
+    Rules:
+      - Any violation of outlier, tiny-topic, or concentration → at least WARN.
+      - Low mean confidence → at least WARN; if it is the *only* violation, WARN
+        not FAIL (confidence is treated as a soft signal, unlike hard constraints).
+      - Two or more violations of any kind → FAIL.
+      - Zero violations → OK.
+
+    Args:
+        metrics: Output of ``compute_raw_metrics``.
+        outlier_thresh: Maximum acceptable outlier_ratio.
+        tiny_thresh: Maximum acceptable tiny_topic_count.
+        conc_thresh: Maximum acceptable largest_topic_share.
+        confidence_fail_thresh: Mean confidence below this triggers a violation.
 
     Returns:
         status     : "OK" | "WARN" | "FAIL"
-        violations : list of human-readable violation strings
+        violations : Human-readable violation strings.
     """
     violations: list[str] = []
 
@@ -195,36 +275,53 @@ def evaluate_status(
         violations.append(
             f"concentration {metrics['largest_topic_share']:.1%} > threshold {conc_thresh:.1%}"
         )
-
-    status = "WARN" if violations else "OK"
-
-    if metrics.get("confidence_stats") and metrics["confidence_stats"]["mean"] < 0.4:
+    if (
+        metrics.get("confidence_stats")
+        and metrics["confidence_stats"]["mean"] < confidence_fail_thresh
+    ):
         violations.append(
-            f"mean_confidence {metrics['confidence_stats']['mean']:.3f} < 0.4"
+            f"mean_confidence {metrics['confidence_stats']['mean']:.3f} < {confidence_fail_thresh}"
         )
-        status = "FAIL"
 
-    return status, violations
+    if not violations:
+        return "OK", []
+    if len(violations) == 1:
+        return "WARN", violations
+    return "FAIL", violations
 
 
 # ---------------------------------------------------------------------------
-# CLI / Main
+# CLI / main
 # ---------------------------------------------------------------------------
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Validate topic modeling outputs")
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
-    parser.add_argument("--outlier-threshold", type=float, default=0.15,
-                        help="Max acceptable outlier ratio (default: 0.15)")
-    parser.add_argument("--tiny-topic-threshold", type=int, default=3,
-                        help="Max acceptable number of tiny topics ≤3 docs (default: 3)")
-    parser.add_argument("--concentration-threshold", type=float, default=0.30,
-                        help="Max acceptable largest-topic share (default: 0.30)")
+    parser.add_argument(
+        "--outlier-threshold", type=float, default=0.15,
+        help="Max acceptable outlier ratio (default: 0.15)",
+    )
+    parser.add_argument(
+        "--tiny-topic-threshold", type=int, default=3,
+        help="Max acceptable number of tiny topics ≤3 docs (default: 3)",
+    )
+    parser.add_argument(
+        "--concentration-threshold", type=float, default=0.30,
+        help="Max acceptable largest-topic share of total documents (default: 0.30)",
+    )
+    parser.add_argument(
+        "--confidence-fail-threshold", type=float, default=0.4,
+        help="Mean confidence below this value triggers a violation (default: 0.4)",
+    )
     args = parser.parse_args()
 
     logger.info(f"Loading topic assignments from {args.input}")
-    assignments = load_assignments(args.input)
+    try:
+        assignments = load_assignments(args.input)
+    except ValidationError as exc:
+        logger.error(str(exc))
+        raise SystemExit(1) from exc
 
     logger.info("Computing validation metrics...")
     metrics = compute_raw_metrics(assignments)
@@ -234,6 +331,7 @@ def main() -> None:
         args.outlier_threshold,
         args.tiny_topic_threshold,
         args.concentration_threshold,
+        args.confidence_fail_threshold,
     )
     metrics["status"] = status
     metrics["violations"] = violations
@@ -241,9 +339,9 @@ def main() -> None:
         "outlier": args.outlier_threshold,
         "tiny_topic": args.tiny_topic_threshold,
         "concentration": args.concentration_threshold,
+        "confidence_fail": args.confidence_fail_threshold,
     }
 
-    # Save
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with open(args.output, "w", encoding="utf-8") as f:
         json.dump(metrics, f, indent=2)
@@ -255,9 +353,12 @@ def main() -> None:
     print(f"Total documents:     {metrics['total_documents']}")
     print(f"Number of topics:    {metrics['num_topics']}")
     print(f"Outliers (topic -1): {metrics['outlier_count']} ({metrics['outlier_ratio']:.1%})")
-    print(f"Topic size range:    {metrics['topic_size_stats']['min']:.0f} – {metrics['topic_size_stats']['max']:.0f}")
+    print(
+        f"Topic size range:    "
+        f"{metrics['topic_size_stats']['min']:.0f} – {metrics['topic_size_stats']['max']:.0f}"
+    )
     print(f"Mean / std:          {metrics['topic_size_stats']['mean']} / {metrics['topic_size_stats']['std']}")
-    print(f"Largest topic share: {metrics['largest_topic_share']:.1%}")
+    print(f"Largest topic share: {metrics['largest_topic_share']:.1%}  (of all documents)")
     print(f"Tiny topics (≤3):    {metrics['tiny_topic_count']}", end="")
     if metrics["tiny_topic_ids"]:
         print(f"  → IDs: {metrics['tiny_topic_ids']}", end="")

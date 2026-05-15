@@ -1,0 +1,30 @@
+{
+  "image_1": {
+    "path": "images/mlops-zoomcamp/image_b6cec005.png",
+    "description": "image #1",
+    "course": "mlops-zoomcamp",
+    "section": "module-6",
+    "source_file": "007_611e6f015f_could-not-reconfigure-pytest-from-zero-after-getti.md"
+  },
+  "image_2": {
+    "path": "images/mlops-zoomcamp/image_27675c03.png",
+    "description": "image #2",
+    "course": "mlops-zoomcamp",
+    "section": "module-5",
+    "source_file": "021_44a68a830c_grafana-ui-changes.md"
+  },
+  "image_3": {
+    "path": "images/mlops-zoomcamp/image_09a24598.png",
+    "description": "image #3",
+    "course": "mlops-zoomcamp",
+    "section": "module-4",
+    "source_file": "001_e00253e2df_fix-out-of-memory-error-while-orchestrating-the-wo.md"
+  },
+  "image_4": {
+    "path": "images/machine-learning-zoomcamp/image_a4cd7017.png",
+    "description": "image #4",
+    "course": "ml-zoomcamp",
+    "section": "module-5",
+    "source_file": "021_3e4e288e93_pipenv-is-not-recognized-as-an-internal-or-externa.md"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "thresholds": {
+    "outlier_ratio_max": 0.15,
+    "keyword_overlap_max": 0.1,
+    "confidence_min": 0.7,
+    "cross_course_max": 70
+  },
+  "adaptive_mode": false,
+  "adaptive_method": null,
+  "percentile": null,
+  "composite_score_enabled": true,
+  "results": [
+    {
+      "model": "intfloat/e5/small/v2",
+      "file": "validation_topic_assignments_intfloat_e5_small_v2.json",
+      "outlier_ratio": 0.1595,
+      "num_topics": 97,
+      "avg_keyword_overlap": 0.0017,
+      "confidence_mean": 0.8893,
+      "topic_size_std": 6.1,
+      "cross_course_topics": 74,
+      "composite_score": 0.605,
+      "status": "FAIL",
+      "violations": [
+        "outlier_ratio 16.0% >= 15.0%",
+        "cross_course_topics 74 > 70"
+      ]
+    },
+    {
+      "model": "BAAI/bge/small/en/v1.5",
+      "file": "validation_topic_assignments_BAAI_bge_small_en_v1.5.json",
+      "outlier_ratio": 0.1238,
+      "num_topics": 93,
+      "avg_keyword_overlap": 0.0025,
+      "confidence_mean": 0.8328,
+      "topic_size_std": 6.9,
+      "cross_course_topics": 73,
+      "composite_score": 0.5664285714285714,
+      "status": "WARN",
+      "violations": [
+        "cross_course_topics 73 > 70"
+      ]
+    },
+    {
+      "model": "BAAI/bge/base/en/v1.5",
+      "file": "validation_topic_assignments_BAAI_bge_base_en_v1.5.json",
+      "outlier_ratio": 0.137,
+      "num_topics": 96,
+      "avg_keyword_overlap": 0.0023,
+      "confidence_mean": 0.8215,
+      "topic_size_std": 5.9,
+      "cross_course_topics": 68,
+      "composite_score": 0.5042857142857141,
+      "status": "OK",
+      "violations": []
+    },
+    {
+      "model": "nomic/ai/nomic/embed/text/v1.5",
+      "file": "validation_topic_assignments_nomic_ai_nomic_embed_text_v1.5.json",
+      "outlier_ratio": 0.1329,
+      "num_topics": 79,
+      "avg_keyword_overlap": 0.0038,
+      "confidence_mean": 0.8294,
+      "topic_size_std": 11.7,
+      "cross_course_topics": 60,
+      "composite_score": 0.4641297935103246,
+      "status": "OK",
+      "violations": []
+    },
+    {
+      "model": "sentence/transformers/all/mpnet/base/v2",
+      "file": "validation_topic_assignments_sentence_transformers_all_mpnet_base_v2.json",
+      "outlier_ratio": 0.1728,
+      "num_topics": 101,
+      "avg_keyword_overlap": 0.0025,
+      "confidence_mean": 0.8347,
+      "topic_size_std": 4.6,
+      "cross_course_topics": 75,
+      "composite_score": 0.20343447113358615,
+      "status": "FAIL",
+      "violations": [
+        "outlier_ratio 17.3% >= 15.0%",
+        "cross_course_topics 75 > 70"
+      ]
+    }
+  ],
+  "best_model": "intfloat/e5/small/v2",
+  "pareto_optimal": [
+    "intfloat/e5/small/v2",
+    "BAAI/bge/small/en/v1.5",
+    "BAAI/bge/base/en/v1.5"
+  ],
+  "metadata": {
+    "total_models": 5,
+    "models_ok": 2,
+    "models_warn": 1,
+    "models_fail": 2
+  }
+}

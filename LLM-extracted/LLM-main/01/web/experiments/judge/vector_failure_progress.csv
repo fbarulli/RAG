@@ -1,0 +1,30 @@
+subset,query,expected_id,found_id,judge_any_yes,judge_verdicts,judged_rank,reasoning,raw_response,raw_len,verdict_count_raw
+vector_failure,Using a docker image as development environment (Linux),866d3bbbed,81c82a4875,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1: This context directly answers the question by providing information on how to use a Docker image as a development environment in Linux.
+Context 2: This context does not directly answer the question, but rather provides a solution to a specific issue related to building a Docker image.
+Context 3: This context does not directly answer the question, but rather provides a solution to a specific issue related to running a Docker image.
+Context 4: This context does not directly answer the q","Context 1: This context directly answers the question by providing information on how to use a Docker image as a development environment in Linux.
+Context 2: This context does not directly answer the question, but rather provides a solution to a specific issue related to building a Docker image.
+Context 3: This context does not directly answer the question, but rather provides a solution to a specific issue related to running a Docker image.
+Context 4: This context does not directly answer the q",772,9
+vector_failure,What can I do before the course starts?,33fc260cd8,068529125b,True,"['NO', 'NO', 'NO', 'NO', 'YES']",5,"Context 1 does not directly answer the question because it discusses what to do after the course finishes, not before it starts.
+Context 2 does not directly answer the question because it discusses the homework submission process, not preparation before the course starts.
+Context 3 does not directly answer the question because it discusses the registration process and eligibility to submit homework, not preparation before the course starts.
+Context 4 does not directly answer the question because","Context 1 does not directly answer the question because it discusses what to do after the course finishes, not before it starts.
+Context 2 does not directly answer the question because it discusses the homework submission process, not preparation before the course starts.
+Context 3 does not directly answer the question because it discusses the registration process and eligibility to submit homework, not preparation before the course starts.
+Context 4 does not directly answer the question because",789,13
+vector_failure,Getting the same result,cee7450404,186ed3fc35,False,"['NO', 'NO', 'NO', 'NO', 'NO']",,,"['NO', 'NO', 'NO', 'NO', 'NO']",30,5
+vector_failure,Homework Q1 is not clear to me. What do I do here?,1b89887a15,186ed3fc35,False,"['NO', 'NO', 'NO', 'NO', 'NO']",,,"['NO', 'NO', 'NO', 'NO', 'NO']
+
+Context 1 does not address the issue of unclear homework Q1, it only provides a general advice.
+Context 2 provides a solution to a different problem and does not address the unclear homework Q1.
+Context 3 discusses a different issue of environment differences and does not address the unclear homework Q1.
+Context 4 talks about submitting homework and does not address the unclear homework Q1.
+Context 5 is unrelated to the question and only provides a general request",501,9
+vector_failure,Features in scikit-learn?,24713fbf0d,c928a85179,True,"['NO', 'NO', 'YES', 'NO', 'NO']",3,"Context 1: This context does not directly answer the question about features in scikit-learn, but rather provides a solution to a warning related to feature names. 
+Context 2: This context does not directly answer the question about features in scikit-learn, but rather provides a solution to a different problem. 
+Context 3: This context directly answers the question about features in scikit-learn by explaining how to get feature names using DictVectorizer. 
+Context 4: This context does not direc","Context 1: This context does not directly answer the question about features in scikit-learn, but rather provides a solution to a warning related to feature names. 
+Context 2: This context does not directly answer the question about features in scikit-learn, but rather provides a solution to a different problem. 
+Context 3: This context directly answers the question about features in scikit-learn by explaining how to get feature names using DictVectorizer. 
+Context 4: This context does not direc",817,9

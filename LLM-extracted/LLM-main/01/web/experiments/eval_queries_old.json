@@ -1,0 +1,1089 @@
+{
+  "metadata": {
+    "description": "Test queries for retrieval evaluation",
+    "model": "nvidia_nim/meta/llama-3.1-70b-instruct",
+    "generated_at": "2026-05-09T19:28:38.532297",
+    "total_documents": 50,
+    "total_queries": 390,
+    "batch_size": 5,
+    "prompt_strategies": [
+      "grounded_analyst",
+      "creative_student",
+      "chaos_monkey"
+    ],
+    "generation_time_seconds": 868.3,
+    "errors": 4
+  },
+  "queries": [
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "streamlit executable not found in docker-compose",
+          "docker-compose up streamlit error",
+          "streamlit not found in PATH docker-compose"
+        ],
+        "creative_student": [
+          "streamlit app won't run with docker-compose, keeps giving me an error",
+          "docker-compose up fails with unknown error, streamlit not found",
+          "why can't I run my streamlit app using docker-compose?"
+        ],
+        "chaos_monkey": [
+          "streamlit app refuses to run due to shim task issues",
+          "container exec error even though PATH is correct",
+          "docker-compose fails to create task for streamlit container"
+        ]
+      },
+      "original_question": "Docker: When trying to run a streamlit app using docker-compose, I get: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: \"streamlit\": executable file not found in $PATH: unknown. The app runs fine outside of docker-compose",
+      "expected_id": "e8df9f0d12",
+      "course": "llm-zoomcamp",
+      "section": "module-6"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "jupyter kernel crashes with embedding",
+          "jupyter notebook runs out of memory",
+          "embedding model crashes jupyter kernel"
+        ],
+        "creative_student": [
+          "jupyter kernel keeps crashing when I try to embed data",
+          "embedding model causes jupyter notebook to run out of memory",
+          "why does my jupyter kernel crash when I try to load the ground-truth set?"
+        ],
+        "chaos_monkey": [
+          "kernel crashes when adding data to notebook",
+          "low RAM causes Jupyter to fail when loading models",
+          "embedding model causes out of memory error"
+        ]
+      },
+      "original_question": "Evaluation: Jupyter kernel crashes when embedding the ground-truth set",
+      "expected_id": "b8f2d6a30c",
+      "course": "llm-zoomcamp",
+      "section": "module-4"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "missing packages for jupyter notebook",
+          "jupyter notebook dependencies",
+          "packages required for jupyter notebook"
+        ],
+        "creative_student": [
+          "jupyter notebook missing packages, can't run starter notebook",
+          "what dependencies do I need to install for the starter jupyter notebook?",
+          "jupyter notebook errors due to missing packages, how do I fix it?"
+        ],
+        "chaos_monkey": [
+          "Jupyter Notebook missing dependencies for starter code",
+          "packages needed to run teacher's Jupyter Notebook",
+          " Codespace environment lacks required libraries"
+        ]
+      },
+      "original_question": "Other packages needed but not listed",
+      "expected_id": "ee564fdf82",
+      "course": "de-zoomcamp",
+      "section": "workshop-1-dlthub"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "python invalid start byte error",
+          "unicode decode error python",
+          "python utf-8 codec error"
+        ],
+        "creative_student": [
+          "python script fails with invalid start byte error, how to fix?",
+          "why am I getting a unicode decode error when reading csv file?",
+          "python pandas read_csv fails with utf-8 codec error"
+        ],
+        "chaos_monkey": [
+          "pandas dataframe encoding fails with latin1",
+          "byte error when reading CSV into pandas",
+          "UnicodeDecodeError when writing to GCS"
+        ]
+      },
+      "original_question": "Python: invalid start byte Error Message",
+      "expected_id": "55b6d6256f",
+      "course": "de-zoomcamp",
+      "section": "module-3"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "wget not recognized as internal command",
+          "install wget on ubuntu",
+          "wget not found in system"
+        ],
+        "creative_student": [
+          "wget command not recognized, how do I install it?",
+          "why is wget not working on my system, no such file or directory error",
+          "how to fix wget is not recognized as an internal or external command error"
+        ],
+        "chaos_monkey": [
+          "output.csv.gz not found due to wget error",
+          "wget command not recognized on Windows",
+          "Ubuntu install fails due to missing wget package"
+        ]
+      },
+      "original_question": "wget is not recognized as an internal or external command",
+      "expected_id": "b3030c88e7",
+      "course": "de-zoomcamp",
+      "section": "module-1-data"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "activate anaconda environment in bashrc",
+          "conda init bash not working",
+          "anaconda environment not activated in unix shell"
+        ],
+        "creative_student": [
+          "conda env not activating after restart",
+          "anaconda not working after closing terminal",
+          "how to make anaconda environment permanent"
+        ],
+        "chaos_monkey": [
+          "My Unix shell keeps forgetting about Anaconda",
+          "conda init doesn't seem to work when I restart my computer",
+          "Why does my .bashrc file not have any Anaconda stuff in it?"
+        ]
+      },
+      "original_question": "Activating Anaconda env in .bashrc",
+      "expected_id": "4aa018f478",
+      "course": "mlops-zoomcamp",
+      "section": "module-1"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "dlt clickhouse connector",
+          "dlt starrocks integration",
+          "does dlt support clickhouse"
+        ],
+        "creative_student": [
+          "does dlt support clickhouse",
+          "starrrocks integration with dlt",
+          "why cant i use clickhouse with dlt"
+        ],
+        "chaos_monkey": [
+          "Can DLT talk to those new columnar databases",
+          "Does DLT have a connector for that one database with the weird name",
+          "How do I get data from DLT into ClickHouse or something similar?"
+        ]
+      },
+      "original_question": "Does DLT have connectors to ClickHouse or StarRocks?",
+      "expected_id": "cd19f122f3",
+      "course": "llm-zoomcamp",
+      "section": "workshops-dlthub"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "terraform googleapi error 403",
+          "googleapi error insufficient authentication scopes",
+          "terraform dataset creation error 403"
+        ],
+        "creative_student": [
+          "terraform google api permission error",
+          "insufficient authentication scopes terraform",
+          "terraform dataset creation error 403"
+        ],
+        "chaos_monkey": [
+          "Terraform keeps saying I don't have permission to do anything",
+          "Error 403 when trying to create a dataset in Terraform",
+          "Why is Terraform so picky about authentication scopes?"
+        ]
+      },
+      "original_question": "Terraform - Error creating Dataset: googleapi: Error 403: Request had insufficient authentication scopes",
+      "expected_id": "4a6d04a2c3",
+      "course": "de-zoomcamp",
+      "section": "module-1-terraform"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "pandas mode returns series",
+          "why mode function returns multiple values",
+          "pandas mode function behavior"
+        ],
+        "creative_student": [
+          "why is mode returning multiple values",
+          "pandas mode function not working as expected",
+          "how to get single mode value in pandas"
+        ],
+        "chaos_monkey": [
+          "Why does my mode always return a bunch of values instead of just one",
+          "That pandas mode function is so weird, it always gives me a list",
+          "How do I get the mode function to just return a single number?"
+        ]
+      },
+      "original_question": "Homework Q5: Why the mode returns a Series instead of a single value?",
+      "expected_id": "22e80c8b22",
+      "course": "ml-zoomcamp",
+      "section": "module-1-homework"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "using dbt core with athena",
+          "dbt athena adapter setup",
+          "dbt core athena tutorial"
+        ],
+        "creative_student": [
+          "using dbt with aws athena",
+          "dbt core athena adapter not working",
+          "how to transform data in athena using dbt"
+        ],
+        "chaos_monkey": [
+          "I want to use dbt with that one AWS query engine",
+          "Can I use dbt-core with Amazon Athena?",
+          "How do I transform data in Athena using dbt?"
+        ]
+      },
+      "original_question": "How to use dbt-core with Athena?",
+      "expected_id": "df38a5d809",
+      "course": "de-zoomcamp",
+      "section": "project"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "aws-cli get-login-password syntax error",
+          "aws ecr get-login --no-include-email invalid choice error",
+          "aws ecr get-login-password command not working"
+        ],
+        "creative_student": [
+          "aws cli password command not working",
+          "getting invalid choice error in aws ecr",
+          "why is aws get login password returning an error"
+        ],
+        "chaos_monkey": [
+          "Docker password doesn't work even after updating my credentials",
+          "aws cli is giving me a password error for my ecr",
+          "Syntax error when trying to use the aws ecr get-login command"
+        ]
+      },
+      "original_question": "Getting a syntax error while trying to get the password from aws-cli",
+      "expected_id": "ac62d9ccf0",
+      "course": "ml-zoomcamp",
+      "section": "module-9"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "ollam RAG connection refused error",
+          "ollama serve command not working",
+          "restart ollama server for connection refused error"
+        ],
+        "creative_student": [
+          "connection refused error in ollama",
+          "ollama server not responding",
+          "why is my ollama notebook cell not working"
+        ],
+        "chaos_monkey": [
+          "Ollama refuses to connect after updating my Jupyter notebook",
+          "Connection issue with the RAG homework prompt",
+          "Ollama RAG cell not responding even after rerunning the cell"
+        ]
+      },
+      "original_question": "Connection refused error on prompting the ollam RAG?",
+      "expected_id": "c6fc2d4d11",
+      "course": "llm-zoomcamp",
+      "section": "module-2"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "dbt target schema not creating correct schema",
+          "dbt marts schema not being created",
+          "dbt append custom schema to initial schema"
+        ],
+        "creative_student": [
+          "dbt creating wrong schema name",
+          "why is dbt appending custom schema",
+          "dbt target schema not working as expected"
+        ],
+        "chaos_monkey": [
+          "Why does dbt keep creating a schema named 'dbt_marts' instead of 'marts'?",
+          "Changing target schema in dbt doesn't seem to be working as expected",
+          "dbt is appending custom schema to my target schema"
+        ]
+      },
+      "original_question": "DBT: Why changing the target schema to \u201cmarts\u201d actually creates a schema named \u201cdbt_marts\u201d instead?",
+      "expected_id": "58586a16a6",
+      "course": "de-zoomcamp",
+      "section": "module-4"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "cloud alternatives with GPU support",
+          "free GPU hours on cloud platforms",
+          "cloud platforms with GPU quota"
+        ],
+        "creative_student": [
+          "alternatives to cloud gpu",
+          "cloud platforms with free gpu hours",
+          "why is my cloud gpu quota not enough"
+        ],
+        "chaos_monkey": [
+          "GPU cloud alternatives are not working due to quota issues",
+          "Free hours limit for GPU cloud services is unclear",
+          "How to avoid being billed separately for GPU cloud services"
+        ]
+      },
+      "original_question": "Cloud alternatives with GPU",
+      "expected_id": "c6c2888275",
+      "course": "llm-zoomcamp",
+      "section": "general"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "docker image build error on Mac M1 silicon",
+          "could not open ld-linux-x86-64.so.2 on Mac M1",
+          "docker build error on M1 chipset"
+        ],
+        "creative_student": [
+          "docker image build error on m1 mac",
+          "why is my docker build failing on mac",
+          "m1 silicon docker build issues"
+        ],
+        "chaos_monkey": [
+          "Docker image build fails on Mac M1 silicon with ld-linux-x86-64.so.2 error",
+          "Error building Docker image on Mac due to missing ld-linux-x86-64.so.2 file",
+          "Mac M1 chipset is causing issues with Docker image build"
+        ]
+      },
+      "original_question": "Error building Docker images on Mac with M1 silicon",
+      "expected_id": "9df18c830e",
+      "course": "ml-zoomcamp",
+      "section": "module-5"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "homework result not exact",
+          "closest option in homework",
+          "homework result tolerance"
+        ],
+        "creative_student": [
+          "Why is my homework answer not matching exactly?",
+          "Homework results are way off, what's going on?",
+          "Can't get the right answer on my homework, help!"
+        ],
+        "chaos_monkey": [
+          "Why is my answer key not working?",
+          "I'm getting the wrong results, what's wrong with the options?",
+          "My homework isn't matching the solution, is it a bug?"
+        ]
+      },
+      "original_question": "Homework: I\u2019m not getting the exact result",
+      "expected_id": "186ed3fc35",
+      "course": "ml-zoomcamp",
+      "section": "module-4-homework"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "docker error access denied",
+          "docker bash access is denied",
+          "docker wsl2 permission issue"
+        ],
+        "creative_student": [
+          "Docker keeps giving me an access denied error",
+          "Can't run Docker command, getting weird error",
+          "Access is denied when running Docker, what's wrong?"
+        ],
+        "chaos_monkey": [
+          "That thing with the containers won't start, it just gives me a mkdir error",
+          "WSL is broken, how do I fix it?",
+          "Why does my Docker command think I'm running it from a Git folder?"
+        ]
+      },
+      "original_question": "docker: Error response from daemon: mkdir C:\\Program Files\\Git\\var: Access is denied.",
+      "expected_id": "16481ac8f7",
+      "course": "de-zoomcamp",
+      "section": "module-2"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "normalize pandas dataframe column",
+          "pandas series vector normalization",
+          "vector normalization in pandas"
+        ],
+        "creative_student": [
+          "How do I make my vectors the same length in Pandas?",
+          "Pandas DataFrame column has weird vector lengths",
+          "Why are my vectors so different in my DataFrame?"
+        ],
+        "chaos_monkey": [
+          "How do I make my vectors the same size?",
+          "I'm trying to normalize my data, but it's not working, what's the formula?",
+          "What's the best way to scale my column vectors?"
+        ]
+      },
+      "original_question": "How to normalize vectors in a Pandas DataFrame column (or Pandas Series)?",
+      "expected_id": "5039707c1a",
+      "course": "llm-zoomcamp",
+      "section": "module-5"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "get_feature_names deprecated",
+          "function get_feature_names is deprecated",
+          "get_feature_names_out replacement"
+        ],
+        "creative_student": [
+          "Why is scikit-learn giving me a FutureWarning?",
+          "What's going on with this get_feature_names error?",
+          "Function is deprecated, what do I use instead?"
+        ],
+        "chaos_monkey": [
+          "Why is my code giving me a warning about a function being removed?",
+          "I'm getting a FutureWarning, how do I fix it?",
+          "What's the replacement for get_feature_names, is it deprecated?"
+        ]
+      },
+      "original_question": "FutureWarning: Function get_feature_names is deprecated; get_feature_names is deprecated in 1.0 and will be removed in 1.2",
+      "expected_id": "c928a85179",
+      "course": "ml-zoomcamp",
+      "section": "module-3"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "ssh could not resolve hostname",
+          "ssh name or service not known",
+          "ssh config file location"
+        ],
+        "creative_student": [
+          "Why won't SSH connect to my linux server?",
+          "SSH says it can't resolve the hostname, what's wrong?",
+          "Can't SSH into my server, getting weird error message"
+        ],
+        "chaos_monkey": [
+          "Why can't my computer find the linux server?",
+          "I'm getting a name resolution error, what's wrong with my config?",
+          "How do I fix my SSH connection, it says it can't resolve the hostname"
+        ]
+      },
+      "original_question": "SSH Error: ssh: Could not resolve hostname linux: Name or service not known",
+      "expected_id": "10407876a1",
+      "course": "de-zoomcamp",
+      "section": "environment"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "Keras Sequential vs Functional model differences",
+          "What is the difference between Sequential and Functional model modes in Keras",
+          "Keras Sequential model API vs Functional API"
+        ],
+        "creative_student": [
+          "why is my keras model not working as expected",
+          "can't get sequential model to work in tensorflow",
+          "keras model not recognizing layers"
+        ],
+        "chaos_monkey": [
+          "why does my neural network keep adding layers in a weird order",
+          "can't get keras to stack layers in a straight line",
+          "how do I make my deep learning model go in a straight line"
+        ]
+      },
+      "original_question": "Sequential vs. Functional Model Modes in Keras (TF2)",
+      "expected_id": "ddc7d09c3d",
+      "course": "ml-zoomcamp",
+      "section": "module-8"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "VS Code pytest not recognizing installed libraries",
+          "Pytest not finding installed packages in VS Code",
+          "Why is pytest not working in VS Code but works in terminal"
+        ],
+        "creative_student": [
+          "pytest not recognizing installed packages in vs code",
+          "why is my python script working in terminal but not in vs code",
+          "vs code not seeing python libraries"
+        ],
+        "chaos_monkey": [
+          "VS Code thinks my packages are invisible",
+          "why does my terminal know about my libraries but VS Code doesn't",
+          "can't get pytest to see my virtual environment"
+        ]
+      },
+      "original_question": "pytest doesn't recognize my installed libraries, but the script works in the terminal. Why?",
+      "expected_id": "716ff05962",
+      "course": "mlops-zoomcamp",
+      "section": "project"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "Can I use Scikit-Learn LinearRegression for this week's assignment",
+          "Is Scikit-Learn LinearRegression allowed in this week's task",
+          "Using Scikit-Learn LinearRegression in this week's project"
+        ],
+        "creative_student": [
+          "can i use linear regression for this assignment",
+          "is scikit-learn allowed in this course",
+          "using linear regression in this week's project"
+        ],
+        "chaos_monkey": [
+          "can I use scikit learn for this week's homework",
+          "is linear regression allowed in this course",
+          "can I use a different library for this week's project"
+        ]
+      },
+      "original_question": "Can I use LinearRegression from Scikit-Learn for this week?",
+      "expected_id": "5a2fac8521",
+      "course": "ml-zoomcamp",
+      "section": "module-2"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "Grafana chart not updating with new data",
+          "Why is my Grafana chart not refreshing",
+          "How to update Grafana chart in real-time"
+        ],
+        "creative_student": [
+          "grafana charts not updating in real time",
+          "why are my grafana charts not refreshing",
+          "grafana not showing live data"
+        ],
+        "chaos_monkey": [
+          "grafana charts are stuck in time",
+          "why does my dashboard only show old data",
+          "grafana not updating with new data"
+        ]
+      },
+      "original_question": "The chart in Grafana doesn\u2019t get updates",
+      "expected_id": "13559b737e",
+      "course": "mlops-zoomcamp",
+      "section": "module-5"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "Which model and DictVectorizer to use for homework Q6",
+          "Homework Q6 model and DictVectorizer selection",
+          "What model and DictVectorizer should I use for question 6"
+        ],
+        "creative_student": [
+          "which model should i use for homework question 6",
+          "what dict vectorizer should i use for this assignment",
+          "homework question 6 model and vectorizer confusion"
+        ],
+        "chaos_monkey": [
+          "which magic files do I need for question 6",
+          "what are the secret model and dict vectorizer files",
+          "where can I find the hidden model and dict vectorizer files"
+        ]
+      },
+      "original_question": "Homework Q6: Which model and dict vectorizer to use?",
+      "expected_id": "3ab0a03ad2",
+      "course": "ml-zoomcamp",
+      "section": "module-5-homework"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "HPA instance not running correctly",
+          "Metrics Server installation issues",
+          "Kubernetes HPA instance troubleshooting"
+        ],
+        "creative_student": [],
+        "chaos_monkey": [
+          "my container manager is malfunctioning",
+          "the metrics server won't run, is my yaml file wrong?",
+          "why won't my kubernetes stuff work after updating?"
+        ]
+      },
+      "original_question": "HPA instance doesn\u2019t run properly (easier solution)",
+      "expected_id": "f8533d5ffd",
+      "course": "ml-zoomcamp",
+      "section": "module-10"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "Kitchenware Classification Competition dataset format",
+          "Image dataset generator for competition",
+          "Converting dataset layout for competition"
+        ],
+        "creative_student": [],
+        "chaos_monkey": [
+          "can you make a dataset like we did in the dinosaur lesson but for kitchen stuff?",
+          "i need a script to make my dataset look like the one we used in class",
+          "how do i convert my dataset to the format used in the dino vs dragon lesson?"
+        ]
+      },
+      "original_question": "Kitchenware Classification Competition Dataset Generator",
+      "expected_id": "0156cf3b62",
+      "course": "ml-zoomcamp",
+      "section": "misc"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "OpenAI API quota exceeded error",
+          "RateLimitError 429 solution",
+          "Insufficient quota error in OpenAI"
+        ],
+        "creative_student": [],
+        "chaos_monkey": [
+          "my ai model keeps saying i've exceeded my limits, what limits?",
+          "why does my openai api keep giving me an error about being too slow?",
+          "what does it mean when my openai account says i've exceeded my quota?"
+        ]
+      },
+      "original_question": "OpenAI: Error: RateLimitError: Error code: 429 -",
+      "expected_id": "152af39a53",
+      "course": "llm-zoomcamp",
+      "section": "module-1"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "Definition of cosine similarity",
+          "Measuring similarity between documents",
+          "Cosine similarity in text analysis"
+        ],
+        "creative_student": [],
+        "chaos_monkey": [
+          "how do i calculate how similar two pieces of text are?",
+          "what's the best way to measure the similarity between two documents?",
+          "can you explain the concept of vector similarity in text analysis?"
+        ]
+      },
+      "original_question": "What is the cosine similarity?",
+      "expected_id": "db78580409",
+      "course": "llm-zoomcamp",
+      "section": "module-3"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "RMSE stops improving meaning",
+          "Interpreting RMSE plateau",
+          "RMSE convergence in n_estimators"
+        ],
+        "creative_student": [],
+        "chaos_monkey": [
+          "my error rate isn't getting any better, is that a problem?",
+          "what does it mean when my model's error rate stops decreasing?",
+          "should i be concerned if my model's error rate plateaus?"
+        ]
+      },
+      "original_question": "Homework Q3: What does it mean that RMSE stops improving?",
+      "expected_id": "66c3aaa71f",
+      "course": "ml-zoomcamp",
+      "section": "module-6-homework"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "what is launching the tracking server locally in mlflow",
+          "mlflow local tracking server",
+          "mlflow server for remote hosting"
+        ],
+        "creative_student": [],
+        "chaos_monkey": [
+          "My laptop is running multiple MLflow servers, how do I connect them to a central hub?",
+          "I'm having trouble with my colleagues' laptops, they can't connect to my ML server",
+          "What's the point of running a server on my machine if I'm working alone?"
+        ]
+      },
+      "original_question": "What does launching the tracking server locally mean?",
+      "expected_id": "86a6321b3d",
+      "course": "mlops-zoomcamp",
+      "section": "module-2"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "features to use for homework Q5",
+          "selecting features for model training",
+          "training model with specific features"
+        ],
+        "creative_student": [],
+        "chaos_monkey": [
+          "How do I compare the accuracy of my model with and without the features I trained it with?",
+          "I'm trying to remove features one by one, but my model's accuracy isn't changing",
+          "Do I need to train my model with all the features at once, or can I add them one by one?"
+        ]
+      },
+      "original_question": "Features for homework: Q5",
+      "expected_id": "4b0519f085",
+      "course": "ml-zoomcamp",
+      "section": "module-3-homework"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "is kserve required",
+          "kserve module necessity",
+          "do i need to use kserve"
+        ],
+        "creative_student": [],
+        "chaos_monkey": [
+          "Is KServe required for Kubernetes deployment?",
+          "What's the difference between KServe and Kubernetes, do I need both?",
+          "Can I use KServe instead of Kubernetes for deployment?"
+        ]
+      },
+      "original_question": "Is the KServe module required?",
+      "expected_id": "da9f03ae67",
+      "course": "ml-zoomcamp",
+      "section": "module-11"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "acceptable datasets for machine learning projects",
+          "choosing a dataset for ml pipeline",
+          "dataset requirements for ml project"
+        ],
+        "creative_student": [],
+        "chaos_monkey": [
+          "Can I use a toy dataset for my project, or do I need something more complex?",
+          "How do I know if my dataset is big enough for the project?",
+          "Can I use a dataset with less than 100 rows if I really want to?"
+        ]
+      },
+      "original_question": "What datasets are acceptable for projects?",
+      "expected_id": "9f4011849d",
+      "course": "ml-zoomcamp",
+      "section": "projects"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "bruin time interval first run error",
+          "resolving table does not exist catalog error",
+          "materialization strategy error in bruin"
+        ],
+        "creative_student": [],
+        "chaos_monkey": [
+          "Why does my database table keep getting deleted when I try to load data?",
+          "I'm getting a catalog error when I try to load data into my table",
+          "How do I create a table that won't get deleted when I run my asset?"
+        ]
+      },
+      "original_question": "Bruin time_interval: Why does the first run fail with a 'table does not exist' catalog error?",
+      "expected_id": "c79cc0fa2f",
+      "course": "de-zoomcamp",
+      "section": "module-5"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "Powershell git commit utf-8 encoding error",
+          "pre-commit yaml utf-8 encoding issue",
+          "git commit error utf-8 codec"
+        ],
+        "creative_student": [],
+        "chaos_monkey": []
+      },
+      "original_question": "In Powershell, Git commit raises utf-8 encoding error after creating pre-commit yaml file",
+      "expected_id": "226f8425c4",
+      "course": "mlops-zoomcamp",
+      "section": "module-6"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "Docker container entry point for scoring script",
+          "bash entry point in Dockerfile",
+          "Docker ENTRYPOINT for bash script"
+        ],
+        "creative_student": [],
+        "chaos_monkey": []
+      },
+      "original_question": "Homework/Question 6: Entry point for running scoring script in Docker container",
+      "expected_id": "d00a9ac4ba",
+      "course": "mlops-zoomcamp",
+      "section": "module-4"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "2024 vs 2023 course cohort differences",
+          "Cohort changes in 2024 course",
+          "What's new in 2024 course cohort"
+        ],
+        "creative_student": [],
+        "chaos_monkey": []
+      },
+      "original_question": "Cohort: What\u2019s the difference between the 2024 and 2023 course?",
+      "expected_id": "99c8a70fdf",
+      "course": "mlops-zoomcamp",
+      "section": "general"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "Is system design included in the course",
+          "Course content system design",
+          "System design module in the course"
+        ],
+        "creative_student": [],
+        "chaos_monkey": []
+      },
+      "original_question": "Is system design included?",
+      "expected_id": "9198d40c17",
+      "course": "ml-zoomcamp",
+      "section": "general"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "Inverting variables with low ROC AUC scores",
+          "Negating variables for better model performance",
+          "Improving feature importance by inverting variables"
+        ],
+        "creative_student": [],
+        "chaos_monkey": []
+      },
+      "original_question": "What is the use of inverting or negating the variables less than the threshold?",
+      "expected_id": "6a8dccc107",
+      "course": "ml-zoomcamp",
+      "section": "module-4"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "importing csv file into jupyter notebook",
+          "how to download csv file in jupyter notebook",
+          "using pandas to read csv file from url"
+        ],
+        "creative_student": [
+          "how to load csv file in jupyter notebook",
+          "can't download file in python notebook",
+          "jupyter notebook csv file not downloading"
+        ],
+        "chaos_monkey": [
+          "My notebook is blocking me from downloading files",
+          "How do I access external data without leaving Jupyter?",
+          "Is it possible to download a file without using pandas?"
+        ]
+      },
+      "original_question": "Downloading a csv file inside notebook",
+      "expected_id": "f3a06ec752",
+      "course": "ml-zoomcamp",
+      "section": "module-1"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "homework answer does not match any option",
+          "what to do if homework answer is not among options",
+          "selecting closest answer in homework"
+        ],
+        "creative_student": [
+          "homework answer not matching any options",
+          "why is my homework answer different from choices",
+          "homework question answer doesn't match any choice"
+        ],
+        "chaos_monkey": [
+          "The homework options are wrong, what can I do?",
+          "Why do the homework answers change depending on the computer?",
+          "How do I deal with homework options that don't match my results?"
+        ]
+      },
+      "original_question": "Homework: The answer I get for one of the homework questions doesn't match any of the options. What should I do?",
+      "expected_id": "8af59cb98f",
+      "course": "ml-zoomcamp",
+      "section": "module-2-homework"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "docker pull command explanation",
+          "how docker pull works",
+          "docker pull public image"
+        ],
+        "creative_student": [
+          "docker pull not working",
+          "can't pull docker image",
+          "docker pull command not fetching image"
+        ],
+        "chaos_monkey": [
+          "The container thing won't pull images",
+          "How do I download a Docker image if it's not public?",
+          "Docker pull is not working, is it because of my OS?"
+        ]
+      },
+      "original_question": "Docker: docker pull dbpage",
+      "expected_id": "bceb4aa421",
+      "course": "de-zoomcamp",
+      "section": "module-1-docker"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "pgadmin create server dialog missing",
+          "pgadmin register server instead of create",
+          "new pgadmin version create server issue"
+        ],
+        "creative_student": [
+          "pgadmin create server dialog not showing",
+          "why can't i create a server in pgadmin",
+          "pgadmin create server option missing"
+        ],
+        "chaos_monkey": [
+          "pgAdmin is not showing the create server option",
+          "How do I create a new server in pgAdmin if the dialog is missing?",
+          "pgAdmin has changed, how do I register a server now?"
+        ]
+      },
+      "original_question": "pgAdmin: Create server dialog does not appear",
+      "expected_id": "117164c439",
+      "course": "de-zoomcamp",
+      "section": "module-1-postgres"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "enable private google access on subnetwork",
+          "dataproc internal ip only error",
+          "resolve private google access error in dataproc"
+        ],
+        "creative_student": [
+          "dataproc cluster internal ip only error",
+          "google cloud dataproc private google access issue",
+          "why is dataproc cluster creation failing"
+        ],
+        "chaos_monkey": [
+          "Dataproc is complaining about a subnet issue",
+          "How do I enable Private Google Access for my VPC?",
+          "Why does my Dataproc cluster need Private Google Access?"
+        ]
+      },
+      "original_question": "Subnetwork 'default' does not support Private Google Access which is required for Dataproc clusters when 'internal_ip_only' is set to 'true'. Enable Private Google Access on subnetwork 'default' or set 'internal_ip_only' to 'false'.",
+      "expected_id": "a25406395b",
+      "course": "de-zoomcamp",
+      "section": "module-6"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "confluent-kafka installation for python avro example",
+          "fastavro installation for producer.py",
+          "python avro dependencies for streaming example"
+        ],
+        "creative_student": [
+          "python script won't run, what's wrong with dependencies",
+          "can't install requirements for streaming example",
+          "producer.py script not working due to missing packages"
+        ],
+        "chaos_monkey": [
+          "why is python producer.py not running with uv",
+          "fastavro not installing with pip",
+          "confluent-kafka dependency not found in python"
+        ]
+      },
+      "original_question": "Streaming: installing dependencies for the Python avro example (producer.py)",
+      "expected_id": "2763850d3e",
+      "course": "de-zoomcamp",
+      "section": "module-7"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "is capstone project solo or group",
+          "capstone project team size",
+          "individual or team capstone project"
+        ],
+        "creative_student": [
+          "do I need to find a team for the final project",
+          "is the capstone a team effort",
+          "can I work alone on the capstone"
+        ],
+        "chaos_monkey": [
+          "can I work in a team for the final project",
+          "do I need to collaborate with others for the capstone",
+          "is the capstone a group assignment"
+        ]
+      },
+      "original_question": "Is it a group project?",
+      "expected_id": "0fab61eca2",
+      "course": "llm-zoomcamp",
+      "section": "project"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "update mage version in UI",
+          "mage version update instructions",
+          "changing mage version after container start"
+        ],
+        "creative_student": [
+          "mage version updated but I don't know what to do",
+          "container shows new mage version, how do I update",
+          "should I update mage version in the UI"
+        ],
+        "chaos_monkey": [
+          "mage version not updating in container",
+          "how to downgrade mage version in ui",
+          "why is mage version changing automatically"
+        ]
+      },
+      "original_question": "Mage updated in UI",
+      "expected_id": "563feb7fd1",
+      "course": "mlops-zoomcamp",
+      "section": "module-3"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "finding my leaderboard display name",
+          "how to locate myself on leaderboard",
+          "leaderboard display name and certificate name"
+        ],
+        "creative_student": [
+          "where is my name on the leaderboard",
+          "can't find myself on the leaderboard",
+          "how do I check my leaderboard ranking"
+        ],
+        "chaos_monkey": [
+          "how to find my username on the leaderboard",
+          "why is my name not on the leaderboard",
+          "how to change my leaderboard display name"
+        ]
+      },
+      "original_question": "Leaderboard: how do I find myself on the leaderboard?",
+      "expected_id": "7255a1c3bc",
+      "course": "de-zoomcamp",
+      "section": "general"
+    },
+    {
+      "prompt_results": {
+        "grounded_analyst": [
+          "lost SSH access to GCP VM due to space",
+          "Permission denied publickey GCP VM",
+          "recovering SSH access to GCP VM after space issue"
+        ],
+        "creative_student": [
+          "lost access to GCP VM due to space issues",
+          "permission denied when trying to access VM",
+          "can't connect to GCP VM, permission denied error"
+        ],
+        "chaos_monkey": [
+          "gcp vm disk full cannot ssh",
+          "ssh permission denied due to disk space",
+          "how to free up disk space on gcp vm"
+        ]
+      },
+      "original_question": "GCP VM: If you have lost SSH access to your machine due to lack of space. Permission denied (publickey)",
+      "expected_id": "c01d835b44",
+      "course": "de-zoomcamp",
+      "section": "module-1-gcp"
+    }
+  ]
+}

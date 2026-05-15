@@ -1,0 +1,2253 @@
+{
+  "metadata": {
+    "total_queries": 390,
+    "embedding_model": "all-MiniLM-L6-v2",
+    "timestamp": "2026-05-09T20:48:33.249938"
+  },
+  "configs": [
+    {
+      "total": 390,
+      "found": 323,
+      "hit_rate": 0.8282051282051283,
+      "recall_at_k": {
+        "1": 0.5384615384615384,
+        "3": 0.7128205128205128,
+        "5": 0.7512820512820513,
+        "10": 0.8282051282051283
+      },
+      "mrr": 0.6357,
+      "ndcg@10": 0.6822,
+      "cross_course_rate": 0.0,
+      "rank_std": 1.92,
+      "failure_count": 67,
+      "failure_avg_sim": 0.3394,
+      "p50_latency": 5.4,
+      "p95_latency": 6.5,
+      "name": "bm25_default",
+      "per_strategy": {
+        "chaos_monkey": {
+          "total": 135,
+          "found": 90,
+          "hit_rate": 0.6666666666666666,
+          "recall_at_k": {
+            "1": 0.4,
+            "3": 0.5481481481481482,
+            "5": 0.5851851851851851,
+            "10": 0.6666666666666666
+          },
+          "mrr": 0.4867,
+          "ndcg@10": 0.5297,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.26,
+          "failure_count": 45,
+          "failure_avg_sim": 0.2865,
+          "p50_latency": 5.6,
+          "p95_latency": 6.7
+        },
+        "creative_student": {
+          "total": 105,
+          "found": 92,
+          "hit_rate": 0.8761904761904762,
+          "recall_at_k": {
+            "1": 0.5523809523809524,
+            "3": 0.7523809523809524,
+            "5": 0.7714285714285715,
+            "10": 0.8761904761904762
+          },
+          "mrr": 0.6595,
+          "ndcg@10": 0.7118,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.0,
+          "failure_count": 13,
+          "failure_avg_sim": 0.4793,
+          "p50_latency": 5.4,
+          "p95_latency": 6.7
+        },
+        "grounded_analyst": {
+          "total": 150,
+          "found": 141,
+          "hit_rate": 0.94,
+          "recall_at_k": {
+            "1": 0.6533333333333333,
+            "3": 0.8333333333333334,
+            "5": 0.8866666666666667,
+            "10": 0.94
+          },
+          "mrr": 0.753,
+          "ndcg@10": 0.7987,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.57,
+          "failure_count": 9,
+          "failure_avg_sim": 0.4022,
+          "p50_latency": 5.1,
+          "p95_latency": 6.0
+        }
+      },
+      "per_course": {
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 114,
+          "hit_rate": 0.8636363636363636,
+          "recall_at_k": {
+            "1": 0.5909090909090909,
+            "3": 0.7424242424242424,
+            "5": 0.7727272727272727,
+            "10": 0.8636363636363636
+          },
+          "mrr": 0.6771,
+          "ndcg@10": 0.7217,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.99,
+          "failure_count": 18,
+          "failure_avg_sim": 0.4086,
+          "p50_latency": 5.4,
+          "p95_latency": 6.5
+        },
+        "llm-zoomcamp": {
+          "total": 75,
+          "found": 66,
+          "hit_rate": 0.88,
+          "recall_at_k": {
+            "1": 0.6666666666666666,
+            "3": 0.7866666666666666,
+            "5": 0.84,
+            "10": 0.88
+          },
+          "mrr": 0.7424,
+          "ndcg@10": 0.7759,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.57,
+          "failure_count": 9,
+          "failure_avg_sim": 0.4381,
+          "p50_latency": 5.2,
+          "p95_latency": 6.3
+        },
+        "ml-zoomcamp": {
+          "total": 132,
+          "found": 101,
+          "hit_rate": 0.7651515151515151,
+          "recall_at_k": {
+            "1": 0.45454545454545453,
+            "3": 0.6515151515151515,
+            "5": 0.6818181818181818,
+            "10": 0.7651515151515151
+          },
+          "mrr": 0.5603,
+          "ndcg@10": 0.61,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.96,
+          "failure_count": 31,
+          "failure_avg_sim": 0.2735,
+          "p50_latency": 5.4,
+          "p95_latency": 6.4
+        },
+        "mlops-zoomcamp": {
+          "total": 51,
+          "found": 42,
+          "hit_rate": 0.8235294117647058,
+          "recall_at_k": {
+            "1": 0.43137254901960786,
+            "3": 0.6862745098039216,
+            "5": 0.7450980392156863,
+            "10": 0.8235294117647058
+          },
+          "mrr": 0.5664,
+          "ndcg@10": 0.6289,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.03,
+          "failure_count": 9,
+          "failure_avg_sim": 0.3294,
+          "p50_latency": 5.3,
+          "p95_latency": 6.5
+        }
+      },
+      "failures_sample": [
+        {
+          "query": "what dependencies do I need to install for the starter jupyter notebook?",
+          "strategy": "creative_student",
+          "top_sim": 0.5090064406394958,
+          "returned": [
+            "How do I install the necessary dependencies to run the code?",
+            "Certificate: Do I need to do the homeworks to get the certificate?"
+          ]
+        },
+        {
+          "query": "jupyter notebook errors due to missing packages, how do I fix it?",
+          "strategy": "creative_student",
+          "top_sim": 0.5448564887046814,
+          "returned": [
+            "Python: Ingestion with Jupyter notebook - missing 100000 records",
+            "Why might some API response fields be missing after a dlt pipeline run, and how can I fix it?"
+          ]
+        },
+        {
+          "query": "Jupyter Notebook missing dependencies for starter code",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.4598258435726166,
+          "returned": [
+            "Python: Ingestion with Jupyter notebook - missing 100000 records",
+            "Jupyter Notebook or SparkUI not loading properly at localhost after port forwarding from VS code?"
+          ]
+        },
+        {
+          "query": " Codespace environment lacks required libraries",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.43559059500694275,
+          "returned": [
+            "Setup: No development environment",
+            "Environment: which Python version should I use?"
+          ]
+        },
+        {
+          "query": "why am I getting a unicode decode error when reading csv file?",
+          "strategy": "creative_student",
+          "top_sim": 0.4450434446334839,
+          "returned": [
+            "Following 5.2.1, I am getting an error - Head:cannot open \u2018taxi+_zone_lookup.csv\u2019 for reading: No such file or directory",
+            "Why does the CSV file size shown in the Kestra Outputs tab differ from the value printed by a Python task?"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 390,
+      "found": 352,
+      "hit_rate": 0.9025641025641026,
+      "recall_at_k": {
+        "1": 0.6692307692307692,
+        "3": 0.841025641025641,
+        "5": 0.8743589743589744,
+        "10": 0.9025641025641026
+      },
+      "mrr": 0.7607,
+      "ndcg@10": 0.796,
+      "cross_course_rate": 0.0,
+      "rank_std": 1.3,
+      "failure_count": 38,
+      "failure_avg_sim": 0.3027,
+      "p50_latency": 5.3,
+      "p95_latency": 6.3,
+      "name": "bm25_balanced",
+      "per_strategy": {
+        "chaos_monkey": {
+          "total": 135,
+          "found": 109,
+          "hit_rate": 0.8074074074074075,
+          "recall_at_k": {
+            "1": 0.562962962962963,
+            "3": 0.7407407407407407,
+            "5": 0.7777777777777778,
+            "10": 0.8074074074074075
+          },
+          "mrr": 0.6575,
+          "ndcg@10": 0.6947,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.38,
+          "failure_count": 26,
+          "failure_avg_sim": 0.2716,
+          "p50_latency": 5.6,
+          "p95_latency": 6.5
+        },
+        "creative_student": {
+          "total": 105,
+          "found": 94,
+          "hit_rate": 0.8952380952380953,
+          "recall_at_k": {
+            "1": 0.638095238095238,
+            "3": 0.8285714285714286,
+            "5": 0.8666666666666667,
+            "10": 0.8952380952380953
+          },
+          "mrr": 0.7372,
+          "ndcg@10": 0.7765,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.37,
+          "failure_count": 11,
+          "failure_avg_sim": 0.3934,
+          "p50_latency": 5.3,
+          "p95_latency": 6.2
+        },
+        "grounded_analyst": {
+          "total": 150,
+          "found": 149,
+          "hit_rate": 0.9933333333333333,
+          "recall_at_k": {
+            "1": 0.7866666666666666,
+            "3": 0.94,
+            "5": 0.9666666666666667,
+            "10": 0.9933333333333333
+          },
+          "mrr": 0.8701,
+          "ndcg@10": 0.9008,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.18,
+          "failure_count": 1,
+          "failure_avg_sim": 0.1151,
+          "p50_latency": 5.2,
+          "p95_latency": 5.9
+        }
+      },
+      "per_course": {
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 120,
+          "hit_rate": 0.9090909090909091,
+          "recall_at_k": {
+            "1": 0.6287878787878788,
+            "3": 0.8484848484848485,
+            "5": 0.8939393939393939,
+            "10": 0.9090909090909091
+          },
+          "mrr": 0.7441,
+          "ndcg@10": 0.7856,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.14,
+          "failure_count": 12,
+          "failure_avg_sim": 0.357,
+          "p50_latency": 5.4,
+          "p95_latency": 6.3
+        },
+        "llm-zoomcamp": {
+          "total": 75,
+          "found": 72,
+          "hit_rate": 0.96,
+          "recall_at_k": {
+            "1": 0.7866666666666666,
+            "3": 0.9066666666666666,
+            "5": 0.9466666666666667,
+            "10": 0.96
+          },
+          "mrr": 0.8497,
+          "ndcg@10": 0.8771,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.01,
+          "failure_count": 3,
+          "failure_avg_sim": 0.2756,
+          "p50_latency": 5.2,
+          "p95_latency": 6.2
+        },
+        "ml-zoomcamp": {
+          "total": 132,
+          "found": 112,
+          "hit_rate": 0.8484848484848485,
+          "recall_at_k": {
+            "1": 0.6060606060606061,
+            "3": 0.7575757575757576,
+            "5": 0.7878787878787878,
+            "10": 0.8484848484848485
+          },
+          "mrr": 0.6911,
+          "ndcg@10": 0.7294,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.75,
+          "failure_count": 20,
+          "failure_avg_sim": 0.2368,
+          "p50_latency": 5.3,
+          "p95_latency": 6.3
+        },
+        "mlops-zoomcamp": {
+          "total": 51,
+          "found": 48,
+          "hit_rate": 0.9411764705882353,
+          "recall_at_k": {
+            "1": 0.7647058823529411,
+            "3": 0.9411764705882353,
+            "5": 0.9411764705882353,
+            "10": 0.9411764705882353
+          },
+          "mrr": 0.8529,
+          "ndcg@10": 0.876,
+          "cross_course_rate": 0.0,
+          "rank_std": 0.39,
+          "failure_count": 3,
+          "failure_avg_sim": 0.5527,
+          "p50_latency": 5.1,
+          "p95_latency": 6.2
+        }
+      },
+      "failures_sample": [
+        {
+          "query": "terraform google api permission error",
+          "strategy": "creative_student",
+          "top_sim": 0.5672189593315125,
+          "returned": [
+            "stoTerraform - Error creating Bucket: googleapi: Error 403: Permission denied to access \u2018storage.buckets.create\u2019",
+            "Terraform Error 412: Request violates constraint 'constraints/storage.uniformBucketLevelAccess', conditionNotMet"
+          ]
+        },
+        {
+          "query": "Terraform keeps saying I don't have permission to do anything",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.2653937339782715,
+          "returned": [
+            "Homework: What does it mean \u201cStop with loading the files into a bucket.\u201d?",
+            "stoTerraform - Error creating Bucket: googleapi: Error 403: Permission denied to access \u2018storage.buckets.create\u2019"
+          ]
+        },
+        {
+          "query": "Why is my homework answer not matching exactly?",
+          "strategy": "creative_student",
+          "top_sim": 0.14846323430538177,
+          "returned": [
+            "Random seed 42",
+            "Homework: is the RMSE result close to the options?"
+          ]
+        },
+        {
+          "query": "Homework results are way off, what's going on?",
+          "strategy": "creative_student",
+          "top_sim": 0.10660090297460556,
+          "returned": [
+            "Failed to read Dockerfile",
+            "Pipenv is taking forever to lock file. I have deleted the lockfile, and restarted my pc. Please, what is a possible solution?"
+          ]
+        },
+        {
+          "query": "Can't get the right answer on my homework, help!",
+          "strategy": "creative_student",
+          "top_sim": 0.3395717740058899,
+          "returned": [
+            "Homework: The answer I get for one of the homework questions doesn't match any of the options. What should I do?",
+            "Pipenv is taking forever to lock file. I have deleted the lockfile, and restarted my pc. Please, what is a possible solution?"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 390,
+      "found": 316,
+      "hit_rate": 0.8102564102564103,
+      "recall_at_k": {
+        "1": 0.5538461538461539,
+        "3": 0.7205128205128205,
+        "5": 0.7666666666666667,
+        "10": 0.8102564102564103
+      },
+      "mrr": 0.6441,
+      "ndcg@10": 0.6846,
+      "cross_course_rate": 0.0,
+      "rank_std": 1.75,
+      "failure_count": 74,
+      "failure_avg_sim": 0.3075,
+      "p50_latency": 5.4,
+      "p95_latency": 6.4,
+      "name": "bm25_high_text",
+      "per_strategy": {
+        "chaos_monkey": {
+          "total": 135,
+          "found": 100,
+          "hit_rate": 0.7407407407407407,
+          "recall_at_k": {
+            "1": 0.45185185185185184,
+            "3": 0.6370370370370371,
+            "5": 0.6888888888888889,
+            "10": 0.7407407407407407
+          },
+          "mrr": 0.5522,
+          "ndcg@10": 0.5982,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.84,
+          "failure_count": 35,
+          "failure_avg_sim": 0.2361,
+          "p50_latency": 5.7,
+          "p95_latency": 6.7
+        },
+        "creative_student": {
+          "total": 105,
+          "found": 83,
+          "hit_rate": 0.7904761904761904,
+          "recall_at_k": {
+            "1": 0.5523809523809524,
+            "3": 0.7142857142857143,
+            "5": 0.7428571428571429,
+            "10": 0.7904761904761904
+          },
+          "mrr": 0.6371,
+          "ndcg@10": 0.6745,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.78,
+          "failure_count": 22,
+          "failure_avg_sim": 0.3883,
+          "p50_latency": 5.4,
+          "p95_latency": 6.3
+        },
+        "grounded_analyst": {
+          "total": 150,
+          "found": 133,
+          "hit_rate": 0.8866666666666667,
+          "recall_at_k": {
+            "1": 0.6466666666666666,
+            "3": 0.8,
+            "5": 0.8533333333333334,
+            "10": 0.8866666666666667
+          },
+          "mrr": 0.7316,
+          "ndcg@10": 0.7695,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.63,
+          "failure_count": 17,
+          "failure_avg_sim": 0.35,
+          "p50_latency": 5.3,
+          "p95_latency": 6.1
+        }
+      },
+      "per_course": {
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 108,
+          "hit_rate": 0.8181818181818182,
+          "recall_at_k": {
+            "1": 0.5303030303030303,
+            "3": 0.7196969696969697,
+            "5": 0.7727272727272727,
+            "10": 0.8181818181818182
+          },
+          "mrr": 0.6379,
+          "ndcg@10": 0.6822,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.78,
+          "failure_count": 24,
+          "failure_avg_sim": 0.3797,
+          "p50_latency": 5.4,
+          "p95_latency": 6.4
+        },
+        "llm-zoomcamp": {
+          "total": 75,
+          "found": 71,
+          "hit_rate": 0.9466666666666667,
+          "recall_at_k": {
+            "1": 0.6133333333333333,
+            "3": 0.8533333333333334,
+            "5": 0.9333333333333333,
+            "10": 0.9466666666666667
+          },
+          "mrr": 0.7313,
+          "ndcg@10": 0.7846,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.38,
+          "failure_count": 4,
+          "failure_avg_sim": 0.143,
+          "p50_latency": 5.4,
+          "p95_latency": 6.4
+        },
+        "ml-zoomcamp": {
+          "total": 132,
+          "found": 87,
+          "hit_rate": 0.6590909090909091,
+          "recall_at_k": {
+            "1": 0.4696969696969697,
+            "3": 0.5909090909090909,
+            "5": 0.6136363636363636,
+            "10": 0.6590909090909091
+          },
+          "mrr": 0.5328,
+          "ndcg@10": 0.5634,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.71,
+          "failure_count": 45,
+          "failure_avg_sim": 0.2818,
+          "p50_latency": 5.4,
+          "p95_latency": 6.3
+        },
+        "mlops-zoomcamp": {
+          "total": 51,
+          "found": 50,
+          "hit_rate": 0.9803921568627451,
+          "recall_at_k": {
+            "1": 0.7450980392156863,
+            "3": 0.8627450980392157,
+            "5": 0.9019607843137255,
+            "10": 0.9803921568627451
+          },
+          "mrr": 0.8195,
+          "ndcg@10": 0.8576,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.15,
+          "failure_count": 1,
+          "failure_avg_sim": 0.3898,
+          "p50_latency": 5.4,
+          "p95_latency": 6.1
+        }
+      },
+      "failures_sample": [
+        {
+          "query": "container exec error even though PATH is correct",
+          "strategy": "chaos_monkey",
+          "top_sim": -0.008419235236942768,
+          "returned": [
+            "I missed the first homework - can I still get a certificate?",
+            "Error: How to fix requests library only installs v2.28 instead of v2.32 required for lancedb?"
+          ]
+        },
+        {
+          "query": "jupyter kernel keeps crashing when I try to embed data",
+          "strategy": "creative_student",
+          "top_sim": 0.12606848776340485,
+          "returned": [
+            "Vector search: should I embed the question, the answer, or both?",
+            "Agents: \"RuntimeError: Already running asyncio in this thread\" when calling asyncio.run() from Jupyter"
+          ]
+        },
+        {
+          "query": "terraform google api permission error",
+          "strategy": "creative_student",
+          "top_sim": 0.5672189593315125,
+          "returned": [
+            "stoTerraform - Error creating Bucket: googleapi: Error 403: Permission denied to access \u2018storage.buckets.create\u2019",
+            "Terraform Error 412: Request violates constraint 'constraints/storage.uniformBucketLevelAccess', conditionNotMet"
+          ]
+        },
+        {
+          "query": "Terraform keeps saying I don't have permission to do anything",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.2653937339782715,
+          "returned": [
+            "Homework: What does it mean \u201cStop with loading the files into a bucket.\u201d?",
+            "stoTerraform - Error creating Bucket: googleapi: Error 403: Permission denied to access \u2018storage.buckets.create\u2019"
+          ]
+        },
+        {
+          "query": "Connection issue with the RAG homework prompt",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.19463945925235748,
+          "returned": [
+            "Project: how do I evaluate a recommender-style RAG (no obvious Q&A ground truth)?",
+            "Evaluation: \"JSONDecodeError: Expecting value\" when generating ground-truth questions with the LLM"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 390,
+      "found": 365,
+      "hit_rate": 0.9358974358974359,
+      "recall_at_k": {
+        "1": 0.6666666666666666,
+        "3": 0.8282051282051283,
+        "5": 0.8769230769230769,
+        "10": 0.9358974358974359
+      },
+      "mrr": 0.7574,
+      "ndcg@10": 0.8006,
+      "cross_course_rate": 0.0,
+      "rank_std": 1.87,
+      "failure_count": 25,
+      "failure_avg_sim": 0.5461,
+      "p50_latency": 19.3,
+      "p95_latency": 24.2,
+      "name": "vector_cosine",
+      "per_strategy": {
+        "chaos_monkey": {
+          "total": 135,
+          "found": 117,
+          "hit_rate": 0.8666666666666667,
+          "recall_at_k": {
+            "1": 0.5555555555555556,
+            "3": 0.7481481481481481,
+            "5": 0.7777777777777778,
+            "10": 0.8666666666666667
+          },
+          "mrr": 0.6546,
+          "ndcg@10": 0.7056,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.09,
+          "failure_count": 18,
+          "failure_avg_sim": 0.5255,
+          "p50_latency": 19.9,
+          "p95_latency": 26.7
+        },
+        "creative_student": {
+          "total": 105,
+          "found": 103,
+          "hit_rate": 0.9809523809523809,
+          "recall_at_k": {
+            "1": 0.638095238095238,
+            "3": 0.8476190476190476,
+            "5": 0.9142857142857143,
+            "10": 0.9809523809523809
+          },
+          "mrr": 0.7597,
+          "ndcg@10": 0.8136,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.86,
+          "failure_count": 2,
+          "failure_avg_sim": 0.6164,
+          "p50_latency": 19.2,
+          "p95_latency": 23.1
+        },
+        "grounded_analyst": {
+          "total": 150,
+          "found": 145,
+          "hit_rate": 0.9666666666666667,
+          "recall_at_k": {
+            "1": 0.7866666666666666,
+            "3": 0.8866666666666667,
+            "5": 0.94,
+            "10": 0.9666666666666667
+          },
+          "mrr": 0.8484,
+          "ndcg@10": 0.877,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.62,
+          "failure_count": 5,
+          "failure_avg_sim": 0.592,
+          "p50_latency": 18.8,
+          "p95_latency": 22.5
+        }
+      },
+      "per_course": {
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 127,
+          "hit_rate": 0.9621212121212122,
+          "recall_at_k": {
+            "1": 0.6590909090909091,
+            "3": 0.8409090909090909,
+            "5": 0.9015151515151515,
+            "10": 0.9621212121212122
+          },
+          "mrr": 0.761,
+          "ndcg@10": 0.8099,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.78,
+          "failure_count": 5,
+          "failure_avg_sim": 0.6368,
+          "p50_latency": 19.3,
+          "p95_latency": 24.6
+        },
+        "llm-zoomcamp": {
+          "total": 75,
+          "found": 75,
+          "hit_rate": 1.0,
+          "recall_at_k": {
+            "1": 0.84,
+            "3": 0.9333333333333333,
+            "5": 0.9866666666666667,
+            "10": 1.0
+          },
+          "mrr": 0.8993,
+          "ndcg@10": 0.9243,
+          "cross_course_rate": 0.0,
+          "rank_std": 0.96,
+          "failure_count": 0,
+          "failure_avg_sim": 0,
+          "p50_latency": 18.7,
+          "p95_latency": 23.2
+        },
+        "ml-zoomcamp": {
+          "total": 132,
+          "found": 116,
+          "hit_rate": 0.8787878787878788,
+          "recall_at_k": {
+            "1": 0.5681818181818182,
+            "3": 0.7348484848484849,
+            "5": 0.7803030303030303,
+            "10": 0.8787878787878788
+          },
+          "mrr": 0.6626,
+          "ndcg@10": 0.7139,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.42,
+          "failure_count": 16,
+          "failure_avg_sim": 0.5126,
+          "p50_latency": 19.6,
+          "p95_latency": 24.9
+        },
+        "mlops-zoomcamp": {
+          "total": 51,
+          "found": 47,
+          "hit_rate": 0.9215686274509803,
+          "recall_at_k": {
+            "1": 0.6862745098039216,
+            "3": 0.8823529411764706,
+            "5": 0.9019607843137255,
+            "10": 0.9215686274509803
+          },
+          "mrr": 0.7849,
+          "ndcg@10": 0.8192,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.29,
+          "failure_count": 4,
+          "failure_avg_sim": 0.5667,
+          "p50_latency": 18.6,
+          "p95_latency": 23.7
+        }
+      },
+      "failures_sample": [
+        {
+          "query": "jupyter notebook dependencies",
+          "strategy": "grounded_analyst",
+          "top_sim": 0.6656677722930908,
+          "returned": [
+            "Alternative way to convert Jupyter notebook to Python script (via jupytext)",
+            "Jupyter: Install nbconvert, fix 'Failed to spawn' nbconvert error, and convert notebook to Python script (including uv integration)"
+          ]
+        },
+        {
+          "query": "Jupyter Notebook missing dependencies for starter code",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.5970175266265869,
+          "returned": [
+            "Alternative way to convert Jupyter notebook to Python script (via jupytext)",
+            "Jupyter: Install nbconvert, fix 'Failed to spawn' nbconvert error, and convert notebook to Python script (including uv integration)"
+          ]
+        },
+        {
+          "query": "pandas mode function not working as expected",
+          "strategy": "creative_student",
+          "top_sim": 0.6241635680198669,
+          "returned": [
+            "Standard deviation using Pandas built in Function",
+            "Warning about modifying Dataframes inside functions"
+          ]
+        },
+        {
+          "query": "That pandas mode function is so weird, it always gives me a list",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.601713240146637,
+          "returned": [
+            "What does pandas.DataFrame.info() do?",
+            "Standard deviation using Pandas built in Function"
+          ]
+        },
+        {
+          "query": "Docker password doesn't work even after updating my credentials",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.6170011162757874,
+          "returned": [
+            "Failed to read Dockerfile",
+            "Docker: Cannot connect to the docker daemon. Is the Docker daemon running?"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 390,
+      "found": 365,
+      "hit_rate": 0.9358974358974359,
+      "recall_at_k": {
+        "1": 0.6666666666666666,
+        "3": 0.8282051282051283,
+        "5": 0.8769230769230769,
+        "10": 0.9358974358974359
+      },
+      "mrr": 0.7574,
+      "ndcg@10": 0.8006,
+      "cross_course_rate": 0.0,
+      "rank_std": 1.87,
+      "failure_count": 25,
+      "failure_avg_sim": 0.5461,
+      "p50_latency": 20.3,
+      "p95_latency": 24.1,
+      "name": "qdrant_cosine",
+      "per_strategy": {
+        "chaos_monkey": {
+          "total": 135,
+          "found": 117,
+          "hit_rate": 0.8666666666666667,
+          "recall_at_k": {
+            "1": 0.5555555555555556,
+            "3": 0.7481481481481481,
+            "5": 0.7777777777777778,
+            "10": 0.8666666666666667
+          },
+          "mrr": 0.6546,
+          "ndcg@10": 0.7056,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.09,
+          "failure_count": 18,
+          "failure_avg_sim": 0.5255,
+          "p50_latency": 20.6,
+          "p95_latency": 24.9
+        },
+        "creative_student": {
+          "total": 105,
+          "found": 103,
+          "hit_rate": 0.9809523809523809,
+          "recall_at_k": {
+            "1": 0.638095238095238,
+            "3": 0.8476190476190476,
+            "5": 0.9142857142857143,
+            "10": 0.9809523809523809
+          },
+          "mrr": 0.7597,
+          "ndcg@10": 0.8136,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.86,
+          "failure_count": 2,
+          "failure_avg_sim": 0.6164,
+          "p50_latency": 19.9,
+          "p95_latency": 23.9
+        },
+        "grounded_analyst": {
+          "total": 150,
+          "found": 145,
+          "hit_rate": 0.9666666666666667,
+          "recall_at_k": {
+            "1": 0.7866666666666666,
+            "3": 0.8866666666666667,
+            "5": 0.94,
+            "10": 0.9666666666666667
+          },
+          "mrr": 0.8484,
+          "ndcg@10": 0.877,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.62,
+          "failure_count": 5,
+          "failure_avg_sim": 0.592,
+          "p50_latency": 20.2,
+          "p95_latency": 23.0
+        }
+      },
+      "per_course": {
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 127,
+          "hit_rate": 0.9621212121212122,
+          "recall_at_k": {
+            "1": 0.6590909090909091,
+            "3": 0.8409090909090909,
+            "5": 0.9015151515151515,
+            "10": 0.9621212121212122
+          },
+          "mrr": 0.761,
+          "ndcg@10": 0.8099,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.78,
+          "failure_count": 5,
+          "failure_avg_sim": 0.6368,
+          "p50_latency": 20.3,
+          "p95_latency": 24.3
+        },
+        "llm-zoomcamp": {
+          "total": 75,
+          "found": 75,
+          "hit_rate": 1.0,
+          "recall_at_k": {
+            "1": 0.84,
+            "3": 0.9333333333333333,
+            "5": 0.9866666666666667,
+            "10": 1.0
+          },
+          "mrr": 0.8993,
+          "ndcg@10": 0.9243,
+          "cross_course_rate": 0.0,
+          "rank_std": 0.96,
+          "failure_count": 0,
+          "failure_avg_sim": 0,
+          "p50_latency": 19.7,
+          "p95_latency": 22.8
+        },
+        "ml-zoomcamp": {
+          "total": 132,
+          "found": 116,
+          "hit_rate": 0.8787878787878788,
+          "recall_at_k": {
+            "1": 0.5681818181818182,
+            "3": 0.7348484848484849,
+            "5": 0.7803030303030303,
+            "10": 0.8787878787878788
+          },
+          "mrr": 0.6626,
+          "ndcg@10": 0.7139,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.42,
+          "failure_count": 16,
+          "failure_avg_sim": 0.5126,
+          "p50_latency": 20.4,
+          "p95_latency": 24.1
+        },
+        "mlops-zoomcamp": {
+          "total": 51,
+          "found": 47,
+          "hit_rate": 0.9215686274509803,
+          "recall_at_k": {
+            "1": 0.6862745098039216,
+            "3": 0.8823529411764706,
+            "5": 0.9019607843137255,
+            "10": 0.9215686274509803
+          },
+          "mrr": 0.7849,
+          "ndcg@10": 0.8192,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.29,
+          "failure_count": 4,
+          "failure_avg_sim": 0.5667,
+          "p50_latency": 20.6,
+          "p95_latency": 24.0
+        }
+      },
+      "failures_sample": [
+        {
+          "query": "jupyter notebook dependencies",
+          "strategy": "grounded_analyst",
+          "top_sim": 0.6656677722930908,
+          "returned": [
+            "Alternative way to convert Jupyter notebook to Python script (via jupytext)",
+            "Jupyter: Install nbconvert, fix 'Failed to spawn' nbconvert error, and convert notebook to Python script (including uv integration)"
+          ]
+        },
+        {
+          "query": "Jupyter Notebook missing dependencies for starter code",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.5970175266265869,
+          "returned": [
+            "Alternative way to convert Jupyter notebook to Python script (via jupytext)",
+            "Jupyter: Install nbconvert, fix 'Failed to spawn' nbconvert error, and convert notebook to Python script (including uv integration)"
+          ]
+        },
+        {
+          "query": "pandas mode function not working as expected",
+          "strategy": "creative_student",
+          "top_sim": 0.6241635680198669,
+          "returned": [
+            "Standard deviation using Pandas built in Function",
+            "Warning about modifying Dataframes inside functions"
+          ]
+        },
+        {
+          "query": "That pandas mode function is so weird, it always gives me a list",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.601713240146637,
+          "returned": [
+            "What does pandas.DataFrame.info() do?",
+            "Standard deviation using Pandas built in Function"
+          ]
+        },
+        {
+          "query": "Docker password doesn't work even after updating my credentials",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.6170011162757874,
+          "returned": [
+            "Failed to read Dockerfile",
+            "Docker: Cannot connect to the docker daemon. Is the Docker daemon running?"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 390,
+      "found": 358,
+      "hit_rate": 0.9179487179487179,
+      "recall_at_k": {
+        "1": 0.5974358974358974,
+        "3": 0.7923076923076923,
+        "5": 0.8538461538461538,
+        "10": 0.9179487179487179
+      },
+      "mrr": 0.7048,
+      "ndcg@10": 0.7564,
+      "cross_course_rate": 0.0,
+      "rank_std": 1.94,
+      "failure_count": 32,
+      "failure_avg_sim": 0.4711,
+      "p50_latency": 30.3,
+      "p95_latency": 35.2,
+      "name": "hybrid_rrf",
+      "per_strategy": {
+        "chaos_monkey": {
+          "total": 135,
+          "found": 109,
+          "hit_rate": 0.8074074074074075,
+          "recall_at_k": {
+            "1": 0.4666666666666667,
+            "3": 0.6518518518518519,
+            "5": 0.7185185185185186,
+            "10": 0.8074074074074075
+          },
+          "mrr": 0.574,
+          "ndcg@10": 0.63,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.22,
+          "failure_count": 26,
+          "failure_avg_sim": 0.451,
+          "p50_latency": 31.1,
+          "p95_latency": 36.4
+        },
+        "creative_student": {
+          "total": 105,
+          "found": 102,
+          "hit_rate": 0.9714285714285714,
+          "recall_at_k": {
+            "1": 0.6,
+            "3": 0.8476190476190476,
+            "5": 0.9047619047619048,
+            "10": 0.9714285714285714
+          },
+          "mrr": 0.7262,
+          "ndcg@10": 0.7858,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.0,
+          "failure_count": 3,
+          "failure_avg_sim": 0.5446,
+          "p50_latency": 30.3,
+          "p95_latency": 34.1
+        },
+        "grounded_analyst": {
+          "total": 150,
+          "found": 147,
+          "hit_rate": 0.98,
+          "recall_at_k": {
+            "1": 0.7133333333333334,
+            "3": 0.88,
+            "5": 0.94,
+            "10": 0.98
+          },
+          "mrr": 0.8075,
+          "ndcg@10": 0.8497,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.61,
+          "failure_count": 3,
+          "failure_avg_sim": 0.5722,
+          "p50_latency": 29.4,
+          "p95_latency": 34.2
+        }
+      },
+      "per_course": {
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 123,
+          "hit_rate": 0.9318181818181818,
+          "recall_at_k": {
+            "1": 0.6590909090909091,
+            "3": 0.8333333333333334,
+            "5": 0.8939393939393939,
+            "10": 0.9318181818181818
+          },
+          "mrr": 0.7541,
+          "ndcg@10": 0.7975,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.68,
+          "failure_count": 9,
+          "failure_avg_sim": 0.4872,
+          "p50_latency": 30.3,
+          "p95_latency": 34.5
+        },
+        "llm-zoomcamp": {
+          "total": 75,
+          "found": 72,
+          "hit_rate": 0.96,
+          "recall_at_k": {
+            "1": 0.7333333333333333,
+            "3": 0.8666666666666667,
+            "5": 0.92,
+            "10": 0.96
+          },
+          "mrr": 0.8106,
+          "ndcg@10": 0.8468,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.77,
+          "failure_count": 3,
+          "failure_avg_sim": 0.454,
+          "p50_latency": 29.5,
+          "p95_latency": 34.0
+        },
+        "ml-zoomcamp": {
+          "total": 132,
+          "found": 116,
+          "hit_rate": 0.8787878787878788,
+          "recall_at_k": {
+            "1": 0.4772727272727273,
+            "3": 0.7045454545454546,
+            "5": 0.7651515151515151,
+            "10": 0.8787878787878788
+          },
+          "mrr": 0.6064,
+          "ndcg@10": 0.6718,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.26,
+          "failure_count": 16,
+          "failure_avg_sim": 0.4567,
+          "p50_latency": 31.1,
+          "p95_latency": 36.7
+        },
+        "mlops-zoomcamp": {
+          "total": 51,
+          "found": 47,
+          "hit_rate": 0.9215686274509803,
+          "recall_at_k": {
+            "1": 0.5490196078431373,
+            "3": 0.803921568627451,
+            "5": 0.8823529411764706,
+            "10": 0.9215686274509803
+          },
+          "mrr": 0.676,
+          "ndcg@10": 0.7361,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.79,
+          "failure_count": 4,
+          "failure_avg_sim": 0.5053,
+          "p50_latency": 30.1,
+          "p95_latency": 34.1
+        }
+      },
+      "failures_sample": [
+        {
+          "query": "Jupyter Notebook missing dependencies for starter code",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.4598258435726166,
+          "returned": [
+            "Python: Ingestion with Jupyter notebook - missing 100000 records",
+            "Alternative way to convert Jupyter notebook to Python script (via jupytext)"
+          ]
+        },
+        {
+          "query": "pandas dataframe encoding fails with latin1",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.41769227385520935,
+          "returned": [
+            "DataType error when creating Spark DataFrame with a specified schema?",
+            "IPython - Pandas parsing dates with \"read_csv\""
+          ]
+        },
+        {
+          "query": "UnicodeDecodeError when writing to GCS",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.5779528021812439,
+          "returned": [
+            "GCS Bucket - error when writing data from web to GCS:",
+            "GCS Bucket: Fix Error when importing FHV data to GCS"
+          ]
+        },
+        {
+          "query": "Terraform keeps saying I don't have permission to do anything",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.5395908355712891,
+          "returned": [
+            "Terraform: Do I need to make another service account for Terraform before I get the keys (.json file)?",
+            "Terraform: Terraform initialized in an empty directory! The directory has no Terraform configuration files. You may begin working with Terraform immediately by creating Terraform configuration files."
+          ]
+        },
+        {
+          "query": "Homework results are way off, what's going on?",
+          "strategy": "creative_student",
+          "top_sim": 0.5408830046653748,
+          "returned": [
+            "Homework: Why do I have different values of accuracy than the options in the homework?",
+            "How do I submit homework?"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 390,
+      "found": 359,
+      "hit_rate": 0.9205128205128205,
+      "recall_at_k": {
+        "1": 0.6051282051282051,
+        "3": 0.823076923076923,
+        "5": 0.8692307692307693,
+        "10": 0.9205128205128205
+      },
+      "mrr": 0.7221,
+      "ndcg@10": 0.771,
+      "cross_course_rate": 0.0,
+      "rank_std": 1.56,
+      "failure_count": 31,
+      "failure_avg_sim": 0.4473,
+      "p50_latency": 30.4,
+      "p95_latency": 35.2,
+      "name": "hybrid_50_50",
+      "per_strategy": {
+        "chaos_monkey": {
+          "total": 135,
+          "found": 111,
+          "hit_rate": 0.8222222222222222,
+          "recall_at_k": {
+            "1": 0.4740740740740741,
+            "3": 0.6888888888888889,
+            "5": 0.7481481481481481,
+            "10": 0.8222222222222222
+          },
+          "mrr": 0.5965,
+          "ndcg@10": 0.6516,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.81,
+          "failure_count": 24,
+          "failure_avg_sim": 0.4124,
+          "p50_latency": 31.1,
+          "p95_latency": 35.8
+        },
+        "creative_student": {
+          "total": 105,
+          "found": 101,
+          "hit_rate": 0.9619047619047619,
+          "recall_at_k": {
+            "1": 0.6,
+            "3": 0.8761904761904762,
+            "5": 0.9142857142857143,
+            "10": 0.9619047619047619
+          },
+          "mrr": 0.7401,
+          "ndcg@10": 0.7953,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.39,
+          "failure_count": 4,
+          "failure_avg_sim": 0.5645,
+          "p50_latency": 30.5,
+          "p95_latency": 35.0
+        },
+        "grounded_analyst": {
+          "total": 150,
+          "found": 147,
+          "hit_rate": 0.98,
+          "recall_at_k": {
+            "1": 0.7266666666666667,
+            "3": 0.9066666666666666,
+            "5": 0.9466666666666667,
+            "10": 0.98
+          },
+          "mrr": 0.8226,
+          "ndcg@10": 0.8615,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.44,
+          "failure_count": 3,
+          "failure_avg_sim": 0.57,
+          "p50_latency": 30.2,
+          "p95_latency": 34.5
+        }
+      },
+      "per_course": {
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 124,
+          "hit_rate": 0.9393939393939394,
+          "recall_at_k": {
+            "1": 0.6742424242424242,
+            "3": 0.8181818181818182,
+            "5": 0.8787878787878788,
+            "10": 0.9393939393939394
+          },
+          "mrr": 0.7599,
+          "ndcg@10": 0.8033,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.69,
+          "failure_count": 8,
+          "failure_avg_sim": 0.4379,
+          "p50_latency": 30.8,
+          "p95_latency": 35.5
+        },
+        "llm-zoomcamp": {
+          "total": 75,
+          "found": 74,
+          "hit_rate": 0.9866666666666667,
+          "recall_at_k": {
+            "1": 0.7333333333333333,
+            "3": 0.92,
+            "5": 0.96,
+            "10": 0.9866666666666667
+          },
+          "mrr": 0.8288,
+          "ndcg@10": 0.8679,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.41,
+          "failure_count": 1,
+          "failure_avg_sim": 0.4844,
+          "p50_latency": 29.8,
+          "p95_latency": 34.7
+        },
+        "ml-zoomcamp": {
+          "total": 132,
+          "found": 114,
+          "hit_rate": 0.8636363636363636,
+          "recall_at_k": {
+            "1": 0.5,
+            "3": 0.75,
+            "5": 0.7954545454545454,
+            "10": 0.8636363636363636
+          },
+          "mrr": 0.6386,
+          "ndcg@10": 0.6942,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.66,
+          "failure_count": 18,
+          "failure_avg_sim": 0.4365,
+          "p50_latency": 30.8,
+          "p95_latency": 35.4
+        },
+        "mlops-zoomcamp": {
+          "total": 51,
+          "found": 47,
+          "hit_rate": 0.9215686274509803,
+          "recall_at_k": {
+            "1": 0.5098039215686274,
+            "3": 0.8823529411764706,
+            "5": 0.9019607843137255,
+            "10": 0.9215686274509803
+          },
+          "mrr": 0.6837,
+          "ndcg@10": 0.744,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.07,
+          "failure_count": 4,
+          "failure_avg_sim": 0.5053,
+          "p50_latency": 29.2,
+          "p95_latency": 33.5
+        }
+      },
+      "failures_sample": [
+        {
+          "query": "Jupyter Notebook missing dependencies for starter code",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.4598258435726166,
+          "returned": [
+            "Python: Ingestion with Jupyter notebook - missing 100000 records",
+            "Alternative way to convert Jupyter notebook to Python script (via jupytext)"
+          ]
+        },
+        {
+          "query": " Codespace environment lacks required libraries",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.43559059500694275,
+          "returned": [
+            "Setup: No development environment",
+            "How do I install the necessary dependencies to run the code?"
+          ]
+        },
+        {
+          "query": "pandas dataframe encoding fails with latin1",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.3661319613456726,
+          "returned": [
+            "IPython - Pandas parsing dates with \"read_csv\"",
+            "TypeError when using spark.createDataFrame function on a pandas df"
+          ]
+        },
+        {
+          "query": "UnicodeDecodeError when writing to GCS",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.5779528021812439,
+          "returned": [
+            "GCS Bucket - error when writing data from web to GCS:",
+            "GCS Bucket - I query my dataset and get a Bad character (ASCII 0) error?"
+          ]
+        },
+        {
+          "query": "pandas mode function not working as expected",
+          "strategy": "creative_student",
+          "top_sim": 0.6241635680198669,
+          "returned": [
+            "Standard deviation using Pandas built in Function",
+            "Shuffling the initial dataset using pandas built-in function"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 390,
+      "found": 366,
+      "hit_rate": 0.9384615384615385,
+      "recall_at_k": {
+        "1": 0.6666666666666666,
+        "3": 0.8333333333333334,
+        "5": 0.9025641025641026,
+        "10": 0.9384615384615385
+      },
+      "mrr": 0.7609,
+      "ndcg@10": 0.8042,
+      "cross_course_rate": 0.0,
+      "rank_std": 1.69,
+      "failure_count": 24,
+      "failure_avg_sim": 0.543,
+      "p50_latency": 30.6,
+      "p95_latency": 35.6,
+      "name": "hybrid_70_30_vec",
+      "per_strategy": {
+        "chaos_monkey": {
+          "total": 135,
+          "found": 116,
+          "hit_rate": 0.8592592592592593,
+          "recall_at_k": {
+            "1": 0.5555555555555556,
+            "3": 0.7185185185185186,
+            "5": 0.8,
+            "10": 0.8592592592592593
+          },
+          "mrr": 0.6562,
+          "ndcg@10": 0.7052,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.1,
+          "failure_count": 19,
+          "failure_avg_sim": 0.5248,
+          "p50_latency": 31.4,
+          "p95_latency": 36.5
+        },
+        "creative_student": {
+          "total": 105,
+          "found": 104,
+          "hit_rate": 0.9904761904761905,
+          "recall_at_k": {
+            "1": 0.638095238095238,
+            "3": 0.8666666666666667,
+            "5": 0.9523809523809523,
+            "10": 0.9904761904761905
+          },
+          "mrr": 0.766,
+          "ndcg@10": 0.8212,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.66,
+          "failure_count": 1,
+          "failure_avg_sim": 0.6086,
+          "p50_latency": 30.3,
+          "p95_latency": 35.0
+        },
+        "grounded_analyst": {
+          "total": 150,
+          "found": 146,
+          "hit_rate": 0.9733333333333334,
+          "recall_at_k": {
+            "1": 0.7866666666666666,
+            "3": 0.9133333333333333,
+            "5": 0.96,
+            "10": 0.9733333333333334
+          },
+          "mrr": 0.8516,
+          "ndcg@10": 0.8815,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.24,
+          "failure_count": 4,
+          "failure_avg_sim": 0.613,
+          "p50_latency": 29.7,
+          "p95_latency": 34.4
+        }
+      },
+      "per_course": {
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 128,
+          "hit_rate": 0.9696969696969697,
+          "recall_at_k": {
+            "1": 0.6590909090909091,
+            "3": 0.8333333333333334,
+            "5": 0.9166666666666666,
+            "10": 0.9696969696969697
+          },
+          "mrr": 0.764,
+          "ndcg@10": 0.8138,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.94,
+          "failure_count": 4,
+          "failure_avg_sim": 0.684,
+          "p50_latency": 30.7,
+          "p95_latency": 35.6
+        },
+        "llm-zoomcamp": {
+          "total": 75,
+          "found": 75,
+          "hit_rate": 1.0,
+          "recall_at_k": {
+            "1": 0.84,
+            "3": 0.9333333333333333,
+            "5": 0.9866666666666667,
+            "10": 1.0
+          },
+          "mrr": 0.8919,
+          "ndcg@10": 0.9183,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.22,
+          "failure_count": 0,
+          "failure_avg_sim": 0,
+          "p50_latency": 29.3,
+          "p95_latency": 33.3
+        },
+        "ml-zoomcamp": {
+          "total": 132,
+          "found": 116,
+          "hit_rate": 0.8787878787878788,
+          "recall_at_k": {
+            "1": 0.5681818181818182,
+            "3": 0.7651515151515151,
+            "5": 0.8333333333333334,
+            "10": 0.8787878787878788
+          },
+          "mrr": 0.6728,
+          "ndcg@10": 0.723,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.85,
+          "failure_count": 16,
+          "failure_avg_sim": 0.5018,
+          "p50_latency": 31.3,
+          "p95_latency": 36.0
+        },
+        "mlops-zoomcamp": {
+          "total": 51,
+          "found": 47,
+          "hit_rate": 0.9215686274509803,
+          "recall_at_k": {
+            "1": 0.6862745098039216,
+            "3": 0.8627450980392157,
+            "5": 0.9215686274509803,
+            "10": 0.9215686274509803
+          },
+          "mrr": 0.7882,
+          "ndcg@10": 0.8221,
+          "cross_course_rate": 0.0,
+          "rank_std": 0.87,
+          "failure_count": 4,
+          "failure_avg_sim": 0.5667,
+          "p50_latency": 29.6,
+          "p95_latency": 33.6
+        }
+      },
+      "failures_sample": [
+        {
+          "query": "jupyter notebook dependencies",
+          "strategy": "grounded_analyst",
+          "top_sim": 0.6656677722930908,
+          "returned": [
+            "Alternative way to convert Jupyter notebook to Python script (via jupytext)",
+            "Python: Ingestion with Jupyter notebook - missing 100000 records"
+          ]
+        },
+        {
+          "query": "Jupyter Notebook missing dependencies for starter code",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.5970175266265869,
+          "returned": [
+            "Alternative way to convert Jupyter notebook to Python script (via jupytext)",
+            "Python: Ingestion with Jupyter notebook - missing 100000 records"
+          ]
+        },
+        {
+          "query": "Docker password doesn't work even after updating my credentials",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.6170011162757874,
+          "returned": [
+            "Failed to read Dockerfile",
+            "Docker: Cannot connect to the docker daemon. Is the Docker daemon running?"
+          ]
+        },
+        {
+          "query": "closest option in homework",
+          "strategy": "grounded_analyst",
+          "top_sim": 0.6109967827796936,
+          "returned": [
+            "How do I submit homework?",
+            "Homework: The answer I get for one of the homework questions doesn't match any of the options. What should I do?"
+          ]
+        },
+        {
+          "query": "WSL is broken, how do I fix it?",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.7401716113090515,
+          "returned": [
+            "WSL: WSL integration with Ubuntu unexpectedly stopped with exit code 1",
+            "WSL: Insufficient system resources exist to complete the requested service."
+          ]
+        }
+      ]
+    },
+    {
+      "total": 390,
+      "found": 352,
+      "hit_rate": 0.9025641025641026,
+      "recall_at_k": {
+        "1": 0.5384615384615384,
+        "3": 0.8076923076923077,
+        "5": 0.8589743589743589,
+        "10": 0.9025641025641026
+      },
+      "mrr": 0.675,
+      "ndcg@10": 0.7313,
+      "cross_course_rate": 0.0,
+      "rank_std": 1.64,
+      "failure_count": 38,
+      "failure_avg_sim": 0.3562,
+      "p50_latency": 30.1,
+      "p95_latency": 35.0,
+      "name": "hybrid_30_70_vec",
+      "per_strategy": {
+        "chaos_monkey": {
+          "total": 135,
+          "found": 109,
+          "hit_rate": 0.8074074074074075,
+          "recall_at_k": {
+            "1": 0.4,
+            "3": 0.6962962962962963,
+            "5": 0.725925925925926,
+            "10": 0.8074074074074075
+          },
+          "mrr": 0.5428,
+          "ndcg@10": 0.6073,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.16,
+          "failure_count": 26,
+          "failure_avg_sim": 0.3093,
+          "p50_latency": 31.1,
+          "p95_latency": 34.9
+        },
+        "creative_student": {
+          "total": 105,
+          "found": 97,
+          "hit_rate": 0.9238095238095239,
+          "recall_at_k": {
+            "1": 0.5523809523809524,
+            "3": 0.8380952380952381,
+            "5": 0.9047619047619048,
+            "10": 0.9238095238095239
+          },
+          "mrr": 0.695,
+          "ndcg@10": 0.7522,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.3,
+          "failure_count": 8,
+          "failure_avg_sim": 0.4312,
+          "p50_latency": 29.8,
+          "p95_latency": 35.0
+        },
+        "grounded_analyst": {
+          "total": 150,
+          "found": 146,
+          "hit_rate": 0.9733333333333334,
+          "recall_at_k": {
+            "1": 0.6533333333333333,
+            "3": 0.8866666666666667,
+            "5": 0.9466666666666667,
+            "10": 0.9733333333333334
+          },
+          "mrr": 0.7799,
+          "ndcg@10": 0.8282,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.27,
+          "failure_count": 4,
+          "failure_avg_sim": 0.5113,
+          "p50_latency": 29.6,
+          "p95_latency": 34.8
+        }
+      },
+      "per_course": {
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 119,
+          "hit_rate": 0.9015151515151515,
+          "recall_at_k": {
+            "1": 0.5909090909090909,
+            "3": 0.8106060606060606,
+            "5": 0.8636363636363636,
+            "10": 0.9015151515151515
+          },
+          "mrr": 0.7071,
+          "ndcg@10": 0.7552,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.47,
+          "failure_count": 13,
+          "failure_avg_sim": 0.428,
+          "p50_latency": 30.0,
+          "p95_latency": 35.2
+        },
+        "llm-zoomcamp": {
+          "total": 75,
+          "found": 72,
+          "hit_rate": 0.96,
+          "recall_at_k": {
+            "1": 0.6666666666666666,
+            "3": 0.8666666666666667,
+            "5": 0.96,
+            "10": 0.96
+          },
+          "mrr": 0.7769,
+          "ndcg@10": 0.8226,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.1,
+          "failure_count": 3,
+          "failure_avg_sim": 0.4402,
+          "p50_latency": 29.6,
+          "p95_latency": 33.3
+        },
+        "ml-zoomcamp": {
+          "total": 132,
+          "found": 114,
+          "hit_rate": 0.8636363636363636,
+          "recall_at_k": {
+            "1": 0.45454545454545453,
+            "3": 0.75,
+            "5": 0.7878787878787878,
+            "10": 0.8636363636363636
+          },
+          "mrr": 0.6033,
+          "ndcg@10": 0.6671,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.03,
+          "failure_count": 18,
+          "failure_avg_sim": 0.2808,
+          "p50_latency": 30.6,
+          "p95_latency": 35.3
+        },
+        "mlops-zoomcamp": {
+          "total": 51,
+          "found": 47,
+          "hit_rate": 0.9215686274509803,
+          "recall_at_k": {
+            "1": 0.43137254901960786,
+            "3": 0.8627450980392157,
+            "5": 0.8823529411764706,
+            "10": 0.9215686274509803
+          },
+          "mrr": 0.6275,
+          "ndcg@10": 0.7013,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.52,
+          "failure_count": 4,
+          "failure_avg_sim": 0.3997,
+          "p50_latency": 29.4,
+          "p95_latency": 35.3
+        }
+      },
+      "failures_sample": [
+        {
+          "query": "what dependencies do I need to install for the starter jupyter notebook?",
+          "strategy": "creative_student",
+          "top_sim": 0.5090064406394958,
+          "returned": [
+            "How do I install the necessary dependencies to run the code?",
+            "Certificate: Do I need to do the homeworks to get the certificate?"
+          ]
+        },
+        {
+          "query": "jupyter notebook errors due to missing packages, how do I fix it?",
+          "strategy": "creative_student",
+          "top_sim": 0.5448564887046814,
+          "returned": [
+            "Python: Ingestion with Jupyter notebook - missing 100000 records",
+            "Alternative way to convert Jupyter notebook to Python script (via jupytext)"
+          ]
+        },
+        {
+          "query": "Jupyter Notebook missing dependencies for starter code",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.4598258435726166,
+          "returned": [
+            "Python: Ingestion with Jupyter notebook - missing 100000 records",
+            "Alternative way to convert Jupyter notebook to Python script (via jupytext)"
+          ]
+        },
+        {
+          "query": " Codespace environment lacks required libraries",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.43559059500694275,
+          "returned": [
+            "Setup: No development environment",
+            "Environment: which Python version should I use?"
+          ]
+        },
+        {
+          "query": "why am I getting a unicode decode error when reading csv file?",
+          "strategy": "creative_student",
+          "top_sim": 0.4450434446334839,
+          "returned": [
+            "Following 5.2.1, I am getting an error - Head:cannot open \u2018taxi+_zone_lookup.csv\u2019 for reading: No such file or directory",
+            "Why does the CSV file size shown in the Kestra Outputs tab differ from the value printed by a Python task?"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 390,
+      "found": 358,
+      "hit_rate": 0.9179487179487179,
+      "recall_at_k": {
+        "1": 0.6153846153846154,
+        "3": 0.7871794871794872,
+        "5": 0.8435897435897436,
+        "10": 0.9179487179487179
+      },
+      "mrr": 0.7156,
+      "ndcg@10": 0.7644,
+      "cross_course_rate": 0.0,
+      "rank_std": 2.01,
+      "failure_count": 32,
+      "failure_avg_sim": 0.4839,
+      "p50_latency": 580.8,
+      "p95_latency": 700.2,
+      "name": "vector_reranked",
+      "per_strategy": {
+        "chaos_monkey": {
+          "total": 135,
+          "found": 117,
+          "hit_rate": 0.8666666666666667,
+          "recall_at_k": {
+            "1": 0.5703703703703704,
+            "3": 0.7333333333333333,
+            "5": 0.7555555555555555,
+            "10": 0.8666666666666667
+          },
+          "mrr": 0.6611,
+          "ndcg@10": 0.71,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.29,
+          "failure_count": 18,
+          "failure_avg_sim": 0.4617,
+          "p50_latency": 595.7,
+          "p95_latency": 725.8
+        },
+        "creative_student": {
+          "total": 105,
+          "found": 98,
+          "hit_rate": 0.9333333333333333,
+          "recall_at_k": {
+            "1": 0.580952380952381,
+            "3": 0.7428571428571429,
+            "5": 0.8571428571428571,
+            "10": 0.9333333333333333
+          },
+          "mrr": 0.6882,
+          "ndcg@10": 0.7468,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.14,
+          "failure_count": 7,
+          "failure_avg_sim": 0.4951,
+          "p50_latency": 589.1,
+          "p95_latency": 713.8
+        },
+        "grounded_analyst": {
+          "total": 150,
+          "found": 143,
+          "hit_rate": 0.9533333333333334,
+          "recall_at_k": {
+            "1": 0.68,
+            "3": 0.8666666666666667,
+            "5": 0.9133333333333333,
+            "10": 0.9533333333333334
+          },
+          "mrr": 0.7839,
+          "ndcg@10": 0.8256,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.6,
+          "failure_count": 7,
+          "failure_avg_sim": 0.5298,
+          "p50_latency": 567.5,
+          "p95_latency": 667.9
+        }
+      },
+      "per_course": {
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 119,
+          "hit_rate": 0.9015151515151515,
+          "recall_at_k": {
+            "1": 0.6060606060606061,
+            "3": 0.7727272727272727,
+            "5": 0.8484848484848485,
+            "10": 0.9015151515151515
+          },
+          "mrr": 0.7076,
+          "ndcg@10": 0.7548,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.72,
+          "failure_count": 13,
+          "failure_avg_sim": 0.5677,
+          "p50_latency": 592.9,
+          "p95_latency": 697.4
+        },
+        "llm-zoomcamp": {
+          "total": 75,
+          "found": 74,
+          "hit_rate": 0.9866666666666667,
+          "recall_at_k": {
+            "1": 0.6933333333333334,
+            "3": 0.9066666666666666,
+            "5": 0.96,
+            "10": 0.9866666666666667
+          },
+          "mrr": 0.8069,
+          "ndcg@10": 0.8516,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.28,
+          "failure_count": 1,
+          "failure_avg_sim": 0.346,
+          "p50_latency": 555.9,
+          "p95_latency": 621.8
+        },
+        "ml-zoomcamp": {
+          "total": 132,
+          "found": 118,
+          "hit_rate": 0.8939393939393939,
+          "recall_at_k": {
+            "1": 0.5075757575757576,
+            "3": 0.6893939393939394,
+            "5": 0.75,
+            "10": 0.8939393939393939
+          },
+          "mrr": 0.6192,
+          "ndcg@10": 0.6839,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.64,
+          "failure_count": 14,
+          "failure_avg_sim": 0.4245,
+          "p50_latency": 590.2,
+          "p95_latency": 734.0
+        },
+        "mlops-zoomcamp": {
+          "total": 51,
+          "found": 47,
+          "hit_rate": 0.9215686274509803,
+          "recall_at_k": {
+            "1": 0.803921568627451,
+            "3": 0.9019607843137255,
+            "5": 0.9019607843137255,
+            "10": 0.9215686274509803
+          },
+          "mrr": 0.8519,
+          "ndcg@10": 0.8691,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.2,
+          "failure_count": 4,
+          "failure_avg_sim": 0.4534,
+          "p50_latency": 571.6,
+          "p95_latency": 663.1
+        }
+      },
+      "failures_sample": [
+        {
+          "query": "container exec error even though PATH is correct",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.3460296392440796,
+          "returned": [
+            "How can I remove all Docker containers, images, and volumes, and builds from the terminal?",
+            "Error: How to fix requests library only installs v2.28 instead of v2.32 required for lancedb?"
+          ]
+        },
+        {
+          "query": "Terraform keeps saying I don't have permission to do anything",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.6249727606773376,
+          "returned": [
+            "Terraform: Could not reach provider registry in restricted region (e.g., Iraq) \u2013 Invalid provider registry host / Could not query available provider packages",
+            "stoTerraform - Error creating Bucket: googleapi: Error 403: Permission denied to access \u2018storage.buckets.create\u2019"
+          ]
+        },
+        {
+          "query": "homework result not exact",
+          "strategy": "grounded_analyst",
+          "top_sim": 0.2942458689212799,
+          "returned": [
+            "Homework: Why did we change the targets to binary format when calculating mutual information score in the homework?",
+            "Can I submit the homework after the due date?"
+          ]
+        },
+        {
+          "query": "Why is my homework answer not matching exactly?",
+          "strategy": "creative_student",
+          "top_sim": 0.6260312795639038,
+          "returned": [
+            "Homework: The answer I get for one of the homework questions doesn't match any of the options. What should I do?",
+            "Homework: Why did we change the targets to binary format when calculating mutual information score in the homework?"
+          ]
+        },
+        {
+          "query": "Why is my answer key not working?",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.37992942333221436,
+          "returned": [
+            "Homework: The answer I get for one of the homework questions doesn't match any of the options. What should I do?",
+            "Why do I get a KeyError when dropping features after one-hot encoding?"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 390,
+      "found": 331,
+      "hit_rate": 0.8487179487179487,
+      "recall_at_k": {
+        "1": 0.5974358974358974,
+        "3": 0.7461538461538462,
+        "5": 0.8025641025641026,
+        "10": 0.8487179487179487
+      },
+      "mrr": 0.6859,
+      "ndcg@10": 0.7255,
+      "cross_course_rate": 0.0,
+      "rank_std": 1.79,
+      "failure_count": 59,
+      "failure_avg_sim": 0.4026,
+      "p50_latency": 578.3,
+      "p95_latency": 688.8,
+      "name": "bm25_reranked",
+      "per_strategy": {
+        "chaos_monkey": {
+          "total": 135,
+          "found": 94,
+          "hit_rate": 0.6962962962962963,
+          "recall_at_k": {
+            "1": 0.5037037037037037,
+            "3": 0.6370370370370371,
+            "5": 0.6888888888888889,
+            "10": 0.6962962962962963
+          },
+          "mrr": 0.5801,
+          "ndcg@10": 0.6092,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.05,
+          "failure_count": 41,
+          "failure_avg_sim": 0.3641,
+          "p50_latency": 584.6,
+          "p95_latency": 699.9
+        },
+        "creative_student": {
+          "total": 105,
+          "found": 95,
+          "hit_rate": 0.9047619047619048,
+          "recall_at_k": {
+            "1": 0.5523809523809524,
+            "3": 0.7238095238095238,
+            "5": 0.8,
+            "10": 0.9047619047619048
+          },
+          "mrr": 0.6638,
+          "ndcg@10": 0.7211,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.4,
+          "failure_count": 10,
+          "failure_avg_sim": 0.4929,
+          "p50_latency": 580.9,
+          "p95_latency": 669.6
+        },
+        "grounded_analyst": {
+          "total": 150,
+          "found": 142,
+          "hit_rate": 0.9466666666666667,
+          "recall_at_k": {
+            "1": 0.7133333333333334,
+            "3": 0.86,
+            "5": 0.9066666666666666,
+            "10": 0.9466666666666667
+          },
+          "mrr": 0.7966,
+          "ndcg@10": 0.8332,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.62,
+          "failure_count": 8,
+          "failure_avg_sim": 0.487,
+          "p50_latency": 566.3,
+          "p95_latency": 688.2
+        }
+      },
+      "per_course": {
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 110,
+          "hit_rate": 0.8333333333333334,
+          "recall_at_k": {
+            "1": 0.553030303030303,
+            "3": 0.7196969696969697,
+            "5": 0.7878787878787878,
+            "10": 0.8333333333333334
+          },
+          "mrr": 0.653,
+          "ndcg@10": 0.697,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.75,
+          "failure_count": 22,
+          "failure_avg_sim": 0.4952,
+          "p50_latency": 579.1,
+          "p95_latency": 717.7
+        },
+        "llm-zoomcamp": {
+          "total": 75,
+          "found": 68,
+          "hit_rate": 0.9066666666666666,
+          "recall_at_k": {
+            "1": 0.64,
+            "3": 0.8533333333333334,
+            "5": 0.9066666666666666,
+            "10": 0.9066666666666666
+          },
+          "mrr": 0.7593,
+          "ndcg@10": 0.797,
+          "cross_course_rate": 0.0,
+          "rank_std": 0.83,
+          "failure_count": 7,
+          "failure_avg_sim": 0.3158,
+          "p50_latency": 555.9,
+          "p95_latency": 653.7
+        },
+        "ml-zoomcamp": {
+          "total": 132,
+          "found": 106,
+          "hit_rate": 0.803030303030303,
+          "recall_at_k": {
+            "1": 0.5303030303030303,
+            "3": 0.6439393939393939,
+            "5": 0.7121212121212122,
+            "10": 0.803030303030303
+          },
+          "mrr": 0.6063,
+          "ndcg@10": 0.6526,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.4,
+          "failure_count": 26,
+          "failure_avg_sim": 0.3411,
+          "p50_latency": 586.2,
+          "p95_latency": 695.4
+        },
+        "mlops-zoomcamp": {
+          "total": 51,
+          "found": 47,
+          "hit_rate": 0.9215686274509803,
+          "recall_at_k": {
+            "1": 0.8235294117647058,
+            "3": 0.9215686274509803,
+            "5": 0.9215686274509803,
+            "10": 0.9215686274509803
+          },
+          "mrr": 0.8693,
+          "ndcg@10": 0.8828,
+          "cross_course_rate": 0.0,
+          "rank_std": 0.39,
+          "failure_count": 4,
+          "failure_avg_sim": 0.4446,
+          "p50_latency": 594.8,
+          "p95_latency": 674.5
+        }
+      },
+      "failures_sample": [
+        {
+          "query": "container exec error even though PATH is correct",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.09940697252750397,
+          "returned": [
+            "Notebook does not have secret access or 401 Client Error: Unauthorized for url: [api.notion.com](https://api.notion.com/v1/search)",
+            "Error: How to fix requests library only installs v2.28 instead of v2.32 required for lancedb?"
+          ]
+        },
+        {
+          "query": "what dependencies do I need to install for the starter jupyter notebook?",
+          "strategy": "creative_student",
+          "top_sim": 0.5090064406394958,
+          "returned": [
+            "How do I install the necessary dependencies to run the code?",
+            "Alternative way to convert Jupyter notebook to Python script (via jupytext)"
+          ]
+        },
+        {
+          "query": "jupyter notebook errors due to missing packages, how do I fix it?",
+          "strategy": "creative_student",
+          "top_sim": 0.5885691046714783,
+          "returned": [
+            "Alternative way to convert Jupyter notebook to Python script (via jupytext)",
+            "How do I install the necessary dependencies to run the code?"
+          ]
+        },
+        {
+          "query": "Jupyter Notebook missing dependencies for starter code",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.467906653881073,
+          "returned": [
+            "How do I install the necessary dependencies to run the code?",
+            "GCP VM: Port forwarding from GCP without using VS Code"
+          ]
+        },
+        {
+          "query": "why am I getting a unicode decode error when reading csv file?",
+          "strategy": "creative_student",
+          "top_sim": 0.2540748417377472,
+          "returned": [
+            "DataType error when creating Spark DataFrame with a specified schema?",
+            "DBT: I am having problems with columns datatype while running DBT/BigQuery"
+          ]
+        }
+      ]
+    }
+  ]
+}

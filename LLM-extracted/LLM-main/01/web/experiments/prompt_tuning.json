@@ -1,0 +1,193 @@
+{
+  "metadata": {
+    "model": "nvidia_nim/meta/llama-3.1-70b-instruct",
+    "judge": "nvidia_nim/meta/llama-3.1-70b-instruct",
+    "test_size": 10,
+    "winner": "baseline"
+  },
+  "scores": {
+    "baseline": {
+      "avg": {
+        "completeness": 4.1,
+        "accuracy": 4.5,
+        "tone": 4.5
+      }
+    },
+    "structured": {
+      "avg": {
+        "completeness": 3.5,
+        "accuracy": 4.1,
+        "tone": 4.2
+      }
+    },
+    "conversational": {
+      "avg": {
+        "completeness": 3.7,
+        "accuracy": 4.0,
+        "tone": 4.0
+      }
+    }
+  },
+  "results": [
+    {
+      "question": "How do you connect BigQuery with BI tools like Looker Studio or Tableau?",
+      "course": "de-zoomcamp",
+      "baseline": {
+        "answer": "To connect BigQuery with BI tools like Looker Studio or Tableau, follow these steps:\n\nFor Looker Studio:\n1. Click Create > Data Source.\n2. Choose BigQuery as the data source and authorize access to your Google Cloud project.\n3. Select the project, dataset, and table (or view) you want to report on, then click Connect.\n4. Add the data source to a report and start building your visuals.\n\nFor Tableau Desktop:\n1. Choose Google BigQuery as the data connector.\n2. Sign in with your Google account and authorize access to your project.\n3. Browse to your project, dataset, and table, then click Connect and start building visuals.\n\nAdditionally, consider creating views in BigQuery to simplify the data schema and using extracts in Tableau for large datasets or offline access.",
+        "latency": 11.4
+      },
+      "structured": {
+        "answer": "To connect BigQuery with BI tools like Looker Studio or Tableau, you can follow these steps: For Looker Studio, click Create > Data Source, choose BigQuery, authorize access, select your project and dataset, and then connect. For Tableau, open Tableau Desktop, choose Google BigQuery as the data connector, sign in with your Google account, and authorize access to your project. You can then browse to your project, dataset, and table to start building visuals.",
+        "latency": 146.0
+      },
+      "conversational": {
+        "answer": "To connect BigQuery with BI tools like Looker Studio or Tableau, you can follow these steps:\n\nFor Looker Studio, go to Create > Data Source, choose BigQuery, and authorize access to your Google Cloud project. Then, select the project, dataset, and table you want to report on, and click Connect.\n\nFor Tableau Desktop, open the app, choose Google BigQuery as the data connector, sign in with your Google account, and authorize access to your project. Browse to your project, dataset, and table, then click Connect.\n\nRemember to consider creating views in BigQuery to simplify the data schema for BI tools, and for Tableau, think about using extracts if you're working with large datasets or need offline access.",
+        "latency": 316.2
+      }
+    },
+    {
+      "question": "Setup: Your IDE session was unable to start. Please contact support.",
+      "course": "de-zoomcamp",
+      "baseline": {
+        "answer": "To resolve the issue with your IDE session being unable to start, please follow these steps: \n\n1. Check the dbt_cloud_setup.md file.\n2. Create an SSH Key.\n3. Use git clone to import the repo into the dbt project.\n4. Copy and paste the deploy key back in your repo settings.\n\nIf the issue persists, please contact support.",
+        "latency": 4.7
+      },
+      "structured": {
+        "answer": "It seems like you're experiencing an issue with your IDE session not starting. To resolve this, please check the dbt_cloud_setup.md file and ensure you've completed the necessary setup steps. You may also need to create an SSH key and use git clone to import the repo into the dbt project. If you're still having trouble, please review the steps to copy and paste the deploy key back into your repo settings.",
+        "latency": 11.9
+      },
+      "conversational": {
+        "answer": "It looks like you're having trouble getting your IDE session started. Don't worry, I'm here to help. If your DBT Cloud IDE is loading indefinitely and then giving you the \"Setup: Your IDE session was unable to start\" error, try the following steps:\n\n1. Check the `dbt_cloud_setup.md` file for any issues.\n2. Create an SSH Key to establish a secure connection.\n3. Use `git clone` to import the repo into your dbt project.\n4. Copy and paste the deploy key back into your repo settings.\n\nIf you're still having trouble, feel free to reach out to support for further assistance.",
+        "latency": 7.0
+      }
+    },
+    {
+      "question": "How do I set up credentials to run dlt in my environment (not Google Colab)?",
+      "course": "de-zoomcamp",
+      "baseline": {
+        "answer": "To set up credentials to run dlt in your environment (not Google Colab), you can use two common methods: \n\n1. Environment Variables: Set credentials via environment variables to avoid hardcoding secrets in your code.\n2. Configuration Files: Use .dlt/secrets.toml for sensitive credentials and .dlt/config.toml for non-sensitive configurations. Place these files in the .dlt folder of your project.",
+        "latency": 6.5
+      },
+      "structured": {
+        "answer": "To set up credentials to run dlt in your environment, you can use environment variables or configuration files. For configuration files, create a `.dlt` folder in your project and add `secrets.toml` for sensitive credentials and `config.toml` for non-sensitive configurations. For example, you can add your Google Cloud service account key to `secrets.toml`. Remember to add `secrets.toml` to your `.gitignore` file to avoid committing sensitive information.",
+        "latency": 13.3
+      },
+      "conversational": {
+        "answer": "To set up credentials for running dlt in your local environment, you can use environment variables or configuration files. The easiest method is to set environment variables, but for local use, I recommend using configuration files. Create a `.dlt` folder in your project and add two files: `secrets.toml` for sensitive credentials and `config.toml` for non-sensitive configurations. For example, in `secrets.toml`, add your Google Cloud credentials like this: `[google_cloud] service_account_key = \"YOUR_SERVICE_ACCOUNT_KEY\"`. Don't forget to add `secrets.toml` to your `.gitignore` file to keep your credentials secure.",
+        "latency": 12.7
+      }
+    },
+    {
+      "question": "How do you share a DataFrame across multiple Spark sessions?",
+      "course": "de-zoomcamp",
+      "baseline": {
+        "answer": "To share a DataFrame across multiple Spark sessions, you can use Spark's Global Temporary Views. This involves two steps: \n\n1. Create a global temporary view using `df.createOrReplaceGlobalTempView('view_name')`.\n2. Query the global view from any session using `spark.sql(\"SELECT * FROM global_temp.view_name\").show()`.",
+        "latency": 8.4
+      },
+      "structured": {
+        "answer": "To share a DataFrame across multiple Spark sessions, you can use Spark's Global Temporary Views. This involves creating a global temporary view using the `createOrReplaceGlobalTempView` method, and then querying the view from any session using `spark.sql` with the `global_temp.` prefix. For example, you can create a global temporary view with `df.createOrReplaceGlobalTempView('trips_global')` and then query it with `spark.sql(\"SELECT * FROM global_temp.trips_global\").show()`.",
+        "latency": 6.4
+      },
+      "conversational": {
+        "answer": "To share a DataFrame across multiple Spark sessions, you can use Spark's Global Temporary Views. This allows you to access the DataFrame from any session within the same Spark application. To do this, first create a global temporary view by running `df.createOrReplaceGlobalTempView('trips_global')`, replacing 'df' with your DataFrame and 'trips_global' with your desired view name. Then, you can query the view from any session using `spark.sql(\"SELECT * FROM global_temp.trips_global\").show()`, making sure to include the 'global_temp.' prefix.",
+        "latency": 9.2
+      }
+    },
+    {
+      "question": "Docker: Postgres container fails to launch with exit code (1) when attempting to compose",
+      "course": "de-zoomcamp",
+      "baseline": {
+        "answer": "To resolve the issue of the Postgres container failing to launch with exit code (1) when attempting to compose, you need to initialize the Postgres database first. Run the following command:\n\n```bash\ndocker run -it \\\n  -e POSTGRES_USER=\"root\" \\\n  -e POSTGRES_PASSWORD=\"root\" \\\n  -e POSTGRES_DB=\"ny_taxi\" \\\n  -v $(pwd)/ny_taxi_data:/var/lib/postgresql/data \\\n  -p 5432:5432 \\\n  --network=pg-network \\\n  --name=pg_database \\\n  postgres:13\n```\n\nThen, you can use Docker Compose as expected.",
+        "latency": 9.2
+      },
+      "structured": {
+        "answer": "The Postgres container fails to launch with exit code (1) when attempting to compose because the database is not initialized before executing docker-compose up -d. To resolve this, you can initialize the database first by running the provided Docker command. This command sets up the Postgres database with the required environment variables and volume mapping.",
+        "latency": 11.2
+      },
+      "conversational": {
+        "answer": "It looks like you're running into an issue with your Postgres container failing to launch with exit code (1) when using `docker-compose up -d`. Don't worry, this is a common issue that can be easily resolved. To fix this, you need to initialize the Postgres database first. You can do this by running the following command in your terminal:\n\n```bash\ndocker run -it \\\n-e POSTGRES_USER=\"root\" \\\n-e POSTGRES_PASSWORD=\"root\" \\\n-e POSTGRES_DB=\"ny_taxi\" \\\n-v $(pwd)/ny_taxi_data:/var/lib/postgresql/data \\\n-p 5432:5432 \\\n--network=pg-network \\\n--name=pg_database \\\npostgres:13\n```\n\nThis command will initialize the database, and then you should be able to use `docker-compose up -d` without any issues. If you have any further questions or concerns, feel free to ask!",
+        "latency": 19.8
+      }
+    },
+    {
+      "question": "BigQuery: \"Cannot read and write in different locations\" when loading from GCS",
+      "course": "de-zoomcamp",
+      "baseline": {
+        "answer": "To resolve the \"Cannot read and write in different locations\" error when loading data from a GCS bucket into BigQuery, ensure the bucket and dataset are in the same region. Check the bucket's region in the GCS console, then create a new BigQuery dataset in the same region by setting the \"Data location\" to match the bucket exactly.",
+        "latency": 4.5
+      },
+      "structured": {
+        "answer": "The error \"Cannot read and write in different locations\" when loading from GCS in BigQuery occurs because the bucket and dataset are in different regions. To fix this, create a BigQuery dataset in the same region as the GCS bucket by setting the \"Data location\" to match the bucket exactly. You can check the bucket's region in the GCS console and then create a new dataset in the same region to load the data.",
+        "latency": 18.6
+      },
+      "conversational": {
+        "answer": "It looks like you're running into a location mismatch issue when trying to load data from Google Cloud Storage (GCS) into BigQuery. This error occurs when your GCS bucket and BigQuery dataset are in different regions. To fix this, you'll need to create a new BigQuery dataset in the same region as your GCS bucket. \n\nTo do this, check the bucket's region in the GCS console (look for the \"Location\" field on the bucket details page). Then, create a new BigQuery dataset by clicking the three-dot menu next to your project, selecting \"Create dataset\", and setting the \"Data location\" to match the bucket exactly (e.g. us-central1, not just US). Once you've created the new dataset, you should be able to load your data into it without any issues.",
+        "latency": 80.6
+      }
+    },
+    {
+      "question": "GCP: The project to be billed is associated with an absent billing account",
+      "course": "de-zoomcamp",
+      "baseline": {
+        "answer": "This error typically occurs due to one of two reasons: \n\n1. Incorrect project ID: Ensure you've entered the correct and unique project ID, which can be found on your GCP Dashboard.\n2. Unlinked billing account: Verify that your billing account is properly linked to your current project.",
+        "latency": 13.0
+      },
+      "structured": {
+        "answer": "It seems like you're encountering an error with your GCP project billing. This error is likely due to an incorrect project ID or an unlinked billing account. To resolve this, please ensure you've entered your unique project ID, which can be found on your GCP Dashboard. Additionally, verify that your billing account is linked to your current project.",
+        "latency": 24.6
+      },
+      "conversational": {
+        "answer": "Hi there, \n\nIt looks like you're running into a billing account issue with your GCP project. Don't worry, this is an easy fix. The error message \"The project to be billed is associated with an absent billing account\" usually means that either your project ID is incorrect or your billing account isn't linked to your project. To resolve this, double-check that you've entered your unique project ID, which you can find on your GCP Dashboard. Also, make sure your billing account is linked to your current project - if you're unsure, you can check your billing settings in the GCP Console.\n\nBest of luck, and let me know if you have any further questions.",
+        "latency": 8.3
+      }
+    },
+    {
+      "question": "DBT: I ran dbt run without specifying variable which gave me a table of 100 rows. I ran again with the variable value specified but my table still has 100 rows in BQ.",
+      "course": "de-zoomcamp",
+      "baseline": {
+        "answer": "To resolve the issue of getting a new dataset after running your CI/CD job, make sure to select 'No; do not defer to another environment' under 'Compare Changes against an environment (Deferral)' when creating the CI/CD job. This will allow dbt to merge your dev models into production models instead of creating a new environment.",
+        "latency": 4.1
+      },
+      "structured": {
+        "answer": "Unfortunately, the student's question wasn't provided. Please go ahead and ask the question, and I'll be happy to help using the provided FAQ.",
+        "latency": 2.0
+      },
+      "conversational": {
+        "answer": "It looks like you've run into a common issue with dbt. When you ran `dbt run` without specifying the variable, it created a dataset in BigQuery with 100 rows. However, when you ran it again with the variable value specified, the dataset wasn't updated. To resolve this, try removing the dataset from BigQuery and running `dbt run` again with the variable value specified. This will ensure that the new dataset is created with the correct rows.",
+        "latency": 6.7
+      }
+    },
+    {
+      "question": "GCP BQ: Can I use BigQuery for real-time analytics in this project?",
+      "course": "de-zoomcamp",
+      "baseline": {
+        "answer": "Yes, BigQuery can be used for real-time analytics in this project, as it has real-time data streaming capabilities.",
+        "latency": 5.2
+      },
+      "structured": {
+        "answer": "While real-time analytics isn't explicitly mentioned in the project, BigQuery does have real-time data streaming capabilities. This means it's possible to integrate BigQuery for real-time analytics in future project iterations. However, it's not explicitly stated as a requirement for this project.",
+        "latency": 8.3
+      },
+      "conversational": {
+        "answer": "You can use BigQuery for real-time analytics in your project. Although it's not explicitly mentioned, BigQuery has real-time data streaming capabilities that can be integrated into your project. This means you can stream data into BigQuery and analyze it in near real-time, making it suitable for real-time analytics use cases. You can explore this feature further in future project iterations, but for now, you can focus on the core requirements.",
+        "latency": 5.4
+      }
+    },
+    {
+      "question": "IPython - Pandas parsing dates with \"read_csv\"",
+      "course": "de-zoomcamp",
+      "baseline": {
+        "answer": "To parse dates with \"read_csv\" in Pandas using IPython, you can use the `parse_dates` parameter and specify the column names or indices that contain date information. This allows Pandas to interpret the string column values as datetime directly when reading the CSV file.\n\nExample:\n```python\nimport pandas as pd\n\ndf = pd.read_csv('your_file.csv', parse_dates=['date_column'])\n```\nReplace `'your_file.csv'` with your actual file name and `'date_column'` with the actual column name that contains date information.",
+        "latency": 43.4
+      },
+      "structured": {
+        "answer": "To parse dates with \"read_csv\" in IPython using Pandas, you can use the `parse_dates` parameter in the `pd.read_csv` function. This parameter can include a list of column names or column indices that contain date information, allowing Pandas to interpret them as datetime directly. For example, `pd.read_csv('your_file.csv', parse_dates=['column_name'])`.",
+        "latency": 4.8
+      },
+      "conversational": {
+        "answer": "To parse dates with `read_csv` in Pandas, you can use the `parse_dates` parameter. This allows you to specify a list of column names or indices that contain date information, which will be converted to `datetime` format during the import process.\n\nFor example, you can use the following code to import a CSV file and parse the 'tpep_pickup_datetime' and 'tpep_dropoff_datetime' columns as dates:\n```python\nimport pandas as pd\ndf = pd.read_csv('your_file.csv', parse_dates=['tpep_pickup_datetime', 'tpep_dropoff_datetime'])\n```\nThis way, you don't need to convert the date columns manually after importing the data. You can find more information about this in the [pandas.read_csv documentation](https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html).",
+        "latency": 11.3
+      }
+    }
+  ]
+}

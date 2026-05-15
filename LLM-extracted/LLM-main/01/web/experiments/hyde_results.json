@@ -1,0 +1,40 @@
+{
+  "baseline_r5": 0.8333333333333334,
+  "hyde_r5": 0.8285714285714286,
+  "hyde_all_r5": 0.8055555555555556,
+  "improvement": -2,
+  "skipped": 2,
+  "by_subtopic": {
+    "0": {
+      "total": 15,
+      "baseline": 10,
+      "hyde": 10,
+      "hyde_attempted": 13
+    },
+    "1": {
+      "total": 12,
+      "baseline": 12,
+      "hyde": 11,
+      "hyde_attempted": 12
+    },
+    "2": {
+      "total": 15,
+      "baseline": 14,
+      "hyde": 13,
+      "hyde_attempted": 15
+    },
+    "3": {
+      "total": 15,
+      "baseline": 14,
+      "hyde": 15,
+      "hyde_attempted": 15
+    },
+    "4": {
+      "total": 15,
+      "baseline": 10,
+      "hyde": 9,
+      "hyde_attempted": 15
+    }
+  },
+  "timestamp": "2026-05-12T14:47:04.415443"
+}

@@ -1,0 +1,22 @@
+{
+  "bm25_default": {
+    "hit_rate_at_5": 1.0,
+    "total_queries": 1150,
+    "hits": 1150
+  },
+  "vector_default": {
+    "hit_rate_at_5": 1.0,
+    "total_queries": 1150,
+    "hits": 1150
+  },
+  "hybrid_default": {
+    "hit_rate_at_5": 1.0,
+    "total_queries": 1150,
+    "hits": 1150
+  },
+  "qdrant_default": {
+    "hit_rate_at_5": 1.0,
+    "total_queries": 1150,
+    "hits": 1150
+  }
+}

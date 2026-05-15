@@ -1,0 +1,38 @@
+{
+    "name": "LLM",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": "..",
+        "args": { "PYTHON_VER": "3.11" }
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:1": {
+            "installZsh": false,
+            "configureZshAsDefaultShell": false
+        },
+        "ghcr.io/devcontainers/features/git:1": "latest",
+        "ghcr.io/devcontainers/features/docker-in-docker:1": {
+            "version": "latest",
+            "moby": true
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                // Hardwire VS Code to the 3.11.15 path
+                "python.defaultInterpreterPath": "/usr/local/bin/python3",
+                "jupyter.notebookEditor.defaultKernel": "python3",
+                "python.terminal.activateEnvInSelectedTerminal": false,
+                "git.ignoreLimitWarning": true 
+            },
+            "extensions": [
+                "ms-python.python",
+                "ms-toolsai.jupyter",
+                "ms-python.pylance"
+            ]
+        }
+    },
+    "remoteUser": "root",
+    "postCreateCommand": "bash .devcontainer/setup.sh",
+    "postStartCommand": "if [ -f test.ipynb ]; then jupyter execute test.ipynb; fi"
+}

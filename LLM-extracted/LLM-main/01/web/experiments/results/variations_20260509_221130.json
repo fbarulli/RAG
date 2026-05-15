@@ -1,0 +1,2253 @@
+{
+  "metadata": {
+    "total_queries": 420,
+    "embedding_model": "all-MiniLM-L6-v2",
+    "timestamp": "2026-05-09T22:11:30.602369"
+  },
+  "configs": [
+    {
+      "total": 420,
+      "found": 339,
+      "hit_rate": 0.8071428571428572,
+      "recall_at_k": {
+        "1": 0.5666666666666667,
+        "3": 0.6976190476190476,
+        "5": 0.7404761904761905,
+        "10": 0.8071428571428572
+      },
+      "mrr": 0.6452,
+      "ndcg@10": 0.6841,
+      "cross_course_rate": 0.0,
+      "rank_std": 2.04,
+      "failure_count": 81,
+      "failure_avg_sim": 0.3326,
+      "p50_latency": 6.0,
+      "p95_latency": 13.1,
+      "name": "bm25_default",
+      "per_strategy": {
+        "chaos_monkey": {
+          "total": 150,
+          "found": 95,
+          "hit_rate": 0.6333333333333333,
+          "recall_at_k": {
+            "1": 0.41333333333333333,
+            "3": 0.5133333333333333,
+            "5": 0.54,
+            "10": 0.6333333333333333
+          },
+          "mrr": 0.4749,
+          "ndcg@10": 0.512,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.55,
+          "failure_count": 55,
+          "failure_avg_sim": 0.2814,
+          "p50_latency": 6.0,
+          "p95_latency": 13.7
+        },
+        "creative_student": {
+          "total": 120,
+          "found": 106,
+          "hit_rate": 0.8833333333333333,
+          "recall_at_k": {
+            "1": 0.65,
+            "3": 0.7833333333333333,
+            "5": 0.825,
+            "10": 0.8833333333333333
+          },
+          "mrr": 0.7307,
+          "ndcg@10": 0.7675,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.85,
+          "failure_count": 14,
+          "failure_avg_sim": 0.4354,
+          "p50_latency": 6.2,
+          "p95_latency": 15.5
+        },
+        "grounded_analyst": {
+          "total": 150,
+          "found": 138,
+          "hit_rate": 0.92,
+          "recall_at_k": {
+            "1": 0.6533333333333333,
+            "3": 0.8133333333333334,
+            "5": 0.8733333333333333,
+            "10": 0.92
+          },
+          "mrr": 0.7472,
+          "ndcg@10": 0.7894,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.71,
+          "failure_count": 12,
+          "failure_avg_sim": 0.4477,
+          "p50_latency": 5.8,
+          "p95_latency": 10.4
+        }
+      },
+      "per_course": {
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 106,
+          "hit_rate": 0.803030303030303,
+          "recall_at_k": {
+            "1": 0.6363636363636364,
+            "3": 0.7196969696969697,
+            "5": 0.7575757575757576,
+            "10": 0.803030303030303
+          },
+          "mrr": 0.6925,
+          "ndcg@10": 0.7193,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.44,
+          "failure_count": 26,
+          "failure_avg_sim": 0.3866,
+          "p50_latency": 6.2,
+          "p95_latency": 14.9
+        },
+        "llm-zoomcamp": {
+          "total": 81,
+          "found": 73,
+          "hit_rate": 0.9012345679012346,
+          "recall_at_k": {
+            "1": 0.691358024691358,
+            "3": 0.7777777777777778,
+            "5": 0.8395061728395061,
+            "10": 0.9012345679012346
+          },
+          "mrr": 0.7525,
+          "ndcg@10": 0.7876,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.03,
+          "failure_count": 8,
+          "failure_avg_sim": 0.3208,
+          "p50_latency": 6.0,
+          "p95_latency": 10.2
+        },
+        "ml-zoomcamp": {
+          "total": 147,
+          "found": 113,
+          "hit_rate": 0.7687074829931972,
+          "recall_at_k": {
+            "1": 0.4965986394557823,
+            "3": 0.6462585034013606,
+            "5": 0.6938775510204082,
+            "10": 0.7687074829931972
+          },
+          "mrr": 0.5839,
+          "ndcg@10": 0.6281,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.24,
+          "failure_count": 34,
+          "failure_avg_sim": 0.3244,
+          "p50_latency": 6.0,
+          "p95_latency": 7.3
+        },
+        "mlops-zoomcamp": {
+          "total": 60,
+          "found": 47,
+          "hit_rate": 0.7833333333333333,
+          "recall_at_k": {
+            "1": 0.4166666666666667,
+            "3": 0.6666666666666666,
+            "5": 0.6833333333333333,
+            "10": 0.7833333333333333
+          },
+          "mrr": 0.5469,
+          "ndcg@10": 0.604,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.49,
+          "failure_count": 13,
+          "failure_avg_sim": 0.2537,
+          "p50_latency": 5.7,
+          "p95_latency": 15.7
+        }
+      },
+      "failures_sample": [
+        {
+          "query": "installing dependencies for jupyter notebook",
+          "strategy": "grounded_analyst",
+          "top_sim": 0.3592735826969147,
+          "returned": [
+            "Streaming: installing dependencies for the Python avro example (producer.py)",
+            "Python: Ingestion with Jupyter notebook - missing 100000 records"
+          ]
+        },
+        {
+          "query": "i need more stuff to make the notebook work",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.07713466137647629,
+          "returned": [
+            "Python: These won't work. You need to make sure you use Int64.",
+            "Terraform: Do I need to make another service account for Terraform before I get the keys (.json file)?"
+          ]
+        },
+        {
+          "query": "what dependencies do i need for the starter notebook",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.513942301273346,
+          "returned": [
+            "How do I install the necessary dependencies to run the code?",
+            "Certificate: Do I need to do the homeworks to get the certificate?"
+          ]
+        },
+        {
+          "query": "why does pandas throw a unicode decode error",
+          "strategy": "creative_student",
+          "top_sim": 0.18951594829559326,
+          "returned": [
+            "Bruin time_interval: Why does the first run fail with a 'table does not exist' catalog error?",
+            "Why does my Bruin seed asset fail with a timeout error related to ingestr or duckdb installation?"
+          ]
+        },
+        {
+          "query": "python is reading my file wrong",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.37273770570755005,
+          "returned": [
+            "Python: How to iterate through and ingest parquet file",
+            "Following 5.2.1, I am getting an error - Head:cannot open \u2018taxi+_zone_lookup.csv\u2019 for reading: No such file or directory"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 420,
+      "found": 374,
+      "hit_rate": 0.8904761904761904,
+      "recall_at_k": {
+        "1": 0.638095238095238,
+        "3": 0.8071428571428572,
+        "5": 0.861904761904762,
+        "10": 0.8904761904761904
+      },
+      "mrr": 0.7308,
+      "ndcg@10": 0.7701,
+      "cross_course_rate": 0.0,
+      "rank_std": 1.5,
+      "failure_count": 46,
+      "failure_avg_sim": 0.2118,
+      "p50_latency": 6.6,
+      "p95_latency": 16.9,
+      "name": "bm25_balanced",
+      "per_strategy": {
+        "chaos_monkey": {
+          "total": 150,
+          "found": 108,
+          "hit_rate": 0.72,
+          "recall_at_k": {
+            "1": 0.48,
+            "3": 0.62,
+            "5": 0.6866666666666666,
+            "10": 0.72
+          },
+          "mrr": 0.5597,
+          "ndcg@10": 0.5987,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.71,
+          "failure_count": 42,
+          "failure_avg_sim": 0.1959,
+          "p50_latency": 6.2,
+          "p95_latency": 17.9
+        },
+        "creative_student": {
+          "total": 120,
+          "found": 119,
+          "hit_rate": 0.9916666666666667,
+          "recall_at_k": {
+            "1": 0.65,
+            "3": 0.8833333333333333,
+            "5": 0.95,
+            "10": 0.9916666666666667
+          },
+          "mrr": 0.78,
+          "ndcg@10": 0.8324,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.61,
+          "failure_count": 1,
+          "failure_avg_sim": 0.2251,
+          "p50_latency": 11.3,
+          "p95_latency": 16.2
+        },
+        "grounded_analyst": {
+          "total": 150,
+          "found": 147,
+          "hit_rate": 0.98,
+          "recall_at_k": {
+            "1": 0.7866666666666666,
+            "3": 0.9333333333333333,
+            "5": 0.9666666666666667,
+            "10": 0.98
+          },
+          "mrr": 0.8625,
+          "ndcg@10": 0.8918,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.17,
+          "failure_count": 3,
+          "failure_avg_sim": 0.43,
+          "p50_latency": 6.0,
+          "p95_latency": 14.9
+        }
+      },
+      "per_course": {
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 120,
+          "hit_rate": 0.9090909090909091,
+          "recall_at_k": {
+            "1": 0.6439393939393939,
+            "3": 0.8257575757575758,
+            "5": 0.8712121212121212,
+            "10": 0.9090909090909091
+          },
+          "mrr": 0.7418,
+          "ndcg@10": 0.7832,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.37,
+          "failure_count": 12,
+          "failure_avg_sim": 0.3217,
+          "p50_latency": 10.6,
+          "p95_latency": 16.4
+        },
+        "llm-zoomcamp": {
+          "total": 81,
+          "found": 76,
+          "hit_rate": 0.9382716049382716,
+          "recall_at_k": {
+            "1": 0.7037037037037037,
+            "3": 0.8641975308641975,
+            "5": 0.9259259259259259,
+            "10": 0.9382716049382716
+          },
+          "mrr": 0.7873,
+          "ndcg@10": 0.8247,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.23,
+          "failure_count": 5,
+          "failure_avg_sim": 0.1954,
+          "p50_latency": 11.6,
+          "p95_latency": 17.5
+        },
+        "ml-zoomcamp": {
+          "total": 147,
+          "found": 127,
+          "hit_rate": 0.8639455782312925,
+          "recall_at_k": {
+            "1": 0.5986394557823129,
+            "3": 0.7619047619047619,
+            "5": 0.8231292517006803,
+            "10": 0.8639455782312925
+          },
+          "mrr": 0.6922,
+          "ndcg@10": 0.734,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.89,
+          "failure_count": 20,
+          "failure_avg_sim": 0.1564,
+          "p50_latency": 6.1,
+          "p95_latency": 16.8
+        },
+        "mlops-zoomcamp": {
+          "total": 60,
+          "found": 51,
+          "hit_rate": 0.85,
+          "recall_at_k": {
+            "1": 0.6333333333333333,
+            "3": 0.8,
+            "5": 0.85,
+            "10": 0.85
+          },
+          "mrr": 0.7247,
+          "ndcg@10": 0.7564,
+          "cross_course_rate": 0.0,
+          "rank_std": 0.93,
+          "failure_count": 9,
+          "failure_avg_sim": 0.1973,
+          "p50_latency": 5.7,
+          "p95_latency": 15.2
+        }
+      },
+      "failures_sample": [
+        {
+          "query": "i need more stuff to make the notebook work",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.07713466137647629,
+          "returned": [
+            "Python: These won't work. You need to make sure you use Int64.",
+            "Terraform: Do I need to make another service account for Terraform before I get the keys (.json file)?"
+          ]
+        },
+        {
+          "query": "python is reading my file wrong",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.14773446321487427,
+          "returned": [
+            "GCS Bucket: Fix Error when importing FHV data to GCS",
+            "dbt: relationships test fails with \"depends on a node named 'taxi_zone_lookup.csv' which was not found\""
+          ]
+        },
+        {
+          "query": "csv file has weird bytes in it",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.5184566378593445,
+          "returned": [
+            "Why does the CSV file size shown in the Kestra Outputs tab differ from the value printed by a Python task?",
+            "Python: Pandas can read *.csv.gzip"
+          ]
+        },
+        {
+          "query": "i need to download something but my computer doesn't know what that is",
+          "strategy": "chaos_monkey",
+          "top_sim": -0.13949048519134521,
+          "returned": [
+            "GCP: SSH public key error - multiple users / usernames",
+            "When configuring the profiles.yml file for dbt-postgres with jinja templates with environment variables, I'm getting \"Credentials in profile \\\"PROFILE_NAME\\\", target: 'dev', invalid: '5432' is not of type 'integer'\""
+          ]
+        },
+        {
+          "query": "how do i install the downloader thing",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.3688296973705292,
+          "returned": [
+            "How do I install the necessary dependencies to run the code?",
+            "Project 1 & Project 2"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 420,
+      "found": 340,
+      "hit_rate": 0.8095238095238095,
+      "recall_at_k": {
+        "1": 0.5119047619047619,
+        "3": 0.6761904761904762,
+        "5": 0.7452380952380953,
+        "10": 0.8095238095238095
+      },
+      "mrr": 0.6098,
+      "ndcg@10": 0.658,
+      "cross_course_rate": 0.0,
+      "rank_std": 2.01,
+      "failure_count": 80,
+      "failure_avg_sim": 0.2842,
+      "p50_latency": 5.5,
+      "p95_latency": 6.4,
+      "name": "bm25_high_text",
+      "per_strategy": {
+        "chaos_monkey": {
+          "total": 150,
+          "found": 104,
+          "hit_rate": 0.6933333333333334,
+          "recall_at_k": {
+            "1": 0.4,
+            "3": 0.54,
+            "5": 0.6133333333333333,
+            "10": 0.6933333333333334
+          },
+          "mrr": 0.486,
+          "ndcg@10": 0.5353,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.36,
+          "failure_count": 46,
+          "failure_avg_sim": 0.2121,
+          "p50_latency": 5.6,
+          "p95_latency": 6.6
+        },
+        "creative_student": {
+          "total": 120,
+          "found": 104,
+          "hit_rate": 0.8666666666666667,
+          "recall_at_k": {
+            "1": 0.5,
+            "3": 0.7083333333333334,
+            "5": 0.8,
+            "10": 0.8666666666666667
+          },
+          "mrr": 0.6232,
+          "ndcg@10": 0.6823,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.94,
+          "failure_count": 16,
+          "failure_avg_sim": 0.3541,
+          "p50_latency": 5.4,
+          "p95_latency": 6.3
+        },
+        "grounded_analyst": {
+          "total": 150,
+          "found": 132,
+          "hit_rate": 0.88,
+          "recall_at_k": {
+            "1": 0.6333333333333333,
+            "3": 0.7866666666666666,
+            "5": 0.8333333333333334,
+            "10": 0.88
+          },
+          "mrr": 0.7228,
+          "ndcg@10": 0.7612,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.67,
+          "failure_count": 18,
+          "failure_avg_sim": 0.4065,
+          "p50_latency": 5.4,
+          "p95_latency": 6.3
+        }
+      },
+      "per_course": {
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 103,
+          "hit_rate": 0.7803030303030303,
+          "recall_at_k": {
+            "1": 0.5075757575757576,
+            "3": 0.6666666666666666,
+            "5": 0.7121212121212122,
+            "10": 0.7803030303030303
+          },
+          "mrr": 0.6052,
+          "ndcg@10": 0.6476,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.05,
+          "failure_count": 29,
+          "failure_avg_sim": 0.4098,
+          "p50_latency": 5.6,
+          "p95_latency": 6.6
+        },
+        "llm-zoomcamp": {
+          "total": 81,
+          "found": 78,
+          "hit_rate": 0.9629629629629629,
+          "recall_at_k": {
+            "1": 0.5061728395061729,
+            "3": 0.7777777777777778,
+            "5": 0.9012345679012346,
+            "10": 0.9629629629629629
+          },
+          "mrr": 0.661,
+          "ndcg@10": 0.7347,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.86,
+          "failure_count": 3,
+          "failure_avg_sim": 0.1012,
+          "p50_latency": 5.3,
+          "p95_latency": 6.3
+        },
+        "ml-zoomcamp": {
+          "total": 147,
+          "found": 109,
+          "hit_rate": 0.7414965986394558,
+          "recall_at_k": {
+            "1": 0.48299319727891155,
+            "3": 0.6122448979591837,
+            "5": 0.673469387755102,
+            "10": 0.7414965986394558
+          },
+          "mrr": 0.5603,
+          "ndcg@10": 0.6035,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.13,
+          "failure_count": 38,
+          "failure_avg_sim": 0.2313,
+          "p50_latency": 5.5,
+          "p95_latency": 6.3
+        },
+        "mlops-zoomcamp": {
+          "total": 60,
+          "found": 50,
+          "hit_rate": 0.8333333333333334,
+          "recall_at_k": {
+            "1": 0.6,
+            "3": 0.7166666666666667,
+            "5": 0.7833333333333333,
+            "10": 0.8333333333333334
+          },
+          "mrr": 0.6718,
+          "ndcg@10": 0.7106,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.84,
+          "failure_count": 10,
+          "failure_avg_sim": 0.1766,
+          "p50_latency": 5.5,
+          "p95_latency": 6.4
+        }
+      },
+      "failures_sample": [
+        {
+          "query": "jupyter is too heavy for my computer",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.11203771829605103,
+          "returned": [
+            "WSL2: ResponseError: model requires more system memory (X.X GiB) than is available (Y.Y GiB). My system has more than X.X GiB.",
+            "Project: do I need an orchestration tool (Airflow, Mage, Kestra) for the capstone?"
+          ]
+        },
+        {
+          "query": "csv file has weird bytes in it",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.5184566378593445,
+          "returned": [
+            "Why does the CSV file size shown in the Kestra Outputs tab differ from the value printed by a Python task?",
+            "Python: Pandas can read *.csv.gzip"
+          ]
+        },
+        {
+          "query": "i need to download something but my computer doesn't know what that is",
+          "strategy": "chaos_monkey",
+          "top_sim": -0.13949048519134521,
+          "returned": [
+            "GCP: SSH public key error - multiple users / usernames",
+            "When configuring the profiles.yml file for dbt-postgres with jinja templates with environment variables, I'm getting \"Credentials in profile \\\"PROFILE_NAME\\\", target: 'dev', invalid: '5432' is not of type 'integer'\""
+          ]
+        },
+        {
+          "query": "how do i install the downloader thing",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.03457365557551384,
+          "returned": [
+            "Project 1 & Project 2",
+            "GCP: Do I need to delete my instance in Google Cloud?"
+          ]
+        },
+        {
+          "query": "google application credentials not set terraform",
+          "strategy": "grounded_analyst",
+          "top_sim": 0.4039615988731384,
+          "returned": [
+            "GCP - Windows Google Cloud SDK install issue:",
+            "Terraform: Error: Post \"[storage.googleapis.com](https://storage.googleapis.com/storage/v1/b?alt=json&prettyPrint=false&project=coherent-ascent-379901): oauth2: cannot fetch token: Post \"[oauth2.googleapis.com](https://oauth2.googleapis.com/token): dial tcp 172.217.163.42:443: i/o timeout"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 420,
+      "found": 381,
+      "hit_rate": 0.9071428571428571,
+      "recall_at_k": {
+        "1": 0.6642857142857143,
+        "3": 0.8047619047619048,
+        "5": 0.8666666666666667,
+        "10": 0.9071428571428571
+      },
+      "mrr": 0.7478,
+      "ndcg@10": 0.7867,
+      "cross_course_rate": 0.0,
+      "rank_std": 1.52,
+      "failure_count": 39,
+      "failure_avg_sim": 0.4865,
+      "p50_latency": 20.4,
+      "p95_latency": 24.2,
+      "name": "vector_cosine",
+      "per_strategy": {
+        "chaos_monkey": {
+          "total": 150,
+          "found": 120,
+          "hit_rate": 0.8,
+          "recall_at_k": {
+            "1": 0.5133333333333333,
+            "3": 0.6533333333333333,
+            "5": 0.7466666666666667,
+            "10": 0.8
+          },
+          "mrr": 0.6033,
+          "ndcg@10": 0.6508,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.84,
+          "failure_count": 30,
+          "failure_avg_sim": 0.4648,
+          "p50_latency": 20.6,
+          "p95_latency": 24.8
+        },
+        "creative_student": {
+          "total": 120,
+          "found": 117,
+          "hit_rate": 0.975,
+          "recall_at_k": {
+            "1": 0.725,
+            "3": 0.9,
+            "5": 0.9333333333333333,
+            "10": 0.975
+          },
+          "mrr": 0.8198,
+          "ndcg@10": 0.8581,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.35,
+          "failure_count": 3,
+          "failure_avg_sim": 0.5399,
+          "p50_latency": 20.4,
+          "p95_latency": 23.3
+        },
+        "grounded_analyst": {
+          "total": 150,
+          "found": 144,
+          "hit_rate": 0.96,
+          "recall_at_k": {
+            "1": 0.7666666666666667,
+            "3": 0.88,
+            "5": 0.9333333333333333,
+            "10": 0.96
+          },
+          "mrr": 0.8346,
+          "ndcg@10": 0.8653,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.29,
+          "failure_count": 6,
+          "failure_avg_sim": 0.5684,
+          "p50_latency": 20.1,
+          "p95_latency": 23.2
+        }
+      },
+      "per_course": {
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 122,
+          "hit_rate": 0.9242424242424242,
+          "recall_at_k": {
+            "1": 0.7121212121212122,
+            "3": 0.8636363636363636,
+            "5": 0.8787878787878788,
+            "10": 0.9242424242424242
+          },
+          "mrr": 0.7927,
+          "ndcg@10": 0.825,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.5,
+          "failure_count": 10,
+          "failure_avg_sim": 0.5066,
+          "p50_latency": 20.5,
+          "p95_latency": 25.1
+        },
+        "llm-zoomcamp": {
+          "total": 81,
+          "found": 81,
+          "hit_rate": 1.0,
+          "recall_at_k": {
+            "1": 0.8395061728395061,
+            "3": 0.9259259259259259,
+            "5": 1.0,
+            "10": 1.0
+          },
+          "mrr": 0.8986,
+          "ndcg@10": 0.9238,
+          "cross_course_rate": 0.0,
+          "rank_std": 0.87,
+          "failure_count": 0,
+          "failure_avg_sim": 0,
+          "p50_latency": 20.4,
+          "p95_latency": 23.6
+        },
+        "ml-zoomcamp": {
+          "total": 147,
+          "found": 125,
+          "hit_rate": 0.8503401360544217,
+          "recall_at_k": {
+            "1": 0.5374149659863946,
+            "3": 0.7142857142857143,
+            "5": 0.7891156462585034,
+            "10": 0.8503401360544217
+          },
+          "mrr": 0.6407,
+          "ndcg@10": 0.6917,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.73,
+          "failure_count": 22,
+          "failure_avg_sim": 0.4811,
+          "p50_latency": 20.4,
+          "p95_latency": 24.4
+        },
+        "mlops-zoomcamp": {
+          "total": 60,
+          "found": 53,
+          "hit_rate": 0.8833333333333333,
+          "recall_at_k": {
+            "1": 0.6333333333333333,
+            "3": 0.7333333333333333,
+            "5": 0.85,
+            "10": 0.8833333333333333
+          },
+          "mrr": 0.7076,
+          "ndcg@10": 0.7499,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.65,
+          "failure_count": 7,
+          "failure_avg_sim": 0.4746,
+          "p50_latency": 20.0,
+          "p95_latency": 23.4
+        }
+      },
+      "failures_sample": [
+        {
+          "query": "installing dependencies for jupyter notebook",
+          "strategy": "grounded_analyst",
+          "top_sim": 0.6110082268714905,
+          "returned": [
+            "Alternative way to convert Jupyter notebook to Python script (via jupytext)",
+            "Jupyter: Install nbconvert, fix 'Failed to spawn' nbconvert error, and convert notebook to Python script (including uv integration)"
+          ]
+        },
+        {
+          "query": "csv file has weird bytes in it",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.5451055765151978,
+          "returned": [
+            "Taxi Data: Unzip csv.gz file",
+            "Python: Pandas can read *.csv.gzip"
+          ]
+        },
+        {
+          "query": "how to get single value from pandas mode",
+          "strategy": "grounded_analyst",
+          "top_sim": 0.5072194933891296,
+          "returned": [
+            "How to ensure \"none\" values are not interpreted as NaN when reading a CSV file in Pandas",
+            "Find standard deviation with Pandas"
+          ]
+        },
+        {
+          "query": "pandas mode function not working as expected",
+          "strategy": "creative_student",
+          "top_sim": 0.6241635680198669,
+          "returned": [
+            "Standard deviation using Pandas built in Function",
+            "Warning about modifying Dataframes inside functions"
+          ]
+        },
+        {
+          "query": "assignment scores aren't adding up",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.4852118194103241,
+          "returned": [
+            "I may end up submitting the assignment late. Would it be evaluated?",
+            "Do you pass a project based on the average of everyone else\u2019s scores or based on the total score you earn?"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 420,
+      "found": 381,
+      "hit_rate": 0.9071428571428571,
+      "recall_at_k": {
+        "1": 0.6642857142857143,
+        "3": 0.8047619047619048,
+        "5": 0.8666666666666667,
+        "10": 0.9071428571428571
+      },
+      "mrr": 0.7478,
+      "ndcg@10": 0.7867,
+      "cross_course_rate": 0.0,
+      "rank_std": 1.52,
+      "failure_count": 39,
+      "failure_avg_sim": 0.4865,
+      "p50_latency": 21.9,
+      "p95_latency": 26.1,
+      "name": "qdrant_cosine",
+      "per_strategy": {
+        "chaos_monkey": {
+          "total": 150,
+          "found": 120,
+          "hit_rate": 0.8,
+          "recall_at_k": {
+            "1": 0.5133333333333333,
+            "3": 0.6533333333333333,
+            "5": 0.7466666666666667,
+            "10": 0.8
+          },
+          "mrr": 0.6033,
+          "ndcg@10": 0.6508,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.84,
+          "failure_count": 30,
+          "failure_avg_sim": 0.4648,
+          "p50_latency": 22.2,
+          "p95_latency": 26.1
+        },
+        "creative_student": {
+          "total": 120,
+          "found": 117,
+          "hit_rate": 0.975,
+          "recall_at_k": {
+            "1": 0.725,
+            "3": 0.9,
+            "5": 0.9333333333333333,
+            "10": 0.975
+          },
+          "mrr": 0.8198,
+          "ndcg@10": 0.8581,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.35,
+          "failure_count": 3,
+          "failure_avg_sim": 0.5399,
+          "p50_latency": 22.1,
+          "p95_latency": 26.7
+        },
+        "grounded_analyst": {
+          "total": 150,
+          "found": 144,
+          "hit_rate": 0.96,
+          "recall_at_k": {
+            "1": 0.7666666666666667,
+            "3": 0.88,
+            "5": 0.9333333333333333,
+            "10": 0.96
+          },
+          "mrr": 0.8346,
+          "ndcg@10": 0.8653,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.29,
+          "failure_count": 6,
+          "failure_avg_sim": 0.5684,
+          "p50_latency": 21.5,
+          "p95_latency": 25.8
+        }
+      },
+      "per_course": {
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 122,
+          "hit_rate": 0.9242424242424242,
+          "recall_at_k": {
+            "1": 0.7121212121212122,
+            "3": 0.8636363636363636,
+            "5": 0.8787878787878788,
+            "10": 0.9242424242424242
+          },
+          "mrr": 0.7927,
+          "ndcg@10": 0.825,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.5,
+          "failure_count": 10,
+          "failure_avg_sim": 0.5066,
+          "p50_latency": 21.7,
+          "p95_latency": 25.4
+        },
+        "llm-zoomcamp": {
+          "total": 81,
+          "found": 81,
+          "hit_rate": 1.0,
+          "recall_at_k": {
+            "1": 0.8395061728395061,
+            "3": 0.9259259259259259,
+            "5": 1.0,
+            "10": 1.0
+          },
+          "mrr": 0.8986,
+          "ndcg@10": 0.9238,
+          "cross_course_rate": 0.0,
+          "rank_std": 0.87,
+          "failure_count": 0,
+          "failure_avg_sim": 0,
+          "p50_latency": 22.5,
+          "p95_latency": 28.9
+        },
+        "ml-zoomcamp": {
+          "total": 147,
+          "found": 125,
+          "hit_rate": 0.8503401360544217,
+          "recall_at_k": {
+            "1": 0.5374149659863946,
+            "3": 0.7142857142857143,
+            "5": 0.7891156462585034,
+            "10": 0.8503401360544217
+          },
+          "mrr": 0.6407,
+          "ndcg@10": 0.6917,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.73,
+          "failure_count": 22,
+          "failure_avg_sim": 0.4811,
+          "p50_latency": 21.7,
+          "p95_latency": 26.7
+        },
+        "mlops-zoomcamp": {
+          "total": 60,
+          "found": 53,
+          "hit_rate": 0.8833333333333333,
+          "recall_at_k": {
+            "1": 0.6333333333333333,
+            "3": 0.7333333333333333,
+            "5": 0.85,
+            "10": 0.8833333333333333
+          },
+          "mrr": 0.7076,
+          "ndcg@10": 0.7499,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.65,
+          "failure_count": 7,
+          "failure_avg_sim": 0.4746,
+          "p50_latency": 21.2,
+          "p95_latency": 24.7
+        }
+      },
+      "failures_sample": [
+        {
+          "query": "installing dependencies for jupyter notebook",
+          "strategy": "grounded_analyst",
+          "top_sim": 0.6110082268714905,
+          "returned": [
+            "Alternative way to convert Jupyter notebook to Python script (via jupytext)",
+            "Jupyter: Install nbconvert, fix 'Failed to spawn' nbconvert error, and convert notebook to Python script (including uv integration)"
+          ]
+        },
+        {
+          "query": "csv file has weird bytes in it",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.5451055765151978,
+          "returned": [
+            "Taxi Data: Unzip csv.gz file",
+            "Python: Pandas can read *.csv.gzip"
+          ]
+        },
+        {
+          "query": "how to get single value from pandas mode",
+          "strategy": "grounded_analyst",
+          "top_sim": 0.5072194933891296,
+          "returned": [
+            "How to ensure \"none\" values are not interpreted as NaN when reading a CSV file in Pandas",
+            "Find standard deviation with Pandas"
+          ]
+        },
+        {
+          "query": "pandas mode function not working as expected",
+          "strategy": "creative_student",
+          "top_sim": 0.6241635680198669,
+          "returned": [
+            "Standard deviation using Pandas built in Function",
+            "Warning about modifying Dataframes inside functions"
+          ]
+        },
+        {
+          "query": "assignment scores aren't adding up",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.4852118194103241,
+          "returned": [
+            "I may end up submitting the assignment late. Would it be evaluated?",
+            "Do you pass a project based on the average of everyone else\u2019s scores or based on the total score you earn?"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 420,
+      "found": 377,
+      "hit_rate": 0.8976190476190476,
+      "recall_at_k": {
+        "1": 0.6023809523809524,
+        "3": 0.7690476190476191,
+        "5": 0.8357142857142857,
+        "10": 0.8976190476190476
+      },
+      "mrr": 0.7003,
+      "ndcg@10": 0.748,
+      "cross_course_rate": 0.0,
+      "rank_std": 1.9,
+      "failure_count": 43,
+      "failure_avg_sim": 0.417,
+      "p50_latency": 32.7,
+      "p95_latency": 38.0,
+      "name": "hybrid_rrf",
+      "per_strategy": {
+        "chaos_monkey": {
+          "total": 150,
+          "found": 115,
+          "hit_rate": 0.7666666666666667,
+          "recall_at_k": {
+            "1": 0.4866666666666667,
+            "3": 0.5933333333333334,
+            "5": 0.6533333333333333,
+            "10": 0.7666666666666667
+          },
+          "mrr": 0.5612,
+          "ndcg@10": 0.6093,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.48,
+          "failure_count": 35,
+          "failure_avg_sim": 0.3781,
+          "p50_latency": 32.9,
+          "p95_latency": 38.4
+        },
+        "creative_student": {
+          "total": 120,
+          "found": 118,
+          "hit_rate": 0.9833333333333333,
+          "recall_at_k": {
+            "1": 0.6666666666666666,
+            "3": 0.875,
+            "5": 0.925,
+            "10": 0.9833333333333333
+          },
+          "mrr": 0.7816,
+          "ndcg@10": 0.8309,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.71,
+          "failure_count": 2,
+          "failure_avg_sim": 0.4978,
+          "p50_latency": 33.2,
+          "p95_latency": 37.6
+        },
+        "grounded_analyst": {
+          "total": 150,
+          "found": 144,
+          "hit_rate": 0.96,
+          "recall_at_k": {
+            "1": 0.6666666666666666,
+            "3": 0.86,
+            "5": 0.9466666666666667,
+            "10": 0.96
+          },
+          "mrr": 0.7742,
+          "ndcg@10": 0.8202,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.36,
+          "failure_count": 6,
+          "failure_avg_sim": 0.6166,
+          "p50_latency": 31.8,
+          "p95_latency": 36.9
+        }
+      },
+      "per_course": {
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 118,
+          "hit_rate": 0.8939393939393939,
+          "recall_at_k": {
+            "1": 0.6818181818181818,
+            "3": 0.7727272727272727,
+            "5": 0.8409090909090909,
+            "10": 0.8939393939393939
+          },
+          "mrr": 0.748,
+          "ndcg@10": 0.783,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.73,
+          "failure_count": 14,
+          "failure_avg_sim": 0.4431,
+          "p50_latency": 33.1,
+          "p95_latency": 38.7
+        },
+        "llm-zoomcamp": {
+          "total": 81,
+          "found": 79,
+          "hit_rate": 0.9753086419753086,
+          "recall_at_k": {
+            "1": 0.7654320987654321,
+            "3": 0.8641975308641975,
+            "5": 0.9259259259259259,
+            "10": 0.9753086419753086
+          },
+          "mrr": 0.833,
+          "ndcg@10": 0.867,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.83,
+          "failure_count": 2,
+          "failure_avg_sim": 0.351,
+          "p50_latency": 32.1,
+          "p95_latency": 37.1
+        },
+        "ml-zoomcamp": {
+          "total": 147,
+          "found": 128,
+          "hit_rate": 0.8707482993197279,
+          "recall_at_k": {
+            "1": 0.4965986394557823,
+            "3": 0.7210884353741497,
+            "5": 0.782312925170068,
+            "10": 0.8707482993197279
+          },
+          "mrr": 0.62,
+          "ndcg@10": 0.6805,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.14,
+          "failure_count": 19,
+          "failure_avg_sim": 0.4,
+          "p50_latency": 32.8,
+          "p95_latency": 37.3
+        },
+        "mlops-zoomcamp": {
+          "total": 60,
+          "found": 52,
+          "hit_rate": 0.8666666666666667,
+          "recall_at_k": {
+            "1": 0.4666666666666667,
+            "3": 0.75,
+            "5": 0.8333333333333334,
+            "10": 0.8666666666666667
+          },
+          "mrr": 0.6127,
+          "ndcg@10": 0.6755,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.58,
+          "failure_count": 8,
+          "failure_avg_sim": 0.4282,
+          "p50_latency": 32.3,
+          "p95_latency": 36.5
+        }
+      },
+      "failures_sample": [
+        {
+          "query": "installing dependencies for jupyter notebook",
+          "strategy": "grounded_analyst",
+          "top_sim": 0.6110082268714905,
+          "returned": [
+            "Alternative way to convert Jupyter notebook to Python script (via jupytext)",
+            "Python: Ingestion with Jupyter notebook - missing 100000 records"
+          ]
+        },
+        {
+          "query": "encoding error when reading data from the web",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.42706170678138733,
+          "returned": [
+            "GCS Bucket - error when writing data from web to GCS:",
+            "Taxi Data: Yellow Taxi Trip Records downloading error"
+          ]
+        },
+        {
+          "query": "csv file has weird bytes in it",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.5184566378593445,
+          "returned": [
+            "Why does the CSV file size shown in the Kestra Outputs tab differ from the value printed by a Python task?",
+            "Taxi Data: Unzip csv.gz file"
+          ]
+        },
+        {
+          "query": "i need to download something but my computer doesn't know what that is",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.20551477372646332,
+          "returned": [
+            "Terraform: Where can I download the Terraform binary for Linux?",
+            "How do you read data stored in GCS on pandas with your local computer?"
+          ]
+        },
+        {
+          "query": "how do i install the downloader thing",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.3688296973705292,
+          "returned": [
+            "How do I install the necessary dependencies to run the code?",
+            "How do I launch Kestra?"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 420,
+      "found": 376,
+      "hit_rate": 0.8952380952380953,
+      "recall_at_k": {
+        "1": 0.611904761904762,
+        "3": 0.8047619047619048,
+        "5": 0.85,
+        "10": 0.8952380952380953
+      },
+      "mrr": 0.7173,
+      "ndcg@10": 0.7611,
+      "cross_course_rate": 0.0,
+      "rank_std": 1.58,
+      "failure_count": 44,
+      "failure_avg_sim": 0.3822,
+      "p50_latency": 34.9,
+      "p95_latency": 40.7,
+      "name": "hybrid_50_50",
+      "per_strategy": {
+        "chaos_monkey": {
+          "total": 150,
+          "found": 115,
+          "hit_rate": 0.7666666666666667,
+          "recall_at_k": {
+            "1": 0.5,
+            "3": 0.6266666666666667,
+            "5": 0.6733333333333333,
+            "10": 0.7666666666666667
+          },
+          "mrr": 0.5804,
+          "ndcg@10": 0.6249,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.11,
+          "failure_count": 35,
+          "failure_avg_sim": 0.3391,
+          "p50_latency": 35.0,
+          "p95_latency": 40.5
+        },
+        "creative_student": {
+          "total": 120,
+          "found": 117,
+          "hit_rate": 0.975,
+          "recall_at_k": {
+            "1": 0.675,
+            "3": 0.9083333333333333,
+            "5": 0.9416666666666667,
+            "10": 0.975
+          },
+          "mrr": 0.7971,
+          "ndcg@10": 0.8416,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.35,
+          "failure_count": 3,
+          "failure_avg_sim": 0.5399,
+          "p50_latency": 35.6,
+          "p95_latency": 41.0
+        },
+        "grounded_analyst": {
+          "total": 150,
+          "found": 144,
+          "hit_rate": 0.96,
+          "recall_at_k": {
+            "1": 0.6733333333333333,
+            "3": 0.9,
+            "5": 0.9533333333333334,
+            "10": 0.96
+          },
+          "mrr": 0.7902,
+          "ndcg@10": 0.8329,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.14,
+          "failure_count": 6,
+          "failure_avg_sim": 0.5545,
+          "p50_latency": 34.2,
+          "p95_latency": 40.2
+        }
+      },
+      "per_course": {
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 120,
+          "hit_rate": 0.9090909090909091,
+          "recall_at_k": {
+            "1": 0.696969696969697,
+            "3": 0.8560606060606061,
+            "5": 0.8939393939393939,
+            "10": 0.9090909090909091
+          },
+          "mrr": 0.7778,
+          "ndcg@10": 0.8104,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.27,
+          "failure_count": 12,
+          "failure_avg_sim": 0.3817,
+          "p50_latency": 35.0,
+          "p95_latency": 40.7
+        },
+        "llm-zoomcamp": {
+          "total": 81,
+          "found": 81,
+          "hit_rate": 1.0,
+          "recall_at_k": {
+            "1": 0.7654320987654321,
+            "3": 0.8888888888888888,
+            "5": 0.9382716049382716,
+            "10": 1.0
+          },
+          "mrr": 0.8415,
+          "ndcg@10": 0.8796,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.76,
+          "failure_count": 0,
+          "failure_avg_sim": 0,
+          "p50_latency": 34.3,
+          "p95_latency": 39.8
+        },
+        "ml-zoomcamp": {
+          "total": 147,
+          "found": 124,
+          "hit_rate": 0.8435374149659864,
+          "recall_at_k": {
+            "1": 0.5102040816326531,
+            "3": 0.7346938775510204,
+            "5": 0.782312925170068,
+            "10": 0.8435374149659864
+          },
+          "mrr": 0.6345,
+          "ndcg@10": 0.6859,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.68,
+          "failure_count": 23,
+          "failure_avg_sim": 0.3814,
+          "p50_latency": 35.2,
+          "p95_latency": 41.5
+        },
+        "mlops-zoomcamp": {
+          "total": 60,
+          "found": 51,
+          "hit_rate": 0.85,
+          "recall_at_k": {
+            "1": 0.4666666666666667,
+            "3": 0.75,
+            "5": 0.8,
+            "10": 0.85
+          },
+          "mrr": 0.6191,
+          "ndcg@10": 0.6766,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.59,
+          "failure_count": 9,
+          "failure_avg_sim": 0.3848,
+          "p50_latency": 34.7,
+          "p95_latency": 37.7
+        }
+      },
+      "failures_sample": [
+        {
+          "query": "installing dependencies for jupyter notebook",
+          "strategy": "grounded_analyst",
+          "top_sim": 0.6110082268714905,
+          "returned": [
+            "Alternative way to convert Jupyter notebook to Python script (via jupytext)",
+            "Streaming: installing dependencies for the Python avro example (producer.py)"
+          ]
+        },
+        {
+          "query": "csv file has weird bytes in it",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.5184566378593445,
+          "returned": [
+            "Why does the CSV file size shown in the Kestra Outputs tab differ from the value printed by a Python task?",
+            "Taxi Data: Unzip csv.gz file"
+          ]
+        },
+        {
+          "query": "i need to download something but my computer doesn't know what that is",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.03283216804265976,
+          "returned": [
+            "GCP: Do I need to delete my instance in Google Cloud?",
+            "Taxi Data: Yellow Taxi Trip Records downloading error"
+          ]
+        },
+        {
+          "query": "how do i install the downloader thing",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.3688296973705292,
+          "returned": [
+            "How do I install the necessary dependencies to run the code?",
+            "How do I launch Kestra?"
+          ]
+        },
+        {
+          "query": "pandas mode function not working as expected",
+          "strategy": "creative_student",
+          "top_sim": 0.6241635680198669,
+          "returned": [
+            "Standard deviation using Pandas built in Function",
+            "Shuffling the initial dataset using pandas built-in function"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 420,
+      "found": 383,
+      "hit_rate": 0.9119047619047619,
+      "recall_at_k": {
+        "1": 0.6642857142857143,
+        "3": 0.8119047619047619,
+        "5": 0.8642857142857143,
+        "10": 0.9119047619047619
+      },
+      "mrr": 0.7525,
+      "ndcg@10": 0.7915,
+      "cross_course_rate": 0.0,
+      "rank_std": 1.58,
+      "failure_count": 37,
+      "failure_avg_sim": 0.4822,
+      "p50_latency": 34.7,
+      "p95_latency": 39.5,
+      "name": "hybrid_70_30_vec",
+      "per_strategy": {
+        "chaos_monkey": {
+          "total": 150,
+          "found": 120,
+          "hit_rate": 0.8,
+          "recall_at_k": {
+            "1": 0.5133333333333333,
+            "3": 0.6466666666666666,
+            "5": 0.72,
+            "10": 0.8
+          },
+          "mrr": 0.603,
+          "ndcg@10": 0.6502,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.03,
+          "failure_count": 30,
+          "failure_avg_sim": 0.4648,
+          "p50_latency": 34.8,
+          "p95_latency": 39.5
+        },
+        "creative_student": {
+          "total": 120,
+          "found": 118,
+          "hit_rate": 0.9833333333333333,
+          "recall_at_k": {
+            "1": 0.725,
+            "3": 0.9166666666666666,
+            "5": 0.9416666666666667,
+            "10": 0.9833333333333333
+          },
+          "mrr": 0.8297,
+          "ndcg@10": 0.8679,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.42,
+          "failure_count": 2,
+          "failure_avg_sim": 0.4978,
+          "p50_latency": 35.1,
+          "p95_latency": 39.8
+        },
+        "grounded_analyst": {
+          "total": 150,
+          "found": 145,
+          "hit_rate": 0.9666666666666667,
+          "recall_at_k": {
+            "1": 0.7666666666666667,
+            "3": 0.8933333333333333,
+            "5": 0.9466666666666667,
+            "10": 0.9666666666666667
+          },
+          "mrr": 0.8404,
+          "ndcg@10": 0.8716,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.15,
+          "failure_count": 5,
+          "failure_avg_sim": 0.5806,
+          "p50_latency": 34.1,
+          "p95_latency": 38.1
+        }
+      },
+      "per_course": {
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 122,
+          "hit_rate": 0.9242424242424242,
+          "recall_at_k": {
+            "1": 0.7121212121212122,
+            "3": 0.8560606060606061,
+            "5": 0.8863636363636364,
+            "10": 0.9242424242424242
+          },
+          "mrr": 0.7937,
+          "ndcg@10": 0.8258,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.44,
+          "failure_count": 10,
+          "failure_avg_sim": 0.5066,
+          "p50_latency": 35.2,
+          "p95_latency": 40.1
+        },
+        "llm-zoomcamp": {
+          "total": 81,
+          "found": 81,
+          "hit_rate": 1.0,
+          "recall_at_k": {
+            "1": 0.8395061728395061,
+            "3": 0.9135802469135802,
+            "5": 0.9506172839506173,
+            "10": 1.0
+          },
+          "mrr": 0.8887,
+          "ndcg@10": 0.9154,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.35,
+          "failure_count": 0,
+          "failure_avg_sim": 0,
+          "p50_latency": 33.8,
+          "p95_latency": 39.4
+        },
+        "ml-zoomcamp": {
+          "total": 147,
+          "found": 127,
+          "hit_rate": 0.8639455782312925,
+          "recall_at_k": {
+            "1": 0.5374149659863946,
+            "3": 0.7414965986394558,
+            "5": 0.8163265306122449,
+            "10": 0.8639455782312925
+          },
+          "mrr": 0.6561,
+          "ndcg@10": 0.7071,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.73,
+          "failure_count": 20,
+          "failure_avg_sim": 0.4727,
+          "p50_latency": 35.0,
+          "p95_latency": 39.3
+        },
+        "mlops-zoomcamp": {
+          "total": 60,
+          "found": 53,
+          "hit_rate": 0.8833333333333333,
+          "recall_at_k": {
+            "1": 0.6333333333333333,
+            "3": 0.75,
+            "5": 0.8166666666666667,
+            "10": 0.8833333333333333
+          },
+          "mrr": 0.7145,
+          "ndcg@10": 0.7552,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.76,
+          "failure_count": 7,
+          "failure_avg_sim": 0.4746,
+          "p50_latency": 33.7,
+          "p95_latency": 39.1
+        }
+      },
+      "failures_sample": [
+        {
+          "query": "installing dependencies for jupyter notebook",
+          "strategy": "grounded_analyst",
+          "top_sim": 0.6110082268714905,
+          "returned": [
+            "Alternative way to convert Jupyter notebook to Python script (via jupytext)",
+            "Jupyter: Install nbconvert, fix 'Failed to spawn' nbconvert error, and convert notebook to Python script (including uv integration)"
+          ]
+        },
+        {
+          "query": "csv file has weird bytes in it",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.5451055765151978,
+          "returned": [
+            "Taxi Data: Unzip csv.gz file",
+            "Why does the CSV file size shown in the Kestra Outputs tab differ from the value printed by a Python task?"
+          ]
+        },
+        {
+          "query": "assignment scores aren't adding up",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.4852118194103241,
+          "returned": [
+            "I may end up submitting the assignment late. Would it be evaluated?",
+            "Do you pass a project based on the average of everyone else\u2019s scores or based on the total score you earn?"
+          ]
+        },
+        {
+          "query": "my containerization software is broken",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.546233057975769,
+          "returned": [
+            "Docker: ERRO[0000] error waiting for container: context canceled",
+            "Docker: Could not start docker image \"control-center\" from the docker-compose.yaml file."
+          ]
+        },
+        {
+          "query": "my virtual environment won't start with admin",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.519403874874115,
+          "returned": [
+            "Setup: No development environment",
+            "GCP: I cannot get my Virtual Machine to start because GCP has no resources."
+          ]
+        }
+      ]
+    },
+    {
+      "total": 420,
+      "found": 370,
+      "hit_rate": 0.8809523809523809,
+      "recall_at_k": {
+        "1": 0.5666666666666667,
+        "3": 0.780952380952381,
+        "5": 0.8285714285714286,
+        "10": 0.8809523809523809
+      },
+      "mrr": 0.6796,
+      "ndcg@10": 0.729,
+      "cross_course_rate": 0.0,
+      "rank_std": 1.71,
+      "failure_count": 50,
+      "failure_avg_sim": 0.3142,
+      "p50_latency": 33.7,
+      "p95_latency": 38.3,
+      "name": "hybrid_30_70_vec",
+      "per_strategy": {
+        "chaos_monkey": {
+          "total": 150,
+          "found": 108,
+          "hit_rate": 0.72,
+          "recall_at_k": {
+            "1": 0.41333333333333333,
+            "3": 0.6,
+            "5": 0.6533333333333333,
+            "10": 0.72
+          },
+          "mrr": 0.5152,
+          "ndcg@10": 0.5647,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.12,
+          "failure_count": 42,
+          "failure_avg_sim": 0.275,
+          "p50_latency": 33.9,
+          "p95_latency": 38.5
+        },
+        "creative_student": {
+          "total": 120,
+          "found": 117,
+          "hit_rate": 0.975,
+          "recall_at_k": {
+            "1": 0.65,
+            "3": 0.875,
+            "5": 0.925,
+            "10": 0.975
+          },
+          "mrr": 0.7714,
+          "ndcg@10": 0.8216,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.55,
+          "failure_count": 3,
+          "failure_avg_sim": 0.5243,
+          "p50_latency": 34.3,
+          "p95_latency": 39.0
+        },
+        "grounded_analyst": {
+          "total": 150,
+          "found": 145,
+          "hit_rate": 0.9666666666666667,
+          "recall_at_k": {
+            "1": 0.6533333333333333,
+            "3": 0.8866666666666667,
+            "5": 0.9266666666666666,
+            "10": 0.9666666666666667
+          },
+          "mrr": 0.7706,
+          "ndcg@10": 0.8191,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.44,
+          "failure_count": 5,
+          "failure_avg_sim": 0.5172,
+          "p50_latency": 32.9,
+          "p95_latency": 36.6
+        }
+      },
+      "per_course": {
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 119,
+          "hit_rate": 0.9015151515151515,
+          "recall_at_k": {
+            "1": 0.6363636363636364,
+            "3": 0.8181818181818182,
+            "5": 0.8712121212121212,
+            "10": 0.9015151515151515
+          },
+          "mrr": 0.7333,
+          "ndcg@10": 0.7748,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.35,
+          "failure_count": 13,
+          "failure_avg_sim": 0.3256,
+          "p50_latency": 33.8,
+          "p95_latency": 38.0
+        },
+        "llm-zoomcamp": {
+          "total": 81,
+          "found": 77,
+          "hit_rate": 0.9506172839506173,
+          "recall_at_k": {
+            "1": 0.691358024691358,
+            "3": 0.8641975308641975,
+            "5": 0.9012345679012346,
+            "10": 0.9506172839506173
+          },
+          "mrr": 0.7882,
+          "ndcg@10": 0.8283,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.34,
+          "failure_count": 4,
+          "failure_avg_sim": 0.2518,
+          "p50_latency": 33.0,
+          "p95_latency": 38.7
+        },
+        "ml-zoomcamp": {
+          "total": 147,
+          "found": 123,
+          "hit_rate": 0.8367346938775511,
+          "recall_at_k": {
+            "1": 0.4965986394557823,
+            "3": 0.7142857142857143,
+            "5": 0.7687074829931972,
+            "10": 0.8367346938775511
+          },
+          "mrr": 0.6122,
+          "ndcg@10": 0.6667,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.04,
+          "failure_count": 24,
+          "failure_avg_sim": 0.3296,
+          "p50_latency": 33.7,
+          "p95_latency": 38.4
+        },
+        "mlops-zoomcamp": {
+          "total": 60,
+          "found": 51,
+          "hit_rate": 0.85,
+          "recall_at_k": {
+            "1": 0.4166666666666667,
+            "3": 0.75,
+            "5": 0.7833333333333333,
+            "10": 0.85
+          },
+          "mrr": 0.5801,
+          "ndcg@10": 0.6467,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.96,
+          "failure_count": 9,
+          "failure_avg_sim": 0.2844,
+          "p50_latency": 33.9,
+          "p95_latency": 36.8
+        }
+      },
+      "failures_sample": [
+        {
+          "query": "installing dependencies for jupyter notebook",
+          "strategy": "grounded_analyst",
+          "top_sim": 0.3592735826969147,
+          "returned": [
+            "Streaming: installing dependencies for the Python avro example (producer.py)",
+            "Alternative way to convert Jupyter notebook to Python script (via jupytext)"
+          ]
+        },
+        {
+          "query": "encoding error when reading data from the web",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.42706170678138733,
+          "returned": [
+            "GCS Bucket - error when writing data from web to GCS:",
+            "Homework: Reading parquets from nyc.gov directly into pandas returns Out of bounds error"
+          ]
+        },
+        {
+          "query": "csv file has weird bytes in it",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.5184566378593445,
+          "returned": [
+            "Why does the CSV file size shown in the Kestra Outputs tab differ from the value printed by a Python task?",
+            "Why must a file be declared again under outputFiles for it to be visible or downloadable in Kestra?"
+          ]
+        },
+        {
+          "query": "i need to download something but my computer doesn't know what that is",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.03283216804265976,
+          "returned": [
+            "GCP: Do I need to delete my instance in Google Cloud?",
+            "VMs: What do I do if my VM runs out of space?"
+          ]
+        },
+        {
+          "query": "how do i install the downloader thing",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.3688296973705292,
+          "returned": [
+            "How do I install the necessary dependencies to run the code?",
+            "Leaderboard: how do I find myself on the leaderboard?"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 420,
+      "found": 378,
+      "hit_rate": 0.9,
+      "recall_at_k": {
+        "1": 0.6095238095238096,
+        "3": 0.8,
+        "5": 0.8333333333333334,
+        "10": 0.9
+      },
+      "mrr": 0.7119,
+      "ndcg@10": 0.7577,
+      "cross_course_rate": 0.0,
+      "rank_std": 1.81,
+      "failure_count": 42,
+      "failure_avg_sim": 0.4393,
+      "p50_latency": 606.8,
+      "p95_latency": 772.0,
+      "name": "vector_reranked",
+      "per_strategy": {
+        "chaos_monkey": {
+          "total": 150,
+          "found": 122,
+          "hit_rate": 0.8133333333333334,
+          "recall_at_k": {
+            "1": 0.5,
+            "3": 0.72,
+            "5": 0.7466666666666667,
+            "10": 0.8133333333333334
+          },
+          "mrr": 0.6113,
+          "ndcg@10": 0.6605,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.05,
+          "failure_count": 28,
+          "failure_avg_sim": 0.4012,
+          "p50_latency": 603.9,
+          "p95_latency": 767.1
+        },
+        "creative_student": {
+          "total": 120,
+          "found": 114,
+          "hit_rate": 0.95,
+          "recall_at_k": {
+            "1": 0.6666666666666666,
+            "3": 0.8333333333333334,
+            "5": 0.8666666666666667,
+            "10": 0.95
+          },
+          "mrr": 0.7625,
+          "ndcg@10": 0.8077,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.87,
+          "failure_count": 6,
+          "failure_avg_sim": 0.481,
+          "p50_latency": 625.7,
+          "p95_latency": 787.0
+        },
+        "grounded_analyst": {
+          "total": 150,
+          "found": 142,
+          "hit_rate": 0.9466666666666667,
+          "recall_at_k": {
+            "1": 0.6733333333333333,
+            "3": 0.8533333333333334,
+            "5": 0.8933333333333333,
+            "10": 0.9466666666666667
+          },
+          "mrr": 0.772,
+          "ndcg@10": 0.8148,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.5,
+          "failure_count": 8,
+          "failure_avg_sim": 0.5411,
+          "p50_latency": 599.7,
+          "p95_latency": 768.1
+        }
+      },
+      "per_course": {
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 115,
+          "hit_rate": 0.8712121212121212,
+          "recall_at_k": {
+            "1": 0.5378787878787878,
+            "3": 0.7651515151515151,
+            "5": 0.803030303030303,
+            "10": 0.8712121212121212
+          },
+          "mrr": 0.6568,
+          "ndcg@10": 0.7092,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.88,
+          "failure_count": 17,
+          "failure_avg_sim": 0.5503,
+          "p50_latency": 614.4,
+          "p95_latency": 774.1
+        },
+        "llm-zoomcamp": {
+          "total": 81,
+          "found": 79,
+          "hit_rate": 0.9753086419753086,
+          "recall_at_k": {
+            "1": 0.654320987654321,
+            "3": 0.8888888888888888,
+            "5": 0.9506172839506173,
+            "10": 0.9753086419753086
+          },
+          "mrr": 0.777,
+          "ndcg@10": 0.8264,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.22,
+          "failure_count": 2,
+          "failure_avg_sim": 0.1951,
+          "p50_latency": 595.4,
+          "p95_latency": 742.5
+        },
+        "ml-zoomcamp": {
+          "total": 147,
+          "found": 130,
+          "hit_rate": 0.8843537414965986,
+          "recall_at_k": {
+            "1": 0.5918367346938775,
+            "3": 0.7551020408163265,
+            "5": 0.782312925170068,
+            "10": 0.8843537414965986
+          },
+          "mrr": 0.6878,
+          "ndcg@10": 0.7348,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.13,
+          "failure_count": 17,
+          "failure_avg_sim": 0.3893,
+          "p50_latency": 611.2,
+          "p95_latency": 770.9
+        },
+        "mlops-zoomcamp": {
+          "total": 60,
+          "found": 54,
+          "hit_rate": 0.9,
+          "recall_at_k": {
+            "1": 0.75,
+            "3": 0.8666666666666667,
+            "5": 0.8666666666666667,
+            "10": 0.9
+          },
+          "mrr": 0.8042,
+          "ndcg@10": 0.8276,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.4,
+          "failure_count": 6,
+          "failure_avg_sim": 0.3477,
+          "p50_latency": 594.1,
+          "p95_latency": 791.8
+        }
+      },
+      "failures_sample": [
+        {
+          "query": "terraform fails to create dataset due to permission issue",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.4934661388397217,
+          "returned": [
+            "stoTerraform - Error creating Bucket: googleapi: Error 403: Permission denied to access \u2018storage.buckets.create\u2019",
+            "Terraform: Teardown of BigQuery Dataset"
+          ]
+        },
+        {
+          "query": "cloud services that also work on my old gaming laptop",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.10804538428783417,
+          "returned": [
+            "What are embeddings?",
+            "Agents: which non-OpenAI models support tool / function calling?"
+          ]
+        },
+        {
+          "query": "homework result not exact",
+          "strategy": "grounded_analyst",
+          "top_sim": 0.2942458689212799,
+          "returned": [
+            "Homework: Why did we change the targets to binary format when calculating mutual information score in the homework?",
+            "Can I submit the homework after the due date?"
+          ]
+        },
+        {
+          "query": "homework result approximation",
+          "strategy": "grounded_analyst",
+          "top_sim": 0.32684797048568726,
+          "returned": [
+            "Floating Point Precision",
+            "Homework: is the RMSE result close to the options?"
+          ]
+        },
+        {
+          "query": "why is my homework answer not exact",
+          "strategy": "creative_student",
+          "top_sim": 0.3019275367259979,
+          "returned": [
+            "Homework: Why did we change the targets to binary format when calculating mutual information score in the homework?",
+            "Floating Point Precision"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 420,
+      "found": 350,
+      "hit_rate": 0.8333333333333334,
+      "recall_at_k": {
+        "1": 0.5952380952380952,
+        "3": 0.75,
+        "5": 0.7857142857142857,
+        "10": 0.8333333333333334
+      },
+      "mrr": 0.68,
+      "ndcg@10": 0.7173,
+      "cross_course_rate": 0.0,
+      "rank_std": 1.75,
+      "failure_count": 70,
+      "failure_avg_sim": 0.3688,
+      "p50_latency": 571.8,
+      "p95_latency": 683.9,
+      "name": "bm25_reranked",
+      "per_strategy": {
+        "chaos_monkey": {
+          "total": 150,
+          "found": 98,
+          "hit_rate": 0.6533333333333333,
+          "recall_at_k": {
+            "1": 0.44666666666666666,
+            "3": 0.58,
+            "5": 0.62,
+            "10": 0.6533333333333333
+          },
+          "mrr": 0.5165,
+          "ndcg@10": 0.5498,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.69,
+          "failure_count": 52,
+          "failure_avg_sim": 0.3265,
+          "p50_latency": 564.7,
+          "p95_latency": 685.5
+        },
+        "creative_student": {
+          "total": 120,
+          "found": 113,
+          "hit_rate": 0.9416666666666667,
+          "recall_at_k": {
+            "1": 0.6666666666666666,
+            "3": 0.8416666666666667,
+            "5": 0.8666666666666667,
+            "10": 0.9416666666666667
+          },
+          "mrr": 0.7667,
+          "ndcg@10": 0.8091,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.92,
+          "failure_count": 7,
+          "failure_avg_sim": 0.4647,
+          "p50_latency": 578.8,
+          "p95_latency": 665.7
+        },
+        "grounded_analyst": {
+          "total": 150,
+          "found": 139,
+          "hit_rate": 0.9266666666666666,
+          "recall_at_k": {
+            "1": 0.6866666666666666,
+            "3": 0.8466666666666667,
+            "5": 0.8866666666666667,
+            "10": 0.9266666666666666
+          },
+          "mrr": 0.774,
+          "ndcg@10": 0.8114,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.64,
+          "failure_count": 11,
+          "failure_avg_sim": 0.5076,
+          "p50_latency": 577.2,
+          "p95_latency": 692.4
+        }
+      },
+      "per_course": {
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 105,
+          "hit_rate": 0.7954545454545454,
+          "recall_at_k": {
+            "1": 0.5151515151515151,
+            "3": 0.7045454545454546,
+            "5": 0.7424242424242424,
+            "10": 0.7954545454545454
+          },
+          "mrr": 0.6227,
+          "ndcg@10": 0.6651,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.8,
+          "failure_count": 27,
+          "failure_avg_sim": 0.4327,
+          "p50_latency": 582.5,
+          "p95_latency": 671.2
+        },
+        "llm-zoomcamp": {
+          "total": 81,
+          "found": 75,
+          "hit_rate": 0.9259259259259259,
+          "recall_at_k": {
+            "1": 0.6296296296296297,
+            "3": 0.8518518518518519,
+            "5": 0.9135802469135802,
+            "10": 0.9259259259259259
+          },
+          "mrr": 0.7455,
+          "ndcg@10": 0.7906,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.16,
+          "failure_count": 6,
+          "failure_avg_sim": 0.2492,
+          "p50_latency": 558.2,
+          "p95_latency": 655.9
+        },
+        "ml-zoomcamp": {
+          "total": 147,
+          "found": 117,
+          "hit_rate": 0.7959183673469388,
+          "recall_at_k": {
+            "1": 0.5918367346938775,
+            "3": 0.6870748299319728,
+            "5": 0.7210884353741497,
+            "10": 0.7959183673469388
+          },
+          "mrr": 0.6511,
+          "ndcg@10": 0.6853,
+          "cross_course_rate": 0.0,
+          "rank_std": 2.17,
+          "failure_count": 30,
+          "failure_avg_sim": 0.3339,
+          "p50_latency": 569.2,
+          "p95_latency": 743.5
+        },
+        "mlops-zoomcamp": {
+          "total": 60,
+          "found": 53,
+          "hit_rate": 0.8833333333333333,
+          "recall_at_k": {
+            "1": 0.7333333333333333,
+            "3": 0.8666666666666667,
+            "5": 0.8666666666666667,
+            "10": 0.8833333333333333
+          },
+          "mrr": 0.7882,
+          "ndcg@10": 0.8118,
+          "cross_course_rate": 0.0,
+          "rank_std": 1.1,
+          "failure_count": 7,
+          "failure_avg_sim": 0.3741,
+          "p50_latency": 582.7,
+          "p95_latency": 714.8
+        }
+      },
+      "failures_sample": [
+        {
+          "query": "installing dependencies for jupyter notebook",
+          "strategy": "grounded_analyst",
+          "top_sim": 0.5012954473495483,
+          "returned": [
+            "How do I install the necessary dependencies to run the code?",
+            "Alternative way to convert Jupyter notebook to Python script (via jupytext)"
+          ]
+        },
+        {
+          "query": "i need more stuff to make the notebook work",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.28523215651512146,
+          "returned": [
+            "Alternative way to convert Jupyter notebook to Python script (via jupytext)",
+            "How do I install the necessary dependencies to run the code?"
+          ]
+        },
+        {
+          "query": "what dependencies do i need for the starter notebook",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.38481253385543823,
+          "returned": [
+            "How does dbt handle dependencies between models?",
+            "How do I install the necessary dependencies to run the code?"
+          ]
+        },
+        {
+          "query": "why does pandas throw a unicode decode error",
+          "strategy": "creative_student",
+          "top_sim": 0.48354578018188477,
+          "returned": [
+            "Homework: Reading parquets from nyc.gov directly into pandas returns Out of bounds error",
+            "TypeError when using spark.createDataFrame function on a pandas df"
+          ]
+        },
+        {
+          "query": "encoding error when reading data from the web",
+          "strategy": "chaos_monkey",
+          "top_sim": 0.11475226283073425,
+          "returned": [
+            "GCP BQ: How to handle type error from BigQuery and Parquet data?",
+            "Taxi Data: Yellow Taxi Trip Records downloading error"
+          ]
+        }
+      ]
+    }
+  ]
+}

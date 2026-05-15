@@ -1,0 +1,2407 @@
+{
+  "metadata": {
+    "name": "BM25 Default"
+  },
+  "results": [
+    {
+      "k": 1,
+      "query": "I missed the first homework - can I still get a certificate?",
+      "expected_id": "9f689c185f",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Cloud alternatives with GPU",
+      "expected_id": "c6c2888275",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'WSL2: ResponseError: model requires more system memory (X.X GiB) than is",
+      "expected_id": "f3dd94f323",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'Leaderboard: I am not on the leaderboard / how do I know which one I am",
+      "expected_id": "c2903069a0",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'Project: do I need an orchestration tool (Airflow, Mage, Kestra) for the",
+      "expected_id": "d4f7c08ea1",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Do we submit 2 projects, what does attempt 1 and 2 mean?",
+      "expected_id": "d5fc98925d",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "I\u2019ve already submitted my project. Why can\u2019t I review any projects?",
+      "expected_id": "a8a7fef016",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'Project: my corpus is large (long PDFs, many paragraphs). What''s a good",
+      "expected_id": "6f2a8b3d10",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "How is my capstone project going to be evaluated?",
+      "expected_id": "9a2e2d2008",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'Project: what does \"reproducibility\" mean \u2014 do reviewers need access to",
+      "expected_id": "e5d8a2c761",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Does the competition count as the capstone?",
+      "expected_id": "e892d44e42",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'Project: how do I evaluate a recommender-style RAG (no obvious Q&A ground",
+      "expected_id": "9b0e2d6a47",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Is it a group project?",
+      "expected_id": "0fab61eca2",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "How can I find some good ideas or datasets for the project?",
+      "expected_id": "e76a70cde3",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "When and how will we be assigned projects for review/grading?",
+      "expected_id": "eae0fb50aa",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'OpenAI: Error: ''Cannot import name OpenAI from openai''; How to fix?'",
+      "expected_id": "35e1ef85a1",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'OpenAI: Why does my token count differ from what OpenAI reports?'",
+      "expected_id": "bf0403d21b",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Why are we not using Langchain in the course?",
+      "expected_id": "b7cdde6b25",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'OpenSource: Can I use open-source alternatives to OpenAI API?'",
+      "expected_id": "3fd5c51182",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'Ollama: How to install Ollama?'",
+      "expected_id": "1d0b969028",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'How do I count tokens for a non-OpenAI model (Gemini, Mistral, HuggingFace)?'",
+      "expected_id": "4d8c1f5b3a",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'Authentication: Why is my OPENAI_API_KEY not found in the Jupyter notebook?'",
+      "expected_id": "86d99bbf21",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'OpenAI: \"RateLimitError 429 / insufficient_quota\" \u2014 my account has no credit'",
+      "expected_id": "6e1d8a7b29",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'API keys: how do I set them once and not re-export every terminal?'",
+      "expected_id": "8b2f5e9d04",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'OpenAI: Do I have to subscribe and pay for Open AI API for this course?'",
+      "expected_id": "85384a18e5",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'Homework: Returning Empty list after filtering my query (HW Q3)'",
+      "expected_id": "83da208a64",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'Error: TypeError: string indices must be integers'",
+      "expected_id": "fa12df76a7",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "(root) Additional property mlflow is not allowed",
+      "expected_id": "7deae3a8eb",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'Video 3.3.4: Training Metrics RMSE chart does not show due to the error:",
+      "expected_id": "b3fe59d431",
+      "success": false
+    },
+    {
+      "k": 1,
+      "query": "Mage updated in UI",
+      "expected_id": "563feb7fd1",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Video 3.2.1 - Various issues with Global Data Products",
+      "expected_id": "cc4481d2fa",
+      "success": false
+    },
+    {
+      "k": 1,
+      "query": "'Q6: Logged model artifacts lost when mlflow container is down or removed'",
+      "expected_id": "d94e5cc566",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Mage in Codespaces",
+      "expected_id": "74daf4433d",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Mage Time Series Bar Chart Not Showing",
+      "expected_id": "078039f4e3",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Where is the FAQ for Prefect questions?",
+      "expected_id": "841966c903",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'MLflow container error: Can''t locate revision identified by \u2026'",
+      "expected_id": "8231e2605d",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'Q6: Correct mlflow tracking uri'",
+      "expected_id": "0afee51849",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'prefect project init Error: No such command ''project''.'",
+      "expected_id": "3e58074bee",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'AttributeError: module ''mlflow'' has no attribute ''set_tracking_url'''",
+      "expected_id": "376ba649d7",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'Mage: Pipeline breaks with `[Errno 2] No such file or directory: ''/home/src/mage_data/{\u2026}",
+      "expected_id": "d317ebf313",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'Q6: mlflow not showing artifacts'",
+      "expected_id": "b88d825b12",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Mage in Codespaces in a subfolder under mlops-zoomcamp repository",
+      "expected_id": "ba50d9e0bc",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "How do you remove a global data product?",
+      "expected_id": "e2806ae236",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Why does MlflowClient no longer support list_experiments?",
+      "expected_id": "c1768edac2",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'Docker: Update docker-compose to initiate Mage'",
+      "expected_id": "60da2ce9c6",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Permission denied in GitHub Codespace",
+      "expected_id": "7100f168a2",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'Mage: data_exporter block not taking all outputs from previous transformer",
+      "expected_id": "1e05eabc5c",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Mage shortcut key to open Text Editor is not working on Windows",
+      "expected_id": "250d8d1c81",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Mage Dashboard on unit_3 is not showing charts",
+      "expected_id": "e065665622",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Hi, is it too late to start the course, I have ML experience?",
+      "expected_id": "dfb6836d0b",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'Course: How do I start?'",
+      "expected_id": "418e8948e7",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'OpenSource: I am using Groq, and it doesn''t provide a tokenizer library",
+      "expected_id": "fe8fed31e6",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "How to store and load API keys using .env file",
+      "expected_id": "233dabe430",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'OpenAI: How much will I have to spend to use the Open AI API?'",
+      "expected_id": "554d0eb78b",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'OpenAI: Error when running OpenAI chat.completions.create command'",
+      "expected_id": "f5df151c59",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'Authentication: Safe and easy way to store and load API keys'",
+      "expected_id": "8d23fe792f",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'OpenAI: Error: RateLimitError: Error code: 429 -'",
+      "expected_id": "152af39a53",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'minsearch: SyntaxError \"invalid character\" when running my downloaded",
+      "expected_id": "f3a92e7c81",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "ModuleNotFoundError on import docx in parse-faq.ipynb",
+      "expected_id": "cf93377279",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'OpenSource: Can I use Groq instead of OpenAI?'",
+      "expected_id": "ee43413718",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "How to set up a new dlt project when loading from cloud?",
+      "expected_id": "6bceeebf04",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Can I use the workshop materials for my own projects or share them with",
+      "expected_id": "d850a0e7ea",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'Notebook does not have secret access or 401 Client Error: Unauthorized",
+      "expected_id": "0dfba07ace",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "How do I know which tables are in the db?",
+      "expected_id": "e394e6f738",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'Error: How to fix requests library only installs v2.28 instead of v2.32",
+      "expected_id": "4b30b918bc",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'There is an error when opening the table using `dbtable = db.open_table(\"notion_pages___homework\")`:",
+      "expected_id": "0407213397",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Does DLT have connectors to ClickHouse or StarRocks?",
+      "expected_id": "cd19f122f3",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'There is an error when running main(): FileNotFoundError: Table notion_pages___homework",
+      "expected_id": "e95bfafc0e",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'Agents: \"RuntimeError: Already running asyncio in this thread\" when calling",
+      "expected_id": "7c4e1a3b58",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'How to Solve \"RuntimeError: Already running asyncio in this thread\"'",
+      "expected_id": "f96fde1726",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Inspect MCP Server",
+      "expected_id": "9c2fd5451c",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Install MCP Inspector",
+      "expected_id": "d09e8d4843",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Any free models with tool use support?",
+      "expected_id": "0d74a3616f",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'Agents: \"AttributeError: ''str'' object has no attribute ''output''\" when",
+      "expected_id": "9e7b3f0c25",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "I passed a float to my tool, but got a validation error saying it expected",
+      "expected_id": "5beafdd0c8",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'I am using Azure OpenAI and I am still getting an error of Error code:",
+      "expected_id": "b9c7c6bb34",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Connection refused error on prompting the ollam RAG?",
+      "expected_id": "c6fc2d4d11",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Is it a group project?",
+      "expected_id": "0a7c21fee9",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "How is my capstone project going to be evaluated?",
+      "expected_id": "b6c7eb17d8",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'AWS: Suggestions'",
+      "expected_id": "11a7ea6c2c",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Use uv as a package manager",
+      "expected_id": "fd2cad423e",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "X has 526 features, but expecting 525 features",
+      "expected_id": "e8dbc40d0c",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "IBM Cloud an alternative for AWS",
+      "expected_id": "1fa4030823",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'.gitignore: how-to'",
+      "expected_id": "bcd4190972",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'AWS EC2: How do I handle changing IP addresses on restart?'",
+      "expected_id": "cf068009f1",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Slightly different RMSE",
+      "expected_id": "663dda52c8",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Launching Jupyter notebook from codespace VM",
+      "expected_id": "1b29ba4c54",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "My connection to my GCP VM instance keeps timing out when I try to connect",
+      "expected_id": "c670950570",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Replacing NaNs for pickup location and drop off location with -1 for One-Hot",
+      "expected_id": "63fb307920",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Kernel getting killed during assignment tasks on local",
+      "expected_id": "108295493e",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Reading parquet files with Pandas (pyarrow dependency)",
+      "expected_id": "a55ee615db",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "RMSE on test set too high",
+      "expected_id": "886fddb311",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Unprotected private key file!",
+      "expected_id": "e04431f782",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Opening Jupyter in VSCode",
+      "expected_id": "cd806dd7d0",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'Git: Created repo without .gitignore'",
+      "expected_id": "2383fdd2f6",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "'WSL: instructions'",
+      "expected_id": "23ed7bdf10",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "AWS EC2 instance constantly drops SSH connection",
+      "expected_id": "af5f29b64f",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "Missing dependencies",
+      "expected_id": "1695e67099",
+      "success": true
+    },
+    {
+      "k": 1,
+      "query": "The feature size is different for training set and validation set",
+      "expected_id": "3f9286329a",
+      "success": false
+    },
+    {
+      "k": 1,
+      "query": "Distplot takes too long",
+      "expected_id": "2d1c6920b6",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "I missed the first homework - can I still get a certificate?",
+      "expected_id": "9f689c185f",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Cloud alternatives with GPU",
+      "expected_id": "c6c2888275",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'WSL2: ResponseError: model requires more system memory (X.X GiB) than is",
+      "expected_id": "f3dd94f323",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'Leaderboard: I am not on the leaderboard / how do I know which one I am",
+      "expected_id": "c2903069a0",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'Project: do I need an orchestration tool (Airflow, Mage, Kestra) for the",
+      "expected_id": "d4f7c08ea1",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Do we submit 2 projects, what does attempt 1 and 2 mean?",
+      "expected_id": "d5fc98925d",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "I\u2019ve already submitted my project. Why can\u2019t I review any projects?",
+      "expected_id": "a8a7fef016",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'Project: my corpus is large (long PDFs, many paragraphs). What''s a good",
+      "expected_id": "6f2a8b3d10",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "How is my capstone project going to be evaluated?",
+      "expected_id": "9a2e2d2008",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'Project: what does \"reproducibility\" mean \u2014 do reviewers need access to",
+      "expected_id": "e5d8a2c761",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Does the competition count as the capstone?",
+      "expected_id": "e892d44e42",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'Project: how do I evaluate a recommender-style RAG (no obvious Q&A ground",
+      "expected_id": "9b0e2d6a47",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Is it a group project?",
+      "expected_id": "0fab61eca2",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "How can I find some good ideas or datasets for the project?",
+      "expected_id": "e76a70cde3",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "When and how will we be assigned projects for review/grading?",
+      "expected_id": "eae0fb50aa",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'OpenAI: Error: ''Cannot import name OpenAI from openai''; How to fix?'",
+      "expected_id": "35e1ef85a1",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'OpenAI: Why does my token count differ from what OpenAI reports?'",
+      "expected_id": "bf0403d21b",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Why are we not using Langchain in the course?",
+      "expected_id": "b7cdde6b25",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'OpenSource: Can I use open-source alternatives to OpenAI API?'",
+      "expected_id": "3fd5c51182",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'Ollama: How to install Ollama?'",
+      "expected_id": "1d0b969028",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'How do I count tokens for a non-OpenAI model (Gemini, Mistral, HuggingFace)?'",
+      "expected_id": "4d8c1f5b3a",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'Authentication: Why is my OPENAI_API_KEY not found in the Jupyter notebook?'",
+      "expected_id": "86d99bbf21",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'OpenAI: \"RateLimitError 429 / insufficient_quota\" \u2014 my account has no credit'",
+      "expected_id": "6e1d8a7b29",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'API keys: how do I set them once and not re-export every terminal?'",
+      "expected_id": "8b2f5e9d04",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'OpenAI: Do I have to subscribe and pay for Open AI API for this course?'",
+      "expected_id": "85384a18e5",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'Homework: Returning Empty list after filtering my query (HW Q3)'",
+      "expected_id": "83da208a64",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'Error: TypeError: string indices must be integers'",
+      "expected_id": "fa12df76a7",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "(root) Additional property mlflow is not allowed",
+      "expected_id": "7deae3a8eb",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'Video 3.3.4: Training Metrics RMSE chart does not show due to the error:",
+      "expected_id": "b3fe59d431",
+      "success": false
+    },
+    {
+      "k": 3,
+      "query": "Mage updated in UI",
+      "expected_id": "563feb7fd1",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Video 3.2.1 - Various issues with Global Data Products",
+      "expected_id": "cc4481d2fa",
+      "success": false
+    },
+    {
+      "k": 3,
+      "query": "'Q6: Logged model artifacts lost when mlflow container is down or removed'",
+      "expected_id": "d94e5cc566",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Mage in Codespaces",
+      "expected_id": "74daf4433d",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Mage Time Series Bar Chart Not Showing",
+      "expected_id": "078039f4e3",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Where is the FAQ for Prefect questions?",
+      "expected_id": "841966c903",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'MLflow container error: Can''t locate revision identified by \u2026'",
+      "expected_id": "8231e2605d",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'Q6: Correct mlflow tracking uri'",
+      "expected_id": "0afee51849",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'prefect project init Error: No such command ''project''.'",
+      "expected_id": "3e58074bee",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'AttributeError: module ''mlflow'' has no attribute ''set_tracking_url'''",
+      "expected_id": "376ba649d7",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'Mage: Pipeline breaks with `[Errno 2] No such file or directory: ''/home/src/mage_data/{\u2026}",
+      "expected_id": "d317ebf313",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'Q6: mlflow not showing artifacts'",
+      "expected_id": "b88d825b12",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Mage in Codespaces in a subfolder under mlops-zoomcamp repository",
+      "expected_id": "ba50d9e0bc",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "How do you remove a global data product?",
+      "expected_id": "e2806ae236",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Why does MlflowClient no longer support list_experiments?",
+      "expected_id": "c1768edac2",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'Docker: Update docker-compose to initiate Mage'",
+      "expected_id": "60da2ce9c6",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Permission denied in GitHub Codespace",
+      "expected_id": "7100f168a2",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'Mage: data_exporter block not taking all outputs from previous transformer",
+      "expected_id": "1e05eabc5c",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Mage shortcut key to open Text Editor is not working on Windows",
+      "expected_id": "250d8d1c81",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Mage Dashboard on unit_3 is not showing charts",
+      "expected_id": "e065665622",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Hi, is it too late to start the course, I have ML experience?",
+      "expected_id": "dfb6836d0b",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'Course: How do I start?'",
+      "expected_id": "418e8948e7",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'OpenSource: I am using Groq, and it doesn''t provide a tokenizer library",
+      "expected_id": "fe8fed31e6",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "How to store and load API keys using .env file",
+      "expected_id": "233dabe430",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'OpenAI: How much will I have to spend to use the Open AI API?'",
+      "expected_id": "554d0eb78b",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'OpenAI: Error when running OpenAI chat.completions.create command'",
+      "expected_id": "f5df151c59",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'Authentication: Safe and easy way to store and load API keys'",
+      "expected_id": "8d23fe792f",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'OpenAI: Error: RateLimitError: Error code: 429 -'",
+      "expected_id": "152af39a53",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'minsearch: SyntaxError \"invalid character\" when running my downloaded",
+      "expected_id": "f3a92e7c81",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "ModuleNotFoundError on import docx in parse-faq.ipynb",
+      "expected_id": "cf93377279",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'OpenSource: Can I use Groq instead of OpenAI?'",
+      "expected_id": "ee43413718",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "How to set up a new dlt project when loading from cloud?",
+      "expected_id": "6bceeebf04",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Can I use the workshop materials for my own projects or share them with",
+      "expected_id": "d850a0e7ea",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'Notebook does not have secret access or 401 Client Error: Unauthorized",
+      "expected_id": "0dfba07ace",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "How do I know which tables are in the db?",
+      "expected_id": "e394e6f738",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'Error: How to fix requests library only installs v2.28 instead of v2.32",
+      "expected_id": "4b30b918bc",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'There is an error when opening the table using `dbtable = db.open_table(\"notion_pages___homework\")`:",
+      "expected_id": "0407213397",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Does DLT have connectors to ClickHouse or StarRocks?",
+      "expected_id": "cd19f122f3",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'There is an error when running main(): FileNotFoundError: Table notion_pages___homework",
+      "expected_id": "e95bfafc0e",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'Agents: \"RuntimeError: Already running asyncio in this thread\" when calling",
+      "expected_id": "7c4e1a3b58",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'How to Solve \"RuntimeError: Already running asyncio in this thread\"'",
+      "expected_id": "f96fde1726",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Inspect MCP Server",
+      "expected_id": "9c2fd5451c",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Install MCP Inspector",
+      "expected_id": "d09e8d4843",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Any free models with tool use support?",
+      "expected_id": "0d74a3616f",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'Agents: \"AttributeError: ''str'' object has no attribute ''output''\" when",
+      "expected_id": "9e7b3f0c25",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "I passed a float to my tool, but got a validation error saying it expected",
+      "expected_id": "5beafdd0c8",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'I am using Azure OpenAI and I am still getting an error of Error code:",
+      "expected_id": "b9c7c6bb34",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Connection refused error on prompting the ollam RAG?",
+      "expected_id": "c6fc2d4d11",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Is it a group project?",
+      "expected_id": "0a7c21fee9",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "How is my capstone project going to be evaluated?",
+      "expected_id": "b6c7eb17d8",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'AWS: Suggestions'",
+      "expected_id": "11a7ea6c2c",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Use uv as a package manager",
+      "expected_id": "fd2cad423e",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "X has 526 features, but expecting 525 features",
+      "expected_id": "e8dbc40d0c",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "IBM Cloud an alternative for AWS",
+      "expected_id": "1fa4030823",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'.gitignore: how-to'",
+      "expected_id": "bcd4190972",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'AWS EC2: How do I handle changing IP addresses on restart?'",
+      "expected_id": "cf068009f1",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Slightly different RMSE",
+      "expected_id": "663dda52c8",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Launching Jupyter notebook from codespace VM",
+      "expected_id": "1b29ba4c54",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "My connection to my GCP VM instance keeps timing out when I try to connect",
+      "expected_id": "c670950570",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Replacing NaNs for pickup location and drop off location with -1 for One-Hot",
+      "expected_id": "63fb307920",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Kernel getting killed during assignment tasks on local",
+      "expected_id": "108295493e",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Reading parquet files with Pandas (pyarrow dependency)",
+      "expected_id": "a55ee615db",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "RMSE on test set too high",
+      "expected_id": "886fddb311",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Unprotected private key file!",
+      "expected_id": "e04431f782",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Opening Jupyter in VSCode",
+      "expected_id": "cd806dd7d0",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'Git: Created repo without .gitignore'",
+      "expected_id": "2383fdd2f6",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "'WSL: instructions'",
+      "expected_id": "23ed7bdf10",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "AWS EC2 instance constantly drops SSH connection",
+      "expected_id": "af5f29b64f",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "Missing dependencies",
+      "expected_id": "1695e67099",
+      "success": true
+    },
+    {
+      "k": 3,
+      "query": "The feature size is different for training set and validation set",
+      "expected_id": "3f9286329a",
+      "success": false
+    },
+    {
+      "k": 3,
+      "query": "Distplot takes too long",
+      "expected_id": "2d1c6920b6",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "I missed the first homework - can I still get a certificate?",
+      "expected_id": "9f689c185f",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Cloud alternatives with GPU",
+      "expected_id": "c6c2888275",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'WSL2: ResponseError: model requires more system memory (X.X GiB) than is",
+      "expected_id": "f3dd94f323",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'Leaderboard: I am not on the leaderboard / how do I know which one I am",
+      "expected_id": "c2903069a0",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'Project: do I need an orchestration tool (Airflow, Mage, Kestra) for the",
+      "expected_id": "d4f7c08ea1",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Do we submit 2 projects, what does attempt 1 and 2 mean?",
+      "expected_id": "d5fc98925d",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "I\u2019ve already submitted my project. Why can\u2019t I review any projects?",
+      "expected_id": "a8a7fef016",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'Project: my corpus is large (long PDFs, many paragraphs). What''s a good",
+      "expected_id": "6f2a8b3d10",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "How is my capstone project going to be evaluated?",
+      "expected_id": "9a2e2d2008",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'Project: what does \"reproducibility\" mean \u2014 do reviewers need access to",
+      "expected_id": "e5d8a2c761",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Does the competition count as the capstone?",
+      "expected_id": "e892d44e42",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'Project: how do I evaluate a recommender-style RAG (no obvious Q&A ground",
+      "expected_id": "9b0e2d6a47",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Is it a group project?",
+      "expected_id": "0fab61eca2",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "How can I find some good ideas or datasets for the project?",
+      "expected_id": "e76a70cde3",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "When and how will we be assigned projects for review/grading?",
+      "expected_id": "eae0fb50aa",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'OpenAI: Error: ''Cannot import name OpenAI from openai''; How to fix?'",
+      "expected_id": "35e1ef85a1",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'OpenAI: Why does my token count differ from what OpenAI reports?'",
+      "expected_id": "bf0403d21b",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Why are we not using Langchain in the course?",
+      "expected_id": "b7cdde6b25",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'OpenSource: Can I use open-source alternatives to OpenAI API?'",
+      "expected_id": "3fd5c51182",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'Ollama: How to install Ollama?'",
+      "expected_id": "1d0b969028",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'How do I count tokens for a non-OpenAI model (Gemini, Mistral, HuggingFace)?'",
+      "expected_id": "4d8c1f5b3a",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'Authentication: Why is my OPENAI_API_KEY not found in the Jupyter notebook?'",
+      "expected_id": "86d99bbf21",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'OpenAI: \"RateLimitError 429 / insufficient_quota\" \u2014 my account has no credit'",
+      "expected_id": "6e1d8a7b29",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'API keys: how do I set them once and not re-export every terminal?'",
+      "expected_id": "8b2f5e9d04",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'OpenAI: Do I have to subscribe and pay for Open AI API for this course?'",
+      "expected_id": "85384a18e5",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'Homework: Returning Empty list after filtering my query (HW Q3)'",
+      "expected_id": "83da208a64",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'Error: TypeError: string indices must be integers'",
+      "expected_id": "fa12df76a7",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "(root) Additional property mlflow is not allowed",
+      "expected_id": "7deae3a8eb",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'Video 3.3.4: Training Metrics RMSE chart does not show due to the error:",
+      "expected_id": "b3fe59d431",
+      "success": false
+    },
+    {
+      "k": 5,
+      "query": "Mage updated in UI",
+      "expected_id": "563feb7fd1",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Video 3.2.1 - Various issues with Global Data Products",
+      "expected_id": "cc4481d2fa",
+      "success": false
+    },
+    {
+      "k": 5,
+      "query": "'Q6: Logged model artifacts lost when mlflow container is down or removed'",
+      "expected_id": "d94e5cc566",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Mage in Codespaces",
+      "expected_id": "74daf4433d",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Mage Time Series Bar Chart Not Showing",
+      "expected_id": "078039f4e3",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Where is the FAQ for Prefect questions?",
+      "expected_id": "841966c903",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'MLflow container error: Can''t locate revision identified by \u2026'",
+      "expected_id": "8231e2605d",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'Q6: Correct mlflow tracking uri'",
+      "expected_id": "0afee51849",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'prefect project init Error: No such command ''project''.'",
+      "expected_id": "3e58074bee",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'AttributeError: module ''mlflow'' has no attribute ''set_tracking_url'''",
+      "expected_id": "376ba649d7",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'Mage: Pipeline breaks with `[Errno 2] No such file or directory: ''/home/src/mage_data/{\u2026}",
+      "expected_id": "d317ebf313",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'Q6: mlflow not showing artifacts'",
+      "expected_id": "b88d825b12",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Mage in Codespaces in a subfolder under mlops-zoomcamp repository",
+      "expected_id": "ba50d9e0bc",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "How do you remove a global data product?",
+      "expected_id": "e2806ae236",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Why does MlflowClient no longer support list_experiments?",
+      "expected_id": "c1768edac2",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'Docker: Update docker-compose to initiate Mage'",
+      "expected_id": "60da2ce9c6",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Permission denied in GitHub Codespace",
+      "expected_id": "7100f168a2",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'Mage: data_exporter block not taking all outputs from previous transformer",
+      "expected_id": "1e05eabc5c",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Mage shortcut key to open Text Editor is not working on Windows",
+      "expected_id": "250d8d1c81",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Mage Dashboard on unit_3 is not showing charts",
+      "expected_id": "e065665622",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Hi, is it too late to start the course, I have ML experience?",
+      "expected_id": "dfb6836d0b",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'Course: How do I start?'",
+      "expected_id": "418e8948e7",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'OpenSource: I am using Groq, and it doesn''t provide a tokenizer library",
+      "expected_id": "fe8fed31e6",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "How to store and load API keys using .env file",
+      "expected_id": "233dabe430",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'OpenAI: How much will I have to spend to use the Open AI API?'",
+      "expected_id": "554d0eb78b",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'OpenAI: Error when running OpenAI chat.completions.create command'",
+      "expected_id": "f5df151c59",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'Authentication: Safe and easy way to store and load API keys'",
+      "expected_id": "8d23fe792f",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'OpenAI: Error: RateLimitError: Error code: 429 -'",
+      "expected_id": "152af39a53",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'minsearch: SyntaxError \"invalid character\" when running my downloaded",
+      "expected_id": "f3a92e7c81",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "ModuleNotFoundError on import docx in parse-faq.ipynb",
+      "expected_id": "cf93377279",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'OpenSource: Can I use Groq instead of OpenAI?'",
+      "expected_id": "ee43413718",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "How to set up a new dlt project when loading from cloud?",
+      "expected_id": "6bceeebf04",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Can I use the workshop materials for my own projects or share them with",
+      "expected_id": "d850a0e7ea",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'Notebook does not have secret access or 401 Client Error: Unauthorized",
+      "expected_id": "0dfba07ace",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "How do I know which tables are in the db?",
+      "expected_id": "e394e6f738",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'Error: How to fix requests library only installs v2.28 instead of v2.32",
+      "expected_id": "4b30b918bc",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'There is an error when opening the table using `dbtable = db.open_table(\"notion_pages___homework\")`:",
+      "expected_id": "0407213397",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Does DLT have connectors to ClickHouse or StarRocks?",
+      "expected_id": "cd19f122f3",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'There is an error when running main(): FileNotFoundError: Table notion_pages___homework",
+      "expected_id": "e95bfafc0e",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'Agents: \"RuntimeError: Already running asyncio in this thread\" when calling",
+      "expected_id": "7c4e1a3b58",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'How to Solve \"RuntimeError: Already running asyncio in this thread\"'",
+      "expected_id": "f96fde1726",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Inspect MCP Server",
+      "expected_id": "9c2fd5451c",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Install MCP Inspector",
+      "expected_id": "d09e8d4843",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Any free models with tool use support?",
+      "expected_id": "0d74a3616f",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'Agents: \"AttributeError: ''str'' object has no attribute ''output''\" when",
+      "expected_id": "9e7b3f0c25",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "I passed a float to my tool, but got a validation error saying it expected",
+      "expected_id": "5beafdd0c8",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'I am using Azure OpenAI and I am still getting an error of Error code:",
+      "expected_id": "b9c7c6bb34",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Connection refused error on prompting the ollam RAG?",
+      "expected_id": "c6fc2d4d11",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Is it a group project?",
+      "expected_id": "0a7c21fee9",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "How is my capstone project going to be evaluated?",
+      "expected_id": "b6c7eb17d8",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'AWS: Suggestions'",
+      "expected_id": "11a7ea6c2c",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Use uv as a package manager",
+      "expected_id": "fd2cad423e",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "X has 526 features, but expecting 525 features",
+      "expected_id": "e8dbc40d0c",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "IBM Cloud an alternative for AWS",
+      "expected_id": "1fa4030823",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'.gitignore: how-to'",
+      "expected_id": "bcd4190972",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'AWS EC2: How do I handle changing IP addresses on restart?'",
+      "expected_id": "cf068009f1",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Slightly different RMSE",
+      "expected_id": "663dda52c8",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Launching Jupyter notebook from codespace VM",
+      "expected_id": "1b29ba4c54",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "My connection to my GCP VM instance keeps timing out when I try to connect",
+      "expected_id": "c670950570",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Replacing NaNs for pickup location and drop off location with -1 for One-Hot",
+      "expected_id": "63fb307920",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Kernel getting killed during assignment tasks on local",
+      "expected_id": "108295493e",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Reading parquet files with Pandas (pyarrow dependency)",
+      "expected_id": "a55ee615db",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "RMSE on test set too high",
+      "expected_id": "886fddb311",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Unprotected private key file!",
+      "expected_id": "e04431f782",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Opening Jupyter in VSCode",
+      "expected_id": "cd806dd7d0",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'Git: Created repo without .gitignore'",
+      "expected_id": "2383fdd2f6",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "'WSL: instructions'",
+      "expected_id": "23ed7bdf10",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "AWS EC2 instance constantly drops SSH connection",
+      "expected_id": "af5f29b64f",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "Missing dependencies",
+      "expected_id": "1695e67099",
+      "success": true
+    },
+    {
+      "k": 5,
+      "query": "The feature size is different for training set and validation set",
+      "expected_id": "3f9286329a",
+      "success": false
+    },
+    {
+      "k": 5,
+      "query": "Distplot takes too long",
+      "expected_id": "2d1c6920b6",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "I missed the first homework - can I still get a certificate?",
+      "expected_id": "9f689c185f",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Cloud alternatives with GPU",
+      "expected_id": "c6c2888275",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'WSL2: ResponseError: model requires more system memory (X.X GiB) than is",
+      "expected_id": "f3dd94f323",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'Leaderboard: I am not on the leaderboard / how do I know which one I am",
+      "expected_id": "c2903069a0",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'Project: do I need an orchestration tool (Airflow, Mage, Kestra) for the",
+      "expected_id": "d4f7c08ea1",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Do we submit 2 projects, what does attempt 1 and 2 mean?",
+      "expected_id": "d5fc98925d",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "I\u2019ve already submitted my project. Why can\u2019t I review any projects?",
+      "expected_id": "a8a7fef016",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'Project: my corpus is large (long PDFs, many paragraphs). What''s a good",
+      "expected_id": "6f2a8b3d10",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "How is my capstone project going to be evaluated?",
+      "expected_id": "9a2e2d2008",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'Project: what does \"reproducibility\" mean \u2014 do reviewers need access to",
+      "expected_id": "e5d8a2c761",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Does the competition count as the capstone?",
+      "expected_id": "e892d44e42",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'Project: how do I evaluate a recommender-style RAG (no obvious Q&A ground",
+      "expected_id": "9b0e2d6a47",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Is it a group project?",
+      "expected_id": "0fab61eca2",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "How can I find some good ideas or datasets for the project?",
+      "expected_id": "e76a70cde3",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "When and how will we be assigned projects for review/grading?",
+      "expected_id": "eae0fb50aa",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'OpenAI: Error: ''Cannot import name OpenAI from openai''; How to fix?'",
+      "expected_id": "35e1ef85a1",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'OpenAI: Why does my token count differ from what OpenAI reports?'",
+      "expected_id": "bf0403d21b",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Why are we not using Langchain in the course?",
+      "expected_id": "b7cdde6b25",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'OpenSource: Can I use open-source alternatives to OpenAI API?'",
+      "expected_id": "3fd5c51182",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'Ollama: How to install Ollama?'",
+      "expected_id": "1d0b969028",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'How do I count tokens for a non-OpenAI model (Gemini, Mistral, HuggingFace)?'",
+      "expected_id": "4d8c1f5b3a",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'Authentication: Why is my OPENAI_API_KEY not found in the Jupyter notebook?'",
+      "expected_id": "86d99bbf21",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'OpenAI: \"RateLimitError 429 / insufficient_quota\" \u2014 my account has no credit'",
+      "expected_id": "6e1d8a7b29",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'API keys: how do I set them once and not re-export every terminal?'",
+      "expected_id": "8b2f5e9d04",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'OpenAI: Do I have to subscribe and pay for Open AI API for this course?'",
+      "expected_id": "85384a18e5",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'Homework: Returning Empty list after filtering my query (HW Q3)'",
+      "expected_id": "83da208a64",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'Error: TypeError: string indices must be integers'",
+      "expected_id": "fa12df76a7",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "(root) Additional property mlflow is not allowed",
+      "expected_id": "7deae3a8eb",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'Video 3.3.4: Training Metrics RMSE chart does not show due to the error:",
+      "expected_id": "b3fe59d431",
+      "success": false
+    },
+    {
+      "k": 10,
+      "query": "Mage updated in UI",
+      "expected_id": "563feb7fd1",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Video 3.2.1 - Various issues with Global Data Products",
+      "expected_id": "cc4481d2fa",
+      "success": false
+    },
+    {
+      "k": 10,
+      "query": "'Q6: Logged model artifacts lost when mlflow container is down or removed'",
+      "expected_id": "d94e5cc566",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Mage in Codespaces",
+      "expected_id": "74daf4433d",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Mage Time Series Bar Chart Not Showing",
+      "expected_id": "078039f4e3",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Where is the FAQ for Prefect questions?",
+      "expected_id": "841966c903",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'MLflow container error: Can''t locate revision identified by \u2026'",
+      "expected_id": "8231e2605d",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'Q6: Correct mlflow tracking uri'",
+      "expected_id": "0afee51849",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'prefect project init Error: No such command ''project''.'",
+      "expected_id": "3e58074bee",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'AttributeError: module ''mlflow'' has no attribute ''set_tracking_url'''",
+      "expected_id": "376ba649d7",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'Mage: Pipeline breaks with `[Errno 2] No such file or directory: ''/home/src/mage_data/{\u2026}",
+      "expected_id": "d317ebf313",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'Q6: mlflow not showing artifacts'",
+      "expected_id": "b88d825b12",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Mage in Codespaces in a subfolder under mlops-zoomcamp repository",
+      "expected_id": "ba50d9e0bc",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "How do you remove a global data product?",
+      "expected_id": "e2806ae236",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Why does MlflowClient no longer support list_experiments?",
+      "expected_id": "c1768edac2",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'Docker: Update docker-compose to initiate Mage'",
+      "expected_id": "60da2ce9c6",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Permission denied in GitHub Codespace",
+      "expected_id": "7100f168a2",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'Mage: data_exporter block not taking all outputs from previous transformer",
+      "expected_id": "1e05eabc5c",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Mage shortcut key to open Text Editor is not working on Windows",
+      "expected_id": "250d8d1c81",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Mage Dashboard on unit_3 is not showing charts",
+      "expected_id": "e065665622",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Hi, is it too late to start the course, I have ML experience?",
+      "expected_id": "dfb6836d0b",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'Course: How do I start?'",
+      "expected_id": "418e8948e7",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'OpenSource: I am using Groq, and it doesn''t provide a tokenizer library",
+      "expected_id": "fe8fed31e6",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "How to store and load API keys using .env file",
+      "expected_id": "233dabe430",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'OpenAI: How much will I have to spend to use the Open AI API?'",
+      "expected_id": "554d0eb78b",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'OpenAI: Error when running OpenAI chat.completions.create command'",
+      "expected_id": "f5df151c59",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'Authentication: Safe and easy way to store and load API keys'",
+      "expected_id": "8d23fe792f",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'OpenAI: Error: RateLimitError: Error code: 429 -'",
+      "expected_id": "152af39a53",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'minsearch: SyntaxError \"invalid character\" when running my downloaded",
+      "expected_id": "f3a92e7c81",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "ModuleNotFoundError on import docx in parse-faq.ipynb",
+      "expected_id": "cf93377279",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'OpenSource: Can I use Groq instead of OpenAI?'",
+      "expected_id": "ee43413718",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "How to set up a new dlt project when loading from cloud?",
+      "expected_id": "6bceeebf04",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Can I use the workshop materials for my own projects or share them with",
+      "expected_id": "d850a0e7ea",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'Notebook does not have secret access or 401 Client Error: Unauthorized",
+      "expected_id": "0dfba07ace",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "How do I know which tables are in the db?",
+      "expected_id": "e394e6f738",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'Error: How to fix requests library only installs v2.28 instead of v2.32",
+      "expected_id": "4b30b918bc",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'There is an error when opening the table using `dbtable = db.open_table(\"notion_pages___homework\")`:",
+      "expected_id": "0407213397",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Does DLT have connectors to ClickHouse or StarRocks?",
+      "expected_id": "cd19f122f3",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'There is an error when running main(): FileNotFoundError: Table notion_pages___homework",
+      "expected_id": "e95bfafc0e",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'Agents: \"RuntimeError: Already running asyncio in this thread\" when calling",
+      "expected_id": "7c4e1a3b58",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'How to Solve \"RuntimeError: Already running asyncio in this thread\"'",
+      "expected_id": "f96fde1726",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Inspect MCP Server",
+      "expected_id": "9c2fd5451c",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Install MCP Inspector",
+      "expected_id": "d09e8d4843",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Any free models with tool use support?",
+      "expected_id": "0d74a3616f",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'Agents: \"AttributeError: ''str'' object has no attribute ''output''\" when",
+      "expected_id": "9e7b3f0c25",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "I passed a float to my tool, but got a validation error saying it expected",
+      "expected_id": "5beafdd0c8",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'I am using Azure OpenAI and I am still getting an error of Error code:",
+      "expected_id": "b9c7c6bb34",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Connection refused error on prompting the ollam RAG?",
+      "expected_id": "c6fc2d4d11",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Is it a group project?",
+      "expected_id": "0a7c21fee9",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "How is my capstone project going to be evaluated?",
+      "expected_id": "b6c7eb17d8",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'AWS: Suggestions'",
+      "expected_id": "11a7ea6c2c",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Use uv as a package manager",
+      "expected_id": "fd2cad423e",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "X has 526 features, but expecting 525 features",
+      "expected_id": "e8dbc40d0c",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "IBM Cloud an alternative for AWS",
+      "expected_id": "1fa4030823",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'.gitignore: how-to'",
+      "expected_id": "bcd4190972",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'AWS EC2: How do I handle changing IP addresses on restart?'",
+      "expected_id": "cf068009f1",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Slightly different RMSE",
+      "expected_id": "663dda52c8",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Launching Jupyter notebook from codespace VM",
+      "expected_id": "1b29ba4c54",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "My connection to my GCP VM instance keeps timing out when I try to connect",
+      "expected_id": "c670950570",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Replacing NaNs for pickup location and drop off location with -1 for One-Hot",
+      "expected_id": "63fb307920",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Kernel getting killed during assignment tasks on local",
+      "expected_id": "108295493e",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Reading parquet files with Pandas (pyarrow dependency)",
+      "expected_id": "a55ee615db",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "RMSE on test set too high",
+      "expected_id": "886fddb311",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Unprotected private key file!",
+      "expected_id": "e04431f782",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Opening Jupyter in VSCode",
+      "expected_id": "cd806dd7d0",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'Git: Created repo without .gitignore'",
+      "expected_id": "2383fdd2f6",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "'WSL: instructions'",
+      "expected_id": "23ed7bdf10",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "AWS EC2 instance constantly drops SSH connection",
+      "expected_id": "af5f29b64f",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "Missing dependencies",
+      "expected_id": "1695e67099",
+      "success": true
+    },
+    {
+      "k": 10,
+      "query": "The feature size is different for training set and validation set",
+      "expected_id": "3f9286329a",
+      "success": false
+    },
+    {
+      "k": 10,
+      "query": "Distplot takes too long",
+      "expected_id": "2d1c6920b6",
+      "success": true
+    }
+  ]
+}

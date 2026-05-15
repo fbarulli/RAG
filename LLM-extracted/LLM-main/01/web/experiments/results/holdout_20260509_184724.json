@@ -1,0 +1,29 @@
+{
+  "metadata": {
+    "description": "Holdout evaluation with semantic matching",
+    "similarity_threshold": 0.85,
+    "train_size": 922,
+    "test_size": 228,
+    "timestamp": "2026-05-09T18:47:24.067599"
+  },
+  "results": {
+    "bm25": {
+      "exact_matches": 0,
+      "similar_matches": 8,
+      "p50_latency": 6.3,
+      "p95_latency": 9.7
+    },
+    "vector": {
+      "exact_matches": 0,
+      "similar_matches": 8,
+      "p50_latency": 6.9,
+      "p95_latency": 9.7
+    },
+    "qdrant": {
+      "exact_matches": 0,
+      "similar_matches": 8,
+      "p50_latency": 6.3,
+      "p95_latency": 13.5
+    }
+  }
+}

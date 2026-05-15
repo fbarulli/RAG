@@ -1,0 +1,912 @@
+subset,query,expected_id,found_id,judge_any_yes,judge_verdicts,judged_rank,reasoning,raw_response,raw_len,verdict_count_raw
+,Using a docker image as development environment (Linux),866d3bbbed,81c82a4875,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1: This context directly answers the question by providing information on how to use a Docker image as a development environment in Linux.
+Context 2: This context does not directly answer the question, but rather provides a solution to a specific issue related to building a Docker image.
+Context 3: This context does not directly answer the question, but rather provides a solution to a specific issue related to running a Docker image.
+Context 4: This context does not directly answer the q","Context 1: This context directly answers the question by providing information on how to use a Docker image as a development environment in Linux.
+Context 2: This context does not directly answer the question, but rather provides a solution to a specific issue related to building a Docker image.
+Context 3: This context does not directly answer the question, but rather provides a solution to a specific issue related to running a Docker image.
+Context 4: This context does not directly answer the q",772,9
+,What can I do before the course starts?,33fc260cd8,068529125b,True,"['NO', 'NO', 'NO', 'NO', 'YES']",5,"Context 1 does not directly answer the question because it discusses what to do after the course finishes, not before it starts.
+Context 2 does not directly answer the question because it discusses the homework submission process, not preparation before the course starts.
+Context 3 does not directly answer the question because it discusses the registration process and eligibility to submit homework, not preparation before the course starts.
+Context 4 does not directly answer the question because","Context 1 does not directly answer the question because it discusses what to do after the course finishes, not before it starts.
+Context 2 does not directly answer the question because it discusses the homework submission process, not preparation before the course starts.
+Context 3 does not directly answer the question because it discusses the registration process and eligibility to submit homework, not preparation before the course starts.
+Context 4 does not directly answer the question because",789,13
+,Getting the same result,cee7450404,186ed3fc35,False,"['NO', 'NO', 'NO', 'NO', 'NO']",,,"['NO', 'NO', 'NO', 'NO', 'NO']",30,5
+,Homework Q1 is not clear to me. What do I do here?,1b89887a15,186ed3fc35,False,"['NO', 'NO', 'NO', 'NO', 'NO']",,,"['NO', 'NO', 'NO', 'NO', 'NO']
+
+Context 1 does not address the issue of unclear homework Q1, it only provides a general advice.
+Context 2 provides a solution to a different problem and does not address the unclear homework Q1.
+Context 3 discusses a different issue of environment differences and does not address the unclear homework Q1.
+Context 4 talks about submitting homework and does not address the unclear homework Q1.
+Context 5 is unrelated to the question and only provides a general request",501,9
+,Features in scikit-learn?,24713fbf0d,c928a85179,True,"['NO', 'NO', 'YES', 'NO', 'NO']",3,"Context 1: This context does not directly answer the question about features in scikit-learn, but rather provides a solution to a warning related to feature names. 
+Context 2: This context does not directly answer the question about features in scikit-learn, but rather provides a solution to a different problem. 
+Context 3: This context directly answers the question about features in scikit-learn by explaining how to get feature names using DictVectorizer. 
+Context 4: This context does not direc","Context 1: This context does not directly answer the question about features in scikit-learn, but rather provides a solution to a warning related to feature names. 
+Context 2: This context does not directly answer the question about features in scikit-learn, but rather provides a solution to a different problem. 
+Context 3: This context directly answers the question about features in scikit-learn by explaining how to get feature names using DictVectorizer. 
+Context 4: This context does not direc",817,9
+,'Why do I get a “ValueError: The truth value of a DataFrame is ambiguous.,2eb2863faf,2eb2863faf,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it provides a solution to the error by suggesting a comparison method for DataFrames.
+
+Context 2 does not directly answer the question because it discusses a different error related to Boto3 and Docker Compose.
+
+Context 3 does not directly answer the question because it talks about certificate requirements for a course, which is unrelated to the error.
+
+Context 4 does not directly answer the question because it mentions a different error related to","Context 1 directly answers the question because it provides a solution to the error by suggesting a comparison method for DataFrames.
+
+Context 2 does not directly answer the question because it discusses a different error related to Boto3 and Docker Compose.
+
+Context 3 does not directly answer the question because it talks about certificate requirements for a course, which is unrelated to the error.
+
+Context 4 does not directly answer the question because it mentions a different error related to",720,10
+,"'OpenSource: I am using Groq, and it doesn''t provide a tokenizer library",fe8fed31e6,fe8fed31e6,False,"['NO', 'NO', 'NO', 'NO', 'NO']",,"Context 1 does not directly answer the question because it provides information about a different library and model.
+Context 2 does not directly answer the question because it discusses the flexibility of using different LLM platforms.
+Context 3 does not directly answer the question because it provides unrelated information about modifying a JSON object.
+Context 4 does not directly answer the question because it discusses account setup and display names.
+Context 5 does not directly answer the qu","Context 1 does not directly answer the question because it provides information about a different library and model.
+Context 2 does not directly answer the question because it discusses the flexibility of using different LLM platforms.
+Context 3 does not directly answer the question because it provides unrelated information about modifying a JSON object.
+Context 4 does not directly answer the question because it discusses account setup and display names.
+Context 5 does not directly answer the qu",669,11
+,Alternative way to convert Jupyter notebook to Python script (via jupytext),c2f39b0ef3,c2f39b0ef3,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it provides an alternative method to convert a Jupyter notebook to a Python script using Jupytext.
+
+Context 2 does not directly answer the question because it discusses a specific issue with running a Jupyter notebook and its solution, but does not provide information on converting a Jupyter notebook to a Python script.
+
+Context 3 does not directly answer the question because it mentions redefining a Python environment variable, but does not provid","Context 1 directly answers the question because it provides an alternative method to convert a Jupyter notebook to a Python script using Jupytext.
+
+Context 2 does not directly answer the question because it discusses a specific issue with running a Jupyter notebook and its solution, but does not provide information on converting a Jupyter notebook to a Python script.
+
+Context 3 does not directly answer the question because it mentions redefining a Python environment variable, but does not provid",1034,19
+,'Ingestion: When attempting to use the provided quick script to load trip,6435e27634,6435e27634,True,"['YES', 'NO', 'NO', 'NO', 'YES']",1,"Context 1: This context provides a direct solution to the problem by offering an alternative method to download the trip data using the GitHub CLI, so it answers the question. 
+Context 2: This context discusses the topic and provides a solution, but it's more of a workaround and doesn't directly answer the question, so it doesn't answer the question.
+Context 3: This context is unrelated to the question and discusses a different issue, so it doesn't answer the question.
+Context 4: This context pr","Context 1: This context provides a direct solution to the problem by offering an alternative method to download the trip data using the GitHub CLI, so it answers the question. 
+Context 2: This context discusses the topic and provides a solution, but it's more of a workaround and doesn't directly answer the question, so it doesn't answer the question.
+Context 3: This context is unrelated to the question and discusses a different issue, so it doesn't answer the question.
+Context 4: This context pr",774,6
+,"Docker - error during connect: In the default daemon configuration on Windows, the docker client must be run with elevated privileges",46dbe4810d,46dbe4810d,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question by providing specific steps to resolve the error on Windows based on the version.
+Context 2 does not directly answer the question, it provides additional troubleshooting steps.
+Context 3 does not directly answer the question, it provides a solution to a different error.
+Context 4 does not directly answer the question, it provides additional information on using WSL2 and troubleshooting steps.
+Context 5 does not directly answer the question, it provides a s","Context 1 directly answers the question by providing specific steps to resolve the error on Windows based on the version.
+Context 2 does not directly answer the question, it provides additional troubleshooting steps.
+Context 3 does not directly answer the question, it provides a solution to a different error.
+Context 4 does not directly answer the question, it provides additional information on using WSL2 and troubleshooting steps.
+Context 5 does not directly answer the question, it provides a s",562,9
+,'Course: I have registered for the Data Engineering Bootcamp. When can I,52217fc51b,52217fc51b,False,"['NO', 'NO', 'NO', 'NO', 'NO']",,"Context 1 does not directly answer the question because it only mentions that registration was to gauge interest, but does not provide information on when the course starts.
+Context 2 does not directly answer the question because it discusses the availability of materials after the course finishes, but does not provide information on when the course starts.
+Context 3 does not directly answer the question because it provides information on preparing the environment, but does not provide informati","Context 1 does not directly answer the question because it only mentions that registration was to gauge interest, but does not provide information on when the course starts.
+Context 2 does not directly answer the question because it discusses the availability of materials after the course finishes, but does not provide information on when the course starts.
+Context 3 does not directly answer the question because it provides information on preparing the environment, but does not provide informati",895,15
+,Multiline commands in Windows Powershell,2d292454ac,2d292454ac,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it provides instructions on how to use multiline commands in Windows PowerShell.
+
+Context 2 does not directly answer the question because it discusses a problem with a git commit command and its solution, which is unrelated to multiline commands in Windows PowerShell.
+
+Context 3 does not directly answer the question because it provides a solution to a problem with listing AWS S3 buckets, which is unrelated to multiline commands in Windows PowerShel","Context 1 directly answers the question because it provides instructions on how to use multiline commands in Windows PowerShell.
+
+Context 2 does not directly answer the question because it discusses a problem with a git commit command and its solution, which is unrelated to multiline commands in Windows PowerShell.
+
+Context 3 does not directly answer the question because it provides a solution to a problem with listing AWS S3 buckets, which is unrelated to multiline commands in Windows PowerShel",905,9
+,Useful Resource for Missing Data Treatment,1c1a0016fc,1c1a0016fc,True,"['NO', 'NO', 'NO', 'YES', 'NO']",4,"Context 1: This context provides a resource for handling missing values in Python, but it does not directly answer a specific question.
+Context 2: This context discusses the tradeoffs of handling missing values before or after splitting data, but it does not directly answer a specific question.
+Context 3: This context explains the importance of not touching the test dataset, but it does not directly answer a specific question.
+Context 4: This context clarifies that a specific question only deals","Context 1: This context provides a resource for handling missing values in Python, but it does not directly answer a specific question.
+Context 2: This context discusses the tradeoffs of handling missing values before or after splitting data, but it does not directly answer a specific question.
+Context 3: This context explains the importance of not touching the test dataset, but it does not directly answer a specific question.
+Context 4: This context clarifies that a specific question only deals",735,10
+,'Pre-commit: Triggers an error at every commit: “mapping values are not,cc6b6f1481,cc6b6f1481,True,"['YES', 'YES', 'NO', 'YES', 'NO']",1,"Context 1: This context directly answers the question by providing a solution to the pre-commit error, specifically mentioning the need to correct indentation in the `.pre-commit-config.yaml` file.
+
+Context 2: This context directly answers the question by providing a solution to the pre-commit error, specifically mentioning the need to set the version to `5.12.0` for the isort repo.
+
+Context 3: This context does not directly answer the question about pre-commit errors, but rather provides a solu","Context 1: This context directly answers the question by providing a solution to the pre-commit error, specifically mentioning the need to correct indentation in the `.pre-commit-config.yaml` file.
+
+Context 2: This context directly answers the question by providing a solution to the pre-commit error, specifically mentioning the need to set the version to `5.12.0` for the isort repo.
+
+Context 3: This context does not directly answer the question about pre-commit errors, but rather provides a solu",965,7
+,Running out of space for AWS instance.,814a8657e2,814a8657e2,True,"['YES', 'NO', 'YES', 'NO', 'NO']",1,"Context 1 directly answers the question because it provides a specific command to free up space after removing Docker images.
+
+Context 2 does not directly answer the question because it discusses a solution for OOM errors on a GPU, which is unrelated to running out of space on an AWS instance.
+
+Context 3 directly answers the question because it provides a step-by-step solution to free up space on an AWS instance by removing unnecessary Docker images and running the `docker system prune` command.","Context 1 directly answers the question because it provides a specific command to free up space after removing Docker images.
+
+Context 2 does not directly answer the question because it discusses a solution for OOM errors on a GPU, which is unrelated to running out of space on an AWS instance.
+
+Context 3 directly answers the question because it provides a step-by-step solution to free up space on an AWS instance by removing unnecessary Docker images and running the `docker system prune` command.",897,8
+,"'There is an error when opening the table using `dbtable = db.open_table(""notion_pages___homework"")`:",0407213397,0407213397,True,"['YES', 'YES', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it provides a specific reason for the error, implying that the solution is to change all instances of ""employee_handbook"" to ""homework"".
+Context 2 directly answers the question because it explicitly states to open the correct table, which is the solution to the error.
+Context 3 does not directly answer the question because it provides unrelated information about modifying a JSON object.
+Context 4 does not directly answer the question because it dis","Context 1 directly answers the question because it provides a specific reason for the error, implying that the solution is to change all instances of ""employee_handbook"" to ""homework"".
+Context 2 directly answers the question because it explicitly states to open the correct table, which is the solution to the error.
+Context 3 does not directly answer the question because it provides unrelated information about modifying a JSON object.
+Context 4 does not directly answer the question because it dis",727,8
+,Can I use the workshop materials for my own projects or share them with,d850a0e7ea,d850a0e7ea,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it explicitly states that the workshop materials can be used for personal projects. 
+Context 2 does not answer the question because it discusses the logistics of the workshop, not the usage of materials. 
+Context 3 does not answer the question because it provides additional resources for the project, but does not address the usage of workshop materials. 
+Context 4 does not answer the question because it discusses the project evaluation process, not","Context 1 directly answers the question because it explicitly states that the workshop materials can be used for personal projects. 
+Context 2 does not answer the question because it discusses the logistics of the workshop, not the usage of materials. 
+Context 3 does not answer the question because it provides additional resources for the project, but does not address the usage of workshop materials. 
+Context 4 does not answer the question because it discusses the project evaluation process, not",722,13
+,Homework/Question 6: Entry point for running scoring script in Docker container,d00a9ac4ba,d00a9ac4ba,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it provides the specific entry point for running a scoring script in a Docker container.
+
+Context 2 does not directly answer the question because it discusses running Flask with Gunicorn and an MLFlow server, which is not related to the entry point for a scoring script.
+
+Context 3 does not directly answer the question because it discusses the type of taxi data to use, which is not related to the entry point for a scoring script.
+
+Context 4 does not","Context 1 directly answers the question because it provides the specific entry point for running a scoring script in a Docker container.
+
+Context 2 does not directly answer the question because it discusses running Flask with Gunicorn and an MLFlow server, which is not related to the entry point for a scoring script.
+
+Context 3 does not directly answer the question because it discusses the type of taxi data to use, which is not related to the entry point for a scoring script.
+
+Context 4 does not",888,13
+,How do I launch Kestra?,bcc6781b6e,bcc6781b6e,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question by providing instructions on how to launch Kestra for Linux and Windows. 
+Context 2 does not answer the question as it discusses using Kestra secrets or the KV store to store service account JSON, unrelated to launching Kestra. 
+Context 3 does not answer the question as it discusses course announcements and certificate generation, unrelated to launching Kestra. 
+Context 4 does not answer the question as it discusses adding the BigQuery connector to a Spark","Context 1 directly answers the question by providing instructions on how to launch Kestra for Linux and Windows. 
+Context 2 does not answer the question as it discusses using Kestra secrets or the KV store to store service account JSON, unrelated to launching Kestra. 
+Context 3 does not answer the question as it discusses course announcements and certificate generation, unrelated to launching Kestra. 
+Context 4 does not answer the question as it discusses adding the BigQuery connector to a Spark",730,11
+,'Homework: Why is the experiment in question 6 taking so long to run? Should,b1a18890f2,b1a18890f2,False,"['NO', 'NO', 'NO', 'NO', 'NO']",,"Context 1 does not directly answer the question because it provides a possible solution but does not confirm it as the correct approach.
+Context 2 does not directly answer the question because it provides a solution to a different part of the problem.
+Context 3 does not directly answer the question because it provides a solution to a different part of the problem.
+Context 4 does not directly answer the question because it is unrelated to the question.
+Context 5 does not directly answer the quest","Context 1 does not directly answer the question because it provides a possible solution but does not confirm it as the correct approach.
+Context 2 does not directly answer the question because it provides a solution to a different part of the problem.
+Context 3 does not directly answer the question because it provides a solution to a different part of the problem.
+Context 4 does not directly answer the question because it is unrelated to the question.
+Context 5 does not directly answer the quest",576,11
+,Are homeworks required to get the certificate?,1a4a7bd286,1a4a7bd286,True,"['YES', 'NO', 'YES', 'NO', 'NO']",1,"Context 1 directly answers the question by stating that homeworks are optional for certification. 
+Context 2 does not directly answer the question, as it explains the requirements for certification but does not mention homeworks. 
+Context 3 directly answers the question by stating that homeworks are optional. 
+Context 4 does not directly answer the question, as it refers to a previous answer without providing any information about homeworks. 
+Context 5 does not directly answer the question, as i","Context 1 directly answers the question by stating that homeworks are optional for certification. 
+Context 2 does not directly answer the question, as it explains the requirements for certification but does not mention homeworks. 
+Context 3 directly answers the question by stating that homeworks are optional. 
+Context 4 does not directly answer the question, as it refers to a previous answer without providing any information about homeworks. 
+Context 5 does not directly answer the question, as i",617,10
+,OpenAI: Error when running OpenAI chat.completions.create command,f5df151c59,f5df151c59,True,"['NO', 'NO', 'YES', 'NO', 'NO']",3,"Context 1 does not directly answer the question because it only states the error message without providing a solution.
+Context 2 does not directly answer the question because it only mentions updating the OpenAI version without explaining how it relates to the error.
+Context 3 directly answers the question because it provides steps to resolve the error caused by insufficient credits in the OpenAI account.
+Context 4 does not directly answer the question because it explains the difference in token","Context 1 does not directly answer the question because it only states the error message without providing a solution.
+Context 2 does not directly answer the question because it only mentions updating the OpenAI version without explaining how it relates to the error.
+Context 3 directly answers the question because it provides steps to resolve the error caused by insufficient credits in the OpenAI account.
+Context 4 does not directly answer the question because it explains the difference in token",756,11
+,Docker: Docker not installable on Ubuntu,1b727dde32,1b727dde32,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it provides a command to install Docker on Ubuntu.
+
+Context 2 does not directly answer the question because it discusses installing Docker on macOS, not Ubuntu.
+
+Context 3 does not directly answer the question because it discusses installing Docker on WSL2 (Ubuntu), but the question is about installing Docker on Ubuntu in general.
+
+Context 4 does not directly answer the question because it discusses a possible error and solution when running a Dock","Context 1 directly answers the question because it provides a command to install Docker on Ubuntu.
+
+Context 2 does not directly answer the question because it discusses installing Docker on macOS, not Ubuntu.
+
+Context 3 does not directly answer the question because it discusses installing Docker on WSL2 (Ubuntu), but the question is about installing Docker on Ubuntu in general.
+
+Context 4 does not directly answer the question because it discusses a possible error and solution when running a Dock",734,12
+,How to use AWS Serverless Framework to deploy on AWS Lambda and expose it,6bdfe65552,6bdfe65552,True,"['NO', 'NO', 'NO', 'YES', 'NO']",4,"Context 1: This context does not directly answer the question, it only provides a reference to an article that may contain the answer. 
+Context 2: This context does not directly answer the question, it provides additional information on testing the deployment setup locally. 
+Context 3: This context does not directly answer the question, it discusses monitoring and maintaining Lambda deployments. 
+Context 4: This context directly answers the question, it provides a step-by-step guide on using AWS","Context 1: This context does not directly answer the question, it only provides a reference to an article that may contain the answer. 
+Context 2: This context does not directly answer the question, it provides additional information on testing the deployment setup locally. 
+Context 3: This context does not directly answer the question, it discusses monitoring and maintaining Lambda deployments. 
+Context 4: This context directly answers the question, it provides a step-by-step guide on using AWS",695,9
+,Where are the FAQ questions from the previous cohorts for the orchestration,f1c31510e6,f1c31510e6,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1: This context directly answers the question by providing links to FAQ documents from previous cohorts for orchestration tools.
+Context 2: This context does not directly answer the question, it discusses the evolution of tooling between cohorts but does not provide the FAQ questions.
+Context 3: This context does not directly answer the question, it provides information about Terraform releases and installation.
+Context 4: This context does not directly answer the question, it discusses ","Context 1: This context directly answers the question by providing links to FAQ documents from previous cohorts for orchestration tools.
+Context 2: This context does not directly answer the question, it discusses the evolution of tooling between cohorts but does not provide the FAQ questions.
+Context 3: This context does not directly answer the question, it provides information about Terraform releases and installation.
+Context 4: This context does not directly answer the question, it discusses ",724,11
+,"Why are FPR and TPR equal to 0.0, when threshold = 1.0?",921879ea38,921879ea38,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it explains why FPR and TPR are equal to 0.0 when the threshold is 1.0.
+Context 2 does not answer the question because it discusses project duration and peer review requirements, unrelated to the topic.
+Context 3 does not answer the question because it provides an example of calculating precision, recall, and F-score, but does not explain why FPR and TPR are 0.0.
+Context 4 does not answer the question because it discusses mutual information score a","Context 1 directly answers the question because it explains why FPR and TPR are equal to 0.0 when the threshold is 1.0.
+Context 2 does not answer the question because it discusses project duration and peer review requirements, unrelated to the topic.
+Context 3 does not answer the question because it provides an example of calculating precision, recall, and F-score, but does not explain why FPR and TPR are 0.0.
+Context 4 does not answer the question because it discusses mutual information score a",732,10
+,MLflow Autolog not working,37e1b6b9bc,37e1b6b9bc,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it provides a specific solution to the problem of MLflow Autolog not working.
+
+Context 2 does not directly answer the question because it provides a solution to a different problem, although it might be related to the MLflow Autolog issue.
+
+Context 3 does not directly answer the question because it discusses a different problem and solution.
+
+Context 4 does not directly answer the question because it provides a solution to a different problem relat","Context 1 directly answers the question because it provides a specific solution to the problem of MLflow Autolog not working.
+
+Context 2 does not directly answer the question because it provides a solution to a different problem, although it might be related to the MLflow Autolog issue.
+
+Context 3 does not directly answer the question because it discusses a different problem and solution.
+
+Context 4 does not directly answer the question because it provides a solution to a different problem relat",693,11
+,How can I find some good ideas or datasets for the project?,e76a70cde3,e76a70cde3,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question by providing a specific resource for finding project ideas and datasets. 
+Context 2 does not directly answer the question, as it discusses using dlt for a capstone project but does not provide specific ideas or datasets. 
+Context 3 does not directly answer the question, as it discusses techniques for chunking and indexing data but does not provide specific ideas or datasets. 
+Context 4 does not directly answer the question, as it discusses the requirements","Context 1 directly answers the question by providing a specific resource for finding project ideas and datasets. 
+Context 2 does not directly answer the question, as it discusses using dlt for a capstone project but does not provide specific ideas or datasets. 
+Context 3 does not directly answer the question, as it discusses techniques for chunking and indexing data but does not provide specific ideas or datasets. 
+Context 4 does not directly answer the question, as it discusses the requirements",779,13
+,'Kafka homework Q3: There are options that support the scaling concept more,443b9afd04,443b9afd04,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1: This context directly answers the question by focusing on horizontal scaling in the context of Kafka, specifically from the consumer end. 
+Context 2: This context does not answer the question as it discusses dbt Core and its UI tools, which is unrelated to Kafka scaling.
+Context 3: This context does not answer the question as it discusses late submissions and homework deadlines, which is unrelated to Kafka scaling.
+Context 4: This context does not answer the question as it discusses d","Context 1: This context directly answers the question by focusing on horizontal scaling in the context of Kafka, specifically from the consumer end. 
+Context 2: This context does not answer the question as it discusses dbt Core and its UI tools, which is unrelated to Kafka scaling.
+Context 3: This context does not answer the question as it discusses late submissions and homework deadlines, which is unrelated to Kafka scaling.
+Context 4: This context does not answer the question as it discusses d",760,9
+,Getting ERROR [internal] load metadata for public.ecr.aws/lambda/python:3.8,f14bb9c2ba,f14bb9c2ba,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question by providing potential solutions to the error. 
+Context 2 does not directly answer the question as it discusses a different error and provides a script for testing API invocation. 
+Context 3 does not directly answer the question as it discusses a different error and provides solutions for a conda command issue. 
+Context 4 does not directly answer the question as it discusses a different error and provides a solution for a Keras model loading issue. 
+Contex","Context 1 directly answers the question by providing potential solutions to the error. 
+Context 2 does not directly answer the question as it discusses a different error and provides a script for testing API invocation. 
+Context 3 does not directly answer the question as it discusses a different error and provides solutions for a conda command issue. 
+Context 4 does not directly answer the question as it discusses a different error and provides a solution for a Keras model loading issue. 
+Contex",669,9
+,Mlflow CLI does not return experiments,ac877b2d3d,ac877b2d3d,True,"['YES', 'YES', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it provides a solution to the problem of MLflow CLI not returning experiments by setting the environment variable for the Tracking URI.
+
+Context 2 directly answers the question because it provides a solution to the problem of MLflow CLI commands not finding experiments by setting the environment variable `MLFLOW_TRACKING_URI` to the URI of the SQLite database.
+
+Context 3 does not directly answer the question because it discusses a different issue r","Context 1 directly answers the question because it provides a solution to the problem of MLflow CLI not returning experiments by setting the environment variable for the Tracking URI.
+
+Context 2 directly answers the question because it provides a solution to the problem of MLflow CLI commands not finding experiments by setting the environment variable `MLFLOW_TRACKING_URI` to the URI of the SQLite database.
+
+Context 3 does not directly answer the question because it discusses a different issue r",1015,16
+,Can I run my dbt project from Kestra?,e14f6a8ed9,e14f6a8ed9,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it explicitly states that dbt can be integrated with Kestra to run dbt projects.
+Context 2 does not directly answer the question because it provides steps for running a dbt project on production, but does not mention Kestra.
+Context 3 does not directly answer the question because it discusses creating a custom Docker image for Kestra, but does not mention running dbt projects.
+Context 4 does not directly answer the question because it provides step","Context 1 directly answers the question because it explicitly states that dbt can be integrated with Kestra to run dbt projects.
+Context 2 does not directly answer the question because it provides steps for running a dbt project on production, but does not mention Kestra.
+Context 3 does not directly answer the question because it discusses creating a custom Docker image for Kestra, but does not mention running dbt projects.
+Context 4 does not directly answer the question because it provides step",736,13
+,How do you partition and cluster a table in BigQuery for better performance?,e6c806f5fe,e6c806f5fe,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question by providing examples and best practices for partitioning and clustering a table in BigQuery for better performance. 
+Context 2 does not directly answer the question, it discusses how to reproduce a BigQuery table's schema and data layout. 
+Context 3 does not directly answer the question, it talks about BigQuery's Identity and Access Management (IAM) to control access to datasets and tables. 
+Context 4 does not directly answer the question, it explains how","Context 1 directly answers the question by providing examples and best practices for partitioning and clustering a table in BigQuery for better performance. 
+Context 2 does not directly answer the question, it discusses how to reproduce a BigQuery table's schema and data layout. 
+Context 3 does not directly answer the question, it talks about BigQuery's Identity and Access Management (IAM) to control access to datasets and tables. 
+Context 4 does not directly answer the question, it explains how",738,9
+,Unsupported Scikit-Learn version,601b847b43,601b847b43,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question by providing a specific version range for scikit-learn that is supported by MLflow. 
+Context 2 does not directly answer the question as it discusses a different issue related to hyperopt and does not mention scikit-learn versions. 
+Context 3 does not directly answer the question as it discusses a different issue related to Docker and does not mention scikit-learn versions. 
+Context 4 does not directly answer the question as it discusses a different issue r","Context 1 directly answers the question by providing a specific version range for scikit-learn that is supported by MLflow. 
+Context 2 does not directly answer the question as it discusses a different issue related to hyperopt and does not mention scikit-learn versions. 
+Context 3 does not directly answer the question as it discusses a different issue related to Docker and does not mention scikit-learn versions. 
+Context 4 does not directly answer the question as it discusses a different issue r",738,13
+,Docker: Dockerizing tips,81c82a4875,81c82a4875,True,"['YES', 'YES', 'NO', 'NO', 'NO']",1,"Context 1: This context directly answers the question by providing tips for Dockerizing, including using the correct image and copying data to a relative path.
+Context 2: This context directly answers the question by providing a solution to a specific problem related to Dockerizing, which is installing a required library.
+Context 3: This context does not directly answer the question, it only provides information about Docker Compose v1 being deprecated.
+Context 4: This context does not directly ","Context 1: This context directly answers the question by providing tips for Dockerizing, including using the correct image and copying data to a relative path.
+Context 2: This context directly answers the question by providing a solution to a specific problem related to Dockerizing, which is installing a required library.
+Context 3: This context does not directly answer the question, it only provides information about Docker Compose v1 being deprecated.
+Context 4: This context does not directly ",807,8
+,RMSE using metrics.root_meas_square(),7fa434b922,7fa434b922,True,"['YES', 'YES', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question by providing an alternative method to calculate RMSE. 
+Context 2 directly answers the question by explaining how to calculate RMSE using the mean_squared_error function. 
+Context 3 does not directly answer the question, it discusses the concept of RMSE and its practical application. 
+Context 4 does not directly answer the question, it discusses a potential issue with the result and provides a suggestion to reinitialize a variable. 
+Context 5 does not direc","Context 1 directly answers the question by providing an alternative method to calculate RMSE. 
+Context 2 directly answers the question by explaining how to calculate RMSE using the mean_squared_error function. 
+Context 3 does not directly answer the question, it discusses the concept of RMSE and its practical application. 
+Context 4 does not directly answer the question, it discusses a potential issue with the result and provides a suggestion to reinitialize a variable. 
+Context 5 does not direc",634,8
+,Pipenv with Jupyter,ecba2d4d27,ecba2d4d27,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question by providing a step-by-step solution to use Jupyter notebooks with the Pipenv environment. 
+Context 2 does not directly answer the question, it discusses a related issue with Tornado and Jupyter notebooks. 
+Context 3 does not directly answer the question, it provides a command to force the creation of `Pipfile.lock` which is related to Pipenv but not Jupyter notebooks. 
+Context 4 does not directly answer the question, it discusses the installation of Pipen","Context 1 directly answers the question by providing a step-by-step solution to use Jupyter notebooks with the Pipenv environment. 
+Context 2 does not directly answer the question, it discusses a related issue with Tornado and Jupyter notebooks. 
+Context 3 does not directly answer the question, it provides a command to force the creation of `Pipfile.lock` which is related to Pipenv but not Jupyter notebooks. 
+Context 4 does not directly answer the question, it discusses the installation of Pipen",680,13
+,'Docker: The command ''/bin/sh -c pipenv install --deploy --system && rm,a43ed572fa,a43ed572fa,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1: This context directly answers the question by providing a solution to the error that occurs when building the Docker image, specifically by adjusting the Python version in the Dockerfile.
+Context 2: This context does not directly answer the question as it discusses a different error related to pulling a Docker image, not building an image with a specific command.
+Context 3: This context does not directly answer the question as it discusses a different error related to installing packa","Context 1: This context directly answers the question by providing a solution to the error that occurs when building the Docker image, specifically by adjusting the Python version in the Dockerfile.
+Context 2: This context does not directly answer the question as it discusses a different error related to pulling a Docker image, not building an image with a specific command.
+Context 3: This context does not directly answer the question as it discusses a different error related to installing packa",923,13
+,"'Terraform Error 412: Request violates constraint ''constraints/storage.uniformBucketLevelAccess'',",64d0d03a6f,64d0d03a6f,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question by providing a specific solution to the Terraform Error 412, which is to enable Uniform Bucket-Level Access (UBLA) in the google_storage_bucket resource.
+
+Context 2 does not directly answer the question, as it discusses a different error (Error 403) and provides a solution for verifying credentials and setting the GOOGLE_APPLICATION_CREDENTIALS environment variable.
+
+Context 3 does not directly answer the question, as it discusses a different error related","Context 1 directly answers the question by providing a specific solution to the Terraform Error 412, which is to enable Uniform Bucket-Level Access (UBLA) in the google_storage_bucket resource.
+
+Context 2 does not directly answer the question, as it discusses a different error (Error 403) and provides a solution for verifying credentials and setting the GOOGLE_APPLICATION_CREDENTIALS environment variable.
+
+Context 3 does not directly answer the question, as it discusses a different error related",928,9
+,"'MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of",14cc6e2060,14cc6e2060,True,"['YES', 'NO', 'NO', 'YES', 'NO']",1,"Context 1: This context directly answers the question about how to resolve the MemoryManager error by increasing the memory of the executor when creating the Spark session.
+
+Context 2: This context does not directly answer a specific question, but rather provides information about BigQuery's Bytes Processed metric.
+
+Context 3: This context does not directly answer a specific question, but rather provides information about how BigQuery uses columnar storage to reduce query cost.
+
+Context 4: This ","Context 1: This context directly answers the question about how to resolve the MemoryManager error by increasing the memory of the executor when creating the Spark session.
+
+Context 2: This context does not directly answer a specific question, but rather provides information about BigQuery's Bytes Processed metric.
+
+Context 3: This context does not directly answer a specific question, but rather provides information about how BigQuery uses columnar storage to reduce query cost.
+
+Context 4: This ",839,8
+,Reading parquet files with Pandas (pyarrow dependency),a55ee615db,a55ee615db,True,"['YES', 'NO', 'YES', 'NO', 'NO']",1,"Context 1: This context directly answers the question by providing a solution to resolve the error when reading parquet files with Pandas due to a pyarrow dependency issue.
+
+Context 2: This context does not directly answer the question, but rather provides alternative solutions to handle large parquet files.
+
+Context 3: This context directly answers the question by providing a solution to resolve the error when reading parquet files with Pandas due to a missing pyarrow installation.
+
+Context 4: ","Context 1: This context directly answers the question by providing a solution to resolve the error when reading parquet files with Pandas due to a pyarrow dependency issue.
+
+Context 2: This context does not directly answer the question, but rather provides alternative solutions to handle large parquet files.
+
+Context 3: This context directly answers the question by providing a solution to resolve the error when reading parquet files with Pandas due to a missing pyarrow installation.
+
+Context 4: ",898,9
+,Identifying highly correlated feature pairs easily through unstack,45482efa5e,45482efa5e,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question by providing code to identify highly correlated feature pairs using unstack and seaborn heatmap. 
+Context 2 does not answer the question as it discusses installing the choco library, which is unrelated to identifying highly correlated feature pairs. 
+Context 3 does not answer the question as it discusses pairing feature names with their importance values, which is a different topic. 
+Context 4 does not answer the question as it discusses calculating the sm","Context 1 directly answers the question by providing code to identify highly correlated feature pairs using unstack and seaborn heatmap. 
+Context 2 does not answer the question as it discusses installing the choco library, which is unrelated to identifying highly correlated feature pairs. 
+Context 3 does not answer the question as it discusses pairing feature names with their importance values, which is a different topic. 
+Context 4 does not answer the question as it discusses calculating the sm",719,9
+,Uploading the homework to Github,f3423f5014,f3423f5014,True,"['YES', 'YES', 'NO', 'NO', 'NO']",1,"Context 1: This context directly answers the question by providing a solution to the error encountered when trying to use Git for the first time.
+Context 2: This context directly answers the question by stating that the repository needs to be public for others to access the link.
+Context 3: This context does not directly answer the question, but rather provides additional information and troubleshooting tips for a specific problem.
+Context 4: This context does not directly answer the question, b","Context 1: This context directly answers the question by providing a solution to the error encountered when trying to use Git for the first time.
+Context 2: This context directly answers the question by stating that the repository needs to be public for others to access the link.
+Context 3: This context does not directly answer the question, but rather provides additional information and troubleshooting tips for a specific problem.
+Context 4: This context does not directly answer the question, b",718,8
+,Can I collaborate with others on the capstone project?,5a491cd847,5a491cd847,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it explicitly states that collaboration is not allowed for the capstone submission.
+Context 2 does not directly answer the question because it discusses the peer review process, not collaboration on the project.
+Context 3 does not directly answer the question because it talks about integrating dbt with Kestra, which is unrelated to collaboration on the capstone project.
+Context 4 does not directly answer the question because it mentions BigQuery's ","Context 1 directly answers the question because it explicitly states that collaboration is not allowed for the capstone submission.
+Context 2 does not directly answer the question because it discusses the peer review process, not collaboration on the project.
+Context 3 does not directly answer the question because it talks about integrating dbt with Kestra, which is unrelated to collaboration on the capstone project.
+Context 4 does not directly answer the question because it mentions BigQuery's ",811,12
+,'Conda environment: You are using Windows. You then use Waitress instead,927d11d38f,927d11d38f,True,"['NO', 'NO', 'NO', 'NO', 'YES']",5,"Context 1 does not directly answer the question about setting up a Conda environment, it discusses uninstalling and reinstalling packages. 
+Context 2 does not directly answer the question about setting up a Conda environment, it discusses building a Docker image and updating pip. 
+Context 3 does not directly answer the question about setting up a Conda environment, it discusses opening the current directory in Windows Explorer. 
+Context 4 does not directly answer the question about setting up a ","Context 1 does not directly answer the question about setting up a Conda environment, it discusses uninstalling and reinstalling packages. 
+Context 2 does not directly answer the question about setting up a Conda environment, it discusses building a Docker image and updating pip. 
+Context 3 does not directly answer the question about setting up a Conda environment, it discusses opening the current directory in Windows Explorer. 
+Context 4 does not directly answer the question about setting up a ",771,9
+,"'Warning: ''model ""multi-qa-mpnet-base-dot-v1"" was made on sentence transformers",aa3f597424,aa3f597424,True,"['YES', 'NO', 'NO', 'NO', 'YES']",1,"Context 1 directly answers the question by providing a command to upgrade `sentence-transformers` to version 3.0.0 or higher to suppress the warning.
+Context 2 does not directly answer the question, it discusses the difference between normalized and non-normalized embeddings.
+Context 3 does not directly answer the question, it provides steps to allocate more RAM in WSL2.
+Context 4 does not directly answer the question, it discusses the limitations of `tiktoken` and provides alternatives for othe","Context 1 directly answers the question by providing a command to upgrade `sentence-transformers` to version 3.0.0 or higher to suppress the warning.
+Context 2 does not directly answer the question, it discusses the difference between normalized and non-normalized embeddings.
+Context 3 does not directly answer the question, it provides steps to allocate more RAM in WSL2.
+Context 4 does not directly answer the question, it discusses the limitations of `tiktoken` and provides alternatives for othe",666,10
+,Target variable transformation,17d0c79f61,17d0c79f61,True,"['YES', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it explains why and when to transform the target variable to logarithm distribution. 
+Context 2 does not directly answer the question because it provides additional information about transforming the target variable but does not address the main question of why to do so. 
+Context 3 does not directly answer the question because it is unrelated to the topic of transforming the target variable. 
+Context 4 does not directly answer the question because ","Context 1 directly answers the question because it explains why and when to transform the target variable to logarithm distribution. 
+Context 2 does not directly answer the question because it provides additional information about transforming the target variable but does not address the main question of why to do so. 
+Context 3 does not directly answer the question because it is unrelated to the topic of transforming the target variable. 
+Context 4 does not directly answer the question because ",612,9
+,DataType error when creating Spark DataFrame with a specified schema?,3e355d74fd,3e355d74fd,False,[],,ERROR: RateLimitError,ERROR: RateLimitError,0,0
+,ConnectionError 'Connection aborted.' for --bind 127.0.0.1:5000,84301e35dd,84301e35dd,True,"['YES', 'YES', 'NO', 'NO', 'NO']",1,"Context 1: This context directly answers the question by providing a solution to the ConnectionError issue.
+Context 2: This context directly answers the question by providing a solution to the ConnectionError issue.
+Context 3: This context does not directly answer the question, as it discusses a different error related to Docker.
+Context 4: This context does not directly answer the question, as it discusses a different error related to the protocol scheme.
+Context 5: This context does not direct","Context 1: This context directly answers the question by providing a solution to the ConnectionError issue.
+Context 2: This context directly answers the question by providing a solution to the ConnectionError issue.
+Context 3: This context does not directly answer the question, as it discusses a different error related to Docker.
+Context 4: This context does not directly answer the question, as it discusses a different error related to the protocol scheme.
+Context 5: This context does not direct",611,8
+,Streaming: installing dependencies for the Python avro example (producer.py),2763850d3e,2763850d3e,False,"['NO', 'NO', 'NO', 'NO', 'NO']",,"Context 1 directly answers the question because it provides the exact command to install the required dependencies for the Python avro example.
+
+Context 2 does not directly answer the question because it discusses alternative options and recommendations, but does not provide the installation command.
+
+Context 3 directly answers the question because it provides the correct installation command for the confluent-kafka package with Avro support.
+
+Context 4 does not directly answer the question beca","Context 1 directly answers the question because it provides the exact command to install the required dependencies for the Python avro example.
+
+Context 2 does not directly answer the question because it discusses alternative options and recommendations, but does not provide the installation command.
+
+Context 3 directly answers the question because it provides the correct installation command for the confluent-kafka package with Avro support.
+
+Context 4 does not directly answer the question beca",891,11
+,AWS costs:,9f6380d76b,9f6380d76b,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question about AWS costs by providing specific cost estimates and strategies for reducing costs.
+
+Context 2 does not directly answer the question about AWS costs, but rather provides general information about stopping EC2 instances and monitoring costs.
+
+Context 3 does not directly answer the question about AWS costs, but rather provides information about configuring AWS CLI.
+
+Context 4 does not directly answer the question about AWS costs, but rather provides a so","Context 1 directly answers the question about AWS costs by providing specific cost estimates and strategies for reducing costs.
+
+Context 2 does not directly answer the question about AWS costs, but rather provides general information about stopping EC2 instances and monitoring costs.
+
+Context 3 does not directly answer the question about AWS costs, but rather provides information about configuring AWS CLI.
+
+Context 4 does not directly answer the question about AWS costs, but rather provides a so",727,10
+,WSL: instructions,23ed7bdf10,23ed7bdf10,True,"['YES', 'NO']",1,"Context 1 directly answers the question because it provides step-by-step instructions for setting up WSL on a Windows machine.
+
+Context 2 does not directly answer the question because it discusses a specific issue with SSH connections in WSL, but the question is about general WSL setup instructions.","Context 1 directly answers the question because it provides step-by-step instructions for setting up WSL on a Windows machine.
+
+Context 2 does not directly answer the question because it discusses a specific issue with SSH connections in WSL, but the question is about general WSL setup instructions.
+
+['YES', 'NO']",315,3
+,'Error: creating Lambda Function (...): InvalidParameterValueException:,896989c9f1,896989c9f1,True,"['YES', 'NO', 'NO', 'YES', 'NO']",1,"Context 1 directly answers the question by providing a quick fix to the error, specifically how to build a Docker image compatible with AWS Lambda.
+
+Context 2 does not directly answer the question as it only provides a solution to a warning raised by the mlflow library, but does not address the error.
+
+Context 3 does not directly answer the question as it discusses the structure of the mlops repository and import statements, but does not address any error or issue.
+
+Context 4 directly answers th","Context 1 directly answers the question by providing a quick fix to the error, specifically how to build a Docker image compatible with AWS Lambda.
+
+Context 2 does not directly answer the question as it only provides a solution to a warning raised by the mlflow library, but does not address the error.
+
+Context 3 does not directly answer the question as it discusses the structure of the mlops repository and import statements, but does not address any error or issue.
+
+Context 4 directly answers th",822,11
+,How do you share a DataFrame across multiple Spark sessions?,db219fef17,db219fef17,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it explains how to share a DataFrame across multiple Spark sessions using Global Temporary Views.
+
+Context 2 does not directly answer the question because it discusses Spark's data processing behavior but does not address sharing DataFrames across sessions.
+
+Context 3 does not directly answer the question because it explains how to read from multiple topics in the same Spark session, which is unrelated to sharing DataFrames across sessions.
+
+Contex","Context 1 directly answers the question because it explains how to share a DataFrame across multiple Spark sessions using Global Temporary Views.
+
+Context 2 does not directly answer the question because it discusses Spark's data processing behavior but does not address sharing DataFrames across sessions.
+
+Context 3 does not directly answer the question because it explains how to read from multiple topics in the same Spark session, which is unrelated to sharing DataFrames across sessions.
+
+Contex",903,10
+,What is the cosine similarity?,db78580409,db78580409,True,"['YES', 'YES', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question as it provides a clear definition of cosine similarity. 
+Context 2 directly answers the question by explaining how cosine similarity measures the alignment of two vectors. 
+Context 3 does not directly answer the question, it discusses the assumption of normalized vectors in calculating cosine similarity. 
+Context 4 does not directly answer the question, it provides information about a lesson or course. 
+Context 5 does not directly answer the question, it d","Context 1 directly answers the question as it provides a clear definition of cosine similarity. 
+Context 2 directly answers the question by explaining how cosine similarity measures the alignment of two vectors. 
+Context 3 does not directly answer the question, it discusses the assumption of normalized vectors in calculating cosine similarity. 
+Context 4 does not directly answer the question, it provides information about a lesson or course. 
+Context 5 does not directly answer the question, it d",574,9
+,Fix Out of Memory error while orchestrating the workflow on a ML Pipeline,e00253e2df,e00253e2df,True,"['YES', 'YES', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question by providing several approaches to mitigate the Out of Memory error. 
+Context 2 directly answers the question by providing a specific solution to reduce memory usage when using DictVectorizer. 
+Context 3 does not directly answer the question as it only provides a solution to a specific error in a homework assignment. 
+Context 4 does not directly answer the question as it only provides a solution to a specific error when using docker-compose. 
+Context 5 doe","Context 1 directly answers the question by providing several approaches to mitigate the Out of Memory error. 
+Context 2 directly answers the question by providing a specific solution to reduce memory usage when using DictVectorizer. 
+Context 3 does not directly answer the question as it only provides a solution to a specific error in a homework assignment. 
+Context 4 does not directly answer the question as it only provides a solution to a specific error when using docker-compose. 
+Context 5 doe",672,8
+,What is Stratified k-fold?,f29b4790fc,f29b4790fc,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it explains what Stratified k-fold is and its importance in multiclass classification.
+
+Context 2 does not answer the question because it discusses the normal distribution and standard deviation, which is unrelated to Stratified k-fold.
+
+Context 3 does not answer the question because it explains the meaning of eta in XGBoost, which is unrelated to Stratified k-fold.
+
+Context 4 does not answer the question because it discusses ensemble algorithms, s","Context 1 directly answers the question because it explains what Stratified k-fold is and its importance in multiclass classification.
+
+Context 2 does not answer the question because it discusses the normal distribution and standard deviation, which is unrelated to Stratified k-fold.
+
+Context 3 does not answer the question because it explains the meaning of eta in XGBoost, which is unrelated to Stratified k-fold.
+
+Context 4 does not answer the question because it discusses ensemble algorithms, s",741,10
+,Does it matter if we let the Python file create the server or if we run,e842ae080e,e842ae080e,False,"['NO', 'NO', 'NO', 'NO', 'NO']",,"Context 1 does not directly answer the question because it only mentions that using the script involves less typing, but does not address the difference in outcome.
+Context 2 does not directly answer the question because it simply states that both methods do the same, without providing any further explanation or addressing the potential differences.
+Context 3 does not directly answer the question because it provides instructions for setting up a Conda environment, which is unrelated to the quest","Context 1 does not directly answer the question because it only mentions that using the script involves less typing, but does not address the difference in outcome.
+Context 2 does not directly answer the question because it simply states that both methods do the same, without providing any further explanation or addressing the potential differences.
+Context 3 does not directly answer the question because it provides instructions for setting up a Conda environment, which is unrelated to the quest",962,12
+,GCP: Where can I find the “ny-rides.json” file?,cdd91ef84a,cdd91ef84a,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it provides step-by-step instructions on how to find the ""ny-rides.json"" file in GCP.
+Context 2 does not answer the question because it discusses Confluent Cloud, which is unrelated to the ""ny-rides.json"" file in GCP.
+Context 3 does not answer the question because it discusses Terraform releases, which is unrelated to the ""ny-rides.json"" file in GCP.
+Context 4 does not answer the question because it discusses reading parquet files, which is unrelat","Context 1 directly answers the question because it provides step-by-step instructions on how to find the ""ny-rides.json"" file in GCP.
+Context 2 does not answer the question because it discusses Confluent Cloud, which is unrelated to the ""ny-rides.json"" file in GCP.
+Context 3 does not answer the question because it discusses Terraform releases, which is unrelated to the ""ny-rides.json"" file in GCP.
+Context 4 does not answer the question because it discusses reading parquet files, which is unrelat",719,9
+,"'ConnectionError: (''Connection aborted.'', RemoteDisconnected(''Remote",f2f7180201,f2f7180201,True,"['YES', 'YES', 'YES', 'NO']",1,"Context 1: This context directly answers the question by providing a solution to the connection error issue. 
+Context 2: This context directly answers the question by providing a solution to the connection error issue. 
+Context 3: This context directly answers the question by providing a solution to the connection error issue. 
+Context 4: This context does not directly answer the question as it discusses a different error issue and its solution.","Context 1: This context directly answers the question by providing a solution to the connection error issue. 
+Context 2: This context directly answers the question by providing a solution to the connection error issue. 
+Context 3: This context directly answers the question by providing a solution to the connection error issue. 
+Context 4: This context does not directly answer the question as it discusses a different error issue and its solution.
+
+['YES', 'YES', 'YES', 'NO']",478,5
+,How to save/download jupyter notebook to python script,9db5014252,9db5014252,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it provides two methods to convert a Jupyter notebook to a Python script.
+Context 2 does not answer the question because it discusses downloading CSV data via Jupyter Notebook using the Kaggle API, which is unrelated to saving a Jupyter notebook as a Python script.
+Context 3 does not answer the question because it provides a solution to an error encountered when launching a Jupyter notebook, which is unrelated to saving a Jupyter notebook as a Pyth","Context 1 directly answers the question because it provides two methods to convert a Jupyter notebook to a Python script.
+Context 2 does not answer the question because it discusses downloading CSV data via Jupyter Notebook using the Kaggle API, which is unrelated to saving a Jupyter notebook as a Python script.
+Context 3 does not answer the question because it provides a solution to an error encountered when launching a Jupyter notebook, which is unrelated to saving a Jupyter notebook as a Pyth",903,18
+,'BigQuery: Datetime columns in Parquet files created from Pandas show up,a83247e572,a83247e572,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question by providing a solution to the issue of datetime columns in Parquet files created from Pandas showing up as integers in BigQuery. 
+Context 2 does not directly answer the question as it discusses BigQuery limits and does not address the issue of datetime columns in Parquet files. 
+Context 3 does not directly answer the question as it discusses a different issue related to data types in Parquet files and BigQuery. 
+Context 4 does not directly answer the ques","Context 1 directly answers the question by providing a solution to the issue of datetime columns in Parquet files created from Pandas showing up as integers in BigQuery. 
+Context 2 does not directly answer the question as it discusses BigQuery limits and does not address the issue of datetime columns in Parquet files. 
+Context 3 does not directly answer the question as it discusses a different issue related to data types in Parquet files and BigQuery. 
+Context 4 does not directly answer the ques",869,12
+,"Why does casting TIMESTAMP_NTZ to BIGINT fail in Spark, and how can I convert",c2c5634e36,c2c5634e36,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it provides a specific function (to_unix_timestamp) to convert TIMESTAMP_NTZ to a numeric representation.
+
+Context 2 does not directly answer the question because it provides troubleshooting steps for a Spark error, but does not address the conversion of TIMESTAMP_NTZ to BIGINT.
+
+Context 3 does not directly answer the question because it discusses computing the duration between two timestamp columns, but does not address the conversion of TIMESTAMP","Context 1 directly answers the question because it provides a specific function (to_unix_timestamp) to convert TIMESTAMP_NTZ to a numeric representation.
+
+Context 2 does not directly answer the question because it provides troubleshooting steps for a Spark error, but does not address the conversion of TIMESTAMP_NTZ to BIGINT.
+
+Context 3 does not directly answer the question because it discusses computing the duration between two timestamp columns, but does not address the conversion of TIMESTAMP",935,13
+,AWS EC2: this site can’t be reached,5af20a05fe,5af20a05fe,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1: This context directly answers the question by explaining that the IP address is not meant to be opened in a browser and providing the correct command to connect to the EC2 instance via terminal.
+
+Context 2: This context does not directly answer the question, as it discusses a different issue related to SSH connections to AWS EC2 instances.
+
+Context 3: This context does not directly answer the question, as it discusses a different issue related to updating the IP address of an EC2 inst","Context 1: This context directly answers the question by explaining that the IP address is not meant to be opened in a browser and providing the correct command to connect to the EC2 instance via terminal.
+
+Context 2: This context does not directly answer the question, as it discusses a different issue related to SSH connections to AWS EC2 instances.
+
+Context 3: This context does not directly answer the question, as it discusses a different issue related to updating the IP address of an EC2 inst",841,10
+,How do you connect BigQuery with BI tools like Looker Studio or Tableau?,ff76cb35fb,ff76cb35fb,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question by providing a step-by-step guide on how to connect BigQuery with BI tools like Looker Studio and Tableau.
+
+Context 2 does not directly answer the question, it provides additional information on how to access the free version of Looker Studio.
+
+Context 3 does not directly answer the question, it provides information on how to connect BigQuery with Spark, which is a different tool.
+
+Context 4 does not directly answer the question, it discusses the topic of ","Context 1 directly answers the question by providing a step-by-step guide on how to connect BigQuery with BI tools like Looker Studio and Tableau.
+
+Context 2 does not directly answer the question, it provides additional information on how to access the free version of Looker Studio.
+
+Context 3 does not directly answer the question, it provides information on how to connect BigQuery with Spark, which is a different tool.
+
+Context 4 does not directly answer the question, it discusses the topic of ",848,11
+,Port-Forwarding with SSH,a8563f2c5c,a8563f2c5c,True,"['YES', 'YES', 'YES', 'YES', 'YES']",1,"Context 1 directly answers the question by providing a step-by-step guide on how to configure port-forwarding with SSH in the terminal.
+
+Context 2 directly answers the question by providing a solution to resolve the error message related to port allocation.
+
+Context 3 directly answers the question by providing a code example on how to calculate the standard deviation of a list using Pandas.
+
+Context 4 directly answers the question by providing a workaround to avoid installation errors related to","Context 1 directly answers the question by providing a step-by-step guide on how to configure port-forwarding with SSH in the terminal.
+
+Context 2 directly answers the question by providing a solution to resolve the error message related to port allocation.
+
+Context 3 directly answers the question by providing a code example on how to calculate the standard deviation of a list using Pandas.
+
+Context 4 directly answers the question by providing a workaround to avoid installation errors related to",700,5
+,GCP: The project to be billed is associated with an absent billing account,bc90da941d,bc90da941d,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it provides a possible reason and solution for the error message about the project being associated with an absent billing account.
+
+Context 2 does not directly answer the question because it discusses a different error message related to billing, although it is still relevant to the topic of billing issues in GCP.
+
+Context 3 does not directly answer the question because it discusses peer review criteria for a course project and is unrelated to the","Context 1 directly answers the question because it provides a possible reason and solution for the error message about the project being associated with an absent billing account.
+
+Context 2 does not directly answer the question because it discusses a different error message related to billing, although it is still relevant to the topic of billing issues in GCP.
+
+Context 3 does not directly answer the question because it discusses peer review criteria for a course project and is unrelated to the",903,11
+,Understanding Ridge,ef52b72189,ef52b72189,False,"['NO', 'NO', 'NO']",,"Context 1 does not directly answer the question because it only provides a general overview of Ridge regression and its parameters without addressing a specific question.
+
+Context 2 does not directly answer the question because it explains how to calculate the Root Mean Squared Error (RMSE) without addressing a specific question about Ridge regression or its parameters.
+
+Context 3 does not directly answer the question because it provides a comparison between the regularization parameters in skle","Context 1 does not directly answer the question because it only provides a general overview of Ridge regression and its parameters without addressing a specific question.
+
+Context 2 does not directly answer the question because it explains how to calculate the Root Mean Squared Error (RMSE) without addressing a specific question about Ridge regression or its parameters.
+
+Context 3 does not directly answer the question because it provides a comparison between the regularization parameters in skle",595,7
+,Warning: the environment variable LANG is not set!,8b15cafd96,8b15cafd96,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question by providing a quick-fix for the warning and explaining that it can usually be ignored. 
+Context 2 does not answer the question as it discusses a different topic related to AWS regions. 
+Context 3 does not answer the question as it discusses transforming target variables to logarithm distribution, which is unrelated to the warning. 
+Context 4 does not answer the question as it discusses transforming target variables with long tail distributions, which is a","Context 1 directly answers the question by providing a quick-fix for the warning and explaining that it can usually be ignored. 
+Context 2 does not answer the question as it discusses a different topic related to AWS regions. 
+Context 3 does not answer the question as it discusses transforming target variables to logarithm distribution, which is unrelated to the warning. 
+Context 4 does not answer the question as it discusses transforming target variables with long tail distributions, which is a",688,10
+,"'Jupyter: Install nbconvert, fix ''Failed to spawn'' nbconvert error, and",35d7874a8d,35d7874a8d,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question about installing nbconvert and fixing the 'Failed to spawn' error by providing specific commands to resolve the issue. 
+Context 2 does not directly answer the question about Jupyter or nbconvert, instead discussing Postgres and Docker. 
+Context 3 does not directly answer the question about Jupyter or nbconvert, instead discussing building Spark and Jupyter images. 
+Context 4 does not directly answer the question about Jupyter or nbconvert, instead discussi","Context 1 directly answers the question about installing nbconvert and fixing the 'Failed to spawn' error by providing specific commands to resolve the issue. 
+Context 2 does not directly answer the question about Jupyter or nbconvert, instead discussing Postgres and Docker. 
+Context 3 does not directly answer the question about Jupyter or nbconvert, instead discussing building Spark and Jupyter images. 
+Context 4 does not directly answer the question about Jupyter or nbconvert, instead discussi",698,9
+,Is the KServe module required?,da9f03ae67,da9f03ae67,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it explicitly states that the KServe module is optional and outdated. 
+Context 2 does not answer the question because it discusses a different topic, classification tasks in machine learning. 
+Context 3 does not answer the question because it talks about homeworks and certification, unrelated to the KServe module. 
+Context 4 does not answer the question because it provides a solution to a specific error in a Python script, unrelated to the KServe m","Context 1 directly answers the question because it explicitly states that the KServe module is optional and outdated. 
+Context 2 does not answer the question because it discusses a different topic, classification tasks in machine learning. 
+Context 3 does not answer the question because it talks about homeworks and certification, unrelated to the KServe module. 
+Context 4 does not answer the question because it provides a solution to a specific error in a Python script, unrelated to the KServe m",664,9
+,Why doesn’t Kestra automatically convert printed task outputs into variables?,5a0d2c0e59,5a0d2c0e59,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it explains that Kestra treats printed task outputs as logs, not as structured data, and requires explicit output definitions to persist or reuse values.
+
+Context 2 does not directly answer the question because it discusses the display of file sizes in the Outputs tab and how to get the correct value, but does not explain why Kestra doesn't automatically convert printed task outputs into variables.
+
+Context 3 does not directly answer the question b","Context 1 directly answers the question because it explains that Kestra treats printed task outputs as logs, not as structured data, and requires explicit output definitions to persist or reuse values.
+
+Context 2 does not directly answer the question because it discusses the display of file sizes in the Outputs tab and how to get the correct value, but does not explain why Kestra doesn't automatically convert printed task outputs into variables.
+
+Context 3 does not directly answer the question b",1174,14
+,Python: How to iterate through and ingest parquet file,fbfa475350,fbfa475350,True,"['YES', 'NO', 'NO', 'NO', 'YES']",1,"Context 1 directly answers the question by providing a code example that iterates through and ingests a parquet file in chunks. 
+Context 2 does not answer the question as it only shows how to download a file using curl, not related to parquet files or chunking.
+Context 3 does not answer the question as it discusses repartitioning a DataFrame and writing it to Parquet, but does not provide a way to iterate through and ingest a parquet file.
+Context 4 does not answer the question as it discusses f","Context 1 directly answers the question by providing a code example that iterates through and ingests a parquet file in chunks. 
+Context 2 does not answer the question as it only shows how to download a file using curl, not related to parquet files or chunking.
+Context 3 does not answer the question as it discusses repartitioning a DataFrame and writing it to Parquet, but does not provide a way to iterate through and ingest a parquet file.
+Context 4 does not answer the question as it discusses f",844,11
+,'ValueError: Incorrect item instead of a metric or metric preset was passed,de13b97575,de13b97575,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it provides a specific solution to the ValueError by suggesting to add parentheses.
+
+Context 2 does not directly answer the question because it discusses a different error and solution related to Evidently, but does not address the ValueError.
+
+Context 3 does not directly answer the question because it discusses comparing Pandas DataFrames and Series, but does not address the ValueError.
+
+Context 4 does not directly answer the question because it d","Context 1 directly answers the question because it provides a specific solution to the ValueError by suggesting to add parentheses.
+
+Context 2 does not directly answer the question because it discusses a different error and solution related to Evidently, but does not address the ValueError.
+
+Context 3 does not directly answer the question because it discusses comparing Pandas DataFrames and Series, but does not address the ValueError.
+
+Context 4 does not directly answer the question because it d",811,13
+,'Homework: Is the due date for homework 20th May? How do I check the updated,df10d8e0e7,df10d8e0e7,True,"['YES', 'NO', 'YES', 'NO', 'NO']",1,"Context 1 directly answers the question by providing the due date and a link to the homework submission page for more information.
+Context 2 does not answer the question as it discusses the grading system and leaderboard.
+Context 3 directly answers the question by providing a link to the course schedule where deadlines can be found.
+Context 4 does not answer the question as it discusses the scoring system for homework assignments.
+Context 5 does not answer the question as it discusses the final ","Context 1 directly answers the question by providing the due date and a link to the homework submission page for more information.
+Context 2 does not answer the question as it discusses the grading system and leaderboard.
+Context 3 directly answers the question by providing a link to the course schedule where deadlines can be found.
+Context 4 does not answer the question as it discusses the scoring system for homework assignments.
+Context 5 does not answer the question as it discusses the final ",569,8
+,"IPython - Pandas parsing dates with ""read_csv""",5b4c133384,5b4c133384,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it provides an example of using the `parse_dates` parameter in `pd.read_csv` to parse dates.
+
+Context 2 does not directly answer the question because it discusses reading a CSV file from Google Cloud Storage, but does not mention parsing dates.
+
+Context 3 does not directly answer the question because it discusses reading a Gzip compressed CSV file, but does not mention parsing dates.
+
+Context 4 does not directly answer the question because it discu","Context 1 directly answers the question because it provides an example of using the `parse_dates` parameter in `pd.read_csv` to parse dates.
+
+Context 2 does not directly answer the question because it discusses reading a CSV file from Google Cloud Storage, but does not mention parsing dates.
+
+Context 3 does not directly answer the question because it discusses reading a Gzip compressed CSV file, but does not mention parsing dates.
+
+Context 4 does not directly answer the question because it discu",846,13
+,WSL: Cannot Connect To Docker Daemon,12d79208b3,12d79208b3,True,"['YES', 'YES', 'NO', 'YES', 'YES']",1,"Context 1: This context directly answers the question by providing a solution to the error encountered when trying to run a Docker command in WSL.
+
+Context 2: This context directly answers the question by providing multiple solutions to the error encountered when trying to connect to the Docker daemon.
+
+Context 3: This context does not directly answer the question as it discusses a different error related to the executable `gunicorn` not being found in the container's `$PATH`.
+
+Context 4: This c","Context 1: This context directly answers the question by providing a solution to the error encountered when trying to run a Docker command in WSL.
+
+Context 2: This context directly answers the question by providing multiple solutions to the error encountered when trying to connect to the Docker daemon.
+
+Context 3: This context does not directly answer the question as it discusses a different error related to the executable `gunicorn` not being found in the container's `$PATH`.
+
+Context 4: This c",810,7
+,VS Code: Tab using spaces,e5dc51eac9,e5dc51eac9,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it provides a solution to the problem of tabs being converted to spaces in VS Code.
+
+Context 2 does not directly answer the question because it discusses forwarding ports for pgAdmin, PostgreSQL, and Jupyter Notebook, which is unrelated to the question about VS Code tabs.
+
+Context 3 does not directly answer the question because it discusses managing Docker containers from VS Code, which is unrelated to the question about VS Code tabs.
+
+Context 4 do","Context 1 directly answers the question because it provides a solution to the problem of tabs being converted to spaces in VS Code.
+
+Context 2 does not directly answer the question because it discusses forwarding ports for pgAdmin, PostgreSQL, and Jupyter Notebook, which is unrelated to the question about VS Code tabs.
+
+Context 3 does not directly answer the question because it discusses managing Docker containers from VS Code, which is unrelated to the question about VS Code tabs.
+
+Context 4 do",888,10
+,Is the AWS free tier enough for doing this course?,ce2a690d31,ce2a690d31,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it explicitly states that the AWS free tier is enough for many parts of the course.
+
+Context 2 does not directly answer the question because it discusses troubleshooting an EC2 instance connection, which is unrelated to the AWS free tier.
+
+Context 3 does not directly answer the question because it explains the grading system and leaderboard, which is unrelated to the AWS free tier.
+
+Context 4 does not directly answer the question because it discuss","Context 1 directly answers the question because it explicitly states that the AWS free tier is enough for many parts of the course.
+
+Context 2 does not directly answer the question because it discusses troubleshooting an EC2 instance connection, which is unrelated to the AWS free tier.
+
+Context 3 does not directly answer the question because it explains the grading system and leaderboard, which is unrelated to the AWS free tier.
+
+Context 4 does not directly answer the question because it discuss",777,10
+,GCP BQ ML - Export ML model to make predictions does not work for MacBook,47f7c8310a,47f7c8310a,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it provides a solution to export the ML model and make predictions on a MacBook.
+
+Context 2 does not directly answer the question because it discusses a different issue related to exporting an ML model from BQ to GCS.
+
+Context 3 does not directly answer the question because it provides information on checking if the BigQuery Command Line Tool is installed, which is not related to exporting an ML model.
+
+Context 4 does not directly answer the questi","Context 1 directly answers the question because it provides a solution to export the ML model and make predictions on a MacBook.
+
+Context 2 does not directly answer the question because it discusses a different issue related to exporting an ML model from BQ to GCS.
+
+Context 3 does not directly answer the question because it provides information on checking if the BigQuery Command Line Tool is installed, which is not related to exporting an ML model.
+
+Context 4 does not directly answer the questi",803,12
+,SQL: SELECT Zone FROM taxi_zones Error Column Zone doesn''t exist,358cb2fd4d,358cb2fd4d,True,"['NO', 'YES', 'NO', 'YES', 'NO']",2,"Context 1 does not directly answer the question because it discusses a different issue related to data case sensitivity.
+Context 2 directly answers the question because it provides a solution to the error by enclosing the column name in double quotes.
+Context 3 does not directly answer the question because it discusses a different error related to the `\d` command.
+Context 4 directly answers the question because it provides a solution to the error by enclosing the column name in double quotes.
+C","Context 1 does not directly answer the question because it discusses a different issue related to data case sensitivity.
+Context 2 directly answers the question because it provides a solution to the error by enclosing the column name in double quotes.
+Context 3 does not directly answer the question because it discusses a different error related to the `\d` command.
+Context 4 directly answers the question because it provides a solution to the error by enclosing the column name in double quotes.
+C",663,8
+,"How do I structure a layered data warehouse (raw, clean, analytics) for",a198f6959c,a198f6959c,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1: This context directly answers the question by providing a detailed structure for a layered data warehouse. 
+Context 2: This context does not directly answer the question, it discusses BigQuery's Identity and Access Management (IAM) and security best practices. 
+Context 3: This context does not directly answer the question, it provides information on how to read from and write to BigQuery using Apache Spark. 
+Context 4: This context does not directly answer the question, it mentions Bi","Context 1: This context directly answers the question by providing a detailed structure for a layered data warehouse. 
+Context 2: This context does not directly answer the question, it discusses BigQuery's Identity and Access Management (IAM) and security best practices. 
+Context 3: This context does not directly answer the question, it provides information on how to read from and write to BigQuery using Apache Spark. 
+Context 4: This context does not directly answer the question, it mentions Bi",786,10
+,Pickle error: can’t get attribute XXX on module __main__,3e621509d2,3e621509d2,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it provides a solution to the Pickle error issue.
+Context 2 does not directly answer the question because it discusses alternative platforms for running Jupyter notebooks, which is unrelated to the Pickle error.
+Context 3 does not directly answer the question because it discusses a different error related to pipenv installation, which is unrelated to the Pickle error.
+Context 4 does not directly answer the question because it discusses a different ","Context 1 directly answers the question because it provides a solution to the Pickle error issue.
+Context 2 does not directly answer the question because it discusses alternative platforms for running Jupyter notebooks, which is unrelated to the Pickle error.
+Context 3 does not directly answer the question because it discusses a different error related to pipenv installation, which is unrelated to the Pickle error.
+Context 4 does not directly answer the question because it discusses a different ",767,10
+,Kind: cannot load docker image,fd3a06c6ee,fd3a06c6ee,True,"['YES', 'YES', 'YES', 'YES', 'NO']",1,"Context 1 directly answers the question by providing a solution to the problem of failing to load a Docker image to a cluster. 
+Context 2 directly answers the question by providing a solution to the problem of pulling a Docker image with the correct tag. 
+Context 3 directly answers the question by providing a solution to the problem of loading an image from a GitHub URL. 
+Context 4 directly answers the question by providing a solution to the problem of connecting to the Docker daemon. 
+Context 5","Context 1 directly answers the question by providing a solution to the problem of failing to load a Docker image to a cluster. 
+Context 2 directly answers the question by providing a solution to the problem of pulling a Docker image with the correct tag. 
+Context 3 directly answers the question by providing a solution to the problem of loading an image from a GitHub URL. 
+Context 4 directly answers the question by providing a solution to the problem of connecting to the Docker daemon. 
+Context 5",669,6
+,Transforming Non-Numerical Columns into Numerical Columns,c4be895874,c4be895874,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it provides specific examples of encoders and scalers that can be used to transform non-numerical columns into numerical columns.
+Context 2 does not directly answer the question because it discusses the ROC AUC score calculation, which is unrelated to transforming non-numerical columns.
+Context 3 does not directly answer the question because it suggests checking previous solutions without providing any specific information on how to transform non-n","Context 1 directly answers the question because it provides specific examples of encoders and scalers that can be used to transform non-numerical columns into numerical columns.
+Context 2 does not directly answer the question because it discusses the ROC AUC score calculation, which is unrelated to transforming non-numerical columns.
+Context 3 does not directly answer the question because it suggests checking previous solutions without providing any specific information on how to transform non-n",884,14
+,how many Zoomcamps run in a year?,b71fb3b195,b71fb3b195,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question as it provides information about the number of Zoomcamps run in a year, stating that each Zoomcamp has one ""live"" cohort per year. 
+Context 2 does not answer the question as it discusses Spark and Parquet files, unrelated to Zoomcamps. 
+Context 3 does not answer the question as it talks about redefining a Python environment variable, unrelated to Zoomcamps. 
+Context 4 does not answer the question as it provides a script for using Kestra, unrelated to Zoomc","Context 1 directly answers the question as it provides information about the number of Zoomcamps run in a year, stating that each Zoomcamp has one ""live"" cohort per year. 
+Context 2 does not answer the question as it discusses Spark and Parquet files, unrelated to Zoomcamps. 
+Context 3 does not answer the question as it talks about redefining a Python environment variable, unrelated to Zoomcamps. 
+Context 4 does not answer the question as it provides a script for using Kestra, unrelated to Zoomc",642,9
+,Cannot find Spark jobs UI at localhost,14b039801e,14b039801e,True,"['YES', 'YES', 'NO', 'NO', 'YES']",1,"Context 1: This context directly answers the question by providing a command to check the port used by Spark UI.
+Context 2: This context directly answers the question by explaining how to find the correct Spark Web UI port and how to access it.
+Context 3: This context does not directly answer the question, it provides a solution for a related problem of accessing the Spark UI from a VM.
+Context 4: This context does not directly answer the question, it provides a solution for a different problem ","Context 1: This context directly answers the question by providing a command to check the port used by Spark UI.
+Context 2: This context directly answers the question by explaining how to find the correct Spark Web UI port and how to access it.
+Context 3: This context does not directly answer the question, it provides a solution for a related problem of accessing the Spark UI from a VM.
+Context 4: This context does not directly answer the question, it provides a solution for a different problem ",702,7
+,"Made change to your modeling files and commit to your development branch,",ee3f7f89ba,ee3f7f89ba,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it provides the next steps after making changes to the modeling files and committing to the development branch.
+
+Context 2 does not directly answer the question because it discusses saving progress in the BigQuery SQL Editor, which is unrelated to the question.
+
+Context 3 does not directly answer the question because it provides troubleshooting steps for the Google Cloud SDK Windows installer, which is unrelated to the question.
+
+Context 4 does not","Context 1 directly answers the question because it provides the next steps after making changes to the modeling files and committing to the development branch.
+
+Context 2 does not directly answer the question because it discusses saving progress in the BigQuery SQL Editor, which is unrelated to the question.
+
+Context 3 does not directly answer the question because it provides troubleshooting steps for the Google Cloud SDK Windows installer, which is unrelated to the question.
+
+Context 4 does not",783,10
+,Read-in the File in Windows OS,5e953f0e8e,5e953f0e8e,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,,"['YES', 'NO', 'NO', 'NO', 'NO']
+
+Context 1 directly answers the question about reading a dataset with Pandas in Windows by providing the correct code to use. 
+Context 2 does not answer the question as it discusses a different topic of running a Docker file in Windows.
+Context 3 does not answer the question as it talks about the format of a training file.
+Context 4 does not answer the question as it explains how to check a file size using PowerShell.
+Context 5 does not answer the question as it p",537,9
+,Why does Spark write multiple parquet files after repartitioning a DataFrame?,a71d2105aa,a71d2105aa,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it explains that Spark writes each partition as a separate output file when writing a DataFrame to disk.
+
+Context 2 does not answer the question because it discusses global temporary views in Spark, which is unrelated to writing multiple parquet files.
+
+Context 3 does not answer the question because it discusses resolving data type errors when defining the schema for a Spark DataFrame, which is unrelated to writing multiple parquet files.
+
+Context ","Context 1 directly answers the question because it explains that Spark writes each partition as a separate output file when writing a DataFrame to disk.
+
+Context 2 does not answer the question because it discusses global temporary views in Spark, which is unrelated to writing multiple parquet files.
+
+Context 3 does not answer the question because it discusses resolving data type errors when defining the schema for a Spark DataFrame, which is unrelated to writing multiple parquet files.
+
+Context ",868,9
+,"'Problem: ''ls'' is not recognized as an internal or external command, operable",c336d11260,c336d11260,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it provides an alternative command to use in a Windows Jupyter Notebook when 'ls' is not recognized.
+
+Context 2 does not directly answer the question because it discusses a different error related to 'pipenv' and does not address the 'ls' command issue.
+
+Context 3 does not directly answer the question because it discusses a different error related to 'kind' and does not address the 'ls' command issue.
+
+Context 4 does not directly answer the questio","Context 1 directly answers the question because it provides an alternative command to use in a Windows Jupyter Notebook when 'ls' is not recognized.
+
+Context 2 does not directly answer the question because it discusses a different error related to 'pipenv' and does not address the 'ls' command issue.
+
+Context 3 does not directly answer the question because it discusses a different error related to 'kind' and does not address the 'ls' command issue.
+
+Context 4 does not directly answer the questio",788,15
+,"'Command aws ecr get-login --no-include-email returns ""aws: error: argument",b612fa07ec,b612fa07ec,True,"['YES', 'YES', 'YES', 'NO', 'NO']",1,"Context 1 directly answers the question by providing the correct command to use instead of the deprecated `aws ecr get-login` command. 
+Context 2 directly answers the question by explaining the deprecation of the `aws ecr get-login` command and providing the correct command to use. 
+Context 3 directly answers the question by providing the correct command to use instead of the deprecated `aws ecr get-login` command. 
+Context 4 does not directly answer the question as it discusses a different erro","Context 1 directly answers the question by providing the correct command to use instead of the deprecated `aws ecr get-login` command. 
+Context 2 directly answers the question by explaining the deprecation of the `aws ecr get-login` command and providing the correct command to use. 
+Context 3 directly answers the question by providing the correct command to use instead of the deprecated `aws ecr get-login` command. 
+Context 4 does not directly answer the question as it discusses a different erro",647,7
+,No module named ‘ping’?,1b08427cd4,1b08427cd4,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question by providing a solution to import the 'ping' module. 
+Context 2 does not directly answer the question as it discusses a different module and error. 
+Context 3 does not directly answer the question as it discusses a different module and error. 
+Context 4 does not directly answer the question as it discusses a different error and solution. 
+Context 5 does not directly answer the question as it is unrelated to the topic.","Context 1 directly answers the question by providing a solution to import the 'ping' module. 
+Context 2 does not directly answer the question as it discusses a different module and error. 
+Context 3 does not directly answer the question as it discusses a different module and error. 
+Context 4 does not directly answer the question as it discusses a different error and solution. 
+Context 5 does not directly answer the question as it is unrelated to the topic.
+
+['YES', 'NO', 'NO', 'NO', 'NO']",494,9
+,Homework: What is the homework URL in the homework link?,9d89b52976,9d89b52976,False,"['NO', 'NO', 'NO', 'NO', 'NO']",,"Context 1 does not directly answer the question because it explains the concept of a homework URL but does not provide the actual URL.
+Context 2 does not directly answer the question because it discusses deadlines and submission forms but does not mention the homework URL.
+Context 3 does not directly answer the question because it talks about late submissions and the submission process but does not provide the homework URL.
+Context 4 does not directly answer the question because it explains a sp","Context 1 does not directly answer the question because it explains the concept of a homework URL but does not provide the actual URL.
+Context 2 does not directly answer the question because it discusses deadlines and submission forms but does not mention the homework URL.
+Context 3 does not directly answer the question because it talks about late submissions and the submission process but does not provide the homework URL.
+Context 4 does not directly answer the question because it explains a sp",734,15
+,Is there any advantage to high homework/leaderboard scores?,9ffc454a24,9ffc454a24,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1: This context directly answers the question by stating that high homework/leaderboard scores can indirectly help with networking and recruiter attention.
+Context 2: This context does not directly answer the question as it discusses a different topic of creating a mobile app or interface.
+Context 3: This context does not directly answer the question as it discusses a specific issue with a discrepancy in results and provides a solution.
+Context 4: This context does not directly answer th","Context 1: This context directly answers the question by stating that high homework/leaderboard scores can indirectly help with networking and recruiter attention.
+Context 2: This context does not directly answer the question as it discusses a different topic of creating a mobile app or interface.
+Context 3: This context does not directly answer the question as it discusses a specific issue with a discrepancy in results and provides a solution.
+Context 4: This context does not directly answer th",727,9
+,Error decoding JSON response: Expecting value: line 1 column 1 (char 0),25ff7dd14c,25ff7dd14c,True,"['YES', 'NO', 'YES', 'YES', 'NO']",1,"Context 1: This context directly answers the question by explaining the error and providing a solution to convert the input format to a suitable one for the model.
+Context 2: This context does not directly answer the question, it discusses an alternative approach to evaluation but does not address the error.
+Context 3: This context directly answers the question by explaining the error and providing a solution to convert the input type to the expected one.
+Context 4: This context directly answers","Context 1: This context directly answers the question by explaining the error and providing a solution to convert the input format to a suitable one for the model.
+Context 2: This context does not directly answer the question, it discusses an alternative approach to evaluation but does not address the error.
+Context 3: This context directly answers the question by explaining the error and providing a solution to convert the input type to the expected one.
+Context 4: This context directly answers",765,8
+,Error raised when executing mlflow’s pyfunc.load_model in lambda function.,164b0e749d,164b0e749d,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it provides a solution to the error raised when executing mlflow's pyfunc.load_model in a lambda function.
+
+Context 2 does not directly answer the question because it discusses a different error related to Docker images and AWS Lambda, not mlflow's pyfunc.load_model.
+
+Context 3 does not directly answer the question because it discusses a permission error in a GitHub CI action, unrelated to mlflow's pyfunc.load_model.
+
+Context 4 does not directly an","Context 1 directly answers the question because it provides a solution to the error raised when executing mlflow's pyfunc.load_model in a lambda function.
+
+Context 2 does not directly answer the question because it discusses a different error related to Docker images and AWS Lambda, not mlflow's pyfunc.load_model.
+
+Context 3 does not directly answer the question because it discusses a permission error in a GitHub CI action, unrelated to mlflow's pyfunc.load_model.
+
+Context 4 does not directly an",811,10
+,The feature size is different for training set and validation set,3f9286329a,3f9286329a,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it explains why the feature sizes for the training and validation datasets might be different and how to resolve the issue.
+
+Context 2 does not directly answer the question because it discusses a different topic related to autologging and MLflow.
+
+Context 3 does not directly answer the question because it discusses a related issue with OneHotEncoder and DictVectorizer, but does not address the specific problem of different feature sizes.
+
+Context 4","Context 1 directly answers the question because it explains why the feature sizes for the training and validation datasets might be different and how to resolve the issue.
+
+Context 2 does not directly answer the question because it discusses a different topic related to autologging and MLflow.
+
+Context 3 does not directly answer the question because it discusses a related issue with OneHotEncoder and DictVectorizer, but does not address the specific problem of different feature sizes.
+
+Context 4",797,10
+,Docker: Docker-Compose deprecated,f2458f5a26,f2458f5a26,True,"['NO', 'YES', 'NO', 'NO', 'NO']",2,"Context 1 does not directly answer the question as it only provides information about the deprecation of Docker Compose v1 without offering a solution. 
+Context 2 directly answers the question by providing a solution to the error caused by the deprecation of Docker Compose v1. 
+Context 3 does not directly answer the question as it discusses a different topic related to Docker Compose, which is selecting a group of containers to run. 
+Context 4 does not directly answer the question as it discusse","Context 1 does not directly answer the question as it only provides information about the deprecation of Docker Compose v1 without offering a solution. 
+Context 2 directly answers the question by providing a solution to the error caused by the deprecation of Docker Compose v1. 
+Context 3 does not directly answer the question as it discusses a different topic related to Docker Compose, which is selecting a group of containers to run. 
+Context 4 does not directly answer the question as it discusse",748,10
+,Running out of storage when using Kestra with Postgres on a GCP VM,00e8093b90,00e8093b90,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question by providing steps to find and reclaim space on a GCP VM when running out of storage while using Kestra with Postgres. 
+Context 2 does not directly answer the question, it discusses the advantages of using a personal environment instead of a GCP VM.
+Context 3 does not directly answer the question, it explains how to submit a job to Dataproc from a local computer.
+Context 4 does not directly answer the question, it provides information on enabling nested vi","Context 1 directly answers the question by providing steps to find and reclaim space on a GCP VM when running out of storage while using Kestra with Postgres. 
+Context 2 does not directly answer the question, it discusses the advantages of using a personal environment instead of a GCP VM.
+Context 3 does not directly answer the question, it explains how to submit a job to Dataproc from a local computer.
+Context 4 does not directly answer the question, it provides information on enabling nested vi",725,10
+,'Python Kafka: ‘KafkaTimeoutError: Failed to update metadata after 60.0,b2c1c1d0ec,b2c1c1d0ec,True,"['YES', 'NO', 'NO', 'NO', 'YES']",1,"Context 1: This context directly answers the question by providing a solution to the KafkaTimeoutError issue.
+Context 2: This context does not directly answer the question, as it provides a possible cause of a different error.
+Context 3: This context does not directly answer the question, as it provides additional information about the rides.csv data.
+Context 4: This context does not directly answer the question, as it provides a solution to a different issue.
+Context 5: This context directly an","Context 1: This context directly answers the question by providing a solution to the KafkaTimeoutError issue.
+Context 2: This context does not directly answer the question, as it provides a possible cause of a different error.
+Context 3: This context does not directly answer the question, as it provides additional information about the rides.csv data.
+Context 4: This context does not directly answer the question, as it provides a solution to a different issue.
+Context 5: This context directly an",608,8
+,Install docker in WSL2 without installing Docker Desktop,1bc7beaf5d,1bc7beaf5d,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question by providing a step-by-step guide to install Docker in WSL2 without Docker Desktop.
+Context 2 does not directly answer the question as it discusses how to view the model inside a Docker container, which is a different topic.
+Context 3 does not directly answer the question as it discusses the deprecation of Docker Compose v1, which is not related to installing Docker in WSL2.
+Context 4 does not directly answer the question as it discusses how to run Flask w","Context 1 directly answers the question by providing a step-by-step guide to install Docker in WSL2 without Docker Desktop.
+Context 2 does not directly answer the question as it discusses how to view the model inside a Docker container, which is a different topic.
+Context 3 does not directly answer the question as it discusses the deprecation of Docker Compose v1, which is not related to installing Docker in WSL2.
+Context 4 does not directly answer the question as it discusses how to run Flask w",775,11
+,How to Install Xgboost,bc2d83ddc7,bc2d83ddc7,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question by providing the command to install Xgboost. 
+Context 2 does not directly answer the question, as it discusses an error that may occur when using Xgboost, but does not provide installation instructions. 
+Context 3 does not directly answer the question, as it discusses an alternative way to extract training and validation AUC, but does not provide installation instructions. 
+Context 4 does not directly answer the question, as it discusses installing kubectl","Context 1 directly answers the question by providing the command to install Xgboost. 
+Context 2 does not directly answer the question, as it discusses an error that may occur when using Xgboost, but does not provide installation instructions. 
+Context 3 does not directly answer the question, as it discusses an alternative way to extract training and validation AUC, but does not provide installation instructions. 
+Context 4 does not directly answer the question, as it discusses installing kubectl",729,11
+,'xgboost.core.XGBoostError: This app has encountered an error. The original,a51d605063,a51d605063,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question because it provides a solution to the error by ensuring sklearn is installed.
+Context 2 does not directly answer the question because it discusses copying a dataframe, which is unrelated to the error.
+Context 3 does not directly answer the question because it provides information about the course schedule, which is unrelated to the error.
+Context 4 does not directly answer the question because it discusses a different topic, handling missing values in Deci","Context 1 directly answers the question because it provides a solution to the error by ensuring sklearn is installed.
+Context 2 does not directly answer the question because it discusses copying a dataframe, which is unrelated to the error.
+Context 3 does not directly answer the question because it provides information about the course schedule, which is unrelated to the error.
+Context 4 does not directly answer the question because it discusses a different topic, handling missing values in Deci",708,9
+,Model training very slow in google colab with T4 GPU,39112d0ede,39112d0ede,True,"['YES', 'NO', 'NO', 'NO', 'NO']",1,"Context 1 directly answers the question by providing a solution to improve model training performance on a T4 GPU in Google Colab. 
+Context 2 does not answer the question as it discusses using wget in Google Colab, which is unrelated to model training performance. 
+Context 3 does not answer the question as it discusses using Docker in Google Colab, which is unrelated to model training performance. 
+Context 4 does not answer the question as it discusses fixing an error in Keras model training, bu","Context 1 directly answers the question by providing a solution to improve model training performance on a T4 GPU in Google Colab. 
+Context 2 does not answer the question as it discusses using wget in Google Colab, which is unrelated to model training performance. 
+Context 3 does not answer the question as it discusses using Docker in Google Colab, which is unrelated to model training performance. 
+Context 4 does not answer the question as it discusses fixing an error in Keras model training, bu",715,11

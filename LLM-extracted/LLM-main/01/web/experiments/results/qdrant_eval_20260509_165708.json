@@ -1,0 +1,53 @@
+{
+  "metadata": {
+    "name": "Qdrant Evaluation Suite",
+    "timestamp": "2026-05-09T16:57:08.289495"
+  },
+  "results": {
+    "embedding_all-MiniLM-L6-v2": {
+      "recall_at_1": 0.985,
+      "dimensions": 384
+    },
+    "embedding_BAAI/bge-small-en-v1.5": {
+      "recall_at_1": 0.985,
+      "dimensions": 384
+    },
+    "hybrid": {
+      "pure_vector_recall": 1.0,
+      "vector_with_filter_recall": 1.0
+    },
+    "cross_course": {
+      "queries_tested": 300,
+      "cross_course_hits": {
+        "llm-zoomcamp": 129,
+        "mlops-zoomcamp": 6,
+        "de-zoomcamp": 237,
+        "ml-zoomcamp": 3
+      }
+    },
+    "latency": {
+      "qdrant": {
+        "p50": 3.8,
+        "p95": 4.6,
+        "p99": 5.0,
+        "mean": 3.9
+      },
+      "es_vector": {
+        "p50": 4.7,
+        "p95": 5.7,
+        "p99": 6.1,
+        "mean": 4.8
+      },
+      "es_bm25": {
+        "p50": 3.6,
+        "p95": 4.8,
+        "p99": 5.1,
+        "mean": 3.7
+      }
+    },
+    "diversity": {
+      "avg_pairwise_distance": 0.4712,
+      "avg_unique_sections": 2.57
+    }
+  }
+}

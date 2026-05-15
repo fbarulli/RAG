@@ -1,0 +1,271 @@
+{
+  "metadata": {
+    "count": 24
+  },
+  "queries": [
+    {
+      "original_question": "Singular Matrix Error",
+      "expected_id": "0be9e7cc3d",
+      "course": "ml-zoomcamp",
+      "sub_topic": 0,
+      "variations": [
+        "what is a singular matrix and how do i fix it",
+        "why cant i invert this matrix",
+        "matrix wont invert says its singular wtf do i do"
+      ]
+    },
+    {
+      "original_question": "What are embeddings?",
+      "expected_id": "69430a79a8",
+      "course": "llm-zoomcamp",
+      "sub_topic": 0,
+      "variations": [
+        "What is the process of turning non numerical data into numbers?",
+        "converting non numerical data to numerical data for machine learning",
+        "how do u turn words into numbers that a computer can understand??"
+      ]
+    },
+    {
+      "original_question": "Understanding Ridge",
+      "expected_id": "ef52b72189",
+      "course": "ml-zoomcamp",
+      "sub_topic": 0,
+      "variations": [
+        "what is ridge regression used for",
+        "how to prevent multicollinearity in linear regression",
+        "whats the deal with sag solver in ridge regression?"
+      ]
+    },
+    {
+      "original_question": "How do you find the correlation matrix?",
+      "expected_id": "abfdc60e4a",
+      "course": "ml-zoomcamp",
+      "sub_topic": 0,
+      "variations": [
+        "how to make a correlation matrix in pandas",
+        "correlating numerical and categorical data",
+        "how do i find correlations btwn columns in df??"
+      ]
+    },
+    {
+      "original_question": "Homework Q4: Is r same as alpha in Scikit-Learn Ridge?",
+      "expected_id": "3ff258b230",
+      "course": "ml-zoomcamp",
+      "sub_topic": 0,
+      "variations": [
+        "What's the difference between r and alpha in regularization",
+        "sklearn ridge regression alpha vs r parameter",
+        "whats the deal w alpha in sklearn ridge is it same as reg param r??"
+      ]
+    },
+    {
+      "original_question": "ValueError: not enough values to unpack when parsing XGBoost output in parse_xg_output; how to fix and switch to evals_result?",
+      "expected_id": "91ff5cb6b6",
+      "course": "ml-zoomcamp",
+      "sub_topic": 1,
+      "variations": [
+        "xgboost error not enough values to unpack",
+        "Why is my xgboost model throwing a value error when parsing output?",
+        "xgboost train not printing logs to stdout help!!"
+      ]
+    },
+    {
+      "original_question": "I get `TypeError: got an unexpected keyword argument 'squared'` when using `mean_squared_error(..., squared=False)`. Why?",
+      "expected_id": "f346d2cc80",
+      "course": "mlops-zoomcamp",
+      "sub_topic": 1,
+      "variations": [
+        "TypeError with mean squared error and squared=false",
+        "scikit learn rmse unexpected keyword",
+        "why does sklearn throw error when i try to get rmse with squared=false??"
+      ]
+    },
+    {
+      "original_question": "Error with the line interpreter.set_tensor(input_index, X)",
+      "expected_id": "29f149ff07",
+      "course": "ml-zoomcamp",
+      "sub_topic": 1,
+      "variations": [
+        "Why does interpreter.set_tensor require float32 input?",
+        "valueerror uint8 vs float32 when setting tensor in python",
+        "how do i fix cannot set tensor expected float got uint8 error in tflite"
+      ]
+    },
+    {
+      "original_question": "Error: Error while parsing arguments via CLI [ValueError: Unknown format code 'd' for object of type 'str']",
+      "expected_id": "e781391c86",
+      "course": "mlops-zoomcamp",
+      "sub_topic": 1,
+      "variations": [
+        "Why does ValueError occur when formatting string as integer in CLI",
+        "error parsing args via command line",
+        "why cant i use f string formatting with sys.argv"
+      ]
+    },
+    {
+      "original_question": "Overfitting: Absurdly high RMSE on the validation dataset",
+      "expected_id": "3b76daefb2",
+      "course": "mlops-zoomcamp",
+      "sub_topic": 2,
+      "variations": [
+        "high rmse on test set after removing outliers",
+        "why is my rmse so high on validation set after preprocessing",
+        "wth huge rmse on val set after stripping outliers from feb data??"
+      ]
+    },
+    {
+      "original_question": "Reproducibility: Do we have to run everything?",
+      "expected_id": "128c829dbd",
+      "course": "ml-zoomcamp",
+      "sub_topic": 2,
+      "variations": [
+        "do i have to run all the code",
+        "How to ensure reproducibility in projects",
+        "do i hav 2 run everythin to reproduce results??"
+      ]
+    },
+    {
+      "original_question": "Why does DecisionTreeClassifier and DecisionTreeRegressor not throw an error when there are nan (missing) values in the feature matrix?",
+      "expected_id": "c0444b72ca",
+      "course": "ml-zoomcamp",
+      "sub_topic": 2,
+      "variations": [
+        "Decision Tree Classifier handling NaN values",
+        "Why no error for missing data in DecisionTreeRegressor?",
+        "sklearn decision tree not complaining about missing vals??"
+      ]
+    },
+    {
+      "original_question": "Does anyone know nice and relatively large datasets?",
+      "expected_id": "2220285e58",
+      "course": "de-zoomcamp",
+      "sub_topic": 2,
+      "variations": [
+        "large public datasets for research",
+        "where can i find big datasets to practice data science",
+        "good dataset sites for machine learning projects"
+      ]
+    },
+    {
+      "original_question": "Homework: Ingesting NYC TLC Data",
+      "expected_id": "c549d24645",
+      "course": "de-zoomcamp",
+      "sub_topic": 2,
+      "variations": [
+        "How to import NYC taxi data from github for homework",
+        "NYC TLC data upload script for google cloud storage",
+        "whats the easiest way to get nyc tlc data from github to gcs for homework??"
+      ]
+    },
+    {
+      "original_question": "Docker: Flask image was built and tested successfully, but tensorflow serving image was built and unable to test successfully. What could be the problem?",
+      "expected_id": "c04524a66d",
+      "course": "ml-zoomcamp",
+      "sub_topic": 3,
+      "variations": [
+        "tensorflow serving illegal instruction error",
+        "docker tf serving wont test on apple silicon",
+        "tf serving entrypoint.sh line 3 illegal instruction wth?!"
+      ]
+    },
+    {
+      "original_question": "Running \u2018nvidia-smi\u2019 in a loop without using \u2018watch\u2019",
+      "expected_id": "e3c5c81223",
+      "course": "ml-zoomcamp",
+      "sub_topic": 3,
+      "variations": [
+        "how to refresh nvidia smi automatically",
+        "nvidia smi loop without watch command",
+        "nvidia smi update every sec w/o watch thx"
+      ]
+    },
+    {
+      "original_question": "Out of memory errors when running tensorflow",
+      "expected_id": "92eac8d507",
+      "course": "ml-zoomcamp",
+      "sub_topic": 3,
+      "variations": [
+        "TensorFlow GPU memory issues",
+        "How do I stop TensorFlow from running out of memory on my Nvidia graphics card?",
+        "tf gpu out of mem error fix plz"
+      ]
+    },
+    {
+      "original_question": "How can I run MLflow on a remote server and access it from a different domain without encountering the 'Invalid Host header' error during development or testing?",
+      "expected_id": "3b5e939644",
+      "course": "mlops-zoomcamp",
+      "sub_topic": 3,
+      "variations": [
+        "mlflow invalid host header error fix",
+        "How do I allow cross origin requests for mlflow server?",
+        "mlflow server cors error when accessing from different domain"
+      ]
+    },
+    {
+      "original_question": "mlflow ui on Windows FileNotFoundError: [WinError 2] The system cannot find the file specified",
+      "expected_id": "f7cd7d85ab",
+      "course": "mlops-zoomcamp",
+      "sub_topic": 3,
+      "variations": [
+        "mlflow ui error windows",
+        "why does mlflow ui give file not found error on windows?",
+        "mlflow ui winerror 2 the system cannot find the file specified wth"
+      ]
+    },
+    {
+      "original_question": "Homework: dlt Exercise 3 - Merge a generator concerns",
+      "expected_id": "5b5d82a924",
+      "course": "de-zoomcamp",
+      "sub_topic": 4,
+      "variations": [
+        "What's the total age of loaded people with actual jobs",
+        "how to calculate sum of ages after filtering out none occupation",
+        "sum ages after filtering out none jobs plz"
+      ]
+    },
+    {
+      "original_question": "Adding additional metric",
+      "expected_id": "296ea7fed1",
+      "course": "mlops-zoomcamp",
+      "sub_topic": 4,
+      "variations": [
+        "Added new metric but getting column errors",
+        "Why am I getting target columns not present error after adding a new metric?",
+        "metric added but says pred cols not ther wut do i do??"
+      ]
+    },
+    {
+      "original_question": "Standard Deviation Differences in Numpy and Pandas",
+      "expected_id": "5020067c2b",
+      "course": "ml-zoomcamp",
+      "sub_topic": 4,
+      "variations": [
+        "why is numpy std different from pandas std",
+        "numpy vs pandas standard deviation calculation",
+        "why numpy and pandas giving diff std dev results"
+      ]
+    },
+    {
+      "original_question": "Why do we use Jan/Feb/March for Train/Test/Validation Purposes?",
+      "expected_id": "d30594cef3",
+      "course": "mlops-zoomcamp",
+      "sub_topic": 4,
+      "variations": [
+        "Why use sequential months for splitting data in machine learning",
+        "seasonality in data splitting - jan feb march",
+        "why cant i just random split my data whats the point of using jan feb march"
+      ]
+    },
+    {
+      "original_question": "Getting the same result",
+      "expected_id": "cee7450404",
+      "course": "ml-zoomcamp",
+      "sub_topic": 4,
+      "variations": [
+        "why am i getting same prediction result from docker image",
+        "docker model not updating",
+        "same output every time i run docker container how to fix"
+      ]
+    }
+  ]
+}

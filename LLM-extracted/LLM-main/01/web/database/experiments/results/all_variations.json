@@ -1,0 +1,44 @@
+[
+  {
+    "name": "BM25 Default",
+    "recall": 97.6,
+    "correct": 976,
+    "total": 1000
+  },
+  {
+    "name": "BM25 High Question",
+    "recall": 97.6,
+    "correct": 976,
+    "total": 1000
+  },
+  {
+    "name": "BM25 High Text",
+    "recall": 97.6,
+    "correct": 976,
+    "total": 1000
+  },
+  {
+    "name": "BM25 Balanced",
+    "recall": 97.6,
+    "correct": 976,
+    "total": 1000
+  },
+  {
+    "name": "Vector Default",
+    "recall": 97.2,
+    "correct": 972,
+    "total": 1000
+  },
+  {
+    "name": "Hybrid Default",
+    "recall": 97.6,
+    "correct": 976,
+    "total": 1000
+  },
+  {
+    "name": "Hybrid Balanced",
+    "recall": 97.6,
+    "correct": 976,
+    "total": 1000
+  }
+]

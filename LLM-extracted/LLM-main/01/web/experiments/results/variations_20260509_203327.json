@@ -1,0 +1,2141 @@
+{
+  "metadata": {
+    "total_queries": 390,
+    "timestamp": "2026-05-09T20:33:27.493664"
+  },
+  "configs": [
+    {
+      "total": 390,
+      "found": 323,
+      "hit_rate": 0.8282051282051283,
+      "recall_at_k": {
+        "1": 0.5384615384615384,
+        "3": 0.7128205128205128,
+        "5": 0.7512820512820513,
+        "10": 0.8282051282051283
+      },
+      "mrr": 0.6357,
+      "cross_course_rate": 0.0,
+      "p50_latency": 5.6,
+      "p95_latency": 6.6,
+      "name": "bm25_default",
+      "per_strategy": {
+        "grounded_analyst": {
+          "total": 150,
+          "found": 141,
+          "hit_rate": 0.94,
+          "recall_at_k": {
+            "1": 0.6533333333333333,
+            "3": 0.8333333333333334,
+            "5": 0.8866666666666667,
+            "10": 0.94
+          },
+          "mrr": 0.753,
+          "cross_course_rate": 0.0,
+          "p50_latency": 5.4,
+          "p95_latency": 6.4
+        },
+        "creative_student": {
+          "total": 105,
+          "found": 92,
+          "hit_rate": 0.8761904761904762,
+          "recall_at_k": {
+            "1": 0.5523809523809524,
+            "3": 0.7523809523809524,
+            "5": 0.7714285714285715,
+            "10": 0.8761904761904762
+          },
+          "mrr": 0.6595,
+          "cross_course_rate": 0.0,
+          "p50_latency": 5.7,
+          "p95_latency": 6.6
+        },
+        "chaos_monkey": {
+          "total": 135,
+          "found": 90,
+          "hit_rate": 0.6666666666666666,
+          "recall_at_k": {
+            "1": 0.4,
+            "3": 0.5481481481481482,
+            "5": 0.5851851851851851,
+            "10": 0.6666666666666666
+          },
+          "mrr": 0.4867,
+          "cross_course_rate": 0.0,
+          "p50_latency": 5.6,
+          "p95_latency": 6.7
+        }
+      },
+      "per_course": {
+        "llm-zoomcamp": {
+          "total": 75,
+          "found": 66,
+          "hit_rate": 0.88,
+          "recall_at_k": {
+            "1": 0.6666666666666666,
+            "3": 0.7866666666666666,
+            "5": 0.84,
+            "10": 0.88
+          },
+          "mrr": 0.7424,
+          "cross_course_rate": 0.0,
+          "p50_latency": 5.7,
+          "p95_latency": 6.8
+        },
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 114,
+          "hit_rate": 0.8636363636363636,
+          "recall_at_k": {
+            "1": 0.5909090909090909,
+            "3": 0.7424242424242424,
+            "5": 0.7727272727272727,
+            "10": 0.8636363636363636
+          },
+          "mrr": 0.6771,
+          "cross_course_rate": 0.0,
+          "p50_latency": 5.6,
+          "p95_latency": 6.6
+        },
+        "mlops-zoomcamp": {
+          "total": 51,
+          "found": 42,
+          "hit_rate": 0.8235294117647058,
+          "recall_at_k": {
+            "1": 0.43137254901960786,
+            "3": 0.6862745098039216,
+            "5": 0.7450980392156863,
+            "10": 0.8235294117647058
+          },
+          "mrr": 0.5664,
+          "cross_course_rate": 0.0,
+          "p50_latency": 5.4,
+          "p95_latency": 6.1
+        },
+        "ml-zoomcamp": {
+          "total": 132,
+          "found": 101,
+          "hit_rate": 0.7651515151515151,
+          "recall_at_k": {
+            "1": 0.45454545454545453,
+            "3": 0.6515151515151515,
+            "5": 0.6818181818181818,
+            "10": 0.7651515151515151
+          },
+          "mrr": 0.5603,
+          "cross_course_rate": 0.0,
+          "p50_latency": 5.7,
+          "p95_latency": 6.5
+        }
+      },
+      "failures": [
+        {
+          "query": "what dependencies do I need to install for the starter jupyter notebook?",
+          "strategy": "creative_student",
+          "course": "de-zoomcamp",
+          "expected_id": "ee564fdf82",
+          "returned_ids": [
+            "122d2b0aed",
+            "3774a79c13",
+            "de1924abdb"
+          ]
+        },
+        {
+          "query": "jupyter notebook errors due to missing packages, how do I fix it?",
+          "strategy": "creative_student",
+          "course": "de-zoomcamp",
+          "expected_id": "ee564fdf82",
+          "returned_ids": [
+            "0d6dc0d041",
+            "53f31cd33c",
+            "35d7874a8d"
+          ]
+        },
+        {
+          "query": "Jupyter Notebook missing dependencies for starter code",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "ee564fdf82",
+          "returned_ids": [
+            "0d6dc0d041",
+            "05dc43cda8",
+            "122d2b0aed"
+          ]
+        },
+        {
+          "query": " Codespace environment lacks required libraries",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "ee564fdf82",
+          "returned_ids": [
+            "29469cf158",
+            "29e58c5c37",
+            "fb43c209d9"
+          ]
+        },
+        {
+          "query": "why am I getting a unicode decode error when reading csv file?",
+          "strategy": "creative_student",
+          "course": "de-zoomcamp",
+          "expected_id": "55b6d6256f",
+          "returned_ids": [
+            "6cab9c338e",
+            "f5a8ca34fa",
+            "95b01285f5"
+          ]
+        },
+        {
+          "query": "pandas dataframe encoding fails with latin1",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "55b6d6256f",
+          "returned_ids": [
+            "5b4c133384",
+            "3e355d74fd",
+            "d3c860aa46"
+          ]
+        },
+        {
+          "query": "UnicodeDecodeError when writing to GCS",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "55b6d6256f",
+          "returned_ids": [
+            "ee4a3bc34d",
+            "950192cbcc",
+            "bcafec775a"
+          ]
+        },
+        {
+          "query": "conda init bash not working",
+          "strategy": "grounded_analyst",
+          "course": "mlops-zoomcamp",
+          "expected_id": "4aa018f478",
+          "returned_ids": [
+            "47c771de0d",
+            "58a9c117d5",
+            "37e1b6b9bc"
+          ]
+        },
+        {
+          "query": "conda init doesn't seem to work when I restart my computer",
+          "strategy": "chaos_monkey",
+          "course": "mlops-zoomcamp",
+          "expected_id": "4aa018f478",
+          "returned_ids": [
+            "c670950570",
+            "cf068009f1",
+            "716ff05962"
+          ]
+        },
+        {
+          "query": "Terraform keeps saying I don't have permission to do anything",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "4a6d04a2c3",
+          "returned_ids": [
+            "de1924abdb",
+            "d0f76f4669",
+            "c01d835b44"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 390,
+      "found": 352,
+      "hit_rate": 0.9025641025641026,
+      "recall_at_k": {
+        "1": 0.6692307692307692,
+        "3": 0.841025641025641,
+        "5": 0.8743589743589744,
+        "10": 0.9025641025641026
+      },
+      "mrr": 0.7607,
+      "cross_course_rate": 0.0,
+      "p50_latency": 5.7,
+      "p95_latency": 6.9,
+      "name": "bm25_balanced",
+      "per_strategy": {
+        "grounded_analyst": {
+          "total": 150,
+          "found": 149,
+          "hit_rate": 0.9933333333333333,
+          "recall_at_k": {
+            "1": 0.7866666666666666,
+            "3": 0.94,
+            "5": 0.9666666666666667,
+            "10": 0.9933333333333333
+          },
+          "mrr": 0.8701,
+          "cross_course_rate": 0.0,
+          "p50_latency": 5.4,
+          "p95_latency": 6.5
+        },
+        "creative_student": {
+          "total": 105,
+          "found": 94,
+          "hit_rate": 0.8952380952380953,
+          "recall_at_k": {
+            "1": 0.638095238095238,
+            "3": 0.8285714285714286,
+            "5": 0.8666666666666667,
+            "10": 0.8952380952380953
+          },
+          "mrr": 0.7372,
+          "cross_course_rate": 0.0,
+          "p50_latency": 5.6,
+          "p95_latency": 6.9
+        },
+        "chaos_monkey": {
+          "total": 135,
+          "found": 109,
+          "hit_rate": 0.8074074074074075,
+          "recall_at_k": {
+            "1": 0.562962962962963,
+            "3": 0.7407407407407407,
+            "5": 0.7777777777777778,
+            "10": 0.8074074074074075
+          },
+          "mrr": 0.6575,
+          "cross_course_rate": 0.0,
+          "p50_latency": 5.9,
+          "p95_latency": 7.2
+        }
+      },
+      "per_course": {
+        "llm-zoomcamp": {
+          "total": 75,
+          "found": 72,
+          "hit_rate": 0.96,
+          "recall_at_k": {
+            "1": 0.7866666666666666,
+            "3": 0.9066666666666666,
+            "5": 0.9466666666666667,
+            "10": 0.96
+          },
+          "mrr": 0.8497,
+          "cross_course_rate": 0.0,
+          "p50_latency": 5.3,
+          "p95_latency": 6.4
+        },
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 120,
+          "hit_rate": 0.9090909090909091,
+          "recall_at_k": {
+            "1": 0.6287878787878788,
+            "3": 0.8484848484848485,
+            "5": 0.8939393939393939,
+            "10": 0.9090909090909091
+          },
+          "mrr": 0.7441,
+          "cross_course_rate": 0.0,
+          "p50_latency": 5.7,
+          "p95_latency": 6.9
+        },
+        "mlops-zoomcamp": {
+          "total": 51,
+          "found": 48,
+          "hit_rate": 0.9411764705882353,
+          "recall_at_k": {
+            "1": 0.7647058823529411,
+            "3": 0.9411764705882353,
+            "5": 0.9411764705882353,
+            "10": 0.9411764705882353
+          },
+          "mrr": 0.8529,
+          "cross_course_rate": 0.0,
+          "p50_latency": 5.6,
+          "p95_latency": 6.4
+        },
+        "ml-zoomcamp": {
+          "total": 132,
+          "found": 112,
+          "hit_rate": 0.8484848484848485,
+          "recall_at_k": {
+            "1": 0.6060606060606061,
+            "3": 0.7575757575757576,
+            "5": 0.7878787878787878,
+            "10": 0.8484848484848485
+          },
+          "mrr": 0.6911,
+          "cross_course_rate": 0.0,
+          "p50_latency": 5.9,
+          "p95_latency": 7.0
+        }
+      },
+      "failures": [
+        {
+          "query": "terraform google api permission error",
+          "strategy": "creative_student",
+          "course": "de-zoomcamp",
+          "expected_id": "4a6d04a2c3",
+          "returned_ids": [
+            "5849afe5f6",
+            "64d0d03a6f",
+            "dec5edee6a"
+          ]
+        },
+        {
+          "query": "Terraform keeps saying I don't have permission to do anything",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "4a6d04a2c3",
+          "returned_ids": [
+            "a9c1fd2a8f",
+            "5849afe5f6",
+            "a697cb2dee"
+          ]
+        },
+        {
+          "query": "Why is my homework answer not matching exactly?",
+          "strategy": "creative_student",
+          "course": "ml-zoomcamp",
+          "expected_id": "186ed3fc35",
+          "returned_ids": [
+            "0f5754c053",
+            "bdcc3ae17b",
+            "631e3d040c"
+          ]
+        },
+        {
+          "query": "Homework results are way off, what's going on?",
+          "strategy": "creative_student",
+          "course": "ml-zoomcamp",
+          "expected_id": "186ed3fc35",
+          "returned_ids": [
+            "9802179265",
+            "a75f85c9da",
+            "2b5ff70c77"
+          ]
+        },
+        {
+          "query": "Can't get the right answer on my homework, help!",
+          "strategy": "creative_student",
+          "course": "ml-zoomcamp",
+          "expected_id": "186ed3fc35",
+          "returned_ids": [
+            "8af59cb98f",
+            "a75f85c9da",
+            "92eac8d507"
+          ]
+        },
+        {
+          "query": "Why is my answer key not working?",
+          "strategy": "chaos_monkey",
+          "course": "ml-zoomcamp",
+          "expected_id": "186ed3fc35",
+          "returned_ids": [
+            "0f5754c053",
+            "bdcc3ae17b",
+            "34d0aaa13e"
+          ]
+        },
+        {
+          "query": "My homework isn't matching the solution, is it a bug?",
+          "strategy": "chaos_monkey",
+          "course": "ml-zoomcamp",
+          "expected_id": "186ed3fc35",
+          "returned_ids": [
+            "307139bab1",
+            "a75f85c9da",
+            "03e27c386a"
+          ]
+        },
+        {
+          "query": "That thing with the containers won't start, it just gives me a mkdir error",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "16481ac8f7",
+          "returned_ids": [
+            "ea9c96ab72",
+            "2d17397995",
+            "62f6c8dd8d"
+          ]
+        },
+        {
+          "query": "WSL is broken, how do I fix it?",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "16481ac8f7",
+          "returned_ids": [
+            "5c5321c295",
+            "25f96d0b34",
+            "a697cb2dee"
+          ]
+        },
+        {
+          "query": "Why is scikit-learn giving me a FutureWarning?",
+          "strategy": "creative_student",
+          "course": "ml-zoomcamp",
+          "expected_id": "c928a85179",
+          "returned_ids": [
+            "24713fbf0d",
+            "1e54b4b3ba",
+            "6cf4287216"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 390,
+      "found": 316,
+      "hit_rate": 0.8102564102564103,
+      "recall_at_k": {
+        "1": 0.5538461538461539,
+        "3": 0.7205128205128205,
+        "5": 0.7666666666666667,
+        "10": 0.8102564102564103
+      },
+      "mrr": 0.6441,
+      "cross_course_rate": 0.0,
+      "p50_latency": 6.2,
+      "p95_latency": 7.2,
+      "name": "bm25_high_text",
+      "per_strategy": {
+        "grounded_analyst": {
+          "total": 150,
+          "found": 133,
+          "hit_rate": 0.8866666666666667,
+          "recall_at_k": {
+            "1": 0.6466666666666666,
+            "3": 0.8,
+            "5": 0.8533333333333334,
+            "10": 0.8866666666666667
+          },
+          "mrr": 0.7316,
+          "cross_course_rate": 0.0,
+          "p50_latency": 6.1,
+          "p95_latency": 7.0
+        },
+        "creative_student": {
+          "total": 105,
+          "found": 83,
+          "hit_rate": 0.7904761904761904,
+          "recall_at_k": {
+            "1": 0.5523809523809524,
+            "3": 0.7142857142857143,
+            "5": 0.7428571428571429,
+            "10": 0.7904761904761904
+          },
+          "mrr": 0.6371,
+          "cross_course_rate": 0.0,
+          "p50_latency": 6.2,
+          "p95_latency": 7.0
+        },
+        "chaos_monkey": {
+          "total": 135,
+          "found": 100,
+          "hit_rate": 0.7407407407407407,
+          "recall_at_k": {
+            "1": 0.45185185185185184,
+            "3": 0.6370370370370371,
+            "5": 0.6888888888888889,
+            "10": 0.7407407407407407
+          },
+          "mrr": 0.5522,
+          "cross_course_rate": 0.0,
+          "p50_latency": 6.3,
+          "p95_latency": 7.3
+        }
+      },
+      "per_course": {
+        "llm-zoomcamp": {
+          "total": 75,
+          "found": 71,
+          "hit_rate": 0.9466666666666667,
+          "recall_at_k": {
+            "1": 0.6133333333333333,
+            "3": 0.8533333333333334,
+            "5": 0.9333333333333333,
+            "10": 0.9466666666666667
+          },
+          "mrr": 0.7313,
+          "cross_course_rate": 0.0,
+          "p50_latency": 6.0,
+          "p95_latency": 6.7
+        },
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 108,
+          "hit_rate": 0.8181818181818182,
+          "recall_at_k": {
+            "1": 0.5303030303030303,
+            "3": 0.7196969696969697,
+            "5": 0.7727272727272727,
+            "10": 0.8181818181818182
+          },
+          "mrr": 0.6379,
+          "cross_course_rate": 0.0,
+          "p50_latency": 6.2,
+          "p95_latency": 7.2
+        },
+        "mlops-zoomcamp": {
+          "total": 51,
+          "found": 50,
+          "hit_rate": 0.9803921568627451,
+          "recall_at_k": {
+            "1": 0.7450980392156863,
+            "3": 0.8627450980392157,
+            "5": 0.9019607843137255,
+            "10": 0.9803921568627451
+          },
+          "mrr": 0.8195,
+          "cross_course_rate": 0.0,
+          "p50_latency": 6.2,
+          "p95_latency": 7.0
+        },
+        "ml-zoomcamp": {
+          "total": 132,
+          "found": 87,
+          "hit_rate": 0.6590909090909091,
+          "recall_at_k": {
+            "1": 0.4696969696969697,
+            "3": 0.5909090909090909,
+            "5": 0.6136363636363636,
+            "10": 0.6590909090909091
+          },
+          "mrr": 0.5328,
+          "cross_course_rate": 0.0,
+          "p50_latency": 6.3,
+          "p95_latency": 7.3
+        }
+      },
+      "failures": [
+        {
+          "query": "container exec error even though PATH is correct",
+          "strategy": "chaos_monkey",
+          "course": "llm-zoomcamp",
+          "expected_id": "e8df9f0d12",
+          "returned_ids": [
+            "9f689c185f",
+            "4b30b918bc",
+            "0dfba07ace"
+          ]
+        },
+        {
+          "query": "jupyter kernel keeps crashing when I try to embed data",
+          "strategy": "creative_student",
+          "course": "llm-zoomcamp",
+          "expected_id": "b8f2d6a30c",
+          "returned_ids": [
+            "5c4a8d2e60",
+            "7c4e1a3b58",
+            "f96fde1726"
+          ]
+        },
+        {
+          "query": "terraform google api permission error",
+          "strategy": "creative_student",
+          "course": "de-zoomcamp",
+          "expected_id": "4a6d04a2c3",
+          "returned_ids": [
+            "5849afe5f6",
+            "64d0d03a6f",
+            "dec5edee6a"
+          ]
+        },
+        {
+          "query": "Terraform keeps saying I don't have permission to do anything",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "4a6d04a2c3",
+          "returned_ids": [
+            "a9c1fd2a8f",
+            "5849afe5f6",
+            "a697cb2dee"
+          ]
+        },
+        {
+          "query": "Connection issue with the RAG homework prompt",
+          "strategy": "chaos_monkey",
+          "course": "llm-zoomcamp",
+          "expected_id": "c6fc2d4d11",
+          "returned_ids": [
+            "9b0e2d6a47",
+            "a3c7e1b4f9",
+            "c774542f32"
+          ]
+        },
+        {
+          "query": "homework result not exact",
+          "strategy": "grounded_analyst",
+          "course": "ml-zoomcamp",
+          "expected_id": "186ed3fc35",
+          "returned_ids": [
+            "3ff40b74f9",
+            "a7e230bfb4",
+            "1a4a7bd286"
+          ]
+        },
+        {
+          "query": "homework result tolerance",
+          "strategy": "grounded_analyst",
+          "course": "ml-zoomcamp",
+          "expected_id": "186ed3fc35",
+          "returned_ids": [
+            "2b5ff70c77",
+            "5020067c2b",
+            "a75f85c9da"
+          ]
+        },
+        {
+          "query": "Why is my homework answer not matching exactly?",
+          "strategy": "creative_student",
+          "course": "ml-zoomcamp",
+          "expected_id": "186ed3fc35",
+          "returned_ids": [
+            "0f5754c053",
+            "bdcc3ae17b",
+            "631e3d040c"
+          ]
+        },
+        {
+          "query": "Homework results are way off, what's going on?",
+          "strategy": "creative_student",
+          "course": "ml-zoomcamp",
+          "expected_id": "186ed3fc35",
+          "returned_ids": [
+            "9802179265",
+            "a75f85c9da",
+            "2b5ff70c77"
+          ]
+        },
+        {
+          "query": "Can't get the right answer on my homework, help!",
+          "strategy": "creative_student",
+          "course": "ml-zoomcamp",
+          "expected_id": "186ed3fc35",
+          "returned_ids": [
+            "a75f85c9da",
+            "92eac8d507",
+            "40abba5fd9"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 390,
+      "found": 365,
+      "hit_rate": 0.9358974358974359,
+      "recall_at_k": {
+        "1": 0.6666666666666666,
+        "3": 0.8282051282051283,
+        "5": 0.8769230769230769,
+        "10": 0.9358974358974359
+      },
+      "mrr": 0.7574,
+      "cross_course_rate": 0.0,
+      "p50_latency": 24.1,
+      "p95_latency": 29.1,
+      "name": "vector_cosine",
+      "per_strategy": {
+        "grounded_analyst": {
+          "total": 150,
+          "found": 145,
+          "hit_rate": 0.9666666666666667,
+          "recall_at_k": {
+            "1": 0.7866666666666666,
+            "3": 0.8866666666666667,
+            "5": 0.94,
+            "10": 0.9666666666666667
+          },
+          "mrr": 0.8484,
+          "cross_course_rate": 0.0,
+          "p50_latency": 23.4,
+          "p95_latency": 28.3
+        },
+        "creative_student": {
+          "total": 105,
+          "found": 103,
+          "hit_rate": 0.9809523809523809,
+          "recall_at_k": {
+            "1": 0.638095238095238,
+            "3": 0.8476190476190476,
+            "5": 0.9142857142857143,
+            "10": 0.9809523809523809
+          },
+          "mrr": 0.7597,
+          "cross_course_rate": 0.0,
+          "p50_latency": 24.5,
+          "p95_latency": 30.0
+        },
+        "chaos_monkey": {
+          "total": 135,
+          "found": 117,
+          "hit_rate": 0.8666666666666667,
+          "recall_at_k": {
+            "1": 0.5555555555555556,
+            "3": 0.7481481481481481,
+            "5": 0.7777777777777778,
+            "10": 0.8666666666666667
+          },
+          "mrr": 0.6546,
+          "cross_course_rate": 0.0,
+          "p50_latency": 24.6,
+          "p95_latency": 29.8
+        }
+      },
+      "per_course": {
+        "llm-zoomcamp": {
+          "total": 75,
+          "found": 75,
+          "hit_rate": 1.0,
+          "recall_at_k": {
+            "1": 0.84,
+            "3": 0.9333333333333333,
+            "5": 0.9866666666666667,
+            "10": 1.0
+          },
+          "mrr": 0.8993,
+          "cross_course_rate": 0.0,
+          "p50_latency": 24.3,
+          "p95_latency": 32.7
+        },
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 127,
+          "hit_rate": 0.9621212121212122,
+          "recall_at_k": {
+            "1": 0.6590909090909091,
+            "3": 0.8409090909090909,
+            "5": 0.9015151515151515,
+            "10": 0.9621212121212122
+          },
+          "mrr": 0.761,
+          "cross_course_rate": 0.0,
+          "p50_latency": 24.3,
+          "p95_latency": 29.0
+        },
+        "mlops-zoomcamp": {
+          "total": 51,
+          "found": 47,
+          "hit_rate": 0.9215686274509803,
+          "recall_at_k": {
+            "1": 0.6862745098039216,
+            "3": 0.8823529411764706,
+            "5": 0.9019607843137255,
+            "10": 0.9215686274509803
+          },
+          "mrr": 0.7849,
+          "cross_course_rate": 0.0,
+          "p50_latency": 23.8,
+          "p95_latency": 28.1
+        },
+        "ml-zoomcamp": {
+          "total": 132,
+          "found": 116,
+          "hit_rate": 0.8787878787878788,
+          "recall_at_k": {
+            "1": 0.5681818181818182,
+            "3": 0.7348484848484849,
+            "5": 0.7803030303030303,
+            "10": 0.8787878787878788
+          },
+          "mrr": 0.6626,
+          "cross_course_rate": 0.0,
+          "p50_latency": 23.9,
+          "p95_latency": 28.5
+        }
+      },
+      "failures": [
+        {
+          "query": "jupyter notebook dependencies",
+          "strategy": "grounded_analyst",
+          "course": "de-zoomcamp",
+          "expected_id": "ee564fdf82",
+          "returned_ids": [
+            "c2f39b0ef3",
+            "35d7874a8d",
+            "0d6dc0d041"
+          ]
+        },
+        {
+          "query": "Jupyter Notebook missing dependencies for starter code",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "ee564fdf82",
+          "returned_ids": [
+            "c2f39b0ef3",
+            "35d7874a8d",
+            "122d2b0aed"
+          ]
+        },
+        {
+          "query": "pandas mode function not working as expected",
+          "strategy": "creative_student",
+          "course": "ml-zoomcamp",
+          "expected_id": "22e80c8b22",
+          "returned_ids": [
+            "d781b23627",
+            "e41007991b",
+            "e74369cf00"
+          ]
+        },
+        {
+          "query": "That pandas mode function is so weird, it always gives me a list",
+          "strategy": "chaos_monkey",
+          "course": "ml-zoomcamp",
+          "expected_id": "22e80c8b22",
+          "returned_ids": [
+            "e74369cf00",
+            "d781b23627",
+            "e41007991b"
+          ]
+        },
+        {
+          "query": "Docker password doesn't work even after updating my credentials",
+          "strategy": "chaos_monkey",
+          "course": "ml-zoomcamp",
+          "expected_id": "ac62d9ccf0",
+          "returned_ids": [
+            "9802179265",
+            "371f4a6519",
+            "554fac782d"
+          ]
+        },
+        {
+          "query": "closest option in homework",
+          "strategy": "grounded_analyst",
+          "course": "ml-zoomcamp",
+          "expected_id": "186ed3fc35",
+          "returned_ids": [
+            "0e38656cfb",
+            "8af59cb98f",
+            "4b0519f085"
+          ]
+        },
+        {
+          "query": "homework result tolerance",
+          "strategy": "grounded_analyst",
+          "course": "ml-zoomcamp",
+          "expected_id": "186ed3fc35",
+          "returned_ids": [
+            "8351543816",
+            "0e38656cfb",
+            "9ffc454a24"
+          ]
+        },
+        {
+          "query": "WSL is broken, how do I fix it?",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "16481ac8f7",
+          "returned_ids": [
+            "62f6c8dd8d",
+            "ec091c69a0",
+            "16d0d756c3"
+          ]
+        },
+        {
+          "query": "Why is scikit-learn giving me a FutureWarning?",
+          "strategy": "creative_student",
+          "course": "ml-zoomcamp",
+          "expected_id": "c928a85179",
+          "returned_ids": [
+            "24713fbf0d",
+            "6cf4287216",
+            "5a2fac8521"
+          ]
+        },
+        {
+          "query": "I'm getting a FutureWarning, how do I fix it?",
+          "strategy": "chaos_monkey",
+          "course": "ml-zoomcamp",
+          "expected_id": "c928a85179",
+          "returned_ids": [
+            "e5ceadc2f4",
+            "feed303fc9",
+            "385807829b"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 390,
+      "found": 365,
+      "hit_rate": 0.9358974358974359,
+      "recall_at_k": {
+        "1": 0.6666666666666666,
+        "3": 0.8282051282051283,
+        "5": 0.8769230769230769,
+        "10": 0.9358974358974359
+      },
+      "mrr": 0.7574,
+      "cross_course_rate": 0.0,
+      "p50_latency": 22.5,
+      "p95_latency": 27.4,
+      "name": "qdrant_cosine",
+      "per_strategy": {
+        "grounded_analyst": {
+          "total": 150,
+          "found": 145,
+          "hit_rate": 0.9666666666666667,
+          "recall_at_k": {
+            "1": 0.7866666666666666,
+            "3": 0.8866666666666667,
+            "5": 0.94,
+            "10": 0.9666666666666667
+          },
+          "mrr": 0.8484,
+          "cross_course_rate": 0.0,
+          "p50_latency": 21.7,
+          "p95_latency": 26.2
+        },
+        "creative_student": {
+          "total": 105,
+          "found": 103,
+          "hit_rate": 0.9809523809523809,
+          "recall_at_k": {
+            "1": 0.638095238095238,
+            "3": 0.8476190476190476,
+            "5": 0.9142857142857143,
+            "10": 0.9809523809523809
+          },
+          "mrr": 0.7597,
+          "cross_course_rate": 0.0,
+          "p50_latency": 22.5,
+          "p95_latency": 28.6
+        },
+        "chaos_monkey": {
+          "total": 135,
+          "found": 117,
+          "hit_rate": 0.8666666666666667,
+          "recall_at_k": {
+            "1": 0.5555555555555556,
+            "3": 0.7481481481481481,
+            "5": 0.7777777777777778,
+            "10": 0.8666666666666667
+          },
+          "mrr": 0.6546,
+          "cross_course_rate": 0.0,
+          "p50_latency": 23.4,
+          "p95_latency": 28.1
+        }
+      },
+      "per_course": {
+        "llm-zoomcamp": {
+          "total": 75,
+          "found": 75,
+          "hit_rate": 1.0,
+          "recall_at_k": {
+            "1": 0.84,
+            "3": 0.9333333333333333,
+            "5": 0.9866666666666667,
+            "10": 1.0
+          },
+          "mrr": 0.8993,
+          "cross_course_rate": 0.0,
+          "p50_latency": 22.6,
+          "p95_latency": 26.4
+        },
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 127,
+          "hit_rate": 0.9621212121212122,
+          "recall_at_k": {
+            "1": 0.6590909090909091,
+            "3": 0.8409090909090909,
+            "5": 0.9015151515151515,
+            "10": 0.9621212121212122
+          },
+          "mrr": 0.761,
+          "cross_course_rate": 0.0,
+          "p50_latency": 22.9,
+          "p95_latency": 29.3
+        },
+        "mlops-zoomcamp": {
+          "total": 51,
+          "found": 47,
+          "hit_rate": 0.9215686274509803,
+          "recall_at_k": {
+            "1": 0.6862745098039216,
+            "3": 0.8823529411764706,
+            "5": 0.9019607843137255,
+            "10": 0.9215686274509803
+          },
+          "mrr": 0.7849,
+          "cross_course_rate": 0.0,
+          "p50_latency": 22.2,
+          "p95_latency": 25.0
+        },
+        "ml-zoomcamp": {
+          "total": 132,
+          "found": 116,
+          "hit_rate": 0.8787878787878788,
+          "recall_at_k": {
+            "1": 0.5681818181818182,
+            "3": 0.7348484848484849,
+            "5": 0.7803030303030303,
+            "10": 0.8787878787878788
+          },
+          "mrr": 0.6626,
+          "cross_course_rate": 0.0,
+          "p50_latency": 22.3,
+          "p95_latency": 26.6
+        }
+      },
+      "failures": [
+        {
+          "query": "jupyter notebook dependencies",
+          "strategy": "grounded_analyst",
+          "course": "de-zoomcamp",
+          "expected_id": "ee564fdf82",
+          "returned_ids": [
+            "c2f39b0ef3",
+            "35d7874a8d",
+            "0d6dc0d041"
+          ]
+        },
+        {
+          "query": "Jupyter Notebook missing dependencies for starter code",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "ee564fdf82",
+          "returned_ids": [
+            "c2f39b0ef3",
+            "35d7874a8d",
+            "122d2b0aed"
+          ]
+        },
+        {
+          "query": "pandas mode function not working as expected",
+          "strategy": "creative_student",
+          "course": "ml-zoomcamp",
+          "expected_id": "22e80c8b22",
+          "returned_ids": [
+            "d781b23627",
+            "e41007991b",
+            "e74369cf00"
+          ]
+        },
+        {
+          "query": "That pandas mode function is so weird, it always gives me a list",
+          "strategy": "chaos_monkey",
+          "course": "ml-zoomcamp",
+          "expected_id": "22e80c8b22",
+          "returned_ids": [
+            "e74369cf00",
+            "d781b23627",
+            "e41007991b"
+          ]
+        },
+        {
+          "query": "Docker password doesn't work even after updating my credentials",
+          "strategy": "chaos_monkey",
+          "course": "ml-zoomcamp",
+          "expected_id": "ac62d9ccf0",
+          "returned_ids": [
+            "9802179265",
+            "371f4a6519",
+            "554fac782d"
+          ]
+        },
+        {
+          "query": "closest option in homework",
+          "strategy": "grounded_analyst",
+          "course": "ml-zoomcamp",
+          "expected_id": "186ed3fc35",
+          "returned_ids": [
+            "0e38656cfb",
+            "8af59cb98f",
+            "4b0519f085"
+          ]
+        },
+        {
+          "query": "homework result tolerance",
+          "strategy": "grounded_analyst",
+          "course": "ml-zoomcamp",
+          "expected_id": "186ed3fc35",
+          "returned_ids": [
+            "8351543816",
+            "0e38656cfb",
+            "9ffc454a24"
+          ]
+        },
+        {
+          "query": "WSL is broken, how do I fix it?",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "16481ac8f7",
+          "returned_ids": [
+            "62f6c8dd8d",
+            "ec091c69a0",
+            "16d0d756c3"
+          ]
+        },
+        {
+          "query": "Why is scikit-learn giving me a FutureWarning?",
+          "strategy": "creative_student",
+          "course": "ml-zoomcamp",
+          "expected_id": "c928a85179",
+          "returned_ids": [
+            "24713fbf0d",
+            "6cf4287216",
+            "5a2fac8521"
+          ]
+        },
+        {
+          "query": "I'm getting a FutureWarning, how do I fix it?",
+          "strategy": "chaos_monkey",
+          "course": "ml-zoomcamp",
+          "expected_id": "c928a85179",
+          "returned_ids": [
+            "e5ceadc2f4",
+            "feed303fc9",
+            "385807829b"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 390,
+      "found": 358,
+      "hit_rate": 0.9179487179487179,
+      "recall_at_k": {
+        "1": 0.5974358974358974,
+        "3": 0.7923076923076923,
+        "5": 0.8538461538461538,
+        "10": 0.9179487179487179
+      },
+      "mrr": 0.7048,
+      "cross_course_rate": 0.0,
+      "p50_latency": 32.3,
+      "p95_latency": 38.4,
+      "name": "hybrid_rrf",
+      "per_strategy": {
+        "grounded_analyst": {
+          "total": 150,
+          "found": 147,
+          "hit_rate": 0.98,
+          "recall_at_k": {
+            "1": 0.7133333333333334,
+            "3": 0.88,
+            "5": 0.94,
+            "10": 0.98
+          },
+          "mrr": 0.8075,
+          "cross_course_rate": 0.0,
+          "p50_latency": 31.2,
+          "p95_latency": 36.5
+        },
+        "creative_student": {
+          "total": 105,
+          "found": 102,
+          "hit_rate": 0.9714285714285714,
+          "recall_at_k": {
+            "1": 0.6,
+            "3": 0.8476190476190476,
+            "5": 0.9047619047619048,
+            "10": 0.9714285714285714
+          },
+          "mrr": 0.7262,
+          "cross_course_rate": 0.0,
+          "p50_latency": 32.5,
+          "p95_latency": 39.4
+        },
+        "chaos_monkey": {
+          "total": 135,
+          "found": 109,
+          "hit_rate": 0.8074074074074075,
+          "recall_at_k": {
+            "1": 0.4666666666666667,
+            "3": 0.6518518518518519,
+            "5": 0.7185185185185186,
+            "10": 0.8074074074074075
+          },
+          "mrr": 0.574,
+          "cross_course_rate": 0.0,
+          "p50_latency": 33.5,
+          "p95_latency": 39.3
+        }
+      },
+      "per_course": {
+        "llm-zoomcamp": {
+          "total": 75,
+          "found": 72,
+          "hit_rate": 0.96,
+          "recall_at_k": {
+            "1": 0.7333333333333333,
+            "3": 0.8666666666666667,
+            "5": 0.92,
+            "10": 0.96
+          },
+          "mrr": 0.8106,
+          "cross_course_rate": 0.0,
+          "p50_latency": 32.5,
+          "p95_latency": 38.4
+        },
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 123,
+          "hit_rate": 0.9318181818181818,
+          "recall_at_k": {
+            "1": 0.6590909090909091,
+            "3": 0.8333333333333334,
+            "5": 0.8939393939393939,
+            "10": 0.9318181818181818
+          },
+          "mrr": 0.7541,
+          "cross_course_rate": 0.0,
+          "p50_latency": 32.8,
+          "p95_latency": 37.6
+        },
+        "mlops-zoomcamp": {
+          "total": 51,
+          "found": 47,
+          "hit_rate": 0.9215686274509803,
+          "recall_at_k": {
+            "1": 0.5490196078431373,
+            "3": 0.803921568627451,
+            "5": 0.8823529411764706,
+            "10": 0.9215686274509803
+          },
+          "mrr": 0.676,
+          "cross_course_rate": 0.0,
+          "p50_latency": 29.9,
+          "p95_latency": 34.4
+        },
+        "ml-zoomcamp": {
+          "total": 132,
+          "found": 116,
+          "hit_rate": 0.8787878787878788,
+          "recall_at_k": {
+            "1": 0.4772727272727273,
+            "3": 0.7045454545454546,
+            "5": 0.7651515151515151,
+            "10": 0.8787878787878788
+          },
+          "mrr": 0.6064,
+          "cross_course_rate": 0.0,
+          "p50_latency": 32.5,
+          "p95_latency": 39.4
+        }
+      },
+      "failures": [
+        {
+          "query": "Jupyter Notebook missing dependencies for starter code",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "ee564fdf82",
+          "returned_ids": [
+            "0d6dc0d041",
+            "c2f39b0ef3",
+            "122d2b0aed"
+          ]
+        },
+        {
+          "query": "pandas dataframe encoding fails with latin1",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "55b6d6256f",
+          "returned_ids": [
+            "3e355d74fd",
+            "5b4c133384",
+            "e0c1900c47"
+          ]
+        },
+        {
+          "query": "UnicodeDecodeError when writing to GCS",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "55b6d6256f",
+          "returned_ids": [
+            "ee4a3bc34d",
+            "950192cbcc",
+            "61b908fe84"
+          ]
+        },
+        {
+          "query": "Terraform keeps saying I don't have permission to do anything",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "4a6d04a2c3",
+          "returned_ids": [
+            "de1924abdb",
+            "76f95c1d28",
+            "55c0047f8b"
+          ]
+        },
+        {
+          "query": "Homework results are way off, what's going on?",
+          "strategy": "creative_student",
+          "course": "ml-zoomcamp",
+          "expected_id": "186ed3fc35",
+          "returned_ids": [
+            "8351543816",
+            "0e38656cfb",
+            "4b0519f085"
+          ]
+        },
+        {
+          "query": "docker wsl2 permission issue",
+          "strategy": "grounded_analyst",
+          "course": "de-zoomcamp",
+          "expected_id": "16481ac8f7",
+          "returned_ids": [
+            "8c1d06d681",
+            "0beb2b5df7",
+            "4c8959502e"
+          ]
+        },
+        {
+          "query": "WSL is broken, how do I fix it?",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "16481ac8f7",
+          "returned_ids": [
+            "7c3cf3b8fc",
+            "25f96d0b34",
+            "62f6c8dd8d"
+          ]
+        },
+        {
+          "query": "Why is scikit-learn giving me a FutureWarning?",
+          "strategy": "creative_student",
+          "course": "ml-zoomcamp",
+          "expected_id": "c928a85179",
+          "returned_ids": [
+            "24713fbf0d",
+            "6cf4287216",
+            "861531763b"
+          ]
+        },
+        {
+          "query": "I'm getting a FutureWarning, how do I fix it?",
+          "strategy": "chaos_monkey",
+          "course": "ml-zoomcamp",
+          "expected_id": "c928a85179",
+          "returned_ids": [
+            "e5ceadc2f4",
+            "1f17886bde",
+            "548dcc8a3c"
+          ]
+        },
+        {
+          "query": "how do I make my deep learning model go in a straight line",
+          "strategy": "chaos_monkey",
+          "course": "ml-zoomcamp",
+          "expected_id": "ddc7d09c3d",
+          "returned_ids": [
+            "7ab955e247",
+            "76134388e5",
+            "bc8bd71f9c"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 390,
+      "found": 359,
+      "hit_rate": 0.9205128205128205,
+      "recall_at_k": {
+        "1": 0.6051282051282051,
+        "3": 0.823076923076923,
+        "5": 0.8692307692307693,
+        "10": 0.9205128205128205
+      },
+      "mrr": 0.7221,
+      "cross_course_rate": 0.0,
+      "p50_latency": 31.2,
+      "p95_latency": 37.2,
+      "name": "hybrid_50_50",
+      "per_strategy": {
+        "grounded_analyst": {
+          "total": 150,
+          "found": 147,
+          "hit_rate": 0.98,
+          "recall_at_k": {
+            "1": 0.7266666666666667,
+            "3": 0.9066666666666666,
+            "5": 0.9466666666666667,
+            "10": 0.98
+          },
+          "mrr": 0.8226,
+          "cross_course_rate": 0.0,
+          "p50_latency": 30.3,
+          "p95_latency": 34.4
+        },
+        "creative_student": {
+          "total": 105,
+          "found": 101,
+          "hit_rate": 0.9619047619047619,
+          "recall_at_k": {
+            "1": 0.6,
+            "3": 0.8761904761904762,
+            "5": 0.9142857142857143,
+            "10": 0.9619047619047619
+          },
+          "mrr": 0.7401,
+          "cross_course_rate": 0.0,
+          "p50_latency": 31.2,
+          "p95_latency": 35.8
+        },
+        "chaos_monkey": {
+          "total": 135,
+          "found": 111,
+          "hit_rate": 0.8222222222222222,
+          "recall_at_k": {
+            "1": 0.4740740740740741,
+            "3": 0.6888888888888889,
+            "5": 0.7481481481481481,
+            "10": 0.8222222222222222
+          },
+          "mrr": 0.5965,
+          "cross_course_rate": 0.0,
+          "p50_latency": 32.4,
+          "p95_latency": 38.6
+        }
+      },
+      "per_course": {
+        "llm-zoomcamp": {
+          "total": 75,
+          "found": 74,
+          "hit_rate": 0.9866666666666667,
+          "recall_at_k": {
+            "1": 0.7333333333333333,
+            "3": 0.92,
+            "5": 0.96,
+            "10": 0.9866666666666667
+          },
+          "mrr": 0.8288,
+          "cross_course_rate": 0.0,
+          "p50_latency": 31.1,
+          "p95_latency": 35.1
+        },
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 124,
+          "hit_rate": 0.9393939393939394,
+          "recall_at_k": {
+            "1": 0.6742424242424242,
+            "3": 0.8181818181818182,
+            "5": 0.8787878787878788,
+            "10": 0.9393939393939394
+          },
+          "mrr": 0.7599,
+          "cross_course_rate": 0.0,
+          "p50_latency": 31.5,
+          "p95_latency": 39.1
+        },
+        "mlops-zoomcamp": {
+          "total": 51,
+          "found": 47,
+          "hit_rate": 0.9215686274509803,
+          "recall_at_k": {
+            "1": 0.5098039215686274,
+            "3": 0.8823529411764706,
+            "5": 0.9019607843137255,
+            "10": 0.9215686274509803
+          },
+          "mrr": 0.6837,
+          "cross_course_rate": 0.0,
+          "p50_latency": 30.4,
+          "p95_latency": 35.7
+        },
+        "ml-zoomcamp": {
+          "total": 132,
+          "found": 114,
+          "hit_rate": 0.8636363636363636,
+          "recall_at_k": {
+            "1": 0.5,
+            "3": 0.75,
+            "5": 0.7954545454545454,
+            "10": 0.8636363636363636
+          },
+          "mrr": 0.6386,
+          "cross_course_rate": 0.0,
+          "p50_latency": 31.4,
+          "p95_latency": 37.2
+        }
+      },
+      "failures": [
+        {
+          "query": "Jupyter Notebook missing dependencies for starter code",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "ee564fdf82",
+          "returned_ids": [
+            "0d6dc0d041",
+            "c2f39b0ef3",
+            "05dc43cda8"
+          ]
+        },
+        {
+          "query": " Codespace environment lacks required libraries",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "ee564fdf82",
+          "returned_ids": [
+            "29469cf158",
+            "122d2b0aed",
+            "29e58c5c37"
+          ]
+        },
+        {
+          "query": "pandas dataframe encoding fails with latin1",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "55b6d6256f",
+          "returned_ids": [
+            "5b4c133384",
+            "34ebc2c6de",
+            "3e355d74fd"
+          ]
+        },
+        {
+          "query": "UnicodeDecodeError when writing to GCS",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "55b6d6256f",
+          "returned_ids": [
+            "ee4a3bc34d",
+            "33184c75bd",
+            "950192cbcc"
+          ]
+        },
+        {
+          "query": "pandas mode function not working as expected",
+          "strategy": "creative_student",
+          "course": "ml-zoomcamp",
+          "expected_id": "22e80c8b22",
+          "returned_ids": [
+            "d781b23627",
+            "6c5a79afd4",
+            "dc86b83814"
+          ]
+        },
+        {
+          "query": "Docker password doesn't work even after updating my credentials",
+          "strategy": "chaos_monkey",
+          "course": "ml-zoomcamp",
+          "expected_id": "ac62d9ccf0",
+          "returned_ids": [
+            "34d0aaa13e",
+            "9802179265",
+            "371f4a6519"
+          ]
+        },
+        {
+          "query": "closest option in homework",
+          "strategy": "grounded_analyst",
+          "course": "ml-zoomcamp",
+          "expected_id": "186ed3fc35",
+          "returned_ids": [
+            "0e38656cfb",
+            "1a96e5837b",
+            "8351543816"
+          ]
+        },
+        {
+          "query": "Homework results are way off, what's going on?",
+          "strategy": "creative_student",
+          "course": "ml-zoomcamp",
+          "expected_id": "186ed3fc35",
+          "returned_ids": [
+            "8351543816",
+            "11f27e4673",
+            "ce5f41e600"
+          ]
+        },
+        {
+          "query": "WSL is broken, how do I fix it?",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "16481ac8f7",
+          "returned_ids": [
+            "25f96d0b34",
+            "62f6c8dd8d",
+            "53f31cd33c"
+          ]
+        },
+        {
+          "query": "Why is scikit-learn giving me a FutureWarning?",
+          "strategy": "creative_student",
+          "course": "ml-zoomcamp",
+          "expected_id": "c928a85179",
+          "returned_ids": [
+            "24713fbf0d",
+            "6cf4287216",
+            "1e54b4b3ba"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 390,
+      "found": 366,
+      "hit_rate": 0.9384615384615385,
+      "recall_at_k": {
+        "1": 0.6666666666666666,
+        "3": 0.8333333333333334,
+        "5": 0.9025641025641026,
+        "10": 0.9384615384615385
+      },
+      "mrr": 0.7609,
+      "cross_course_rate": 0.0,
+      "p50_latency": 31.7,
+      "p95_latency": 36.7,
+      "name": "hybrid_70_30_vec",
+      "per_strategy": {
+        "grounded_analyst": {
+          "total": 150,
+          "found": 146,
+          "hit_rate": 0.9733333333333334,
+          "recall_at_k": {
+            "1": 0.7866666666666666,
+            "3": 0.9133333333333333,
+            "5": 0.96,
+            "10": 0.9733333333333334
+          },
+          "mrr": 0.8516,
+          "cross_course_rate": 0.0,
+          "p50_latency": 30.8,
+          "p95_latency": 35.5
+        },
+        "creative_student": {
+          "total": 105,
+          "found": 104,
+          "hit_rate": 0.9904761904761905,
+          "recall_at_k": {
+            "1": 0.638095238095238,
+            "3": 0.8666666666666667,
+            "5": 0.9523809523809523,
+            "10": 0.9904761904761905
+          },
+          "mrr": 0.766,
+          "cross_course_rate": 0.0,
+          "p50_latency": 31.8,
+          "p95_latency": 36.8
+        },
+        "chaos_monkey": {
+          "total": 135,
+          "found": 116,
+          "hit_rate": 0.8592592592592593,
+          "recall_at_k": {
+            "1": 0.5555555555555556,
+            "3": 0.7185185185185186,
+            "5": 0.8,
+            "10": 0.8592592592592593
+          },
+          "mrr": 0.6562,
+          "cross_course_rate": 0.0,
+          "p50_latency": 32.8,
+          "p95_latency": 37.0
+        }
+      },
+      "per_course": {
+        "llm-zoomcamp": {
+          "total": 75,
+          "found": 75,
+          "hit_rate": 1.0,
+          "recall_at_k": {
+            "1": 0.84,
+            "3": 0.9333333333333333,
+            "5": 0.9866666666666667,
+            "10": 1.0
+          },
+          "mrr": 0.8919,
+          "cross_course_rate": 0.0,
+          "p50_latency": 31.2,
+          "p95_latency": 35.2
+        },
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 128,
+          "hit_rate": 0.9696969696969697,
+          "recall_at_k": {
+            "1": 0.6590909090909091,
+            "3": 0.8333333333333334,
+            "5": 0.9166666666666666,
+            "10": 0.9696969696969697
+          },
+          "mrr": 0.764,
+          "cross_course_rate": 0.0,
+          "p50_latency": 32.0,
+          "p95_latency": 36.8
+        },
+        "mlops-zoomcamp": {
+          "total": 51,
+          "found": 47,
+          "hit_rate": 0.9215686274509803,
+          "recall_at_k": {
+            "1": 0.6862745098039216,
+            "3": 0.8627450980392157,
+            "5": 0.9215686274509803,
+            "10": 0.9215686274509803
+          },
+          "mrr": 0.7882,
+          "cross_course_rate": 0.0,
+          "p50_latency": 30.2,
+          "p95_latency": 34.4
+        },
+        "ml-zoomcamp": {
+          "total": 132,
+          "found": 116,
+          "hit_rate": 0.8787878787878788,
+          "recall_at_k": {
+            "1": 0.5681818181818182,
+            "3": 0.7651515151515151,
+            "5": 0.8333333333333334,
+            "10": 0.8787878787878788
+          },
+          "mrr": 0.6728,
+          "cross_course_rate": 0.0,
+          "p50_latency": 32.6,
+          "p95_latency": 37.4
+        }
+      },
+      "failures": [
+        {
+          "query": "jupyter notebook dependencies",
+          "strategy": "grounded_analyst",
+          "course": "de-zoomcamp",
+          "expected_id": "ee564fdf82",
+          "returned_ids": [
+            "c2f39b0ef3",
+            "0d6dc0d041",
+            "35d7874a8d"
+          ]
+        },
+        {
+          "query": "Jupyter Notebook missing dependencies for starter code",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "ee564fdf82",
+          "returned_ids": [
+            "c2f39b0ef3",
+            "0d6dc0d041",
+            "35d7874a8d"
+          ]
+        },
+        {
+          "query": "Docker password doesn't work even after updating my credentials",
+          "strategy": "chaos_monkey",
+          "course": "ml-zoomcamp",
+          "expected_id": "ac62d9ccf0",
+          "returned_ids": [
+            "9802179265",
+            "371f4a6519",
+            "34d0aaa13e"
+          ]
+        },
+        {
+          "query": "closest option in homework",
+          "strategy": "grounded_analyst",
+          "course": "ml-zoomcamp",
+          "expected_id": "186ed3fc35",
+          "returned_ids": [
+            "0e38656cfb",
+            "8af59cb98f",
+            "1a96e5837b"
+          ]
+        },
+        {
+          "query": "WSL is broken, how do I fix it?",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "16481ac8f7",
+          "returned_ids": [
+            "62f6c8dd8d",
+            "ec091c69a0",
+            "25f96d0b34"
+          ]
+        },
+        {
+          "query": "Why is scikit-learn giving me a FutureWarning?",
+          "strategy": "creative_student",
+          "course": "ml-zoomcamp",
+          "expected_id": "c928a85179",
+          "returned_ids": [
+            "24713fbf0d",
+            "6cf4287216",
+            "5a2fac8521"
+          ]
+        },
+        {
+          "query": "I'm getting a FutureWarning, how do I fix it?",
+          "strategy": "chaos_monkey",
+          "course": "ml-zoomcamp",
+          "expected_id": "c928a85179",
+          "returned_ids": [
+            "e5ceadc2f4",
+            "feed303fc9",
+            "2acc8ec64a"
+          ]
+        },
+        {
+          "query": "how do I make my deep learning model go in a straight line",
+          "strategy": "chaos_monkey",
+          "course": "ml-zoomcamp",
+          "expected_id": "ddc7d09c3d",
+          "returned_ids": [
+            "3f5dbbd3b5",
+            "7ab955e247",
+            "76134388e5"
+          ]
+        },
+        {
+          "query": "VS Code thinks my packages are invisible",
+          "strategy": "chaos_monkey",
+          "course": "mlops-zoomcamp",
+          "expected_id": "716ff05962",
+          "returned_ids": [
+            "fb9846ce91",
+            "cd806dd7d0",
+            "0cfb31c221"
+          ]
+        },
+        {
+          "query": "which magic files do I need for question 6",
+          "strategy": "chaos_monkey",
+          "course": "ml-zoomcamp",
+          "expected_id": "3ab0a03ad2",
+          "returned_ids": [
+            "faa864b7f6",
+            "d8f72f3007",
+            "36c30c8e2f"
+          ]
+        }
+      ]
+    },
+    {
+      "total": 390,
+      "found": 352,
+      "hit_rate": 0.9025641025641026,
+      "recall_at_k": {
+        "1": 0.5384615384615384,
+        "3": 0.8076923076923077,
+        "5": 0.8589743589743589,
+        "10": 0.9025641025641026
+      },
+      "mrr": 0.675,
+      "cross_course_rate": 0.0,
+      "p50_latency": 31.8,
+      "p95_latency": 36.2,
+      "name": "hybrid_30_70_vec",
+      "per_strategy": {
+        "grounded_analyst": {
+          "total": 150,
+          "found": 146,
+          "hit_rate": 0.9733333333333334,
+          "recall_at_k": {
+            "1": 0.6533333333333333,
+            "3": 0.8866666666666667,
+            "5": 0.9466666666666667,
+            "10": 0.9733333333333334
+          },
+          "mrr": 0.7799,
+          "cross_course_rate": 0.0,
+          "p50_latency": 31.2,
+          "p95_latency": 35.1
+        },
+        "creative_student": {
+          "total": 105,
+          "found": 97,
+          "hit_rate": 0.9238095238095239,
+          "recall_at_k": {
+            "1": 0.5523809523809524,
+            "3": 0.8380952380952381,
+            "5": 0.9047619047619048,
+            "10": 0.9238095238095239
+          },
+          "mrr": 0.695,
+          "cross_course_rate": 0.0,
+          "p50_latency": 31.7,
+          "p95_latency": 36.0
+        },
+        "chaos_monkey": {
+          "total": 135,
+          "found": 109,
+          "hit_rate": 0.8074074074074075,
+          "recall_at_k": {
+            "1": 0.4,
+            "3": 0.6962962962962963,
+            "5": 0.725925925925926,
+            "10": 0.8074074074074075
+          },
+          "mrr": 0.5428,
+          "cross_course_rate": 0.0,
+          "p50_latency": 32.6,
+          "p95_latency": 38.1
+        }
+      },
+      "per_course": {
+        "llm-zoomcamp": {
+          "total": 75,
+          "found": 72,
+          "hit_rate": 0.96,
+          "recall_at_k": {
+            "1": 0.6666666666666666,
+            "3": 0.8666666666666667,
+            "5": 0.96,
+            "10": 0.96
+          },
+          "mrr": 0.7769,
+          "cross_course_rate": 0.0,
+          "p50_latency": 31.4,
+          "p95_latency": 35.5
+        },
+        "de-zoomcamp": {
+          "total": 132,
+          "found": 119,
+          "hit_rate": 0.9015151515151515,
+          "recall_at_k": {
+            "1": 0.5909090909090909,
+            "3": 0.8106060606060606,
+            "5": 0.8636363636363636,
+            "10": 0.9015151515151515
+          },
+          "mrr": 0.7071,
+          "cross_course_rate": 0.0,
+          "p50_latency": 31.8,
+          "p95_latency": 36.3
+        },
+        "mlops-zoomcamp": {
+          "total": 51,
+          "found": 47,
+          "hit_rate": 0.9215686274509803,
+          "recall_at_k": {
+            "1": 0.43137254901960786,
+            "3": 0.8627450980392157,
+            "5": 0.8823529411764706,
+            "10": 0.9215686274509803
+          },
+          "mrr": 0.6275,
+          "cross_course_rate": 0.0,
+          "p50_latency": 30.5,
+          "p95_latency": 35.3
+        },
+        "ml-zoomcamp": {
+          "total": 132,
+          "found": 114,
+          "hit_rate": 0.8636363636363636,
+          "recall_at_k": {
+            "1": 0.45454545454545453,
+            "3": 0.75,
+            "5": 0.7878787878787878,
+            "10": 0.8636363636363636
+          },
+          "mrr": 0.6033,
+          "cross_course_rate": 0.0,
+          "p50_latency": 32.4,
+          "p95_latency": 36.5
+        }
+      },
+      "failures": [
+        {
+          "query": "what dependencies do I need to install for the starter jupyter notebook?",
+          "strategy": "creative_student",
+          "course": "de-zoomcamp",
+          "expected_id": "ee564fdf82",
+          "returned_ids": [
+            "122d2b0aed",
+            "3774a79c13",
+            "c2f39b0ef3"
+          ]
+        },
+        {
+          "query": "jupyter notebook errors due to missing packages, how do I fix it?",
+          "strategy": "creative_student",
+          "course": "de-zoomcamp",
+          "expected_id": "ee564fdf82",
+          "returned_ids": [
+            "0d6dc0d041",
+            "c2f39b0ef3",
+            "35d7874a8d"
+          ]
+        },
+        {
+          "query": "Jupyter Notebook missing dependencies for starter code",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "ee564fdf82",
+          "returned_ids": [
+            "0d6dc0d041",
+            "c2f39b0ef3",
+            "05dc43cda8"
+          ]
+        },
+        {
+          "query": " Codespace environment lacks required libraries",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "ee564fdf82",
+          "returned_ids": [
+            "29469cf158",
+            "29e58c5c37",
+            "122d2b0aed"
+          ]
+        },
+        {
+          "query": "why am I getting a unicode decode error when reading csv file?",
+          "strategy": "creative_student",
+          "course": "de-zoomcamp",
+          "expected_id": "55b6d6256f",
+          "returned_ids": [
+            "6cab9c338e",
+            "f5a8ca34fa",
+            "33184c75bd"
+          ]
+        },
+        {
+          "query": "pandas dataframe encoding fails with latin1",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "55b6d6256f",
+          "returned_ids": [
+            "5b4c133384",
+            "3e355d74fd",
+            "34ebc2c6de"
+          ]
+        },
+        {
+          "query": "UnicodeDecodeError when writing to GCS",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "55b6d6256f",
+          "returned_ids": [
+            "ee4a3bc34d",
+            "950192cbcc",
+            "33184c75bd"
+          ]
+        },
+        {
+          "query": "Terraform keeps saying I don't have permission to do anything",
+          "strategy": "chaos_monkey",
+          "course": "de-zoomcamp",
+          "expected_id": "4a6d04a2c3",
+          "returned_ids": [
+            "de1924abdb",
+            "d0f76f4669",
+            "55c0047f8b"
+          ]
+        },
+        {
+          "query": "pandas mode function not working as expected",
+          "strategy": "creative_student",
+          "course": "ml-zoomcamp",
+          "expected_id": "22e80c8b22",
+          "returned_ids": [
+            "d781b23627",
+            "6c5a79afd4",
+            "dc86b83814"
+          ]
+        },
+        {
+          "query": "why is my ollama notebook cell not working",
+          "strategy": "creative_student",
+          "course": "llm-zoomcamp",
+          "expected_id": "c6fc2d4d11",
+          "returned_ids": [
+            "86d99bbf21",
+            "1d0b969028",
+            "bf0403d21b"
+          ]
+        }
+      ]
+    }
+  ]
+}
