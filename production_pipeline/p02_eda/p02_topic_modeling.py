@@ -22,11 +22,11 @@ from pathlib import Path
 from rag_pipeline.paths import Paths
 from rag_pipeline.logging import get_logger
 
-from ._topic_loader import load_documents
-from ._topic_cluster import cluster_topics
-from ._topic_subtopics import build_subtopics
-from ._topic_assignments import build_assignments, build_output, attach_subtopics
-from ._topic_report import print_full_topic_report, save_results
+from _topic_loader import load_documents
+from _topic_cluster import cluster_topics
+from _topic_subtopics import build_subtopics
+from _topic_assignments import build_assignments, build_output, attach_subtopics
+from _topic_report import print_full_topic_report, save_results
 
 logger = get_logger(__name__)
 

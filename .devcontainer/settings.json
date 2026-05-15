@@ -1,6 +1,24 @@
 {
-    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
-    "jupyter.notebookEditor.defaultKernel": "python3",
-    "python.terminal.activateEnvInSelectedTerminal": false,
-    "git.ignoreLimitWarning": true
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+                "jupyter.notebookEditor.defaultKernel": "python3",
+                "python.terminal.activateEnvInSelectedTerminal": false,
+                "git.ignoreLimitWarning": true,
+                "python.terminal.activateEnvironment": true,
+                "python.linting.flake8Enabled": true,
+                "editor.formatOnSave": true,
+                "files.autoSave": "onFocusChange",
+                "git.autofetch": true
+            },
+            "extensions": [
+                "ms-python.python",
+                "ms-toolsai.jupyter",
+                "ms-python.pylance",
+                "eamodio.gitlens",
+                "charliermarsh.ruff"
+            ]
+        }
+    }
 }
