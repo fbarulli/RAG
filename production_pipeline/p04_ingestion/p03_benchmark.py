@@ -1,117 +1,117 @@
 """
-_benchmark_loader.py
-====================
-Load test data, topic assignments, and retrieval configs for benchmarking.
-
-Single responsibility: I/O for benchmark inputs.
-No metric computation, no retrieval logic, no reporting.
-
-Functions:
-    load_test_set(path: Path) -> list[dict]
-    load_topic_assignments(path: Path) -> dict[str, dict]
-    load_configs(path: Path) -> dict
+p03_benchmark.py
+================
+Retrieval benchmark for FAQ RAG pipeline.
+Tests embedding models + retrieval configs against held-out test set.
+Metrics: Hit Rate@k, MRR, NDCG, latency, code integrity, topic-stratified.
+Input:  test.jsonl, topic_assignments.json, retrieval_configs.json
+Output: experiments/benchmark_results.json, benchmark_summary.txt
+Run:    uv run python -m production_pipeline.p04_ingestion.p03_benchmark
 """
-import json
+import argparse
 from pathlib import Path
-
+from qdrant_client import QdrantClient
+from sentence_transformers import SentenceTransformer
+from rag_pipeline.paths import Paths
 from rag_pipeline.logging import get_logger
+from ._benchmark_loader import load_test_set, load_topic_assignments, load_configs
+from ._benchmark_metrics import evaluate_config, aggregate_metrics
+from ._benchmark_report import print_full_benchmark_report, save_benchmark_results
 
 logger = get_logger(__name__)
 
+DEFAULT_TEST_SET = Paths.processed_dir() / "test.jsonl"
+DEFAULT_TOPIC_ASSIGNMENTS = Paths.experiments_dir() / "topic_assignments.json"
+DEFAULT_CONFIGS = Path("configs/retrieval_configs.json")
+DEFAULT_QDRANT_HOST = "localhost"
+DEFAULT_QDRANT_PORT = 6333
+DEFAULT_TOP_K = 10
+DEFAULT_EMBEDDING_MODELS = [
+    "BAAI/bge-small-en-v1.5",
+    "intfloat/e5-small-v2",
+    "BAAI/bge-base-en-v1.5",
+    "intfloat/e5-base-v2",
+]
+OUTPUT_DIR = Paths.experiments_dir()
 
-# ---------------------------------------------------------------------------
-# Core logic
-# ---------------------------------------------------------------------------
+def _build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description="Benchmark retrieval configurations")
+    parser.add_argument("--test-set", type=Path, default=DEFAULT_TEST_SET)
+    parser.add_argument("--topic-assignments", type=Path, default=DEFAULT_TOPIC_ASSIGNMENTS)
+    parser.add_argument("--configs", type=Path, default=DEFAULT_CONFIGS)
+    parser.add_argument("--qdrant-host", type=str, default=DEFAULT_QDRANT_HOST)
+    parser.add_argument("--qdrant-port", type=int, default=DEFAULT_QDRANT_PORT)
+    parser.add_argument("--top-k", type=int, default=DEFAULT_TOP_K)
+    parser.add_argument("--collection", type=str, default=None)
+    parser.add_argument("--model", type=str, default=None)
+    parser.add_argument("--config", type=str, default=None)
+    parser.add_argument("--output-dir", type=Path, default=OUTPUT_DIR)
+    return parser
 
-def load_test_set(path: Path) -> list[dict]:
-    """
-    Load holdout test queries with expected document IDs.
+def main():
+    args = _build_parser().parse_args()
 
-    Args:
-        path: Path to test.jsonl file
+    try:
+        logger.info("Step 1/6: Loading test set")
+        test_set = load_test_set(args.test_set)
 
-    Returns:
-        List of dicts with:
-            - query_id: unique identifier for the query
-            - query: the question text
-            - expected_id: the document ID that should be retrieved (falls back to query_id if not explicit)
-            - course: course name for filtering
-            - answer: reference answer for quality checks
+        logger.info("Step 2/6: Loading topic assignments")
+        topic_map = load_topic_assignments(args.topic_assignments)
 
-    Note: If a test document has an explicit "expected_id" field, it is used.
-          Otherwise, "id" is used as both query_id and expected_id (common when
-          test queries are the original FAQ questions themselves).
-    """
-    if not path.exists():
-        raise FileNotFoundError(f"Test set not found: {path}")
+        logger.info("Step 3/6: Loading retrieval configs")
+        configs = load_configs(args.configs)
 
-    tests = []
-    required = {"id", "question", "answer", "course"}
+        if args.config and args.config not in configs:
+            raise ValueError(f"Config '{args.config}' not found. Available: {list(configs.keys())}")
 
-    with open(path, encoding="utf-8") as f:
-        for line_num, line in enumerate(f, 1):
-            if not line.strip():
+        logger.info("Step 4/6: Connecting to Qdrant")
+        client = QdrantClient(host=args.qdrant_host, port=args.qdrant_port)
+
+        models_to_test = [args.model] if args.model else DEFAULT_EMBEDDING_MODELS
+        configs_to_test = [args.config] if args.config else list(configs.keys())
+        all_summaries = []
+
+        logger.info("Step 5/6: Running benchmark evaluations")
+        for model_name in models_to_test:
+            logger.info(f"Loading model: {model_name}")
+            model = SentenceTransformer(model_name)
+
+            collection = args.collection or model_name.split("/")[-1].replace("-", "_")
+            logger.info(f"Using collection: '{collection}'")
+
+            if not client.collection_exists(collection):
+                logger.warning(f"Collection '{collection}' not found; skipping {model_name}")
                 continue
-            try:
-                doc = json.loads(line)
-            except json.JSONDecodeError as e:
-                logger.warning(f"Test set line {line_num}: JSON error: {e}")
-                continue
 
-            missing = required - doc.keys()
-            if missing:
-                logger.warning(f"Test set line {line_num}: Missing fields {missing}")
-                continue
+            for config_name in configs_to_test:
+                config = configs[config_name]
+                logger.info(f"Evaluating config: {config_name} on collection: {collection}")
 
-            tests.append({
-                "query_id": doc["id"],
-                "query": doc["question"],
-                "expected_id": doc.get("expected_id", doc["id"]),
-                "course": doc["course"],
-                "section": doc.get("section", ""),
-                "answer": doc["answer"],
-            })
+                raw_results = evaluate_config(
+                    client=client,
+                    collection=collection,
+                    model=model,
+                    test_set=test_set,
+                    topic_map=topic_map,
+                    config=config,
+                    top_k=args.top_k,
+                )
 
-    logger.info(f"Loaded {len(tests)} test queries from {path}")
-    return tests
+                summary = aggregate_metrics(raw_results, config_name, model_name)
+                all_summaries.append(summary)
+                logger.info(f"  Hit@5: {summary.hit_rate_5:.1%} | MRR: {summary.mrr:.4f}")
 
+        if not all_summaries:
+            raise RuntimeError("No results collected — check collections exist and configs are valid")
 
-def load_topic_assignments(path: Path) -> dict[str, dict]:
-    """
-    Load topic assignments indexed by document ID.
+        logger.info("Step 6/6: Generating reports")
+        print_full_benchmark_report(all_summaries)
+        save_benchmark_results(all_summaries, args.output_dir)
+        logger.info("Benchmark complete.")
 
-    Args:
-        path: Path to topic_assignments.json
+    except Exception as e:
+        logger.exception(f"Benchmark failed: {e}")
+        raise SystemExit(1)
 
-    Returns:
-        Dict mapping doc_id -> {topic, subtopic, subtopic_keywords, ...}
-    """
-    if not path.exists():
-        raise FileNotFoundError(f"Topic assignments not found: {path}")
-
-    with open(path, encoding="utf-8") as f:
-        data = json.load(f)
-
-    assignments = {a["id"]: a for a in data.get("assignments", [])}
-    logger.info(f"Loaded {len(assignments)} topic assignments from {path}")
-    return assignments
-
-
-def load_configs(path: Path) -> dict:
-    """
-    Load retrieval configuration presets.
-
-    Args:
-        path: Path to retrieval_configs.json
-
-    Returns:
-        Dict mapping config_name -> config dict
-    """
-    if not path.exists():
-        raise FileNotFoundError(f"Retrieval configs not found: {path}")
-
-    with open(path, encoding="utf-8") as f:
-        configs = json.load(f)
-
-    logger.info(f"Loaded {len(configs)} retrieval configs from {path}")
-    return configs
+if __name__ == "__main__":
+    main()

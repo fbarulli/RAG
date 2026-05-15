@@ -1,23 +1,47 @@
+
 """
 _benchmark_loader.py
 ====================
 Load test data, topic assignments, and retrieval configs for benchmarking.
+
+Single responsibility: I/O for benchmark inputs.
+No metric computation, no retrieval logic, no reporting.
+
+Functions:
+    load_test_set(path: Path) -> list[dict]
+    load_topic_assignments(path: Path) -> dict[str, dict]
+    load_configs(path: Path) -> dict
 """
 import json
 from pathlib import Path
 
+from rag_pipeline.logging import get_logger
+
+logger = get_logger(__name__)
+
+
 def load_test_set(path: Path) -> list[dict]:
-    """Load holdout test queries with expected document IDs."""
     if not path.exists():
         raise FileNotFoundError(f"Test set not found: {path}")
+
     tests = []
     required = {"id", "question", "answer", "course"}
+
     with open(path, encoding="utf-8") as f:
         for line_num, line in enumerate(f, 1):
-            if not line.strip(): continue
-            try: doc = json.loads(line)
-            except json.JSONDecodeError: continue
-            if not required.issubset(doc.keys()): continue
+            if not line.strip():
+                continue
+            try:
+                doc = json.loads(line)
+            except json.JSONDecodeError as e:
+                logger.warning(f"Test set line {line_num}: JSON error: {e}")
+                continue
+
+            missing = required - doc.keys()
+            if missing:
+                logger.warning(f"Test set line {line_num}: Missing fields {missing}")
+                continue
+
             tests.append({
                 "query_id": doc["id"],
                 "query": doc["question"],
@@ -26,19 +50,29 @@ def load_test_set(path: Path) -> list[dict]:
                 "section": doc.get("section", ""),
                 "answer": doc["answer"],
             })
+
+    logger.info(f"Loaded {len(tests)} test queries from {path}")
     return tests
 
+
 def load_topic_assignments(path: Path) -> dict[str, dict]:
-    """Load topic assignments indexed by document ID."""
     if not path.exists():
         raise FileNotFoundError(f"Topic assignments not found: {path}")
+
     with open(path, encoding="utf-8") as f:
         data = json.load(f)
-    return {a["id"]: a for a in data.get("assignments", [])}
+
+    assignments = {a["id"]: a for a in data.get("assignments", [])}
+    logger.info(f"Loaded {len(assignments)} topic assignments from {path}")
+    return assignments
+
 
 def load_configs(path: Path) -> dict:
-    """Load retrieval configuration presets."""
     if not path.exists():
         raise FileNotFoundError(f"Retrieval configs not found: {path}")
+
     with open(path, encoding="utf-8") as f:
-        return json.load(f)
+        configs = json.load(f)
+
+    logger.info(f"Loaded {len(configs)} retrieval configs from {path}")
+    return configs

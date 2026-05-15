@@ -33,5 +33,5 @@
     },
     "remoteUser": "root",
     "postCreateCommand": "bash .devcontainer/setup.sh",
-    "postStartCommand": "grep -qxF 'source /home/admin/LLM/.venv/bin/activate' ~/.bashrc || echo 'source /home/admin/LLM/.venv/bin/activate' >> ~/.bashrc"
+    "postStartCommand": "grep -qxF 'source /workspaces/LLM/.venv/bin/activate' ~/.bashrc || echo 'source /workspaces/LLM/.venv/bin/activate' >> ~/.bashrc"
 }
