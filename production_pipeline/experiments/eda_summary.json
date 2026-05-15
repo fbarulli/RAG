@@ -243,16 +243,6 @@
     ],
     "code_signals": {
       "by_course": {
-        "llm-zoomcamp": {
-          "total": 79,
-          "with_code": 32,
-          "code_pct": 40.51
-        },
-        "data-engineering-zoomcamp": {
-          "total": 402,
-          "with_code": 238,
-          "code_pct": 59.2
-        },
         "mlops-zoomcamp": {
           "total": 251,
           "with_code": 145,
@@ -262,6 +252,16 @@
           "total": 472,
           "with_code": 237,
           "code_pct": 50.21
+        },
+        "llm-zoomcamp": {
+          "total": 79,
+          "with_code": 32,
+          "code_pct": 40.51
+        },
+        "data-engineering-zoomcamp": {
+          "total": 402,
+          "with_code": 238,
+          "code_pct": 59.2
         }
       },
       "potential_code_misses": [
@@ -286,8 +286,8 @@
           "question": "Why does the course use GCP and not AWS or Azure?",
           "course": "data-engineering-zoomcamp",
           "matched_keywords": [
-            "aws",
-            "gcp"
+            "gcp",
+            "aws"
           ]
         },
         {
@@ -303,8 +303,8 @@
           "question": "Can I use AWS / Snowflake / Azure instead of GCP for the project?",
           "course": "data-engineering-zoomcamp",
           "matched_keywords": [
-            "aws",
-            "gcp"
+            "gcp",
+            "aws"
           ]
         },
         {

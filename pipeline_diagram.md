@@ -14,6 +14,8 @@ flowchart TD
         p01_data_cleaning_p01_download --> p01_data_cleaning_p02_parse
         p01_data_cleaning_p03_dedup[p03_dedup.py]
         p01_data_cleaning_p02_parse --> p01_data_cleaning_p03_dedup
+        p01_data_cleaning_p04_split[p04_split.py]
+        p01_data_cleaning_p03_dedup --> p01_data_cleaning_p04_split
         end
         subgraph p02_eda[p02_eda]
         p02_eda_p01_load_and_inspect[p01_load_and_inspect.py]
@@ -31,6 +33,8 @@ flowchart TD
         p04_ingestion_p01_ingest_es[p01_ingest_es.py]
         p04_ingestion_p01_ingest_qdrant[p01_ingest_qdrant.py]
         p04_ingestion_p01_ingest_es --> p04_ingestion_p01_ingest_qdrant
+        p04_ingestion_p02_ingest_models[p02_ingest_models.py]
+        p04_ingestion_p01_ingest_qdrant --> p04_ingestion_p02_ingest_models
         end
     end
     subgraph Tests[tests/]

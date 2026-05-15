@@ -1,0 +1,42 @@
+{
+  "qdrant_default": {
+    "name": "Qdrant Vector Default",
+    "search_type": "qdrant",
+    "collection": "faqs",
+    "limit": 10,
+    "score_threshold": 0.75
+  },
+  "qdrant_high_accuracy": {
+    "name": "Qdrant High Accuracy",
+    "search_type": "qdrant",
+    "collection": "faqs",
+    "limit": 10,
+    "hnsw_ef": 256,
+    "score_threshold": 0.80
+  },
+  "qdrant_fast": {
+    "name": "Qdrant Fast (lower ef)",
+    "search_type": "qdrant",
+    "collection": "faqs",
+    "limit": 10,
+    "hnsw_ef": 64,
+    "score_threshold": 0.70
+  },
+  "qdrant_with_filter": {
+    "name": "Qdrant Filtered",
+    "search_type": "qdrant",
+    "collection": "faqs",
+    "limit": 10,
+    "filters": {
+      "must": [{ "key": "language", "match": { "value": "en" } }]
+    }
+  },
+  "qdrant_payload_search": {
+    "name": "Qdrant Payload + Vector",
+    "search_type": "qdrant",
+    "collection": "faqs",
+    "limit": 10,
+    "with_payload": true,
+    "with_vectors": false
+  }
+}
