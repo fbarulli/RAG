@@ -27,7 +27,7 @@ def _format_summary(s: MetricSummary) -> list[str]:
     """Format a single MetricSummary into a list of display lines."""
     lines = [f"Config: {s.config_name} | Model: {s.model_name}"]
     if s.topic is not None:
-        lines.append(f"  Topic: {s.topic} | Subtopic: {s.subtopic} | Intent: {s.intent}")
+        lines.append(f"  Topic: {s.topic} | Subtopic: {s.subtopic}")
     ret_integrity = f"{s.avg_code_integrity_retrieved:.1%}" if s.avg_code_integrity_retrieved is not None else "N/A"
     lines += [
         f"  Queries: {s.num_queries}",
@@ -43,7 +43,7 @@ def _sort_summaries(summaries: list[MetricSummary]) -> list[MetricSummary]:
     """Sort summaries deterministically for consistent reporting."""
     return sorted(
         summaries,
-        key=lambda s: (s.config_name, s.model_name, s.topic or -1, s.subtopic or -1, s.intent or "")
+        key=lambda s: (s.config_name, s.model_name, s.topic or -1, s.subtopic or -1)
     )
 
 
