@@ -2,7 +2,7 @@
   "total_docs": 1204,
   "unique_ids": 1204,
   "duplicate_ids": 0,
-  "input_file_hash": "d40761a4719309d5",
+  "input_file_hash": "ae67242b5271d96a",
   "courses": {
     "data-engineering-zoomcamp": 402,
     "mlops-zoomcamp": 251,
@@ -49,16 +49,16 @@
   },
   "answer_length": {
     "min": 3,
-    "max": 4142,
-    "mean": 541.9,
-    "p10": 137,
-    "p50": 421,
-    "p90": 1054
+    "max": 4185,
+    "mean": 548.6,
+    "p10": 139,
+    "p50": 427,
+    "p90": 1071
   },
   "answer_signals": {
     "has_code_block": 652,
     "has_url": 113,
-    "has_list": 688
+    "has_list": 689
   },
   "top_words": {
     "error": 190,
@@ -127,13 +127,6 @@
         "answer": "You can try to do these steps:",
         "course": "data-engineering-zoomcamp",
         "answer_length": 30
-      },
-      {
-        "id": "e80e8216d5",
-        "question": "Python: Python can't ingest data from the GitHub link provided using curl",
-        "answer": "```os.system(f\"curl -LO {url} -o {csv_name}\")```",
-        "course": "data-engineering-zoomcamp",
-        "answer_length": 48
       },
       {
         "id": "2220285e58",
@@ -260,15 +253,15 @@
           "with_code": 238,
           "code_pct": 59.2
         },
-        "machine-learning-zoomcamp": {
-          "total": 472,
-          "with_code": 237,
-          "code_pct": 50.21
-        },
         "mlops-zoomcamp": {
           "total": 251,
           "with_code": 145,
           "code_pct": 57.77
+        },
+        "machine-learning-zoomcamp": {
+          "total": 472,
+          "with_code": 237,
+          "code_pct": 50.21
         }
       },
       "potential_code_misses": [
@@ -743,17 +736,17 @@
     },
     "qa_correlation": {
       "pearson_r": 0.088,
-      "p_value": 0.0023
+      "p_value": 0.0024
     },
     "answer_length_distribution": {
-      "very_short (<50)": 19,
-      "short (50-200)": 200,
-      "medium (200-800)": 763,
-      "long (800+)": 222
+      "very_short (<50)": 18,
+      "short (50-200)": 198,
+      "medium (200-800)": 760,
+      "long (800+)": 228
     }
   },
   "recommendations": [
-    "🔴 Audit 19 answers <50 chars — likely broken/placeholder content",
+    "🔴 Audit 18 answers <50 chars — likely broken/placeholder content",
     "🟡 Retrieval bias risk (max/min ratio: 6.0) — consider course-aware filtering"
   ]
 }
