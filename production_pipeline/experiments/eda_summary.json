@@ -2,7 +2,7 @@
   "total_docs": 1204,
   "unique_ids": 1204,
   "duplicate_ids": 0,
-  "input_file_hash": "9a449826f0c01482",
+  "input_file_hash": "d40761a4719309d5",
   "courses": {
     "data-engineering-zoomcamp": 402,
     "mlops-zoomcamp": 251,
@@ -49,16 +49,16 @@
   },
   "answer_length": {
     "min": 3,
-    "max": 4154,
-    "mean": 543.2,
+    "max": 4142,
+    "mean": 541.9,
     "p10": 137,
-    "p50": 422,
-    "p90": 1059
+    "p50": 421,
+    "p90": 1054
   },
   "answer_signals": {
-    "has_code_block": 2,
-    "has_url": 109,
-    "has_list": 685
+    "has_code_block": 652,
+    "has_url": 113,
+    "has_list": 688
   },
   "top_words": {
     "error": 190,
@@ -127,6 +127,13 @@
         "answer": "You can try to do these steps:",
         "course": "data-engineering-zoomcamp",
         "answer_length": 30
+      },
+      {
+        "id": "e80e8216d5",
+        "question": "Python: Python can't ingest data from the GitHub link provided using curl",
+        "answer": "```os.system(f\"curl -LO {url} -o {csv_name}\")```",
+        "course": "data-engineering-zoomcamp",
+        "answer_length": 48
       },
       {
         "id": "2220285e58",
@@ -245,23 +252,23 @@
       "by_course": {
         "machine-learning-zoomcamp": {
           "total": 472,
-          "with_code": 0,
-          "code_pct": 0.0
+          "with_code": 237,
+          "code_pct": 50.21
         },
         "data-engineering-zoomcamp": {
           "total": 402,
-          "with_code": 1,
-          "code_pct": 0.25
-        },
-        "llm-zoomcamp": {
-          "total": 79,
-          "with_code": 0,
-          "code_pct": 0.0
+          "with_code": 238,
+          "code_pct": 59.2
         },
         "mlops-zoomcamp": {
           "total": 251,
-          "with_code": 1,
-          "code_pct": 0.4
+          "with_code": 145,
+          "code_pct": 57.77
+        },
+        "llm-zoomcamp": {
+          "total": 79,
+          "with_code": 32,
+          "code_pct": 40.51
         }
       },
       "potential_code_misses": [
@@ -291,40 +298,8 @@
           ]
         },
         {
-          "id": "1ba19ed6a0",
-          "question": "Git Bash: Backslash as an escape character in Git Bash for Windows",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "git"
-          ]
-        },
-        {
-          "id": "3d24f7796d",
-          "question": "GitHub Codespaces: Running pgadmin in Docker",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "docker"
-          ]
-        },
-        {
           "id": "a3776dc060",
           "question": "How to run Python as a startup script?",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "python"
-          ]
-        },
-        {
-          "id": "35d7874a8d",
-          "question": "Jupyter: Install nbconvert, fix 'Failed to spawn' nbconvert error, and convert notebook to Python sc",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "python"
-          ]
-        },
-        {
-          "id": "c2f39b0ef3",
-          "question": "Alternative way to convert Jupyter notebook to Python script (via jupytext)",
           "course": "data-engineering-zoomcamp",
           "matched_keywords": [
             "python"
@@ -372,38 +347,6 @@
           ]
         },
         {
-          "id": "5e6c4090af",
-          "question": "Docker: Cannot connect to Docker daemon at unix:///var/run/docker.sock. Is the Docker daemon running",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "docker"
-          ]
-        },
-        {
-          "id": "46dbe4810d",
-          "question": "Docker - error during connect: In the default daemon configuration on Windows, the docker client mus",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "docker"
-          ]
-        },
-        {
-          "id": "bceb4aa421",
-          "question": "Docker: docker pull dbpage",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "docker"
-          ]
-        },
-        {
-          "id": "0beb2b5df7",
-          "question": "docker + Postgres: permission errors on the data directory (chown / could not change permissions / c",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "docker"
-          ]
-        },
-        {
           "id": "3549528659",
           "question": "Docker: Docker won't start or is stuck in settings (Windows 10 / 11)",
           "course": "data-engineering-zoomcamp",
@@ -420,122 +363,8 @@
           ]
         },
         {
-          "id": "ed8dcfbb5a",
-          "question": "Docker: The input device is not a TTY (Docker run for Windows)",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "docker"
-          ]
-        },
-        {
-          "id": "4c8959502e",
-          "question": "Docker: Cannot pip install on Docker container (Windows)",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "docker",
-            "pip"
-          ]
-        },
-        {
-          "id": "87e92edf02",
-          "question": "docker on Windows: volume mount path syntax (Git Bash, MINGW, paths with spaces, \"ny_taxi_postgres_d",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "docker",
-            "git"
-          ]
-        },
-        {
-          "id": "b2eabcd7dc",
-          "question": "Docker: Setting up Docker on Mac",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "docker"
-          ]
-        },
-        {
-          "id": "30dcc71db8",
-          "question": "How can I back up and restore PostgreSQL data stored in a Docker volume?",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "docker"
-          ]
-        },
-        {
-          "id": "d87e3d2a14",
-          "question": "Docker: ERRO[0000] error waiting for container: context canceled",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "docker"
-          ]
-        },
-        {
-          "id": "79e44b9c07",
-          "question": "Docker: Docker network name",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "docker"
-          ]
-        },
-        {
-          "id": "381dfe5145",
-          "question": "Docker: Error response from daemon: Conflict. The container name \"pg-database\" is already in use by ",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "docker"
-          ]
-        },
-        {
-          "id": "1700cb2bd4",
-          "question": "docker compose: \"could not translate host name pgdatabase / pg-database to address\" — hostname does ",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "docker"
-          ]
-        },
-        {
-          "id": "c6cd0fedc5",
-          "question": "Docker: Cannot install docker on MacOS/Windows 11 VM running on top of Linux (due to Nested virtuali",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "docker"
-          ]
-        },
-        {
           "id": "0cc94bef66",
           "question": "Docker: Connecting from VS Code",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "docker"
-          ]
-        },
-        {
-          "id": "9e05e54958",
-          "question": "Docker: How to stop a container?",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "docker"
-          ]
-        },
-        {
-          "id": "1b727dde32",
-          "question": "Docker: Docker not installable on Ubuntu",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "docker"
-          ]
-        },
-        {
-          "id": "fa905a3e7b",
-          "question": "What's the difference between -i and -t in docker run -it?",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "docker"
-          ]
-        },
-        {
-          "id": "a950fda271",
-          "question": "Docker-Compose: PgAdmin – no database in PgAdmin",
           "course": "data-engineering-zoomcamp",
           "matched_keywords": [
             "docker"
@@ -550,30 +379,6 @@
           ]
         },
         {
-          "id": "e43abaa421",
-          "question": "docker compose: installation problems (binary not found, exec format error, credentials error, dial ",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "docker"
-          ]
-        },
-        {
-          "id": "73876c8348",
-          "question": "Docker-Compose: Errors pertaining to docker-compose.yml and pgadmin setup",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "docker"
-          ]
-        },
-        {
-          "id": "d3c860aa46",
-          "question": "Docker: Postgres container fails to launch with exit code (1) when attempting to compose",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "docker"
-          ]
-        },
-        {
           "id": "8c1d06d681",
           "question": "Can I run Docker Engine directly in WSL2 (Ubuntu) without Docker Desktop?",
           "course": "data-engineering-zoomcamp",
@@ -582,48 +387,8 @@
           ]
         },
         {
-          "id": "687d54c6ba",
-          "question": "Docker: Docker-compose takes infinitely long to install zip unzip packages for linux, which are requ",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "docker"
-          ]
-        },
-        {
           "id": "bd56924fcb",
           "question": "GCP: Static vs Ephemeral IP / Setting up static IP for VM",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "gcp"
-          ]
-        },
-        {
-          "id": "25b0348672",
-          "question": "GCP: \"The installer is unable to automatically update your system PATH\" on Windows",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "gcp"
-          ]
-        },
-        {
-          "id": "bad6a11a5a",
-          "question": "GCP: Project creation failed: HttpError accessing … Requested entity already exists",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "gcp"
-          ]
-        },
-        {
-          "id": "bc90da941d",
-          "question": "GCP: The project to be billed is associated with an absent billing account",
-          "course": "data-engineering-zoomcamp",
-          "matched_keywords": [
-            "gcp"
-          ]
-        },
-        {
-          "id": "53b423d784",
-          "question": "GCP: OR-CBAT-15 ERROR Google cloud free trial account",
           "course": "data-engineering-zoomcamp",
           "matched_keywords": [
             "gcp"
@@ -662,11 +427,251 @@
           ]
         },
         {
-          "id": "513410225e",
-          "question": "GCP: Virtual Machine (VM) Size, Slow, Clean Up",
+          "id": "f29d45f419",
+          "question": "GCP: I cannot get my Virtual Machine to start because GCP has no resources.",
           "course": "data-engineering-zoomcamp",
           "matched_keywords": [
             "gcp"
+          ]
+        },
+        {
+          "id": "d8ebc91216",
+          "question": "GCP VM: Is it necessary to use a GCP VM? When is it useful?",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "gcp"
+          ]
+        },
+        {
+          "id": "c01d835b44",
+          "question": "GCP VM: If you have lost SSH access to your machine due to lack of space. Permission denied (publick",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "gcp"
+          ]
+        },
+        {
+          "id": "8ddf54cbd0",
+          "question": "PGCLI: Should we run pgcli inside another docker container?",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "docker"
+          ]
+        },
+        {
+          "id": "0d6dc0d041",
+          "question": "Python: Ingestion with Jupyter notebook - missing 100000 records",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "python"
+          ]
+        },
+        {
+          "id": "dec5edee6a",
+          "question": "Terraform: Could not reach provider registry in restricted region (e.g., Iraq) – Invalid provider re",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "terraform"
+          ]
+        },
+        {
+          "id": "31053272e0",
+          "question": "Terraform: Error: Post \"[storage.googleapis.com](https://storage.googleapis.com/storage/v1/b?alt=jso",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "terraform"
+          ]
+        },
+        {
+          "id": "a5a163f51d",
+          "question": "Terraform: Install for WSL",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "terraform"
+          ]
+        },
+        {
+          "id": "feb57d99da",
+          "question": "Terraform: Error acquiring the state lock",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "terraform"
+          ]
+        },
+        {
+          "id": "de1924abdb",
+          "question": "Terraform: Do I need to make another service account for Terraform before I get the keys (.json file",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "terraform"
+          ]
+        },
+        {
+          "id": "d0f76f4669",
+          "question": "Terraform: Where can I download the Terraform binary for Linux?",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "terraform"
+          ]
+        },
+        {
+          "id": "76f95c1d28",
+          "question": "Terraform: Terraform initialized in an empty directory! The directory has no Terraform configuration",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "terraform"
+          ]
+        },
+        {
+          "id": "db53f69d74",
+          "question": "Adding a pgadmin service with volume mounting to the docker-compose:",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "docker"
+          ]
+        },
+        {
+          "id": "733065c175",
+          "question": "Why does Kestra need access to the Docker socket?",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "docker"
+          ]
+        },
+        {
+          "id": "f5a8ca34fa",
+          "question": "Why does the CSV file size shown in the Kestra Outputs tab differ from the value printed by a Python",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "python"
+          ]
+        },
+        {
+          "id": "91a298833a",
+          "question": "GitHub Codespaces: ERR_EMPTY_RESPONSE when accessing Kestra in Docker (this page isn’t working / 127",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "docker"
+          ]
+        },
+        {
+          "id": "0131ac93ac",
+          "question": "GCP: Caution in using BigQuery - bigquery:no",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "gcp"
+          ]
+        },
+        {
+          "id": "b98d573ce2",
+          "question": "GCP BQ: Remember to save your queries",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "gcp"
+          ]
+        },
+        {
+          "id": "57303f9d80",
+          "question": "GCP BQ: Can I use BigQuery for real-time analytics in this project?",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "gcp"
+          ]
+        },
+        {
+          "id": "8bfd81c403",
+          "question": "GCP BQ: When querying two different tables, external and materialized, why do you get the same resul",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "gcp"
+          ]
+        },
+        {
+          "id": "625c1f542a",
+          "question": "GCP BQ: Invalid project ID. Project IDs must contain 6-63 lowercase letters, digits, or dashes.",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "gcp"
+          ]
+        },
+        {
+          "id": "8248dd9d7f",
+          "question": "GCP BQ: When trying to cluster by DATE(tpep_pickup_datetime) it gives an error: Entries in the CLUST",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "gcp"
+          ]
+        },
+        {
+          "id": "0f2a26772e",
+          "question": "Python: Generators in Python",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "python"
+          ]
+        },
+        {
+          "id": "577dfed594",
+          "question": "Python: Easiest way to read multiple files at the same time?",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "python"
+          ]
+        },
+        {
+          "id": "8815e0f1fd",
+          "question": "Why use dbt if we already have Python?",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "python"
+          ]
+        },
+        {
+          "id": "497269a77f",
+          "question": "Connecting from local Spark to GCS: Spark does not find my Google credentials as shown in the video?",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "spark"
+          ]
+        },
+        {
+          "id": "39fc22b5cb",
+          "question": "GCP: py4j.protocol.Py4JJavaError",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "gcp"
+          ]
+        },
+        {
+          "id": "94ccf8c158",
+          "question": "Docker: Could not start docker image \"control-center\" from the docker-compose.yaml file.",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "docker"
+          ]
+        },
+        {
+          "id": "348f696873",
+          "question": "Kafka: Python videos have low audio and are hard to follow up",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "python"
+          ]
+        },
+        {
+          "id": "759b5d80ec",
+          "question": "Kafka Python Videos: Rides.csv",
+          "course": "data-engineering-zoomcamp",
+          "matched_keywords": [
+            "python"
+          ]
+        },
+        {
+          "id": "15e931476c",
+          "question": "In Windows OS: OSError: [WinError 126] The specified module could not be found. Error loading \"C:\\Us",
+          "course": "llm-zoomcamp",
+          "matched_keywords": [
+            "python"
           ]
         }
       ]
@@ -737,19 +742,18 @@
       }
     },
     "qa_correlation": {
-      "pearson_r": 0.087,
-      "p_value": 0.0026
+      "pearson_r": 0.088,
+      "p_value": 0.0023
     },
     "answer_length_distribution": {
-      "very_short (<50)": 18,
-      "short (50-200)": 199,
+      "very_short (<50)": 19,
+      "short (50-200)": 200,
       "medium (200-800)": 763,
-      "long (800+)": 224
+      "long (800+)": 222
     }
   },
   "recommendations": [
-    "🔴 Audit 18 answers <50 chars — likely broken/placeholder content",
-    "🔴 Investigate code parsing for machine-learning-zoomcamp, data-engineering-zoomcamp, llm-zoomcamp, mlops-zoomcamp — expected more code blocks",
+    "🔴 Audit 19 answers <50 chars — likely broken/placeholder content",
     "🟡 Retrieval bias risk (max/min ratio: 6.0) — consider course-aware filtering"
   ]
 }

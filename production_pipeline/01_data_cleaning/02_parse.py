@@ -63,16 +63,14 @@ _RE_EXCESS_NEWLINES = re.compile(
 
 def clean_answer(text: str) -> str:
     """Remove markdown formatting while preserving fenced code blocks."""
-
+    
     code_blocks = []
     def protect_fenced_code(match):
         code_blocks.append(match.group(1).strip())
         return f"__FENCED_CODE_{len(code_blocks)-1}__"
     
-
-    text = re.sub(r'```(?:\w+)?\n(.*?)```', protect_fenced_code, text, flags=re.DOTALL | re.IGNORECASE)
     
-    # Step 2: Apply existing cleaning steps
+    text = re.sub(r'```(?:\w+)?\n(.*?)```', protect_fenced_code, text, flags=re.DOTALL | re.IGNORECASE)
     text = _RE_IMAGE_PLACEHOLDER.sub("", text)
     text = _RE_HEADERS.sub("", text)
     text = _RE_MD_IMAGE.sub("", text)
