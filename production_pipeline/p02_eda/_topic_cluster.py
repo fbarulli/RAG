@@ -8,6 +8,8 @@ import numpy as np
 from bertopic import BERTopic
 from hdbscan import HDBSCAN
 from sentence_transformers import SentenceTransformer
+from sklearn.feature_extraction.text import CountVectorizer
+
 
 from rag_pipeline.logging import get_logger
 
@@ -19,6 +21,7 @@ def cluster_topics(
     embedding_model_name: str,
     min_topic_size: int = 5,
     min_samples: int = 1,
+    stopwords: list[str] | None = None,
 ) -> tuple[BERTopic, list[int], list[float], np.ndarray]:
     """
     Run BERTopic with explicit HDBSCAN configuration.
@@ -33,7 +36,9 @@ def cluster_topics(
         Tuple of (topic_model, topic_labels, probabilities, embeddings)
     """
     logger.info(f"Loading embedding model: {embedding_model_name}")
-    embedder = SentenceTransformer(embedding_model_name)
+    logger.info(f"[cluster_topics] stopwords received: {len(stopwords) if stopwords else 0}")
+
+    embedder = SentenceTransformer(embedding_model_name,trust_remote_code=True)
 
     # Pre-compute embeddings for efficiency
     logger.info("Encoding questions...")
@@ -47,10 +52,16 @@ def cluster_topics(
         min_samples=min_samples,
         prediction_data=True,
     )
+    vectorizer_model = CountVectorizer(
+    stop_words=stopwords or "english",
+    ngram_range=(1, 2),
+)
+
 
     topic_model = BERTopic(
         embedding_model=embedder,
         hdbscan_model=hdbscan_model,
+        vectorizer_model=vectorizer_model,
         verbose=True,
     )
 

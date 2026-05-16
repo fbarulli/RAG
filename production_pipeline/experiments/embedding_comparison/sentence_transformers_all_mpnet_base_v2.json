@@ -1,23 +1,23 @@
 {
   "model": "sentence-transformers/all-mpnet-base-v2",
   "total_documents": 1204,
-  "num_topics": 96,
-  "outlier_count": 154,
-  "outlier_ratio": 0.1279,
-  "avg_keyword_overlap": 0.0003,
-  "mean_confidence": 0.723,
-  "low_confidence_count": 330,
-  "low_confidence_ratio": 0.2741,
+  "num_topics": 95,
+  "outlier_count": 166,
+  "outlier_ratio": 0.1379,
+  "avg_keyword_overlap": 0.0004,
+  "mean_confidence": 0.7094,
+  "low_confidence_count": 336,
+  "low_confidence_ratio": 0.2791,
   "topic_size_stats": {
     "min": 5,
-    "max": 41,
+    "max": 45,
     "mean": 10.9,
     "median": 9.0,
-    "std": 6.6
+    "std": 6.4
   },
-  "silhouette_score": 0.1099,
-  "davies_bouldin_index": 2.3932,
-  "runtime_seconds": 53.4,
-  "peak_memory_mb": 24.3,
+  "silhouette_score": 0.1126,
+  "davies_bouldin_index": 2.4455,
+  "runtime_seconds": 10.6,
+  "peak_memory_mb": 20.4,
   "embedding_dim": 768
 }

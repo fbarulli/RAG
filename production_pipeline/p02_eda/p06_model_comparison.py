@@ -20,6 +20,8 @@ import argparse
 import json
 from pathlib import Path
 from typing import Any
+from collections import defaultdict
+
 
 import numpy as np
 
@@ -58,33 +60,77 @@ METRIC_WEIGHTS: dict[str, float] = {
 # ---------------------------------------------------------------------------
 
 def load_model_results(input_dir: Path) -> list[dict[str, Any]]:
-    """Load all validation_topic_assignments_*.json files and extract metrics."""
-    results = []
-    for f in sorted(input_dir.glob("validation_topic_assignments_*.json")):
+    """Load all topic_assignments_*.json files and compute all metrics."""
+    results: list[dict[str, Any]] = []
+    for f in sorted(input_dir.glob("topic_assignments_*.json")):
+        # Skip validated files to avoid duplicates
+        if "_validated" in f.name:
+            continue
         try:
             with open(f, encoding="utf-8") as fh:
                 data = json.load(fh)
-        except json.JSONDecodeError as e:
-            logger.warning(f"Invalid JSON in {f.name}: {e}")
+            meta = data.get("metadata", {})
+            assignments = data.get("assignments", [])
+            
+            # Compute missing metrics from assignments
+            topics = [a.get("topic") for a in assignments if a.get("topic") != -1]
+            probs = [a.get("topic_probability", 0) for a in assignments if a.get("topic") != -1]
+            
+            # Keyword overlap (Jaccard between topic keyword sets)
+            topic_keywords = defaultdict(set)
+            for a in assignments:
+                t = a.get("topic")
+                if t != -1:
+                    kws = a.get("keywords", [])
+                    if kws and isinstance(kws[0], (list, tuple)):
+                        words = [kw[0] for kw in kws if isinstance(kw, (list, tuple)) and len(kw) > 0]
+                    else:
+                        words = [kw for kw in kws if isinstance(kw, str)]
+                    topic_keywords[t].update(w.lower() for w in words)
+            
+            overlap_scores = []
+            topic_ids = list(topic_keywords.keys())
+            for i in range(len(topic_ids)):
+                for j in range(i+1, len(topic_ids)):
+                    a, b = topic_keywords[topic_ids[i]], topic_keywords[topic_ids[j]]
+                    if a or b:
+                        jaccard = len(a & b) / len(a | b) if (a | b) else 0
+                        overlap_scores.append(jaccard)
+            avg_overlap = np.mean(overlap_scores) if overlap_scores else 0
+            
+            # Confidence stats
+            conf_mean = np.mean(probs) if probs else 0
+            
+            # Topic size std
+            from collections import Counter
+            sizes = list(Counter(topics).values())
+            size_std = np.std(sizes) if len(sizes) > 1 else 0
+            
+            # Cross-course topics
+            topic_courses = defaultdict(set)
+            for a in assignments:
+                t, c = a.get("topic"), a.get("course")
+                if t != -1 and c:
+                    topic_courses[t].add(c)
+            cross_course = sum(1 for courses in topic_courses.values() if len(courses) > 1)
+            
+            results.append({
+                "model": meta.get("model", f.stem.replace("topic_assignments_", "").replace("_", "/").replace("__", "-")),
+                "file": f.name,
+                "outlier_ratio": meta.get("outlier_ratio", 0.0),
+                "num_topics": meta.get("num_topics", 0),
+                "avg_keyword_overlap": round(avg_overlap, 4),
+                "confidence_mean": round(conf_mean, 3),
+                "topic_size_std": round(size_std, 1),
+                "cross_course_topics": cross_course,
+            })
+        except Exception as e:
+            logger.warning(f"Skipping {f.name}: {e}")
             continue
-        except OSError as e:
-            logger.warning(f"Could not read {f.name}: {e}")
-            continue
-
-        model_name = f.stem.replace("validation_topic_assignments_", "").replace("_", "/")
-        results.append({
-            "model": data.get("metadata", {}).get("model", model_name),
-            "file": f.name,
-            "outlier_ratio": data.get("outlier_ratio", 0.0),
-            "num_topics": data.get("num_topics", 0),
-            "avg_keyword_overlap": data.get("avg_keyword_overlap"),
-            "confidence_mean": data.get("confidence_stats", {}).get("mean")
-                               if data.get("confidence_stats") else None,
-            "topic_size_std": data.get("topic_size_stats", {}).get("std")
-                              if data.get("topic_size_stats") else None,
-            "cross_course_topics": data.get("cross_course_topics"),
-        })
+    logger.info(f"Loaded {len(results)} model results from {input_dir}")
     return results
+
+
 
 
 # ---------------------------------------------------------------------------

@@ -21,6 +21,7 @@ from typing import Optional
 
 
 from qdrant_client.models import Filter, FieldCondition, MatchValue, SearchParams
+from elasticsearch import Elasticsearch
 
 from ._benchmark_types import MetricSummary, QueryResult
 
@@ -93,11 +94,109 @@ def compute_ndcg_at_k(hits: tuple[str, ...], expected_id: str, k: int) -> float:
     dcg = 1.0 / math.log2(rank + 1)
     idcg = 1.0
     return dcg / idcg
+def run_hybrid_rrf_query(
+    client,
+    collection: str,
+    query_vector: list,
+    es: "Elasticsearch",
+    es_index: str,
+    query_text: str,
+    course_filter: str,
+    config: dict,
+    top_k: int,
+) -> tuple[tuple[str, ...], Optional[str], tuple[float, ...], float]:
+    start = time.perf_counter()
+    k = config.get("rrf_k", 60)
+
+    # Vector results
+    must_conditions = []
+    if course_filter:
+        must_conditions.append(FieldCondition(key="course", match=MatchValue(value=course_filter)))
+    query_filter = Filter(must=must_conditions) if must_conditions else None
+
+    vector_result = client.query_points(
+        collection_name=collection,
+        query=query_vector,
+        limit=top_k,
+        query_filter=query_filter,
+        with_payload=True,
+        with_vectors=False,
+    )
+    vector_ids = [p.payload.get("es_id", "") for p in vector_result.points]
+
+    # BM25 results
+    bm25_result = run_es_retrieval_query(
+        es=es,
+        index=es_index,
+        query_text=query_text,
+        course_filter=course_filter,
+        config=config,
+        top_k=top_k,
+    )
+    bm25_ids = list(bm25_result[0])
+
+    # RRF fusion
+    rrf_scores: dict[str, float] = {}
+    for rank, doc_id in enumerate(vector_ids, start=1):
+        rrf_scores[doc_id] = rrf_scores.get(doc_id, 0.0) + 1.0 / (k + rank)
+    for rank, doc_id in enumerate(bm25_ids, start=1):
+        rrf_scores[doc_id] = rrf_scores.get(doc_id, 0.0) + 1.0 / (k + rank)
+
+    sorted_ids = sorted(rrf_scores, key=lambda x: -rrf_scores[x])[:top_k]
+    scores = tuple(rrf_scores[doc_id] for doc_id in sorted_ids)
+
+    # Get top answer from Qdrant payload
+    id_to_answer = {p.payload.get("es_id", ""): p.payload.get("answer") for p in vector_result.points}
+    top_answer = id_to_answer.get(sorted_ids[0]) if sorted_ids else None
+
+    latency_ms = (time.perf_counter() - start) * 1000
+    return tuple(sorted_ids), top_answer, scores, latency_ms
 
 
 # ---------------------------------------------------------------------------
 # Core logic: Retrieval execution (config-aware)
 # ---------------------------------------------------------------------------
+def run_es_retrieval_query(
+    es: Elasticsearch,
+    index: str,
+    query_text: str,
+    course_filter: str,
+    config: dict,
+    top_k: int,
+) -> tuple[tuple[str, ...], Optional[str], tuple[float, ...], float]:
+    start = time.perf_counter()
+
+    boost_q = config.get("boost_question", 1.0)
+    boost_t = config.get("boost_text", 1.0)
+
+    must = []
+    if boost_q > 0 and boost_t > 0:
+        must.append({"multi_match": {
+            "query": query_text,
+            "fields": [f"question^{boost_q}", f"answer^{boost_t}"],
+        }})
+    elif boost_q > 0:
+        must.append({"match": {"question": {"query": query_text, "boost": boost_q}}})
+    else:
+        must.append({"match": {"answer": {"query": query_text, "boost": boost_t}}})
+
+    body = {
+        "query": {"bool": {
+            "must": must,
+            "filter": [{"term": {"course": course_filter}}] if course_filter else [],
+        }},
+        "size": top_k,
+    }
+
+    resp = es.search(index=index, body=body)
+    latency_ms = (time.perf_counter() - start) * 1000
+
+    hits = resp["hits"]["hits"]
+    hit_ids = tuple(h["_source"].get("es_id", "") for h in hits)
+    scores = tuple(float(h["_score"]) for h in hits)
+    top_answer = hits[0]["_source"].get("answer") if hits else None
+
+    return hit_ids, top_answer, scores, latency_ms
 
 def run_retrieval_query(
     client, 
@@ -161,37 +260,67 @@ def run_retrieval_query(
 # Core logic: Evaluation & Aggregation
 # ---------------------------------------------------------------------------
 
-def evaluate_config(client, collection: str, model, test_set: list[dict], topic_map: dict, config: dict, top_k: int) -> list[QueryResult]:
+def evaluate_config(
+    client,
+    collection: str,
+    model,
+    test_set: list[dict],
+    topic_map: dict,
+    config: dict,
+    top_k: int,
+    es: "Elasticsearch | None" = None,
+    es_index: str = "faqs",
+) -> list[QueryResult]:
     """
     Evaluate a single config/model combination against the test set.
     Uses factual topic/subtopic assignments from topic_map.
     """
     results = []
-    
     for test in test_set:
         query = test["query"]
         expected_id = test["expected_id"]
         course = test["course"]
         ref_answer = test["answer"]
-        
         topic_info = topic_map.get(expected_id, {})
         topic = topic_info.get("topic", -1)
         subtopic = topic_info.get("subtopic")
-        
-        query_vector = model.encode(query, convert_to_numpy=True).tolist()
-        
-        hit_ids, top_answer, scores, latency_ms = run_retrieval_query(
-            client=client,
-            collection=collection,
-            query_vector=query_vector,
-            course_filter=course,
-            config=config,
-            top_k=top_k,
-        )
-        
+        search_type = config.get("search_type", "vector")
+
+        if search_type == "bm25" and es is not None:
+            hit_ids, top_answer, scores, latency_ms = run_es_retrieval_query(
+                es=es,
+                index=es_index,
+                query_text=query,
+                course_filter=course,
+                config=config,
+                top_k=top_k,
+            )
+        elif search_type == "hybrid_rrf" and es is not None:
+            query_vector = model.encode(query, convert_to_numpy=True).tolist()
+            hit_ids, top_answer, scores, latency_ms = run_hybrid_rrf_query(
+                client=client,
+                collection=collection,
+                query_vector=query_vector,
+                es=es,
+                es_index=es_index,
+                query_text=query,
+                course_filter=course,
+                config=config,
+                top_k=top_k,
+            )
+        else:
+            query_vector = model.encode(query, convert_to_numpy=True).tolist()
+            hit_ids, top_answer, scores, latency_ms = run_retrieval_query(
+                client=client,
+                collection=collection,
+                query_vector=query_vector,
+                course_filter=course,
+                config=config,
+                top_k=top_k,
+            )
+
         code_int_ref = check_code_integrity(ref_answer)
         code_int_ret = check_code_integrity(top_answer) if top_answer else None
-        
         results.append(QueryResult(
             query_id=test["query_id"],
             query_text=query,
@@ -199,13 +328,13 @@ def evaluate_config(client, collection: str, model, test_set: list[dict], topic_
             course=course,
             topic=topic,
             subtopic=subtopic,
+            query_type=test.get("query_type", "unknown"),
             hit_ids=hit_ids,
             hit_scores=scores,
             latency_ms=latency_ms,
             code_integrity_ref=code_int_ref,
             code_integrity_retrieved=code_int_ret,
         ))
-    
     return results
 
 

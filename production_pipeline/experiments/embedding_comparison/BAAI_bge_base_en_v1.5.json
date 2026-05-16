@@ -1,23 +1,23 @@
 {
   "model": "BAAI/bge-base-en-v1.5",
   "total_documents": 1204,
-  "num_topics": 100,
-  "outlier_count": 158,
-  "outlier_ratio": 0.1312,
-  "avg_keyword_overlap": 0.0004,
-  "mean_confidence": 0.722,
-  "low_confidence_count": 320,
-  "low_confidence_ratio": 0.2658,
+  "num_topics": 102,
+  "outlier_count": 153,
+  "outlier_ratio": 0.1271,
+  "avg_keyword_overlap": null,
+  "mean_confidence": 0.7177,
+  "low_confidence_count": 326,
+  "low_confidence_ratio": 0.2708,
   "topic_size_stats": {
     "min": 5,
-    "max": 28,
-    "mean": 10.5,
-    "median": 9.0,
-    "std": 5.4
+    "max": 43,
+    "mean": 10.3,
+    "median": 8.0,
+    "std": 6.1
   },
-  "silhouette_score": 0.1077,
-  "davies_bouldin_index": 2.4951,
-  "runtime_seconds": 11.8,
-  "peak_memory_mb": 24.5,
+  "silhouette_score": 0.1034,
+  "davies_bouldin_index": 2.4268,
+  "runtime_seconds": 11.1,
+  "peak_memory_mb": 20.9,
   "embedding_dim": 768
 }

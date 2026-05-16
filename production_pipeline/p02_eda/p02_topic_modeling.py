@@ -17,6 +17,9 @@ from rag_pipeline.logging import get_logger
 from rag_pipeline.paths import Paths
 
 from ._topic_cluster import cluster_topics
+from production_pipeline.p02_eda._tfidf_stopwords import load_stopwords
+from production_pipeline.p02_eda._entity_pattern_learner import build_base_nlp, extract_missed_terms, suggest_patterns, update_entity_ruler
+
 
 logger = get_logger(__name__)
 
@@ -24,7 +27,7 @@ logger = get_logger(__name__)
 # Configuration
 # ---------------------------------------------------------------------------
 DEFAULT_INPUT = Paths.processed_dir() / "clean.jsonl"
-DEFAULT_OUTPUT = Paths.experiments_dir() / "topic_assignments.json"
+DEFAULT_OUTPUT = Path(__file__).parent / "experiments" / "topic_assignments.json"
 DEFAULT_EMBEDDING_MODEL = "BAAI/bge-small-en-v1.5"
 DEFAULT_MIN_TOPIC_SIZE = 5
 DEFAULT_SUBTOPIC_THRESHOLD = 40
@@ -36,6 +39,7 @@ TEST_MODELS = [
     "sentence-transformers/all-mpnet-base-v2",
     "nomic-ai/nomic-embed-text-v1.5",
     "intfloat/e5-small-v2",
+    "intfloat/e5-base-v2"
 ]
 
 
@@ -121,13 +125,41 @@ def process_model(
     logger.info(f"Processing model: {model_name}")
     docs = load_questions(input_path)
     questions = [d["question"] for d in docs]
+    stopwords = load_stopwords(  
+        Path("production_pipeline/p02_eda/experiments/tfidf_analysis/stopwords/stopwords_pass2.txt")
+    )
 
-    topic_model, topics, probs, _ = cluster_topics(
+    topic_model, topics, probs, embeddings = cluster_topics(
         questions=questions,
         embedding_model_name=model_name,
         min_topic_size=min_topic_size,
+        stopwords=stopwords,
         min_samples=min_samples,
     )
+    topics = list(topics)
+    outlier_indices = [i for i, t in enumerate(topics) if t == -1]
+    if outlier_indices:
+        outlier_questions = [questions[i] for i in outlier_indices]
+        topic_distr, _ = topic_model.approximate_distribution(outlier_questions)
+        for idx, dist in zip(outlier_indices, topic_distr):
+            best_topic = int(dist.argmax())
+            best_prob = float(dist.max())
+            if best_prob >= 0.1:  # minimum confidence threshold
+                topics[idx] = best_topic
+                probs[idx] = best_prob
+
+    nlp = build_base_nlp()
+    missed = extract_missed_terms(questions, nlp)
+    suggestions = suggest_patterns(missed, min_count=3)
+    nlp = update_entity_ruler(nlp, suggestions)
+
+    ner_tagged = {}
+    for doc in nlp.pipe(questions, batch_size=64):
+        ents = list(doc.ents)
+        ner_tagged[doc.text] = {
+            "category": ents[0].label_ if ents else "OTHER",
+            "primary_entity": ents[0].text.lower() if ents else None,
+        }
 
     # Build assignments
     assignments = []
@@ -143,6 +175,8 @@ def process_model(
             "topic": topic_id,
             "topic_probability": prob,
             "question": doc["question"],
+            "ner_category": ner_tagged.get(doc["question"], {}).get("category", "OTHER"),
+            "ner_primary_entity": ner_tagged.get(doc["question"], {}).get("primary_entity"),
             "subtopic": None,
             "subtopic_keywords": [],
             "keywords": keywords,

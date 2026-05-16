@@ -1,4 +1,15 @@
 {
+  "vector_default": {
+    "name": "Vector Default",
+    "search_type": "vector",
+    "use_vector": true
+  },
+  "vector_with_threshold": {
+    "name": "Vector With Threshold",
+    "search_type": "vector",
+    "use_vector": true,
+    "score_threshold": 0.75
+  },
   "bm25_default": {
     "name": "BM25 Default",
     "search_type": "bm25",
@@ -11,81 +22,17 @@
     "boost_question": 5.0,
     "boost_text": 5.0
   },
-  "bm25_high_question": {
-    "name": "BM25 High Question",
-    "search_type": "bm25",
-    "boost_question": 50.0,
-    "boost_text": 1.0
-  },
-  "bm25_high_text": {
-    "name": "BM25 High Text",
-    "search_type": "bm25",
-    "boost_question": 1.0,
-    "boost_text": 10.0
-  },
   "bm25_question_only": {
     "name": "BM25 Question Only",
     "search_type": "bm25",
     "boost_question": 1.0,
     "boost_text": 0.0
   },
-  "bm25_text_only": {
-    "name": "BM25 Text Only",
-    "search_type": "bm25",
-    "boost_question": 0.0,
-    "boost_text": 1.0
-  },
-  "vector_default": {
-    "name": "Vector Default",
-    "search_type": "vector",
-    "use_vector": true
-  },
-  "vector_with_threshold": {
-    "name": "Vector With Threshold",
-    "search_type": "vector",
-    "use_vector": true,
-    "score_threshold": 0.75
-  },
-  "vector_with_reranking": {
-    "name": "Vector With Reranking",
-    "search_type": "vector",
-    "use_vector": true,
-    "reranker": true
-  },
-  "hybrid_default": {
-    "name": "Hybrid Default",
-    "search_type": "hybrid",
-    "use_vector": true,
-    "boost_question": 20.0,
-    "boost_text": 1.0
-  },
-  "hybrid_balanced": {
-    "name": "Hybrid Balanced",
-    "search_type": "hybrid",
-    "use_vector": true,
-    "boost_question": 5.0,
-    "boost_text": 5.0
-  },
-  "hybrid_high_question": {
-    "name": "Hybrid High Question",
-    "search_type": "hybrid",
-    "use_vector": true,
-    "boost_question": 50.0,
-    "boost_text": 1.0
-  },
-  "hybrid_text_dominant": {
-    "name": "Hybrid Text Dominant",
-    "search_type": "hybrid",
-    "use_vector": true,
-    "boost_question": 1.0,
-    "boost_text": 10.0
-  },
-  "hybrid_with_reranking": {
-    "name": "Hybrid With Reranking",
-    "search_type": "hybrid",
-    "use_vector": true,
+  "hybrid_rrf": {
+    "name": "Hybrid RRF",
+    "search_type": "hybrid_rrf",
     "boost_question": 5.0,
     "boost_text": 5.0,
-    "reranker": true
-  }
+    "rrf_k": 60
+}
 }

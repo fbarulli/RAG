@@ -1,3 +1,4 @@
+import dataclasses
 """
 _benchmark_report.py
 ====================
@@ -16,6 +17,7 @@ from pathlib import Path
 from rag_pipeline.logging import get_logger
 
 from ._benchmark_types import MetricSummary
+from dataclasses import asdict
 
 logger = get_logger(__name__)
 
@@ -24,11 +26,13 @@ logger = get_logger(__name__)
 # ---------------------------------------------------------------------------
 
 def _format_summary(s: MetricSummary) -> list[str]:
-    """Format a single MetricSummary into a list of display lines."""
+    """Format a single MetricSummary into a list of display lines (with all new metrics)."""
     lines = [f"Config: {s.config_name} | Model: {s.model_name}"]
     if s.topic is not None:
         lines.append(f"  Topic: {s.topic} | Subtopic: {s.subtopic}")
+
     ret_integrity = f"{s.avg_code_integrity_retrieved:.1%}" if s.avg_code_integrity_retrieved is not None else "N/A"
+
     lines += [
         f"  Queries: {s.num_queries}",
         f"  Hit Rate @1: {s.hit_rate_1:.1%} | @3: {s.hit_rate_3:.1%} | @5: {s.hit_rate_5:.1%} | @10: {s.hit_rate_10:.1%}",
@@ -36,6 +40,16 @@ def _format_summary(s: MetricSummary) -> list[str]:
         f"  Latency: p50={s.latency_p50:.1f}ms | p95={s.latency_p95:.1f}ms | p99={s.latency_p99:.1f}ms",
         f"  Code Integrity (Ref): {s.avg_code_integrity_ref:.1%} | (Retrieved): {ret_integrity}",
     ]
+
+    # === NEW METRICS ===
+    lines += [
+        f"  Cross-Course Contamination: {s.cross_course_contamination:.2%}",
+        f"  Rank Std Dev: {s.rank_std:.2f}   (lower is better)",
+        f"  Failures (Hit@10=0): {s.failure_count}",
+    ]
+    if s.avg_failure_similarity is not None:
+        lines.append(f"  Avg Failure Similarity: {s.avg_failure_similarity:.4f}")
+
     return lines
 
 
@@ -69,7 +83,9 @@ def save_benchmark_results(summaries: list[MetricSummary], output_dir: Path) -> 
     # JSON report
     results_path = output_dir / "benchmark_results.json"
     with open(results_path, "w", encoding="utf-8") as f:
-        json.dump([s.to_dict() for s in summaries], f, indent=2, ensure_ascii=False)
+        json.dump([asdict(s) for s in summaries], f, indent=2, ensure_ascii=False)
+
+
     logger.info(f"Saved benchmark results: {results_path}")
 
     # Text summary

@@ -43,6 +43,7 @@ class QueryResult:
     latency_ms: float
     code_integrity_ref: float
     code_integrity_retrieved: Optional[float] = None
+    query_type: str = "unknown"
 
 
 @dataclass(frozen=True)

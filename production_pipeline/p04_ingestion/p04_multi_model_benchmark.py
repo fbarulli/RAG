@@ -51,7 +51,7 @@ DEFAULT_MODELS = [
 def _best_summary_per_model(summaries: list[MetricSummary]) -> list[dict[str, Any]]:
     """
     Collapse per-config summaries to one row per model by picking the config
-    with the highest MRR for each model. Excludes zero-query summaries.
+    with the highest MRR for each model.
     """
     best: dict[str, MetricSummary] = {}
     for s in summaries:
@@ -62,20 +62,21 @@ def _best_summary_per_model(summaries: list[MetricSummary]) -> list[dict[str, An
 
     rows = []
     for s in best.values():
-            rows.append({
-            "model": best.model_name,
-            "best_config": best.config_name,
-            "hit_at_1": best.hit_rate_1,
-            "hit_at_5": best.hit_rate_5,
-            "hit_at_10": best.hit_rate_10,
-            "mrr": best.mrr,
-            "ndcg_at_10": best.ndcg_10,
-            "latency_p50_ms": best.latency_p50,
-            "latency_p95_ms": best.latency_p95,
-            "cross_course_contam": best.cross_course_contamination,
-            "rank_std": best.rank_std,
-            "failures": best.failure_count,
-            "avg_fail_sim": best.avg_failure_similarity or 0.0,
+        rows.append({
+            "model": s.model_name,
+            "best_config": s.config_name,
+            "hit_at_1": s.hit_rate_1,
+            "hit_at_5": s.hit_rate_5,
+            "hit_at_10": s.hit_rate_10,
+            "mrr": s.mrr,
+            "ndcg_at_10": s.ndcg_10,
+            "latency_p50_ms": s.latency_p50,
+            "latency_p95_ms": s.latency_p95,
+            # New metrics
+            "cross_course_contam": s.cross_course_contamination,
+            "rank_std": s.rank_std,
+            "failures": s.failure_count,
+            "avg_fail_sim": s.avg_failure_similarity or 0.0,
         })
 
     rows.sort(key=lambda r: r["mrr"], reverse=True)
@@ -226,32 +227,7 @@ def main() -> None:
         logger.exception(f"Benchmark failed: {exc}")
         sys.exit(1)
 
-def print_detailed_report(summaries: list[MetricSummary]) -> None:
-    """Print detailed breakdown per configuration with all new metrics."""
-    print("\n" + "=" * 140)
-    print("DETAILED BENCHMARK REPORT - ALL CONFIGURATIONS")
-    print("=" * 140)
-    print(
-        f"{'Model':<25} {'Config':<18} {'H@1':>6} {'H@10':>6} {'MRR':>6} {'P50':>6} "
-        f"{'CrossCourse':>11} {'RankStd':>7} {'Fails':>5} {'AvgFailSim':>10} {'#Q':>4}"
-    )
-    print("-" * 140)
 
-    for s in sorted(summaries, key=lambda x: x.mrr, reverse=True):
-        print(
-            f"{s.model_name:<25} "
-            f"{s.config_name:<18} "
-            f"{s.hit_rate_1:>5.1%} "
-            f"{s.hit_rate_10:>5.1%} "
-            f"{s.mrr:>5.3f} "
-            f"{s.latency_p50:>5.1f} "
-            f"{s.cross_course_contamination:>10.2%} "
-            f"{s.rank_std:>6.2f} "
-            f"{s.failure_count:>4} "
-            f"{(s.avg_failure_similarity or 0):>9.3f} "
-            f"{s.num_queries:>3}"
-        )
-    print("=" * 140)
 
 if __name__ == "__main__":
     main()

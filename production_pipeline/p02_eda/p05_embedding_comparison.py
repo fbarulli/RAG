@@ -82,7 +82,7 @@ def load_or_compute_embeddings(
 ) -> tuple[np.ndarray, SentenceTransformer]:
     """Load cached embeddings or compute + save them. Returns both the array and the loaded model."""
     logger.info(f"Loading model: {model_name}...")
-    embedder = SentenceTransformer(model_name)
+    embedder = SentenceTransformer(model_name, trust_remote_code=True)
     
     if use_cache:
         cache_path = get_embedding_cache_path(model_name, questions, cache_dir)
