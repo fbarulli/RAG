@@ -62,51 +62,59 @@ def _best_summary_per_model(summaries: list[MetricSummary]) -> list[dict[str, An
 
     rows = []
     for s in best.values():
-        rows.append({
-            "model": s.model_name,
-            "best_config": s.config_name,
-            "hit_at_1": s.hit_rate_1,
-            "hit_at_5": s.hit_rate_5,
-            "hit_at_10": s.hit_rate_10,
-            "mrr": s.mrr,
-            "ndcg_at_10": s.ndcg_10,
-            "latency_p50_ms": s.latency_p50,
-            "latency_p95_ms": s.latency_p95,
+            rows.append({
+            "model": best.model_name,
+            "best_config": best.config_name,
+            "hit_at_1": best.hit_rate_1,
+            "hit_at_5": best.hit_rate_5,
+            "hit_at_10": best.hit_rate_10,
+            "mrr": best.mrr,
+            "ndcg_at_10": best.ndcg_10,
+            "latency_p50_ms": best.latency_p50,
+            "latency_p95_ms": best.latency_p95,
+            "cross_course_contam": best.cross_course_contamination,
+            "rank_std": best.rank_std,
+            "failures": best.failure_count,
+            "avg_fail_sim": best.avg_failure_similarity or 0.0,
         })
 
     rows.sort(key=lambda r: r["mrr"], reverse=True)
     return rows
 
 
-def print_comparison_table(rows: list[dict[str, Any]]) -> None:
-    """Print a single-row-per-model comparison sorted by MRR."""
+def print_comparison_table(rows: list[dict]) -> None:
+    """Print summary table with all new metrics."""
     if not rows:
-        print("No benchmark results to compare.")
+        print("No results to display.")
         return
 
-    print("\nMULTI-MODEL RETRIEVAL BENCHMARK COMPARISON  (best config per model)")
-    print("=" * 120)
+    print("\n" + "=" * 160)
+    print("MULTI-MODEL BENCHMARK COMPARISON (Best config per model)")
+    print("=" * 160)
     print(
-        f"{'Model':<45} {'Config':<20} {'Hit@1':>7} {'Hit@5':>7} {'Hit@10':>8} "
-        f"{'MRR':>7} {'NDCG@10':>9} {'p50ms':>7} {'p95ms':>7}"
+        f"{'Model':<35} {'Config':<12} {'H@1':>6} {'H@5':>6} {'H@10':>6} {'MRR':>6} "
+        f"{'NDCG@10':>8} {'P50(ms)':>7} {'P95(ms)':>7} {'CrossCourse':>11} "
+        f"{'RankStd':>7} {'Fails':>5} {'FailSim':>7}"
     )
-    print("-" * 120)
-    for r in rows:
+    print("-" * 160)
+
+    for r in sorted(rows, key=lambda x: x['mrr'], reverse=True):
         print(
-            f"{r['model']:<45} "
-            f"{r['best_config']:<20} "
-            f"{r['hit_at_1']:>6.1%} "
-            f"{r['hit_at_5']:>6.1%} "
-            f"{r['hit_at_10']:>7.1%} "
-            f"{r['mrr']:>6.3f} "
-            f"{r['ndcg_at_10']:>8.3f} "
+            f"{r['model']:<35} "
+            f"{r['best_config']:<12} "
+            f"{r['hit_at_1']:>5.1%} "
+            f"{r['hit_at_5']:>5.1%} "
+            f"{r['hit_at_10']:>5.1%} "
+            f"{r['mrr']:>5.3f} "
+            f"{r['ndcg_at_10']:>7.3f} "
             f"{r['latency_p50_ms']:>6.1f} "
-            f"{r['latency_p95_ms']:>6.1f}"
+            f"{r['latency_p95_ms']:>6.1f} "
+            f"{r['cross_course_contam']:>10.2%} "
+            f"{r['rank_std']:>6.2f} "
+            f"{r['failures']:>4} "
+            f"{r.get('avg_fail_sim', 0):>6.3f}"
         )
-    print("=" * 120)
-    best = rows[0]
-    print(f"\nBest model by MRR: {best['model']}  (MRR {best['mrr']:.3f}, config: {best['best_config']})")
-    print()
+    print("=" * 160)
 
 
 # ---------------------------------------------------------------------------
@@ -218,6 +226,33 @@ def main() -> None:
         logger.exception(f"Benchmark failed: {exc}")
         sys.exit(1)
 
+def print_detailed_report(summaries: list[MetricSummary]) -> None:
+    """Print detailed breakdown per configuration with all new metrics."""
+    print("\n" + "=" * 140)
+    print("DETAILED BENCHMARK REPORT - ALL CONFIGURATIONS")
+    print("=" * 140)
+    print(
+        f"{'Model':<25} {'Config':<18} {'H@1':>6} {'H@10':>6} {'MRR':>6} {'P50':>6} "
+        f"{'CrossCourse':>11} {'RankStd':>7} {'Fails':>5} {'AvgFailSim':>10} {'#Q':>4}"
+    )
+    print("-" * 140)
+
+    for s in sorted(summaries, key=lambda x: x.mrr, reverse=True):
+        print(
+            f"{s.model_name:<25} "
+            f"{s.config_name:<18} "
+            f"{s.hit_rate_1:>5.1%} "
+            f"{s.hit_rate_10:>5.1%} "
+            f"{s.mrr:>5.3f} "
+            f"{s.latency_p50:>5.1f} "
+            f"{s.cross_course_contamination:>10.2%} "
+            f"{s.rank_std:>6.2f} "
+            f"{s.failure_count:>4} "
+            f"{(s.avg_failure_similarity or 0):>9.3f} "
+            f"{s.num_queries:>3}"
+        )
+    print("=" * 140)
 
 if __name__ == "__main__":
     main()
+

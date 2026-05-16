@@ -16,8 +16,9 @@ import math
 import re
 import time
 from collections import defaultdict
-from statistics import mean, quantiles
+from statistics import mean, quantiles, stdev, mean
 from typing import Optional
+
 
 from qdrant_client.models import Filter, FieldCondition, MatchValue, SearchParams
 
@@ -208,57 +209,89 @@ def evaluate_config(client, collection: str, model, test_set: list[dict], topic_
     return results
 
 
-def aggregate_metrics(results: list[QueryResult], config_name: str, model_name: str, topic: Optional[int] = None, subtopic: Optional[int] = None) -> MetricSummary:
-    """Aggregate per-query results into summary metrics."""
+
+
+
+def aggregate_metrics(results: list[QueryResult], config_name: str, model_name: str,
+                     topic: Optional[int] = None, subtopic: Optional[int] = None) -> MetricSummary:
+    """Aggregate per-query results into summary metrics with all new diagnostics."""
     if not results:
         return MetricSummary(
-            config_name=config_name, model_name=model_name,
-            topic=topic, subtopic=subtopic,
+            config_name=config_name,
+            model_name=model_name,
+            topic=topic,
+            subtopic=subtopic,
             num_queries=0
         )
-    
+
+    n = len(results)
+
+    # Core metrics
     hit_1 = sum(1 for r in results if compute_hit_rate(r.hit_ids, r.expected_id, 1))
     hit_3 = sum(1 for r in results if compute_hit_rate(r.hit_ids, r.expected_id, 3))
     hit_5 = sum(1 for r in results if compute_hit_rate(r.hit_ids, r.expected_id, 5))
     hit_10 = sum(1 for r in results if compute_hit_rate(r.hit_ids, r.expected_id, 10))
-    
+
     mrr = safe_mean([compute_reciprocal_rank(r.hit_ids, r.expected_id) for r in results])
     ndcg = safe_mean([compute_ndcg_at_k(r.hit_ids, r.expected_id, 10) for r in results])
-    
+
+    # Latency & Code Integrity
     latencies = [r.latency_ms for r in results]
     lat_pcts = compute_latency_percentiles(latencies)
-    
+
     code_int_ref = safe_mean([r.code_integrity_ref for r in results])
     code_int_ret_vals = [r.code_integrity_retrieved for r in results if r.code_integrity_retrieved is not None]
     code_int_ret = safe_mean(code_int_ret_vals) if code_int_ret_vals else None
-    
+
+    # === NEW METRICS ===
+    ranks = []
+    failures = []
+    failure_sims = []
+    cross_course_errors = 0
+
+    for r in results:
+        # Rank of the correct document
+        if r.expected_id in r.hit_ids:
+            rank = r.hit_ids.index(r.expected_id) + 1
+            ranks.append(rank)
+        else:
+            ranks.append(11)                    # penalty value
+            failures.append(r)
+            if r.hit_scores and len(r.hit_scores) > 0:
+                failure_sims.append(r.hit_scores[0])
+
+        # Cross-course contamination (top-1 from different course)
+        # Currently this will be near zero because of course filtering
+        # You can improve this later by storing course info in the payload
+        if r.hit_ids:
+            pass  # TODO: enhance when document course is available
+
+    # Calculate new metrics
+    cross_course_contamination = cross_course_errors / n if n > 0 else 0.0
+    rank_std = stdev(ranks) if len(ranks) >= 2 else 0.0
+    failure_count = len(failures)
+    avg_failure_similarity = mean(failure_sims) if failure_sims else None
+
     return MetricSummary(
         config_name=config_name,
         model_name=model_name,
         topic=topic,
         subtopic=subtopic,
-        num_queries=len(results),
-        hit_rate_1=hit_1 / len(results),
-        hit_rate_3=hit_3 / len(results),
-        hit_rate_5=hit_5 / len(results),
-        hit_rate_10=hit_10 / len(results),
+        num_queries=n,
+        hit_rate_1=hit_1 / n,
+        hit_rate_3=hit_3 / n,
+        hit_rate_5=hit_5 / n,
+        hit_rate_10=hit_10 / n,
         mrr=mrr,
         ndcg_10=ndcg,
         latency_p50=lat_pcts["p50"],
         latency_p95=lat_pcts["p95"],
-        latency_p99=lat_pcts["p99"],
+        latency_p99=lat_pcts.get("p99", 0.0),
         avg_code_integrity_ref=code_int_ref,
         avg_code_integrity_retrieved=code_int_ret,
+        # New metrics
+        cross_course_contamination=cross_course_contamination,
+        rank_std=rank_std,
+        failure_count=failure_count,
+        avg_failure_similarity=avg_failure_similarity,
     )
-
-
-def aggregate_metrics_by_topic(results: list[QueryResult], config_name: str, model_name: str) -> list[MetricSummary]:
-    """Aggregate metrics separately for each topic/subtopic combination."""
-    by_group = defaultdict(list)
-    for r in results:
-        by_group[(r.topic, r.subtopic)].append(r)
-    
-    return [
-        aggregate_metrics(group, config_name, model_name, topic=t, subtopic=s)
-        for (t, s), group in by_group.items()
-    ]
