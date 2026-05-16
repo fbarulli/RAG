@@ -1,5 +1,5 @@
 """
-helpers/nvidia_call.py
+helpers/llm_client.py
 =======================
 Centralized NVIDIA NIM API calls with rate limiting, retries, and logging.
 Thread-safe RateGate for concurrent async calls.
@@ -98,11 +98,23 @@ def call_llm(prompt: str, max_tokens: int, model: str = DEFAULT_MODEL,
         except Exception as e:
             is_rl = _is_rate_limit(e)
             wait = _backoff(attempt, is_rl)
-            logger.warning(f"LLM error (attempt {attempt+1}/{MAX_RETRIES}): {e}")
             if attempt == MAX_RETRIES - 1:
+                logger.error(f"LLM failed after {MAX_RETRIES} attempts: {e}")
                 raise
-            time.sleep(wait)
-
+            if is_rl:
+                logger.warning(
+                    f"Rate limit hit (attempt {attempt+1}/{MAX_RETRIES}) — "
+                    f"waiting {wait:.0f}s before retry..."
+                )
+                for remaining in range(int(wait), 0, -10):
+                    logger.info(f"  Resume in {remaining}s...")
+                    time.sleep(min(10, remaining))
+            else:
+                logger.warning(
+                    f"LLM error (attempt {attempt+1}/{MAX_RETRIES}): {e} — "
+                    f"retrying in {wait:.0f}s"
+                )
+                time.sleep(wait)
 
 async def call_llm_async(prompt: str, max_tokens: int, model: str = DEFAULT_MODEL,
                          temperature: float = 0.3, rate_gate: RateGate = None) -> LLMResult:

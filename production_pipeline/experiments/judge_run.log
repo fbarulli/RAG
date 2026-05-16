@@ -1,0 +1,234 @@
+20:57:02 [INFO] __main__: [p05_llm_judge] model=BAAI/bge-base-en-v1.5 config=hybrid_rrf
+20:57:02 [INFO] __main__: [p05_llm_judge] 453 queries to judge
+20:57:02 [INFO] __main__: [build_answer_map] 1204 answers loaded from faqs_bge_base_en_v1_5
+20:57:08 [INFO] __main__: [score_result] tokens=prompt:301 completion:21 latency=3971ms
+20:57:08 [INFO] __main__: [1/453] e8df9f0d12_orig | hit=True | faith=1.00 fc=1.00 | latency=3971ms | Docker: When trying to run a streamlit app using docker-comp
+20:57:16 [INFO] __main__: [score_result] tokens=prompt:234 completion:21 latency=7974ms
+20:57:16 [INFO] __main__: [2/453] e8df9f0d12_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=7974ms | docker-compose streamlit executable file not found
+20:57:19 [INFO] __main__: [score_result] tokens=prompt:234 completion:21 latency=2468ms
+20:57:19 [INFO] __main__: [3/453] e8df9f0d12_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=2468ms | streamlit app not running in docker-compose
+20:57:21 [INFO] __main__: [score_result] tokens=prompt:233 completion:21 latency=2059ms
+20:57:21 [INFO] __main__: [4/453] e8df9f0d12_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=2059ms | OCI runtime create failed in docker-compose
+20:57:26 [INFO] __main__: [score_result] tokens=prompt:234 completion:21 latency=5227ms
+20:57:26 [INFO] __main__: [5/453] e8df9f0d12_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=5227ms | docker-compose streamlit app won't run
+20:57:28 [INFO] __main__: [score_result] tokens=prompt:239 completion:21 latency=1528ms
+20:57:28 [INFO] __main__: [6/453] e8df9f0d12_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=1528ms | why is streamlit not found in $PATH when running docker-comp
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+20:58:32 [INFO] __main__: [score_result] tokens=prompt:238 completion:21 latency=2957ms
+20:58:32 [INFO] __main__: [7/453] e8df9f0d12_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=2957ms | streamlit app runs fine outside of docker-compose but fails 
+20:58:39 [INFO] __main__: [score_result] tokens=prompt:240 completion:21 latency=6704ms
+20:58:39 [INFO] __main__: [8/453] e8df9f0d12_chaos_monkey_0 | hit=True | faith=1.00 fc=1.00 | latency=6704ms | my streamlit app doesn't work when i put it in a box
+20:58:44 [INFO] __main__: [score_result] tokens=prompt:236 completion:21 latency=4741ms
+20:58:44 [INFO] __main__: [9/453] e8df9f0d12_chaos_monkey_1 | hit=True | faith=1.00 fc=1.00 | latency=4741ms | docker gives error when streamlit is run from inside
+20:58:50 [INFO] __main__: [score_result] tokens=prompt:236 completion:21 latency=5862ms
+20:58:50 [INFO] __main__: [10/453] e8df9f0d12_chaos_monkey_2 | hit=True | faith=1.00 fc=1.00 | latency=5862ms | can't find streamlit file when using docker thing
+20:58:50 [INFO] __main__: [p05_llm_judge] Checkpoint saved (10 scored)
+20:58:57 [INFO] __main__: [score_result] tokens=prompt:461 completion:21 latency=7893ms
+20:58:57 [INFO] __main__: [11/453] b8f2d6a30c_orig | hit=True | faith=1.00 fc=1.00 | latency=7893ms | Evaluation: Jupyter kernel crashes when embedding the ground
+20:59:01 [INFO] __main__: [score_result] tokens=prompt:455 completion:21 latency=3566ms
+20:59:01 [INFO] __main__: [12/453] b8f2d6a30c_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=3566ms | jupyter kernel crashes with embedding model
+20:59:05 [INFO] __main__: [score_result] tokens=prompt:459 completion:21 latency=3574ms
+20:59:05 [INFO] __main__: [13/453] b8f2d6a30c_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=3574ms | jupyter notebook out of memory with ground-truth set
+21:04:12 [INFO] __main__: [score_result] tokens=prompt:457 completion:21 latency=307212ms
+21:04:12 [INFO] __main__: [14/453] b8f2d6a30c_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=307212ms | kernel crashes when loading embedding model in jupyter
+21:04:15 [INFO] __main__: [score_result] tokens=prompt:459 completion:21 latency=3247ms
+21:04:15 [INFO] __main__: [15/453] b8f2d6a30c_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=3247ms | jupyter kernel keeps crashing when loading ground-truth set
+21:04:18 [INFO] __main__: [score_result] tokens=prompt:462 completion:21 latency=3208ms
+21:04:18 [INFO] __main__: [16/453] b8f2d6a30c_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=3208ms | why does my jupyter notebook run out of memory when embeddin
+21:04:33 [INFO] __main__: [score_result] tokens=prompt:456 completion:21 latency=14726ms
+21:04:33 [INFO] __main__: [17/453] b8f2d6a30c_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=14726ms | embedding model causes jupyter kernel to crash
+21:04:38 [INFO] __main__: [score_result] tokens=prompt:488 completion:21 latency=4680ms
+21:04:38 [INFO] __main__: [18/453] b8f2d6a30c_chaos_monkey_0 | hit=True | faith=0.00 fc=0.00 | latency=4680ms | jupyter is too heavy for my computer
+21:04:39 [INFO] __main__: [score_result] tokens=prompt:457 completion:21 latency=1663ms
+21:04:39 [INFO] __main__: [19/453] b8f2d6a30c_chaos_monkey_1 | hit=True | faith=1.00 fc=1.00 | latency=1663ms | kernel crashes when i try to embed the truth
+21:04:41 [INFO] __main__: [score_result] tokens=prompt:456 completion:21 latency=1695ms
+21:04:41 [INFO] __main__: [20/453] b8f2d6a30c_chaos_monkey_2 | hit=True | faith=1.00 fc=1.00 | latency=1695ms | small computers can't handle jupyter notebooks
+21:04:41 [INFO] __main__: [p05_llm_judge] Checkpoint saved (20 scored)
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+21:05:49 [INFO] __main__: [score_result] tokens=prompt:342 completion:21 latency=6923ms
+21:05:49 [INFO] __main__: [21/453] ee564fdf82_orig | hit=True | faith=1.00 fc=1.00 | latency=6923ms | Other packages needed but not listed
+21:06:02 [INFO] __main__: [score_result] tokens=prompt:342 completion:21 latency=12588ms
+21:06:02 [INFO] __main__: [22/453] ee564fdf82_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=12588ms | required packages for jupyter notebook
+21:06:04 [INFO] __main__: [score_result] tokens=prompt:343 completion:21 latency=1613ms
+21:06:04 [INFO] __main__: [23/453] ee564fdf82_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=1613ms | packages needed for starter jupyter notebook
+21:06:14 [INFO] __main__: [score_result] tokens=prompt:320 completion:21 latency=10362ms
+21:06:14 [INFO] __main__: [24/453] ee564fdf82_grounded_analyst_2 | hit=False | faith=0.50 fc=0.50 | latency=10362ms | installing dependencies for jupyter notebook
+21:06:20 [INFO] __main__: [score_result] tokens=prompt:347 completion:21 latency=6304ms
+21:06:20 [INFO] __main__: [25/453] ee564fdf82_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=6304ms | starter jupyter notebook won't run due to missing packages
+21:06:24 [INFO] __main__: [score_result] tokens=prompt:326 completion:21 latency=3986ms
+21:06:24 [INFO] __main__: [26/453] ee564fdf82_creative_student_1 | hit=True | faith=0.50 fc=0.50 | latency=3986ms | what dependencies are needed to run the teacher's jupyter no
+21:06:27 [INFO] __main__: [score_result] tokens=prompt:344 completion:21 latency=2945ms
+21:06:27 [INFO] __main__: [27/453] ee564fdf82_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=2945ms | jupyter notebook errors due to missing packages
+21:06:29 [INFO] __main__: [score_result] tokens=prompt:309 completion:21 latency=1667ms
+21:06:29 [INFO] __main__: [28/453] ee564fdf82_chaos_monkey_0 | hit=True | faith=0.00 fc=0.00 | latency=1667ms | i need more stuff to make the notebook work
+21:06:32 [INFO] __main__: [score_result] tokens=prompt:343 completion:21 latency=3481ms
+21:06:32 [INFO] __main__: [29/453] ee564fdf82_chaos_monkey_1 | hit=True | faith=1.00 fc=1.00 | latency=3481ms | starter notebook needs extra packages to run
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+21:07:38 [INFO] __main__: [score_result] tokens=prompt:323 completion:21 latency=4426ms
+21:07:38 [INFO] __main__: [30/453] ee564fdf82_chaos_monkey_2 | hit=True | faith=0.50 fc=0.50 | latency=4426ms | what dependencies do i need for the starter notebook
+21:07:38 [INFO] __main__: [p05_llm_judge] Checkpoint saved (30 scored)
+21:08:16 [INFO] __main__: [score_result] tokens=prompt:375 completion:21 latency=38030ms
+21:08:16 [INFO] __main__: [31/453] 55b6d6256f_orig | hit=True | faith=1.00 fc=1.00 | latency=38030ms | Python: invalid start byte Error Message
+21:08:22 [INFO] __main__: [score_result] tokens=prompt:375 completion:21 latency=6448ms
+21:08:22 [INFO] __main__: [32/453] 55b6d6256f_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=6448ms | unicode decode error invalid start byte python
+21:08:32 [INFO] __main__: [score_result] tokens=prompt:378 completion:21 latency=9082ms
+21:08:32 [INFO] __main__: [33/453] 55b6d6256f_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=9082ms | utf-8 codec can't decode byte in python
+21:08:34 [INFO] __main__: [score_result] tokens=prompt:375 completion:21 latency=2121ms
+21:08:34 [INFO] __main__: [34/453] 55b6d6256f_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=2121ms | python pandas read csv invalid start byte
+21:08:38 [INFO] __main__: [score_result] tokens=prompt:376 completion:21 latency=3902ms
+21:08:38 [INFO] __main__: [35/453] 55b6d6256f_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=3902ms | invalid start byte error when reading csv file
+21:08:47 [INFO] __main__: [score_result] tokens=prompt:376 completion:21 latency=9734ms
+21:08:47 [INFO] __main__: [36/453] 55b6d6256f_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=9734ms | why does pandas throw a unicode decode error
+21:08:51 [INFO] __main__: [score_result] tokens=prompt:380 completion:21 latency=4089ms
+21:08:51 [INFO] __main__: [37/453] 55b6d6256f_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=4089ms | utf-8 codec can't decode byte error when reading csv
+21:08:55 [INFO] __main__: [score_result] tokens=prompt:540 completion:21 latency=3251ms
+21:08:55 [INFO] __main__: [38/453] 55b6d6256f_chaos_monkey_0 | hit=False | faith=0.00 fc=0.00 | latency=3251ms | python is reading my file wrong
+21:09:28 [INFO] __main__: [score_result] tokens=prompt:376 completion:21 latency=33111ms
+21:09:28 [INFO] __main__: [39/453] 55b6d6256f_chaos_monkey_1 | hit=True | faith=1.00 fc=1.00 | latency=33111ms | encoding error when reading data from the web
+21:10:03 [INFO] __main__: [score_result] tokens=prompt:337 completion:21 latency=34975ms
+21:10:03 [INFO] __main__: [40/453] 55b6d6256f_chaos_monkey_2 | hit=False | faith=0.00 fc=0.00 | latency=34975ms | csv file has weird bytes in it
+21:10:03 [INFO] __main__: [p05_llm_judge] Checkpoint saved (40 scored)
+21:10:11 [INFO] __main__: [score_result] tokens=prompt:678 completion:21 latency=8150ms
+21:10:11 [INFO] __main__: [41/453] b3030c88e7_orig | hit=True | faith=1.00 fc=1.00 | latency=8150ms | wget is not recognized as an internal or external command
+21:10:54 [INFO] __main__: [score_result] tokens=prompt:676 completion:21 latency=43554ms
+21:10:54 [INFO] __main__: [42/453] b3030c88e7_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=43554ms | wget not recognized as internal or external command
+21:10:59 [INFO] __main__: [score_result] tokens=prompt:675 completion:21 latency=4602ms
+21:10:59 [INFO] __main__: [43/453] b3030c88e7_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=4602ms | installing wget on ubuntu macos windows
+21:11:04 [INFO] __main__: [score_result] tokens=prompt:673 completion:21 latency=5322ms
+21:11:04 [INFO] __main__: [44/453] b3030c88e7_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=5322ms | wget installation for data download
+21:11:06 [INFO] __main__: [score_result] tokens=prompt:674 completion:21 latency=1694ms
+21:11:06 [INFO] __main__: [45/453] b3030c88e7_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=1694ms | wget command not recognized in terminal
+21:11:09 [INFO] __main__: [score_result] tokens=prompt:676 completion:21 latency=3302ms
+21:11:09 [INFO] __main__: [46/453] b3030c88e7_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=3302ms | why is wget not working on my system
+21:11:11 [INFO] __main__: [score_result] tokens=prompt:678 completion:21 latency=1897ms
+21:11:11 [INFO] __main__: [47/453] b3030c88e7_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=1897ms | no such file or directory error due to missing wget
+21:11:47 [INFO] __main__: [score_result] tokens=prompt:682 completion:21 latency=35538ms
+21:11:47 [INFO] __main__: [48/453] b3030c88e7_chaos_monkey_0 | hit=True | faith=0.00 fc=1.00 | latency=35538ms | i need to download something but my computer doesn't know wh
+21:11:53 [INFO] __main__: [score_result] tokens=prompt:487 completion:21 latency=5707ms
+21:11:53 [INFO] __main__: [49/453] b3030c88e7_chaos_monkey_1 | hit=False | faith=0.00 fc=0.00 | latency=5707ms | how do i install the downloader thing
+21:11:56 [INFO] __main__: [score_result] tokens=prompt:676 completion:21 latency=3347ms
+21:11:56 [INFO] __main__: [50/453] b3030c88e7_chaos_monkey_2 | hit=True | faith=1.00 fc=1.00 | latency=3347ms | wget doesn't work on my windows computer
+21:11:56 [INFO] __main__: [p05_llm_judge] Checkpoint saved (50 scored)
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+21:13:00 [INFO] __main__: [score_result] tokens=prompt:325 completion:21 latency=2390ms
+21:13:00 [INFO] __main__: [51/453] 4aa018f478_orig | hit=True | faith=1.00 fc=1.00 | latency=2390ms | Activating Anaconda env in .bashrc
+21:13:03 [INFO] __main__: [score_result] tokens=prompt:325 completion:21 latency=3568ms
+21:13:03 [INFO] __main__: [52/453] 4aa018f478_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=3568ms | how to activate anaconda environment in bashrc
+21:13:07 [INFO] __main__: [score_result] tokens=prompt:322 completion:21 latency=3610ms
+21:13:07 [INFO] __main__: [53/453] 4aa018f478_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=3610ms | conda init bash not working
+21:13:11 [INFO] __main__: [score_result] tokens=prompt:323 completion:21 latency=4507ms
+21:13:11 [INFO] __main__: [54/453] 4aa018f478_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=4507ms | anaconda environment not activated after restart
+21:13:17 [INFO] __main__: [score_result] tokens=prompt:323 completion:21 latency=5690ms
+21:13:17 [INFO] __main__: [55/453] 4aa018f478_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=5690ms | anaconda environment not activating after restart
+21:13:19 [INFO] __main__: [score_result] tokens=prompt:324 completion:21 latency=2209ms
+21:13:19 [INFO] __main__: [56/453] 4aa018f478_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=2209ms | conda init not working in bashrc
+21:13:22 [INFO] __main__: [score_result] tokens=prompt:325 completion:21 latency=2394ms
+21:13:22 [INFO] __main__: [57/453] 4aa018f478_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=2394ms | why is my anaconda environment not loading automatically
+21:13:26 [INFO] __main__: [score_result] tokens=prompt:327 completion:21 latency=4130ms
+21:13:26 [INFO] __main__: [58/453] 4aa018f478_chaos_monkey_0 | hit=True | faith=1.00 fc=1.00 | latency=4130ms | why conda doesn't recognize my .bashrc file
+21:13:30 [INFO] __main__: [score_result] tokens=prompt:327 completion:21 latency=4572ms
+21:13:30 [INFO] __main__: [59/453] 4aa018f478_chaos_monkey_1 | hit=True | faith=1.00 fc=1.00 | latency=4572ms | my shell doesn't see the anaconda environment after reboot
+21:13:35 [INFO] __main__: [score_result] tokens=prompt:326 completion:21 latency=4649ms
+21:13:35 [INFO] __main__: [60/453] 4aa018f478_chaos_monkey_2 | hit=True | faith=1.00 fc=1.00 | latency=4649ms | unix shell doesn't recognize anaconda path after restart
+21:13:35 [INFO] __main__: [p05_llm_judge] Checkpoint saved (60 scored)
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+21:14:39 [INFO] __main__: [score_result] tokens=prompt:195 completion:21 latency=2803ms
+21:14:39 [INFO] __main__: [61/453] cd19f122f3_orig | hit=True | faith=1.00 fc=1.00 | latency=2803ms | Does DLT have connectors to ClickHouse or StarRocks?
+21:14:47 [INFO] __main__: [score_result] tokens=prompt:188 completion:21 latency=7682ms
+21:14:47 [INFO] __main__: [62/453] cd19f122f3_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=7682ms | does dlt support clickhouse
+21:16:30 [INFO] __main__: [score_result] tokens=prompt:189 completion:21 latency=103118ms
+21:16:30 [INFO] __main__: [63/453] cd19f122f3_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=103118ms | dlt connector for starrocks
+21:16:41 [INFO] __main__: [score_result] tokens=prompt:188 completion:21 latency=11401ms
+21:16:41 [INFO] __main__: [64/453] cd19f122f3_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=11401ms | integrating clickhouse with dlt
+21:16:44 [INFO] __main__: [score_result] tokens=prompt:189 completion:21 latency=2602ms
+21:16:44 [INFO] __main__: [65/453] cd19f122f3_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=2602ms | does data loading tool support clickhouse
+21:16:59 [INFO] __main__: [score_result] tokens=prompt:190 completion:21 latency=15449ms
+21:16:59 [INFO] __main__: [66/453] cd19f122f3_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=15449ms | starrocks integration with data loading tool
+21:17:03 [INFO] __main__: [score_result] tokens=prompt:191 completion:21 latency=4055ms
+21:17:03 [INFO] __main__: [67/453] cd19f122f3_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=4055ms | how to connect clickhouse to data loading tool
+21:17:13 [INFO] __main__: [score_result] tokens=prompt:195 completion:21 latency=9796ms
+21:17:13 [INFO] __main__: [68/453] cd19f122f3_chaos_monkey_0 | hit=True | faith=0.00 fc=0.00 | latency=9796ms | can DLT talk to databases that start with C or S
+21:17:49 [INFO] __main__: [score_result] tokens=prompt:190 completion:21 latency=35939ms
+21:17:49 [INFO] __main__: [69/453] cd19f122f3_chaos_monkey_1 | hit=True | faith=1.00 fc=1.00 | latency=35939ms | does DLT support popular OLAP databases
+21:17:52 [INFO] __main__: [score_result] tokens=prompt:196 completion:21 latency=2925ms
+21:17:52 [INFO] __main__: [70/453] cd19f122f3_chaos_monkey_2 | hit=True | faith=0.00 fc=0.00 | latency=2925ms | what databases can DLT connect to, specifically the ones I u
+21:17:52 [INFO] __main__: [p05_llm_judge] Checkpoint saved (70 scored)
+21:17:56 [INFO] __main__: [score_result] tokens=prompt:367 completion:21 latency=4006ms
+21:17:56 [INFO] __main__: [71/453] 4a6d04a2c3_orig | hit=True | faith=1.00 fc=1.00 | latency=4006ms | Terraform - Error creating Dataset: googleapi: Error 403: Re
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+21:19:02 [INFO] __main__: [score_result] tokens=prompt:358 completion:21 latency=4961ms
+21:19:02 [INFO] __main__: [72/453] 4a6d04a2c3_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=4961ms | terraform googleapi error 403 insufficient authentication sc
+21:19:05 [INFO] __main__: [score_result] tokens=prompt:291 completion:21 latency=2371ms
+21:19:05 [INFO] __main__: [73/453] 4a6d04a2c3_grounded_analyst_1 | hit=True | faith=0.50 fc=0.50 | latency=2371ms | google application credentials not set terraform
+21:19:07 [INFO] __main__: [score_result] tokens=prompt:355 completion:21 latency=1874ms
+21:19:07 [INFO] __main__: [74/453] 4a6d04a2c3_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=1874ms | terraform dataset creation error 403
+21:19:09 [INFO] __main__: [score_result] tokens=prompt:355 completion:21 latency=2388ms
+21:19:09 [INFO] __main__: [75/453] 4a6d04a2c3_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=2388ms | terraform googleapi error 403
+21:19:11 [INFO] __main__: [score_result] tokens=prompt:354 completion:21 latency=1859ms
+21:19:11 [INFO] __main__: [76/453] 4a6d04a2c3_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=1859ms | insufficient authentication scopes in terraform
+21:19:13 [INFO] __main__: [score_result] tokens=prompt:339 completion:21 latency=1746ms
+21:19:13 [INFO] __main__: [77/453] 4a6d04a2c3_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=1746ms | why is terraform giving me an access denied error
+21:19:17 [INFO] __main__: [score_result] tokens=prompt:270 completion:21 latency=4251ms
+21:19:17 [INFO] __main__: [78/453] 4a6d04a2c3_chaos_monkey_0 | hit=True | faith=0.50 fc=0.50 | latency=4251ms | terraform fails to create dataset due to permission issue
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+21:20:25 [INFO] __main__: [score_result] tokens=prompt:356 completion:21 latency=6947ms
+21:20:25 [INFO] __main__: [79/453] 4a6d04a2c3_chaos_monkey_1 | hit=True | faith=1.00 fc=1.00 | latency=6947ms | google dataset creation error with missing authentication sc
+21:22:49 [INFO] __main__: [score_result] tokens=prompt:403 completion:21 latency=143789ms
+21:22:49 [INFO] __main__: [80/453] 4a6d04a2c3_chaos_monkey_2 | hit=True | faith=0.00 fc=0.00 | latency=143789ms | terraform dataset creation error, possibly due to network is
+21:22:49 [INFO] __main__: [p05_llm_judge] Checkpoint saved (80 scored)
+21:22:54 [INFO] __main__: [score_result] tokens=prompt:380 completion:21 latency=5310ms
+21:22:54 [INFO] __main__: [81/453] 22e80c8b22_orig | hit=True | faith=1.00 fc=1.00 | latency=5310ms | Homework Q5: Why the mode returns a Series instead of a sing
+21:23:13 [INFO] __main__: [score_result] tokens=prompt:369 completion:21 latency=18937ms
+21:23:13 [INFO] __main__: [82/453] 22e80c8b22_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=18937ms | why pandas mode returns series
+21:23:17 [INFO] __main__: [score_result] tokens=prompt:370 completion:21 latency=3388ms
+21:23:17 [INFO] __main__: [83/453] 22e80c8b22_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=3388ms | pandas mode function returns multiple values
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
