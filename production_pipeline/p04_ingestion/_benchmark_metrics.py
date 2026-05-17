@@ -198,6 +198,7 @@ def run_es_retrieval_query(
 
     return hit_ids, top_answer, scores, latency_ms
 
+
 def run_retrieval_query(
     client, 
     collection: str, 
@@ -255,6 +256,60 @@ def run_retrieval_query(
     
     return hit_ids, top_answer, scores, latency_ms
 
+def run_entity_boosted_query(
+    client,
+    collection: str,
+    query_vector: list,
+    course_filter: str,
+    config: dict,
+    top_k: int,
+    ner_category: str | None = None,
+    ner_primary_entity: str | None = None,
+) -> tuple[tuple[str, ...], Optional[str], tuple[float, ...], float]:
+    """
+    Vector search with soft entity boosting via should clauses.
+    Falls back gracefully — never returns 0 results due to entity mismatch.
+    """
+    start = time.perf_counter()
+
+    must_conditions = []
+    if course_filter:
+        must_conditions.append(FieldCondition(key="course", match=MatchValue(value=course_filter)))
+
+    # Soft boost via should — entity match preferred but not required
+    should_conditions = []
+    if ner_primary_entity:
+        should_conditions.append(
+            FieldCondition(key="ner_primary_entity", match=MatchValue(value=ner_primary_entity))
+        )
+    if ner_category and ner_category not in ("OTHER", "UNKNOWN"):
+        should_conditions.append(
+            FieldCondition(key="ner_category", match=MatchValue(value=ner_category))
+        )
+
+    query_filter = Filter(
+        must=must_conditions,
+        should=should_conditions if should_conditions else None,
+    ) if (must_conditions or should_conditions) else None
+
+    result = client.query_points(
+        collection_name=collection,
+        query=query_vector,
+        limit=top_k,
+        query_filter=query_filter,
+        with_payload=True,
+        with_vectors=False,
+    )
+
+    latency_ms = (time.perf_counter() - start) * 1000
+    points = result.points
+
+    hit_ids = tuple(p.payload.get("es_id", "") for p in points)
+    scores = tuple(float(p.score) if p.score is not None else 0.0 for p in points)
+    top_answer = points[0].payload.get("answer", None) if points else None
+
+    return hit_ids, top_answer, scores, latency_ms
+
 
 # ---------------------------------------------------------------------------
 # Core logic: Evaluation & Aggregation
@@ -284,6 +339,8 @@ def evaluate_config(
         topic_info = topic_map.get(expected_id, {})
         topic = topic_info.get("topic", -1)
         subtopic = topic_info.get("subtopic")
+        ner_category = topic_info.get("ner_category")
+        ner_primary_entity = topic_info.get("ner_primary_entity")
         search_type = config.get("search_type", "vector")
 
         if search_type == "bm25" and es is not None:
@@ -307,6 +364,18 @@ def evaluate_config(
                 course_filter=course,
                 config=config,
                 top_k=top_k,
+            )
+        elif search_type == "entity_boosted":
+            query_vector = model.encode(query, convert_to_numpy=True).tolist()
+            hit_ids, top_answer, scores, latency_ms = run_entity_boosted_query(
+                client=client,
+                collection=collection,
+                query_vector=query_vector,
+                course_filter=course,
+                config=config,
+                top_k=top_k,
+                ner_category=ner_category,
+                ner_primary_entity=ner_primary_entity,
             )
         else:
             query_vector = model.encode(query, convert_to_numpy=True).tolist()

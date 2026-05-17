@@ -34,5 +34,12 @@
     "boost_question": 5.0,
     "boost_text": 5.0,
     "rrf_k": 60
-}
+  },
+  "entity_boosted": {
+    "name": "Entity Boosted",
+    "search_type": "entity_boosted",
+    "rrf_k": 60,
+    "boost_question": 5.0,
+    "boost_text": 5.0
+  }
 }

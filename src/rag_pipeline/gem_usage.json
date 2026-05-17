@@ -1,0 +1,20 @@
+{
+  "daily": {
+    "2026-05-17": {
+      "requests": 1,
+      "prompt_tokens": 3,
+      "completion_tokens": 1,
+      "total_tokens": 4
+    }
+  },
+  "entries": [
+    {
+      "timestamp_pt": "2026-05-17T02:32:19.038683-07:00",
+      "model": "gemini-2.5-flash",
+      "prompt_tokens": 3,
+      "completion_tokens": 1,
+      "total_tokens": 4,
+      "latency_ms": 915.5
+    }
+  ]
+}

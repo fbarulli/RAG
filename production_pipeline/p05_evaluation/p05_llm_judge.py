@@ -278,20 +278,36 @@ def _print_summary(results: list[dict], model: str, config: str) -> None:
         qt = r.get("query_type", "unknown")
         by_type.setdefault(qt, []).append(r)
 
+    non_chaos = [r for r in results if r.get("query_type") != "chaos_monkey"]
+    chaos = [r for r in results if r.get("query_type") == "chaos_monkey"]
+
+    composite_non_chaos = sum(
+        (r["faithfulness"] + r["factual_correctness"]) / 2
+        for r in non_chaos
+    ) / len(non_chaos) if non_chaos else 0
+
+    composite_chaos = sum(
+        r["factual_correctness"] for r in chaos
+    ) / len(chaos) if chaos else 0
+
     print(f"\n{'='*70}")
     print(f"LLM JUDGE RESULTS — {model} / {config}")
     print(f"{'='*70}")
-    print(f"  Queries scored    : {len(results)}")
-    print(f"  Mean faithfulness : {sum(faith)/len(faith):.3f}")
-    print(f"  Mean factual corr.: {sum(fc)/len(fc):.3f}")
+    print(f"  Queries scored         : {len(results)}")
+    print(f"  Mean faithfulness      : {sum(faith)/len(faith):.3f}")
+    print(f"  Mean factual corr.     : {sum(fc)/len(fc):.3f}")
+    print(f"  Composite (non-chaos)  : {composite_non_chaos:.3f}")
+    print(f"  Composite (chaos fc)   : {composite_chaos:.3f}")
     print(f"\n  By query type:")
     for qt, items in sorted(by_type.items()):
         f_scores = [r["faithfulness"] for r in items]
         fc_scores = [r["factual_correctness"] for r in items]
+        primary = "fc only" if qt == "chaos_monkey" else "faith+fc"
         print(
             f"    {qt:20s} n={len(items):3d} "
             f"faith={sum(f_scores)/len(f_scores):.3f} "
-            f"fc={sum(fc_scores)/len(fc_scores):.3f}"
+            f"fc={sum(fc_scores)/len(fc_scores):.3f} "
+            f"[{primary}]"
         )
     print(f"{'='*70}\n")
 

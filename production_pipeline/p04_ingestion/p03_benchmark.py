@@ -38,6 +38,7 @@ DEFAULT_EMBEDDING_MODELS = [
     "BAAI/bge-small-en-v1.5",
     "intfloat/e5-small-v2",
     "BAAI/bge-base-en-v1.5",
+    "sentence-transformers/all-mpnet-base-v2",
 ]
 OUTPUT_DIR = Paths.experiments_dir()
 
