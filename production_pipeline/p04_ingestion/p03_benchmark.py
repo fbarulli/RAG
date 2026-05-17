@@ -9,7 +9,8 @@ from pathlib import Path
 from ._benchmark_metrics.evaluation import evaluate_config
 from ._benchmark_metrics.aggregation import aggregate_metrics
 from ._benchmark_report import print_full_benchmark_report, save_benchmark_results, save_performance_summary
-from .configs.benchmark_config import BenchmarkConfig, create_benchmark_parser
+from ._benchmark_config import BenchmarkConfig
+from configs.benchmark_cli import create_benchmark_parser
 from rag_pipeline.logging import get_logger
 
 logger = get_logger(__name__)
@@ -20,7 +21,8 @@ def main():
     args = parser.parse_args()
     
     # Load config from defaults + CLI overrides
-    config = BenchmarkConfig.from_defaults()
+    config = BenchmarkConfig.from_args(args)
+
     cli_config = BenchmarkConfig.from_args(args)
     
     # Merge CLI overrides (non-None values take precedence)

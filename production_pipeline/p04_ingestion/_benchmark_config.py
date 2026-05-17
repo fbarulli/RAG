@@ -28,6 +28,7 @@ from functools import cached_property
 from pathlib import Path
 from typing import Optional, List, Tuple
 from rag_pipeline.paths import Paths
+from functools import cached_property
 
 
 from rag_pipeline.logging import get_logger
@@ -96,6 +97,31 @@ class BenchmarkConfig:
     # Constructors
     # ------------------------------------------------------------------
 
+    @cached_property
+    def qdrant_client(self):
+        """Lazy Qdrant client."""
+        from qdrant_client import QdrantClient
+        client = QdrantClient(host=self.qdrant_host, port=self.qdrant_port)
+        # Smoke test
+        client.get_collections()
+        return client
+
+
+    @cached_property
+    def es_client(self):
+        """Lazy Elasticsearch client (optional)."""
+        if not self.es_host:
+            return None
+        from elasticsearch import Elasticsearch
+        try:
+            es = Elasticsearch(hosts=[self.es_host])
+            if es.ping():
+                return es
+            logger.warning("Elasticsearch not reachable")
+            return None
+        except Exception as e:
+            logger.warning(f"Elasticsearch connection failed: {e}")
+            return None
     @classmethod
     def from_defaults(cls) -> "BenchmarkConfig":
         """
@@ -141,6 +167,11 @@ class BenchmarkConfig:
             batch_size=ingest.get("batch_size", 100),
             quick=bench.get("quick", False),
         )
+    @classmethod
+    def from_args(cls, args: argparse.Namespace) -> "BenchmarkConfig":
+        """Create config from defaults + CLI arguments."""
+        config = cls.from_defaults()
+        return config.merge_args(args)
 
     def merge_args(self, args: argparse.Namespace) -> "BenchmarkConfig":
         """
