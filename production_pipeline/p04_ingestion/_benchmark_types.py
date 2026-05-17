@@ -6,38 +6,30 @@ Shared data classes for the retrieval benchmark pipeline.
 No I/O, no logic — pure data definitions.
 """
 
-from dataclasses import dataclass, asdict, field
+from __future__ import annotations
+
+from dataclasses import dataclass, asdict
 from typing import Optional
 
 
 @dataclass(frozen=True)
-class TestQuery:
-    id: str
-    question: str
-    expected_id: str
-    course: str
-    section: str
-    answer: str
-    query_type: str = "unknown"
-    topic: Optional[int] = None
-    subtopic: Optional[int] = None
-
-    def to_dict(self) -> dict:
-        return asdict(self)
-
-    @classmethod
-    def from_dict(cls, d: dict) -> "TestQuery":
-        valid_fields = set(cls.__dataclass_fields__)
-        return cls(**{k: v for k, v in d.items() if k in valid_fields})
+class SearchResult:
+    """Intermediate result from a retriever before conversion to QueryResult."""
+    hit_ids: tuple[str, ...]
+    hit_scores: tuple[float, ...]
+    hit_courses: tuple[str, ...]
+    top_answer: Optional[str]
+    latency_ms: float
 
 
 @dataclass(frozen=True)
 class QueryResult:
+    """Per-query retrieval result."""
     query_id: str
     query_text: str
     expected_id: str
     course: str
-    topic: int
+    topic: Optional[int]
     subtopic: Optional[int]
     hit_ids: tuple[str, ...]
     hit_scores: tuple[float, ...]
@@ -45,12 +37,12 @@ class QueryResult:
     code_integrity_ref: float
     code_integrity_retrieved: Optional[float] = None
     query_type: str = "unknown"
+    hit_courses: Optional[tuple[str, ...]] = None
 
 
 @dataclass(frozen=True)
 class MetricSummary:
     """Aggregated metrics for one (config, model) pair, optionally stratified by topic."""
-
     config_name: str
     model_name: str
     topic: Optional[int] = None
@@ -76,6 +68,9 @@ class MetricSummary:
 
     # Diagnostic metrics
     cross_course_contamination: float = 0.0       # top-1 from wrong course
-    rank_std: float = 0.0                         # rank variance across queries
+    rank_std: float = 0.0                         # std dev of expected doc rank (11 = not found)
     failure_count: int = 0                        # queries with Hit@10 = 0
-    avg_failure_similarity: Optional[float] = None  # avg score on failures
+    avg_failure_similarity: Optional[float] = None  # avg top-1 score for failed queries
+
+    def to_dict(self) -> dict:
+        return asdict(self)

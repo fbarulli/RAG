@@ -2,18 +2,19 @@
   "_comment": "Default settings for the retrieval benchmark pipeline. All overridable via CLI.",
 
   "paths": {
-    "clean_jsonl":           "data/processed/clean.jsonl",
-    "test_jsonl":            "data/processed/test.jsonl",
-    "topic_assignments":     "production_pipeline/p02_eda/experiments/topic_assignments_all.json",
-    "retrieval_configs":     "configs/retrieval_configs.json",
-    "models_config":         "configs/models.json",
-    "experiments_dir":       "experiments",
-    "embeddings_cache_dir":  "experiments/embeddings"
+    "clean_jsonl": "production_pipeline/p01_data_cleaning/data/processed/clean.jsonl",
+    "test_jsonl": "production_pipeline/p01_data_cleaning/data/processed/test.jsonl",
+    "topic_assignments": "production_pipeline/p02_eda/experiments/topic_assignments_all.json",
+    "retrieval_configs": "configs/retrieval_configs.json",
+    "models_config": "configs/models.json",
+    "experiments_dir": "experiments",
+    "embeddings_cache_dir": "experiments/embeddings"
   },
 
   "qdrant": {
     "host": "localhost",
     "port": 6333,
+    "grpc_port": 6334,
     "distance": "Cosine"
   },
 
@@ -26,7 +27,8 @@
 
   "benchmark": {
     "top_k": 10,
-    "default_search_type": "vector"
+    "default_search_type": "vector",
+    "encode_batch_size": 32
   },
 
   "ingestion": {
@@ -36,10 +38,10 @@
   },
 
   "course_name_map": {
-    "ml-zoomcamp":   "machine-learning-zoomcamp",
-    "de-zoomcamp":   "data-engineering-zoomcamp",
-    "mlops-zoomcamp": "mlops-zoomcamp",
-    "llm-zoomcamp":  "llm-zoomcamp"
+    "ml-zoomcamp":      "machine-learning-zoomcamp",
+    "de-zoomcamp":      "data-engineering-zoomcamp",
+    "mlops-zoomcamp":   "mlops-zoomcamp",
+    "llm-zoomcamp":     "llm-zoomcamp"
   },
 
   "production_model": "BAAI/bge-base-en-v1.5"
