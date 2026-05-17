@@ -25,6 +25,8 @@ DEFAULT_OUTPUT = Paths.processed_dir() / "test.jsonl"
 DEFAULT_N = 280
 DEFAULT_STRATIFY_BY = ["course"]  # Changed to list for multi-key support
 DEFAULT_SEED = 42
+DEFAULT_TOPIC_ASSIGNMENTS = Path("production_pipeline/p02_eda/experiments/topic_assignments_all.json")
+
 
 
 def load_documents(path: Path) -> list[dict]:
@@ -37,6 +39,33 @@ def load_documents(path: Path) -> list[dict]:
             if not line.strip():
                 continue
             docs.append(json.loads(line))
+    return docs
+
+
+def load_documents_with_topics(
+    clean_path: Path,
+    topic_assignments_path: Path,
+    model: str = "BAAI/bge-base-en-v1.5",
+) -> list[dict]:
+    """Load clean docs and join with topic assignments."""
+    # Load topic map
+    assignments = json.load(open(topic_assignments_path))
+    topic_map = {
+        a["id"]: a
+        for a in assignments["results"][model]["assignments"]
+    }
+
+    docs = []
+    for line in open(clean_path, encoding="utf-8"):
+        if not line.strip():
+            continue
+        doc = json.loads(line)
+        topic_info = topic_map.get(doc["id"], {})
+        doc["topic"] = topic_info.get("topic", -1)
+        doc["ner_category"] = topic_info.get("ner_category", "OTHER")
+        doc["ner_primary_entity"] = topic_info.get("ner_primary_entity")
+        docs.append(doc)
+
     return docs
 
 
@@ -231,7 +260,7 @@ def main() -> None:
     args = parser.parse_args()
 
     logger.info(f"Loading documents from {args.input}")
-    docs = load_documents(args.input)
+    docs = load_documents_with_topics(args.input, DEFAULT_TOPIC_ASSIGNMENTS)
     logger.info(f"Loaded {len(docs)} documents")
     
     # Log topic distribution for context
