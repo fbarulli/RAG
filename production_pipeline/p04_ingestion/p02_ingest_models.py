@@ -26,11 +26,14 @@ QDRANT_HOST = "localhost"
 QDRANT_PORT = 6333
 BATCH_SIZE = 100
 
+
+
 MODELS = [
     'BAAI/bge-small-en-v1.5',    # 384d - current baseline
     'intfloat/e5-small-v2',       # 384d - strong alternative
     'BAAI/bge-base-en-v1.5',      # 768d - larger BGE
-    'intfloat/e5-base-v2',        # 768d - larger E5
+    'intfloat/e5-base-v2',
+    "sentence-transformers/all-mpnet-base-v2"        # 768d - larger E5
 ]
 
 def main(input_path: Path = DEFAULT_INPUT, host: str = QDRANT_HOST, port: int = QDRANT_PORT):

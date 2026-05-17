@@ -2,9 +2,11 @@
 _benchmark_types.py
 ===================
 Shared data classes for the retrieval benchmark pipeline.
+
+No I/O, no logic — pure data definitions.
 """
 
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass, asdict, field
 from typing import Optional
 
 
@@ -16,8 +18,7 @@ class TestQuery:
     course: str
     section: str
     answer: str
-    strategy: str
-    original_question: str
+    query_type: str = "unknown"
     topic: Optional[int] = None
     subtopic: Optional[int] = None
 
@@ -48,7 +49,8 @@ class QueryResult:
 
 @dataclass(frozen=True)
 class MetricSummary:
-    """Aggregated metrics including new diagnostics."""
+    """Aggregated metrics for one (config, model) pair, optionally stratified by topic."""
+
     config_name: str
     model_name: str
     topic: Optional[int] = None
@@ -63,17 +65,17 @@ class MetricSummary:
     mrr: float = 0.0
     ndcg_10: float = 0.0
 
-    # Latency
+    # Latency (milliseconds)
     latency_p50: float = 0.0
     latency_p95: float = 0.0
     latency_p99: float = 0.0
 
-    # Code integrity
+    # Code integrity (1.0 = all blocks complete, 0.0 = all broken)
     avg_code_integrity_ref: float = 0.0
     avg_code_integrity_retrieved: Optional[float] = None
 
-    # === NEW METRICS ===
-    cross_course_contamination: float = 0.0      
-    rank_std: float = 0.0                        
-    failure_count: int = 0                       
-    avg_failure_similarity: Optional[float] = None  
+    # Diagnostic metrics
+    cross_course_contamination: float = 0.0       # top-1 from wrong course
+    rank_std: float = 0.0                         # rank variance across queries
+    failure_count: int = 0                        # queries with Hit@10 = 0
+    avg_failure_similarity: Optional[float] = None  # avg score on failures
