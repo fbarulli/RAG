@@ -95,8 +95,10 @@ def _add_flag_args(parser: argparse.ArgumentParser) -> None:
                    help="Wipe benchmark state before running")
     g.add_argument("--fail-fast", action="store_true", default=False,
                    help="Abort on the first model/config error")
-    g.add_argument("--timeout", type=int, default=None,
+    g.add_argument("--timeout",   type=int, default=None,
                    help="Per-model timeout in seconds (default: 3600)")
+    parser.add_argument("--sample-size", type=int, default=0,
+                        help="Number of queries to sample. 0 = full dataset (default).")
 
 
 # ---------------------------------------------------------------------------
@@ -120,7 +122,6 @@ def create_base_parser(
     _add_model_args(parser)
     _add_tuning_args(parser)
     _add_flag_args(parser)
-    parser.add_argument("--sample-size", type=int, default=0, help="Number of queries to sample. 0 runs the full dataset.")
     return parser
 
 
@@ -140,7 +141,6 @@ def create_ingestion_parser() -> argparse.ArgumentParser:
         help="Ingest only this model (must match 'name' in models.json). "
              "Overrides --models.",
     )
-    parser.add_argument("--sample-size", type=int, default=0, help="Number of queries to sample. 0 runs the full dataset.")
     return parser
 
 
@@ -160,7 +160,6 @@ def create_benchmark_parser() -> argparse.ArgumentParser:
         default=None,    
         help="Model to benchmark (matches 'name' in models.json). Omitting this runs all models.",
     )
-    parser.add_argument("--sample-size", type=int, default=0, help="Number of queries to sample. 0 runs the full dataset.")
     return parser
 
 
@@ -224,5 +223,4 @@ def create_generation_parser() -> argparse.ArgumentParser:
         help="Override max tokens (otherwise per-prompt-style)",
     )
     
-    parser.add_argument("--sample-size", type=int, default=0, help="Number of queries to sample. 0 runs the full dataset.")
     return parser

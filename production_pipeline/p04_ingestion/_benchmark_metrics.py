@@ -62,6 +62,8 @@ from qdrant_client.models import Filter, FieldCondition, MatchValue, SearchParam
 from elasticsearch import Elasticsearch
 
 from ._benchmark_types import MetricSummary, QueryResult
+from ._benchmark_reranker import evaluate_with_reranker
+
 
 
 # ---------------------------------------------------------------------------
@@ -363,23 +365,30 @@ def evaluate_config(
     top_k: int,
     es: "Elasticsearch | None" = None,
     es_index: str = "faqs",
+    encode_batch_size: int = 32,
 ) -> list[QueryResult]:
     """
     Evaluate a single config/model combination against the test set.
     Uses factual topic/subtopic assignments from topic_map.
+    Applies reranking if config specifies reranker=true and reranker_name.
     """
+    use_reranker  = config.get("reranker", False)
+    reranker_name = config.get("reranker_name") if use_reranker else None
+    # Fetch more candidates when reranking so the reranker has a larger pool to work with
+    retrieval_k   = top_k * 4 if use_reranker else top_k
+
     results = []
     for test in test_set:
-        query = test["query"]
-        expected_id = test["expected_id"]
-        course = test["course"]
-        ref_answer = test["answer"]
-        topic_info = topic_map.get(expected_id, {})
-        topic = topic_info.get("topic", -1)
-        subtopic = topic_info.get("subtopic")
-        ner_category = topic_info.get("ner_category")
+        query              = test["query"]
+        expected_id        = test["expected_id"]
+        course             = test["course"]
+        ref_answer         = test["answer"]
+        topic_info         = topic_map.get(expected_id, {})
+        topic              = topic_info.get("topic", -1)
+        subtopic           = topic_info.get("subtopic")
+        ner_category       = topic_info.get("ner_category")
         ner_primary_entity = topic_info.get("ner_primary_entity")
-        search_type = config.get("search_type", "vector")
+        search_type        = config.get("search_type", "vector")
 
         if search_type == "bm25" and es is not None:
             hit_ids, top_answer, scores, latency_ms = run_es_retrieval_query(
@@ -388,7 +397,7 @@ def evaluate_config(
                 query_text=query,
                 course_filter=course,
                 config=config,
-                top_k=top_k,
+                top_k=retrieval_k,
             )
         elif search_type == "hybrid_rrf" and es is not None:
             query_vector = model.encode(query, convert_to_numpy=True).tolist()
@@ -401,7 +410,7 @@ def evaluate_config(
                 query_text=query,
                 course_filter=course,
                 config=config,
-                top_k=top_k,
+                top_k=retrieval_k,
             )
         elif search_type == "entity_boosted":
             query_vector = model.encode(query, convert_to_numpy=True).tolist()
@@ -411,7 +420,7 @@ def evaluate_config(
                 query_vector=query_vector,
                 course_filter=course,
                 config=config,
-                top_k=top_k,
+                top_k=retrieval_k,
                 ner_category=ner_category,
                 ner_primary_entity=ner_primary_entity,
             )
@@ -423,8 +432,23 @@ def evaluate_config(
                 query_vector=query_vector,
                 course_filter=course,
                 config=config,
+                top_k=retrieval_k,
+            )
+
+        # Reranking — runs on all search_types if config enables it
+        reranker_latency_ms = 0.0
+        if use_reranker and reranker_name and hit_ids:
+            candidates = [{"es_id": id_} for id_ in hit_ids]
+            hit_ids, rerank_metrics = evaluate_with_reranker(
+                query=query,
+                retrieved_candidates=candidates,
+                reranker_name=reranker_name,
                 top_k=top_k,
             )
+            hit_ids = tuple(hit_ids)
+            reranker_latency_ms = rerank_metrics.get("reranker_latency_ms", 0.0)
+            # Scores are no longer meaningful post-rerank; zero them out
+            scores = tuple(0.0 for _ in hit_ids)
 
         code_int_ref = check_code_integrity(ref_answer)
         code_int_ret = check_code_integrity(top_answer) if top_answer else None
@@ -439,6 +463,7 @@ def evaluate_config(
             hit_ids=hit_ids,
             hit_scores=scores,
             latency_ms=latency_ms,
+            reranker_latency_ms=reranker_latency_ms,
             code_integrity_ref=code_int_ref,
             code_integrity_retrieved=code_int_ret,
         ))

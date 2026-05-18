@@ -69,6 +69,7 @@ def main():
         all_results = []
         for cfg_name, cfg in configs.items():
             logger.info(f"  Running: {cfg_name}")
+            logger.info(f"Config dict: {cfg}")
             results = evaluate_config(
                 client=config.qdrant_client,
                 collection=model_entry["collection"],
