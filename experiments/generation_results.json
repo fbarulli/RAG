@@ -12,15 +12,58 @@
       "context_doc_ids": [
         "e8df9f0d12"
       ],
-      "context_text": "[Document e8df9f0d12]:\nTo resolve this issue:\n\n1. Ensure you have created a Dockerfile.\n2. Add streamlit to the docker-compose configuration.\n3. Run the following command to rebuild and start the application:\n\n   ```bash\ndocker-compose up --build\n```",
-      "generated_answer": "Based on the context, it seems like the issue is related to the Docker setup. The provided context mentions a solution to resolve an issue, but it doesn't directly address the error message you're seeing. However, it does provide a general solution to rebuild and start the application using `docker-compose up --build`.\n\nGiven the error message, it seems like the issue is that the `streamlit` executable is not found in the container's PATH. This could be due to a missing or incorrect Dockerfile configuration.\n\nThe context does mention ensuring you have created a Dockerfile, which might be related to the issue. However, without more information about your Dockerfile and docker-compose configuration, it's difficult to provide a more specific solution.\n\nYou may want to verify that your Dockerfile correctly installs and configures Streamlit, and that your docker-compose configuration is correct. If you're still having trouble, you may need to provide more information about your setup or configuration files.",
-      "prompt_style": "relaxed",
-      "temperature": 0.3,
-      "max_tokens": 500,
+      "context_text": "1. Ensure you have created a Dockerfile.\n2. Add streamlit to the docker-compose configuration.\n3. Run the following command to rebuild and start the application:\n\n   ```bash\ndocker-compose up --build\n```",
+      "generated_answer": "To resolve the issue, follow these steps:\n\n1. Ensure you have created a Dockerfile.\n2. Add streamlit to the docker-compose configuration.\n3. Run the following command to rebuild and start the application: \n   ```bash\ndocker-compose up --build\n```\nThis should rebuild the Docker image and start the application, resolving the error.",
+      "prompt_style": "strict",
+      "temperature": 0.0,
+      "max_tokens": 300,
       "llm_model": "nvidia_nim/meta/llama-3.1-70b-instruct",
-      "latency_ms": 19081.199421000292,
-      "prompt_tokens": 235,
-      "completion_tokens": 195,
+      "latency_ms": 6818.204406001314,
+      "prompt_tokens": 215,
+      "completion_tokens": 72,
+      "success": true,
+      "error": null
+    },
+    "evaluation": {
+      "query_id": "e8df9f0d12_orig",
+      "faithfulness": 1.0,
+      "factual_correctness": 1.0,
+      "latency_ms": 9257.659451002837,
+      "prompt_tokens": 409,
+      "completion_tokens": 21,
+      "error": null
+    },
+    "prompt_style": "strict",
+    "top_k": 1,
+    "timestamp": "2026-05-18T15:11:30.459058",
+    "reranked": true
+  },
+  {
+    "query_id": "e8df9f0d12_orig",
+    "query": "Docker: When trying to run a streamlit app using docker-compose, I get: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: \"streamlit\": executable file not found in $PATH: unknown. The app runs fine outside of docker-compose",
+    "expected_id": "e8df9f0d12",
+    "retrieved_doc_ids": [
+      "e8df9f0d12",
+      "80a2e18431",
+      "664833c280"
+    ],
+    "generation": {
+      "query_id": "e8df9f0d12_orig",
+      "query": "Docker: When trying to run a streamlit app using docker-compose, I get: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: \"streamlit\": executable file not found in $PATH: unknown. The app runs fine outside of docker-compose",
+      "context_doc_ids": [
+        "e8df9f0d12",
+        "80a2e18431",
+        "664833c280"
+      ],
+      "context_text": "1. Ensure you have created a Dockerfile.\n2. Add streamlit to the docker-compose configuration.\n3. Run the following command to rebuild and start the application:\n\n   ```bash\ndocker-compose up --build\n```\n\n---\n\nThis error indicates that the executable gunicorn is not found in the container's $PATH. To resolve this, you need to add gunicorn and flask to your Pipfile.\n\nUpdate your Pipfile as follows:\n\n```plaintext\n[[source]]\nurl = \"https://pypi.org/simple\"\nverify_ssl = true\nname = \"pypi\"\n\n[packages]\nscikit-learn = \"==1.5.2\"\ngunicorn = \"*\"\nflask = \"*\"\n\n[dev-packages]\n\n[requires]\npython_version = \"3.11\"\n```\n\nAfter making these changes, follow these steps:\n\n1. Run pipenv lock to update the Pipfile.lock.\n2. Build the Docker image with:\n   ```bash\ndocker build -t [name] .\n```\n3. Run the Docker container with:\n   ```bash\ndocker run [name]\n```\n\n---\n\nIf you get this error, it means you have not built your Spark and Jupyter images. These images aren\u2019t readily available on DockerHub.\n\nTo resolve this:\n\n- In the Spark folder, run the following command from a bash CLI to build all images before running docker compose:\n  \n  ```bash\n./build.sh\n```",
+      "generated_answer": "To resolve the error, follow these steps:\n\n1. Ensure you have created a Dockerfile.\n2. Add streamlit to the docker-compose configuration.\n3. Run the following command to rebuild and start the application: \n```bash\ndocker-compose up --build\n```\nHowever, if you encounter another error, check if you have gunicorn and flask in your Pipfile. If not, update your Pipfile as follows:\n```plaintext\n[[source]]\nurl = \"https://pypi.org/simple\"\nverify_ssl = true\nname = \"pypi\"\n\n[packages]\nscikit-learn = \"==1.5.2\"\ngunicorn = \"*\"\nflask = \"*\"\n\n[dev-packages]\n\n[requires]\npython_version = \"3.11\"\n```\nThen, follow these steps:\n1. Run pipenv lock to update the Pipfile.lock.\n2. Build the Docker image with: \n```bash\ndocker build -t [name] .\n```\n3. Run the Docker container with: \n```bash\ndocker run [name]\n```\nNote: If you are using Spark and Jupyter images, ensure you have built them by running the following command in the Spark folder:\n```bash\n./build.sh\n```",
+      "prompt_style": "strict",
+      "temperature": 0.0,
+      "max_tokens": 300,
+      "llm_model": "nvidia_nim/meta/llama-3.1-70b-instruct",
+      "latency_ms": 14527.70310699998,
+      "prompt_tokens": 444,
+      "completion_tokens": 251,
       "success": true,
       "error": null
     },
@@ -28,13 +71,61 @@
       "query_id": "e8df9f0d12_orig",
       "faithfulness": 0.5,
       "factual_correctness": 0.5,
-      "latency_ms": 2054.9694149999596,
-      "prompt_tokens": 534,
+      "latency_ms": 1312.7110179993906,
+      "prompt_tokens": 578,
       "completion_tokens": 21,
       "error": null
     },
-    "prompt_style": "relaxed",
-    "top_k": 1,
-    "timestamp": "2026-05-18T11:25:35.637161"
+    "prompt_style": "strict",
+    "top_k": 3,
+    "timestamp": "2026-05-18T15:11:47.409644",
+    "reranked": true
+  },
+  {
+    "query_id": "e8df9f0d12_orig",
+    "query": "Docker: When trying to run a streamlit app using docker-compose, I get: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: \"streamlit\": executable file not found in $PATH: unknown. The app runs fine outside of docker-compose",
+    "expected_id": "e8df9f0d12",
+    "retrieved_doc_ids": [
+      "e8df9f0d12",
+      "80a2e18431",
+      "664833c280",
+      "fdcf991009",
+      "04411f29bb"
+    ],
+    "generation": {
+      "query_id": "e8df9f0d12_orig",
+      "query": "Docker: When trying to run a streamlit app using docker-compose, I get: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: \"streamlit\": executable file not found in $PATH: unknown. The app runs fine outside of docker-compose",
+      "context_doc_ids": [
+        "e8df9f0d12",
+        "80a2e18431",
+        "664833c280",
+        "fdcf991009",
+        "04411f29bb"
+      ],
+      "context_text": "1. Ensure you have created a Dockerfile.\n2. Add streamlit to the docker-compose configuration.\n3. Run the following command to rebuild and start the application:\n\n   ```bash\ndocker-compose up --build\n```\n\n---\n\nThis error indicates that the executable gunicorn is not found in the container's $PATH. To resolve this, you need to add gunicorn and flask to your Pipfile.\n\nUpdate your Pipfile as follows:\n\n```plaintext\n[[source]]\nurl = \"https://pypi.org/simple\"\nverify_ssl = true\nname = \"pypi\"\n\n[packages]\nscikit-learn = \"==1.5.2\"\ngunicorn = \"*\"\nflask = \"*\"\n\n[dev-packages]\n\n[requires]\npython_version = \"3.11\"\n```\n\nAfter making these changes, follow these steps:\n\n1. Run pipenv lock to update the Pipfile.lock.\n2. Build the Docker image with:\n   ```bash\ndocker build -t [name] .\n```\n3. Run the Docker container with:\n   ```bash\ndocker run [name]\n```\n\n---\n\nIf you get this error, it means you have not built your Spark and Jupyter images. These images aren\u2019t readily available on DockerHub.\n\nTo resolve this:\n\n- In the Spark folder, run the following command from a bash CLI to build all images before running docker compose:\n  \n  ```bash\n./build.sh\n```\n\n---\n\n```docker: Error response from daemon: mkdir /var/lib/docker/overlay2/37be849565da96ac3fce34ee9eb2215bd6cd7899a63ebc0ace481fd735c4cb0e-init: read-only file system.\n```\n\nTo resolve this error, restart the Docker services.\n\n---\n\nIf you see this error from Grafana on startup:\n\n```\u2717 Failed to create provisioner: Failed to read dashboards config: could not parse provisioning config file: dashboards.yaml error: read /etc/grafana/provisioning/dashboards/dashboards.yaml: is a directory\n```\n\nThe Grafana volumes in your docker-compose.yml are mounting a YAML file path, but Grafana sees a directory at that path. Change file references to directory references in the Grafana volumes section.\n\nInstead of:\n\n```/etc/grafana/provisioning/dashboards/dashboards.yaml\n```\n\nuse:\n\n```/etc/grafana/provisioning/dashboards/dashboards\n```\n\nApply the same change to all file paths in the Grafana volumes block.",
+      "generated_answer": "To resolve the error, follow these steps:\n\n1. Ensure you have created a Dockerfile.\n2. Add streamlit to the docker-compose configuration.\n3. Run the following command to rebuild and start the application: \n```bash\ndocker-compose up --build\n```\nHowever, since the error is not explicitly mentioned in the context, we can try to resolve a similar error that indicates the executable is not found in the container's $PATH. \n\nIf the error is related to the executable not being found, it might be due to a missing package. Update your Pipfile as follows:\n```plaintext\n[[source]]\nurl = \"https://pypi.org/simple\"\nverify_ssl = true\nname = \"pypi\"\n\n[packages]\nscikit-learn = \"==1.5.2\"\ngunicorn = \"*\"\nflask = \"*\"\n\n[dev-packages]\n\n[requires]\npython_version = \"3.11\"\n```\nAfter making these changes, follow these steps:\n1. Run pipenv lock to update the Pipfile.lock.\n2. Build the Docker image with: \n```bash\ndocker build -t [name] .\n```\n3. Run the Docker container with: \n```bash\ndocker run [name]\n```\nIf the issue persists, ensure that you have built your Spark and Jupyter images by running the following command in the Spark folder:\n```bash\n./build.sh\n```\nIf none of the above steps resolve the issue, try restarting the Docker",
+      "prompt_style": "strict",
+      "temperature": 0.0,
+      "max_tokens": 300,
+      "llm_model": "nvidia_nim/meta/llama-3.1-70b-instruct",
+      "latency_ms": 20007.645403002243,
+      "prompt_tokens": 667,
+      "completion_tokens": 300,
+      "success": true,
+      "error": null
+    },
+    "evaluation": {
+      "query_id": "e8df9f0d12_orig",
+      "faithfulness": 0.0,
+      "factual_correctness": 0.0,
+      "latency_ms": 1394.3517620027706,
+      "prompt_tokens": 626,
+      "completion_tokens": 21,
+      "error": null
+    },
+    "prompt_style": "strict",
+    "top_k": 5,
+    "timestamp": "2026-05-18T15:12:09.825388",
+    "reranked": true
   }
 ]

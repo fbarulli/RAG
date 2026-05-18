@@ -113,6 +113,7 @@ def run_vector_retrieval(
     hit_ids = tuple(p.payload.get("es_id", "") for p in points)
     hit_courses = tuple(p.payload.get("course", "") for p in points)
     hit_scores = tuple(float(p.score) if p.score is not None else 0.0 for p in points)
+    hit_answers = tuple(p.payload.get("answer", "") for p in points)
     top_answer = points[0].payload.get("answer") if points else None
 
     return SearchResult(
@@ -121,6 +122,7 @@ def run_vector_retrieval(
         hit_courses=hit_courses,
         top_answer=top_answer,
         latency_ms=latency_ms,
+        hit_answers=hit_answers
     )
 
 

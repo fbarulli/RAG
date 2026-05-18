@@ -1,67 +1,68 @@
-# test_llama8b_multiple.py
-import sys
-sys.path.insert(0, '/workspaces/LLM')
-import logging
+"""
+scripts/test_fixed_retrieval.py
+Test the fixed version of run_vector_retrieval WITHOUT changing any files yet.
+"""
 
-
+from qdrant_client import QdrantClient
+from production_pipeline.p04_ingestion._benchmark_metrics.retrievers import run_vector_retrieval
 import json
 from rag_pipeline.paths import Paths
-from production_pipeline.p06_answer_generation.retriever import ContextRetriever
-from production_pipeline.p06_answer_generation.config import get_prompt, get_prompt_config
-from rag_pipeline.llm_client import call_llm
+import time
 
-logging.getLogger().setLevel(logging.ERROR)
-logging.getLogger("production_pipeline").setLevel(logging.ERROR)
-logging.disable(logging.CRITICAL)
-# Load test queries
-test_set_path = Paths.test_jsonl()
-test_queries = []
-with open(test_set_path) as f:
-    for line in f:
-        if line.strip():
-            doc = json.loads(line)
-            test_queries.append({
-                "id": doc["id"],
-                "question": doc["question"],
-                "expected_id": doc.get("expected_id") or doc.get("expected_doc_id") or doc["id"],
-            })
-            if len(test_queries) >= 5:
-                break
+# Load config
+with open(Paths.base() / "configs" / "defaults.json") as f:
+    defaults = json.load(f)
 
-# Initialize retriever once
-retriever = ContextRetriever(model_name="BAAI/bge-base-en-v1.5")
+qdrant_cfg = defaults.get("qdrant", {})
+client = QdrantClient(
+    host=qdrant_cfg.get("host", "localhost"), 
+    port=qdrant_cfg.get("port", 6333)
+)
 
-config = get_prompt_config("strict")
+collection = "faqs_bge_base_en_v1_5"
 
-print("=" * 80)
-print("TESTING 5 QUERIES WITH LLAMA 3.1 8B")
-print("=" * 80)
+print("Testing FIXED version...")
 
-for i, query_data in enumerate(test_queries, 1):
-    print(f"\n{'='*80}")
-    print(f"QUERY {i}: {query_data['id']}")
-    print(f"{'='*80}")
-    print(f"\nQUESTION:")
-    print(f"{query_data['question']}")
+# Temporary fixed version for testing
+def test_fixed_run_vector_retrieval():
+    start = time.perf_counter()
+    must_conditions = []
+    # (we keep it minimal for this test)
     
-    # Get context for this query's expected document
-    context = retriever.get_context([query_data['expected_id']])
-    
-    print(f"\nCONTEXT (from retrieved document):")
-    print(f"{context}")
-    
-    # Build prompt
-    prompt = get_prompt("strict", context, query_data['question'])
-    
-    # Call LLM
-    result = call_llm(
-        prompt=prompt,
-        max_tokens=config.max_tokens,
-        model="nvidia_nim/meta/llama-3.1-8b-instruct",
-        temperature=config.temperature,
-        system=config.system,
+    result = client.query_points(
+        collection_name=collection,
+        query=[0.1] * 768,   # dummy vector
+        limit=3,
+        with_payload=True,
+        with_vectors=False,
     )
     
-    print(f"\nMODEL RESPONSE:")
-    print(f"{result.content}")
-    print(f"\n--- Metrics: Latency={result.latency_ms:.0f}ms, Tokens={result.prompt_tokens} in, {result.completion_tokens} out ---")
+    points = result.points
+    latency_ms = (time.perf_counter() - start) * 1000
+    
+    hit_ids = tuple(p.payload.get("es_id", "") for p in points)
+    hit_courses = tuple(p.payload.get("course", "") for p in points)
+    hit_scores = tuple(float(p.score) if p.score is not None else 0.0 for p in points)
+    hit_answers = tuple(p.payload.get("answer", "") for p in points)      # ← key line
+    top_answer = points[0].payload.get("answer") if points else None
+
+    # Import here so we can test the class
+    from production_pipeline.p04_ingestion._benchmark_types import SearchResult
+    
+    return SearchResult(
+        hit_ids=hit_ids,
+        hit_scores=hit_scores,
+        hit_courses=hit_courses,
+        top_answer=top_answer,
+        latency_ms=latency_ms,
+        hit_answers=hit_answers,
+    )
+
+# Run the test
+result = test_fixed_run_vector_retrieval()
+
+print("✅ Success!")
+print("hit_ids count:", len(result.hit_ids))
+print("hit_answers count:", len(result.hit_answers))
+print("First hit_id:", result.hit_ids[0] if result.hit_ids else None)
+print("First course:", result.hit_courses[0] if result.hit_courses else None)
