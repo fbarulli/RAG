@@ -1,5 +1,34 @@
 """src/rag_pipeline/paths.py
-Centralized path resolution — eliminates hardcoded BASE logic across all scripts.
+Paths Management Module.
+
+This module provides centralized path resolution for the RAG pipeline.
+
+Classes:
+    Paths: Dynamic project root detection and standard directory helpers.
+
+Methods (Classmethods):
+    base(): Find and cache the project root (where pyproject.toml lives).
+    _load_defaults(): Load defaults.json from configs directory.
+    get(key, default): Get a path from defaults.json or return default.
+    raw_dir(): Path to raw data directory.
+    processed_dir(): Path to processed data directory.
+    experiments_dir(): Path to experiments directory.
+    configs_dir(): Path to configs directory.
+    embeddings_cache_dir(): Path to embeddings cache directory.
+    clean_jsonl(): Path to cleaned FAQ documents.
+    test_jsonl(): Path to test set queries.
+    models_config(): Path to models.json.
+    retrieval_configs(): Path to retrieval_configs.json.
+    defaults_json(): Path to defaults.json.
+    topic_assignments(): Path to merged topic assignments.
+    topic_assignments_for_model(model_name): Path to per-model topic assignments.
+    benchmark_results(): Path to benchmark_results.json.
+    benchmark_summary(): Path to benchmark_summary.txt.
+    benchmark_performance(): Path to benchmark_performance.json.
+    benchmark_comparison(): Path to benchmark_comparison.json.
+    benchmark_query_results(): Path to benchmark_query_results.json.
+    input_file(stage): Default input file for a pipeline stage.
+    output_file(stage): Default output file for a pipeline stage.
 """
 
 import json

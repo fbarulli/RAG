@@ -41,5 +41,12 @@
     "rrf_k": 60,
     "boost_question": 5.0,
     "boost_text": 5.0
-  }
+  },
+  "hybrid_balanced": {
+  "search_type": "hybrid_rrf",
+  "rrf_k": 60,
+  "vector_weight": 0.7,
+  "bm25_weight": 0.3,
+  "description": "Weighted hybrid favoring vector search"
+}
 }

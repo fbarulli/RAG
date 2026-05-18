@@ -1,14 +1,69 @@
 RETRIEVAL BENCHMARK SUMMARY
 ========================================================================================================================
 
-Config: entity_boosted | Model: BAAI/bge-base-en-v1.5
-  Queries: 2058
-  Hit Rate @1: 71.9% | @3: 85.4% | @5: 88.9% | @10: 92.5%
-  MRR: 0.7919 | NDCG@10: 0.8245
-  Latency: p50=5.5ms | p95=7.3ms | p99=8.4ms
+Config: bm25_balanced | Model: BAAI/bge-base-en-v1.5
+  Queries: 453
+  Hit Rate @1: 67.8% | @3: 82.8% | @5: 87.9% | @10: 91.2%
+  MRR: 0.7606 | NDCG@10: 0.7975
+  Latency: p50=6.5ms | p95=8.7ms | p99=9.7ms
   Code Integrity (Ref): 100.0% | (Retrieved): 99.6%
   Cross-Course Contamination: 0.00%
-  Rank Std Dev: 2.87   (lower is better)
-  Failures (Hit@10=0): 154
-  Avg Failure Similarity: 0.7118
+  Rank Std Dev: 3.06   (lower is better)
+  Failures (Hit@10=0): 40
+  Avg Failure Similarity: 61.2610
+
+Config: bm25_default | Model: BAAI/bge-base-en-v1.5
+  Queries: 453
+  Hit Rate @1: 59.6% | @3: 73.1% | @5: 77.0% | @10: 83.0%
+  MRR: 0.6754 | NDCG@10: 0.7127
+  Latency: p50=6.3ms | p95=8.5ms | p99=9.5ms
+  Code Integrity (Ref): 100.0% | (Retrieved): 100.0%
+  Cross-Course Contamination: 0.00%
+  Rank Std Dev: 3.84   (lower is better)
+  Failures (Hit@10=0): 77
+  Avg Failure Similarity: 202.6151
+
+Config: bm25_question_only | Model: BAAI/bge-base-en-v1.5
+  Queries: 453
+  Hit Rate @1: 59.6% | @3: 73.1% | @5: 77.0% | @10: 82.8%
+  MRR: 0.6751 | NDCG@10: 0.7121
+  Latency: p50=6.1ms | p95=8.0ms | p99=8.8ms
+  Code Integrity (Ref): 100.0% | (Retrieved): 100.0%
+  Cross-Course Contamination: 0.00%
+  Rank Std Dev: 3.84   (lower is better)
+  Failures (Hit@10=0): 78
+  Avg Failure Similarity: 10.1681
+
+Config: entity_boosted | Model: BAAI/bge-base-en-v1.5
+  Queries: 453
+  Hit Rate @1: 76.2% | @3: 90.9% | @5: 94.0% | @10: 96.2%
+  MRR: 0.8395 | NDCG@10: 0.8700
+  Latency: p50=5.5ms | p95=7.5ms | p99=8.1ms
+  Code Integrity (Ref): 100.0% | (Retrieved): 100.0%
+  Cross-Course Contamination: 0.00%
+  Rank Std Dev: 2.19   (lower is better)
+  Failures (Hit@10=0): 17
+  Avg Failure Similarity: 0.7292
+
+Config: hybrid_rrf | Model: BAAI/bge-base-en-v1.5
+  Queries: 453
+  Hit Rate @1: 72.0% | @3: 88.3% | @5: 92.7% | @10: 95.8%
+  MRR: 0.8101 | NDCG@10: 0.8466
+  Latency: p50=13.7ms | p95=15.6ms | p99=16.3ms
+  Code Integrity (Ref): 100.0% | (Retrieved): 99.8%
+  Cross-Course Contamination: 0.00%
+  Rank Std Dev: 2.33   (lower is better)
+  Failures (Hit@10=0): 19
+  Avg Failure Similarity: 0.0309
+
+Config: vector_default | Model: BAAI/bge-base-en-v1.5
+  Queries: 453
+  Hit Rate @1: 71.3% | @3: 85.9% | @5: 90.5% | @10: 94.3%
+  MRR: 0.7936 | NDCG@10: 0.8300
+  Latency: p50=6.5ms | p95=7.9ms | p99=8.5ms
+  Code Integrity (Ref): 100.0% | (Retrieved): 100.0%
+  Cross-Course Contamination: 0.00%
+  Rank Std Dev: 2.65   (lower is better)
+  Failures (Hit@10=0): 26
+  Avg Failure Similarity: 0.7093
 

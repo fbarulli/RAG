@@ -78,6 +78,36 @@ def _short_model_name(full_name: str, max_len: int = 35) -> str:
     return name[:max_len] if len(name) > max_len else name
 
 
+def _load_existing_summaries(results_path: Path) -> dict[tuple[str, str], dict[str, Any]]:
+    """
+    Load existing benchmark_results.json and index by (model_name, config_name).
+    Returns an empty dict if the file doesn't exist or is malformed.
+    """
+    if not results_path.exists():
+        return {}
+    try:
+        with results_path.open(encoding="utf-8") as f:
+            rows = json.load(f)
+        return {(row["model_name"], row["config_name"]): row for row in rows}
+    except (json.JSONDecodeError, KeyError) as e:
+        logger.warning(f"Could not load existing results from {results_path}: {e}. Starting fresh.")
+        return {}
+
+
+def _merge_summaries(
+    existing: dict[tuple[str, str], dict[str, Any]],
+    new_summaries: list[MetricSummary],
+) -> list[MetricSummary]:
+    """
+    Upsert new_summaries into existing by (model_name, config_name).
+    New results overwrite same-key existing rows; all other rows are kept.
+    """
+    merged = dict(existing)
+    for s in new_summaries:
+        merged[(s.model_name, s.config_name)] = asdict(s)
+    return _sort_summaries([MetricSummary(**row) for row in merged.values()])
+
+
 # ---------------------------------------------------------------------------
 # Table Formatters
 # ---------------------------------------------------------------------------
@@ -180,42 +210,49 @@ def save_benchmark_results(summaries: list[MetricSummary], output_dir: Path) -> 
     """
     Save per-run benchmark results to JSON and a human-readable text summary.
 
+    Results are upserted by (model_name, config_name): new rows overwrite
+    existing rows with the same key; all other existing rows are preserved.
+    Running a single model updates only that model's rows.
+    Running all models replaces all rows for every model in that run.
+
     Also calls ``save_performance_summary`` to update the canonical
     ``benchmark_performance.json`` rankings file.
 
     Files written
     -------------
-    ``benchmark_results.json``  — full results for every model/config combination
-    ``benchmark_summary.txt``   — human-readable equivalent
+    ``benchmark_results.json``     — full results for every model/config combination
+    ``benchmark_summary.txt``      — human-readable equivalent
     ``benchmark_performance.json`` — ranked view with winner (via save_performance_summary)
     """
     output_dir.mkdir(parents=True, exist_ok=True)
-    sorted_summaries = _sort_summaries(summaries)
+
+    results_path = output_dir / "benchmark_results.json"
+    existing = _load_existing_summaries(results_path)
+    merged = _merge_summaries(existing, summaries)
 
     # JSON results
-    results_path = output_dir / "benchmark_results.json"
     with results_path.open("w", encoding="utf-8") as f:
         json.dump(
-            [asdict(s) for s in sorted_summaries],
+            [asdict(s) for s in merged],
             f,
             indent=2,
             ensure_ascii=False,
         )
     logger.info(f"Saved benchmark results: {results_path}")
 
-    # Text summary (detailed format)
+    # Text summary (detailed format) — regenerated from full merged set
     summary_path = output_dir / "benchmark_summary.txt"
     with summary_path.open("w", encoding="utf-8") as f:
         f.write("RETRIEVAL BENCHMARK SUMMARY\n")
         f.write("=" * 120 + "\n\n")
-        for s in sorted_summaries:
+        for s in merged:
             if s.num_queries == 0:
                 continue
             f.write("\n".join(_format_summary(s)) + "\n\n")
     logger.info(f"Saved benchmark summary: {summary_path}")
 
-    # Canonical rankings
-    save_performance_summary(summaries, output_dir)
+    # Canonical rankings — pass merged so winner reflects all known results
+    save_performance_summary(merged, output_dir)
 
 
 def save_performance_summary(

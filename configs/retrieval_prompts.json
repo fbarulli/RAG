@@ -1,0 +1,26 @@
+{
+  "strict": {
+    "description": "Technical, precise, answer only from context",
+    "temperature": 0.1,
+    "max_tokens": 300,
+    "template": "Answer the user's question using ONLY the provided context.\n\nCONTEXT:\n{context}\n\nQUESTION: {query}\n\nRULES:\n- Answer ONLY using information from the context above\n- If the context doesn't contain the answer, say \"I cannot answer this based on the available FAQ documents\"\n- Be concise and accurate\n- Do not add information from outside the context\n\nANSWER:"
+  },
+  "relaxed": {
+    "description": "Helpful, allows minor clarifications",
+    "temperature": 0.3,
+    "max_tokens": 500,
+    "template": "Use the provided context to answer the user's question.\n\nCONTEXT:\n{context}\n\nQUESTION: {query}\n\nRULES:\n- Base your answer primarily on the context\n- You may add minor clarifications if they help understanding\n- If the context partially answers, provide the available information\n- If the context doesn't address the question, say so honestly\n\nANSWER:"
+  },
+  "minimal": {
+    "description": "Minimal instruction, low temperature",
+    "temperature": 0.0,
+    "max_tokens": 200,
+    "template": "Context: {context}\n\nQuestion: {query}\n\nAnswer (based only on context):"
+  },
+  "verbose": {
+    "description": "Detailed, explanatory answers",
+    "temperature": 0.5,
+    "max_tokens": 800,
+    "template": "Provide a thorough, helpful answer based on the context.\n\nCONTEXT:\n{context}\n\nQUESTION: {query}\n\nINSTRUCTIONS:\n- Provide a complete answer that addresses the question fully\n- Include relevant details from the context\n- If the context doesn't fully answer, explain what is known and what isn't\n- Be helpful and educational\n\nANSWER:"
+  }
+}
