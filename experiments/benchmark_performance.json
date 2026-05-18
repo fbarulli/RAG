@@ -1,10 +1,10 @@
 {
   "winner_model": "BAAI/bge-base-en-v1.5",
-  "winner_config": "entity_boosted",
+  "winner_config": "entity_boosted_with_reranking",
   "winner_mrr": 0.8394863169697605,
   "best_per_model": [
     {
-      "config_name": "entity_boosted",
+      "config_name": "entity_boosted_with_reranking",
       "model_name": "BAAI/bge-base-en-v1.5",
       "topic": null,
       "subtopic": null,
@@ -15,20 +15,20 @@
       "hit_rate_10": 0.9624724061810155,
       "mrr": 0.8394863169697605,
       "ndcg_10": 0.86999480381722,
-      "latency_p50": 5.715449999115663,
-      "latency_p95": 7.795290000103705,
-      "latency_p99": 8.667620000778697,
+      "latency_p50": 8.439609000561177,
+      "latency_p95": 11.00402900010522,
+      "latency_p99": 11.972109999987879,
       "avg_code_integrity_ref": 1.0,
       "avg_code_integrity_retrieved": 1.0,
       "cross_course_contamination": 0.0,
       "rank_std": 2.1899774186016248,
       "failure_count": 17,
-      "avg_failure_similarity": 0.7292305511764706
+      "avg_failure_similarity": 0.7292305405882353
     }
   ],
   "all_results": [
     {
-      "config_name": "entity_boosted",
+      "config_name": "entity_boosted_with_reranking",
       "model_name": "BAAI/bge-base-en-v1.5",
       "topic": null,
       "subtopic": null,
@@ -39,15 +39,15 @@
       "hit_rate_10": 0.9624724061810155,
       "mrr": 0.8394863169697605,
       "ndcg_10": 0.86999480381722,
-      "latency_p50": 5.715449999115663,
-      "latency_p95": 7.795290000103705,
-      "latency_p99": 8.667620000778697,
+      "latency_p50": 8.439609000561177,
+      "latency_p95": 11.00402900010522,
+      "latency_p99": 11.972109999987879,
       "avg_code_integrity_ref": 1.0,
       "avg_code_integrity_retrieved": 1.0,
       "cross_course_contamination": 0.0,
       "rank_std": 2.1899774186016248,
       "failure_count": 17,
-      "avg_failure_similarity": 0.7292305511764706
+      "avg_failure_similarity": 0.7292305405882353
     }
   ]
 }

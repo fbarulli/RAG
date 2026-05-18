@@ -1,0 +1,572 @@
+[
+  {
+    "query": "Docker: When trying to run a streamlit app using docker-compose, I get: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: \"streamlit\": executable file not found in $PATH: unknown. The app runs fine outside of docker-compose",
+    "topic": "llm-zoomcamp",
+    "expected_id": "e8df9f0d12",
+    "retrieval_latency_ms": 49.9,
+    "bge-reranker-base_top_ids": [
+      "e8df9f0d12",
+      "80a2e18431",
+      "e43abaa421",
+      "bbabf5b235",
+      "6d91bd8f56",
+      "fdcf991009",
+      "d3c860aa46",
+      "27b149393b",
+      "04411f29bb",
+      "664833c280"
+    ],
+    "bge-reranker-base_latency_ms": 9070.8
+  },
+  {
+    "query": "docker-compose streamlit executable file not found",
+    "topic": "llm-zoomcamp",
+    "expected_id": "e8df9f0d12",
+    "retrieval_latency_ms": 11.8,
+    "bge-reranker-base_top_ids": [
+      "e8df9f0d12",
+      "e43abaa421",
+      "bbabf5b235",
+      "f2458f5a26",
+      "27b149393b",
+      "d3c860aa46",
+      "80a2e18431",
+      "73876c8348",
+      "a950fda271",
+      "664833c280"
+    ],
+    "bge-reranker-base_latency_ms": 4531.0
+  },
+  {
+    "query": "streamlit app not running in docker-compose",
+    "topic": "llm-zoomcamp",
+    "expected_id": "e8df9f0d12",
+    "retrieval_latency_ms": 12.2,
+    "bge-reranker-base_top_ids": [
+      "e8df9f0d12",
+      "27b149393b",
+      "d3c860aa46",
+      "f2458f5a26",
+      "a950fda271",
+      "e43abaa421",
+      "664833c280",
+      "c6a6a991d8",
+      "60da2ce9c6",
+      "b1cb53ac6a"
+    ],
+    "bge-reranker-base_latency_ms": 4121.5
+  },
+  {
+    "query": "OCI runtime create failed in docker-compose",
+    "topic": "llm-zoomcamp",
+    "expected_id": "e8df9f0d12",
+    "retrieval_latency_ms": 9.3,
+    "bge-reranker-base_top_ids": [
+      "80a2e18431",
+      "e8df9f0d12",
+      "04411f29bb",
+      "d3c860aa46",
+      "73876c8348",
+      "f2458f5a26",
+      "e43abaa421",
+      "a950fda271",
+      "fdcf991009",
+      "c6a6a991d8"
+    ],
+    "bge-reranker-base_latency_ms": 4015.7
+  },
+  {
+    "query": "docker-compose streamlit app won't run",
+    "topic": "llm-zoomcamp",
+    "expected_id": "e8df9f0d12",
+    "retrieval_latency_ms": 8.3,
+    "bge-reranker-base_top_ids": [
+      "e8df9f0d12",
+      "27b149393b",
+      "d3c860aa46",
+      "6d91bd8f56",
+      "f2458f5a26",
+      "e43abaa421",
+      "04411f29bb",
+      "664833c280",
+      "73876c8348",
+      "fd3a06c6ee"
+    ],
+    "bge-reranker-base_latency_ms": 4303.9
+  },
+  {
+    "query": "why is streamlit not found in $PATH when running docker-compose",
+    "topic": "llm-zoomcamp",
+    "expected_id": "e8df9f0d12",
+    "retrieval_latency_ms": 9.3,
+    "bge-reranker-base_top_ids": [
+      "e8df9f0d12",
+      "27b149393b",
+      "f2458f5a26",
+      "bbabf5b235",
+      "d3c860aa46",
+      "87e92edf02",
+      "e43abaa421",
+      "73876c8348",
+      "04411f29bb",
+      "a5ee2dc890"
+    ],
+    "bge-reranker-base_latency_ms": 4249.3
+  },
+  {
+    "query": "streamlit app runs fine outside of docker-compose but fails inside",
+    "topic": "llm-zoomcamp",
+    "expected_id": "e8df9f0d12",
+    "retrieval_latency_ms": 7.4,
+    "bge-reranker-base_top_ids": [
+      "e8df9f0d12",
+      "27b149393b",
+      "d3c860aa46",
+      "f2458f5a26",
+      "b0300fc9b8",
+      "8a23cfbf67",
+      "b1cb53ac6a",
+      "55c1151596",
+      "c6a6a991d8",
+      "04411f29bb"
+    ],
+    "bge-reranker-base_latency_ms": 4448.2
+  },
+  {
+    "query": "my streamlit app doesn't work when i put it in a box",
+    "topic": "llm-zoomcamp",
+    "expected_id": "e8df9f0d12",
+    "retrieval_latency_ms": 15.5,
+    "bge-reranker-base_top_ids": [
+      "27b149393b",
+      "5b1d465332",
+      "e8df9f0d12",
+      "6bceeebf04",
+      "05dc43cda8",
+      "2763850d3e",
+      "2d274b7acd",
+      "3a1f2deaa8",
+      "772aea0210",
+      "c6f2a2afe5"
+    ],
+    "bge-reranker-base_latency_ms": 4093.0
+  },
+  {
+    "query": "docker gives error when streamlit is run from inside",
+    "topic": "llm-zoomcamp",
+    "expected_id": "e8df9f0d12",
+    "retrieval_latency_ms": 9.4,
+    "bge-reranker-base_top_ids": [
+      "e8df9f0d12",
+      "27b149393b",
+      "fdcf991009",
+      "55c1151596",
+      "5ba1e7ba64",
+      "efae76d03c",
+      "664833c280",
+      "82cf92503d",
+      "fd3a06c6ee",
+      "215ad00cfc"
+    ],
+    "bge-reranker-base_latency_ms": 4195.4
+  },
+  {
+    "query": "can't find streamlit file when using docker thing",
+    "topic": "llm-zoomcamp",
+    "expected_id": "e8df9f0d12",
+    "retrieval_latency_ms": 9.9,
+    "bge-reranker-base_top_ids": [
+      "e8df9f0d12",
+      "27b149393b",
+      "a5ee2dc890",
+      "fd3a06c6ee",
+      "bbabf5b235",
+      "664833c280",
+      "f5b6e3f04b",
+      "e5b8322bee",
+      "82cf92503d",
+      "6d91bd8f56"
+    ],
+    "bge-reranker-base_latency_ms": 4226.0
+  },
+  {
+    "query": "Evaluation: Jupyter kernel crashes when embedding the ground-truth set",
+    "topic": "llm-zoomcamp",
+    "expected_id": "b8f2d6a30c",
+    "retrieval_latency_ms": 15.3,
+    "bge-reranker-base_top_ids": [
+      "b8f2d6a30c",
+      "b27e47d7ca",
+      "c1e9f4b820",
+      "92ff36d48e",
+      "57e17a3e5f",
+      "95feb4e75b",
+      "108295493e",
+      "02cd286eb8",
+      "ee14ae778d",
+      "5686aea16e"
+    ],
+    "bge-reranker-base_latency_ms": 4380.8
+  },
+  {
+    "query": "jupyter kernel crashes with embedding model",
+    "topic": "llm-zoomcamp",
+    "expected_id": "b8f2d6a30c",
+    "retrieval_latency_ms": 10.8,
+    "bge-reranker-base_top_ids": [
+      "b8f2d6a30c",
+      "b27e47d7ca",
+      "92ff36d48e",
+      "108295493e",
+      "fb9846ce91",
+      "af3774c8e2",
+      "57e17a3e5f",
+      "ace84c3970",
+      "69430a79a8",
+      "5686aea16e"
+    ],
+    "bge-reranker-base_latency_ms": 4306.8
+  },
+  {
+    "query": "jupyter notebook out of memory with ground-truth set",
+    "topic": "llm-zoomcamp",
+    "expected_id": "b8f2d6a30c",
+    "retrieval_latency_ms": 13.2,
+    "bge-reranker-base_top_ids": [
+      "b8f2d6a30c",
+      "92eac8d507",
+      "0d6dc0d041",
+      "bc8bd71f9c",
+      "afdcab5249",
+      "e00253e2df",
+      "d9072c7279",
+      "307139bab1",
+      "4d5aa45b03",
+      "4693802714"
+    ],
+    "bge-reranker-base_latency_ms": 4179.7
+  },
+  {
+    "query": "kernel crashes when loading embedding model in jupyter",
+    "topic": "llm-zoomcamp",
+    "expected_id": "b8f2d6a30c",
+    "retrieval_latency_ms": 9.5,
+    "bge-reranker-base_top_ids": [
+      "b8f2d6a30c",
+      "b27e47d7ca",
+      "92ff36d48e",
+      "108295493e",
+      "7915e5968b",
+      "fb9846ce91",
+      "af3774c8e2",
+      "ace84c3970",
+      "164b0e749d",
+      "f5e5120ecb"
+    ],
+    "bge-reranker-base_latency_ms": 4388.9
+  },
+  {
+    "query": "jupyter kernel keeps crashing when loading ground-truth set",
+    "topic": "llm-zoomcamp",
+    "expected_id": "b8f2d6a30c",
+    "retrieval_latency_ms": 8.5,
+    "bge-reranker-base_top_ids": [
+      "b8f2d6a30c",
+      "b27e47d7ca",
+      "108295493e",
+      "fb9846ce91",
+      "92ff36d48e",
+      "d9072c7279",
+      "5686aea16e",
+      "4e51151a36",
+      "307139bab1",
+      "7915e5968b"
+    ],
+    "bge-reranker-base_latency_ms": 4214.7
+  },
+  {
+    "query": "why does my jupyter notebook run out of memory when embedding a dataset",
+    "topic": "llm-zoomcamp",
+    "expected_id": "b8f2d6a30c",
+    "retrieval_latency_ms": 10.5,
+    "bge-reranker-base_top_ids": [
+      "b8f2d6a30c",
+      "92eac8d507",
+      "e00253e2df",
+      "307139bab1",
+      "bc8bd71f9c",
+      "afdcab5249",
+      "7f18a34896",
+      "0d6dc0d041",
+      "95feb4e75b",
+      "0a4f9065b1"
+    ],
+    "bge-reranker-base_latency_ms": 4226.6
+  },
+  {
+    "query": "embedding model causes jupyter kernel to crash",
+    "topic": "llm-zoomcamp",
+    "expected_id": "b8f2d6a30c",
+    "retrieval_latency_ms": 6.5,
+    "bge-reranker-base_top_ids": [
+      "b8f2d6a30c",
+      "b27e47d7ca",
+      "92ff36d48e",
+      "108295493e",
+      "57e17a3e5f",
+      "fb9846ce91",
+      "af3774c8e2",
+      "2d0e38492f",
+      "69430a79a8",
+      "7915e5968b"
+    ],
+    "bge-reranker-base_latency_ms": 4308.7
+  },
+  {
+    "query": "jupyter is too heavy for my computer",
+    "topic": "llm-zoomcamp",
+    "expected_id": "b8f2d6a30c",
+    "retrieval_latency_ms": 11.2,
+    "bge-reranker-base_top_ids": [
+      "5ff9126a13",
+      "4d5aa45b03",
+      "47d9cd9aca",
+      "c5b67c62c1",
+      "307139bab1",
+      "fb9846ce91",
+      "cd806dd7d0",
+      "1b29ba4c54",
+      "00b076410d",
+      "c2f39b0ef3"
+    ],
+    "bge-reranker-base_latency_ms": 4254.5
+  },
+  {
+    "query": "kernel crashes when i try to embed the truth",
+    "topic": "llm-zoomcamp",
+    "expected_id": "b8f2d6a30c",
+    "retrieval_latency_ms": 9.3,
+    "bge-reranker-base_top_ids": [
+      "b8f2d6a30c",
+      "92ff36d48e",
+      "108295493e",
+      "b27e47d7ca",
+      "930f795453",
+      "eaae17dfea",
+      "c1095e75a3",
+      "fb9846ce91",
+      "b577c9ba98",
+      "bc8bd71f9c"
+    ],
+    "bge-reranker-base_latency_ms": 3989.2
+  },
+  {
+    "query": "small computers can't handle jupyter notebooks",
+    "topic": "llm-zoomcamp",
+    "expected_id": "b8f2d6a30c",
+    "retrieval_latency_ms": 6.3,
+    "bge-reranker-base_top_ids": [
+      "5ff9126a13",
+      "4d5aa45b03",
+      "1b29ba4c54",
+      "c5b67c62c1",
+      "9610a0de1d",
+      "fb9846ce91",
+      "05dc43cda8",
+      "9db5014252",
+      "35d7874a8d",
+      "36182df492"
+    ],
+    "bge-reranker-base_latency_ms": 3984.9
+  },
+  {
+    "query": "Other packages needed but not listed",
+    "topic": "data-engineering-zoomcamp",
+    "expected_id": "ee564fdf82",
+    "retrieval_latency_ms": 10.4,
+    "bge-reranker-base_top_ids": [
+      "ee564fdf82",
+      "1695e67099",
+      "b75fa5280e",
+      "122d2b0aed",
+      "ef6fba8f4d",
+      "edf4b7b73e",
+      "f9c9e0b9eb",
+      "1b08427cd4",
+      "dcdd7eda4d",
+      "4b30b918bc"
+    ],
+    "bge-reranker-base_latency_ms": 4149.3
+  },
+  {
+    "query": "required packages for jupyter notebook",
+    "topic": "data-engineering-zoomcamp",
+    "expected_id": "ee564fdf82",
+    "retrieval_latency_ms": 7.0,
+    "bge-reranker-base_top_ids": [
+      "4d5aa45b03",
+      "c5b67c62c1",
+      "ee564fdf82",
+      "122d2b0aed",
+      "6aa17f1eab",
+      "35d7874a8d",
+      "5ff9126a13",
+      "b75fa5280e",
+      "1b29ba4c54",
+      "9db5014252"
+    ],
+    "bge-reranker-base_latency_ms": 4085.5
+  },
+  {
+    "query": "packages needed for starter jupyter notebook",
+    "topic": "data-engineering-zoomcamp",
+    "expected_id": "ee564fdf82",
+    "retrieval_latency_ms": 7.0,
+    "bge-reranker-base_top_ids": [
+      "4d5aa45b03",
+      "c5b67c62c1",
+      "1b29ba4c54",
+      "ee564fdf82",
+      "122d2b0aed",
+      "5ff9126a13",
+      "6aa17f1eab",
+      "47d9cd9aca",
+      "b75fa5280e",
+      "35d7874a8d"
+    ],
+    "bge-reranker-base_latency_ms": 4096.4
+  },
+  {
+    "query": "installing dependencies for jupyter notebook",
+    "topic": "data-engineering-zoomcamp",
+    "expected_id": "ee564fdf82",
+    "retrieval_latency_ms": 6.4,
+    "bge-reranker-base_top_ids": [
+      "122d2b0aed",
+      "5ff9126a13",
+      "c5b67c62c1",
+      "1695e67099",
+      "35d7874a8d",
+      "9db5014252",
+      "b75fa5280e",
+      "2763850d3e",
+      "6aa17f1eab",
+      "1b29ba4c54"
+    ],
+    "bge-reranker-base_latency_ms": 4374.9
+  },
+  {
+    "query": "starter jupyter notebook won't run due to missing packages",
+    "topic": "data-engineering-zoomcamp",
+    "expected_id": "ee564fdf82",
+    "retrieval_latency_ms": 5.7,
+    "bge-reranker-base_top_ids": [
+      "5ff9126a13",
+      "1695e67099",
+      "1b29ba4c54",
+      "c5b67c62c1",
+      "122d2b0aed",
+      "6aa17f1eab",
+      "e525587d40",
+      "b75fa5280e",
+      "c29959db3a",
+      "35d7874a8d"
+    ],
+    "bge-reranker-base_latency_ms": 4174.9
+  },
+  {
+    "query": "what dependencies are needed to run the teacher's jupyter notebook",
+    "topic": "data-engineering-zoomcamp",
+    "expected_id": "ee564fdf82",
+    "retrieval_latency_ms": 7.3,
+    "bge-reranker-base_top_ids": [
+      "122d2b0aed",
+      "5ff9126a13",
+      "6aa17f1eab",
+      "4d5aa45b03",
+      "c5b67c62c1",
+      "1695e67099",
+      "2763850d3e",
+      "b6d8547280",
+      "35d7874a8d",
+      "1b29ba4c54"
+    ],
+    "bge-reranker-base_latency_ms": 4394.6
+  },
+  {
+    "query": "jupyter notebook errors due to missing packages",
+    "topic": "data-engineering-zoomcamp",
+    "expected_id": "ee564fdf82",
+    "retrieval_latency_ms": 8.7,
+    "bge-reranker-base_top_ids": [
+      "1695e67099",
+      "ebd339f9a5",
+      "5ff9126a13",
+      "c5b67c62c1",
+      "af3774c8e2",
+      "ee564fdf82",
+      "7064ef8f01",
+      "35d7874a8d",
+      "b75fa5280e",
+      "9610a0de1d"
+    ],
+    "bge-reranker-base_latency_ms": 3987.3
+  },
+  {
+    "query": "i need more stuff to make the notebook work",
+    "topic": "data-engineering-zoomcamp",
+    "expected_id": "ee564fdf82",
+    "retrieval_latency_ms": 9.5,
+    "bge-reranker-base_top_ids": [
+      "4d5aa45b03",
+      "d7abe28e77",
+      "afdcab5249",
+      "ee564fdf82",
+      "a83f047f52",
+      "ab183bd688",
+      "6aa17f1eab",
+      "edf4b7b73e",
+      "fa77367725",
+      "35d7874a8d"
+    ],
+    "bge-reranker-base_latency_ms": 4119.7
+  },
+  {
+    "query": "starter notebook needs extra packages to run",
+    "topic": "data-engineering-zoomcamp",
+    "expected_id": "ee564fdf82",
+    "retrieval_latency_ms": 7.2,
+    "bge-reranker-base_top_ids": [
+      "ee564fdf82",
+      "122d2b0aed",
+      "b75fa5280e",
+      "6aa17f1eab",
+      "1695e67099",
+      "1b29ba4c54",
+      "edf4b7b73e",
+      "4d5aa45b03",
+      "29469cf158",
+      "e525587d40"
+    ],
+    "bge-reranker-base_latency_ms": 4060.0
+  },
+  {
+    "query": "what dependencies do i need for the starter notebook",
+    "topic": "data-engineering-zoomcamp",
+    "expected_id": "ee564fdf82",
+    "retrieval_latency_ms": 5.9,
+    "bge-reranker-base_top_ids": [
+      "122d2b0aed",
+      "1695e67099",
+      "6aa17f1eab",
+      "2763850d3e",
+      "29e58c5c37",
+      "edf4b7b73e",
+      "4d5aa45b03",
+      "b75fa5280e",
+      "b6d8547280",
+      "35d7874a8d"
+    ],
+    "bge-reranker-base_latency_ms": 3945.3
+  }
+]

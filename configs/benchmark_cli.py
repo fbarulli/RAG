@@ -120,6 +120,7 @@ def create_base_parser(
     _add_model_args(parser)
     _add_tuning_args(parser)
     _add_flag_args(parser)
+    parser.add_argument("--sample-size", type=int, default=0, help="Number of queries to sample. 0 runs the full dataset.")
     return parser
 
 
@@ -139,24 +140,29 @@ def create_ingestion_parser() -> argparse.ArgumentParser:
         help="Ingest only this model (must match 'name' in models.json). "
              "Overrides --models.",
     )
+    parser.add_argument("--sample-size", type=int, default=0, help="Number of queries to sample. 0 runs the full dataset.")
     return parser
 
 
 def create_benchmark_parser() -> argparse.ArgumentParser:
     """
-    Parser for ``p03_benchmark.py`` (single-model benchmark).
+    Parser for ``p03_benchmark.py`` (benchmarks models).
 
-    ``--model`` is required here because the single-model script always
-    needs a target.
+    If ``--model`` is omitted, the script runs all models found in the config.
     """
     parser = create_base_parser(
-        description="Run the retrieval benchmark for a single embedding model."
+        description="Run the retrieval benchmark for embedding/reranker models."
     )
     parser.add_argument(
-        "--model", type=str, required=True,
-        help="Model to benchmark (must match 'name' in models.json).",
+        "--model", 
+        type=str, 
+        required=False,  
+        default=None,    
+        help="Model to benchmark (matches 'name' in models.json). Omitting this runs all models.",
     )
+    parser.add_argument("--sample-size", type=int, default=0, help="Number of queries to sample. 0 runs the full dataset.")
     return parser
+
 
 
 def create_multi_benchmark_parser() -> argparse.ArgumentParser:
@@ -218,4 +224,5 @@ def create_generation_parser() -> argparse.ArgumentParser:
         help="Override max tokens (otherwise per-prompt-style)",
     )
     
+    parser.add_argument("--sample-size", type=int, default=0, help="Number of queries to sample. 0 runs the full dataset.")
     return parser

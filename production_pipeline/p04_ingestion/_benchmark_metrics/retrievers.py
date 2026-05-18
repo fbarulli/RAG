@@ -10,7 +10,7 @@ from typing import Optional, TYPE_CHECKING
 from qdrant_client.models import Filter, FieldCondition, MatchValue, SearchParams
 
 from .._benchmark_types import SearchResult
-
+from .._benchmark_reranker import evaluate_with_reranker
 if TYPE_CHECKING:
     from elasticsearch import Elasticsearch
 
@@ -270,12 +270,80 @@ def run_entity_boosted_retrieval(
     hit_ids = tuple(p.payload.get("es_id", "") for p in points)
     hit_courses = tuple(p.payload.get("course", "") for p in points)
     hit_scores = tuple(float(p.score) if p.score is not None else 0.0 for p in points)
+    hit_answers = tuple(p.payload.get("answer", "") for p in points)
     top_answer = points[0].payload.get("answer") if points else None
 
     return SearchResult(
         hit_ids=hit_ids,
         hit_scores=hit_scores,
         hit_courses=hit_courses,
+        hit_answers=hit_answers,  
         top_answer=top_answer,
         latency_ms=latency_ms,
+    )
+def run_vector_retrieval_with_reranker(
+    client,
+    collection: str,
+    query_vector: list,
+    query_text: str,
+    course_filter: str,
+    config: dict,
+    top_k: int,
+    reranker_name: Optional[str] = None,
+) -> SearchResult:
+    """
+    Vector retrieval + Reranking
+    """
+    import time
+
+    start_total = time.perf_counter()
+
+    fetch_k = max(top_k * 3, 30)
+
+    initial_result = run_vector_retrieval(
+        client=client,
+        collection=collection,
+        query_vector=query_vector,
+        course_filter=course_filter,
+        config=config,
+        top_k=fetch_k
+    )
+
+    # Prepare candidates
+    candidates = []
+    for i, doc_id in enumerate(initial_result.hit_ids):
+        candidates.append({
+            "es_id": doc_id,
+            "payload": {
+                "es_id": doc_id,
+                "question": "",
+                "answer": initial_result.hit_answers[i] if hasattr(initial_result, 'hit_answers') else ""
+            }
+        })
+
+    # Rerank
+    reranked_ids, metrics = evaluate_with_reranker(
+        query=query_text,
+        retrieved_candidates=candidates,
+        reranker_name=reranker_name,
+        top_k=top_k
+    )
+
+    # Rebuild result
+    id_to_score = dict(zip(initial_result.hit_ids, initial_result.hit_scores))
+    id_to_answer = dict(zip(initial_result.hit_ids, getattr(initial_result, 'hit_answers', [])))
+
+    final_hit_ids = tuple(reranked_ids)
+    final_scores = tuple(id_to_score.get(doc_id, 0.0) for doc_id in final_hit_ids)
+    final_answers = tuple(id_to_answer.get(doc_id, "") for doc_id in final_hit_ids)
+
+    total_latency_ms = (time.perf_counter() - start_total) * 1000
+
+    return SearchResult(
+        hit_ids=final_hit_ids,
+        hit_scores=final_scores,
+        hit_courses=initial_result.hit_courses[:len(final_hit_ids)],
+        top_answer=final_answers[0] if final_answers else None,
+        latency_ms=total_latency_ms,
+        hit_answers=final_answers
     )

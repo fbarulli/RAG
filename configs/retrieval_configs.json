@@ -4,11 +4,28 @@
     "search_type": "vector",
     "use_vector": true
   },
+  "vector_default_with_reranking": {
+    "name": "Vector Default + Reranking",
+    "search_type": "vector",
+    "use_vector": true,
+    "reranker": true,
+    "reranker_name": "bge-reranker-base",
+    "top_k": 10
+  },
   "vector_with_threshold": {
     "name": "Vector With Threshold",
     "search_type": "vector",
     "use_vector": true,
     "score_threshold": 0.75
+  },
+  "vector_with_threshold_with_reranking": {
+    "name": "Vector With Threshold + Reranking",
+    "search_type": "vector",
+    "use_vector": true,
+    "score_threshold": 0.75,
+    "reranker": true,
+    "reranker_name": "bge-reranker-base",
+    "top_k": 10
   },
   "bm25_default": {
     "name": "BM25 Default",
@@ -16,17 +33,44 @@
     "boost_question": 20.0,
     "boost_text": 1.0
   },
+  "bm25_default_with_reranking": {
+    "name": "BM25 Default + Reranking",
+    "search_type": "bm25",
+    "boost_question": 20.0,
+    "boost_text": 1.0,
+    "reranker": true,
+    "reranker_name": "bge-reranker-base",
+    "top_k": 10
+  },
   "bm25_balanced": {
     "name": "BM25 Balanced",
     "search_type": "bm25",
     "boost_question": 5.0,
     "boost_text": 5.0
   },
+  "bm25_balanced_with_reranking": {
+    "name": "BM25 Balanced + Reranking",
+    "search_type": "bm25",
+    "boost_question": 5.0,
+    "boost_text": 5.0,
+    "reranker": true,
+    "reranker_name": "bge-reranker-base",
+    "top_k": 10
+  },
   "bm25_question_only": {
     "name": "BM25 Question Only",
     "search_type": "bm25",
     "boost_question": 1.0,
     "boost_text": 0.0
+  },
+  "bm25_question_only_with_reranking": {
+    "name": "BM25 Question Only + Reranking",
+    "search_type": "bm25",
+    "boost_question": 1.0,
+    "boost_text": 0.0,
+    "reranker": true,
+    "reranker_name": "bge-reranker-base",
+    "top_k": 10
   },
   "hybrid_rrf": {
     "name": "Hybrid RRF",
@@ -35,6 +79,16 @@
     "boost_text": 5.0,
     "rrf_k": 60
   },
+  "hybrid_rrf_with_reranking": {
+    "name": "Hybrid RRF + Reranking",
+    "search_type": "hybrid_rrf",
+    "boost_question": 5.0,
+    "boost_text": 5.0,
+    "rrf_k": 60,
+    "reranker": true,
+    "reranker_name": "bge-reranker-base",
+    "top_k": 10
+  },
   "entity_boosted": {
     "name": "Entity Boosted",
     "search_type": "entity_boosted",
@@ -42,11 +96,42 @@
     "boost_question": 5.0,
     "boost_text": 5.0
   },
+  "entity_boosted_with_reranking": {
+    "name": "Entity Boosted + Reranking",
+    "search_type": "entity_boosted",
+    "rrf_k": 60,
+    "boost_question": 5.0,
+    "boost_text": 5.0,
+    "reranker": true,
+    "reranker_name": "bge-reranker-base",
+    "top_k": 10
+  },
   "hybrid_balanced": {
-  "search_type": "hybrid_rrf",
-  "rrf_k": 60,
-  "vector_weight": 0.7,
-  "bm25_weight": 0.3,
-  "description": "Weighted hybrid favoring vector search"
-}
+    "name": "Hybrid Balanced",
+    "search_type": "hybrid_rrf",
+    "rrf_k": 60,
+    "vector_weight": 0.7,
+    "bm25_weight": 0.3,
+    "description": "Weighted hybrid favoring vector search"
+  },
+  "hybrid_balanced_with_reranking": {
+    "name": "Hybrid Balanced + Reranking",
+    "search_type": "hybrid_rrf",
+    "rrf_k": 60,
+    "vector_weight": 0.7,
+    "bm25_weight": 0.3,
+    "reranker": true,
+    "reranker_name": "bge-reranker-base",
+    "top_k": 10,
+    "description": "Weighted hybrid followed by reranking"
+  },
+  "vector_with_reranking": {
+    "name": "Vector + Reranking",
+    "search_type": "vector",
+    "use_vector": true,
+    "reranker": true,
+    "reranker_name": "bge-reranker-base",
+    "top_k": 10,
+    "description": "Vector retrieval followed by reranking"
+  }
 }

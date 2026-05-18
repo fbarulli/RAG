@@ -10,6 +10,7 @@ from .core import check_code_integrity
 from .retrievers import (
     run_es_retrieval,
     run_vector_retrieval,
+    run_vector_retrieval_with_reranker,
     run_hybrid_rrf_retrieval,
     run_entity_boosted_retrieval,
 )
@@ -99,12 +100,25 @@ def evaluate_config(
                 ner_category=ner_category,
                 ner_primary_entity=ner_primary_entity,
             )
-        else:
-            search_result = run_vector_retrieval(
-                client=client, collection=collection,
-                query_vector=query_vector, course_filter=course,
-                config=config, top_k=top_k,
-            )
+        else:  # vector search
+            if config.get("reranker", False):
+                reranker_name = config.get("reranker_name")
+                search_result = run_vector_retrieval_with_reranker(
+                    client=client,
+                    collection=collection,
+                    query_vector=query_vector,
+                    query_text=query,
+                    course_filter=course,
+                    config=config,
+                    top_k=top_k,
+                    reranker_name=reranker_name,
+                )
+            else:
+                search_result = run_vector_retrieval(
+                    client=client, collection=collection,
+                    query_vector=query_vector, course_filter=course,
+                    config=config, top_k=top_k,
+                )
 
         results.append(QueryResult(
             query_id=test["query_id"],
