@@ -1,5 +1,5 @@
 """
-_benchmark_types.py
+production_pipeline/p04_ingestion/_benchmark_types.py
 ===================
 Shared data classes for the retrieval benchmark pipeline.
 
@@ -20,6 +20,8 @@ class SearchResult:
     hit_courses: tuple[str, ...]
     top_answer: Optional[str]
     latency_ms: float
+    hit_answers: tuple[str, ...]
+    reranker_latency_ms: float = 0.0
 
 
 @dataclass(frozen=True)
@@ -38,6 +40,7 @@ class QueryResult:
     code_integrity_retrieved: Optional[float] = None
     query_type: str = "unknown"
     hit_courses: Optional[tuple[str, ...]] = None
+    reranker_latency_ms: Optional[float] = None
 
 
 @dataclass(frozen=True)

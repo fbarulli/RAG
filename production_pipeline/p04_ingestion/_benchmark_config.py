@@ -1,5 +1,5 @@
 """
-_benchmark_config.py
+production_pipeline/p04_ingestion/_benchmark_config.py
 ===================
 Centralized configuration dataclass for all benchmark scripts.
 

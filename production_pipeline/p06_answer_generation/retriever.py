@@ -1,9 +1,10 @@
-"""Document retrieval for answer generation."""
-
+"""
+production_pipeline/p06_answer_generation/retriever.py
+Document retrieval and reranking for answer generation.
+"""
 from typing import Optional
 from qdrant_client import QdrantClient
 from rag_pipeline.logging import get_logger
-from rag_pipeline.paths import Paths
 
 logger = get_logger(__name__)
 
@@ -17,19 +18,32 @@ def collection_name_for_model(model_name: str) -> str:
     return f"faqs_{short}"
 
 
+def _clean_answer(text: str) -> str:
+    """Remove common introductory phrases."""
+    import re
+    text = re.sub(r'^To resolve this issue:\s*\n?', '', text)
+    text = re.sub(r'^To fix this:\s*\n?', '', text)
+    text = re.sub(r'^Solution:\s*\n?', '', text)
+    return text.strip()
+
+
 class ContextRetriever:
-    """Retrieve relevant documents from Qdrant for answer generation."""
+    """Retrieve and optionally rerank documents from Qdrant for answer generation."""
 
     def __init__(
         self,
         host: str = "localhost",
         port: int = 6333,
         model_name: str = "BAAI/bge-base-en-v1.5",
+        reranker_model: str = "cross-encoder/ms-marco-MiniLM-L-6-v2",
     ):
         self.client = QdrantClient(host=host, port=port)
         self.model_name = model_name
+        self.reranker_model = reranker_model
         self._collection: Optional[str] = None
-        self._answer_map: Optional[dict[str, str]] = None
+        # Stores {doc_id: {"answer": ..., "question": ...}} — question needed for reranking
+        self._payload_map: Optional[dict[str, dict]] = None
+        self._reranker = None  # lazy-loaded
 
     @property
     def collection(self) -> str:
@@ -37,13 +51,18 @@ class ContextRetriever:
             self._collection = collection_name_for_model(self.model_name)
         return self._collection
 
-    def _load_answer_map(self) -> dict[str, str]:
-        """Load all answers from Qdrant into memory."""
-        if self._answer_map is not None:
-            return self._answer_map
+    def _load_payload_map(self) -> dict[str, dict]:
+        """
+        Load answer + question for all docs from Qdrant into memory.
 
-        logger.info(f"Loading answer map from {self.collection}...")
-        answer_map: dict[str, str] = {}
+        Extends the old _answer_map to also cache 'question', which the
+        cross-encoder needs to score (query, question + answer) pairs.
+        """
+        if self._payload_map is not None:
+            return self._payload_map
+
+        logger.info(f"Loading payload map from {self.collection}...")
+        payload_map: dict[str, dict] = {}
         offset = None
 
         try:
@@ -57,19 +76,76 @@ class ContextRetriever:
                 )
                 for point in points:
                     es_id = point.payload.get("es_id", "")
-                    answer = point.payload.get("answer", "")
                     if es_id:
-                        answer_map[es_id] = answer
-
+                        payload_map[es_id] = {
+                            "answer": point.payload.get("answer", ""),
+                            "question": point.payload.get("question", ""),
+                        }
                 if offset is None:
                     break
         except Exception as e:
-            logger.error(f"Failed to load answer map from {self.collection}: {e}")
+            logger.error(f"Failed to load payload map from {self.collection}: {e}")
             raise
 
-        logger.info(f"Loaded {len(answer_map)} answers from {self.collection}")
-        self._answer_map = answer_map
-        return answer_map
+        logger.info(f"Loaded {len(payload_map)} documents from {self.collection}")
+        self._payload_map = payload_map
+        return payload_map
+
+    def _get_reranker(self):
+        """Lazy-load cross-encoder reranker."""
+        if self._reranker is None:
+            from sentence_transformers import CrossEncoder
+            logger.info(f"Loading reranker: {self.reranker_model}")
+            self._reranker = CrossEncoder(self.reranker_model)
+        return self._reranker
+
+    def rerank(self, query: str, doc_ids: list[str], top_k: int) -> list[str]:
+        """
+        Rerank doc_ids by cross-encoder score against the query.
+
+        Scores (query, question + answer) pairs — combining both fields
+        gives the cross-encoder more signal than answer alone, since FAQ
+        questions often contain the key entity/error name.
+
+        Args:
+            query: The user query
+            doc_ids: Candidate doc IDs from first-stage retrieval
+            top_k: How many to return after reranking
+
+        Returns:
+            Reranked doc IDs, best first, sliced to top_k
+        """
+        if not doc_ids:
+            return []
+
+        payload_map = self._load_payload_map()
+        reranker = self._get_reranker()
+
+        pairs = []
+        valid_ids = []
+        for doc_id in doc_ids:
+            payload = payload_map.get(doc_id)
+            if not payload:
+                logger.warning(f"No payload found for doc {doc_id} during reranking")
+                continue
+            # Prepend question so the cross-encoder sees the FAQ framing,
+            # not just the answer body
+            doc_text = f"{payload['question']}\n{payload['answer']}"
+            pairs.append([query, doc_text])
+            valid_ids.append(doc_id)
+
+        if not pairs:
+            return doc_ids[:top_k]
+
+        scores = reranker.predict(pairs)
+        ranked = sorted(zip(valid_ids, scores), key=lambda x: x[1], reverse=True)
+
+        reranked_ids = [doc_id for doc_id, _ in ranked[:top_k]]
+        logger.debug(
+            f"Reranked {len(valid_ids)} docs → top {top_k}: "
+            + ", ".join(f"{d}({s:.3f})" for d, s in ranked[:top_k])
+        )
+        return reranked_ids
 
     def get_context(
         self,
@@ -77,35 +153,24 @@ class ContextRetriever:
         max_chars_per_doc: int = _DEFAULT_MAX_CHARS_PER_DOC,
         max_context_chars: int = _DEFAULT_MAX_CONTEXT_CHARS,
     ) -> str:
-        """
-        Retrieve full answers for document IDs and combine as context.
-        """
-        answer_map = self._load_answer_map()
+        """Retrieve full answers for document IDs and combine as context."""
+        payload_map = self._load_payload_map()
         contexts = []
         total_chars = 0
 
         for doc_id in doc_ids:
-            answer = answer_map.get(doc_id, "")
-            if not answer:
+            payload = payload_map.get(doc_id)
+            if not payload:
                 logger.warning(f"No answer found for document {doc_id}")
                 continue
 
-            # ADD THIS CLEANING FUNCTION HERE
-            def clean_answer(text: str) -> str:
-                """Remove common introductory phrases."""
-                import re
-                text = re.sub(r'^To resolve this issue:\s*\n?', '', text)
-                text = re.sub(r'^To fix this:\s*\n?', '', text)
-                text = re.sub(r'^Solution:\s*\n?', '', text)
-                return text.strip()
-            
-            answer = clean_answer(answer)  # <-- APPLY CLEANING HERE
+            answer = _clean_answer(payload["answer"])
 
             if len(answer) > max_chars_per_doc:
                 answer = answer[:max_chars_per_doc].rsplit(" ", 1)[0] + "..."
 
             if total_chars + len(answer) > max_context_chars:
-                logger.debug(f"Context limit reached at {total_chars} chars, skipping remaining docs")
+                logger.debug(f"Context limit reached at {total_chars} chars")
                 break
 
             contexts.append(answer)

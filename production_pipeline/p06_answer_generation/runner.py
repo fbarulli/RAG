@@ -1,4 +1,17 @@
-"""Orchestrate answer generation and evaluation pipeline."""
+"""
+production_pipeline/p06_answer_generation/runner.py
+
+Orchestrate answer generation and evaluation pipeline.
+
+Changes vs previous version:
+- generate_single: accepts rerank=True to rerank retrieved IDs before
+  context assembly. Reranking runs inside ContextRetriever so no new
+  dependencies leak into runner.
+- run_generations: passes rerank flag through; retrieves at max top_k
+  then reranks per-combination (same cost as before at retrieval, one
+  cross-encoder pass per query×top_k slice).
+- run_pipeline: exposes rerank parameter, defaults True.
+"""
 
 import json
 from pathlib import Path
@@ -34,6 +47,7 @@ class PipelineResult:
     prompt_style: str
     top_k: int
     timestamp: str
+    reranked: bool = False
 
 
 # ---------------------------------------------------------------------------
@@ -71,17 +85,15 @@ class QueryRetriever:
 
     def __init__(self, model_name: str):
         self.model = SentenceTransformer(model_name)
-        
-        # Load Qdrant config from defaults.json
+
         import json
         defaults_path = Paths.base() / "configs" / "defaults.json"
         with open(defaults_path) as f:
             defaults = json.load(f)
-        
+
         qdrant_cfg = defaults.get("qdrant", {})
         host = qdrant_cfg.get("host", "localhost")
         port = qdrant_cfg.get("port", 6333)
-        print(f"DEBUG: Connecting to Qdrant at {host}:{port}")
         self.client = QdrantClient(host=host, port=port)
         short_name = model_name.split("/")[-1].replace("-", "_").replace(".", "_")
         self.collection = f"faqs_{short_name}"
@@ -114,14 +126,29 @@ def generate_single(
     generator: AnswerGenerator,
     evaluator: AnswerEvaluator,
     context_retriever: ContextRetriever,
+    rerank: bool = True,
 ) -> PipelineResult:
-    """Generate and evaluate a single answer."""
-    context_text = context_retriever.get_context(retrieved_ids)
+    """
+    Generate and evaluate a single answer.
+
+    If rerank=True, retrieved_ids are reranked by the cross-encoder before
+    context assembly. The cross-encoder scores (query, question+answer) pairs,
+    which is more precise than embedding similarity for short FAQ docs.
+    retrieved_ids should already be sliced to the desired top_k before calling
+    this function, unless reranking — in which case pass the full candidate set
+    and rerank() handles the slice.
+    """
+    if rerank and len(retrieved_ids) > 1:
+        final_ids = context_retriever.rerank(query, retrieved_ids, top_k)
+    else:
+        final_ids = retrieved_ids[:top_k]
+
+    context_text = context_retriever.get_context(final_ids)
 
     generation = generator.generate(
         query_id=query_id,
         query=query,
-        context_doc_ids=retrieved_ids,
+        context_doc_ids=final_ids,
         context_text=context_text,
         prompt_style=prompt_style,
     )
@@ -148,12 +175,13 @@ def generate_single(
         query_id=query_id,
         query=query,
         expected_id=expected_id,
-        retrieved_doc_ids=retrieved_ids,
+        retrieved_doc_ids=final_ids,
         generation=asdict(generation),
         evaluation=asdict(evaluation),
         prompt_style=prompt_style,
         top_k=top_k,
         timestamp=datetime.now().isoformat(),
+        reranked=rerank,
     )
 
 
@@ -165,8 +193,23 @@ def run_generations(
     evaluator: AnswerEvaluator,
     prompt_styles: list[str],
     top_k_values: list[int],
+    rerank: bool = True,
 ) -> list[PipelineResult]:
-    """Run generation for all query × style × top_k combinations."""
+    """
+    Run generation for all query × style × top_k combinations.
+
+    Retrieval strategy with reranking:
+    - First-stage: retrieve RERANK_POOL candidates (wider net)
+    - Per top_k combination: rerank the pool, slice to top_k
+    - Cost: one cross-encoder pass per query×top_k (fast, ~10ms on CPU)
+
+    Without reranking, behaviour is unchanged from before.
+    """
+    # Retrieve a wider pool when reranking so the cross-encoder has
+    # more candidates to promote. 10 is enough for typical FAQ corpora.
+    RERANK_POOL = 10
+    retrieve_k = RERANK_POOL if rerank else max(top_k_values)
+
     results = []
     total = len(test_queries) * len(prompt_styles) * len(top_k_values)
     idx = 0
@@ -177,8 +220,8 @@ def run_generations(
         expected_id = query_data["expected_id"]
         reference_answer = query_data["answer"]
 
-        # Retrieve once per query at max top_k, slice per combination
-        retrieved_ids = retriever.retrieve(query, max(top_k_values))
+        # One retrieval call per query at pool size
+        candidate_ids = retriever.retrieve(query, retrieve_k)
 
         for style in prompt_styles:
             for top_k in top_k_values:
@@ -190,12 +233,13 @@ def run_generations(
                     query=query,
                     expected_id=expected_id,
                     reference_answer=reference_answer,
-                    retrieved_ids=retrieved_ids[:top_k],
+                    retrieved_ids=candidate_ids,   # full pool; rerank() slices
                     prompt_style=style,
                     top_k=top_k,
                     generator=generator,
                     evaluator=evaluator,
                     context_retriever=context_retriever,
+                    rerank=rerank,
                 )
                 results.append(result)
 
@@ -265,7 +309,7 @@ def print_summary(
                 f"{total_tok:>{col_w}.0f}  {len(bucket):>5}"
             )
 
-        print()  # blank line between styles
+        print()
 
     print("=" * 110)
     print(f"🏆 Best combination: {best_label}  (avg judge score: {best_score:.3f})")
@@ -294,6 +338,7 @@ def run_pipeline(
     prompt_styles: Optional[list[str]] = None,
     top_k_values: Optional[list[int]] = None,
     limit: Optional[int] = None,
+    rerank: bool = True,
 ) -> None:
     """Run answer generation pipeline directly from test set."""
     retrieval_model = retrieval_model or "BAAI/bge-base-en-v1.5"
@@ -304,22 +349,18 @@ def run_pipeline(
     test_queries = load_test_queries(Paths.test_jsonl(), limit)
 
     retriever = QueryRetriever(model_name=retrieval_model)
-    
-    
-    
+
     defaults_path = Paths.base() / "configs" / "defaults.json"
     with open(defaults_path) as f:
         defaults = json.load(f)
-    
+
     qdrant_cfg = defaults.get("qdrant", {})
-    qdrant_host = qdrant_cfg.get("host", "localhost")
-    qdrant_port = qdrant_cfg.get("port", 6333)
-    
     context_retriever = ContextRetriever(
-        host=qdrant_host,
-        port=qdrant_port,
+        host=qdrant_cfg.get("host", "localhost"),
+        port=qdrant_cfg.get("port", 6333),
         model_name=retrieval_model,
     )
+
     config = GenerationConfig(llm_model=llm_model)
     generator = AnswerGenerator.from_config(config)
     evaluator = AnswerEvaluator(llm_model=llm_model)
@@ -332,6 +373,7 @@ def run_pipeline(
         evaluator=evaluator,
         prompt_styles=prompt_styles,
         top_k_values=top_k_values,
+        rerank=rerank,
     )
 
     output_path = Paths.experiments_dir() / "generation_results.json"
@@ -354,6 +396,7 @@ def main():
         prompt_styles=args.styles,
         top_k_values=args.top_k_list,
         limit=args.limit,
+        rerank=getattr(args, "rerank", True),
     )
 
 
