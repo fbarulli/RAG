@@ -1,5 +1,5 @@
 """
-benchmark_cli.py
+configs/benchmark_cli.py
 ================
 Argparse parser factories for all benchmark and ingestion scripts.
 
@@ -169,3 +169,50 @@ def create_multi_benchmark_parser() -> argparse.ArgumentParser:
     return create_base_parser(
         description="Run the retrieval benchmark across all (or selected) embedding models."
     )
+
+def create_generation_parser() -> argparse.ArgumentParser:
+    """
+    Parser for ``p06_answer_generation.runner.py``.
+
+    Adds generation-specific arguments for prompt styles and top-k values.
+    """
+    parser = create_base_parser(
+        description="Run answer generation evaluation across prompt styles and top-k values."
+    )
+    
+    g = parser.add_argument_group("generation")
+    g.add_argument(
+        "--model", type=str, default=None,
+        help="Retrieval model to use for context (default: from config)",
+    )
+    g.add_argument(
+        "--retrieval-config", type=str, default=None,
+        help="Retrieval config name (for reference, not actually used in retrieval)",
+    )
+    g.add_argument(
+        "--llm-model", type=str, default=None,
+        help="LLM model for generation (default: nvidia_nim/meta/llama-3.1-70b-instruct)",
+    )
+    g.add_argument(
+        "--prompt-style", type=str, default=None,
+        help="Single prompt style to use (default: strict)",
+    )
+    g.add_argument(
+        "--styles", type=str, nargs="+", default=None,
+        help="List of prompt styles to test, e.g. --styles strict relaxed minimal",
+    )
+    # DON'T add --top-k here - it's already in the base parser via _add_tuning_args()
+    g.add_argument(
+        "--limit", type=int, default=None,
+        help="Limit number of test queries for quick testing",
+    )
+    g.add_argument(
+        "--temperature", type=float, default=None,
+        help="Override temperature (otherwise per-prompt-style)",
+    )
+    g.add_argument(
+        "--max-tokens", type=int, default=None,
+        help="Override max tokens (otherwise per-prompt-style)",
+    )
+    
+    return parser

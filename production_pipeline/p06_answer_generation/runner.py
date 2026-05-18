@@ -1,15 +1,20 @@
 """Orchestrate answer generation and evaluation pipeline."""
 
 import json
+from pathlib import Path
 from typing import Optional
 from dataclasses import dataclass, asdict
 from datetime import datetime
+
+from tqdm import tqdm
+from sentence_transformers import SentenceTransformer
+from qdrant_client import QdrantClient
 
 from rag_pipeline.logging import get_logger
 from rag_pipeline.paths import Paths
 from .config import GenerationConfig, PromptStyle, PROMPT_CONFIGS
 from .retriever import ContextRetriever
-from .generator import AnswerGenerator, GeneratedAnswer
+from .generator import AnswerGenerator
 from .evaluator import AnswerEvaluator, EvaluationResult
 
 logger = get_logger(__name__)
@@ -24,176 +29,189 @@ class PipelineResult:
     query: str
     expected_id: str
     retrieved_doc_ids: list[str]
-    generation: GeneratedAnswer
-    evaluation: EvaluationResult
+    generation: dict
+    evaluation: dict
     prompt_style: str
     top_k: int
     timestamp: str
 
 
-class AnswerGenerationPipeline:
-    """Orchestrate the full answer generation and evaluation pipeline."""
+# ---------------------------------------------------------------------------
+# Test set loader
+# ---------------------------------------------------------------------------
 
-    def __init__(self, config: Optional[GenerationConfig] = None):
-        self.config = config or GenerationConfig()
-
-        self.retriever = ContextRetriever(
-            host=self.config.qdrant_host,
-            port=self.config.qdrant_port,
-            model_name=self.config.retrieval_model,
-        )
-        self.generator = AnswerGenerator.from_config(self.config)
-        self.evaluator = AnswerEvaluator(llm_model=self.config.llm_model)
-
-    def process_query(
-        self,
-        query_id: str,
-        query: str,
-        expected_id: str,
-        reference_answer: str,
-        prompt_style: PromptStyle,
-        top_k: int,
-        top_hit_ids: Optional[list[str]] = None,
-    ) -> PipelineResult:
-        """Process a single query through the full pipeline."""
-        if top_hit_ids is None:
-            logger.warning(f"No top_hit_ids provided for {query_id}, falling back to expected_id")
-            retrieved_doc_ids = [expected_id]
-        else:
-            retrieved_doc_ids = top_hit_ids[:top_k]
-
-        context_text = self.retriever.get_context(retrieved_doc_ids)
-
-        generation = self.generator.generate(
-            query_id=query_id,
-            query=query,
-            context_doc_ids=retrieved_doc_ids,
-            context_text=context_text,
-            prompt_style=prompt_style,
-        )
-
-        if generation.success:
-            evaluation = self.evaluator.evaluate(
-                query_id=query_id,
-                query=query,
-                generated_answer=generation.generated_answer,
-                reference_answer=reference_answer,
-            )
-        else:
-            evaluation = EvaluationResult(
-                query_id=query_id,
-                faithfulness=0.0,
-                factual_correctness=0.0,
-                latency_ms=0,
-                prompt_tokens=0,
-                completion_tokens=0,
-                error=generation.error,
-            )
-
-        return PipelineResult(
-            query_id=query_id,
-            query=query,
-            expected_id=expected_id,
-            retrieved_doc_ids=retrieved_doc_ids,
-            generation=generation,
-            evaluation=evaluation,
-            prompt_style=prompt_style,
-            top_k=top_k,
-            timestamp=datetime.now().isoformat(),
-        )
-
-
-def run_pipeline(
-    config: Optional[GenerationConfig] = None,
-    prompt_styles: Optional[list[PromptStyle]] = None,
-    top_k_values: Optional[list[int]] = None,
-    limit: Optional[int] = None,
-) -> None:
-    """
-    Run the answer generation pipeline on benchmark results.
-
-    Iterates over every combination of prompt_style × top_k, collecting
-    generation metrics (tokens, latency) and judge scores (faithfulness,
-    factual_correctness) for each combination.
-    """
-    config = config or GenerationConfig()
-    prompt_styles = prompt_styles or list(PROMPT_CONFIGS.keys())
-    top_k_values = top_k_values or TOP_K_VALUES
-
-    benchmark_results_path = Paths.benchmark_query_results()
-    test_set_path = Paths.test_jsonl()
-    output_path = Paths.experiments_dir() / "generation_results.json"
-
-    logger.info(f"Loading benchmark results from {benchmark_results_path}")
-    with open(benchmark_results_path) as f:
-        all_results = json.load(f)
-
-    target_results = [
-        r for r in all_results
-        if r.get("model") == config.retrieval_model and r.get("config") == config.retrieval_config
-    ]
-
-    if limit:
-        target_results = target_results[:limit]
-
-    combinations = len(prompt_styles) * len(top_k_values)
-    logger.info(
-        f"Processing {len(target_results)} queries × "
-        f"{len(prompt_styles)} styles × {len(top_k_values)} top_k values "
-        f"= {len(target_results) * combinations} total runs"
-    )
-
-    ref_answers: dict[str, str] = {}
+def load_test_queries(test_set_path: Path, limit: Optional[int] = None) -> list[dict]:
+    """Load test queries directly from test.jsonl."""
+    queries = []
     with open(test_set_path) as f:
         for line in f:
-            if line.strip():
-                doc = json.loads(line)
-                ref_answers[doc["id"]] = doc.get("answer", "")
+            if not line.strip():
+                continue
+            doc = json.loads(line)
+            queries.append({
+                "query_id": doc["id"],
+                "query_text": doc["question"],
+                "expected_id": doc.get("expected_id") or doc.get("expected_doc_id") or doc["id"],
+                "answer": doc.get("answer", ""),
+            })
 
-    pipeline = AnswerGenerationPipeline(config=config)
-    all_pipeline_results: list[PipelineResult] = []
+    if limit:
+        queries = queries[:limit]
 
-    total = len(target_results) * combinations
-    run = 0
+    logger.info(f"Loaded {len(queries)} test queries")
+    return queries
 
-    for i, result in enumerate(target_results):
-        query_id = result["query_id"]
-        query = result["query_text"]
-        expected_id = result["expected_id"]
-        top_hit_ids = result.get("top_hit_ids") or (
-            [result["top_hit_id"]] if result.get("top_hit_id") else []
+
+# ---------------------------------------------------------------------------
+# Retriever with embedding
+# ---------------------------------------------------------------------------
+
+class QueryRetriever:
+    """Retrieve documents for a query using embedding model."""
+
+    def __init__(self, model_name: str):
+        self.model = SentenceTransformer(model_name)
+        
+        # Load Qdrant config from defaults.json
+        import json
+        defaults_path = Paths.base() / "configs" / "defaults.json"
+        with open(defaults_path) as f:
+            defaults = json.load(f)
+        
+        qdrant_cfg = defaults.get("qdrant", {})
+        host = qdrant_cfg.get("host", "localhost")
+        port = qdrant_cfg.get("port", 6333)
+        
+        self.client = QdrantClient(host=host, port=port)
+        short_name = model_name.split("/")[-1].replace("-", "_").replace(".", "_")
+        self.collection = f"faqs_{short_name}"
+        logger.info(f"Retriever using collection: {self.collection}")
+
+    def retrieve(self, query: str, top_k: int) -> list[str]:
+        """Retrieve top_k document IDs for a query."""
+        vector = self.model.encode(query).tolist()
+        results = self.client.query_points(
+            collection_name=self.collection,
+            query=vector,
+            limit=top_k,
+            with_payload=True,
         )
-        reference_answer = ref_answers.get(query_id, "")
-        if not reference_answer:
-            logger.warning(f"No reference answer for {query_id}, evaluation scores unreliable")
+        return [hit.payload.get("es_id", "") for hit in results.points]
+
+
+# ---------------------------------------------------------------------------
+# Generation helpers
+# ---------------------------------------------------------------------------
+
+def generate_single(
+    query_id: str,
+    query: str,
+    expected_id: str,
+    reference_answer: str,
+    retrieved_ids: list[str],
+    prompt_style: str,
+    top_k: int,
+    generator: AnswerGenerator,
+    evaluator: AnswerEvaluator,
+    context_retriever: ContextRetriever,
+) -> PipelineResult:
+    """Generate and evaluate a single answer."""
+    context_text = context_retriever.get_context(retrieved_ids)
+
+    generation = generator.generate(
+        query_id=query_id,
+        query=query,
+        context_doc_ids=retrieved_ids,
+        context_text=context_text,
+        prompt_style=prompt_style,
+    )
+
+    if generation.success:
+        evaluation = evaluator.evaluate(
+            query_id=query_id,
+            query=query,
+            generated_answer=generation.generated_answer,
+            reference_answer=reference_answer,
+        )
+    else:
+        evaluation = EvaluationResult(
+            query_id=query_id,
+            faithfulness=0.0,
+            factual_correctness=0.0,
+            latency_ms=0,
+            prompt_tokens=0,
+            completion_tokens=0,
+            error=generation.error,
+        )
+
+    return PipelineResult(
+        query_id=query_id,
+        query=query,
+        expected_id=expected_id,
+        retrieved_doc_ids=retrieved_ids,
+        generation=asdict(generation),
+        evaluation=asdict(evaluation),
+        prompt_style=prompt_style,
+        top_k=top_k,
+        timestamp=datetime.now().isoformat(),
+    )
+
+
+def run_generations(
+    test_queries: list[dict],
+    retriever: QueryRetriever,
+    context_retriever: ContextRetriever,
+    generator: AnswerGenerator,
+    evaluator: AnswerEvaluator,
+    prompt_styles: list[str],
+    top_k_values: list[int],
+) -> list[PipelineResult]:
+    """Run generation for all query × style × top_k combinations."""
+    results = []
+    total = len(test_queries) * len(prompt_styles) * len(top_k_values)
+    idx = 0
+
+    for query_data in tqdm(test_queries, desc="Generating answers"):
+        query_id = query_data["query_id"]
+        query = query_data["query_text"]
+        expected_id = query_data["expected_id"]
+        reference_answer = query_data["answer"]
+
+        # Retrieve once per query at max top_k, slice per combination
+        retrieved_ids = retriever.retrieve(query, max(top_k_values))
 
         for style in prompt_styles:
             for top_k in top_k_values:
-                run += 1
-                logger.info(f"[{run}/{total}] {query_id} | style={style} top_k={top_k}")
-                all_pipeline_results.append(pipeline.process_query(
+                idx += 1
+                logger.debug(f"[{idx}/{total}] {query_id} | style={style} top_k={top_k}")
+
+                result = generate_single(
                     query_id=query_id,
                     query=query,
                     expected_id=expected_id,
                     reference_answer=reference_answer,
+                    retrieved_ids=retrieved_ids[:top_k],
                     prompt_style=style,
                     top_k=top_k,
-                    top_hit_ids=top_hit_ids,
-                ))
+                    generator=generator,
+                    evaluator=evaluator,
+                    context_retriever=context_retriever,
+                )
+                results.append(result)
 
+    logger.info(f"Generated {len(results)} results")
+    return results
+
+
+def save_results(results: list[PipelineResult], output_path: Path) -> None:
+    """Save results to JSON file."""
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w") as f:
-        json.dump([asdict(r) for r in all_pipeline_results], f, indent=2)
-
-    logger.info(f"Saved {len(all_pipeline_results)} results to {output_path}")
-    _print_summary(all_pipeline_results, prompt_styles, top_k_values)
+        json.dump([asdict(r) for r in results], f, indent=2)
+    logger.info(f"Saved {len(results)} results to {output_path}")
 
 
-def _avg(values: list[float]) -> float:
-    return sum(values) / len(values) if values else 0.0
-
-
-def _print_summary(
+def print_summary(
     results: list[PipelineResult],
     styles: list[str],
     top_k_values: list[int],
@@ -201,7 +219,6 @@ def _print_summary(
     """Print summary table broken down by prompt_style × top_k."""
     col_w = 10
 
-    # Header
     print("\n" + "=" * 110)
     print("ANSWER GENERATION SUMMARY")
     print("=" * 110)
@@ -214,34 +231,30 @@ def _print_summary(
     )
     print("-" * 110)
 
-    best_mrr = -1.0
+    best_score = -1.0
     best_label = ""
 
     for style in styles:
         for top_k in top_k_values:
-            bucket = [
-                r for r in results
-                if r.prompt_style == style and r.top_k == top_k
-            ]
+            bucket = [r for r in results if r.prompt_style == style and r.top_k == top_k]
             if not bucket:
                 continue
 
-            faithful   = _avg([r.evaluation.faithfulness for r in bucket])
-            factual    = _avg([r.evaluation.factual_correctness for r in bucket])
-            gen_lat    = _sorted_p50([r.generation.latency_ms for r in bucket])
-            judge_lat  = _sorted_p50([r.evaluation.latency_ms for r in bucket])
-            prompt_tok = _avg([r.generation.prompt_tokens for r in bucket])
-            comp_tok   = _avg([r.generation.completion_tokens for r in bucket])
+            faithful   = _avg([r.evaluation["faithfulness"] for r in bucket])
+            factual    = _avg([r.evaluation["factual_correctness"] for r in bucket])
+            gen_lat    = _p50([r.generation["latency_ms"] for r in bucket])
+            judge_lat  = _p50([r.evaluation["latency_ms"] for r in bucket])
+            prompt_tok = _avg([r.generation["prompt_tokens"] for r in bucket])
+            comp_tok   = _avg([r.generation["completion_tokens"] for r in bucket])
             total_tok  = _avg([
-                r.generation.prompt_tokens + r.generation.completion_tokens
+                r.generation["prompt_tokens"] + r.generation["completion_tokens"]
                 for r in bucket
             ])
 
-            # Combined score for winner detection
             combined = (faithful + factual) / 2
             label = f"{style}/top_k={top_k}"
-            if combined > best_mrr:
-                best_mrr = combined
+            if combined > best_score:
+                best_score = combined
                 best_label = label
 
             print(
@@ -252,16 +265,18 @@ def _print_summary(
                 f"{total_tok:>{col_w}.0f}  {len(bucket):>5}"
             )
 
-        # Blank line between styles for readability
-        print()
+        print()  # blank line between styles
 
     print("=" * 110)
-    print(f"🏆 Best combination: {best_label}  (avg judge score: {best_mrr:.3f})")
+    print(f"🏆 Best combination: {best_label}  (avg judge score: {best_score:.3f})")
     print("=" * 110)
 
 
-def _sorted_p50(values: list[float]) -> float:
-    """Return the median (p50) of a list of floats."""
+def _avg(values: list[float]) -> float:
+    return sum(values) / len(values) if values else 0.0
+
+
+def _p50(values: list[float]) -> float:
     if not values:
         return 0.0
     s = sorted(values)
@@ -269,31 +284,64 @@ def _sorted_p50(values: list[float]) -> float:
     return s[mid] if len(s) % 2 else (s[mid - 1] + s[mid]) / 2
 
 
-def main():
-    import argparse
+# ---------------------------------------------------------------------------
+# Main Pipeline
+# ---------------------------------------------------------------------------
 
-    parser = argparse.ArgumentParser(description="Answer Generation Pipeline")
-    parser.add_argument("--model", type=str, default=None)
-    parser.add_argument("--retrieval-config", type=str, default=None)
-    parser.add_argument("--prompt-style", type=str, default=None)
-    parser.add_argument("--limit", type=int, default=None)
-    parser.add_argument("--styles", type=str, nargs="+", default=None)
-    parser.add_argument(
-        "--top-k-values", type=int, nargs="+", default=None,
-        help="List of top_k values to evaluate, e.g. --top-k-values 1 3 5",
+def run_pipeline(
+    retrieval_model: Optional[str] = None,
+    llm_model: Optional[str] = None,
+    prompt_styles: Optional[list[str]] = None,
+    top_k_values: Optional[list[int]] = None,
+    limit: Optional[int] = None,
+) -> None:
+    """Run answer generation pipeline directly from test set."""
+    retrieval_model = retrieval_model or "BAAI/bge-base-en-v1.5"
+    llm_model = llm_model or "nvidia_nim/meta/llama-3.1-70b-instruct"
+    prompt_styles = prompt_styles or list(PROMPT_CONFIGS.keys())
+    top_k_values = top_k_values or TOP_K_VALUES
+
+    test_queries = load_test_queries(Paths.test_jsonl(), limit)
+
+    retriever = QueryRetriever(model_name=retrieval_model)
+    context_retriever = ContextRetriever(
+        host=Paths.get("qdrant_host"),
+        port=Paths.get("qdrant_port"),
+        model_name=retrieval_model,
     )
+    config = GenerationConfig(llm_model=llm_model)
+    generator = AnswerGenerator.from_config(config)
+    evaluator = AnswerEvaluator(llm_model=llm_model)
+
+    results = run_generations(
+        test_queries=test_queries,
+        retriever=retriever,
+        context_retriever=context_retriever,
+        generator=generator,
+        evaluator=evaluator,
+        prompt_styles=prompt_styles,
+        top_k_values=top_k_values,
+    )
+
+    output_path = Paths.experiments_dir() / "generation_results.json"
+    save_results(results, output_path)
+    print_summary(results, prompt_styles, top_k_values)
+
+
+# ---------------------------------------------------------------------------
+# CLI Entry Point
+# ---------------------------------------------------------------------------
+
+def main():
+    from configs.benchmark_cli import create_generation_parser
+    parser = create_generation_parser()
     args = parser.parse_args()
 
-    config = GenerationConfig(
-        **({"retrieval_model": args.model} if args.model else {}),
-        **({"retrieval_config": args.retrieval_config} if args.retrieval_config else {}),
-        **({"prompt_style": args.prompt_style} if args.prompt_style else {}),
-    )
-
     run_pipeline(
-        config=config,
+        retrieval_model=args.model or None,
+        llm_model=args.llm_model or None,
         prompt_styles=args.styles,
-        top_k_values=args.top_k_values,
+        top_k_values=args.top_k,
         limit=args.limit,
     )
 

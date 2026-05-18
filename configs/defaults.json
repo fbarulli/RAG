@@ -44,5 +44,7 @@
     "llm-zoomcamp":     "llm-zoomcamp"
   },
   "production_config": "entity_boosted",
-  "production_model": "BAAI/bge-base-en-v1.5"
+  "production_model": "BAAI/bge-base-en-v1.5",
+  "llm_model": "nvidia_nim/meta/llama-3.1-70b-instruct"
+
 }
