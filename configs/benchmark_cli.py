@@ -201,7 +201,10 @@ def create_generation_parser() -> argparse.ArgumentParser:
         "--styles", type=str, nargs="+", default=None,
         help="List of prompt styles to test, e.g. --styles strict relaxed minimal",
     )
-    # DON'T add --top-k here - it's already in the base parser via _add_tuning_args()
+    g.add_argument(
+        "--top-k-list", type=int, nargs="+", default=None,
+        help="List of top_k values to test, e.g. --top-k-list 1 3 5",
+    )
     g.add_argument(
         "--limit", type=int, default=None,
         help="Limit number of test queries for quick testing",

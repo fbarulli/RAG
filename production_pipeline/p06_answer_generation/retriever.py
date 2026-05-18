@@ -79,14 +79,6 @@ class ContextRetriever:
     ) -> str:
         """
         Retrieve full answers for document IDs and combine as context.
-
-        Args:
-            doc_ids: List of document IDs (es_id values)
-            max_chars_per_doc: Max chars per individual document
-            max_context_chars: Max total chars across all documents
-
-        Returns:
-            Combined context string, or fallback message if nothing found.
         """
         answer_map = self._load_answer_map()
         contexts = []
@@ -98,6 +90,17 @@ class ContextRetriever:
                 logger.warning(f"No answer found for document {doc_id}")
                 continue
 
+            # ADD THIS CLEANING FUNCTION HERE
+            def clean_answer(text: str) -> str:
+                """Remove common introductory phrases."""
+                import re
+                text = re.sub(r'^To resolve this issue:\s*\n?', '', text)
+                text = re.sub(r'^To fix this:\s*\n?', '', text)
+                text = re.sub(r'^Solution:\s*\n?', '', text)
+                return text.strip()
+            
+            answer = clean_answer(answer)  # <-- APPLY CLEANING HERE
+
             if len(answer) > max_chars_per_doc:
                 answer = answer[:max_chars_per_doc].rsplit(" ", 1)[0] + "..."
 
@@ -105,7 +108,7 @@ class ContextRetriever:
                 logger.debug(f"Context limit reached at {total_chars} chars, skipping remaining docs")
                 break
 
-            contexts.append(f"[Document {doc_id}]:\n{answer}")
+            contexts.append(answer)
             total_chars += len(answer)
 
         if not contexts:

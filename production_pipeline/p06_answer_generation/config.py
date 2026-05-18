@@ -15,6 +15,7 @@ class PromptConfig:
     temperature: float
     max_tokens: int
     template: str
+    system: str | None = None
 
     def format(self, context: str, query: str) -> str:
         return self.template.format(context=context, query=query)
@@ -37,6 +38,13 @@ def get_prompt(style: PromptStyle, context: str, query: str) -> str:
     if style not in PROMPT_CONFIGS:
         raise ValueError(f"Unknown prompt style: {style!r}. Available: {list(PROMPT_CONFIGS)}")
     return PROMPT_CONFIGS[style].format(context=context, query=query)
+
+
+def get_prompt_config(style: PromptStyle) -> PromptConfig:
+    """Get the full config object for the specified style."""
+    if style not in PROMPT_CONFIGS:
+        raise ValueError(f"Unknown prompt style: {style!r}. Available: {list(PROMPT_CONFIGS)}")
+    return PROMPT_CONFIGS[style]
 
 
 @dataclass

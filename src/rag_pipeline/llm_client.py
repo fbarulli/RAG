@@ -73,7 +73,7 @@ class RateGate:
 
 
 def call_llm(prompt: str, max_tokens: int, model: str = DEFAULT_MODEL,
-             temperature: float = 0.3) -> LLMResult:
+             temperature: float = 0.3, system: str = None) -> LLMResult:
     """Synchronous LLM call with retry. max_tokens is REQUIRED. Raises on failure."""
     from litellm import completion
     init()
@@ -81,7 +81,11 @@ def call_llm(prompt: str, max_tokens: int, model: str = DEFAULT_MODEL,
     for attempt in range(MAX_RETRIES):
         try:
             t0 = time.monotonic()
-            resp = completion(model=model, messages=[{"role":"user","content":prompt}],
+            messages = []
+            if system:
+                messages.append({"role": "system", "content": system})
+            messages.append({"role": "user", "content": prompt})
+            resp = completion(model=model, messages=messages,
                             temperature=temperature, max_tokens=max_tokens)
             elapsed = (time.monotonic() - t0) * 1000
             content = resp.choices[0].message.content
@@ -116,8 +120,10 @@ def call_llm(prompt: str, max_tokens: int, model: str = DEFAULT_MODEL,
                 )
                 time.sleep(wait)
 
+
 async def call_llm_async(prompt: str, max_tokens: int, model: str = DEFAULT_MODEL,
-                         temperature: float = 0.3, rate_gate: RateGate = None) -> LLMResult:
+                         temperature: float = 0.3, rate_gate: RateGate = None,
+                         system: str = None) -> LLMResult:
     """Async LLM call with retry and optional shared rate gate. max_tokens is REQUIRED. Raises on failure."""
     from litellm import acompletion
     init()
@@ -127,7 +133,11 @@ async def call_llm_async(prompt: str, max_tokens: int, model: str = DEFAULT_MODE
             await rate_gate.wait_if_needed()
         try:
             t0 = time.monotonic()
-            resp = await acompletion(model=model, messages=[{"role":"user","content":prompt}],
+            messages = []
+            if system:
+                messages.append({"role": "system", "content": system})
+            messages.append({"role": "user", "content": prompt})
+            resp = await acompletion(model=model, messages=messages,
                                      temperature=temperature, max_tokens=max_tokens)
             elapsed = (time.monotonic() - t0) * 1000
             content = resp.choices[0].message.content
@@ -144,6 +154,7 @@ async def call_llm_async(prompt: str, max_tokens: int, model: str = DEFAULT_MODE
         except Exception as e:
             is_rl = _is_rate_limit(e)
             if is_rl and rate_gate:
+
                 await rate_gate.hit_limit()
                 await rate_gate.wait_if_needed()
             else:

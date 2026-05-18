@@ -81,7 +81,7 @@ class QueryRetriever:
         qdrant_cfg = defaults.get("qdrant", {})
         host = qdrant_cfg.get("host", "localhost")
         port = qdrant_cfg.get("port", 6333)
-        
+        print(f"DEBUG: Connecting to Qdrant at {host}:{port}")
         self.client = QdrantClient(host=host, port=port)
         short_name = model_name.split("/")[-1].replace("-", "_").replace(".", "_")
         self.collection = f"faqs_{short_name}"
@@ -304,9 +304,20 @@ def run_pipeline(
     test_queries = load_test_queries(Paths.test_jsonl(), limit)
 
     retriever = QueryRetriever(model_name=retrieval_model)
+    
+    
+    
+    defaults_path = Paths.base() / "configs" / "defaults.json"
+    with open(defaults_path) as f:
+        defaults = json.load(f)
+    
+    qdrant_cfg = defaults.get("qdrant", {})
+    qdrant_host = qdrant_cfg.get("host", "localhost")
+    qdrant_port = qdrant_cfg.get("port", 6333)
+    
     context_retriever = ContextRetriever(
-        host=Paths.get("qdrant_host"),
-        port=Paths.get("qdrant_port"),
+        host=qdrant_host,
+        port=qdrant_port,
         model_name=retrieval_model,
     )
     config = GenerationConfig(llm_model=llm_model)
@@ -341,7 +352,7 @@ def main():
         retrieval_model=args.model or None,
         llm_model=args.llm_model or None,
         prompt_styles=args.styles,
-        top_k_values=args.top_k,
+        top_k_values=args.top_k_list,
         limit=args.limit,
     )
 
