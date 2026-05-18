@@ -1,4 +1,12 @@
 """
+Public Functions for Hierarchical Subtopic Generation:
+
+def build_subtopics(assignments: list, questions: list[str], embeddings: np.ndarray, subtopic_threshold: int, subtopic_min_size: int) -> dict[str, SubtopicRecord]:
+    Generate subtopics for parent topics that exceed size threshold.
+    I/O: assignments (list), questions (list[str]), embeddings (np.ndarray), subtopic_threshold (int), subtopic_min_size (int) -> dict[str, SubtopicRecord]
+
+
+
 _topic_subtopics.py
 ===================
 Generate subtopics for large parent topics using BERTopic.

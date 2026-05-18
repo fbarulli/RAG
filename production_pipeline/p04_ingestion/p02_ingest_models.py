@@ -1,4 +1,30 @@
 """
+def doc_id_to_point_id(doc_id: str) -> str:
+    Convert document ID string to a Qdrant point ID.
+    I/O: doc_id (str) -> str
+
+def get_cache_path(cache_dir: Path, model_short_name: str) -> Path:
+    Return path for cached embeddings .npy file.
+    I/O: cache_dir (Path), model_short_name (str) -> Path
+
+def load_cached_embeddings(cache_dir: Path, model_short_name: str, expected_count: int) -> Optional[np.ndarray]:
+    Return cached embeddings array or None if cache is absent/stale.
+    I/O: cache_dir (Path), model_short_name (str), expected_count (int) -> Optional[np.ndarray]
+
+def save_embeddings_cache(cache_dir: Path, model_short_name: str, vectors: np.ndarray) -> None:
+    Save embeddings to cache using atomic write.
+    I/O: cache_dir (Path), model_short_name (str), vectors (np.ndarray) -> None
+
+def load_corpus(input_path: Path) -> list[FAQDocument]:
+    Load corpus with robust error handling.
+    I/O: input_path (Path) -> list[FAQDocument]
+
+def load_ner_map(topic_assignments_path: Optional[Path], model_name: str) -> dict[str, dict]:
+    Load topic/NER assignments for a specific model.
+    I/O: topic_assignments_path (Optional[Path]), model_name (str) -> dict[str, dict]
+
+
+    
 p02_ingest_models.py
 ====================
 Ingests FAQ documents into Qdrant using all embedding models declared in

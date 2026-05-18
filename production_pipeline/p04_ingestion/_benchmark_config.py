@@ -1,4 +1,18 @@
 """
+Public Functions for Benchmark and Ingestion Configuration Management:
+
+def from_defaults() -> BenchmarkConfig:
+    Build a config from defaults.json with project-root relative path resolution.
+    I/O: None -> BenchmarkConfig
+
+def from_args(args: argparse.Namespace) -> BenchmarkConfig:
+    Create config from defaults + CLI arguments.
+    I/O: args (argparse.Namespace) -> BenchmarkConfig
+
+def merge_args(args: argparse.Namespace) -> BenchmarkConfig:
+    Return a new config with any non-None CLI values overlaid on self.
+    I/O: args (argparse.Namespace) -> BenchmarkConfig
+
 production_pipeline/p04_ingestion/_benchmark_config.py
 ===================
 Centralized configuration dataclass for all benchmark scripts.

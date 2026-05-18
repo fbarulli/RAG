@@ -1,4 +1,15 @@
 """
+Public Functions for Topic Modeling Output Validation:
+
+def load_assignments(path: Path) -> list[dict]:
+    Load and validate topic assignment records from JSON.
+    I/O: path (Path) -> list[dict]
+
+def compute_raw_metrics(assignments: list[dict]) -> dict[str, Any]:
+    Compute all raw measurement metrics. No pass/fail logic.
+    I/O: assignments (list[dict]) -> dict[str, Any]
+
+    
 p03_topic_validation.py
 =======================
 Validates topic modeling outputs by computing outlier ratios, topic size distributions,

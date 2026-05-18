@@ -1,4 +1,19 @@
 """
+
+Public Functions for Domain-Aware NER and Question Tagging:
+
+def build_ner(tfidf_terms_path: Path, bridge_concepts_path: Path) -> Language:
+    Build a SpaCy pipeline with an EntityRuler seeded from TF-IDF outputs.
+    I/O: tfidf_terms_path (Path), bridge_concepts_path (Path) -> Language
+
+def tag_questions(questions: list[str], nlp: Language) -> list[dict]:
+    Tag each question with detected entities and a top-level category.
+    I/O: questions (list[str]), nlp (Language) -> list[dict]
+
+
+
+
+
 _topic_ner.py
 =============
 Domain-aware NER for topic taxonomy using SpaCy EntityRuler.

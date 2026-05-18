@@ -1,4 +1,20 @@
 """
+Public Functions for Main Topic Modeling Runner Pipeline:
+
+def load_questions(path: Path) -> list[dict]:
+    Load cleaned FAQs.
+    I/O: path (Path) -> list[dict]
+
+def generate_subtopics(topic_model: Any, questions: list[str], topics: list[int]) -> dict[int, list[dict]]:
+    Fit separate BERTopic models per large topic to discover subtopics.
+    I/O: topic_model (Any), questions (list[str]), topics (list[int]) -> dict[int, list[dict]]
+
+def process_model(model_name: str, output_path: Path, min_topic_size: int, min_samples: int, subtopic_threshold: int, input_path: Path) -> None:
+    Run the full topic modeling pipeline for a single model.
+    I/O: model_name (str), output_path (Path), min_topic_size (int), min_samples (int), subtopic_threshold (int), input_path (Path) -> None
+
+
+
 p02_topic_modeling.py
 =====================
 Runs BERTopic to discover and label topics in cleaned FAQ data.

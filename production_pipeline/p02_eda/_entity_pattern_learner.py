@@ -1,6 +1,38 @@
 """
-Entity pattern learner that automatically extracts patterns from missed questions.
-Filters stopwords and learns domain-specific terms.
+def load_questions(data_path: Path) -> List[str]:
+
+    Ingests the raw evaluation dataset and extracts student/user questions.
+
+    I/O: data_path (Path) -> List[str]
+
+
+
+def extract_missed_terms(questions: List[str], nlp: spacy.Language) -> Counter:
+
+    Identifies text collections where the current model failed to find 
+    entities, tokenizes them, filters noise, and counts raw term frequencies.
+
+    I/O: questions (List[str]), nlp (spacy.Language) -> Counter
+
+
+
+def suggest_patterns(missed_terms: Counter, min_count: int = 3) -> Dict[str, List[str]]:
+
+    Applies heuristic rules to frequently missed terms to categorize them 
+    into draft entity classes (TOOL, ERROR, LANGUAGE, ADMIN).
+
+    I/O: missed_terms (Counter), min_count (int) -> Dict[str, List[str]]
+
+
+
+def update_entity_ruler(nlp: spacy.Language, suggestions: Dict[str, List[str]]) -> spacy.Language:
+
+    Mutates and updates the SpaCy pipeline by transforming text suggestions 
+    into case-insensitive token match patterns.
+
+    I/O: nlp (spacy.Language), suggestions (Dict[str, List[str]]) -> spacy.Language
+
+
 """
 
 from pathlib import Path

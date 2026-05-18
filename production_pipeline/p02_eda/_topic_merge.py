@@ -1,4 +1,23 @@
 """
+
+
+
+Public Functions for Topic Assignment Merging and Reclassification:
+
+def reclassify_other(category: str, question: str) -> str:
+    Reclassify OTHER using signal matching. Priority: ERROR > ADMIN > CONCEPT.
+    I/O: category (str), question (str) -> str
+
+def merge(exp_dir: Path = EXP_DIR, output_path: Path = OUTPUT_PATH) -> None:
+    Merge per-model topic assignment files and apply NER reclassification to OTHER questions using rule-based signals.
+    I/O: exp_dir (Path), output_path (Path) -> None
+
+
+
+
+
+
+
 _topic_merge.py
 ===============
 Merge per-model topic assignment files and apply NER reclassification

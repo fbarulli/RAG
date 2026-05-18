@@ -1,4 +1,18 @@
 """
+Public Functions for Embedding Array Caching I/O Utilities:
+
+def get_cache_path(cache_dir: Path, model_short_name: str) -> Path:
+    Return the .npy path for model_short_name inside cache_dir.
+    I/O: cache_dir (Path), model_short_name (str) -> Path
+
+def load_cached_embeddings(cache_dir: Path, model_short_name: str, expected_count: int) -> Optional[np.ndarray]:
+    Return a cached embedding array, or None if the cache is absent or stale.
+    I/O: cache_dir (Path), model_short_name (str), expected_count (int) -> Optional[np.ndarray]
+
+def save_embeddings_cache(cache_dir: Path, model_short_name: str, vectors: np.ndarray) -> None:
+    Persist vectors to <cache_dir>/<model_short_name>.npy atomically.
+    I/O: cache_dir (Path), model_short_name (str), vectors (np.ndarray) -> None
+
 _embedding_cache.py
 ===================
 Utilities for persisting and loading sentence-embedding arrays to/from disk.

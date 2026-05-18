@@ -1,4 +1,21 @@
 """
+Public Functions for Topic NER Diagnostics:
+
+def reclassify_others(assignments: list[dict], nlp: spacy.Language) -> tuple[Counter, list[dict]]:
+    Attempt rule-based reclassification of OTHER questions.
+    I/O: assignments (list[dict]), nlp (spacy.Language) -> tuple[Counter, list[dict]]
+
+def analyze_still_other(still_other: list[dict], nlp: spacy.Language) -> None:
+    Extract top unmatched terms from remaining OTHER questions.
+    I/O: still_other (list[dict]), nlp (spacy.Language) -> None
+
+def main() -> None:
+    Execute full pipeline diagnostic scan to surface unmatched term distributions and signal adjustment suggestions.
+    I/O: None -> None
+
+
+
+
 _topic_ner_diagnostics.py
 =========================
 Diagnostic module for analyzing OTHER questions and suggesting pattern fixes.

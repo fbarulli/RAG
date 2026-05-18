@@ -15,6 +15,28 @@ Responsibilities (analysis only — no corpus prep):
 
 Corpus preparation (stopwords, balancing, code stripping) lives in:
     rag_pipeline/preprocessing/stopwords.py
+
+
+
+
+
+Public Functions for TF-IDF Course Analysis Pipeline:
+
+def load_cleaned_data(eda_stats_path: Path | None = None) -> tuple[pd.DataFrame, dict]:
+    Load cleaned Q&A documents with validation.
+    I/O: eda_stats_path (Path | None) -> tuple[pd.DataFrame, dict]
+
+def prepare_corpus(df: pd.DataFrame, balance_strategy: str = "oversample_min", strip_code: bool = True, exclude_homework: bool = True) -> pd.DataFrame:
+    Apply corpus-level preparation before TF-IDF fitting.
+    I/O: df (pd.DataFrame), balance_strategy (str), strip_code (bool), exclude_homework (bool) -> pd.DataFrame
+
+def fit_tfidf(df: pd.DataFrame, stopwords: list[str], top_n: int = 50, text_col: str = "tfidf_text") -> tuple[dict, TfidfVectorizer, pd.DataFrame, np.ndarray]:
+    Fit TF-IDF per course on aggregated text.
+    I/O: df (pd.DataFrame), stopwords (list[str]), top_n (int), text_col (str) -> tuple[dict, TfidfVectorizer, pd.DataFrame, np.ndarray]
+
+
+
+
 """
 import json
 import logging

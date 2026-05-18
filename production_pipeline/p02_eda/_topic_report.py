@@ -1,4 +1,14 @@
 """
+Public Functions for Topic Reporting and Artifact Serialization:
+
+def print_full_topic_report(results: dict) -> None:
+    Print complete topic structure without any truncation.
+    I/O: results (dict) -> None
+
+def save_results(results: dict, output_dir: Path, topic_model: Any) -> None:
+    Save assignments and model artifacts.
+    I/O: results (dict), output_dir (Path), topic_model (Any) -> None
+    
 _topic_report.py
 ================
 Print reports and save results for topic modeling.

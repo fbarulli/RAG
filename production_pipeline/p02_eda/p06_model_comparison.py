@@ -1,4 +1,22 @@
 """
+Public Functions for Topic Model Comparison Strategy Selection:
+
+def load_model_results(input_dir: Path) -> list[dict[str, Any]]:
+    Load all topic_assignments_*.json files and compute all metrics.
+    I/O: input_dir (Path) -> list[dict[str, Any]]
+
+def normalize_metric(value: float, all_values: list[float], lower_is_better: bool = True) -> float:
+    Normalize a metric to [0, 1] where 1.0 is always best.
+    I/O: value (float), all_values (list[float]), lower_is_better (bool) -> float
+
+def compute_composite_score(result: dict[str, Any], all_results: list[dict[str, Any]]) -> float:
+    Compute a weighted composite score for a model (higher is better, range [0, 1]).
+    I/O: result (dict[str, Any]), all_results (list[dict[str, Any]]) -> float
+
+def evaluate_status_fixed(metrics: dict[str, Any], thresholds: dict[str, float]) -> tuple[str, list[str]]:
+    Determine OK/WARN/FAIL status based on fixed thresholds.
+    I/O: metrics (dict[str, Any]), thresholds (dict[str, float]) -> tuple[str, list[str]]
+    
 p06_model_comparison.py
 =======================
 Compares topic modeling results across embedding models using multiple quality metrics.

@@ -1,4 +1,7 @@
 """
+def main() -> None:
+    Executes the multi-model retrieval benchmark framework loop, resolving CLI arguments, validating server connections, tracking task states, and generating metric evaluation summaries.
+    I/O: None -> None
 p04_multi_model_benchmark.py
 ============================
 Run the retrieval benchmark across all (or selected) embedding models.

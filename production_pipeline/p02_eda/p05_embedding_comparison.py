@@ -1,4 +1,26 @@
 """
+Public Functions for Embedding Model Comparison and Performance Profiling:
+
+def load_questions(path: Path) -> list[str]:
+    Load questions from JSONL file.
+    I/O: path (Path) -> list[str]
+
+def get_embedding_cache_path(model_name: str, questions: list[str], cache_dir: Path) -> Path:
+    Generate deterministic cache path based on model + questions hash.
+    I/O: model_name (str), questions (list[str]), cache_dir (Path) -> Path
+
+def load_or_compute_embeddings(questions: list[str], model_name: str, cache_dir: Path, use_cache: bool = True) -> tuple[np.ndarray, SentenceTransformer]:
+    Load cached embeddings or compute + save them. Returns both the array and the loaded model.
+    I/O: questions (list[str]), model_name (str), cache_dir (Path), use_cache (bool) -> tuple[np.ndarray, SentenceTransformer]
+
+def compute_cluster_quality(embeddings: np.ndarray, topics: list[int]) -> dict:
+    Compute internal clustering validation metrics.
+    I/O: embeddings (np.ndarray), topics (list[int]) -> dict
+
+def run_clustering(questions: list[str], model_name: str, min_topic_size: int, min_samples: int, cache_dir: Path, use_cache: bool = True) -> dict:
+    Run BERTopic and return comprehensive metrics.
+    I/O: questions (list[str]), model_name (str), min_topic_size (int), min_samples (int), cache_dir (Path), use_cache (bool) -> dict
+
 p05_embedding_comparison.py
 ===========================
 Compares topic modeling results across embedding models.

@@ -1,4 +1,17 @@
 """
+
+
+def load_test_queries(test_set_path: Path, limit: Optional[int] = None) -> list[dict]:
+    Load test queries directly from test.jsonl.
+    I/O: test_set_path (Path), limit (Optional[int]) -> list[dict]
+
+def generate_single(query_id: str, query: str, expected_id: str, reference_answer: str, retrieved_ids: list[str], prompt_style: str, top_k: int, generator: AnswerGenerator, evaluator: AnswerEvaluator, context_retriever: ContextRetriever, rerank: bool = True) -> PipelineResult:
+    Generate and evaluate a single answer with optional cross-encoder reranking.
+    I/O: query_id (str), query (str), expected_id (str), reference_answer (str), retrieved_ids (list[str]), prompt_style (str), top_k (int), generator (AnswerGenerator), evaluator (AnswerEvaluator), context_retriever (ContextRetriever), rerank (bool) -> PipelineResult
+
+def run_generations(test_queries: list[dict], retriever: QueryRetriever, context_retriever: ContextRetriever, generator: AnswerGenerator, evaluator: AnswerEvaluator, prompt_styles: list[str], top_k_values: list[int], rerank: bool = True) -> list[PipelineResult]:
+    Run generation for all query × style × top_k combinations.
+    I/O: test_queries (list[dict]), retriever: (QueryRetriever), context_retriever (ContextRetriever), generator (AnswerGenerator), evaluator (AnswerEvaluator), prompt_styles (list[str]), top_k_values (list[int]), rerank (bool) -> list[PipelineResult]
 production_pipeline/p06_answer_generation/runner.py
 
 Orchestrate answer generation and evaluation pipeline.

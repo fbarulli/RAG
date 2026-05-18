@@ -1,4 +1,42 @@
 """
+Public Functions for Retrieval Metrics Evaluation and Database Query Execution:
+
+def check_code_integrity(text: str) -> float:
+    Check if code blocks in text are complete and well-formed.
+    I/O: text (str) -> float
+
+def compute_latency_percentiles(latencies: list[float]) -> dict[str, float]:
+    Compute p50, p95, p99 latency using proper percentile calculation.
+    I/O: latencies (list[float]) -> dict[str, float]
+
+def safe_mean(values: list[float]) -> float:
+    Compute mean, returning 0.0 for empty lists.
+    I/O: values (list[float]) -> float
+
+def compute_hit_rate(hits: tuple[str, ...], expected_id: str, k: int) -> bool:
+    Check if expected_id appears in top-k results.
+    I/O: hits (tuple[str, ...]), expected_id (str), k (int) -> bool
+
+def compute_reciprocal_rank(hits: tuple[str, ...], expected_id: str) -> float:
+    Compute 1/rank if found, else 0.
+    I/O: hits (tuple[str, ...]), expected_id (str) -> float
+
+def compute_ndcg_at_k(hits: tuple[str, ...], expected_id: str, k: int) -> float:
+    Compute NDCG@k for binary relevance (1 if correct, 0 otherwise).
+    I/O: hits (tuple[str, ...]), expected_id (str), k (int) -> float
+
+def run_hybrid_rrf_query(client: Any, collection: str, query_vector: list, es: Elasticsearch, es_index: str, query_text: str, course_filter: str, config: dict, top_k: int) -> tuple[tuple[str, ...], Optional[str], tuple[float, ...], float]:
+    Execute a hybrid Reciprocal Rank Fusion (RRF) search combining dense vector hits with Elasticsearch BM25 results.
+    I/O: client (Any), collection (str), query_vector (list), es (Elasticsearch), es_index (str), query_text (str), course_filter (str), config (dict), top_k (int) -> tuple[tuple[str, ...], Optional[str], tuple[float, ...], float]
+
+def run_es_retrieval_query(es: Elasticsearch, index: str, query_text: str, course_filter: str, config: dict, top_k: int) -> tuple[tuple[str, ...], Optional[str], tuple[float, ...], float]:
+    Execute a text-search query against Elasticsearch applying query fields and term boost configurations.
+    I/O: es (Elasticsearch), index (str), query_text (str), course_filter (str), config (dict), top_k (int) -> tuple[tuple[str, ...], Optional[str], tuple[float, ...], float]
+
+def run_retrieval_query(client: Any, collection: str, query_vector: list, course_filter: str, config: dict, top_k: int) -> tuple[tuple[str, ...], Optional[str], tuple[float, ...], float]:
+    Execute a single retrieval query against Qdrant, applying config options.
+    I/O: client (Any), collection (str), query_vector (list), course_filter (str), config (dict), top_k (int) -> tuple[tuple[str, ...], Optional[str], tuple[float, ...], float]
+
 production_pipeline/p04_ingestion/_benchmark_metrics.py
 =====================
 Compute retrieval metrics for benchmark evaluation.

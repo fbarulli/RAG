@@ -1,4 +1,22 @@
 """
+
+
+
+Public Functions for Topic Assignment Construction:
+
+def build_assignments(docs: list[dict], topics: list[int], probs: list[float]) -> list[TopicAssignment]:
+    Map each document to its base topic assignment.
+    I/O: docs (list[dict]), topics (list[int]), probs (list[float]) -> list[TopicAssignment]
+
+def attach_subtopics(assignments: list[TopicAssignment], subtopics: dict[str, dict]) -> None:
+    Attach subtopic info to assignments in place.
+    I/O: assignments (list[TopicAssignment]), subtopics (dict[str, dict]) -> None
+
+def build_output(assignments: list[TopicAssignment], topic_model, embedding_model_name: str, min_topic_size: int, subtopic_threshold: int, total_docs: int) -> dict:
+    Compile final output structure for serialization.
+    I/O: assignments (list[TopicAssignment]), topic_model (Any), embedding_model_name (str), min_topic_size (int), subtopic_threshold (int), total_docs (int) -> dict
+
+    
 _topic_assignments.py
 =====================
 Build and compile topic assignments for output.

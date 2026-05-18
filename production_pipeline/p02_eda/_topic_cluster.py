@@ -1,4 +1,10 @@
 """
+Public Functions for Topic Clustering:
+
+def cluster_topics(questions: list[str], embedding_model_name: str, min_topic_size: int = 5, min_samples: int = 1, stopwords: list[str] | None = None) -> tuple[BERTopic, list[int], list[float], np.ndarray]:
+    Run BERTopic with explicit HDBSCAN configuration.
+    I/O: questions (list[str]), embedding_model_name (str), min_topic_size (int), min_samples (int), stopwords (list[str] | None) -> tuple[BERTopic, list[int], list[float], np.ndarray]
+
 _topic_cluster.py
 =================
 Core clustering logic for topic modeling.

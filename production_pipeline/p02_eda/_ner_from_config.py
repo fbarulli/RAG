@@ -1,4 +1,16 @@
+
 """
+Public Functions for Config-Driven NER Pipeline:
+
+def build_ner_from_config(config_path: Path) -> spacy.Language:
+    Builds a SpaCy NER pipeline using patterns from a JSON config file.
+    I/O: config_path (Path) -> spacy.Language
+
+def tag_questions(questions: List[str], nlp: spacy.Language) -> List[Dict]:
+    Tags questions with entities using the configured NER pipeline.
+    I/O: questions (List[str]), nlp (spacy.Language) -> List[Dict]
+
+
 NER pipeline that loads entity patterns from a JSON configuration file.
 This makes it easy to add/remove patterns without changing code.
 """

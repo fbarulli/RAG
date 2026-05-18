@@ -1,3 +1,10 @@
+"""
+Public Functions for Retrieval Failure and Error Stratification Analysis:
+
+def main() -> None:
+    Executes a complete profiling analysis of retrieval failures across query types and NER semantic categories, surfacing the highest-impact false positives.
+    I/O: None -> None
+"""
 
 import json
 from collections import Counter, defaultdict

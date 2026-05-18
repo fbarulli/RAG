@@ -1,4 +1,11 @@
 """
+def print_full_benchmark_report(summaries: list[MetricSummary]) -> None:
+    Print benchmark results in clean table format, including the overall best config per model and per-config comparison matrices.
+    I/O: summaries (list[MetricSummary]) -> None
+
+def save_benchmark_results(summaries: list[MetricSummary], output_dir: Path) -> None:
+    Save per-run benchmark results to JSON and a human-readable text summary using an upsert scheme indexed by model and config.
+    I/O: summaries (list[MetricSummary]), output_dir (Path) -> None
 _benchmark_report.py
 ====================
 Print reports and save results for the retrieval benchmark.

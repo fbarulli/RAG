@@ -1,4 +1,20 @@
 """
+
+
+Public Functions for Topic Document Loading:
+
+def load_documents(path: Path) -> list[dict]:
+    Load and validate documents from a JSONL file.
+    I/O: path (Path) -> list[dict]
+
+def group_by_course(docs: list[dict]) -> dict[str, list[dict]]:
+    Group documents by course for stratified analysis.
+    I/O: docs (list[dict]) -> dict[str, list[dict]]
+
+
+
+
+
 _topic_loader.py
 ================
 Load and validate FAQ documents from JSONL for topic modeling.

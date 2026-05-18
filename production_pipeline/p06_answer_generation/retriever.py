@@ -1,6 +1,17 @@
 """
-production_pipeline/p06_answer_generation/retriever.py
-Document retrieval and reranking for answer generation.
+Public Functions for Answer Generation Document Retrieval and Reranking:
+
+def collection_name_for_model(model_name: str) -> str:
+    Derive Qdrant collection name from model name.
+    I/O: model_name (str) -> str
+
+def rerank(self, query: str, doc_ids: list[str], top_k: int) -> list[str]:
+    Rerank doc_ids by cross-encoder score against the query.
+    I/O: query (str), doc_ids (list[str]), top_k (int) -> list[str]
+
+def get_context(self, doc_ids: list[str], max_chars_per_doc: int = _DEFAULT_MAX_CHARS_PER_DOC, max_context_chars: int = _DEFAULT_MAX_CONTEXT_CHARS) -> str:
+    Retrieve full answers for document IDs and combine as context.
+    I/O: doc_ids (list[str]), max_chars_per_doc (int), max_context_chars (int) -> str.
 """
 from typing import Optional
 from qdrant_client import QdrantClient
