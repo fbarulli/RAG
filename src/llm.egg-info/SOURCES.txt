@@ -6,6 +6,7 @@ src/llm.egg-info/dependency_links.txt
 src/llm.egg-info/requires.txt
 src/llm.egg-info/top_level.txt
 src/rag_pipeline/__init__.py
+src/rag_pipeline/gem_client.py
 src/rag_pipeline/llm_client.py
 src/rag_pipeline/logging.py
 src/rag_pipeline/paths.py
