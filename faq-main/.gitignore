@@ -1,8 +1,0 @@
-.venv
-_site
-__pycache__
-.envrc
-.ipynb_checkpoints/
-CLAUDE.md
-*.egg-info/
-build

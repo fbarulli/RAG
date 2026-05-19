@@ -1,1 +1,0 @@
-# Tests for FAQ site generator
