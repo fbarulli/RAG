@@ -1,4 +1,5 @@
 {
+  
   "vector_default": {
     "name": "Vector Default",
     "search_type": "vector",
@@ -133,5 +134,55 @@
     "reranker_name": "bge-reranker-base",
     "top_k": 10,
     "description": "Vector retrieval followed by reranking"
-  }
+  },
+  "entity_boosted_tinybert": {
+  "name": "Entity Boosted + TinyBERT",
+  "search_type": "entity_boosted",
+  "rrf_k": 60,
+  "boost_question": 5.0,
+  "boost_text": 5.0,
+  "reranker": true,
+  "reranker_name": "TinyBERT",
+  "top_k": 10
+},
+"entity_boosted_minilm_l6": {
+  "name": "Entity Boosted + MiniLM-L6",
+  "search_type": "entity_boosted",
+  "rrf_k": 60,
+  "boost_question": 5.0,
+  "boost_text": 5.0,
+  "reranker": true,
+  "reranker_name": "MiniLM-L6",
+  "top_k": 10
+},
+"entity_boosted_mxbai_xsmall": {
+  "name": "Entity Boosted + mxbai-xsmall",
+  "search_type": "entity_boosted",
+  "rrf_k": 60,
+  "boost_question": 5.0,
+  "boost_text": 5.0,
+  "reranker": true,
+  "reranker_name": "mxbai-xsmall",
+  "top_k": 10
+},
+"entity_boosted_answerdotai": {
+  "name": "Entity Boosted + AnswerDotAI-Trainic",
+  "search_type": "entity_boosted",
+  "rrf_k": 60,
+  "boost_question": 5.0,
+  "boost_text": 5.0,
+  "reranker": true,
+  "reranker_name": "AnswerDotAI-Trainic",
+  "top_k": 10
+},
+"entity_boosted_bge_reranker": {
+  "name": "Entity Boosted + bge-reranker-base",
+  "search_type": "entity_boosted",
+  "rrf_k": 60,
+  "boost_question": 5.0,
+  "boost_text": 5.0,
+  "reranker": true,
+  "reranker_name": "bge-reranker-base",
+  "top_k": 10
+}
 }

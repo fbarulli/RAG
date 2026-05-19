@@ -47,14 +47,14 @@ Config: entity_boosted | Model: BAAI/bge-base-en-v1.5
 
 Config: entity_boosted_with_reranking | Model: BAAI/bge-base-en-v1.5
   Queries: 453
-  Hit Rate @1: 76.2% | @3: 90.9% | @5: 94.0% | @10: 96.2%
-  MRR: 0.8395 | NDCG@10: 0.8700
-  Latency: p50=8.5ms | p95=11.0ms | p99=11.7ms
+  Hit Rate @1: 63.4% | @3: 83.9% | @5: 89.4% | @10: 96.0%
+  MRR: 0.7478 | NDCG@10: 0.7993
+  Latency: p50=11.0ms | p95=14.1ms | p99=16.9ms
   Code Integrity (Ref): 100.0% | (Retrieved): 100.0%
   Cross-Course Contamination: 0.00%
-  Rank Std Dev: 2.19   (lower is better)
-  Failures (Hit@10=0): 17
-  Avg Failure Similarity: 0.7292
+  Rank Std Dev: 2.66   (lower is better)
+  Failures (Hit@10=0): 18
+  Avg Failure Similarity: 0.0000
 
 Config: entity_boosted_with_reranking | Model: BAAI/bge-small-en-v1.5
   Queries: 453

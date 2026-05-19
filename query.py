@@ -1,99 +1,119 @@
+#!/usr/bin/env python3
 """
-Quick & safe CLI to test reranking using existing modules only.
-No modifications to core files yet.
-"""
+Quick CLI script to validate reranker entries in retrieval_configs.json
+and cross-reference against rerankers.json.
 
-import sys
+Usage:
+    uv run python check_reranker_configs.py
+    uv run python check_reranker_configs.py --configs-path /path/to/retrieval_configs.json
+"""
+import json
 import argparse
 from pathlib import Path
-import logging
 
-# Use src modules as requested
-from rag_pipeline.paths import Paths
-from rag_pipeline.logging import get_logger
+EXPECTED_CONFIGS = [
+    "entity_boosted_tinybert",
+    "entity_boosted_minilm_l6",
+    "entity_boosted_mxbai_xsmall",
+    "entity_boosted_answerdotai",
+    "entity_boosted_bge_reranker",
+]
 
-logger = get_logger(__name__)
-
-# Import existing p04 modules
-from production_pipeline.p04_ingestion._benchmark_metrics.retrievers import run_vector_retrieval
-from production_pipeline.p04_ingestion._benchmark_reranker import evaluate_with_reranker
-from production_pipeline.p04_ingestion._benchmark_config import BenchmarkConfig
+REQUIRED_FIELDS = ["name", "search_type", "reranker", "reranker_name", "top_k"]
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Test reranker standalone")
-    parser.add_argument("--reranker", type=str, default=None,
-                        help="Reranker name from rerankers.json (e.g. bge-reranker-base)")
-    parser.add_argument("--top-k", type=int, default=10)
-    parser.add_argument("--query", type=str, 
-                        default="What are the key differences between Python and JavaScript?")
-    parser.add_argument("--collection", type=str, default=None)
-    parser.add_argument("--model", type=str, default=None)
+    parser = argparse.ArgumentParser(description="Validate reranker retrieval configs.")
+    parser.add_argument(
+        "--configs-path", type=Path,
+        default=Path("configs/retrieval_configs.json"),
+        help="Path to retrieval_configs.json",
+    )
+    parser.add_argument(
+        "--rerankers-path", type=Path,
+        default=Path("configs/rerankers.json"),
+        help="Path to rerankers.json",
+    )
     args = parser.parse_args()
 
-    config = BenchmarkConfig.from_args(argparse.Namespace())  # load defaults
+    ok = True
 
-    # Use first available embedding model if not specified
-    model_entries = config.get_model_entries()
-    model_entry = model_entries[0]
-    collection = args.collection or model_entry["collection"]
-    model_name = args.model or model_entry["name"]
+    # --- Load retrieval_configs.json ---
+    if not args.configs_path.exists():
+        print(f"[ERROR] retrieval_configs.json not found at: {args.configs_path}")
+        raise SystemExit(1)
 
-    logger.info(f"Testing reranker: {args.reranker or 'default'}")
-    logger.info(f"Collection: {collection} | Embedding model: {model_name}")
+    retrieval_configs = json.loads(args.configs_path.read_text())
+    print(f"[OK] Loaded retrieval_configs.json ({len(retrieval_configs)} entries)\n")
 
-    try:
-        # 1. Load embedding model (same as p03_benchmark.py)
-        from sentence_transformers import SentenceTransformer
-        embedder = SentenceTransformer(model_name, trust_remote_code=model_entry.get("trust_remote_code", False))
+    # --- Load rerankers.json ---
+    if not args.rerankers_path.exists():
+        print(f"[ERROR] rerankers.json not found at: {args.rerankers_path}")
+        raise SystemExit(1)
 
-        # 2. Get query vector
-        query_vector = embedder.encode(args.query, convert_to_numpy=True).tolist()
+    rerankers_data = json.loads(args.rerankers_path.read_text())
+    known_reranker_names = {m["name"] for m in rerankers_data.get("models", [])}
+    print(f"[OK] Loaded rerankers.json — known reranker names: {sorted(known_reranker_names)}\n")
 
-        # 3. Run initial vector retrieval (existing function)
-        client = config.qdrant_client
+    # --- Check each expected config ---
+    print("=== Checking expected reranker configs ===\n")
+    for key in EXPECTED_CONFIGS:
+        if key not in retrieval_configs:
+            print(f"  [MISSING] '{key}' not found in retrieval_configs.json")
+            ok = False
+            continue
 
-        initial_result = run_vector_retrieval(
-            client=client,
-            collection=collection,
-            query_vector=query_vector,
-            course_filter="",           # empty = no filter
-            config={},
-            top_k=args.top_k * 3        # fetch more candidates for reranking
-        )
+        cfg = retrieval_configs[key]
+        print(f"  [{key}]")
 
-        logger.info(f"Initial retrieval: {len(initial_result.hit_ids)} documents")
+        # Required fields
+        for field in REQUIRED_FIELDS:
+            if field not in cfg:
+                print(f"    [ERROR] Missing required field: '{field}'")
+                ok = False
+            else:
+                print(f"    {field}: {cfg[field]}")
 
-        # 4. Convert to candidate format expected by reranker
-        candidates = []
-        for i, doc_id in enumerate(initial_result.hit_ids):
-            candidates.append({
-                "es_id": doc_id,
-                "payload": {
-                    "es_id": doc_id,
-                    "question": "",   # will be filled if you fetch full payload
-                    "answer": initial_result.hit_answers[i] if hasattr(initial_result, 'hit_answers') else ""
-                }
-            })
+        # reranker_name must exist in rerankers.json
+        reranker_name = cfg.get("reranker_name")
+        if reranker_name and reranker_name not in known_reranker_names:
+            print(f"    [ERROR] reranker_name '{reranker_name}' not found in rerankers.json")
+            ok = False
+        elif reranker_name:
+            print(f"    [OK] reranker_name '{reranker_name}' found in rerankers.json")
 
-        # 5. Apply reranker using existing function
-        reranked_ids, metrics = evaluate_with_reranker(
-            query=args.query,
-            retrieved_candidates=candidates,
-            reranker_name=args.reranker,
-            top_k=args.top_k
-        )
+        # reranker flag must be true
+        if not cfg.get("reranker", False):
+            print(f"    [ERROR] 'reranker' field is not true")
+            ok = False
 
-        print("\n=== RERANKING RESULTS ===")
-        print(f"Reranker used : {metrics.get('reranker_name', 'None')}")
-        print(f"Rerank latency: {metrics.get('reranker_latency_ms', 0):.1f} ms")
-        print(f"Top {len(reranked_ids)} IDs: {reranked_ids[:5]}...")
+        # search_type must be entity_boosted
+        if cfg.get("search_type") != "entity_boosted":
+            print(f"    [WARN] search_type is '{cfg.get('search_type')}', expected 'entity_boosted'")
 
-    except Exception as e:
-        logger.error(f"Test failed: {e}")
-        import traceback
-        traceback.print_exc()
-        sys.exit(1)
+        print()
+
+    # --- Check for stale reranker_name in rerankers.json nested blocks ---
+    print("=== Checking rerankers.json for stale nested configs ===\n")
+    for m in rerankers_data.get("models", []):
+        nested = m.get("vector_with_reranking", {})
+        if nested:
+            hardcoded = nested.get("reranker_name")
+            if hardcoded and hardcoded != m["name"]:
+                print(
+                    f"  [WARN] '{m['name']}' has nested reranker_name='{hardcoded}' "
+                    f"— should be '{m['name']}' or removed entirely"
+                )
+                ok = False
+        if "vector_with_reranking" in m:
+            print(f"  [WARN] '{m['name']}' still has deprecated 'vector_with_reranking' block — safe to remove")
+
+    print("\n" + ("=" * 50))
+    if ok:
+        print("All checks passed.")
+    else:
+        print("Some checks failed — see above.")
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":
