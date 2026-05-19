@@ -10,7 +10,7 @@ from ._benchmark_metrics.evaluation import evaluate_config
 from ._benchmark_metrics.aggregation import aggregate_metrics
 from ._benchmark_report import print_full_benchmark_report, save_benchmark_results, save_performance_summary
 from ._benchmark_config import BenchmarkConfig
-from ._benchmark_reranker import evaluate_with_reranker
+
 from configs.benchmark_cli import create_benchmark_parser
 
 logger = get_logger(__name__)
@@ -21,7 +21,8 @@ def main():
     args = parser.parse_args()
     
     # Initialize the BenchmarkConfig instance safely from the parsed CLI args
-    config = BenchmarkConfig.from_args(args)
+    config = BenchmarkConfig.from_defaults().merge_args(args)
+
     
     # Load and sample the evaluation dataset completely at the root context level
     test_set = config.get_test_set()

@@ -8,7 +8,6 @@ from dataclasses import dataclass
 from typing import Any, Optional, TYPE_CHECKING
 
 from .._benchmark_types import QueryResult
-from .._benchmark_reranker import evaluate_with_reranker
 from .core import check_code_integrity
 from .retrievers import (
     run_es_retrieval,
@@ -47,17 +46,16 @@ class RetrievalConfig:
 # ---------------------------------------------------------------------------
 
 def _encode_queries(model, test_set: list[dict], encode_batch_size: int) -> list[list[float]]:
-    """
-    Batch-encode all queries upfront and convert to plain Python lists.
-    Pre-converting avoids repeated .tolist() calls inside the main loop.
-    """
     queries = [test["query"] for test in test_set]
+    print(f"DEBUG _encode_queries: {len(queries)} queries, batch_size={encode_batch_size}", flush=True)
+    print(f"DEBUG _encode_queries: model type={type(model).__name__}", flush=True)
     vectors = model.encode(
         queries,
         batch_size=encode_batch_size,
         convert_to_numpy=True,
         show_progress_bar=True,
     )
+    print(f"DEBUG _encode_queries: vectors shape={vectors.shape}", flush=True)
     return vectors.tolist()
 
 
@@ -155,6 +153,7 @@ def _apply_reranking(
     Post-rerank scores use descending reciprocal rank (1/rank) as a proxy
     so rank-weighted metrics like NDCG remain meaningful.
     """
+    from .._benchmark_reranker import evaluate_with_reranker
     hit_ids             = search_result.hit_ids
     hit_scores          = search_result.hit_scores
     reranker_latency_ms = search_result.reranker_latency_ms
@@ -194,6 +193,82 @@ def _apply_reranking(
     return hit_ids, hit_scores, reranker_latency_ms
 
 
+def _build_query_context(
+    idx: int,
+    test: dict,
+    topic_map: dict,
+    query_vectors: Optional[list],
+) -> dict:
+    """Extract and return all per-query context fields."""
+    expected_id = test["expected_id"]
+    topic_info  = topic_map.get(expected_id, {})
+    return {
+        "query":              test["query"],
+        "expected_id":        expected_id,
+        "course":             test["course"],
+        "topic":              topic_info.get("topic"),
+        "subtopic":           topic_info.get("subtopic"),
+        "ner_category":       topic_info.get("ner_category"),
+        "ner_primary_entity": topic_info.get("ner_primary_entity"),
+        "query_vector":       query_vectors[idx] if query_vectors is not None else None,
+    }
+
+
+def _retrieve_and_rerank(
+    ctx: dict,
+    rc: RetrievalConfig,
+) -> tuple:
+    """Run retrieval then optional reranking. Returns (search_result, hit_ids, hit_scores, reranker_latency_ms)."""
+    logger.debug(f"calling _run_retrieval query={ctx['query']!r}")
+    search_result = _run_retrieval(
+        rc=rc,
+        query=ctx["query"],
+        query_vector=ctx["query_vector"],
+        course=ctx["course"],
+        ner_category=ctx["ner_category"],
+        ner_primary_entity=ctx["ner_primary_entity"],
+    )
+    logger.debug(f"_run_retrieval returned hits={len(search_result.hit_ids)}")
+
+    hit_ids, hit_scores, reranker_latency_ms = _apply_reranking(
+        search_result=search_result,
+        rc=rc,
+        query=ctx["query"],
+    )
+    return search_result, hit_ids, hit_scores, reranker_latency_ms
+
+
+def _build_query_result(
+    test: dict,
+    ctx: dict,
+    search_result,
+    hit_ids: tuple,
+    hit_scores: tuple,
+    reranker_latency_ms: float,
+    integrity_cache: dict,
+) -> QueryResult:
+    """Assemble the final QueryResult from retrieval outputs."""
+    return QueryResult(
+        query_id=test["query_id"],
+        query_text=ctx["query"],
+        expected_id=ctx["expected_id"],
+        course=ctx["course"],
+        topic=ctx["topic"],
+        subtopic=ctx["subtopic"],
+        query_type=test.get("query_type", "unknown"),
+        hit_ids=hit_ids,
+        hit_scores=hit_scores,
+        hit_courses=search_result.hit_courses,
+        latency_ms=search_result.latency_ms,
+        reranker_latency_ms=reranker_latency_ms,
+        code_integrity_ref=integrity_cache.get(ctx["expected_id"]),
+        code_integrity_retrieved=(
+            check_code_integrity(search_result.top_answer)
+            if search_result.top_answer else None
+        ),
+    )
+
+
 def _evaluate_single(
     idx: int,
     test: dict,
@@ -206,55 +281,58 @@ def _evaluate_single(
     Evaluate a single test item: retrieve, optionally rerank, build QueryResult.
     Extracted for unit testability and to keep evaluate_config readable.
     """
-    query              = test["query"]
-    expected_id        = test["expected_id"]
-    course             = test["course"]
-    topic_info         = topic_map.get(expected_id, {})
-    topic              = topic_info.get("topic")
-    subtopic           = topic_info.get("subtopic")
-    ner_category       = topic_info.get("ner_category")
-    ner_primary_entity = topic_info.get("ner_primary_entity")
-    query_vector       = query_vectors[idx] if query_vectors is not None else None
-
-    search_result = _run_retrieval(
-        rc=rc,
-        query=query,
-        query_vector=query_vector,
-        course=course,
-        ner_category=ner_category,
-        ner_primary_entity=ner_primary_entity,
-    )
-
-    hit_ids, hit_scores, reranker_latency_ms = _apply_reranking(
-        search_result=search_result,
-        rc=rc,
-        query=query,
-    )
-
-    return QueryResult(
-        query_id=test["query_id"],
-        query_text=query,
-        expected_id=expected_id,
-        course=course,
-        topic=topic,
-        subtopic=subtopic,
-        query_type=test.get("query_type", "unknown"),
-        hit_ids=hit_ids,
-        hit_scores=hit_scores,
-        hit_courses=search_result.hit_courses,
-        latency_ms=search_result.latency_ms,
-        reranker_latency_ms=reranker_latency_ms,
-        code_integrity_ref=integrity_cache.get(expected_id),
-        code_integrity_retrieved=(
-            check_code_integrity(search_result.top_answer)
-            if search_result.top_answer else None
-        ),
-    )
+    ctx = _build_query_context(idx, test, topic_map, query_vectors)
+    search_result, hit_ids, hit_scores, reranker_latency_ms = _retrieve_and_rerank(ctx, rc)
+    return _build_query_result(test, ctx, search_result, hit_ids, hit_scores, reranker_latency_ms, integrity_cache)
 
 
 # ---------------------------------------------------------------------------
 # Public API
 # ---------------------------------------------------------------------------
+
+def _run_evaluation_loop(
+    test_set: list[dict],
+    topic_map: dict,
+    query_vectors: Optional[list],
+    integrity_cache: dict,
+    rc: RetrievalConfig,
+) -> list[QueryResult]:
+    results: list[QueryResult] = []
+    total = len(test_set)
+
+    for idx, test in enumerate(test_set):
+        if idx % 10 == 0:
+            logger.info(f"Progress: {idx}/{total} queries evaluated")
+        print(f"DEBUG loop: idx={idx} course={test.get('course')} ner_category={topic_map.get(test.get('expected_id'), {}).get('ner_category')}", flush=True)
+        try:
+            ctx = _build_query_context(idx, test, topic_map, query_vectors)
+            print(f"DEBUG: ctx built — query={ctx['query'][:40]!r} vector_dim={len(ctx['query_vector']) if ctx['query_vector'] else None}", flush=True)
+            
+            print(f"DEBUG: calling _run_retrieval", flush=True)
+            search_result = _run_retrieval(
+                rc=rc,
+                query=ctx["query"],
+                query_vector=ctx["query_vector"],
+                course=ctx["course"],
+                ner_category=ctx["ner_category"],
+                ner_primary_entity=ctx["ner_primary_entity"],
+            )
+            print(f"DEBUG: _run_retrieval done — hits={len(search_result.hit_ids)}", flush=True)
+
+            hit_ids, hit_scores, reranker_latency_ms = _apply_reranking(
+                search_result=search_result, rc=rc, query=ctx["query"],
+            )
+            print(f"DEBUG: reranking done", flush=True)
+
+            results.append(_build_query_result(
+                test, ctx, search_result, hit_ids, hit_scores, reranker_latency_ms, integrity_cache,
+            ))
+        except Exception as e:
+            logger.error(f"Query '{test.get('query_id', idx)}' failed: {e}", exc_info=True)
+
+    logger.info(f"Evaluation complete — {len(results)}/{total} queries succeeded.")
+    return results
+
 
 def evaluate_config(
     client,
@@ -292,32 +370,37 @@ def evaluate_config(
 
     _validate_config(rc, model)
 
-    # Pre-encode all queries in one batched pass — avoids per-query encode overhead
     query_vectors = None
     if search_type in ("vector", "hybrid_rrf", "entity_boosted"):
+        queries = [test["query"] for test in test_set]
+        print(f"DEBUG: encoding {len(queries)} queries", flush=True)
+        print(f"DEBUG: first 3 queries: {queries[:3]}", flush=True)
+        print(f"DEBUG: batch_size={encode_batch_size}", flush=True)
         query_vectors = _encode_queries(model, test_set, encode_batch_size)
+        print(f"DEBUG: encoding done — {len(query_vectors)} vectors, dim={len(query_vectors[0])}", flush=True)
 
-    # Pre-compute reference answer integrity scores — deterministic and
-    # potentially shared across queries with the same expected_id
     integrity_cache = _build_integrity_cache(test_set)
+    if query_vectors is not None:
+        logger.info(f"Vector check — dim={len(query_vectors[0])}, sample={query_vectors[0][:3]}")
+        # Test first retrieval directly
+        from .._benchmark_metrics.retrievers import run_entity_boosted_retrieval
+        test_result = run_entity_boosted_retrieval(
+            client=rc.client,
+            collection=rc.collection,
+            query_vector=query_vectors[0],
+            course_filter=test_set[0]["course"],
+            config=rc.config,
+            top_k=5,
+            ner_category=None,
+            ner_primary_entity=None,
+        )
+        logger.info(f"Test retrieval OK — hits={len(test_result.hit_ids)}")
+    logger.info(f"Integrity cache built — {len(integrity_cache)} entries.")
 
-    results: list[QueryResult] = []
-    for idx, test in enumerate(test_set):
-        try:
-            results.append(
-                _evaluate_single(
-                    idx=idx,
-                    test=test,
-                    topic_map=topic_map,
-                    query_vectors=query_vectors,
-                    integrity_cache=integrity_cache,
-                    rc=rc,
-                )
-            )
-        except Exception as e:
-            logger.error(
-                f"Query '{test.get('query_id', idx)}' failed and will be skipped: {e}",
-                exc_info=True,
-            )
-
-    return results
+    return _run_evaluation_loop(
+        test_set=test_set,
+        topic_map=topic_map,
+        query_vectors=query_vectors,
+        integrity_cache=integrity_cache,
+        rc=rc,
+    )

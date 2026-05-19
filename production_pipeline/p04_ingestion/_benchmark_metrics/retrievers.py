@@ -10,7 +10,7 @@ from typing import Optional, TYPE_CHECKING
 from qdrant_client.models import Filter, FieldCondition, MatchValue, SearchParams
 
 from .._benchmark_types import SearchResult
-from .._benchmark_reranker import evaluate_with_reranker
+
 if TYPE_CHECKING:
     from elasticsearch import Elasticsearch
 
@@ -294,6 +294,8 @@ def run_vector_retrieval_with_reranker(
     """
     Vector retrieval + Reranking
     """
+    from .._benchmark_reranker import evaluate_with_reranker
+
     import time
 
     start_total = time.perf_counter()

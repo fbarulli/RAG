@@ -1,4 +1,5 @@
 """
+production_pipeline/p04_ingestion/_benchmark_reranker.py
 Public Functions for Rerank Evaluation Integration:
 
 def evaluate_with_reranker(query: str, retrieved_candidates: List[Dict], reranker_name: str = None, top_k: int = 5) -> Tuple[List[str], Dict]:

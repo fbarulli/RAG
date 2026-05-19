@@ -1,120 +1,58 @@
-#!/usr/bin/env python3
+# /workspaces/LLM/test_pipeline_probe.py
 """
-Quick CLI script to validate reranker entries in retrieval_configs.json
-and cross-reference against rerankers.json.
-
-Usage:
-    uv run python check_reranker_configs.py
-    uv run python check_reranker_configs.py --configs-path /path/to/retrieval_configs.json
+Standalone probe — run directly to isolate where the hang occurs.
+Usage: python test_pipeline_probe.py
 """
-import json
-import argparse
-from pathlib import Path
+import logging
+import sys
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+    stream=sys.stdout,
+    force=True,
+)
 
-EXPECTED_CONFIGS = [
-    "entity_boosted_tinybert",
-    "entity_boosted_minilm_l6",
-    "entity_boosted_mxbai_xsmall",
-    "entity_boosted_answerdotai",
-    "entity_boosted_bge_reranker",
-]
+print("=== STEP 1: imports ===", flush=True)
+from production_pipeline.p04_ingestion._benchmark_metrics.retrievers import run_entity_boosted_retrieval
+from production_pipeline.p04_ingestion._benchmark_reranker import evaluate_with_reranker
+from production_pipeline.p04_ingestion._reranker_runner import run_reranking
+print("=== imports OK ===", flush=True)
 
-REQUIRED_FIELDS = ["name", "search_type", "reranker", "reranker_name", "top_k"]
+print("=== STEP 2: qdrant client ===", flush=True)
+from qdrant_client import QdrantClient
+client = QdrantClient(host="localhost", port=6333)
+print(f"Collections: {client.get_collections()}", flush=True)
 
+print("=== STEP 3: dummy vector ===", flush=True)
+dummy_vector = [0.0] * 768  # adjust dim to match your model
 
-def main():
-    parser = argparse.ArgumentParser(description="Validate reranker retrieval configs.")
-    parser.add_argument(
-        "--configs-path", type=Path,
-        default=Path("configs/retrieval_configs.json"),
-        help="Path to retrieval_configs.json",
-    )
-    parser.add_argument(
-        "--rerankers-path", type=Path,
-        default=Path("configs/rerankers.json"),
-        help="Path to rerankers.json",
-    )
-    args = parser.parse_args()
+print("=== STEP 4: entity_boosted retrieval ===", flush=True)
+import time
+t0 = time.perf_counter()
+result = run_entity_boosted_retrieval(
+    client=client,
+    collection="faqs_bge_base_en_v1_5",
 
-    ok = True
+    query_vector=dummy_vector,
+    course_filter="machine-learning-zoomcamp",  # or whichever course is in your test set
 
-    # --- Load retrieval_configs.json ---
-    if not args.configs_path.exists():
-        print(f"[ERROR] retrieval_configs.json not found at: {args.configs_path}")
-        raise SystemExit(1)
+    config={"boost_question": 5.0, "boost_text": 5.0, "rrf_k": 60},
+    top_k=40,
+    ner_category=None,
+    ner_primary_entity=None,
+)
+print(f"=== retrieval done in {(time.perf_counter()-t0)*1000:.1f}ms ===", flush=True)
+print(f"hit_ids: {result.hit_ids[:5]}", flush=True)
 
-    retrieval_configs = json.loads(args.configs_path.read_text())
-    print(f"[OK] Loaded retrieval_configs.json ({len(retrieval_configs)} entries)\n")
+print("=== STEP 5: reranker ===", flush=True)
+candidates = [{"es_id": id_, "question": "test", "answer": "test"} for id_ in result.hit_ids[:10]]
+reranked, latency = run_reranking(
+    reranker_config={"model": "BAAI/bge-reranker-base", "name": "bge-reranker-base"},
+    query="test query",
+    candidates=candidates,
+    top_k=5,
+)
+print(f"=== reranking done in {latency:.1f}ms ===", flush=True)
+print(f"reranked_ids: {reranked}", flush=True)
 
-    # --- Load rerankers.json ---
-    if not args.rerankers_path.exists():
-        print(f"[ERROR] rerankers.json not found at: {args.rerankers_path}")
-        raise SystemExit(1)
-
-    rerankers_data = json.loads(args.rerankers_path.read_text())
-    known_reranker_names = {m["name"] for m in rerankers_data.get("models", [])}
-    print(f"[OK] Loaded rerankers.json — known reranker names: {sorted(known_reranker_names)}\n")
-
-    # --- Check each expected config ---
-    print("=== Checking expected reranker configs ===\n")
-    for key in EXPECTED_CONFIGS:
-        if key not in retrieval_configs:
-            print(f"  [MISSING] '{key}' not found in retrieval_configs.json")
-            ok = False
-            continue
-
-        cfg = retrieval_configs[key]
-        print(f"  [{key}]")
-
-        # Required fields
-        for field in REQUIRED_FIELDS:
-            if field not in cfg:
-                print(f"    [ERROR] Missing required field: '{field}'")
-                ok = False
-            else:
-                print(f"    {field}: {cfg[field]}")
-
-        # reranker_name must exist in rerankers.json
-        reranker_name = cfg.get("reranker_name")
-        if reranker_name and reranker_name not in known_reranker_names:
-            print(f"    [ERROR] reranker_name '{reranker_name}' not found in rerankers.json")
-            ok = False
-        elif reranker_name:
-            print(f"    [OK] reranker_name '{reranker_name}' found in rerankers.json")
-
-        # reranker flag must be true
-        if not cfg.get("reranker", False):
-            print(f"    [ERROR] 'reranker' field is not true")
-            ok = False
-
-        # search_type must be entity_boosted
-        if cfg.get("search_type") != "entity_boosted":
-            print(f"    [WARN] search_type is '{cfg.get('search_type')}', expected 'entity_boosted'")
-
-        print()
-
-    # --- Check for stale reranker_name in rerankers.json nested blocks ---
-    print("=== Checking rerankers.json for stale nested configs ===\n")
-    for m in rerankers_data.get("models", []):
-        nested = m.get("vector_with_reranking", {})
-        if nested:
-            hardcoded = nested.get("reranker_name")
-            if hardcoded and hardcoded != m["name"]:
-                print(
-                    f"  [WARN] '{m['name']}' has nested reranker_name='{hardcoded}' "
-                    f"— should be '{m['name']}' or removed entirely"
-                )
-                ok = False
-        if "vector_with_reranking" in m:
-            print(f"  [WARN] '{m['name']}' still has deprecated 'vector_with_reranking' block — safe to remove")
-
-    print("\n" + ("=" * 50))
-    if ok:
-        print("All checks passed.")
-    else:
-        print("Some checks failed — see above.")
-        raise SystemExit(1)
-
-
-if __name__ == "__main__":
-    main()
+print("=== ALL STEPS OK ===", flush=True)
