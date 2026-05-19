@@ -3,3 +3,7 @@ LLM-extracted
 faq.zip
 LLM-main.zip
 faq-main
+experiments/onnx_cache/
+experiments/embeddings/
+.venv/
+__pycache__/
