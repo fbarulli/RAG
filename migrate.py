@@ -100,7 +100,26 @@ def main(execute=False, backup=True):
         "src/rag_pipeline/gem_client.py": "src/rag_pipeline/core/gem_client.py",
         "src/rag_pipeline/logging.py": "src/rag_pipeline/core/logging.py",
     }
-
+    # Add to the moves dict in migrate.py
+    moves.update({
+        # EDA
+        "production_pipeline/p02_eda/": "src/rag_pipeline/eda/",
+        
+        # Generation
+        "production_pipeline/p03_generation/": "src/rag_pipeline/generation/",
+        
+        # Evaluation
+        "production_pipeline/p05_evaluation/": "src/rag_pipeline/evaluation/",
+        
+        # Answer generation
+        "production_pipeline/p06_answer_generation/": "src/rag_pipeline/answer_generation/",
+        
+        # Keep orchestrator at top level or move it
+        "production_pipeline/run_clean_pipeline.py": "src/rag_pipeline/run_clean_pipeline.py",
+        
+        # Any leftover ingestion files
+        "production_pipeline/p04_ingestion/": "src/rag_pipeline/ingestion/",
+    })
     for old_rel, new_rel in moves.items():
         old_path = root / old_rel
         new_path = root / new_rel
