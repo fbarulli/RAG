@@ -2,12 +2,11 @@
 import pytest
 import sys
 from pathlib import Path
-
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from production_pipeline.p01_data_cleaning.p02_parse import clean_answer
+from rag_pipeline.cleaning.p02_parse import clean_answer
 
 def test_inline_code_stripped():
-    assert clean_answer("Use `pip install` for setup.") == "Use pip install for setup."
+    assert clean_answer('Use `pip install` for setup.') == 'Use pip install for setup.'
 
 def test_fenced_block_preserved():
     inp = "Run this:\n```python\nprint('hi')\n```"
@@ -15,22 +14,21 @@ def test_fenced_block_preserved():
     assert "```python\nprint('hi')\n```" in out
 
 def test_no_sentinel_leakage():
-    inp = "Block 1:\n```bash\necho 1\n```\nBlock 2:\n```bash\necho 2\n```"
+    inp = 'Block 1:\n```bash\necho 1\n```\nBlock 2:\n```bash\necho 2\n```'
     out = clean_answer(inp)
-    assert "__FENCED_CODE_" not in out
-    assert "```bash\necho 1\n```" in out
-    assert "```bash\necho 2\n```" in out
+    assert '__FENCED_CODE_' not in out
+    assert '```bash\necho 1\n```' in out
+    assert '```bash\necho 2\n```' in out
 
 def test_edge_case_no_newline_after_tag():
     inp = "```python print('hi')```"
     out = clean_answer(inp)
-    # Function normalizes by adding a trailing newline before closing fence
     assert "```python print('hi')\n```" in out
 
 def test_round_trip_metadata():
-    inp = "### Header\n**Bold**\n`code`\nLink: [Click](url)\n```bash\nrun\n```"
+    inp = '### Header\n**Bold**\n`code`\nLink: [Click](url)\n```bash\nrun\n```'
     out = clean_answer(inp)
-    assert "###" not in out
-    assert "**" not in out
-    assert "[Click]" not in out
-    assert "```bash\nrun\n```" in out
+    assert '###' not in out
+    assert '**' not in out
+    assert '[Click]' not in out
+    assert '```bash\nrun\n```' in out

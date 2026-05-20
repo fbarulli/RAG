@@ -1,0 +1,39 @@
+{
+  "input_count": 1207,
+  "threshold": 0.95,
+  "unique_questions": 1196,
+  "removal_count": 3,
+  "estimated_output": 1204,
+  "removals": [
+    {
+      "kept_id": "900f60fd25",
+      "removed_id": "b047f348bc",
+      "question": "Certificate - Can I follow the course in a self-paced mode and get a certificate?",
+      "kept_answer": "No, you can only get a certificate if you finish the course with a “live” cohort. We don't award certificates for the self-paced mode. The reason is you need to peer-review capstone(s) after submittin",
+      "removed_answer": "No, you can only get a certificate if you finish the course with a “live” cohort. We don't award certificates for the self-paced mode. The reason is you need to peer-review capstone(s) after submittin",
+      "similarity": 1.0,
+      "course": "mlops-zoomcamp",
+      "section": "general"
+    },
+    {
+      "kept_id": "0a7c21fee9",
+      "removed_id": "0fab61eca2",
+      "question": "Is it a group project?",
+      "kept_answer": "No, the capstone is a solo project.",
+      "removed_answer": "No, the capstone is a solo project.",
+      "similarity": 1.0,
+      "course": "llm-zoomcamp",
+      "section": "project"
+    },
+    {
+      "kept_id": "9ae63755b8",
+      "removed_id": "d5fc98925d",
+      "question": "Do we submit 2 projects, what does attempt 1 and 2 mean?",
+      "kept_answer": "You only need to submit one project. If the submission at the first attempt fails, you can improve it and re-submit during the attempt 2 submission window.\n\n- If you want to submit two projects for th",
+      "removed_answer": "You only need to submit one project. If the submission at the first attempt fails, you can improve it and re-submit during the attempt#2 submission window.\n\n- If you want to submit two projects for th",
+      "similarity": 0.9963,
+      "course": "llm-zoomcamp",
+      "section": "project"
+    }
+  ]
+}

@@ -28,21 +28,9 @@ Functions:
 import json
 from collections import defaultdict
 from pathlib import Path
-
 from rag_pipeline.logging import get_logger
-
 logger = get_logger(__name__)
-
-# ---------------------------------------------------------------------------
-# Configuration
-# ---------------------------------------------------------------------------
-
-REQUIRED_FIELDS = {"id", "question", "course"}
-
-
-# ---------------------------------------------------------------------------
-# Core logic
-# ---------------------------------------------------------------------------
+REQUIRED_FIELDS = {'id', 'question', 'course'}
 
 def load_documents(path: Path) -> list[dict]:
     """
@@ -59,44 +47,34 @@ def load_documents(path: Path) -> list[dict]:
         ValueError: If no valid documents could be loaded
     """
     if not path.exists():
-        raise FileNotFoundError(f"Input file not found: {path}")
-    
+        raise FileNotFoundError(f'Input file not found: {path}')
     docs = []
     skipped = 0
-    
-    with open(path, encoding="utf-8") as f:
+    with open(path, encoding='utf-8') as f:
         for line_num, line in enumerate(f, 1):
             if not line.strip():
                 continue
-                
             try:
                 doc = json.loads(line)
             except json.JSONDecodeError as e:
-                logger.warning(f"Line {line_num}: JSON parse error: {e}")
+                logger.warning(f'Line {line_num}: JSON parse error: {e}')
                 skipped += 1
                 continue
-            
             missing = REQUIRED_FIELDS - doc.keys()
             if missing:
-                doc_id = doc.get("id", f"line_{line_num}")
-                logger.warning(f"Line {line_num} [{doc_id}]: Missing required fields {missing}")
+                doc_id = doc.get('id', f'line_{line_num}')
+                logger.warning(f'Line {line_num} [{doc_id}]: Missing required fields {missing}')
                 skipped += 1
                 continue
-            
-            # Basic content validation
-            if not doc["question"].strip():
+            if not doc['question'].strip():
                 logger.warning(f"Line {line_num} [{doc['id']}]: Empty question field")
                 skipped += 1
                 continue
-                
             docs.append(doc)
-    
     if not docs:
-        raise ValueError(f"No valid documents loaded from {path}")
-    
-    logger.info(f"Loaded {len(docs)} valid documents ({skipped} skipped) from {path}")
+        raise ValueError(f'No valid documents loaded from {path}')
+    logger.info(f'Loaded {len(docs)} valid documents ({skipped} skipped) from {path}')
     return docs
-
 
 def group_by_course(docs: list[dict]) -> dict[str, list[dict]]:
     """
@@ -110,5 +88,5 @@ def group_by_course(docs: list[dict]) -> dict[str, list[dict]]:
     """
     by_course = defaultdict(list)
     for doc in docs:
-        by_course[doc["course"]].append(doc)
+        by_course[doc['course']].append(doc)
     return dict(by_course)

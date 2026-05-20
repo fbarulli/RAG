@@ -1,0 +1,14 @@
+pandas
+numpy
+scipy
+matplotlib
+seaborn
+plotly
+scikit-learn
+statsmodels
+ipykernel
+ipython
+nbformat
+nbclient
+python-dotenv
+openpyxl

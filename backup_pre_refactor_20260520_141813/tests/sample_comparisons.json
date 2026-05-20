@@ -1,0 +1,62 @@
+[
+  {
+    "id": "47f7c8310a",
+    "course": "data-engineering-zoomcamp",
+    "question": "GCP BQ ML - Export ML model to make predictions does not work for MacBook with Apple M1 chip (arm architecture).",
+    "status": "CODE PRESERVED",
+    "raw_body": "**Solution:**\n\nProceed with setting up `serving_dir` on your computer as described in the `extract_model.md` file. Then, instead of using:\n\n```bash\ndocker pull tensorflow/serving\n```\n\nuse:\n\n```bash\ndocker pull emacski/tensorflow-serving\n```\n\nThen run:\n\n```bash\ndocker run -p 8500:8500 -p 8501:8501 --mount type=bind,source=`pwd`/serving_dir/tip_model,target=/models/tip_model -e MODEL_NAME=tip_model -t emacski/tensorflow-serving\n```\n\nAfter that, run the `curl` command as instructed, and you should get a prediction.\n\n**Or new since Oct 2024:**\n\nBeta release of Docker VMM - the more performant alternative to Apple Virtualization Framework on macOS (requires Apple Silicon and macOS 12.5 or later). [https://docs.docker.com/desktop/features/vmm/](https://docs.docker.com/desktop/features/vmm/)\n\n<{IMAGE:image_1}>",
+    "parsed_answer": "Solution:\n\nProceed with setting up serving_dir on your computer as described in the extract_model.md file. Then, instead of using:\n\n```bash\ndocker pull tensorflow/serving\n```\n\nuse:\n\n```bash\ndocker pull emacski/tensorflow-serving\n```\n\nThen run:\n\n```bash\ndocker run -p 8500:8500 -p 8501:8501 --mount type=bind,source=`pwd`/serving_dir/tip_model,target=/models/tip_model -e MODEL_NAME=tip_model -t emacski/tensorflow-serving\n```\n\nAfter that, run the curl command as instructed, and you should get a prediction.\n\nOr new since Oct 2024:\n\nBeta release of Docker VMM - the more performant alternative to Apple Virtualization Framework on macOS (requires Apple Silicon and macOS 12.5 or later). https://docs.docker.com/desktop/features/vmm/",
+    "raw_has_code": true,
+    "parsed_has_code": true
+  },
+  {
+    "id": "eecebb4f2f",
+    "course": "machine-learning-zoomcamp",
+    "question": "How to select column by dtype",
+    "status": "CODE PRESERVED",
+    "raw_body": "To select columns by data type, you can use the following methods:\n\n- To get columns with numeric data:\n\n  ```python\n  df.select_dtypes(include=np.number).columns.tolist()\n  ```\n  \n- To get columns with object (string) data:\n\n  ```python\n  df.select_dtypes(include='object').columns.tolist()\n  ```",
+    "parsed_answer": "To select columns by data type, you can use the following methods:\n\n- To get columns with numeric data:\n\n  ```python\ndf.select_dtypes(include=np.number).columns.tolist()\n```\n  \n- To get columns with object (string) data:\n\n  ```python\ndf.select_dtypes(include='object').columns.tolist()\n```",
+    "raw_has_code": true,
+    "parsed_has_code": true
+  },
+  {
+    "id": "e596dc3cbe",
+    "course": "data-engineering-zoomcamp",
+    "question": "dbt: dbt_utils.surrogate_key has been renamed to dbt_utils.generate_surrogate_key",
+    "status": "CODE PRESERVED",
+    "raw_body": "In `dbt-utils` 1.0+, `dbt_utils.surrogate_key` was renamed to `dbt_utils.generate_surrogate_key`. If you copy the macro call from older course materials you'll see a deprecation warning or an error.\n\nFix: replace every `surrogate_key` call with `generate_surrogate_key`. The arguments are the same.\n\n```sql\n{{ dbt_utils.generate_surrogate_key(['field_a', 'field_b', 'field_c']) }}\n```\n\nCommon places in the course where this comes up: `stg_green_tripdata.sql`, `stg_yellow_tripdata.sql`, and similar staging models.",
+    "parsed_answer": "In dbt-utils 1.0+, dbt_utils.surrogate_key was renamed to dbt_utils.generate_surrogate_key. If you copy the macro call from older course materials you'll see a deprecation warning or an error.\n\nFix: replace every surrogate_key call with generate_surrogate_key. The arguments are the same.\n\n```sql\n{{ dbt_utils.generate_surrogate_key(['field_a', 'field_b', 'field_c']) }}\n```\n\nCommon places in the course where this comes up: stg_green_tripdata.sql, stg_yellow_tripdata.sql, and similar staging models.",
+    "raw_has_code": true,
+    "parsed_has_code": true
+  },
+  {
+    "id": "fdef2dfcc4",
+    "course": "data-engineering-zoomcamp",
+    "question": "lServiceException: 401 Anonymous caller does not have storage.objects.list access to the Google Cloud Storage bucket. Permission 'storage.objects.list' denied on resource (or it may not exist).",
+    "status": "CODE PRESERVED",
+    "raw_body": "This occurs because you are not logged in with Google Cloud SDK, or the project ID is not set. Follow these steps:\n\n1. Log in using Google Cloud SDK:\n   \n   ```bash\n   gcloud auth login\n   ```\n   \n   This will open a tab in the browser. Accept the terms, then close the tab if needed.\n\n2. Set the project ID:\n   \n   ```bash\n   gcloud config set project <YOUR_PROJECT_ID>\n   ```\n\n3. Upload the `pq` directory to a Google Cloud Storage (GCS) Bucket:\n   \n   ```bash\n   gsutil -m cp -r pq/ <YOUR_URI_from_gsutil>/pq\n   ```",
+    "parsed_answer": "This occurs because you are not logged in with Google Cloud SDK, or the project ID is not set. Follow these steps:\n\n1. Log in using Google Cloud SDK:\n   \n   ```bash\ngcloud auth login\n```\n   \n   This will open a tab in the browser. Accept the terms, then close the tab if needed.\n\n2. Set the project ID:\n   \n   ```bash\ngcloud config set project <YOUR_PROJECT_ID>\n```\n\n3. Upload the pq directory to a Google Cloud Storage (GCS) Bucket:\n   \n   ```bash\ngsutil -m cp -r pq/ <YOUR_URI_from_gsutil>/pq\n```",
+    "raw_has_code": true,
+    "parsed_has_code": true
+  },
+  {
+    "id": "1695e67099",
+    "course": "mlops-zoomcamp",
+    "question": "Missing dependencies",
+    "status": "CODE PRESERVED",
+    "raw_body": "If some dependencies are missing:\n\n<{IMAGE:image_1}>\n\nInstall the following packages:\n\n- `pandas`\n- `matplotlib`\n- `scikit-learn`\n- `fastparquet`\n- `pyarrow`\n- `seaborn`\n\n```bash\npip install -r requirements.txt\n```\n\nI have seen this error when using `pandas.read_parquet()`. The solution is to install `pyarrow` or `fastparquet` by running the following command in the notebook:\n\n```bash\n!pip install pyarrow\n```\n\n**Note:** If you’re using Conda instead of pip, install `fastparquet` rather than `pyarrow`, as it is much easier to install and it’s functionally identical to `pyarrow` for our needs.",
+    "parsed_answer": "If some dependencies are missing:\n\nInstall the following packages:\n\n- pandas\n- matplotlib\n- scikit-learn\n- fastparquet\n- pyarrow\n- seaborn\n\n```bash\npip install -r requirements.txt\n```\n\nI have seen this error when using pandas.read_parquet(). The solution is to install pyarrow or fastparquet by running the following command in the notebook:\n\n```bash\n!pip install pyarrow\n```\n\nNote: If you’re using Conda instead of pip, install fastparquet rather than pyarrow, as it is much easier to install and it’s functionally identical to pyarrow for our needs.",
+    "raw_has_code": true,
+    "parsed_has_code": true
+  },
+  {
+    "id": "51bc7e280d",
+    "course": "data-engineering-zoomcamp",
+    "question": "GCP VM - mkdir: cannot create directory ‘.ssh’: Permission denied",
+    "status": "CODE PRESERVED",
+    "raw_body": "If you encounter an error while trying to create a directory:\n\n```bash\nUser1@DESKTOP-PD6UM8A MINGW64 /\n\n$ mkdir .ssh\n\nmkdir: cannot create directory ‘.ssh’: Permission denied\n```\n\nThis error occurs because you are attempting to create the directory in the root folder (`/`).\n\nTo resolve this, create the directory in your home directory instead. Use the following steps:\n\n1. Navigate to your home directory using:\n   \n   ```bash\n   cd ~\n   ```\n\n2. Create the `.ssh` directory:\n   \n   ```bash\n   mkdir .ssh\n   ```\n\nFor further guidance, watch [this video](https://www.youtube.com/watch?v=ae-CV2KfoN0&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb).",
+    "parsed_answer": "If you encounter an error while trying to create a directory:\n\n```bash\nUser1@DESKTOP-PD6UM8A MINGW64 /\n\n$ mkdir .ssh\n\nmkdir: cannot create directory ‘.ssh’: Permission denied\n```\n\nThis error occurs because you are attempting to create the directory in the root folder (/).\n\nTo resolve this, create the directory in your home directory instead. Use the following steps:\n\n1. Navigate to your home directory using:\n   \n   ```bash\ncd ~\n```\n\n2. Create the .ssh directory:\n   \n   ```bash\nmkdir .ssh\n```\n\nFor further guidance, watch this video.",
+    "raw_has_code": true,
+    "parsed_has_code": true
+  }
+]

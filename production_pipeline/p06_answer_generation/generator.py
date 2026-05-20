@@ -13,17 +13,13 @@ Methods:
     AnswerGenerator.from_config(config): Instantiates the generator using a GenerationConfig object.
     AnswerGenerator.generate(query_id, query, context_doc_ids, context_text, prompt_style): Formats the context and query into a template, invokes the LLM, and returns execution metrics.
 """
-
-
 from typing import Optional
 from dataclasses import dataclass
 from rag_pipeline.logging import get_logger
-from rag_pipeline.paths import Paths
-from rag_pipeline.llm_client import call_llm, LLMResult
+from rag_pipeline.core.paths import Paths
+from rag_pipeline.core.llm_client import call_llm, LLMResult
 from .config import GenerationConfig, PromptStyle, get_prompt, PROMPT_CONFIGS
-
 logger = get_logger(__name__)
-
 
 @dataclass
 class GeneratedAnswer:
@@ -43,7 +39,6 @@ class GeneratedAnswer:
     success: bool
     error: Optional[str] = None
 
-
 class AnswerGenerator:
     """Generate answers using LLM with retrieved context."""
 
@@ -53,22 +48,11 @@ class AnswerGenerator:
         self.temperature = temperature
 
     @classmethod
-    def from_config(cls, config: GenerationConfig) -> "AnswerGenerator":
+    def from_config(cls, config: GenerationConfig) -> 'AnswerGenerator':
         """Construct from a GenerationConfig."""
-        return cls(
-            llm_model=config.llm_model,
-            max_tokens=config.max_tokens,
-            temperature=config.temperature,
-        )
+        return cls(llm_model=config.llm_model, max_tokens=config.max_tokens, temperature=config.temperature)
 
-    def generate(
-        self,
-        query_id: str,
-        query: str,
-        context_doc_ids: list[str],
-        context_text: str,
-        prompt_style: PromptStyle,
-    ) -> GeneratedAnswer:
+    def generate(self, query_id: str, query: str, context_doc_ids: list[str], context_text: str, prompt_style: PromptStyle) -> GeneratedAnswer:
         """
         Generate an answer using LLM.
 
@@ -84,47 +68,9 @@ class AnswerGenerator:
         """
         prompt_cfg = PROMPT_CONFIGS[prompt_style]
         prompt = prompt_cfg.format(context=context_text, query=query)
-
         try:
-            result: LLMResult = call_llm(
-                prompt=prompt,
-                max_tokens=prompt_cfg.max_tokens,
-                model=self.llm_model,
-                temperature=prompt_cfg.temperature,
-            )
-
-            return GeneratedAnswer(
-                query_id=query_id,
-                query=query,
-                context_doc_ids=context_doc_ids,
-                context_text=context_text,
-                generated_answer=result.content,
-                prompt_style=prompt_style,
-                temperature=prompt_cfg.temperature,
-                max_tokens=prompt_cfg.max_tokens,
-                llm_model=self.llm_model,
-                latency_ms=result.latency_ms,
-                prompt_tokens=result.prompt_tokens,
-                completion_tokens=result.completion_tokens,
-                success=True,
-                error=None,
-            )
-
+            result: LLMResult = call_llm(prompt=prompt, max_tokens=prompt_cfg.max_tokens, model=self.llm_model, temperature=prompt_cfg.temperature)
+            return GeneratedAnswer(query_id=query_id, query=query, context_doc_ids=context_doc_ids, context_text=context_text, generated_answer=result.content, prompt_style=prompt_style, temperature=prompt_cfg.temperature, max_tokens=prompt_cfg.max_tokens, llm_model=self.llm_model, latency_ms=result.latency_ms, prompt_tokens=result.prompt_tokens, completion_tokens=result.completion_tokens, success=True, error=None)
         except Exception as e:
-            logger.error(f"Generation failed for {query_id}: {e}")
-            return GeneratedAnswer(
-                query_id=query_id,
-                query=query,
-                context_doc_ids=context_doc_ids,
-                context_text=context_text,
-                generated_answer="",
-                prompt_style=prompt_style,
-                temperature=prompt_cfg.temperature,
-                max_tokens=prompt_cfg.max_tokens,
-                llm_model=self.llm_model,
-                latency_ms=0,
-                prompt_tokens=0,
-                completion_tokens=0,
-                success=False,
-                error=str(e),
-            )
+            logger.error(f'Generation failed for {query_id}: {e}')
+            return GeneratedAnswer(query_id=query_id, query=query, context_doc_ids=context_doc_ids, context_text=context_text, generated_answer='', prompt_style=prompt_style, temperature=prompt_cfg.temperature, max_tokens=prompt_cfg.max_tokens, llm_model=self.llm_model, latency_ms=0, prompt_tokens=0, completion_tokens=0, success=False, error=str(e))

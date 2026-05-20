@@ -1,0 +1,118 @@
+{
+  "thresholds": {
+    "outlier_ratio_max": 0.15,
+    "keyword_overlap_max": 0.1,
+    "confidence_min": 0.7,
+    "cross_course_max": 10
+  },
+  "adaptive_mode": false,
+  "adaptive_method": null,
+  "percentile": null,
+  "composite_score_enabled": true,
+  "results": [
+    {
+      "model": "all",
+      "file": "topic_assignments_all.json",
+      "outlier_ratio": 0.0,
+      "num_topics": 0,
+      "avg_keyword_overlap": 0,
+      "confidence_mean": 0,
+      "topic_size_std": 0,
+      "cross_course_topics": 0,
+      "composite_score": 0.75,
+      "status": "WARN",
+      "violations": [
+        "confidence_mean 0.000 < 0.700"
+      ]
+    },
+    {
+      "model": "nomic-ai/nomic-embed-text-v1.5",
+      "file": "topic_assignments_nomic_ai_nomic_embed_text_v1.5.json",
+      "outlier_ratio": 0.0556,
+      "num_topics": 88,
+      "avg_keyword_overlap": 0.0007,
+      "confidence_mean": 0.844,
+      "topic_size_std": 11.0,
+      "cross_course_topics": 73,
+      "composite_score": 0.3597950995796034,
+      "status": "WARN",
+      "violations": [
+        "cross_course_topics 73 > 10"
+      ]
+    },
+    {
+      "model": "BAAI/bge-small-en-v1.5",
+      "file": "topic_assignments_BAAI_bge_small_en_v1.5.json",
+      "outlier_ratio": 0.049,
+      "num_topics": 99,
+      "avg_keyword_overlap": 0.0008,
+      "confidence_mean": 0.823,
+      "topic_size_std": 5.5,
+      "cross_course_topics": 78,
+      "composite_score": 0.3577391534994844,
+      "status": "WARN",
+      "violations": [
+        "cross_course_topics 78 > 10"
+      ]
+    },
+    {
+      "model": "BAAI/bge-base-en-v1.5",
+      "file": "topic_assignments_BAAI_bge_base_en_v1.5.json",
+      "outlier_ratio": 0.0432,
+      "num_topics": 92,
+      "avg_keyword_overlap": 0.001,
+      "confidence_mean": 0.813,
+      "topic_size_std": 6.9,
+      "cross_course_topics": 72,
+      "composite_score": 0.3501299336495427,
+      "status": "WARN",
+      "violations": [
+        "cross_course_topics 72 > 10"
+      ]
+    },
+    {
+      "model": "intfloat/e5-small-v2",
+      "file": "topic_assignments_intfloat_e5_small_v2.json",
+      "outlier_ratio": 0.0573,
+      "num_topics": 99,
+      "avg_keyword_overlap": 0.001,
+      "confidence_mean": 0.848,
+      "topic_size_std": 6.2,
+      "cross_course_topics": 77,
+      "composite_score": 0.2684295753778418,
+      "status": "WARN",
+      "violations": [
+        "cross_course_topics 77 > 10"
+      ]
+    },
+    {
+      "model": "sentence-transformers/all-mpnet-base-v2",
+      "file": "topic_assignments_sentence_transformers_all_mpnet_base_v2.json",
+      "outlier_ratio": 0.0598,
+      "num_topics": 102,
+      "avg_keyword_overlap": 0.0009,
+      "confidence_mean": 0.813,
+      "topic_size_std": 5.3,
+      "cross_course_topics": 79,
+      "composite_score": 0.2646816037735849,
+      "status": "WARN",
+      "violations": [
+        "cross_course_topics 79 > 10"
+      ]
+    }
+  ],
+  "best_model": "all",
+  "pareto_optimal": [
+    "all",
+    "nomic-ai/nomic-embed-text-v1.5",
+    "BAAI/bge-small-en-v1.5",
+    "BAAI/bge-base-en-v1.5",
+    "intfloat/e5-small-v2"
+  ],
+  "metadata": {
+    "total_models": 6,
+    "models_ok": 0,
+    "models_warn": 6,
+    "models_fail": 0
+  }
+}

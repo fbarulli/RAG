@@ -1,0 +1,23 @@
+{
+  "base_dirs": {
+    "raw": "data/raw",
+    "processed": "data/processed",
+    "experiments": "production_pipeline/experiments",
+    "configs": "configs"
+  },
+  "files": {
+    "clean_jsonl": "data/processed/clean.jsonl",
+    "test_jsonl": "data/processed/test.jsonl",
+    "topic_assignments": "production_pipeline/p02_eda/experiments/topic_assignments_all.json"
+  },
+  "output_mapping": {
+    "parse": "data/processed/parsed.jsonl",
+    "dedup": "data/processed/clean.jsonl",
+    "eda": "production_pipeline/experiments/eda_summary.json"
+  },
+  "input_mapping": {
+    "parse": "data/processed/parsed.jsonl",
+    "dedup": "data/processed/parsed.jsonl",
+    "eda": "data/processed/clean.jsonl"
+  }
+}

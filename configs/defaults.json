@@ -2,23 +2,24 @@
   "_comment": "Default settings for the retrieval benchmark pipeline. All overridable via CLI.",
 
   "paths": {
-    "clean_jsonl": "production_pipeline/p01_data_cleaning/data/processed/clean.jsonl",
-    "test_jsonl": "production_pipeline/p01_data_cleaning/data/processed/test.jsonl",
+    "raw_dir": "data/raw",
+    "processed_dir": "data/processed",
+    "experiments_dir": "production_pipeline/experiments",
+    "clean_jsonl": "data/processed/clean.jsonl",
+    "test_jsonl": "data/processed/test.jsonl",
     "topic_assignments": "production_pipeline/p02_eda/experiments/topic_assignments_all.json",
     "retrieval_configs": "configs/retrieval_configs.json",
     "models_config": "configs/models.json",
-    "experiments_dir": "experiments",
     "rerankers_config": "configs/rerankers.json",
-    "embeddings_cache_dir": "experiments/embeddings"
+    "embeddings_cache_dir": "production_pipeline/experiments/embeddings"
   },
-  
+
   "qdrant": {
     "host": "localhost",
     "port": 6333,
     "grpc_port": 6334,
     "distance": "Cosine",
     "collection": "faqs_bge_base_en_v1_5"
-
   },
 
   "elasticsearch": {
@@ -49,9 +50,5 @@
     
   "production_config": "entity_boosted_with_reranking",
   "production_model": "BAAI/bge-base-en-v1.5",
-   "llm_model": "nvidia_nim/meta/llama-3.1-70b-instruct"
-    
-
- 
-
+  "llm_model": "nvidia_nim/meta/llama-3.1-70b-instruct"
 }

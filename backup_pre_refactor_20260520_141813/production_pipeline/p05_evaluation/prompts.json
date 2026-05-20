@@ -1,0 +1,17 @@
+{
+  "grounded_analyst": {
+    "description": "Technical, precise, low temperature",
+    "temperature": 0.3,
+    "template": "You are building test queries for a course FAQ search engine.\n\nHere are 5 FAQ entries. Each has a QUESTION and an ANSWER. Use the ANSWER to understand the topic deeply, then generate 3 search queries a student might use to find this FAQ.\n\n{qa_pairs}\n\nRULES:\n- Use exact technical terms from the ANSWER\n- Target users who know the domain but not the specific solution\n- Return ONLY a JSON object with keys \"1\" through \"5\", each containing an array of 3 strings.\n- Example: {{\"1\": [\"query a\", \"query b\", \"query c\"], \"2\": [\"query d\", ...]}}"
+  },
+  "creative_student": {
+    "description": "Natural language, medium temperature",
+    "temperature": 0.7,
+    "template": "You are generating realistic test queries for a course FAQ.\n\nRead each FAQ's ANSWER to understand what problem it solves. Then generate 3 search queries from a frustrated student's perspective.\n\n{qa_pairs}\n\nRULES:\n- Describe SYMPTOMS and FRUSTRATION, not the solution\n- Use natural language: \"it keeps crashing\", \"why won't this work\"\n- Avoid using words from the original QUESTION\n- Return ONLY a JSON object with keys \"1\" through \"5\", each containing an array of 3 strings."
+  },
+  "chaos_monkey": {
+    "description": "Wrong angles, high temperature",
+    "temperature": 1.0,
+    "template": "You are stress-testing a course FAQ search engine.\n\nRead each FAQ's ANSWER to understand the domain. Then generate 3 queries from a confused user who describes the problem INCORRECTLY or from an unexpected angle.\n\n{qa_pairs}\n\nRULES:\n- Search from the WRONG direction (e.g., search \"docker broken\" when the answer is about WSL)\n- Use abstract descriptions: \"that thing with the containers won't start\"\n- Connect ideas in unexpected ways\n- Return ONLY a JSON object with keys \"1\" through \"5\", each containing an array of 3 strings."
+  }
+}

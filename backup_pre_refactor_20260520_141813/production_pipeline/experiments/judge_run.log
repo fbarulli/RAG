@@ -1,0 +1,1035 @@
+09:04:50 [INFO] __main__: [p05_llm_judge] model=BAAI/bge-base-en-v1.5 config=hybrid_rrf
+09:04:50 [INFO] __main__: [p05_llm_judge] 453 queries to judge
+09:04:50 [INFO] __main__: [build_answer_map] 1204 answers loaded from faqs_bge_base_en_v1_5
+09:04:50 [INFO] __main__: [p05_llm_judge] Resuming — 80 already scored
+09:05:49 [INFO] __main__: [score_result] tokens=prompt:380 completion:21 latency=55519ms
+09:05:49 [INFO] __main__: [81/453] 22e80c8b22_orig | hit=True | faith=1.00 fc=1.00 | latency=55519ms | Homework Q5: Why the mode returns a Series instead of a sing
+09:05:58 [INFO] __main__: [score_result] tokens=prompt:369 completion:21 latency=9077ms
+09:05:58 [INFO] __main__: [82/453] 22e80c8b22_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=9077ms | why pandas mode returns series
+09:06:37 [INFO] __main__: [score_result] tokens=prompt:370 completion:21 latency=38925ms
+09:06:37 [INFO] __main__: [83/453] 22e80c8b22_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=38925ms | pandas mode function returns multiple values
+09:06:50 [INFO] __main__: [score_result] tokens=prompt:372 completion:21 latency=12828ms
+09:06:50 [INFO] __main__: [84/453] 22e80c8b22_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=12828ms | how to get single value from pandas mode
+09:06:58 [INFO] __main__: [score_result] tokens=prompt:370 completion:21 latency=8417ms
+09:06:58 [INFO] __main__: [85/453] 22e80c8b22_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=8417ms | why is mode returning multiple values
+09:07:01 [INFO] __main__: [score_result] tokens=prompt:371 completion:21 latency=2903ms
+09:07:01 [INFO] __main__: [86/453] 22e80c8b22_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=2903ms | pandas mode function not working as expected
+09:07:03 [INFO] __main__: [score_result] tokens=prompt:373 completion:21 latency=2034ms
+09:07:03 [INFO] __main__: [87/453] 22e80c8b22_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=2034ms | how to get a single mode value in pandas
+09:07:36 [INFO] __main__: [score_result] tokens=prompt:376 completion:21 latency=33391ms
+09:07:36 [INFO] __main__: [88/453] 22e80c8b22_chaos_monkey_0 | hit=True | faith=1.00 fc=1.00 | latency=33391ms | why pandas mode function gives me a list instead of one numb
+09:07:39 [INFO] __main__: [score_result] tokens=prompt:374 completion:21 latency=2831ms
+09:07:39 [INFO] __main__: [89/453] 22e80c8b22_chaos_monkey_1 | hit=True | faith=1.00 fc=1.00 | latency=2831ms | pandas mode returns multiple values but I only need one
+09:07:42 [INFO] __main__: [score_result] tokens=prompt:376 completion:21 latency=2960ms
+09:07:42 [INFO] __main__: [90/453] 22e80c8b22_chaos_monkey_2 | hit=True | faith=1.00 fc=1.00 | latency=2960ms | what if I only want the first mode value in pandas series
+09:07:42 [INFO] __main__: [p05_llm_judge] Checkpoint saved (10 scored)
+09:07:51 [INFO] __main__: [score_result] tokens=prompt:379 completion:21 latency=8404ms
+09:07:51 [INFO] __main__: [91/453] df38a5d809_orig | hit=True | faith=1.00 fc=1.00 | latency=8404ms | How to use dbt-core with Athena?
+09:07:53 [INFO] __main__: [score_result] tokens=prompt:378 completion:21 latency=2607ms
+09:07:53 [INFO] __main__: [92/453] df38a5d809_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=2607ms | using dbt core with athena
+09:08:00 [INFO] __main__: [score_result] tokens=prompt:377 completion:21 latency=6389ms
+09:08:00 [INFO] __main__: [93/453] df38a5d809_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=6389ms | dbt athena adapter setup
+09:08:04 [INFO] __main__: [score_result] tokens=prompt:379 completion:21 latency=4101ms
+09:08:04 [INFO] __main__: [94/453] df38a5d809_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=4101ms | integrating dbt core with aws athena
+09:08:06 [INFO] __main__: [score_result] tokens=prompt:378 completion:21 latency=2042ms
+09:08:06 [INFO] __main__: [95/453] df38a5d809_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=2042ms | using dbt core with athena
+09:08:59 [INFO] __main__: [score_result] tokens=prompt:380 completion:21 latency=53229ms
+09:08:59 [INFO] __main__: [96/453] df38a5d809_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=53229ms | how to integrate dbt with aws athena
+09:09:02 [INFO] __main__: [score_result] tokens=prompt:378 completion:21 latency=2883ms
+09:09:02 [INFO] __main__: [97/453] df38a5d809_creative_student_2 | hit=True | faith=0.00 fc=1.00 | latency=2883ms | dbt athena adapter not working
+09:09:04 [INFO] __main__: [score_result] tokens=prompt:384 completion:21 latency=2446ms
+09:09:04 [INFO] __main__: [98/453] df38a5d809_chaos_monkey_0 | hit=True | faith=1.00 fc=1.00 | latency=2446ms | how to use dbt for data transformation in Athena without dbt
+09:10:03 [INFO] __main__: [score_result] tokens=prompt:383 completion:21 latency=58515ms
+09:10:03 [INFO] __main__: [99/453] df38a5d809_chaos_monkey_1 | hit=True | faith=1.00 fc=1.00 | latency=58515ms | running dbt on AWS Athena, any alternatives to dbt Cloud
+09:10:10 [INFO] __main__: [score_result] tokens=prompt:381 completion:21 latency=7469ms
+09:10:10 [INFO] __main__: [100/453] df38a5d809_chaos_monkey_2 | hit=True | faith=1.00 fc=1.00 | latency=7469ms | Athena data transformation with dbt Core, any community solu
+09:10:10 [INFO] __main__: [p05_llm_judge] Checkpoint saved (20 scored)
+09:10:33 [INFO] __main__: [score_result] tokens=prompt:333 completion:21 latency=22388ms
+09:10:33 [INFO] __main__: [101/453] ac62d9ccf0_orig | hit=True | faith=1.00 fc=1.00 | latency=22388ms | Getting a syntax error while trying to get the password from
+09:11:29 [INFO] __main__: [score_result] tokens=prompt:327 completion:21 latency=56694ms
+09:11:29 [INFO] __main__: [102/453] ac62d9ccf0_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=56694ms | aws ecr get-login syntax error
+09:11:37 [INFO] __main__: [score_result] tokens=prompt:326 completion:21 latency=7901ms
+09:11:37 [INFO] __main__: [103/453] ac62d9ccf0_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=7901ms | aws-cli get-login-password error
+09:11:42 [INFO] __main__: [score_result] tokens=prompt:374 completion:21 latency=4541ms
+09:11:42 [INFO] __main__: [104/453] ac62d9ccf0_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=4541ms | aws ecr get-login --no-include-email invalid choice
+09:11:47 [INFO] __main__: [score_result] tokens=prompt:326 completion:21 latency=4855ms
+09:11:47 [INFO] __main__: [105/453] ac62d9ccf0_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=4855ms | aws-cli password command not working
+09:11:50 [INFO] __main__: [score_result] tokens=prompt:328 completion:21 latency=3568ms
+09:11:50 [INFO] __main__: [106/453] ac62d9ccf0_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=3568ms | getting syntax error with ecr get-login
+09:11:54 [INFO] __main__: [score_result] tokens=prompt:369 completion:21 latency=3488ms
+09:11:54 [INFO] __main__: [107/453] ac62d9ccf0_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=3488ms | aws ecr login command throwing error
+09:11:59 [INFO] __main__: [score_result] tokens=prompt:373 completion:21 latency=5723ms
+09:11:59 [INFO] __main__: [108/453] ac62d9ccf0_chaos_monkey_0 | hit=True | faith=1.00 fc=0.50 | latency=5723ms | why does my aws login password look like an invalid choice
+09:12:02 [INFO] __main__: [score_result] tokens=prompt:375 completion:21 latency=2948ms
+09:12:02 [INFO] __main__: [109/453] ac62d9ccf0_chaos_monkey_1 | hit=True | faith=1.00 fc=0.50 | latency=2948ms | is ecr get-login broken when I use a certain email address
+09:12:09 [INFO] __main__: [score_result] tokens=prompt:331 completion:21 latency=6227ms
+09:12:09 [INFO] __main__: [110/453] ac62d9ccf0_chaos_monkey_2 | hit=True | faith=1.00 fc=1.00 | latency=6227ms | getting syntax error on aws get-login command with random st
+09:12:09 [INFO] __main__: [p05_llm_judge] Checkpoint saved (30 scored)
+09:12:17 [INFO] __main__: [score_result] tokens=prompt:272 completion:21 latency=8030ms
+09:12:17 [INFO] __main__: [111/453] c6fc2d4d11_orig | hit=True | faith=1.00 fc=1.00 | latency=8030ms | Connection refused error on prompting the ollam RAG?
+09:12:25 [INFO] __main__: [score_result] tokens=prompt:266 completion:21 latency=7906ms
+09:12:25 [INFO] __main__: [112/453] c6fc2d4d11_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=7906ms | ollama server connection refused
+09:12:45 [INFO] __main__: [score_result] tokens=prompt:265 completion:21 latency=20208ms
+09:12:45 [INFO] __main__: [113/453] c6fc2d4d11_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=20208ms | ollama serve error
+09:12:50 [INFO] __main__: [score_result] tokens=prompt:267 completion:21 latency=5207ms
+09:12:50 [INFO] __main__: [114/453] c6fc2d4d11_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=5207ms | connection refused error in ollama
+09:12:55 [INFO] __main__: [score_result] tokens=prompt:269 completion:21 latency=5443ms
+09:12:55 [INFO] __main__: [115/453] c6fc2d4d11_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=5443ms | connection refused error in ollam RAG
+09:13:42 [INFO] __main__: [score_result] tokens=prompt:427 completion:21 latency=46853ms
+09:13:42 [INFO] __main__: [116/453] c6fc2d4d11_creative_student_1 | hit=True | faith=0.00 fc=0.00 | latency=46853ms | ollama server not responding
+09:13:46 [INFO] __main__: [score_result] tokens=prompt:269 completion:21 latency=3901ms
+09:13:46 [INFO] __main__: [117/453] c6fc2d4d11_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=3901ms | why is ollam RAG not connecting
+09:13:49 [INFO] __main__: [score_result] tokens=prompt:272 completion:21 latency=3005ms
+09:13:49 [INFO] __main__: [118/453] c6fc2d4d11_chaos_monkey_0 | hit=True | faith=0.00 fc=1.00 | latency=3005ms | ollama cell fails to connect after I made a sandwich
+09:13:51 [INFO] __main__: [score_result] tokens=prompt:316 completion:21 latency=2152ms
+09:13:51 [INFO] __main__: [119/453] c6fc2d4d11_chaos_monkey_1 | hit=True | faith=0.00 fc=0.00 | latency=2152ms | server refuses connection after jupyter restart
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+09:15:09 [INFO] __main__: [score_result] tokens=prompt:276 completion:21 latency=16412ms
+09:15:09 [INFO] __main__: [120/453] c6fc2d4d11_chaos_monkey_2 | hit=True | faith=0.00 fc=1.00 | latency=16412ms | connection refused error after trying ollama RAG function on
+09:15:09 [INFO] __main__: [p05_llm_judge] Checkpoint saved (40 scored)
+09:15:28 [INFO] __main__: [score_result] tokens=prompt:378 completion:21 latency=19023ms
+09:15:28 [INFO] __main__: [121/453] 58586a16a6_orig | hit=True | faith=1.00 fc=1.00 | latency=19023ms | DBT: Why changing the target schema to “marts” actually crea
+09:15:35 [INFO] __main__: [score_result] tokens=prompt:358 completion:21 latency=7040ms
+09:15:35 [INFO] __main__: [122/453] 58586a16a6_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=7040ms | dbt target schema marts
+09:16:10 [INFO] __main__: [score_result] tokens=prompt:358 completion:21 latency=34256ms
+09:16:10 [INFO] __main__: [123/453] 58586a16a6_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=34256ms | dbt custom schema naming convention
+09:16:12 [INFO] __main__: [score_result] tokens=prompt:358 completion:21 latency=2727ms
+09:16:12 [INFO] __main__: [124/453] 58586a16a6_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=2727ms | dbt generate schema name macro
+09:16:16 [INFO] __main__: [score_result] tokens=prompt:412 completion:21 latency=3438ms
+09:16:16 [INFO] __main__: [125/453] 58586a16a6_creative_student_0 | hit=True | faith=0.00 fc=0.00 | latency=3438ms | dbt creating wrong schema name
+09:16:49 [INFO] __main__: [score_result] tokens=prompt:361 completion:21 latency=32974ms
+09:16:49 [INFO] __main__: [126/453] 58586a16a6_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=32974ms | target schema not working as expected in dbt
+09:18:00 [INFO] __main__: [score_result] tokens=prompt:357 completion:21 latency=70837ms
+09:18:00 [INFO] __main__: [127/453] 58586a16a6_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=70837ms | dbt schema naming issue
+09:18:19 [INFO] __main__: [score_result] tokens=prompt:366 completion:21 latency=19778ms
+09:18:19 [INFO] __main__: [128/453] 58586a16a6_chaos_monkey_0 | hit=True | faith=1.00 fc=1.00 | latency=19778ms | dbt creates a weird schema name when I set it to something n
+09:18:31 [INFO] __main__: [score_result] tokens=prompt:361 completion:21 latency=11882ms
+09:18:31 [INFO] __main__: [129/453] 58586a16a6_chaos_monkey_1 | hit=True | faith=1.00 fc=1.00 | latency=11882ms | custom schema in dbt always has a prefix
+09:19:06 [INFO] __main__: [score_result] tokens=prompt:362 completion:21 latency=34802ms
+09:19:06 [INFO] __main__: [130/453] 58586a16a6_chaos_monkey_2 | hit=True | faith=1.00 fc=1.00 | latency=34802ms | mysterious behavior when setting target schema to just one w
+09:19:06 [INFO] __main__: [p05_llm_judge] Checkpoint saved (50 scored)
+09:19:42 [INFO] __main__: [score_result] tokens=prompt:332 completion:21 latency=35619ms
+09:19:42 [INFO] __main__: [131/453] c6c2888275_orig | hit=True | faith=1.00 fc=1.00 | latency=35619ms | Cloud alternatives with GPU
+09:20:15 [INFO] __main__: [score_result] tokens=prompt:333 completion:21 latency=32963ms
+09:20:15 [INFO] __main__: [132/453] c6c2888275_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=32963ms | cloud alternatives with gpu support
+09:20:55 [INFO] __main__: [score_result] tokens=prompt:333 completion:21 latency=40661ms
+09:20:55 [INFO] __main__: [133/453] c6c2888275_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=40661ms | free gpu hours cloud platforms
+09:20:59 [INFO] __main__: [score_result] tokens=prompt:334 completion:21 latency=4121ms
+09:20:59 [INFO] __main__: [134/453] c6c2888275_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=4121ms | gpu cloud services for machine learning
+09:21:02 [INFO] __main__: [score_result] tokens=prompt:335 completion:21 latency=2229ms
+09:21:02 [INFO] __main__: [135/453] c6c2888275_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=2229ms | alternatives to cloud GPU with free hours
+09:21:06 [INFO] __main__: [score_result] tokens=prompt:335 completion:21 latency=4060ms
+09:21:06 [INFO] __main__: [136/453] c6c2888275_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=4060ms | options for cloud GPU with no costs
+09:21:08 [INFO] __main__: [score_result] tokens=prompt:334 completion:21 latency=2379ms
+09:21:08 [INFO] __main__: [137/453] c6c2888275_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=2379ms | cloud GPU services with free tier
+09:21:11 [INFO] __main__: [score_result] tokens=prompt:336 completion:21 latency=2835ms
+09:21:11 [INFO] __main__: [138/453] c6c2888275_chaos_monkey_0 | hit=True | faith=0.00 fc=1.00 | latency=2835ms | gpu acceleration free alternatives that also serve pizza
+09:21:15 [INFO] __main__: [score_result] tokens=prompt:282 completion:21 latency=4196ms
+09:21:15 [INFO] __main__: [139/453] c6c2888275_chaos_monkey_1 | hit=True | faith=0.00 fc=0.00 | latency=4196ms | are there any free gpu resources available only on tuesdays
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+09:22:19 [INFO] __main__: [score_result] tokens=prompt:338 completion:21 latency=2760ms
+09:22:19 [INFO] __main__: [140/453] c6c2888275_chaos_monkey_2 | hit=True | faith=1.00 fc=1.00 | latency=2760ms | cloud services that also work on my old gaming laptop
+09:22:19 [INFO] __main__: [p05_llm_judge] Checkpoint saved (60 scored)
+09:22:24 [INFO] __main__: [score_result] tokens=prompt:382 completion:21 latency=5024ms
+09:22:24 [INFO] __main__: [141/453] 9df18c830e_orig | hit=True | faith=1.00 fc=1.00 | latency=5024ms | Error building Docker images on Mac with M1 silicon
+09:22:27 [INFO] __main__: [score_result] tokens=prompt:379 completion:21 latency=2218ms
+09:22:27 [INFO] __main__: [142/453] 9df18c830e_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=2218ms | docker build error mac m1 silicon
+09:22:31 [INFO] __main__: [score_result] tokens=prompt:506 completion:21 latency=4522ms
+09:22:31 [INFO] __main__: [143/453] 9df18c830e_grounded_analyst_1 | hit=True | faith=1.00 fc=0.50 | latency=4522ms | docker image build failed mac m1
+09:22:34 [INFO] __main__: [score_result] tokens=prompt:388 completion:21 latency=2646ms
+09:22:34 [INFO] __main__: [144/453] 9df18c830e_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=2646ms | could not open ld-linux-x86-64.so.2 docker mac m1
+09:22:37 [INFO] __main__: [score_result] tokens=prompt:507 completion:21 latency=3342ms
+09:22:37 [INFO] __main__: [145/453] 9df18c830e_creative_student_0 | hit=True | faith=0.50 fc=0.50 | latency=3342ms | docker image build error on Mac M1
+09:22:40 [INFO] __main__: [score_result] tokens=prompt:379 completion:21 latency=2592ms
+09:22:40 [INFO] __main__: [146/453] 9df18c830e_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=2592ms | M1 silicon mac docker build issue
+09:32:55 [INFO] __main__: [score_result] tokens=prompt:508 completion:21 latency=615372ms
+09:32:55 [INFO] __main__: [147/453] 9df18c830e_creative_student_2 | hit=True | faith=1.00 fc=0.50 | latency=615372ms | why can't I build docker image on Mac
+09:33:02 [INFO] __main__: [score_result] tokens=prompt:512 completion:21 latency=7390ms
+09:33:02 [INFO] __main__: [148/453] 9df18c830e_chaos_monkey_0 | hit=True | faith=1.00 fc=0.50 | latency=7390ms | docker fails on my m1 macbook because of a library file
+09:33:06 [INFO] __main__: [score_result] tokens=prompt:384 completion:21 latency=3548ms
+09:33:06 [INFO] __main__: [149/453] 9df18c830e_chaos_monkey_1 | hit=True | faith=1.00 fc=1.00 | latency=3548ms | building docker images with an arm64 processor produces a st
+09:33:41 [INFO] __main__: [score_result] tokens=prompt:384 completion:21 latency=34917ms
+09:33:41 [INFO] __main__: [150/453] 9df18c830e_chaos_monkey_2 | hit=True | faith=1.00 fc=1.00 | latency=34917ms | is there a problem with the new mac silicon chip and docker
+09:33:41 [INFO] __main__: [p05_llm_judge] Checkpoint saved (70 scored)
+09:33:45 [INFO] __main__: [score_result] tokens=prompt:153 completion:21 latency=4135ms
+09:33:45 [INFO] __main__: [151/453] 186ed3fc35_orig | hit=True | faith=1.00 fc=1.00 | latency=4135ms | Homework: I’m not getting the exact result
+09:33:53 [INFO] __main__: [score_result] tokens=prompt:148 completion:21 latency=7637ms
+09:33:53 [INFO] __main__: [152/453] 186ed3fc35_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=7637ms | homework result not exact
+09:34:00 [INFO] __main__: [score_result] tokens=prompt:222 completion:21 latency=7219ms
+09:34:00 [INFO] __main__: [153/453] 186ed3fc35_grounded_analyst_1 | hit=True | faith=0.50 fc=0.00 | latency=7219ms | closest option homework result
+09:34:03 [INFO] __main__: [score_result] tokens=prompt:147 completion:21 latency=3336ms
+09:34:03 [INFO] __main__: [154/453] 186ed3fc35_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=3336ms | homework result approximation
+09:34:07 [INFO] __main__: [score_result] tokens=prompt:151 completion:21 latency=3755ms
+09:34:07 [INFO] __main__: [155/453] 186ed3fc35_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=3755ms | why is my homework answer not exact
+09:34:10 [INFO] __main__: [score_result] tokens=prompt:151 completion:21 latency=2516ms
+09:34:10 [INFO] __main__: [156/453] 186ed3fc35_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=2516ms | homework result is close but not exact
+09:34:15 [INFO] __main__: [score_result] tokens=prompt:151 completion:21 latency=5277ms
+09:34:15 [INFO] __main__: [157/453] 186ed3fc35_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=5277ms | can't get exact result in homework
+09:34:25 [INFO] __main__: [score_result] tokens=prompt:209 completion:21 latency=10385ms
+09:34:25 [INFO] __main__: [158/453] 186ed3fc35_chaos_monkey_0 | hit=True | faith=0.00 fc=0.00 | latency=10385ms | my grades are all wrong
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+09:36:05 [INFO] __main__: [score_result] tokens=prompt:175 completion:21 latency=38305ms
+09:36:05 [INFO] __main__: [159/453] 186ed3fc35_chaos_monkey_1 | hit=True | faith=0.00 fc=0.00 | latency=38305ms | assignment scores aren't adding up
+09:36:51 [INFO] __main__: [score_result] tokens=prompt:153 completion:21 latency=46141ms
+09:36:51 [INFO] __main__: [160/453] 186ed3fc35_chaos_monkey_2 | hit=True | faith=0.00 fc=1.00 | latency=46141ms | I'm not getting the right points for homework
+09:36:51 [INFO] __main__: [p05_llm_judge] Checkpoint saved (80 scored)
+09:39:43 [INFO] __main__: [score_result] tokens=prompt:723 completion:21 latency=172282ms
+09:39:43 [INFO] __main__: [161/453] 16481ac8f7_orig | hit=True | faith=1.00 fc=1.00 | latency=172282ms | docker: Error response from daemon: mkdir C:\Program Files\G
+09:39:49 [INFO] __main__: [score_result] tokens=prompt:706 completion:21 latency=5292ms
+09:39:49 [INFO] __main__: [162/453] 16481ac8f7_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=5292ms | docker access denied mkdir
+09:40:22 [INFO] __main__: [score_result] tokens=prompt:710 completion:21 latency=32901ms
+09:40:22 [INFO] __main__: [163/453] 16481ac8f7_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=32901ms | docker error response from daemon access is denied
+09:40:26 [INFO] __main__: [score_result] tokens=prompt:463 completion:21 latency=4960ms
+09:40:26 [INFO] __main__: [164/453] 16481ac8f7_grounded_analyst_2 | hit=True | faith=0.00 fc=0.00 | latency=4960ms | docker wsl2 access denied
+09:40:31 [INFO] __main__: [score_result] tokens=prompt:708 completion:21 latency=4889ms
+09:40:31 [INFO] __main__: [165/453] 16481ac8f7_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=4889ms | docker command gives access denied error
+09:43:03 [INFO] __main__: [score_result] tokens=prompt:1201 completion:21 latency=151392ms
+09:43:03 [INFO] __main__: [166/453] 16481ac8f7_creative_student_1 | hit=True | faith=0.00 fc=0.00 | latency=151392ms | can't run docker due to permission issue
+09:43:05 [INFO] __main__: [score_result] tokens=prompt:708 completion:21 latency=2532ms
+09:43:05 [INFO] __main__: [167/453] 16481ac8f7_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=2532ms | access denied when running docker command
+09:43:07 [INFO] __main__: [score_result] tokens=prompt:540 completion:21 latency=2178ms
+09:43:07 [INFO] __main__: [168/453] 16481ac8f7_chaos_monkey_0 | hit=False | faith=0.00 fc=0.00 | latency=2178ms | my containerization software is broken
+09:43:10 [INFO] __main__: [score_result] tokens=prompt:1199 completion:21 latency=2786ms
+09:43:10 [INFO] __main__: [169/453] 16481ac8f7_chaos_monkey_1 | hit=True | faith=0.00 fc=0.00 | latency=2786ms | docker is giving me permission errors
+09:43:14 [INFO] __main__: [score_result] tokens=prompt:475 completion:21 latency=3270ms
+09:43:14 [INFO] __main__: [170/453] 16481ac8f7_chaos_monkey_2 | hit=False | faith=0.00 fc=0.00 | latency=3270ms | my virtual environment won't start with admin
+09:43:14 [INFO] __main__: [p05_llm_judge] Checkpoint saved (90 scored)
+09:43:16 [INFO] __main__: [score_result] tokens=prompt:248 completion:21 latency=2813ms
+09:43:16 [INFO] __main__: [171/453] 5039707c1a_orig | hit=True | faith=1.00 fc=1.00 | latency=2813ms | How to normalize vectors in a Pandas DataFrame column (or Pa
+09:43:26 [INFO] __main__: [score_result] tokens=prompt:236 completion:21 latency=9574ms
+09:43:26 [INFO] __main__: [172/453] 5039707c1a_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=9574ms | normalize vectors pandas dataframe
+09:43:36 [INFO] __main__: [score_result] tokens=prompt:236 completion:21 latency=9669ms
+09:43:36 [INFO] __main__: [173/453] 5039707c1a_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=9669ms | pandas series vector normalization
+09:43:38 [INFO] __main__: [score_result] tokens=prompt:236 completion:21 latency=2588ms
+09:43:38 [INFO] __main__: [174/453] 5039707c1a_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=2588ms | vector normalization in pandas
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+09:44:44 [INFO] __main__: [score_result] tokens=prompt:238 completion:21 latency=4387ms
+09:44:44 [INFO] __main__: [175/453] 5039707c1a_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=4387ms | normalizing vectors in pandas dataframe
+09:44:46 [INFO] __main__: [score_result] tokens=prompt:239 completion:21 latency=2153ms
+09:44:46 [INFO] __main__: [176/453] 5039707c1a_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=2153ms | how to scale vectors in pandas series
+09:44:49 [INFO] __main__: [score_result] tokens=prompt:240 completion:21 latency=3091ms
+09:44:49 [INFO] __main__: [177/453] 5039707c1a_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=3091ms | why can't i normalize vectors in pandas
+09:45:00 [INFO] __main__: [score_result] tokens=prompt:239 completion:21 latency=10747ms
+09:45:00 [INFO] __main__: [178/453] 5039707c1a_chaos_monkey_0 | hit=True | faith=0.00 fc=1.00 | latency=10747ms | scaling down really big numbers in pandas
+09:48:04 [INFO] __main__: [score_result] tokens=prompt:238 completion:21 latency=183496ms
+09:48:04 [INFO] __main__: [179/453] 5039707c1a_chaos_monkey_1 | hit=True | faith=1.00 fc=1.00 | latency=183496ms | pandas dataframe column is too big
+09:51:21 [INFO] __main__: [score_result] tokens=prompt:239 completion:21 latency=197290ms
+09:51:21 [INFO] __main__: [180/453] 5039707c1a_chaos_monkey_2 | hit=True | faith=1.00 fc=1.00 | latency=197290ms | reducing size of vectors in data frame
+09:51:21 [INFO] __main__: [p05_llm_judge] Checkpoint saved (100 scored)
+09:51:25 [INFO] __main__: [score_result] tokens=prompt:401 completion:21 latency=4297ms
+09:51:25 [INFO] __main__: [181/453] c928a85179_orig | hit=True | faith=1.00 fc=1.00 | latency=4297ms | FutureWarning: Function get_feature_names is deprecated; get
+09:51:28 [INFO] __main__: [score_result] tokens=prompt:380 completion:21 latency=2467ms
+09:51:28 [INFO] __main__: [182/453] c928a85179_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=2467ms | get_feature_names deprecated scikit-learn
+09:51:31 [INFO] __main__: [score_result] tokens=prompt:377 completion:21 latency=3485ms
+09:51:31 [INFO] __main__: [183/453] c928a85179_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=3485ms | futurewarning get_feature_names
+09:51:45 [INFO] __main__: [score_result] tokens=prompt:492 completion:21 latency=14017ms
+09:51:45 [INFO] __main__: [184/453] c928a85179_grounded_analyst_2 | hit=True | faith=0.00 fc=0.00 | latency=14017ms | get_feature_names_out scikit-learn
+09:51:53 [INFO] __main__: [score_result] tokens=prompt:378 completion:21 latency=7653ms
+09:51:53 [INFO] __main__: [185/453] c928a85179_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=7653ms | get_feature_names is deprecated warning
+09:52:34 [INFO] __main__: [score_result] tokens=prompt:379 completion:21 latency=41198ms
+09:52:34 [INFO] __main__: [186/453] c928a85179_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=41198ms | future warning when using get_feature_names
+09:52:37 [INFO] __main__: [score_result] tokens=prompt:381 completion:21 latency=2921ms
+09:52:37 [INFO] __main__: [187/453] c928a85179_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=2921ms | how to fix get_feature_names deprecation warning
+09:52:40 [INFO] __main__: [score_result] tokens=prompt:492 completion:21 latency=2956ms
+09:52:40 [INFO] __main__: [188/453] c928a85179_chaos_monkey_0 | hit=True | faith=0.00 fc=0.00 | latency=2956ms | deprecated warning for something in scikit learn
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+09:53:46 [INFO] __main__: [score_result] tokens=prompt:379 completion:21 latency=4752ms
+09:53:46 [INFO] __main__: [189/453] c928a85179_chaos_monkey_1 | hit=True | faith=1.00 fc=1.00 | latency=4752ms | function name changed in newer library version
+09:53:48 [INFO] __main__: [score_result] tokens=prompt:706 completion:21 latency=2013ms
+09:53:48 [INFO] __main__: [190/453] c928a85179_chaos_monkey_2 | hit=False | faith=0.00 fc=0.00 | latency=2013ms | old method not working in new library
+09:53:48 [INFO] __main__: [p05_llm_judge] Checkpoint saved (110 scored)
+09:53:53 [INFO] __main__: [score_result] tokens=prompt:180 completion:21 latency=4538ms
+09:53:53 [INFO] __main__: [191/453] 10407876a1_orig | hit=True | faith=1.00 fc=1.00 | latency=4538ms | SSH Error: ssh: Could not resolve hostname linux: Name or se
+09:53:55 [INFO] __main__: [score_result] tokens=prompt:170 completion:21 latency=2669ms
+09:53:55 [INFO] __main__: [192/453] 10407876a1_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=2669ms | ssh could not resolve hostname linux
+09:54:02 [INFO] __main__: [score_result] tokens=prompt:170 completion:21 latency=6714ms
+09:54:02 [INFO] __main__: [193/453] 10407876a1_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=6714ms | ssh name or service not known
+09:54:05 [INFO] __main__: [score_result] tokens=prompt:168 completion:21 latency=3307ms
+09:54:05 [INFO] __main__: [194/453] 10407876a1_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=3307ms | ssh config file location
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+09:55:27 [INFO] __main__: [score_result] tokens=prompt:170 completion:21 latency=19800ms
+09:55:27 [INFO] __main__: [195/453] 10407876a1_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=19800ms | ssh connection failed with unknown hostname
+09:55:31 [INFO] __main__: [score_result] tokens=prompt:171 completion:21 latency=4480ms
+09:55:31 [INFO] __main__: [196/453] 10407876a1_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=4480ms | can't connect to linux via ssh
+09:55:35 [INFO] __main__: [score_result] tokens=prompt:170 completion:21 latency=4256ms
+09:55:35 [INFO] __main__: [197/453] 10407876a1_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=4256ms | ssh error says hostname not found
+09:55:41 [INFO] __main__: [score_result] tokens=prompt:173 completion:21 latency=5999ms
+09:55:41 [INFO] __main__: [198/453] 10407876a1_chaos_monkey_0 | hit=True | faith=1.00 fc=1.00 | latency=5999ms | can't connect to server with weird hostname error
+09:55:51 [INFO] __main__: [score_result] tokens=prompt:169 completion:21 latency=9161ms
+09:55:51 [INFO] __main__: [199/453] 10407876a1_chaos_monkey_1 | hit=True | faith=1.00 fc=1.00 | latency=9161ms | SSH config file not working
+09:55:54 [INFO] __main__: [score_result] tokens=prompt:495 completion:21 latency=3521ms
+09:55:54 [INFO] __main__: [200/453] 10407876a1_chaos_monkey_2 | hit=True | faith=1.00 fc=0.00 | latency=3521ms | linux not recognizing my username
+09:55:54 [INFO] __main__: [p05_llm_judge] Checkpoint saved (120 scored)
+09:56:00 [INFO] __main__: [score_result] tokens=prompt:539 completion:21 latency=6133ms
+09:56:00 [INFO] __main__: [201/453] ddc7d09c3d_orig | hit=True | faith=1.00 fc=1.00 | latency=6133ms | Sequential vs. Functional Model Modes in Keras (TF2)
+09:56:09 [INFO] __main__: [score_result] tokens=prompt:533 completion:21 latency=8367ms
+09:56:09 [INFO] __main__: [202/453] ddc7d09c3d_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=8367ms | Keras Sequential vs Functional model modes
+09:56:14 [INFO] __main__: [score_result] tokens=prompt:537 completion:21 latency=5718ms
+09:56:14 [INFO] __main__: [203/453] ddc7d09c3d_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=5718ms | How to choose between Sequential and Functional models in Ke
+09:56:17 [INFO] __main__: [score_result] tokens=prompt:533 completion:21 latency=2694ms
+09:56:17 [INFO] __main__: [204/453] ddc7d09c3d_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=2694ms | Understanding Sequential model API in Keras
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+09:57:21 [INFO] __main__: [score_result] tokens=prompt:537 completion:21 latency=2641ms
+09:57:21 [INFO] __main__: [205/453] ddc7d09c3d_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=2641ms | Why can't I just add layers in Keras?
+09:57:25 [INFO] __main__: [score_result] tokens=prompt:539 completion:21 latency=3591ms
+09:57:25 [INFO] __main__: [206/453] ddc7d09c3d_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=3591ms | How do I make a model with multiple layers in Keras?
+09:57:29 [INFO] __main__: [score_result] tokens=prompt:539 completion:21 latency=4486ms
+09:57:29 [INFO] __main__: [207/453] ddc7d09c3d_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=4486ms | What's the difference between these two model modes in Keras
+09:57:31 [INFO] __main__: [score_result] tokens=prompt:417 completion:21 latency=2355ms
+09:57:31 [INFO] __main__: [208/453] ddc7d09c3d_chaos_monkey_0 | hit=True | faith=0.00 fc=0.00 | latency=2355ms | Keras seems to be ignoring my layer order
+09:57:35 [INFO] __main__: [score_result] tokens=prompt:361 completion:21 latency=3320ms
+09:57:35 [INFO] __main__: [209/453] ddc7d09c3d_chaos_monkey_1 | hit=True | faith=0.00 fc=0.00 | latency=3320ms | Empty model isn't adding layers as expected
+09:57:40 [INFO] __main__: [score_result] tokens=prompt:537 completion:21 latency=4830ms
+09:57:40 [INFO] __main__: [210/453] ddc7d09c3d_chaos_monkey_2 | hit=True | faith=0.00 fc=1.00 | latency=4830ms | Sequential model API is giving different results than manual
+09:57:40 [INFO] __main__: [p05_llm_judge] Checkpoint saved (130 scored)
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+09:58:45 [INFO] __main__: [score_result] tokens=prompt:326 completion:21 latency=4147ms
+09:58:45 [INFO] __main__: [211/453] 716ff05962_orig | hit=True | faith=1.00 fc=1.00 | latency=4147ms | pytest doesn't recognize my installed libraries, but the scr
+09:58:47 [INFO] __main__: [score_result] tokens=prompt:317 completion:21 latency=2294ms
+09:58:47 [INFO] __main__: [212/453] 716ff05962_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=2294ms | Pytest not recognizing installed libraries in VS Code
+09:59:00 [INFO] __main__: [score_result] tokens=prompt:316 completion:21 latency=12503ms
+09:59:00 [INFO] __main__: [213/453] 716ff05962_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=12503ms | VS Code using different Python interpreter than terminal
+09:59:03 [INFO] __main__: [score_result] tokens=prompt:316 completion:21 latency=2928ms
+09:59:03 [INFO] __main__: [214/453] 716ff05962_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=2928ms | Pytest not seeing packages in virtual environment
+09:59:05 [INFO] __main__: [score_result] tokens=prompt:318 completion:21 latency=1846ms
+09:59:05 [INFO] __main__: [215/453] 716ff05962_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=1846ms | Why is pytest saying my libraries aren't installed?
+09:59:07 [INFO] __main__: [score_result] tokens=prompt:265 completion:21 latency=2507ms
+09:59:07 [INFO] __main__: [216/453] 716ff05962_creative_student_1 | hit=True | faith=0.00 fc=0.00 | latency=2507ms | VS Code isn't recognizing my virtual environment, what's goi
+09:59:14 [INFO] __main__: [score_result] tokens=prompt:322 completion:21 latency=6288ms
+09:59:14 [INFO] __main__: [217/453] 716ff05962_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=6288ms | How do I get pytest to see my installed packages in VS Code?
+09:59:18 [INFO] __main__: [score_result] tokens=prompt:319 completion:21 latency=4872ms
+09:59:18 [INFO] __main__: [218/453] 716ff05962_chaos_monkey_0 | hit=True | faith=1.00 fc=1.00 | latency=4872ms | VS Code doesn't recognize packages even though I installed t
+09:59:22 [INFO] __main__: [score_result] tokens=prompt:320 completion:21 latency=3373ms
+09:59:22 [INFO] __main__: [219/453] 716ff05962_chaos_monkey_1 | hit=True | faith=1.00 fc=1.00 | latency=3373ms | Why does my script work in terminal but not in VS Code
+09:59:29 [INFO] __main__: [score_result] tokens=prompt:320 completion:21 latency=7668ms
+09:59:29 [INFO] __main__: [220/453] 716ff05962_chaos_monkey_2 | hit=True | faith=1.00 fc=1.00 | latency=7668ms | Pytest can't find my virtual environment packages in VS Code
+09:59:29 [INFO] __main__: [p05_llm_judge] Checkpoint saved (140 scored)
+09:59:34 [INFO] __main__: [score_result] tokens=prompt:192 completion:21 latency=4965ms
+09:59:34 [INFO] __main__: [221/453] 5a2fac8521_orig | hit=True | faith=1.00 fc=1.00 | latency=4965ms | Can I use LinearRegression from Scikit-Learn for this week?
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+10:00:41 [INFO] __main__: [score_result] tokens=prompt:188 completion:21 latency=5232ms
+10:00:41 [INFO] __main__: [222/453] 5a2fac8521_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=5232ms | Using LinearRegression from Scikit-Learn this week
+10:00:43 [INFO] __main__: [score_result] tokens=prompt:189 completion:21 latency=2210ms
+10:00:43 [INFO] __main__: [223/453] 5a2fac8521_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=2210ms | Is LinearRegression from Scikit-Learn allowed this week
+10:00:46 [INFO] __main__: [score_result] tokens=prompt:190 completion:21 latency=2746ms
+10:00:46 [INFO] __main__: [224/453] 5a2fac8521_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=2746ms | Can I use Scikit-Learn LinearRegression for this assignment
+10:00:53 [INFO] __main__: [score_result] tokens=prompt:209 completion:21 latency=7131ms
+10:00:53 [INFO] __main__: [225/453] 5a2fac8521_creative_student_0 | hit=True | faith=1.00 fc=0.50 | latency=7131ms | Can I use Scikit-Learn for this assignment?
+10:01:02 [INFO] __main__: [score_result] tokens=prompt:190 completion:21 latency=8722ms
+10:01:02 [INFO] __main__: [226/453] 5a2fac8521_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=8722ms | Is LinearRegression from Scikit-Learn allowed this week?
+10:01:09 [INFO] __main__: [score_result] tokens=prompt:213 completion:21 latency=7023ms
+10:01:09 [INFO] __main__: [227/453] 5a2fac8521_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=7023ms | Will I get in trouble if I use Scikit-Learn for this?
+10:01:17 [INFO] __main__: [score_result] tokens=prompt:231 completion:21 latency=7980ms
+10:01:17 [INFO] __main__: [228/453] 5a2fac8521_chaos_monkey_0 | hit=True | faith=0.00 fc=0.00 | latency=7980ms | Can I use a different library for linear regression
+10:01:27 [INFO] __main__: [score_result] tokens=prompt:396 completion:21 latency=9693ms
+10:01:27 [INFO] __main__: [229/453] 5a2fac8521_chaos_monkey_1 | hit=False | faith=0.00 fc=0.00 | latency=9693ms | Is Scikit-Learn compatible with our project
+10:01:31 [INFO] __main__: [score_result] tokens=prompt:314 completion:21 latency=4649ms
+10:01:31 [INFO] __main__: [230/453] 5a2fac8521_chaos_monkey_2 | hit=False | faith=1.00 fc=1.00 | latency=4649ms | Do we need to implement linear regression from scratch
+10:01:31 [INFO] __main__: [p05_llm_judge] Checkpoint saved (150 scored)
+10:02:06 [INFO] __main__: [score_result] tokens=prompt:315 completion:21 latency=34542ms
+10:02:06 [INFO] __main__: [231/453] 13559b737e_orig | hit=True | faith=1.00 fc=1.00 | latency=34542ms | The chart in Grafana doesn’t get updates
+10:02:08 [INFO] __main__: [score_result] tokens=prompt:311 completion:21 latency=2510ms
+10:02:08 [INFO] __main__: [232/453] 13559b737e_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=2510ms | Grafana chart not updating
+10:02:17 [INFO] __main__: [score_result] tokens=prompt:315 completion:21 latency=8685ms
+10:02:17 [INFO] __main__: [233/453] 13559b737e_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=8685ms | How to update Grafana chart in real time
+10:03:09 [INFO] __main__: [score_result] tokens=prompt:313 completion:21 latency=52434ms
+10:03:09 [INFO] __main__: [234/453] 13559b737e_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=52434ms | Grafana chart refresh interval not working
+10:03:45 [INFO] __main__: [score_result] tokens=prompt:315 completion:21 latency=35372ms
+10:03:45 [INFO] __main__: [235/453] 13559b737e_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=35372ms | Why isn't my Grafana chart updating?
+10:03:51 [INFO] __main__: [score_result] tokens=prompt:318 completion:21 latency=6572ms
+10:03:51 [INFO] __main__: [236/453] 13559b737e_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=6572ms | How do I get my Grafana chart to refresh automatically?
+10:03:56 [INFO] __main__: [score_result] tokens=prompt:317 completion:21 latency=5047ms
+10:03:56 [INFO] __main__: [237/453] 13559b737e_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=5047ms | Why is my Grafana chart stuck on old data?
+10:03:59 [INFO] __main__: [score_result] tokens=prompt:315 completion:21 latency=2830ms
+10:03:59 [INFO] __main__: [238/453] 13559b737e_chaos_monkey_0 | hit=True | faith=1.00 fc=1.00 | latency=2830ms | Grafana charts are not updating with new data
+10:04:18 [INFO] __main__: [score_result] tokens=prompt:314 completion:21 latency=18769ms
+10:04:18 [INFO] __main__: [239/453] 13559b737e_chaos_monkey_1 | hit=True | faith=1.00 fc=1.00 | latency=18769ms | Metric generation script not updating Grafana dashboard
+10:04:21 [INFO] __main__: [score_result] tokens=prompt:315 completion:21 latency=2961ms
+10:04:21 [INFO] __main__: [240/453] 13559b737e_chaos_monkey_2 | hit=True | faith=1.00 fc=1.00 | latency=2961ms | Timezone setting is affecting Grafana chart updates
+10:04:21 [INFO] __main__: [p05_llm_judge] Checkpoint saved (160 scored)
+10:04:25 [INFO] __main__: [score_result] tokens=prompt:225 completion:21 latency=4209ms
+10:04:25 [INFO] __main__: [241/453] 3ab0a03ad2_orig | hit=True | faith=1.00 fc=1.00 | latency=4209ms | Homework Q6: Which model and dict vectorizer to use?
+10:04:27 [INFO] __main__: [score_result] tokens=prompt:220 completion:21 latency=2047ms
+10:04:27 [INFO] __main__: [242/453] 3ab0a03ad2_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=2047ms | Homework Q6 model and dict vectorizer
+10:04:29 [INFO] __main__: [score_result] tokens=prompt:223 completion:21 latency=1833ms
+10:04:29 [INFO] __main__: [243/453] 3ab0a03ad2_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=1833ms | Which model and DictVectorizer to use for question 6
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+10:05:34 [INFO] __main__: [score_result] tokens=prompt:282 completion:21 latency=3470ms
+10:05:34 [INFO] __main__: [244/453] 3ab0a03ad2_grounded_analyst_2 | hit=True | faith=0.50 fc=0.00 | latency=3470ms | Model2.bin and dv.bin usage in homework Q6
+10:05:36 [INFO] __main__: [score_result] tokens=prompt:225 completion:21 latency=2236ms
+10:05:36 [INFO] __main__: [245/453] 3ab0a03ad2_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=2236ms | What model and vectorizer should I use for question 6?
+10:05:38 [INFO] __main__: [score_result] tokens=prompt:225 completion:21 latency=1988ms
+10:05:38 [INFO] __main__: [246/453] 3ab0a03ad2_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=1988ms | Which dict vectorizer do I need for homework question 6?
+10:05:40 [INFO] __main__: [score_result] tokens=prompt:223 completion:21 latency=1941ms
+10:05:40 [INFO] __main__: [247/453] 3ab0a03ad2_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=1941ms | What's the correct model for homework question 6?
+10:05:42 [INFO] __main__: [score_result] tokens=prompt:223 completion:21 latency=2077ms
+10:05:42 [INFO] __main__: [248/453] 3ab0a03ad2_chaos_monkey_0 | hit=True | faith=1.00 fc=1.00 | latency=2077ms | Which model file should I use for homework question 6
+10:05:54 [INFO] __main__: [score_result] tokens=prompt:220 completion:21 latency=11683ms
+10:05:54 [INFO] __main__: [249/453] 3ab0a03ad2_chaos_monkey_1 | hit=True | faith=1.00 fc=1.00 | latency=11683ms | Is DictVectorizer required for question 6
+10:05:57 [INFO] __main__: [score_result] tokens=prompt:252 completion:21 latency=3392ms
+10:05:57 [INFO] __main__: [250/453] 3ab0a03ad2_chaos_monkey_2 | hit=True | faith=0.00 fc=0.00 | latency=3392ms | Why is the image svizor/zoomcamp-model:3.10.12-slim required
+10:05:57 [INFO] __main__: [p05_llm_judge] Checkpoint saved (170 scored)
+10:05:59 [INFO] __main__: [score_result] tokens=prompt:364 completion:21 latency=1883ms
+10:05:59 [INFO] __main__: [251/453] f8533d5ffd_orig | hit=True | faith=1.00 fc=1.00 | latency=1883ms | HPA instance doesn’t run properly (easier solution)
+10:06:05 [INFO] __main__: [score_result] tokens=prompt:432 completion:21 latency=5870ms
+10:06:05 [INFO] __main__: [252/453] f8533d5ffd_grounded_analyst_0 | hit=True | faith=1.00 fc=0.00 | latency=5870ms | HPA instance not running properly
+10:06:13 [INFO] __main__: [score_result] tokens=prompt:408 completion:21 latency=7803ms
+10:06:13 [INFO] __main__: [253/453] f8533d5ffd_grounded_analyst_1 | hit=True | faith=1.00 fc=0.50 | latency=7803ms | Metrics Server installation issues
+10:06:19 [INFO] __main__: [score_result] tokens=prompt:430 completion:21 latency=5985ms
+10:06:19 [INFO] __main__: [254/453] f8533d5ffd_grounded_analyst_2 | hit=True | faith=1.00 fc=0.00 | latency=5985ms | Kubernetes HPA troubleshooting
+10:06:22 [INFO] __main__: [score_result] tokens=prompt:433 completion:21 latency=3653ms
+10:06:22 [INFO] __main__: [255/453] f8533d5ffd_creative_student_0 | hit=True | faith=1.00 fc=0.00 | latency=3653ms | my HPA instance is malfunctioning
+10:06:25 [INFO] __main__: [score_result] tokens=prompt:434 completion:21 latency=3003ms
+10:06:25 [INFO] __main__: [256/453] f8533d5ffd_creative_student_1 | hit=True | faith=1.00 fc=0.00 | latency=3003ms | why won't my HPA run correctly
+10:06:27 [INFO] __main__: [score_result] tokens=prompt:433 completion:21 latency=1927ms
+10:06:27 [INFO] __main__: [257/453] f8533d5ffd_creative_student_2 | hit=True | faith=1.00 fc=0.00 | latency=1927ms | HPA instance not working as expected
+10:06:30 [INFO] __main__: [score_result] tokens=prompt:539 completion:21 latency=2721ms
+10:06:30 [INFO] __main__: [258/453] f8533d5ffd_chaos_monkey_0 | hit=False | faith=0.00 fc=0.00 | latency=2721ms | Docker can't connect to magic server
+10:06:33 [INFO] __main__: [score_result] tokens=prompt:395 completion:21 latency=2678ms
+10:06:33 [INFO] __main__: [259/453] f8533d5ffd_chaos_monkey_1 | hit=False | faith=0.00 fc=0.00 | latency=2678ms | The Kubernetes thing is broken, how do I fix it?
+10:06:36 [INFO] __main__: [score_result] tokens=prompt:303 completion:21 latency=3526ms
+10:06:36 [INFO] __main__: [260/453] f8533d5ffd_chaos_monkey_2 | hit=False | faith=0.00 fc=0.00 | latency=3526ms | App doesn't run, maybe something is blocking the server
+10:06:36 [INFO] __main__: [p05_llm_judge] Checkpoint saved (180 scored)
+10:06:39 [INFO] __main__: [score_result] tokens=prompt:260 completion:21 latency=2933ms
+10:06:39 [INFO] __main__: [261/453] 0156cf3b62_orig | hit=True | faith=1.00 fc=1.00 | latency=2933ms | Kitchenware Classification Competition Dataset Generator
+10:06:44 [INFO] __main__: [score_result] tokens=prompt:259 completion:21 latency=4831ms
+10:06:44 [INFO] __main__: [262/453] 0156cf3b62_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=4831ms | Kitchenware Classification dataset layout
+10:06:47 [INFO] __main__: [score_result] tokens=prompt:260 completion:21 latency=2980ms
+10:06:47 [INFO] __main__: [263/453] 0156cf3b62_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=2980ms | Dino vs dragon dataset generator
+10:06:50 [INFO] __main__: [score_result] tokens=prompt:278 completion:21 latency=2514ms
+10:06:50 [INFO] __main__: [264/453] 0156cf3b62_grounded_analyst_2 | hit=True | faith=0.00 fc=0.00 | latency=2514ms | Kaggle dataset generator script
+10:06:54 [INFO] __main__: [score_result] tokens=prompt:265 completion:21 latency=4529ms
+10:06:54 [INFO] __main__: [265/453] 0156cf3b62_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=4529ms | can't find the right dataset layout for kitchenware classifi
+10:06:57 [INFO] __main__: [score_result] tokens=prompt:263 completion:21 latency=2401ms
+10:06:57 [INFO] __main__: [266/453] 0156cf3b62_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=2401ms | kitchenware competition dataset not in the right format
+10:06:59 [INFO] __main__: [score_result] tokens=prompt:265 completion:21 latency=2895ms
+10:06:59 [INFO] __main__: [267/453] 0156cf3b62_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=2895ms | how to get the correct dataset layout for kitchenware classi
+10:07:02 [INFO] __main__: [score_result] tokens=prompt:263 completion:21 latency=3073ms
+10:07:02 [INFO] __main__: [268/453] 0156cf3b62_chaos_monkey_0 | hit=True | faith=0.00 fc=1.00 | latency=3073ms | How to recreate dinosaur dataset but for kitchen stuff
+10:07:05 [INFO] __main__: [score_result] tokens=prompt:264 completion:21 latency=2370ms
+10:07:05 [INFO] __main__: [269/453] 0156cf3b62_chaos_monkey_1 | hit=True | faith=0.00 fc=1.00 | latency=2370ms | Lesson dataset generator doesn't work with pots and pans
+10:07:07 [INFO] __main__: [score_result] tokens=prompt:337 completion:21 latency=2133ms
+10:07:07 [INFO] __main__: [270/453] 0156cf3b62_chaos_monkey_2 | hit=True | faith=0.00 fc=0.00 | latency=2133ms | Why dino dataset converter doesn't work with cups and saucer
+10:07:07 [INFO] __main__: [p05_llm_judge] Checkpoint saved (190 scored)
+10:07:09 [INFO] __main__: [score_result] tokens=prompt:619 completion:21 latency=2181ms
+10:07:09 [INFO] __main__: [271/453] 152af39a53_orig | hit=True | faith=1.00 fc=1.00 | latency=2181ms | OpenAI: Error: RateLimitError: Error code: 429 -
+10:07:19 [INFO] __main__: [score_result] tokens=prompt:559 completion:21 latency=10298ms
+10:07:19 [INFO] __main__: [272/453] 152af39a53_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=10298ms | OpenAI API rate limit error
+10:07:22 [INFO] __main__: [score_result] tokens=prompt:610 completion:21 latency=2066ms
+10:07:22 [INFO] __main__: [273/453] 152af39a53_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=2066ms | Error code 429 OpenAI
+10:07:25 [INFO] __main__: [score_result] tokens=prompt:559 completion:21 latency=3234ms
+10:07:25 [INFO] __main__: [274/453] 152af39a53_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=3234ms | Insufficient quota OpenAI API
+10:07:29 [INFO] __main__: [score_result] tokens=prompt:563 completion:21 latency=4690ms
+10:07:29 [INFO] __main__: [275/453] 152af39a53_creative_student_0 | hit=True | faith=1.00 fc=0.50 | latency=4690ms | OpenAI API keeps giving me a rate limit error
+10:07:33 [INFO] __main__: [score_result] tokens=prompt:615 completion:21 latency=3137ms
+10:07:33 [INFO] __main__: [276/453] 152af39a53_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=3137ms | why am I getting a 429 error from OpenAI
+10:07:40 [INFO] __main__: [score_result] tokens=prompt:562 completion:21 latency=7841ms
+10:07:40 [INFO] __main__: [277/453] 152af39a53_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=7841ms | OpenAI quota exceeded, what do I do
+10:07:49 [INFO] __main__: [score_result] tokens=prompt:443 completion:21 latency=8156ms
+10:07:49 [INFO] __main__: [278/453] 152af39a53_chaos_monkey_0 | hit=True | faith=0.00 fc=0.00 | latency=8156ms | OpenAI stopped working, maybe I need to pay?
+10:07:58 [INFO] __main__: [score_result] tokens=prompt:393 completion:21 latency=9099ms
+10:07:58 [INFO] __main__: [279/453] 152af39a53_chaos_monkey_1 | hit=False | faith=0.00 fc=0.00 | latency=9099ms | Why can't I talk to OpenAI anymore?
+10:08:08 [INFO] __main__: [score_result] tokens=prompt:562 completion:21 latency=10386ms
+10:08:08 [INFO] __main__: [280/453] 152af39a53_chaos_monkey_2 | hit=False | faith=1.00 fc=1.00 | latency=10386ms | Chatbot broke and won't answer my questions
+10:08:08 [INFO] __main__: [p05_llm_judge] Checkpoint saved (200 scored)
+10:08:22 [INFO] __main__: [score_result] tokens=prompt:336 completion:21 latency=14307ms
+10:08:22 [INFO] __main__: [281/453] db78580409_orig | hit=True | faith=1.00 fc=1.00 | latency=14307ms | What is the cosine similarity?
+10:08:31 [INFO] __main__: [score_result] tokens=prompt:334 completion:21 latency=8651ms
+10:08:31 [INFO] __main__: [282/453] db78580409_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=8651ms | Cosine similarity measure
+10:09:33 [INFO] __main__: [score_result] tokens=prompt:334 completion:21 latency=61967ms
+10:09:33 [INFO] __main__: [283/453] db78580409_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=61967ms | Text analysis similarity metric
+10:09:45 [INFO] __main__: [score_result] tokens=prompt:300 completion:21 latency=11794ms
+10:09:45 [INFO] __main__: [284/453] db78580409_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=11794ms | Vector similarity calculation
+10:09:53 [INFO] __main__: [score_result] tokens=prompt:340 completion:21 latency=8428ms
+10:09:53 [INFO] __main__: [285/453] db78580409_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=8428ms | what is the meaning of cosine similarity in text analysis
+10:09:59 [INFO] __main__: [score_result] tokens=prompt:337 completion:21 latency=6059ms
+10:09:59 [INFO] __main__: [286/453] db78580409_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=6059ms | how does cosine similarity measure document similarity
+10:10:01 [INFO] __main__: [score_result] tokens=prompt:334 completion:21 latency=2173ms
+10:10:01 [INFO] __main__: [287/453] db78580409_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=2173ms | cosine similarity explanation needed
+10:10:04 [INFO] __main__: [score_result] tokens=prompt:340 completion:21 latency=2693ms
+10:10:04 [INFO] __main__: [288/453] db78580409_chaos_monkey_0 | hit=True | faith=1.00 fc=1.00 | latency=2693ms | Is cosine similarity like how similar my documents are?
+10:10:08 [INFO] __main__: [score_result] tokens=prompt:305 completion:21 latency=3554ms
+10:10:08 [INFO] __main__: [289/453] db78580409_chaos_monkey_1 | hit=True | faith=1.00 fc=1.00 | latency=3554ms | How to compare two vectors in text analysis
+10:10:18 [INFO] __main__: [score_result] tokens=prompt:345 completion:21 latency=10786ms
+10:10:18 [INFO] __main__: [290/453] db78580409_chaos_monkey_2 | hit=True | faith=1.00 fc=1.00 | latency=10786ms | What is this 'cosine' thing and how does it compare words?
+10:10:18 [INFO] __main__: [p05_llm_judge] Checkpoint saved (210 scored)
+10:10:23 [INFO] __main__: [score_result] tokens=prompt:300 completion:21 latency=4067ms
+10:10:23 [INFO] __main__: [291/453] 66c3aaa71f_orig | hit=True | faith=1.00 fc=1.00 | latency=4067ms | Homework Q3: What does it mean that RMSE stops improving?
+10:10:40 [INFO] __main__: [score_result] tokens=prompt:291 completion:21 latency=17168ms
+10:10:40 [INFO] __main__: [292/453] 66c3aaa71f_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=17168ms | RMSE stops improving meaning
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+10:11:44 [INFO] __main__: [score_result] tokens=prompt:356 completion:21 latency=2935ms
+10:11:44 [INFO] __main__: [293/453] 66c3aaa71f_grounded_analyst_1 | hit=True | faith=0.00 fc=0.00 | latency=2935ms | RMSE plateau explanation
+10:11:48 [INFO] __main__: [score_result] tokens=prompt:308 completion:21 latency=4052ms
+10:11:48 [INFO] __main__: [294/453] 66c3aaa71f_grounded_analyst_2 | hit=True | faith=0.00 fc=0.00 | latency=4052ms | n_estimators and RMSE relationship
+10:11:55 [INFO] __main__: [score_result] tokens=prompt:296 completion:21 latency=6538ms
+10:11:55 [INFO] __main__: [295/453] 66c3aaa71f_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=6538ms | RMSE value not improving, what does it mean
+10:11:59 [INFO] __main__: [score_result] tokens=prompt:293 completion:21 latency=4453ms
+10:11:59 [INFO] __main__: [296/453] 66c3aaa71f_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=4453ms | why did my RMSE stop decreasing
+10:12:02 [INFO] __main__: [score_result] tokens=prompt:362 completion:21 latency=2791ms
+10:12:02 [INFO] __main__: [297/453] 66c3aaa71f_creative_student_2 | hit=True | faith=0.00 fc=0.00 | latency=2791ms | RMSE not getting better, what's going on
+10:12:04 [INFO] __main__: [score_result] tokens=prompt:299 completion:21 latency=2292ms
+10:12:04 [INFO] __main__: [298/453] 66c3aaa71f_chaos_monkey_0 | hit=True | faith=1.00 fc=1.00 | latency=2292ms | Why RMSE went up then down, what's going on?
+10:12:06 [INFO] __main__: [score_result] tokens=prompt:295 completion:21 latency=2177ms
+10:12:06 [INFO] __main__: [299/453] 66c3aaa71f_chaos_monkey_1 | hit=True | faith=1.00 fc=1.00 | latency=2177ms | How to know when RMSE is done improving
+10:12:10 [INFO] __main__: [score_result] tokens=prompt:297 completion:21 latency=3351ms
+10:12:10 [INFO] __main__: [300/453] 66c3aaa71f_chaos_monkey_2 | hit=True | faith=1.00 fc=1.00 | latency=3351ms | What's the number when RMSE stops getting better?
+10:12:10 [INFO] __main__: [p05_llm_judge] Checkpoint saved (220 scored)
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+10:13:16 [INFO] __main__: [score_result] tokens=prompt:229 completion:21 latency=4894ms
+10:13:16 [INFO] __main__: [301/453] 86a6321b3d_orig | hit=True | faith=1.00 fc=1.00 | latency=4894ms | What does launching the tracking server locally mean?
+10:13:23 [INFO] __main__: [score_result] tokens=prompt:228 completion:21 latency=7386ms
+10:13:23 [INFO] __main__: [302/453] 86a6321b3d_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=7386ms | what is local tracking server in mlflow
+10:13:57 [INFO] __main__: [score_result] tokens=prompt:226 completion:21 latency=33286ms
+10:13:57 [INFO] __main__: [303/453] 86a6321b3d_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=33286ms | mlflow server for remote hosting
+10:14:00 [INFO] __main__: [score_result] tokens=prompt:217 completion:21 latency=3614ms
+10:14:00 [INFO] __main__: [304/453] 86a6321b3d_grounded_analyst_2 | hit=True | faith=0.00 fc=0.00 | latency=3614ms | mlflow local tracking server setup
+10:14:37 [INFO] __main__: [score_result] tokens=prompt:233 completion:21 latency=36494ms
+10:14:37 [INFO] __main__: [305/453] 86a6321b3d_chaos_monkey_0 | hit=True | faith=1.00 fc=1.00 | latency=36494ms | Why does my machine need a server for my team to collaborate
+10:15:12 [INFO] __main__: [score_result] tokens=prompt:242 completion:21 latency=34964ms
+10:15:12 [INFO] __main__: [306/453] 86a6321b3d_chaos_monkey_1 | hit=True | faith=0.00 fc=0.00 | latency=34964ms | Can I track work progress on my own laptop without sharing?
+10:15:18 [INFO] __main__: [score_result] tokens=prompt:236 completion:21 latency=6052ms
+10:15:18 [INFO] __main__: [307/453] 86a6321b3d_chaos_monkey_2 | hit=False | faith=0.00 fc=0.00 | latency=6052ms | What if I don't want my colleagues connecting to my laptop?
+10:15:51 [INFO] __main__: [score_result] tokens=prompt:456 completion:21 latency=33626ms
+10:15:51 [INFO] __main__: [308/453] 4b0519f085_orig | hit=True | faith=1.00 fc=1.00 | latency=33626ms | Features for homework: Q5
+10:16:37 [INFO] __main__: [score_result] tokens=prompt:458 completion:21 latency=45690ms
+10:16:37 [INFO] __main__: [309/453] 4b0519f085_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=45690ms | features to train model for homework q5
+10:16:40 [INFO] __main__: [score_result] tokens=prompt:361 completion:21 latency=2675ms
+10:16:40 [INFO] __main__: [310/453] 4b0519f085_grounded_analyst_1 | hit=False | faith=0.00 fc=0.00 | latency=2675ms | selecting features for machine learning model
+10:16:40 [INFO] __main__: [p05_llm_judge] Checkpoint saved (230 scored)
+10:16:42 [INFO] __main__: [score_result] tokens=prompt:474 completion:21 latency=2437ms
+10:16:42 [INFO] __main__: [311/453] 4b0519f085_grounded_analyst_2 | hit=False | faith=0.50 fc=0.00 | latency=2437ms | training model with subset of features
+10:17:24 [INFO] __main__: [score_result] tokens=prompt:395 completion:21 latency=41411ms
+10:17:24 [INFO] __main__: [312/453] 4b0519f085_chaos_monkey_0 | hit=False | faith=0.00 fc=0.00 | latency=41411ms | Is feature reduction always better for models?
+10:17:31 [INFO] __main__: [score_result] tokens=prompt:395 completion:21 latency=7259ms
+10:17:31 [INFO] __main__: [313/453] 4b0519f085_chaos_monkey_1 | hit=True | faith=0.00 fc=0.00 | latency=7259ms | Will removing households improve accuracy on its own?
+10:17:39 [INFO] __main__: [score_result] tokens=prompt:483 completion:21 latency=8471ms
+10:17:39 [INFO] __main__: [314/453] 4b0519f085_chaos_monkey_2 | hit=True | faith=1.00 fc=0.50 | latency=8471ms | Why can't we just compare the models using only the most imp
+10:17:43 [INFO] __main__: [score_result] tokens=prompt:215 completion:21 latency=3765ms
+10:17:43 [INFO] __main__: [315/453] 9f4011849d_orig | hit=True | faith=1.00 fc=1.00 | latency=3765ms | What datasets are acceptable for projects?
+10:17:47 [INFO] __main__: [score_result] tokens=prompt:214 completion:21 latency=4040ms
+10:17:47 [INFO] __main__: [316/453] 9f4011849d_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=4040ms | acceptable datasets for machine learning projects
+10:17:50 [INFO] __main__: [score_result] tokens=prompt:214 completion:21 latency=2512ms
+10:17:50 [INFO] __main__: [317/453] 9f4011849d_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=2512ms | choosing a dataset for ml pipeline
+10:17:52 [INFO] __main__: [score_result] tokens=prompt:236 completion:21 latency=2490ms
+10:17:52 [INFO] __main__: [318/453] 9f4011849d_grounded_analyst_2 | hit=True | faith=0.00 fc=0.00 | latency=2490ms | dataset requirements for ml project
+10:17:55 [INFO] __main__: [score_result] tokens=prompt:217 completion:21 latency=2432ms
+10:17:55 [INFO] __main__: [319/453] 9f4011849d_chaos_monkey_0 | hit=True | faith=1.00 fc=1.00 | latency=2432ms | Can I use my personal data collection project?
+10:17:59 [INFO] __main__: [score_result] tokens=prompt:214 completion:21 latency=3848ms
+10:17:59 [INFO] __main__: [320/453] 9f4011849d_chaos_monkey_1 | hit=True | faith=0.00 fc=1.00 | latency=3848ms | Are toy datasets never acceptable?
+10:17:59 [INFO] __main__: [p05_llm_judge] Checkpoint saved (240 scored)
+10:18:01 [INFO] __main__: [score_result] tokens=prompt:217 completion:21 latency=2589ms
+10:18:01 [INFO] __main__: [321/453] 9f4011849d_chaos_monkey_2 | hit=True | faith=0.00 fc=1.00 | latency=2589ms | Do smaller datasets still demonstrate the full pipeline?
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+10:19:05 [INFO] __main__: [score_result] tokens=prompt:394 completion:21 latency=2193ms
+10:19:05 [INFO] __main__: [322/453] c79cc0fa2f_orig | hit=True | faith=1.00 fc=1.00 | latency=2193ms | Bruin time_interval: Why does the first run fail with a 'tab
+10:19:07 [INFO] __main__: [score_result] tokens=prompt:379 completion:21 latency=1879ms
+10:19:07 [INFO] __main__: [323/453] c79cc0fa2f_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=1879ms | bruin time interval materialization error
+10:19:45 [INFO] __main__: [score_result] tokens=prompt:463 completion:21 latency=38462ms
+10:19:45 [INFO] __main__: [324/453] c79cc0fa2f_grounded_analyst_1 | hit=True | faith=0.00 fc=0.00 | latency=38462ms | table does not exist error in bruin
+10:19:51 [INFO] __main__: [score_result] tokens=prompt:378 completion:21 latency=5656ms
+10:19:51 [INFO] __main__: [325/453] c79cc0fa2f_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=5656ms | resolving catalog error in bruin
+10:19:57 [INFO] __main__: [score_result] tokens=prompt:402 completion:21 latency=6580ms
+10:19:57 [INFO] __main__: [326/453] c79cc0fa2f_chaos_monkey_0 | hit=True | faith=0.00 fc=0.00 | latency=6580ms | How do I create a table before running the materialization s
+10:20:00 [INFO] __main__: [score_result] tokens=prompt:382 completion:21 latency=2779ms
+10:20:00 [INFO] __main__: [327/453] c79cc0fa2f_chaos_monkey_1 | hit=True | faith=0.00 fc=1.00 | latency=2779ms | Can I just ignore the catalog error and continue?
+10:20:02 [INFO] __main__: [score_result] tokens=prompt:382 completion:21 latency=2095ms
+10:20:02 [INFO] __main__: [328/453] c79cc0fa2f_chaos_monkey_2 | hit=True | faith=1.00 fc=1.00 | latency=2095ms | Why does the materialization strategy delete the table?
+10:20:11 [INFO] __main__: [score_result] tokens=prompt:352 completion:21 latency=8872ms
+10:20:11 [INFO] __main__: [329/453] 226f8425c4_orig | hit=True | faith=1.00 fc=1.00 | latency=8872ms | In Powershell, Git commit raises utf-8 encoding error after 
+10:20:20 [INFO] __main__: [score_result] tokens=prompt:343 completion:21 latency=8628ms
+10:20:20 [INFO] __main__: [330/453] 226f8425c4_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=8628ms | powershell git commit utf-8 encoding error
+10:20:20 [INFO] __main__: [p05_llm_judge] Checkpoint saved (250 scored)
+10:20:30 [INFO] __main__: [score_result] tokens=prompt:340 completion:21 latency=10715ms
+10:20:30 [INFO] __main__: [331/453] 226f8425c4_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=10715ms | pre-commit yaml file encoding issue
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+10:22:04 [INFO] __main__: [score_result] tokens=prompt:344 completion:21 latency=32256ms
+10:22:04 [INFO] __main__: [332/453] 226f8425c4_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=32256ms | utf-8 codec error in powershell git commit
+10:22:07 [INFO] __main__: [score_result] tokens=prompt:480 completion:21 latency=2509ms
+10:22:07 [INFO] __main__: [333/453] 226f8425c4_chaos_monkey_0 | hit=False | faith=0.00 fc=0.00 | latency=2509ms | docker thinks my yaml is in a different language
+10:22:11 [INFO] __main__: [score_result] tokens=prompt:343 completion:21 latency=3963ms
+10:22:11 [INFO] __main__: [334/453] 226f8425c4_chaos_monkey_1 | hit=True | faith=1.00 fc=1.00 | latency=3963ms | bash thing wont read my file after adding yaml
+10:22:13 [INFO] __main__: [score_result] tokens=prompt:429 completion:21 latency=2184ms
+10:22:13 [INFO] __main__: [335/453] 226f8425c4_chaos_monkey_2 | hit=True | faith=0.00 fc=0.00 | latency=2184ms | why wont windows talk to my git commits
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+10:23:33 [INFO] __main__: [score_result] tokens=prompt:229 completion:21 latency=18873ms
+10:23:33 [INFO] __main__: [336/453] d00a9ac4ba_orig | hit=True | faith=1.00 fc=1.00 | latency=18873ms | Homework/Question 6: Entry point for running scoring script 
+10:23:36 [INFO] __main__: [score_result] tokens=prompt:221 completion:21 latency=2868ms
+10:23:36 [INFO] __main__: [337/453] d00a9ac4ba_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=2868ms | docker container entry point for scoring script
+10:23:38 [INFO] __main__: [score_result] tokens=prompt:221 completion:21 latency=1774ms
+10:23:38 [INFO] __main__: [338/453] d00a9ac4ba_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=1774ms | entry point for running script in docker
+10:23:41 [INFO] __main__: [score_result] tokens=prompt:220 completion:21 latency=2864ms
+10:23:41 [INFO] __main__: [339/453] d00a9ac4ba_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=2864ms | docker entry point for bash script
+10:23:43 [INFO] __main__: [score_result] tokens=prompt:322 completion:21 latency=2111ms
+10:23:43 [INFO] __main__: [340/453] d00a9ac4ba_chaos_monkey_0 | hit=False | faith=0.00 fc=0.00 | latency=2111ms | that thing with the containers wont start
+10:23:43 [INFO] __main__: [p05_llm_judge] Checkpoint saved (260 scored)
+10:23:45 [INFO] __main__: [score_result] tokens=prompt:223 completion:21 latency=2036ms
+10:23:45 [INFO] __main__: [341/453] d00a9ac4ba_chaos_monkey_1 | hit=True | faith=1.00 fc=1.00 | latency=2036ms | running my scoring script in a box is hard
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+10:24:58 [INFO] __main__: [score_result] tokens=prompt:418 completion:21 latency=11162ms
+10:24:58 [INFO] __main__: [342/453] d00a9ac4ba_chaos_monkey_2 | hit=False | faith=0.00 fc=0.00 | latency=11162ms | what bash command makes my docker work
+10:25:00 [INFO] __main__: [score_result] tokens=prompt:242 completion:21 latency=2647ms
+10:25:00 [INFO] __main__: [343/453] 99c8a70fdf_orig | hit=True | faith=1.00 fc=1.00 | latency=2647ms | Cohort: What’s the difference between the 2024 and 2023 cour
+10:25:04 [INFO] __main__: [score_result] tokens=prompt:235 completion:21 latency=3872ms
+10:25:04 [INFO] __main__: [344/453] 99c8a70fdf_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=3872ms | difference between 2023 and 2024 course cohort
+10:25:06 [INFO] __main__: [score_result] tokens=prompt:230 completion:21 latency=1976ms
+10:25:06 [INFO] __main__: [345/453] 99c8a70fdf_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=1976ms | 2024 course cohort changes
+10:25:29 [INFO] __main__: [score_result] tokens=prompt:233 completion:21 latency=23255ms
+10:25:29 [INFO] __main__: [346/453] 99c8a70fdf_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=23255ms | what's new in 2024 course cohort
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+10:26:35 [INFO] __main__: [score_result] tokens=prompt:194 completion:21 latency=3729ms
+10:26:35 [INFO] __main__: [347/453] 99c8a70fdf_chaos_monkey_0 | hit=False | faith=0.00 fc=0.00 | latency=3729ms | will there be robots in the new class
+10:26:38 [INFO] __main__: [score_result] tokens=prompt:213 completion:21 latency=3609ms
+10:26:38 [INFO] __main__: [348/453] 99c8a70fdf_chaos_monkey_1 | hit=False | faith=0.00 fc=0.00 | latency=3609ms | is the course the same this year as last
+10:26:42 [INFO] __main__: [score_result] tokens=prompt:289 completion:21 latency=3222ms
+10:26:42 [INFO] __main__: [349/453] 99c8a70fdf_chaos_monkey_2 | hit=False | faith=0.00 fc=0.00 | latency=3222ms | did they fix the thing with the videos
+10:26:46 [INFO] __main__: [score_result] tokens=prompt:217 completion:21 latency=4291ms
+10:26:46 [INFO] __main__: [350/453] 9198d40c17_orig | hit=True | faith=1.00 fc=1.00 | latency=4291ms | Is system design included?
+10:26:46 [INFO] __main__: [p05_llm_judge] Checkpoint saved (270 scored)
+10:26:50 [INFO] __main__: [score_result] tokens=prompt:219 completion:21 latency=4229ms
+10:26:50 [INFO] __main__: [351/453] 9198d40c17_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=4229ms | is system design included in the course
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+10:27:58 [INFO] __main__: [score_result] tokens=prompt:218 completion:21 latency=6243ms
+10:27:58 [INFO] __main__: [352/453] 9198d40c17_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=6243ms | system design module in the course
+10:28:01 [INFO] __main__: [score_result] tokens=prompt:218 completion:21 latency=3414ms
+10:28:01 [INFO] __main__: [353/453] 9198d40c17_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=3414ms | does the course cover system design
+10:28:05 [INFO] __main__: [score_result] tokens=prompt:225 completion:21 latency=3519ms
+10:28:05 [INFO] __main__: [354/453] 9198d40c17_chaos_monkey_0 | hit=False | faith=0.50 fc=0.50 | latency=3519ms | i want to learn about making systems big
+10:28:07 [INFO] __main__: [score_result] tokens=prompt:257 completion:21 latency=1901ms
+10:28:07 [INFO] __main__: [355/453] 9198d40c17_chaos_monkey_1 | hit=False | faith=0.50 fc=0.00 | latency=1901ms | does this course have big picture thinking
+10:28:11 [INFO] __main__: [score_result] tokens=prompt:219 completion:21 latency=3937ms
+10:28:11 [INFO] __main__: [356/453] 9198d40c17_chaos_monkey_2 | hit=True | faith=1.00 fc=1.00 | latency=3937ms | why no system design module thingy
+10:28:13 [INFO] __main__: [score_result] tokens=prompt:249 completion:21 latency=2261ms
+10:28:13 [INFO] __main__: [357/453] 6a8dccc107_orig | hit=True | faith=1.00 fc=1.00 | latency=2261ms | What is the use of inverting or negating the variables less 
+10:28:15 [INFO] __main__: [score_result] tokens=prompt:275 completion:21 latency=2279ms
+10:28:15 [INFO] __main__: [358/453] 6a8dccc107_grounded_analyst_0 | hit=True | faith=0.00 fc=0.00 | latency=2279ms | inverting variables with low roc auc scores
+10:29:17 [INFO] __main__: [score_result] tokens=prompt:238 completion:21 latency=62209ms
+10:29:17 [INFO] __main__: [359/453] 6a8dccc107_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=62209ms | negating variables with low threshold
+10:29:23 [INFO] __main__: [score_result] tokens=prompt:224 completion:21 latency=5465ms
+10:29:23 [INFO] __main__: [360/453] 6a8dccc107_grounded_analyst_2 | hit=True | faith=0.00 fc=0.00 | latency=5465ms | improving model performance with variable inversion
+10:29:23 [INFO] __main__: [p05_llm_judge] Checkpoint saved (280 scored)
+10:29:25 [INFO] __main__: [score_result] tokens=prompt:339 completion:21 latency=1853ms
+10:29:25 [INFO] __main__: [361/453] 6a8dccc107_chaos_monkey_0 | hit=False | faith=1.00 fc=0.00 | latency=1853ms | make the numbers bigger for good model
+10:29:29 [INFO] __main__: [score_result] tokens=prompt:366 completion:21 latency=3934ms
+10:29:29 [INFO] __main__: [362/453] 6a8dccc107_chaos_monkey_1 | hit=True | faith=0.00 fc=0.00 | latency=3934ms | when to flip the features upside down
+10:32:49 [INFO] __main__: [score_result] tokens=prompt:204 completion:21 latency=200649ms
+10:32:49 [INFO] __main__: [363/453] 6a8dccc107_chaos_monkey_2 | hit=True | faith=0.00 fc=0.00 | latency=200649ms | negate to participate in model party
+10:33:08 [INFO] __main__: [score_result] tokens=prompt:443 completion:21 latency=19038ms
+10:33:08 [INFO] __main__: [364/453] f3a06ec752_orig | hit=True | faith=1.00 fc=1.00 | latency=19038ms | Downloading a csv file inside notebook
+10:33:17 [INFO] __main__: [score_result] tokens=prompt:445 completion:21 latency=8725ms
+10:33:17 [INFO] __main__: [365/453] f3a06ec752_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=8725ms | how to download csv file in jupyter notebook
+10:33:27 [INFO] __main__: [score_result] tokens=prompt:443 completion:21 latency=10063ms
+10:33:27 [INFO] __main__: [366/453] f3a06ec752_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=10063ms | loading csv file directly into pandas dataframe
+10:33:31 [INFO] __main__: [score_result] tokens=prompt:394 completion:21 latency=3506ms
+10:33:31 [INFO] __main__: [367/453] f3a06ec752_grounded_analyst_2 | hit=True | faith=0.00 fc=0.00 | latency=3506ms | jupyter notebook download file from url
+10:34:03 [INFO] __main__: [score_result] tokens=prompt:346 completion:21 latency=32840ms
+10:34:03 [INFO] __main__: [368/453] f3a06ec752_creative_student_0 | hit=True | faith=0.00 fc=0.00 | latency=32840ms | How do I get data from a website into my Jupyter notebook?
+10:34:06 [INFO] __main__: [score_result] tokens=prompt:451 completion:21 latency=2449ms
+10:34:06 [INFO] __main__: [369/453] f3a06ec752_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=2449ms | Can't download csv file into my notebook, what's the easiest
+10:34:09 [INFO] __main__: [score_result] tokens=prompt:336 completion:21 latency=3340ms
+10:34:09 [INFO] __main__: [370/453] f3a06ec752_creative_student_2 | hit=True | faith=0.00 fc=0.00 | latency=3340ms | Stuck trying to import data from a URL into pandas
+10:34:09 [INFO] __main__: [p05_llm_judge] Checkpoint saved (290 scored)
+10:34:15 [INFO] __main__: [score_result] tokens=prompt:331 completion:21 latency=6098ms
+10:34:15 [INFO] __main__: [371/453] f3a06ec752_chaos_monkey_0 | hit=False | faith=0.00 fc=0.00 | latency=6098ms | importing data with a broken pandas
+10:34:20 [INFO] __main__: [score_result] tokens=prompt:363 completion:21 latency=4411ms
+10:34:20 [INFO] __main__: [372/453] f3a06ec752_chaos_monkey_1 | hit=False | faith=1.00 fc=0.00 | latency=4411ms | trying to read a url but getting errors
+10:34:31 [INFO] __main__: [score_result] tokens=prompt:445 completion:21 latency=11099ms
+10:34:31 [INFO] __main__: [373/453] f3a06ec752_chaos_monkey_2 | hit=True | faith=1.00 fc=1.00 | latency=11099ms | giving pandas a url but it's not working
+10:34:33 [INFO] __main__: [score_result] tokens=prompt:289 completion:21 latency=2535ms
+10:34:33 [INFO] __main__: [374/453] 8af59cb98f_orig | hit=True | faith=1.00 fc=1.00 | latency=2535ms | Homework: The answer I get for one of the homework questions
+10:34:37 [INFO] __main__: [score_result] tokens=prompt:352 completion:21 latency=3337ms
+10:34:37 [INFO] __main__: [375/453] 8af59cb98f_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=3337ms | homework answer doesn't match options
+10:34:40 [INFO] __main__: [score_result] tokens=prompt:269 completion:21 latency=2908ms
+10:34:40 [INFO] __main__: [376/453] 8af59cb98f_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=2908ms | different answer options in homework
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+10:35:48 [INFO] __main__: [score_result] tokens=prompt:352 completion:21 latency=7364ms
+10:35:48 [INFO] __main__: [377/453] 8af59cb98f_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=7364ms | homework answer not matching any choice
+10:36:00 [INFO] __main__: [score_result] tokens=prompt:356 completion:21 latency=12047ms
+10:36:00 [INFO] __main__: [378/453] 8af59cb98f_creative_student_0 | hit=True | faith=1.00 fc=0.50 | latency=12047ms | Why don't my homework answers match the options?
+10:36:05 [INFO] __main__: [score_result] tokens=prompt:280 completion:21 latency=4887ms
+10:36:05 [INFO] __main__: [379/453] 8af59cb98f_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=4887ms | Homework question answer doesn't match any of the choices, w
+10:36:48 [INFO] __main__: [score_result] tokens=prompt:280 completion:21 latency=42291ms
+10:36:48 [INFO] __main__: [380/453] 8af59cb98f_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=42291ms | Frustrated that my answer isn't one of the options on the ho
+10:36:48 [INFO] __main__: [p05_llm_judge] Checkpoint saved (300 scored)
+10:36:51 [INFO] __main__: [score_result] tokens=prompt:353 completion:21 latency=3488ms
+10:36:51 [INFO] __main__: [381/453] 8af59cb98f_chaos_monkey_0 | hit=True | faith=1.00 fc=1.00 | latency=3488ms | homework answer is not on the list
+10:36:56 [INFO] __main__: [score_result] tokens=prompt:353 completion:21 latency=4512ms
+10:36:56 [INFO] __main__: [382/453] 8af59cb98f_chaos_monkey_1 | hit=True | faith=0.00 fc=0.00 | latency=4512ms | closest answer is not in the options
+10:36:59 [INFO] __main__: [score_result] tokens=prompt:353 completion:21 latency=2984ms
+10:36:59 [INFO] __main__: [383/453] 8af59cb98f_chaos_monkey_2 | hit=True | faith=0.00 fc=0.00 | latency=2984ms | options don't include my exact answer
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+10:38:03 [INFO] __main__: [score_result] tokens=prompt:720 completion:21 latency=3275ms
+10:38:03 [INFO] __main__: [384/453] bceb4aa421_orig | hit=True | faith=1.00 fc=1.00 | latency=3275ms | Docker: docker pull dbpage
+10:38:11 [INFO] __main__: [score_result] tokens=prompt:719 completion:21 latency=7194ms
+10:38:11 [INFO] __main__: [385/453] bceb4aa421_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=7194ms | docker pull command not working
+10:38:13 [INFO] __main__: [score_result] tokens=prompt:718 completion:21 latency=2696ms
+10:38:13 [INFO] __main__: [386/453] bceb4aa421_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=2696ms | docker pull public image
+10:38:23 [INFO] __main__: [score_result] tokens=prompt:719 completion:21 latency=9552ms
+10:38:23 [INFO] __main__: [387/453] bceb4aa421_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=9552ms | docker pull image from repository
+10:38:36 [INFO] __main__: [score_result] tokens=prompt:721 completion:21 latency=13593ms
+10:38:36 [INFO] __main__: [388/453] bceb4aa421_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=13593ms | Why won't Docker pull work?
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+10:39:42 [INFO] __main__: [score_result] tokens=prompt:724 completion:21 latency=3820ms
+10:39:42 [INFO] __main__: [389/453] bceb4aa421_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=3820ms | Having trouble pulling a Docker image, any ideas?
+10:39:47 [INFO] __main__: [score_result] tokens=prompt:725 completion:21 latency=5446ms
+10:39:47 [INFO] __main__: [390/453] bceb4aa421_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=5446ms | Docker pull command not working, what's going on?
+10:39:47 [INFO] __main__: [p05_llm_judge] Checkpoint saved (310 scored)
+10:39:50 [INFO] __main__: [score_result] tokens=prompt:509 completion:21 latency=3255ms
+10:39:50 [INFO] __main__: [391/453] bceb4aa421_chaos_monkey_0 | hit=True | faith=0.00 fc=0.00 | latency=3255ms | cannot fetch public image
+10:39:53 [INFO] __main__: [score_result] tokens=prompt:880 completion:21 latency=2959ms
+10:39:53 [INFO] __main__: [392/453] bceb4aa421_chaos_monkey_1 | hit=True | faith=0.00 fc=0.00 | latency=2959ms | docker repository not found
+10:39:57 [INFO] __main__: [score_result] tokens=prompt:552 completion:21 latency=3731ms
+10:39:57 [INFO] __main__: [393/453] bceb4aa421_chaos_monkey_2 | hit=False | faith=0.00 fc=0.00 | latency=3731ms | pulling postgres image fails
+10:40:01 [INFO] __main__: [score_result] tokens=prompt:179 completion:21 latency=3723ms
+10:40:01 [INFO] __main__: [394/453] 117164c439_orig | hit=True | faith=1.00 fc=1.00 | latency=3723ms | pgAdmin: Create server dialog does not appear
+10:40:05 [INFO] __main__: [score_result] tokens=prompt:176 completion:21 latency=4127ms
+10:40:05 [INFO] __main__: [395/453] 117164c439_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=4127ms | pgadmin create server dialog missing
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+10:41:09 [INFO] __main__: [score_result] tokens=prompt:177 completion:21 latency=2479ms
+10:41:09 [INFO] __main__: [396/453] 117164c439_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=2479ms | pgadmin register server instead of create
+10:41:15 [INFO] __main__: [score_result] tokens=prompt:177 completion:21 latency=6629ms
+10:41:15 [INFO] __main__: [397/453] 117164c439_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=6629ms | pgadmin new version create server issue
+10:41:17 [INFO] __main__: [score_result] tokens=prompt:179 completion:21 latency=1776ms
+10:41:17 [INFO] __main__: [398/453] 117164c439_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=1776ms | Can't find create server dialog in pgAdmin
+10:41:20 [INFO] __main__: [score_result] tokens=prompt:180 completion:21 latency=2881ms
+10:41:20 [INFO] __main__: [399/453] 117164c439_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=2881ms | pgAdmin not showing create server option, help!
+10:41:22 [INFO] __main__: [score_result] tokens=prompt:181 completion:21 latency=2078ms
+10:41:22 [INFO] __main__: [400/453] 117164c439_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=2078ms | Why is the create server dialog missing in pgAdmin?
+10:41:22 [INFO] __main__: [p05_llm_judge] Checkpoint saved (320 scored)
+10:41:25 [INFO] __main__: [score_result] tokens=prompt:178 completion:21 latency=2693ms
+10:41:25 [INFO] __main__: [401/453] 117164c439_chaos_monkey_0 | hit=True | faith=1.00 fc=1.00 | latency=2693ms | pgadmin won't let me add server
+10:41:28 [INFO] __main__: [score_result] tokens=prompt:176 completion:21 latency=2939ms
+10:41:28 [INFO] __main__: [402/453] 117164c439_chaos_monkey_1 | hit=True | faith=1.00 fc=1.00 | latency=2939ms | pgadmin server dialog not visible
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+10:42:39 [INFO] __main__: [score_result] tokens=prompt:175 completion:21 latency=9631ms
+10:42:39 [INFO] __main__: [403/453] 117164c439_chaos_monkey_2 | hit=True | faith=1.00 fc=1.00 | latency=9631ms | registering server in pgadmin
+10:42:44 [INFO] __main__: [score_result] tokens=prompt:334 completion:21 latency=4729ms
+10:42:44 [INFO] __main__: [404/453] a25406395b_orig | hit=True | faith=1.00 fc=1.00 | latency=4729ms | Subnetwork 'default' does not support Private Google Access 
+10:42:47 [INFO] __main__: [score_result] tokens=prompt:289 completion:21 latency=3040ms
+10:42:47 [INFO] __main__: [405/453] a25406395b_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=3040ms | enable private google access on subnetwork
+10:42:49 [INFO] __main__: [score_result] tokens=prompt:288 completion:21 latency=2232ms
+10:42:49 [INFO] __main__: [406/453] a25406395b_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=2232ms | dataproc internal ip only issue
+10:42:51 [INFO] __main__: [score_result] tokens=prompt:289 completion:21 latency=1822ms
+10:42:51 [INFO] __main__: [407/453] a25406395b_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=1822ms | google cloud private google access subnetwork
+10:42:53 [INFO] __main__: [score_result] tokens=prompt:292 completion:21 latency=2548ms
+10:42:53 [INFO] __main__: [408/453] a25406395b_creative_student_0 | hit=False | faith=0.00 fc=0.00 | latency=2548ms | Dataproc cluster setup error, what's going on?
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+10:44:00 [INFO] __main__: [score_result] tokens=prompt:292 completion:21 latency=5613ms
+10:44:00 [INFO] __main__: [409/453] a25406395b_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=5613ms | Getting an error about Private Google Access in Google Cloud
+10:44:02 [INFO] __main__: [score_result] tokens=prompt:443 completion:21 latency=2205ms
+10:44:02 [INFO] __main__: [410/453] a25406395b_creative_student_2 | hit=True | faith=0.00 fc=0.00 | latency=2205ms | Can't set up Dataproc cluster due to subnetwork issue
+10:44:02 [INFO] __main__: [p05_llm_judge] Checkpoint saved (330 scored)
+10:44:06 [INFO] __main__: [score_result] tokens=prompt:292 completion:21 latency=3584ms
+10:44:06 [INFO] __main__: [411/453] a25406395b_chaos_monkey_0 | hit=True | faith=1.00 fc=1.00 | latency=3584ms | dataproc needs private access but it's not enabled
+10:44:38 [INFO] __main__: [score_result] tokens=prompt:355 completion:21 latency=32406ms
+10:44:38 [INFO] __main__: [412/453] a25406395b_chaos_monkey_1 | hit=True | faith=0.00 fc=0.00 | latency=32406ms | setting dataproc to internal ip only not working
+10:44:42 [INFO] __main__: [score_result] tokens=prompt:372 completion:21 latency=3631ms
+10:44:42 [INFO] __main__: [413/453] a25406395b_chaos_monkey_2 | hit=True | faith=0.00 fc=0.00 | latency=3631ms | enabling private access for dataproc
+10:44:45 [INFO] __main__: [score_result] tokens=prompt:270 completion:21 latency=2727ms
+10:44:45 [INFO] __main__: [414/453] 2763850d3e_orig | hit=True | faith=1.00 fc=1.00 | latency=2727ms | Streaming: installing dependencies for the Python avro examp
+10:44:49 [INFO] __main__: [score_result] tokens=prompt:261 completion:21 latency=4025ms
+10:44:49 [INFO] __main__: [415/453] 2763850d3e_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=4025ms | python avro example dependencies
+10:44:54 [INFO] __main__: [score_result] tokens=prompt:253 completion:21 latency=4740ms
+10:44:54 [INFO] __main__: [416/453] 2763850d3e_grounded_analyst_1 | hit=True | faith=0.00 fc=0.00 | latency=4740ms | install confluent-kafka fastavro
+10:45:07 [INFO] __main__: [score_result] tokens=prompt:260 completion:21 latency=13767ms
+10:45:07 [INFO] __main__: [417/453] 2763850d3e_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=13767ms | producer.py script dependencies
+10:45:10 [INFO] __main__: [score_result] tokens=prompt:269 completion:21 latency=2175ms
+10:45:10 [INFO] __main__: [418/453] 2763850d3e_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=2175ms | Why can't I install the dependencies for the Python streamin
+10:45:12 [INFO] __main__: [score_result] tokens=prompt:362 completion:21 latency=2494ms
+10:45:12 [INFO] __main__: [419/453] 2763850d3e_creative_student_1 | hit=True | faith=1.00 fc=0.50 | latency=2494ms | Error when running producer.py script
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+10:46:18 [INFO] __main__: [score_result] tokens=prompt:280 completion:21 latency=4053ms
+10:46:18 [INFO] __main__: [420/453] 2763850d3e_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=4053ms | Can't get the avro example to work in Python
+10:46:18 [INFO] __main__: [p05_llm_judge] Checkpoint saved (340 scored)
+10:46:23 [INFO] __main__: [score_result] tokens=prompt:264 completion:21 latency=5501ms
+10:46:23 [INFO] __main__: [421/453] 2763850d3e_chaos_monkey_0 | hit=True | faith=1.00 fc=1.00 | latency=5501ms | pip install doesn't work for streaming example
+10:46:26 [INFO] __main__: [score_result] tokens=prompt:212 completion:21 latency=2685ms
+10:46:26 [INFO] __main__: [422/453] 2763850d3e_chaos_monkey_1 | hit=False | faith=0.00 fc=0.00 | latency=2685ms | conda activation breaks python script
+10:46:28 [INFO] __main__: [score_result] tokens=prompt:280 completion:21 latency=1943ms
+10:46:28 [INFO] __main__: [423/453] 2763850d3e_chaos_monkey_2 | hit=True | faith=0.00 fc=0.00 | latency=1943ms | why does my avro example need a virtual environment?
+10:46:30 [INFO] __main__: [score_result] tokens=prompt:814 completion:21 latency=2173ms
+10:46:30 [INFO] __main__: [424/453] 563feb7fd1_orig | hit=True | faith=1.00 fc=1.00 | latency=2173ms | Mage updated in UI
+10:46:34 [INFO] __main__: [score_result] tokens=prompt:815 completion:21 latency=4474ms
+10:46:34 [INFO] __main__: [425/453] 563feb7fd1_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=4474ms | mage version update in UI
+10:47:41 [INFO] __main__: [score_result] tokens=prompt:815 completion:21 latency=66448ms
+10:47:41 [INFO] __main__: [426/453] 563feb7fd1_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=66448ms | update mage version in container
+10:47:44 [INFO] __main__: [score_result] tokens=prompt:815 completion:21 latency=3171ms
+10:47:44 [INFO] __main__: [427/453] 563feb7fd1_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=3171ms | mage version change in UI
+10:47:46 [INFO] __main__: [score_result] tokens=prompt:816 completion:21 latency=1896ms
+10:47:46 [INFO] __main__: [428/453] 563feb7fd1_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=1896ms | Mage version changed unexpectedly in UI
+10:47:48 [INFO] __main__: [score_result] tokens=prompt:822 completion:21 latency=1965ms
+10:47:48 [INFO] __main__: [429/453] 563feb7fd1_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=1965ms | How do I update the mage version without breaking my work?
+10:48:06 [INFO] __main__: [score_result] tokens=prompt:821 completion:21 latency=18580ms
+10:48:06 [INFO] __main__: [430/453] 563feb7fd1_creative_student_2 | hit=True | faith=1.00 fc=1.00 | latency=18580ms | What do I do when the mage version changes automatically?
+10:48:06 [INFO] __main__: [p05_llm_judge] Checkpoint saved (350 scored)
+10:48:09 [INFO] __main__: [score_result] tokens=prompt:687 completion:21 latency=2872ms
+10:48:09 [INFO] __main__: [431/453] 563feb7fd1_chaos_monkey_0 | hit=True | faith=0.00 fc=0.00 | latency=2872ms | Container says new version available, what do I do?
+10:48:14 [INFO] __main__: [score_result] tokens=prompt:545 completion:21 latency=4851ms
+10:48:14 [INFO] __main__: [432/453] 563feb7fd1_chaos_monkey_1 | hit=False | faith=0.00 fc=0.00 | latency=4851ms | Can I update my project without messing things up?
+10:48:26 [INFO] __main__: [score_result] tokens=prompt:821 completion:21 latency=12262ms
+10:48:26 [INFO] __main__: [433/453] 563feb7fd1_chaos_monkey_2 | hit=True | faith=1.00 fc=1.00 | latency=12262ms | Mage UI shows new version, how do I update?
+10:48:31 [INFO] __main__: [score_result] tokens=prompt:404 completion:21 latency=4638ms
+10:48:31 [INFO] __main__: [434/453] 7255a1c3bc_orig | hit=True | faith=0.00 fc=1.00 | latency=4638ms | Leaderboard: how do I find myself on the leaderboard?
+10:48:34 [INFO] __main__: [score_result] tokens=prompt:396 completion:21 latency=2917ms
+10:48:34 [INFO] __main__: [435/453] 7255a1c3bc_grounded_analyst_0 | hit=True | faith=0.00 fc=1.00 | latency=2917ms | find myself on leaderboard
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+10:49:45 [INFO] __main__: [score_result] tokens=prompt:395 completion:21 latency=9327ms
+10:49:45 [INFO] __main__: [436/453] 7255a1c3bc_grounded_analyst_1 | hit=True | faith=1.00 fc=1.00 | latency=9327ms | leaderboard display name
+10:49:50 [INFO] __main__: [score_result] tokens=prompt:396 completion:21 latency=5553ms
+10:49:50 [INFO] __main__: [437/453] 7255a1c3bc_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=5553ms | change leaderboard display name
+10:49:52 [INFO] __main__: [score_result] tokens=prompt:402 completion:21 latency=2060ms
+10:49:52 [INFO] __main__: [438/453] 7255a1c3bc_creative_student_0 | hit=True | faith=0.00 fc=1.00 | latency=2060ms | How do I find my name on the leaderboard?
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+10:50:57 [INFO] __main__: [score_result] tokens=prompt:401 completion:21 latency=2935ms
+10:50:57 [INFO] __main__: [439/453] 7255a1c3bc_creative_student_1 | hit=True | faith=1.00 fc=1.00 | latency=2935ms | Can't find my display name on the leaderboard
+10:51:00 [INFO] __main__: [score_result] tokens=prompt:403 completion:21 latency=2948ms
+10:51:00 [INFO] __main__: [440/453] 7255a1c3bc_creative_student_2 | hit=True | faith=0.00 fc=1.00 | latency=2948ms | Why isn't my name showing up on the leaderboard?
+10:51:00 [INFO] __main__: [p05_llm_judge] Checkpoint saved (360 scored)
+10:51:02 [INFO] __main__: [score_result] tokens=prompt:404 completion:21 latency=2388ms
+10:51:02 [INFO] __main__: [441/453] 7255a1c3bc_chaos_monkey_0 | hit=True | faith=0.00 fc=1.00 | latency=2388ms | How do I see my leaderboard rank on the course site?
+10:51:06 [INFO] __main__: [score_result] tokens=prompt:403 completion:21 latency=3951ms
+10:51:06 [INFO] __main__: [442/453] 7255a1c3bc_chaos_monkey_1 | hit=True | faith=0.00 fc=1.00 | latency=3951ms | My name is not showing up on the leaderboard, help
+10:51:08 [INFO] __main__: [score_result] tokens=prompt:399 completion:21 latency=2156ms
+10:51:08 [INFO] __main__: [443/453] 7255a1c3bc_chaos_monkey_2 | hit=True | faith=1.00 fc=1.00 | latency=2156ms | Where is my leaderboard display name?
+10:51:14 [INFO] __main__: [score_result] tokens=prompt:167 completion:21 latency=5375ms
+10:51:14 [INFO] __main__: [444/453] c01d835b44_orig | hit=True | faith=0.00 fc=0.00 | latency=5375ms | GCP VM: If you have lost SSH access to your machine due to l
+10:51:19 [INFO] __main__: [score_result] tokens=prompt:149 completion:21 latency=5713ms
+10:51:19 [INFO] __main__: [445/453] c01d835b44_grounded_analyst_0 | hit=True | faith=1.00 fc=1.00 | latency=5713ms | lost SSH access to GCP VM
+10:51:22 [INFO] __main__: [score_result] tokens=prompt:260 completion:21 latency=2609ms
+10:51:22 [INFO] __main__: [446/453] c01d835b44_grounded_analyst_1 | hit=True | faith=0.00 fc=0.00 | latency=2609ms | Permission denied publickey GCP VM
+10:51:26 [INFO] __main__: [score_result] tokens=prompt:351 completion:21 latency=3817ms
+10:51:26 [INFO] __main__: [447/453] c01d835b44_grounded_analyst_2 | hit=True | faith=1.00 fc=1.00 | latency=3817ms | GCP VM out of space SSH access
+10:51:29 [INFO] __main__: [score_result] tokens=prompt:154 completion:21 latency=2905ms
+10:51:29 [INFO] __main__: [448/453] c01d835b44_creative_student_0 | hit=True | faith=1.00 fc=1.00 | latency=2905ms | Lost SSH access to GCP VM due to disk space issues
+10:51:31 [INFO] __main__: [score_result] tokens=prompt:224 completion:21 latency=2732ms
+10:51:31 [INFO] __main__: [449/453] c01d835b44_creative_student_1 | hit=True | faith=1.00 fc=0.00 | latency=2732ms | Permission denied error when trying to access GCP VM
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+10:52:36 [INFO] __main__: [score_result] tokens=prompt:198 completion:21 latency=2772ms
+10:52:36 [INFO] __main__: [450/453] c01d835b44_creative_student_2 | hit=True | faith=1.00 fc=0.00 | latency=2772ms | Can't connect to GCP VM because of space constraints
+10:52:36 [INFO] __main__: [p05_llm_judge] Checkpoint saved (370 scored)
+10:52:39 [INFO] __main__: [score_result] tokens=prompt:310 completion:21 latency=3465ms
+10:52:39 [INFO] __main__: [451/453] c01d835b44_chaos_monkey_0 | hit=True | faith=1.00 fc=1.00 | latency=3465ms | VM connection refused due to disk space issue
+10:52:45 [INFO] __main__: [score_result] tokens=prompt:153 completion:21 latency=5660ms
+10:52:45 [INFO] __main__: [452/453] c01d835b44_chaos_monkey_1 | hit=True | faith=0.00 fc=0.00 | latency=5660ms | Permission denied on SSH to GCP VM due to size
+Rate limit hit (attempt 1/3) — waiting 60s before retry...
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+[1;31mProvider List: https://docs.litellm.ai/docs/providers[0m
+
+10:53:51 [INFO] __main__: [score_result] tokens=prompt:153 completion:21 latency=4105ms
+10:53:51 [INFO] __main__: [453/453] c01d835b44_chaos_monkey_2 | hit=True | faith=0.00 fc=0.00 | latency=4105ms | No space left on device, GCP SSH access denied
+
+======================================================================
+LLM JUDGE RESULTS — BAAI/bge-base-en-v1.5 / hybrid_rrf
+======================================================================
+  Queries scored    : 453
+  Mean faithfulness : 0.769
+  Mean factual corr.: 0.773
+
+  By query type:
+    chaos_monkey         n=144 faith=0.500 fc=0.559
+    creative_student     n=117 faith=0.889 fc=0.850
+    grounded_analyst     n=144 faith=0.878 fc=0.854
+    original             n= 48 faith=0.958 fc=0.979
+======================================================================
+
+10:53:51 [INFO] __main__: [p05_llm_judge] Done — 373 scored, 80 skipped (resume)
