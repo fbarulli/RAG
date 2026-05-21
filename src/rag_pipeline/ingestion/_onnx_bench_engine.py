@@ -1,5 +1,5 @@
 """
-production_pipeline/p04_ingestion/_onnx_bench_engine.py
+rag_pipeline/p04_ingestion/_onnx_bench_engine.py
 RESPONSIBILITY: Manages Qdrant network operations and payload transformation mappings.
 """
 import logging

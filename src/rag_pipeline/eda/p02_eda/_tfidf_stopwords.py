@@ -1,5 +1,5 @@
 """
-/workspaces/LLM/production_pipeline/p02_eda/_tfidf_stopwords.py
+/workspaces/LLM/rag_pipeline/p02_eda/_tfidf_stopwords.py
 ========================================
 Corpus-derived stopword list building — no hardcoded domain lists.
 

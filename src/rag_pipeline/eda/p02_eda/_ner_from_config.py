@@ -66,7 +66,7 @@ def tag_questions(questions: List[str], nlp: spacy.Language) -> List[Dict]:
         results.append({'question': doc.text, 'entities': entities, 'category': category, 'primary_entity': primary_entity})
     return results
 if __name__ == '__main__':
-    config_path = Path('production_pipeline/p02_eda/entity_patterns.json')
+    config_path = Path('rag_pipeline/p02_eda/entity_patterns.json')
     nlp = build_ner_from_config(config_path)
     test_questions = ['How to run Python as a startup script?', "HPA instance doesn't run properly", 'Deploying to Digital Ocean', 'What does pandas.DataFrame.info() do?', 'Any advice for adding experience to your LinkedIn profile?', 'What is the difference between OneHotEncoder and DictVectorizer?']
     print('\nTesting NER from config:')
@@ -75,7 +75,7 @@ if __name__ == '__main__':
         entities = [(ent.text, ent.label_) for ent in doc.ents]
         print(f'\n{q}')
         print(f'  Entities: {entities}')
-    data_path = Path('production_pipeline/p02_eda/experiments/topic_assignments_all.json')
+    data_path = Path('rag_pipeline/p02_eda/experiments/topic_assignments_all.json')
     if data_path.exists():
         with open(data_path) as f:
             data = json.load(f)

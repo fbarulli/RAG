@@ -1,5 +1,5 @@
 """
-production_pipeline/p04_ingestion/_onnx_bench.py
+rag_pipeline/p04_ingestion/_onnx_bench.py
 
 Core evaluation processing functions for the ONNX Cross-Encoder matrix.
 RESPONSIBILITY: Manages individual test query iteration execution flows.

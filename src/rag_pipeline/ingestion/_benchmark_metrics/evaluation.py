@@ -1,5 +1,5 @@
 """
-production_pipeline/p04_ingestion/_benchmark_metrics/evaluation.py
+rag_pipeline/p04_ingestion/_benchmark_metrics/evaluation.py
 Evaluation orchestration - ties retrievers to test data.
 """
 import logging

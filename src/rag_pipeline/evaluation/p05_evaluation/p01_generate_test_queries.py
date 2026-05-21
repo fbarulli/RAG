@@ -4,11 +4,11 @@ p01_generate_test_queries.py
 Generates test queries from a stratified document sample using 3 prompt strategies.
 Saves incrementally — safe to resume after interruption.
 
-Output: production_pipeline/p01_data_cleaning/data/processed/eval_queries.json
+Output: rag_pipeline/p01_data_cleaning/data/processed/eval_queries.json
 
 Run:
-    uv run python -m production_pipeline.p05_evaluation.p01_generate_test_queries
-    uv run python -m production_pipeline.p05_evaluation.p01_generate_test_queries --n-docs 308 --batch-size 5
+    uv run python -m rag_pipeline.p05_evaluation.p01_generate_test_queries
+    uv run python -m rag_pipeline.p05_evaluation.p01_generate_test_queries --n-docs 308 --batch-size 5
 """
 import argparse
 import asyncio
@@ -27,8 +27,8 @@ logger = get_logger(__name__)
 DEFAULT_N_DOCS = 308
 DEFAULT_BATCH_SIZE = 5
 DEFAULT_OUTPUT = Paths.processed_dir() / 'eval_queries.json'
-DEFAULT_PROMPTS = Path('production_pipeline/p05_evaluation/prompts.json')
-DEFAULT_TOPIC_ASSIGNMENTS = Path('production_pipeline/p02_eda/experiments/topic_assignments_all.json')
+DEFAULT_PROMPTS = Path('rag_pipeline/p05_evaluation/prompts.json')
+DEFAULT_TOPIC_ASSIGNMENTS = Path('rag_pipeline/p02_eda/experiments/topic_assignments_all.json')
 DEFAULT_CLEAN = Paths.processed_dir() / 'clean.jsonl'
 DEFAULT_MODEL = 'BAAI/bge-base-en-v1.5'
 JUDGE_LLM = 'nvidia_nim/meta/llama-3.1-70b-instruct'

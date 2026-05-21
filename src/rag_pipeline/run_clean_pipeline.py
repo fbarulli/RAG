@@ -5,20 +5,20 @@ End-to-end clean run: clears old outputs, runs topic modeling for all models,
 merges NER assignments, ingests into Qdrant + ES, compares models,
 runs retrieval benchmarking, and runs LLM-as-judge evaluation.
 
-Run: uv run python -m production_pipeline.run_clean_pipeline
+Run: uv run python -m rag_pipeline.run_clean_pipeline
 """
 import subprocess
 import sys
 import json
 import traceback
 from pathlib import Path
-from production_pipeline.p02_eda._topic_merge import merge as merge_topic_assignments
+from rag_pipeline.p02_eda._topic_merge import merge as merge_topic_assignments
 from rag_pipeline.logging import get_logger
 logger = get_logger(__name__)
 PROJECT = Path(__file__).parent.parent
-TOPIC_DIR = PROJECT / 'production_pipeline/p02_eda/experiments'
-BENCH_DIR = PROJECT / 'production_pipeline/experiments'
-TEST_FILE = PROJECT / 'production_pipeline/p01_data_cleaning/data/processed/test.jsonl'
+TOPIC_DIR = PROJECT / 'rag_pipeline/p02_eda/experiments'
+BENCH_DIR = PROJECT / 'rag_pipeline/experiments'
+TEST_FILE = PROJECT / 'rag_pipeline/p01_data_cleaning/data/processed/test.jsonl'
 MODELS = ['BAAI/bge-base-en-v1.5', 'BAAI/bge-small-en-v1.5', 'intfloat/e5-small-v2', 'nomic-ai/nomic-embed-text-v1.5', 'sentence-transformers/all-mpnet-base-v2']
 JUDGE_MODEL = 'BAAI/bge-base-en-v1.5'
 JUDGE_CONFIG = 'entity_boosted'
@@ -43,7 +43,7 @@ def clean() -> None:
 
 def run_topic_modeling() -> None:
     logger.info('Step 1/6: Topic Modeling (all models)')
-    run([sys.executable, '-m', 'production_pipeline.p02_eda.p02_topic_modeling', '--run-all', '--min-topic-size', '5', '--min-samples', '1'], step='topic_modeling')
+    run([sys.executable, '-m', 'rag_pipeline.p02_eda.p02_topic_modeling', '--run-all', '--min-topic-size', '5', '--min-samples', '1'], step='topic_modeling')
 
 def run_merge() -> None:
     logger.info('Step 2/6: Merging topic assignments + NER reclassification')
@@ -82,7 +82,7 @@ def _build_payload_indexes() -> None:
 
 def run_comparison() -> None:
     logger.info('Step 4/6: Model Comparison')
-    run([sys.executable, '-m', 'production_pipeline.p02_eda.p06_model_comparison', '--input-dir', str(TOPIC_DIR)], step='comparison')
+    run([sys.executable, '-m', 'rag_pipeline.p02_eda.p06_model_comparison', '--input-dir', str(TOPIC_DIR)], step='comparison')
 
 def run_benchmark() -> None:
     logger.info('Step 5/6: Retrieval Benchmark (all models)')
@@ -97,7 +97,7 @@ def run_benchmark() -> None:
 
 def run_judge() -> None:
     logger.info(f'Step 6/6: LLM-as-judge ({JUDGE_MODEL} / {JUDGE_CONFIG})')
-    run([sys.executable, '-m', 'production_pipeline.p05_evaluation.p05_llm_judge', '--model', JUDGE_MODEL, '--config', JUDGE_CONFIG], step='judge')
+    run([sys.executable, '-m', 'rag_pipeline.p05_evaluation.p05_llm_judge', '--model', JUDGE_MODEL, '--config', JUDGE_CONFIG], step='judge')
 
 def print_summary() -> None:
     logger.info('Pipeline complete — benchmark summary:')

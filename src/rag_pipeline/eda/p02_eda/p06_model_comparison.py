@@ -31,7 +31,7 @@ Metrics evaluated:
 Supports fixed thresholds OR adaptive percentile-based thresholds.
 
 Output: experiments/model_comparison.json
-Run:    uv run python -m production_pipeline.p02_eda.p06_model_comparison
+Run:    uv run python -m rag_pipeline.p02_eda.p06_model_comparison
         uv run python -m ... --adaptive --percentile 0.25
 """
 import argparse

@@ -1,11 +1,11 @@
 """
-production_pipeline/p04_ingestion/_benchmark_reranker.py
+rag_pipeline/p04_ingestion/_benchmark_reranker.py
 Public Functions for Rerank Evaluation Integration:
 
 def evaluate_with_reranker(query: str, retrieved_candidates: List[Dict], reranker_name: str = None, top_k: int = 5) -> Tuple[List[str], Dict]:
     Run one reranker and return reranked ids + metrics.
     I/O: query (str), retrieved_candidates (List[Dict]), reranker_name (str), top_k (int) -> Tuple[List[str], Dict]
-production_pipeline/p04_ingestion/_benchmark_reranker.py
+rag_pipeline/p04_ingestion/_benchmark_reranker.py
 Integration point for testing multiple rerankers in p04.
 """
 import time

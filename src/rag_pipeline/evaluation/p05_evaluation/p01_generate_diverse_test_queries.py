@@ -19,7 +19,7 @@ import time
 from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
-from production_pipeline.p05_evaluation.p01_generate_test_queries import DEFAULT_CLEAN, DEFAULT_PROMPTS, DEFAULT_TOPIC_ASSIGNMENTS, GAP_BETWEEN_CALLS, JUDGE_LLM, _init_env, generate_batch, load_documents_with_topics, stratified_sample
+from rag_pipeline.evaluation.p05_evaluation.p01_generate_test_queries import DEFAULT_CLEAN, DEFAULT_PROMPTS, DEFAULT_TOPIC_ASSIGNMENTS, GAP_BETWEEN_CALLS, JUDGE_LLM, _init_env, generate_batch, load_documents_with_topics, stratified_sample
 from rag_pipeline.logging import get_logger
 from rag_pipeline.core.paths import Paths
 logger = get_logger(__name__)

@@ -21,7 +21,7 @@ Runs BERTopic to discover and label topics in cleaned FAQ data.
 Supports batch processing of multiple embedding models and auto-skipping completed runs.
 
 Output: experiments/topic_assignments_*.json
-Run:    uv run python -m production_pipeline.p02_eda.p02_topic_modeling --run-all
+Run:    uv run python -m rag_pipeline.p02_eda.p02_topic_modeling --run-all
         uv run python -m ... --embedding-model "BAAI/bge-small-en-v1.5"
 """
 import argparse
@@ -31,8 +31,8 @@ from typing import Any
 from rag_pipeline.logging import get_logger
 from rag_pipeline.core.paths import Paths
 from ._topic_cluster import cluster_topics
-from production_pipeline.p02_eda._tfidf_stopwords import load_stopwords
-from production_pipeline.p02_eda._entity_pattern_learner import build_base_nlp, extract_missed_terms, suggest_patterns, update_entity_ruler
+from rag_pipeline.p02_eda._tfidf_stopwords import load_stopwords
+from rag_pipeline.p02_eda._entity_pattern_learner import build_base_nlp, extract_missed_terms, suggest_patterns, update_entity_ruler
 logger = get_logger(__name__)
 DEFAULT_INPUT = Paths.processed_dir() / 'clean.jsonl'
 DEFAULT_OUTPUT = Path(__file__).parent / 'experiments' / 'topic_assignments.json'
@@ -90,7 +90,7 @@ def process_model(model_name: str, output_path: Path, min_topic_size: int, min_s
     logger.info(f'Processing model: {model_name}')
     docs = load_questions(input_path)
     questions = [d['question'] for d in docs]
-    stopwords = load_stopwords(Path('production_pipeline/p02_eda/experiments/tfidf_analysis/stopwords/stopwords_pass2.txt'))
+    stopwords = load_stopwords(Path('rag_pipeline/p02_eda/experiments/tfidf_analysis/stopwords/stopwords_pass2.txt'))
     topic_model, topics, probs, embeddings = cluster_topics(questions=questions, embedding_model_name=model_name, min_topic_size=min_topic_size, stopwords=stopwords, min_samples=min_samples)
     topics = list(topics)
     outlier_indices = [i for i, t in enumerate(topics) if t == -1]

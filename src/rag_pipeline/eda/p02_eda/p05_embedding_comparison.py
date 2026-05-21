@@ -26,11 +26,11 @@ p05_embedding_comparison.py
 Compares topic modeling results across embedding models.
 
 Run one model at a time:
-    uv run python -m production_pipeline.p02_eda.p05_embedding_comparison --model BAAI/bge-base-en-v1.5
+    uv run python -m rag_pipeline.p02_eda.p05_embedding_comparison --model BAAI/bge-base-en-v1.5
 
 Or loop in shell:
     for m in "BAAI/bge-small-en-v1.5" "BAAI/bge-base-en-v1.5" "sentence-transformers/all-mpnet-base-v2"; do
-        uv run python -m production_pipeline.p02_eda.p05_embedding_comparison --model "$m"
+        uv run python -m rag_pipeline.p02_eda.p05_embedding_comparison --model "$m"
     done
 """
 import argparse

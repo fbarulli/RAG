@@ -37,7 +37,7 @@ def run_retrieval_query(client: Any, collection: str, query_vector: list, course
     Execute a single retrieval query against Qdrant, applying config options.
     I/O: client (Any), collection (str), query_vector (list), course_filter (str), config (dict), top_k (int) -> tuple[tuple[str, ...], Optional[str], tuple[float, ...], float]
 
-production_pipeline/p04_ingestion/_benchmark_metrics.py
+rag_pipeline/p04_ingestion/_benchmark_metrics.py
 =====================
 Compute retrieval metrics for benchmark evaluation.
 

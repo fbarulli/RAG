@@ -1,5 +1,5 @@
 """
-production_pipeline/p04_ingestion/_benchmark_with_reranker.py
+rag_pipeline/p04_ingestion/_benchmark_with_reranker.py
 Helper to run benchmark with different rerankers (one at a time).
 """
 import logging

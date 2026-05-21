@@ -25,13 +25,13 @@ to OTHER questions using rule-based signals.
 
 Usage
 -----
-    cd /workspaces/LLM && uv run python -m production_pipeline.p02_eda._topic_merge
+    cd /workspaces/LLM && uv run python -m rag_pipeline.p02_eda._topic_merge
 """
 import json
 from pathlib import Path
 from rag_pipeline.logging import get_logger
 logger = get_logger(__name__)
-EXP_DIR = Path('production_pipeline/p02_eda/experiments')
+EXP_DIR = Path('rag_pipeline/p02_eda/experiments')
 OUTPUT_PATH = EXP_DIR / 'topic_assignments_all.json'
 _ERROR_SIGNALS = {'error', 'exception', 'failed', 'failure', 'warning', 'cannot', "can't", 'unable', 'not found', 'permission denied', 'attributeerror', 'valueerror', 'typeerror', 'importerror', 'modulenotfounderror', 'filenotfounderror', 'keyerror', 'oserror', 'runtimeerror', 'nameerror', 'traceback', 'convergencewarning', 'futurewarning', 'userwarning', 'deprecationwarning', 'timeout', 'refused', 'denied', 'crash', 'invalid', 'unrecognized', 'could not', 'no module', 'no such'}
 _ADMIN_SIGNALS = {'certificate', 'homework', 'deadline', 'cohort', 'office hours', 'self-paced', 'graduate', 'leaderboard', 'peer review', 'capstone', 'lecture', 'video', 'live', 'recorded', 'session', 'form', 'confirmation', 'email', 'registration', 'enroll', 'books', 'resources', 'additional resources'}

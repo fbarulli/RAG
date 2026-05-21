@@ -104,7 +104,7 @@ def update_entity_ruler(nlp: spacy.Language, suggestions: Dict[str, List[str]]):
     print(f'Added {len(patterns)} new token-based patterns from missed questions')
     return nlp
 if __name__ == '__main__':
-    data_path = Path('production_pipeline/p02_eda/experiments/topic_assignments_all.json')
+    data_path = Path('rag_pipeline/p02_eda/experiments/topic_assignments_all.json')
     questions = load_questions(data_path)
     print(f'Loaded {len(questions)} questions')
     nlp = build_base_nlp()

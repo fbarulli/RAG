@@ -12,7 +12,7 @@ def generate_single(query_id: str, query: str, expected_id: str, reference_answe
 def run_generations(test_queries: list[dict], retriever: QueryRetriever, context_retriever: ContextRetriever, generator: AnswerGenerator, evaluator: AnswerEvaluator, prompt_styles: list[str], top_k_values: list[int], rerank: bool = True) -> list[PipelineResult]:
     Run generation for all query × style × top_k combinations.
     I/O: test_queries (list[dict]), retriever: (QueryRetriever), context_retriever (ContextRetriever), generator (AnswerGenerator), evaluator (AnswerEvaluator), prompt_styles (list[str]), top_k_values (list[int]), rerank (bool) -> list[PipelineResult]
-production_pipeline/p06_answer_generation/runner.py
+rag_pipeline/p06_answer_generation/runner.py
 
 Orchestrate answer generation and evaluation pipeline.
 

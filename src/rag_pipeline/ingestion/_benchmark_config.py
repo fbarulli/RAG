@@ -13,7 +13,7 @@ def merge_args(args: argparse.Namespace) -> BenchmarkConfig:
     Return a new config with any non-None CLI values overlaid on self.
     I/O: args (argparse.Namespace) -> BenchmarkConfig
 
-production_pipeline/p04_ingestion/_benchmark_config.py
+rag_pipeline/p04_ingestion/_benchmark_config.py
 ===================
 Centralized configuration dataclass for all benchmark scripts.
 

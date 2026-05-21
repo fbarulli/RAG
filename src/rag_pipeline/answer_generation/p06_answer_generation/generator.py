@@ -1,5 +1,5 @@
 """
-production_pipeline/p06_answer_generation/generator.py
+rag_pipeline/p06_answer_generation/generator.py
 LLM Answer Generation Module.
 
 This module handles the generation of answers from retrieved context using 

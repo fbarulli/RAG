@@ -1,5 +1,5 @@
 """
-production_pipeline/p04_ingestion/_reranker_runner.py
+rag_pipeline/p04_ingestion/_reranker_runner.py
 
 Handles model loading, caching, and reranking inference.
 """

@@ -1,5 +1,5 @@
 """
-production_pipeline/p04_ingestion/_benchmark_metrics/retrievers.py
+rag_pipeline/p04_ingestion/_benchmark_metrics/retrievers.py
 Retrieval implementations for different search types.
 All functions return SearchResult.
 """

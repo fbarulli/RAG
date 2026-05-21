@@ -1,5 +1,5 @@
 """
-production_pipeline/p04_ingestion/_benchmark_types.py
+rag_pipeline/p04_ingestion/_benchmark_types.py
 ===================
 Shared data classes for the retrieval benchmark pipeline.
 

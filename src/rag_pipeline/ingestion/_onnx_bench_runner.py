@@ -1,5 +1,5 @@
 """
-production_pipeline/p04_ingestion/_onnx_bench_runner.py
+rag_pipeline/p04_ingestion/_onnx_bench_runner.py
 
 The standalone entry point and CLI orchestrator for the ONNX Cross-Encoder matrix evaluation.
 RESPONSIBILITY: Manages top-level application bootstrapping and reporting lifecycle hooks.

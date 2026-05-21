@@ -1,5 +1,5 @@
 """
-production_pipeline/p04_ingestion/warm_onnx_cache.py
+rag_pipeline/p04_ingestion/warm_onnx_cache.py
 
 Utility script to pre-download and compile all cross-encoder models 
 defined in rerankers.json into the ONNX cache.

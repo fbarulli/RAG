@@ -1,5 +1,5 @@
 """
-production_pipeline/p04_ingestion/_onnx_bench_config.py
+rag_pipeline/p04_ingestion/_onnx_bench_config.py
 RESPONSIBILITY: Manages loading and resolving filesystem configuration matrices.
 """
 import json

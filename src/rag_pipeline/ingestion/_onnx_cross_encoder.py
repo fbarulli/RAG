@@ -1,5 +1,5 @@
 """
-production_pipeline/p04_ingestion/_onnx_cross_encoder.py
+rag_pipeline/p04_ingestion/_onnx_cross_encoder.py
 ONNX Cross-Encoder Inference Engine
 
 Handles batched inference for cross-encoder models using ONNX Runtime via Optimum.

@@ -29,7 +29,7 @@ ADMIN       : course logistics (certificate, cohort, homework, office hours ...)
 
 Usage
 -----
-    from production_pipeline.p02_eda._topic_ner import build_ner, tag_questions
+    from rag_pipeline.p02_eda._topic_ner import build_ner, tag_questions
 
     nlp = build_ner(
         tfidf_terms_path=Path("...tfidf_terms_long.csv"),

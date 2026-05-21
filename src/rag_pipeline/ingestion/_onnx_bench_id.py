@@ -1,5 +1,5 @@
 """
-production_pipeline/p04_ingestion/_onnx_bench_id.py
+rag_pipeline/p04_ingestion/_onnx_bench_id.py
 RESPONSIBILITY: Handles data type formatting and deterministic UUID text alignments.
 """
 import uuid

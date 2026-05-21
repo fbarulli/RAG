@@ -1,4 +1,4 @@
-""" production_pipeline/p04_ingestion/_onnx_model_loader.py
+""" rag_pipeline/p04_ingestion/_onnx_model_loader.py
 ONNX Model Loading and Configuration Module
 Handles loading and initialization of ONNX models with the Optimum library.
 """

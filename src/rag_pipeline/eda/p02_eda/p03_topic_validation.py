@@ -18,7 +18,7 @@ confidence statistics, keyword overlap, and quality proxies.
 Separates pure measurement from threshold-based evaluation to enable independent testing.
 
 Output: experiments/topic_validation.json
-Run:    uv run python -m production_pipeline.p02_eda.p03_topic_validation
+Run:    uv run python -m rag_pipeline.p02_eda.p03_topic_validation
 """
 import argparse
 import json

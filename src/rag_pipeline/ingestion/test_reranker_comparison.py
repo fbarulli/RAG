@@ -1,5 +1,5 @@
 """
-production_pipeline/p04_ingestion/test_reranker_comparison.py
+rag_pipeline/p04_ingestion/test_reranker_comparison.py
 Test different reranking strategies on a small stratified sample.
 """
 import sys

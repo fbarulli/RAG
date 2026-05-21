@@ -210,7 +210,7 @@ def _load_ner_map(topic_path: Path, model_name: str) -> dict[str, dict]:
     if 'results' not in data:
         raise KeyError(f"Topic assignments file missing 'results' key")
     if model_name not in data['results']:
-        raise KeyError(f"Model '{model_name}' not found in topic assignments. Run: uv run python -m production_pipeline.p02_eda.p02_topic_modeling --embedding-model {model_name} --run-all")
+        raise KeyError(f"Model '{model_name}' not found in topic assignments. Run: uv run python -m rag_pipeline.eda.p02_topic_modeling --embedding-model {model_name} --run-all")
     assignments = data['results'][model_name].get('assignments', [])
     mapping = {}
     for a in assignments:
@@ -247,7 +247,7 @@ def ingest_one_model(*, model_entry: dict, docs: list[FAQDocument], client: Qdra
     ner_map = _load_ner_map(config.topic_path, model_name)
     missing_docs = [doc.id for doc in docs if doc.id not in ner_map]
     if missing_docs:
-        raise RuntimeError(f"❌ Model '{model_name}' missing NER data for {len(missing_docs)} documents.\n   First 5 missing IDs: {missing_docs[:5]}\n\n   Generate missing data with:\n   uv run python -m production_pipeline.p02_eda.p02_topic_modeling \\\n       --embedding-model {model_name} \\\n       --run-all\n\n   Then re-run this ingestion.")
+        raise RuntimeError(f"❌ Model '{model_name}' missing NER data for {len(missing_docs)} documents.\n   First 5 missing IDs: {missing_docs[:5]}\n\n   Generate missing data with:\n   uv run python -m rag_pipeline.eda.p02_topic_modeling \\\n       --embedding-model {model_name} \\\n       --run-all\n\n   Then re-run this ingestion.")
     logger.info(f'✅ NER coverage: {len(ner_map)}/{n_docs} documents (100%)')
     if not _ensure_collection(client, collection, dims):
         return False

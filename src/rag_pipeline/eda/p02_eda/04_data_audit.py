@@ -4,7 +4,7 @@
 Deep data quality audit for parsed FAQ documents.
 Checks code block integrity, encoding, metadata, and content patterns.
 
-Run: uv run python production_pipeline/p02_eda/04_data_audit.py [--sample N]
+Run: uv run python rag_pipeline/p02_eda/04_data_audit.py [--sample N]
 """
 import argparse
 import json

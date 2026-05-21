@@ -13,8 +13,8 @@ using an LLM judge on two dimensions:
 Scores are 0.0–1.0. Results are saved incrementally to avoid loss on crash.
 
 Run:
-    uv run python -m production_pipeline.p05_evaluation.p05_llm_judge
-    uv run python -m production_pipeline.p05_evaluation.p05_llm_judge --model "BAAI/bge-base-en-v1.5" --config "hybrid_rrf"
+    uv run python -m rag_pipeline.p05_evaluation.p05_llm_judge
+    uv run python -m rag_pipeline.p05_evaluation.p05_llm_judge --model "BAAI/bge-base-en-v1.5" --config "hybrid_rrf"
 """
 import argparse
 import json
