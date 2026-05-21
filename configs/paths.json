@@ -10,5 +10,15 @@
   "models_config": "configs/models.json",
   "rerankers_config": "configs/rerankers.json",
   "embeddings_cache_dir": "production_pipeline/experiments/embeddings",
-  "reranker_results_dir": "production_pipeline/experiments/reranker_benchmarks"
+  "reranker_results_dir": "production_pipeline/experiments/reranker_benchmarks",
+  "input_mapping": {
+    "parse": "data/processed/parsed.jsonl",
+    "dedup": "data/processed/parsed.jsonl",
+    "eda": "data/processed/clean.jsonl"
+  },
+  "output_mapping": {
+    "parse": "data/processed/parsed.jsonl",
+    "dedup": "data/processed/clean.jsonl",
+    "eda": "data/processed/clean.jsonl"
+  }
 }

@@ -35,7 +35,7 @@ def _build_candidate_record(point: Any, id_mapping: Dict[str, str]) -> Dict[str,
     text_content = payload.get(PAYLOAD_KEY_TEXT, payload.get(PAYLOAD_KEY_ANSWER, ''))
     if not text_content:
         text_content = '[NO CONTENT]'
-    return {'es_id': id_mapping.get(pid, pid), 'question': text_content, 'answer': text_content, 'payload': payload}
+    return {'es_id': id_mapping.get(pid, pid), 'question': payload.get('question', ''), 'answer': text_content, 'payload': payload}
 
 def prepare_candidates_from_hits(client: QdrantClient, collection: str, hit_ids: List[Any], top_k: int=20) -> List[Dict[str, Any]]:
     """RESPONSIBILITY: Top-level orchestrator organizing key lookups and payload data mapping streams."""
