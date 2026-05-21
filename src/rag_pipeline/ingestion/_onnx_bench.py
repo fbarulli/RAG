@@ -100,7 +100,7 @@ def run_benchmark_loop(client: QdrantClient, test_set: List[Dict[str, Any]], mod
     cfg_name = f"onnx_{model_name.replace('/', '_')}"
     summary = aggregate_metrics(results, cfg_name, model_entry['name'])
     logger.info('🏆 Final Performance Matrix for %s: Hit@5=%s MRR=%s', model_name, f'{summary.hit_rate_5:.1%}', f'{summary.mrr:.4f}')
-    return summary
+    return (summary, results)
 
 def setup_bi_encoder_context(config: Any) -> Dict[str, Any]:
     """RESPONSIBILITY: Matches active environment models to structural metadata stored in models.json."""
@@ -134,9 +134,9 @@ def execute_matrix_evaluation(client: QdrantClient, test_set: List[Any], embeddi
         try:
             logger.info('🚀 Starting Benchmark Matrix Node: %s (%s)', reranker_entry['name'], reranker_entry['model'])
             encoder = compile_onnx_runtime_node(model_key=reranker_entry['model'], max_length=reranker_entry.get('max_length', 512), provider='CPUExecutionProvider')
-            summary = run_benchmark_loop(client, test_set, embedding_entry, retrieval_config, encoder, embedding_model, topic_map)
+            summary, results = run_benchmark_loop(client, test_set, embedding_entry, retrieval_config, encoder, embedding_model, topic_map)
             if summary:
-                summaries.append(summary)
+                summaries.append((summary, results, reranker_entry["name"]))
         except Exception as e:
             logger.error(traceback.format_exc())
             logger.error("Skipping node failure on cross-encoder '%s': %s", reranker_entry['name'], e)

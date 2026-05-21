@@ -16,6 +16,9 @@ from ._onnx_bench_config import load_matrix_configs
 from ._onnx_bench_engine import verify_live_infrastructure
 from ._onnx_bench import prepare_sliced_test_set, setup_bi_encoder_context, parse_runtime_hyperparameters, execute_matrix_evaluation
 from ._benchmark_report import print_full_benchmark_report, save_benchmark_results, save_performance_summary
+from ._onnx_bench_failure_analysis import save_failure_analysis
+from ._onnx_bench_failure_analysis import save_failure_analysis
+from ._onnx_bench_failure_analysis import save_failure_analysis
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(name)s: %(message)s', handlers=[logging.StreamHandler(sys.stdout)])
 logger = logging.getLogger(__name__)
 
@@ -56,9 +59,12 @@ def _persist_final_reports(summaries: List[Any], output_dir: str) -> None:
     if not summaries:
         logger.warning('⚠️ Benchmarks terminated. Zero successful summaries generated.')
         return
-    print_full_benchmark_report(summaries)
-    save_benchmark_results(summaries, output_dir)
-    save_performance_summary(summaries, output_dir)
+    metric_summaries = [s for s, _, _ in summaries]
+    results_by_reranker = {name: results for _, results, name in summaries}
+    print_full_benchmark_report(metric_summaries)
+    save_benchmark_results(metric_summaries, output_dir)
+    save_performance_summary(metric_summaries, output_dir)
+    save_failure_analysis(results_by_reranker, metric_summaries, output_dir)
     logger.info('✅ All Matrix Reranker Benchmarks complete!')
 
 def main() -> None:

@@ -123,7 +123,7 @@ class BenchmarkConfig:
             if p.is_absolute():
                 return p
             return Paths.base() / path_str
-        return cls(test_set_path=resolve(paths.get('test_jsonl')), clean_path=resolve(paths.get('clean_jsonl')), topic_path=resolve(paths.get('topic_assignments')), configs_path=resolve(paths.get('retrieval_configs')), output_dir=resolve(paths.get('experiments_dir')), cache_dir=resolve(paths.get('embeddings_cache_dir')), qdrant_host=qdrant.get('host', 'localhost'), qdrant_port=qdrant.get('port', 6333), es_host=es.get('host'), es_index=es.get('index', 'faqs'), top_k=bench.get('top_k', 10), encode_batch_size=bench.get('encode_batch_size', 32), batch_size=ingest.get('batch_size', 100), quick=bench.get('quick', False))
+        return cls(test_set_path=resolve(paths.get('test_jsonl')), clean_path=resolve(paths.get('clean_jsonl')), topic_path=resolve(paths.get('topic_assignments')), configs_path=resolve(paths.get('retrieval_configs')), output_dir=Paths.reranker_results_dir(), cache_dir=resolve(paths.get('embeddings_cache_dir')), qdrant_host=qdrant.get('host', 'localhost'), qdrant_port=qdrant.get('port', 6333), es_host=es.get('host'), es_index=es.get('index', 'faqs'), top_k=bench.get('top_k', 10), encode_batch_size=bench.get('encode_batch_size', 32), batch_size=ingest.get('batch_size', 100), quick=bench.get('quick', False))
 
     @classmethod
     def from_args(cls, args: argparse.Namespace) -> 'BenchmarkConfig':

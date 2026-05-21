@@ -23,11 +23,11 @@ class Paths:
     @classmethod
     def _load_config(cls) -> Dict[str, Any]:
         if cls._config is None:
-            config_path = cls.base() / 'configs' / 'defaults.json'
+            config_path = cls.base() / 'configs' / 'paths.json'
             try:
                 with open(config_path, encoding='utf-8') as f:
                     full = json.load(f)
-                cls._config = full.get("paths", {})
+                cls._config = full
             except Exception as e:
                 raise RuntimeError(f"Failed to load configs/defaults.json: {e}")
             
@@ -58,6 +58,14 @@ class Paths:
     @classmethod
     def topic_assignments(cls) -> Path:
         return cls.base() / cls._load_config()["topic_assignments"]
+
+    @classmethod
+    def reranker_results_dir(cls) -> Path:
+        return cls.base() / cls._load_config()["reranker_results_dir"]
+
+    @classmethod
+    def reranker_results_dir(cls) -> Path:
+        return cls.base() / cls._load_config()["reranker_results_dir"]
 
     @classmethod
     def input_file(cls, stage: str) -> Path:
