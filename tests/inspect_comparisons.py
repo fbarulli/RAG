@@ -37,7 +37,7 @@ def main():
     parser.add_argument('--count', type=int, default=10, help='Number of documents to sample')
     parser.add_argument('--clear', action='store_true', help='Clear existing JSON before running')
     args = parser.parse_args()
-    base_dir = Path('production_pipeline/p01_data_cleaning')
+    base_dir = Path('rag_pipeline/cleaning/data')
     raw_dir = base_dir / 'data' / 'raw'
     processed_dir = base_dir / 'data' / 'processed'
     output_file = Path('tests/sample_comparisons.json')

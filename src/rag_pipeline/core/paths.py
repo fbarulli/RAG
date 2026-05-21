@@ -64,6 +64,7 @@ class Paths:
         mapping = {
             "parse": cls.processed_dir() / "parsed.jsonl",
             "dedup": cls.processed_dir() / "parsed.jsonl",
+            "eda": cls.clean_jsonl(),
         }
         if stage not in mapping:
             raise ValueError(f"Unknown stage: {stage}")
@@ -74,6 +75,7 @@ class Paths:
         mapping = {
             "parse": cls.processed_dir() / "parsed.jsonl",
             "dedup": cls.clean_jsonl(),
+            "eda": cls.clean_jsonl(),
         }
         if stage not in mapping:
             raise ValueError(f"Unknown stage: {stage}")

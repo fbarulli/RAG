@@ -12,7 +12,7 @@ import re
 from collections import defaultdict
 from difflib import SequenceMatcher
 from pathlib import Path
-INPUT_PATH = Path('production_pipeline/p01_data_cleaning/data/processed/parsed.jsonl')
+INPUT_PATH = Path('rag_pipeline/cleaning/data/processed/parsed.jsonl')
 SIMILARITY_THRESHOLD = 0.95
 
 def normalize(text: str) -> str:

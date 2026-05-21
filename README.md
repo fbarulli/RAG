@@ -15,7 +15,7 @@ See [pipeline_diagram.md](pipeline_diagram.md) for the full dataflow.
 5. **p05_evaluation** — Diverse test sets + LLM-as-judge scoring
 6. **p06_answer_generation** — End-to-end RAG response generation
 
-**Main orchestrator**: `production_pipeline/run_clean_pipeline.py`
+**Main orchestrator**: `rag_pipeline/cleaning.pipeline.py`
 
 ## Detailed Steps & Outputs
 
@@ -27,7 +27,7 @@ See [pipeline_diagram.md](pipeline_diagram.md) for the full dataflow.
 - **p04_stratified_test_split.py** — Creates `train.jsonl` + `test.jsonl` (stratified by course/section).
 
 **Key outputs**:
-- `production_pipeline/p01_data_cleaning/data/processed/clean.jsonl` (~1140 docs)
+- `rag_pipeline/p01_data_cleaning/data/processed/clean.jsonl` (~1140 docs)
 - `test.jsonl` (used downstream)
 
 ### p02_eda
@@ -74,7 +74,7 @@ End-to-end RAG inference with chosen retriever/reranker/config.
 uv sync
 
 # Run full clean pipeline (recommended)
-uv run python -m production_pipeline.run_clean_pipeline
+uv run python -m production_pipeline.cleaning.pipeline
 
 # Or individual stages via just (see justfile)
 just clean-pipeline

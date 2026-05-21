@@ -15,11 +15,11 @@ lint:
 
 typecheck:
 	@echo "▶ Running type checker..."
-	uv run mypy src/rag_pipeline production_pipeline/ --ignore-missing-imports
+	uv run mypy src/rag_pipeline src/rag_pipeline/ --ignore-missing-imports
 
 test extra_args='':
 	@echo "▶ Running tests..."
-	uv run pytest tests/ -v --cov=src/rag_pipeline --cov=production_pipeline/ {{extra_args}}
+	uv run pytest tests/ -v --cov=src/rag_pipeline --cov=src/rag_pipeline/ {{extra_args}}
 
 # ── Pipeline Execution ────────────────────────────────────────────────
 # Usage: just run <stage> [args...]
@@ -27,12 +27,12 @@ test extra_args='':
 run stage args='':
 	@echo "▶ Running stage: {{stage}}"
 	@case "{{stage}}" in \
-		download) uv run python production_pipeline/p01_data_cleaning/p01_download.py ;; \
-		parse)    uv run python production_pipeline/p01_data_cleaning/p02_parse.py {{args}} ;; \
-		dedup)    uv run python production_pipeline/p01_data_cleaning/p03_dedup.py {{args}} ;; \
-		split)    uv run python production_pipeline/p01_data_cleaning/p04_split.py {{args}} ;; \
-		eda)      uv run python production_pipeline/p02_eda/p01_load_and_inspect.py {{args}} ;; \
-		ingest-models) uv run python production_pipeline/p04_ingestion/p02_ingest_models.py {{args}} ;; \
+		download) uv run python src/rag_pipeline/cleaning/download.py ;; \
+		parse)    uv run python src/rag_pipeline/cleaning/parse.py {{args}} ;; \
+		dedup)    uv run python src/rag_pipeline/cleaning/dedup.py {{args}} ;; \
+		split)    uv run python src/rag_pipeline/cleaning/stratified_test_split.py {{args}} ;; \
+		eda)      uv run python src/rag_pipeline/eda/p02_eda/p01_load_and_inspect.py {{args}} ;; \
+		ingest-models) uv run python src/rag_pipeline/ingestion/p02_ingest_models.py {{args}} ;; \
 		all)      just run download && just run parse && just run dedup && just run split && just run eda ;; \
 		*) echo "Unknown stage: {{stage}}. Use: download | parse | dedup | split | eda | ingest-models | all"; exit 1 ;; \
 	esac
@@ -44,15 +44,15 @@ run-dry stage args='':
 # ── Data Management ───────────────────────────────────────────────────
 clean-data:
 	@echo "  Removing processed data (keeping raw)..."
-	rm -rf production_pipeline/p01_data_cleaning/data/processed/*.jsonl
-	rm -rf production_pipeline/experiments/*.json
+	rm -rf src/rag_pipeline/cleaning/data/processed/*.jsonl
+	rm -rf src/rag_pipeline/experiments/*.json
 	@echo "✓ Cleaned processed data"
 
 clean-all:
 	@echo " Removing ALL data (raw + processed)..."
-	rm -rf production_pipeline/p01_data_cleaning/data/raw/*
-	rm -rf production_pipeline/p01_data_cleaning/data/processed/*
-	rm -rf production_pipeline/experiments/*
+	rm -rf src/rag_pipeline/cleaning/data/raw/*
+	rm -rf src/rag_pipeline/cleaning/data/processed/*
+	rm -rf src/rag_pipeline/experiments/*
 	@echo "✓ Fully cleaned"
 
 # ── Infrastructure ────────────────────────────────────────────────────
