@@ -1,0 +1,72 @@
+[
+  {
+    "query_id": "e8df9f0d12_creative_student_0",
+    "query_text": "docker-compose streamlit app won't run",
+    "expected_id": "e8df9f0d12",
+    "course": "llm-zoomcamp",
+    "topic": null,
+    "failed_rerankers": [
+      "TinyBERT",
+      "MiniLM-L6",
+      "mxbai-xsmall",
+      "AnswerDotAI-Trainic",
+      "bge-reranker-base"
+    ]
+  },
+  {
+    "query_id": "e8df9f0d12_grounded_analyst_0",
+    "query_text": "docker-compose streamlit executable file not found",
+    "expected_id": "e8df9f0d12",
+    "course": "llm-zoomcamp",
+    "topic": null,
+    "failed_rerankers": [
+      "TinyBERT",
+      "MiniLM-L6",
+      "mxbai-xsmall",
+      "AnswerDotAI-Trainic",
+      "bge-reranker-base"
+    ]
+  },
+  {
+    "query_id": "e8df9f0d12_grounded_analyst_1",
+    "query_text": "streamlit app not running in docker-compose",
+    "expected_id": "e8df9f0d12",
+    "course": "llm-zoomcamp",
+    "topic": null,
+    "failed_rerankers": [
+      "TinyBERT",
+      "MiniLM-L6",
+      "mxbai-xsmall",
+      "AnswerDotAI-Trainic",
+      "bge-reranker-base"
+    ]
+  },
+  {
+    "query_id": "e8df9f0d12_grounded_analyst_2",
+    "query_text": "OCI runtime create failed in docker-compose",
+    "expected_id": "e8df9f0d12",
+    "course": "llm-zoomcamp",
+    "topic": null,
+    "failed_rerankers": [
+      "TinyBERT",
+      "MiniLM-L6",
+      "mxbai-xsmall",
+      "AnswerDotAI-Trainic",
+      "bge-reranker-base"
+    ]
+  },
+  {
+    "query_id": "e8df9f0d12_orig",
+    "query_text": "Docker: When trying to run a streamlit app using docker-compose, I get: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: \"streamlit\": executable file not found in $PATH: unknown. The app runs fine outside of docker-compose",
+    "expected_id": "e8df9f0d12",
+    "course": "llm-zoomcamp",
+    "topic": null,
+    "failed_rerankers": [
+      "TinyBERT",
+      "MiniLM-L6",
+      "mxbai-xsmall",
+      "AnswerDotAI-Trainic",
+      "bge-reranker-base"
+    ]
+  }
+]

@@ -76,7 +76,7 @@ def _evaluate_single_query(client: QdrantClient, query_item: Dict[str, Any], idx
     hit_ids = tuple(c.get('es_id', '') or c.get('payload', {}).get('es_id', '') for c in reranked_hits)
     hit_scores = tuple(float(c.get('score', 0.0)) for c in reranked_hits)
     hit_courses = tuple(c.get('payload', {}).get('course', '') for c in reranked_hits)
-    return QueryResult(query_id=str(query_item.get('id', idx)), query_text=query_text, expected_id=str(query_item.get('expected_doc_id') or query_item.get('document_id', '')), course=str(query_item.get('course', '')), topic=topic_map.get(query_text) if topic_map else None, subtopic=None, hit_ids=hit_ids, hit_scores=hit_scores, hit_courses=hit_courses, latency_ms=latency_ms, code_integrity_ref=0.0)
+    return QueryResult(query_id=str(query_item.get('query_id') or query_item.get('id', idx)), query_text=query_text, expected_id=str(query_item.get('expected_id') or query_item.get('expected_doc_id') or query_item.get('document_id', '')), course=str(query_item.get('course', '')), topic=topic_map.get(query_text) if topic_map else None, subtopic=None, hit_ids=hit_ids, hit_scores=hit_scores, hit_courses=hit_courses, latency_ms=latency_ms, code_integrity_ref=0.0)
 
 def run_benchmark_loop(client: QdrantClient, test_set: List[Dict[str, Any]], model_entry: Dict[str, Any], config: Dict[str, Any], encoder: Any, embedding_model: SentenceTransformer, topic_map: Optional[Dict[str, Any]]=None) -> Optional[Any]:
     """RESPONSIBILITY: Manages outer tracking metrics loop iteration boundaries."""

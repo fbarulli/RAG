@@ -1,0 +1,37 @@
+[
+  {
+    "reranker": "TinyBERT",
+    "failure_top1_score_avg": 0.8872,
+    "success_top1_score_avg": null,
+    "failure_count": 5,
+    "success_count": 0
+  },
+  {
+    "reranker": "MiniLM-L6",
+    "failure_top1_score_avg": 0.9029,
+    "success_top1_score_avg": null,
+    "failure_count": 5,
+    "success_count": 0
+  },
+  {
+    "reranker": "mxbai-xsmall",
+    "failure_top1_score_avg": 0.3735,
+    "success_top1_score_avg": null,
+    "failure_count": 5,
+    "success_count": 0
+  },
+  {
+    "reranker": "AnswerDotAI-Trainic",
+    "failure_top1_score_avg": 0.5124,
+    "success_top1_score_avg": null,
+    "failure_count": 5,
+    "success_count": 0
+  },
+  {
+    "reranker": "bge-reranker-base",
+    "failure_top1_score_avg": 0.7892,
+    "success_top1_score_avg": null,
+    "failure_count": 5,
+    "success_count": 0
+  }
+]
