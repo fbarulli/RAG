@@ -144,13 +144,13 @@ def save_benchmark_results(summaries: list[MetricSummary], output_dir: Path) -> 
     Running all models replaces all rows for every model in that run.
 
     Also calls ``save_performance_summary`` to update the canonical
-    ``benchmark_performance.json`` rankings file.
+    ``reranker_benchmark_performance.json`` rankings file.
 
     Files written
     -------------
     ``benchmark_results.json``     — full results for every model/config combination
     ``benchmark_summary.txt``      — human-readable equivalent
-    ``benchmark_performance.json`` — ranked view with winner (via save_performance_summary)
+    ``reranker_benchmark_performance.json`` — ranked view with winner (via save_performance_summary)
     """
     output_dir.mkdir(parents=True, exist_ok=True)
     results_path = output_dir / 'benchmark_results.json'
@@ -172,7 +172,7 @@ def save_benchmark_results(summaries: list[MetricSummary], output_dir: Path) -> 
 
 def save_performance_summary(summaries: list[MetricSummary], output_dir: Path) -> None:
     """
-    Save ``benchmark_performance.json`` — a consolidated rankings view.
+    Save ``reranker_benchmark_performance.json`` — a consolidated rankings view.
 
     Contains all model/config combinations ranked by MRR, per-model best-config
     rows, and an overall winner (tie-broken by Hit@1 then NDCG@10).
@@ -186,7 +186,7 @@ def save_performance_summary(summaries: list[MetricSummary], output_dir: Path) -
             best_per_model[m] = row
     winner = max(best_per_model.values(), key=_winner_key, default=None)
     payload: dict[str, Any] = {'winner_model': winner['model_name'] if winner else None, 'winner_config': winner['config_name'] if winner else None, 'winner_mrr': winner['mrr'] if winner else None, 'best_per_model': sorted(best_per_model.values(), key=lambda r: r['mrr'], reverse=True), 'all_results': sorted(all_rows, key=lambda r: r['mrr'], reverse=True)}
-    perf_path = output_dir / 'benchmark_performance.json'
+    perf_path = output_dir / 'reranker_benchmark_performance.json'
     with perf_path.open('w', encoding='utf-8') as f:
         json.dump(payload, f, indent=2, ensure_ascii=False)
     logger.info(f'Saved performance summary: {perf_path}')

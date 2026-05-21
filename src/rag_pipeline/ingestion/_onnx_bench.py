@@ -5,6 +5,7 @@ Core evaluation processing functions for the ONNX Cross-Encoder matrix.
 RESPONSIBILITY: Manages individual test query iteration execution flows.
 """
 import logging
+import traceback
 import time
 from typing import Any, Dict, List, Optional, Tuple
 from qdrant_client import QdrantClient
@@ -13,6 +14,7 @@ from ._onnx_bench_config import extract_active_environment
 from ._onnx_bench_engine import compile_onnx_runtime_node, prepare_candidates_from_hits
 from ._benchmark_metrics.evaluation import run_entity_boosted_retrieval
 from ._benchmark_metrics.aggregation import aggregate_metrics
+from ._benchmark_types import QueryResult
 logger = logging.getLogger(__name__)
 
 def _extract_query_text(query_item: Dict[str, Any]) -> str:
@@ -71,7 +73,10 @@ def _evaluate_single_query(client: QdrantClient, query_item: Dict[str, Any], idx
     if not candidates:
         return None
     reranked_hits, latency_ms = _score_and_sort_candidates(encoder, query_text, candidates)
-    return {'query_id': query_item.get('id', idx), 'query': query_text, 'ground_truth': query_item.get('expected_doc_id') or query_item.get('document_id'), 'hits': reranked_hits, 'latency_ms': latency_ms, 'topic': topic_map.get(query_text) if topic_map else None}
+    hit_ids = tuple(c.get('es_id', '') or c.get('payload', {}).get('es_id', '') for c in reranked_hits)
+    hit_scores = tuple(float(c.get('score', 0.0)) for c in reranked_hits)
+    hit_courses = tuple(c.get('payload', {}).get('course', '') for c in reranked_hits)
+    return QueryResult(query_id=str(query_item.get('id', idx)), query_text=query_text, expected_id=str(query_item.get('expected_doc_id') or query_item.get('document_id', '')), course=str(query_item.get('course', '')), topic=topic_map.get(query_text) if topic_map else None, subtopic=None, hit_ids=hit_ids, hit_scores=hit_scores, hit_courses=hit_courses, latency_ms=latency_ms, code_integrity_ref=0.0)
 
 def run_benchmark_loop(client: QdrantClient, test_set: List[Dict[str, Any]], model_entry: Dict[str, Any], config: Dict[str, Any], encoder: Any, embedding_model: SentenceTransformer, topic_map: Optional[Dict[str, Any]]=None) -> Optional[Any]:
     """RESPONSIBILITY: Manages outer tracking metrics loop iteration boundaries."""
@@ -87,7 +92,7 @@ def run_benchmark_loop(client: QdrantClient, test_set: List[Dict[str, Any]], mod
             if idx % 50 == 0:
                 logger.info('Progress Check | Evaluated %d/%d queries successfully.', idx, len(test_set))
         except Exception as e:
-            logger.error('Failed executing evaluation task block on query index %d: %s', idx, e)
+            logger.error("Failed executing evaluation task block on query index %d: %s", idx, e, exc_info=True)
             continue
     if not results:
         logger.warning('Zero execution nodes completed for target model matrix: %s', model_name)
@@ -133,6 +138,7 @@ def execute_matrix_evaluation(client: QdrantClient, test_set: List[Any], embeddi
             if summary:
                 summaries.append(summary)
         except Exception as e:
+            logger.error(traceback.format_exc())
             logger.error("Skipping node failure on cross-encoder '%s': %s", reranker_entry['name'], e)
             continue
     return summaries

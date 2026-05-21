@@ -1,4 +1,7 @@
 """
+`_evaluate_single_query` was returning a plain `dict` but `aggregate_metrics` expected `QueryResult` dataclass objects with attribute access (`.hit_ids`, `.expected_id`, etc.). The dict had the right data but wrong shape — keys like `ground_truth` and `hits` instead of `expected_id` and `hit_ids`. Fixed by constructing a proper `QueryResult` from the reranked candidates before returning.
+
+
 production_pipeline/p04_ingestion/_onnx_bench.py
 
 Core evaluation processing functions for the ONNX Cross-Encoder matrix.
@@ -8,15 +11,13 @@ RESPONSIBILITY: Manages individual test query iteration execution flows.
 import logging
 import time
 from typing import Any, Dict, List, Optional, Tuple
-
 from qdrant_client import QdrantClient
 from sentence_transformers import SentenceTransformer
-
 from ._onnx_bench_config import extract_active_environment
 from ._onnx_bench_engine import compile_onnx_runtime_node, prepare_candidates_from_hits
 from ._benchmark_metrics.evaluation import run_entity_boosted_retrieval
 from ._benchmark_metrics.aggregation import aggregate_metrics
-
+from ._benchmark_types import QueryResult
 logger = logging.getLogger(__name__)
 
 
@@ -95,32 +96,40 @@ def _score_and_sort_candidates(encoder: Any, query_text: str, candidates: List[D
 
 
 def _evaluate_single_query(
-    client: QdrantClient, 
-    query_item: Dict[str, Any], 
-    idx: int, 
-    collection: str, 
-    config: Dict[str, Any], 
-    encoder: Any, 
+    client: QdrantClient,
+    query_item: Dict[str, Any],
+    idx: int,
+    collection: str,
+    config: Dict[str, Any],
+    encoder: Any,
     embedding_model: SentenceTransformer,
-    topic_map: Optional[Dict[str, Any]] = None  # ADDED: Topic map alignment
-) -> Optional[Dict[str, Any]]:
+    topic_map: Optional[Dict[str, Any]] = None,
+) -> Optional[Any]:
     """RESPONSIBILITY: Orchestrates a single query through retrieval and ranking evaluation steps."""
     query_text = _extract_query_text(query_item)
-    
     candidates = _retrieve_vector_candidates(client, collection, query_item, config, embedding_model)
     if not candidates:
         return None
-        
     reranked_hits, latency_ms = _score_and_sort_candidates(encoder, query_text, candidates)
-    
-    return {
-        "query_id": query_item.get("id", idx),
-        "query": query_text,
-        "ground_truth": query_item.get("expected_doc_id") or query_item.get("document_id"),
-        "hits": reranked_hits,
-        "latency_ms": latency_ms,
-        "topic": topic_map.get(query_text) if topic_map else None  # ADDED: Track query topic
-    }
+    hit_ids = tuple(
+        c.get('es_id', '') or c.get('payload', {}).get('es_id', '')
+        for c in reranked_hits
+    )
+    hit_scores = tuple(float(c.get('score', 0.0)) for c in reranked_hits)
+    hit_courses = tuple(c.get('payload', {}).get('course', '') for c in reranked_hits)
+    return QueryResult(
+        query_id=str(query_item.get('id', idx)),
+        query_text=query_text,
+        expected_id=str(query_item.get('expected_doc_id') or query_item.get('document_id', '')),
+        course=str(query_item.get('course', '')),
+        topic=topic_map.get(query_text) if topic_map else None,
+        subtopic=None,
+        hit_ids=hit_ids,
+        hit_scores=hit_scores,
+        hit_courses=hit_courses,
+        latency_ms=latency_ms,
+        code_integrity_ref=0.0,
+    )
 
 
 def run_benchmark_loop(

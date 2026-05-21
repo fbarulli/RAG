@@ -297,7 +297,7 @@ def save_performance_summary(
         "all_results": sorted(all_rows, key=lambda r: r["mrr"], reverse=True),
     }
 
-    perf_path = output_dir / "benchmark_performance.json"
+    perf_path = output_dir / "reranker_benchmark_performance.json"
     with perf_path.open("w", encoding="utf-8") as f:
         json.dump(payload, f, indent=2, ensure_ascii=False)
     logger.info(f"Saved performance summary: {perf_path}")

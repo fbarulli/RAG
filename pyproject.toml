@@ -56,4 +56,5 @@ dependencies = [
     "tqdm>=4.67.3",
 ]
 [tool.setuptools.packages.find]
-where = ["src"]
+where = ["src", "."]
+include = ["rag_pipeline*", "configs*"]
