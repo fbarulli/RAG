@@ -8,10 +8,10 @@
     "topic": null,
     "subtopic": null,
     "top1_returned": "12d79208b3",
-    "top1_course": "machine-learning-zoomcamp",
+    "top1_course": "",
     "top1_score": 0.9528460502624512,
     "num_hits": 40,
-    "latency_ms": 468.2
+    "latency_ms": 912.48
   },
   {
     "reranker": "TinyBERT",
@@ -22,10 +22,10 @@
     "topic": null,
     "subtopic": null,
     "top1_returned": "80a2e18431",
-    "top1_course": "machine-learning-zoomcamp",
+    "top1_course": "",
     "top1_score": 0.9566639065742493,
     "num_hits": 40,
-    "latency_ms": 292.74
+    "latency_ms": 213.95
   },
   {
     "reranker": "TinyBERT",
@@ -36,38 +36,10 @@
     "topic": null,
     "subtopic": null,
     "top1_returned": "27b149393b",
-    "top1_course": "machine-learning-zoomcamp",
+    "top1_course": "",
     "top1_score": 0.9913968443870544,
     "num_hits": 40,
-    "latency_ms": 398.05
-  },
-  {
-    "reranker": "TinyBERT",
-    "query_id": "e8df9f0d12_grounded_analyst_2",
-    "query_text": "OCI runtime create failed in docker-compose",
-    "expected_id": "e8df9f0d12",
-    "course": "llm-zoomcamp",
-    "topic": null,
-    "subtopic": null,
-    "top1_returned": "98e0d0b961",
-    "top1_course": "machine-learning-zoomcamp",
-    "top1_score": 0.9206019639968872,
-    "num_hits": 40,
-    "latency_ms": 251.34
-  },
-  {
-    "reranker": "TinyBERT",
-    "query_id": "e8df9f0d12_creative_student_0",
-    "query_text": "docker-compose streamlit app won't run",
-    "expected_id": "e8df9f0d12",
-    "course": "llm-zoomcamp",
-    "topic": null,
-    "subtopic": null,
-    "top1_returned": "27b149393b",
-    "top1_course": "machine-learning-zoomcamp",
-    "top1_score": 0.6144241094589233,
-    "num_hits": 40,
-    "latency_ms": 275.28
+    "latency_ms": 217.08
   },
   {
     "reranker": "MiniLM-L6",
@@ -78,10 +50,10 @@
     "topic": null,
     "subtopic": null,
     "top1_returned": "12d79208b3",
-    "top1_course": "machine-learning-zoomcamp",
+    "top1_course": "",
     "top1_score": 0.9876863956451416,
     "num_hits": 40,
-    "latency_ms": 4103.65
+    "latency_ms": 4835.37
   },
   {
     "reranker": "MiniLM-L6",
@@ -92,10 +64,10 @@
     "topic": null,
     "subtopic": null,
     "top1_returned": "80a2e18431",
-    "top1_course": "machine-learning-zoomcamp",
+    "top1_course": "",
     "top1_score": 0.8294080495834351,
     "num_hits": 40,
-    "latency_ms": 3986.87
+    "latency_ms": 2517.71
   },
   {
     "reranker": "MiniLM-L6",
@@ -106,38 +78,10 @@
     "topic": null,
     "subtopic": null,
     "top1_returned": "27b149393b",
-    "top1_course": "machine-learning-zoomcamp",
+    "top1_course": "",
     "top1_score": 0.9933577179908752,
     "num_hits": 40,
-    "latency_ms": 3815.69
-  },
-  {
-    "reranker": "MiniLM-L6",
-    "query_id": "e8df9f0d12_grounded_analyst_2",
-    "query_text": "OCI runtime create failed in docker-compose",
-    "expected_id": "e8df9f0d12",
-    "course": "llm-zoomcamp",
-    "topic": null,
-    "subtopic": null,
-    "top1_returned": "98e0d0b961",
-    "top1_course": "machine-learning-zoomcamp",
-    "top1_score": 0.7357182502746582,
-    "num_hits": 40,
-    "latency_ms": 3555.06
-  },
-  {
-    "reranker": "MiniLM-L6",
-    "query_id": "e8df9f0d12_creative_student_0",
-    "query_text": "docker-compose streamlit app won't run",
-    "expected_id": "e8df9f0d12",
-    "course": "llm-zoomcamp",
-    "topic": null,
-    "subtopic": null,
-    "top1_returned": "27b149393b",
-    "top1_course": "machine-learning-zoomcamp",
-    "top1_score": 0.9681217074394226,
-    "num_hits": 40,
-    "latency_ms": 3885.53
+    "latency_ms": 3014.89
   },
   {
     "reranker": "mxbai-xsmall",
@@ -148,10 +92,10 @@
     "topic": null,
     "subtopic": null,
     "top1_returned": "a5ee2dc890",
-    "top1_course": "machine-learning-zoomcamp",
+    "top1_course": "",
     "top1_score": 0.6167522072792053,
     "num_hits": 40,
-    "latency_ms": 12712.26
+    "latency_ms": 13515.44
   },
   {
     "reranker": "mxbai-xsmall",
@@ -162,10 +106,10 @@
     "topic": null,
     "subtopic": null,
     "top1_returned": "27b149393b",
-    "top1_course": "machine-learning-zoomcamp",
+    "top1_course": "",
     "top1_score": 0.24486443400382996,
     "num_hits": 40,
-    "latency_ms": 10591.4
+    "latency_ms": 9496.74
   },
   {
     "reranker": "mxbai-xsmall",
@@ -176,38 +120,10 @@
     "topic": null,
     "subtopic": null,
     "top1_returned": "27b149393b",
-    "top1_course": "machine-learning-zoomcamp",
+    "top1_course": "",
     "top1_score": 0.4455485939979553,
     "num_hits": 40,
-    "latency_ms": 10454.34
-  },
-  {
-    "reranker": "mxbai-xsmall",
-    "query_id": "e8df9f0d12_grounded_analyst_2",
-    "query_text": "OCI runtime create failed in docker-compose",
-    "expected_id": "e8df9f0d12",
-    "course": "llm-zoomcamp",
-    "topic": null,
-    "subtopic": null,
-    "top1_returned": "b1cb53ac6a",
-    "top1_course": "machine-learning-zoomcamp",
-    "top1_score": 0.1165446788072586,
-    "num_hits": 40,
-    "latency_ms": 10788.72
-  },
-  {
-    "reranker": "mxbai-xsmall",
-    "query_id": "e8df9f0d12_creative_student_0",
-    "query_text": "docker-compose streamlit app won't run",
-    "expected_id": "e8df9f0d12",
-    "course": "llm-zoomcamp",
-    "topic": null,
-    "subtopic": null,
-    "top1_returned": "27b149393b",
-    "top1_course": "machine-learning-zoomcamp",
-    "top1_score": 0.44371679425239563,
-    "num_hits": 40,
-    "latency_ms": 13463.61
+    "latency_ms": 10367.44
   },
   {
     "reranker": "AnswerDotAI-Trainic",
@@ -218,10 +134,10 @@
     "topic": null,
     "subtopic": null,
     "top1_returned": "0b60cbb594",
-    "top1_course": "machine-learning-zoomcamp",
+    "top1_course": "",
     "top1_score": 0.5126304626464844,
     "num_hits": 40,
-    "latency_ms": 10592.84
+    "latency_ms": 7995.68
   },
   {
     "reranker": "AnswerDotAI-Trainic",
@@ -232,10 +148,10 @@
     "topic": null,
     "subtopic": null,
     "top1_returned": "8a23cfbf67",
-    "top1_course": "machine-learning-zoomcamp",
+    "top1_course": "",
     "top1_score": 0.5124749541282654,
     "num_hits": 40,
-    "latency_ms": 7870.64
+    "latency_ms": 5493.67
   },
   {
     "reranker": "AnswerDotAI-Trainic",
@@ -246,38 +162,10 @@
     "topic": null,
     "subtopic": null,
     "top1_returned": "8a23cfbf67",
-    "top1_course": "machine-learning-zoomcamp",
+    "top1_course": "",
     "top1_score": 0.5123629570007324,
     "num_hits": 40,
-    "latency_ms": 7455.54
-  },
-  {
-    "reranker": "AnswerDotAI-Trainic",
-    "query_id": "e8df9f0d12_grounded_analyst_2",
-    "query_text": "OCI runtime create failed in docker-compose",
-    "expected_id": "e8df9f0d12",
-    "course": "llm-zoomcamp",
-    "topic": null,
-    "subtopic": null,
-    "top1_returned": "8a23cfbf67",
-    "top1_course": "machine-learning-zoomcamp",
-    "top1_score": 0.5123544931411743,
-    "num_hits": 40,
-    "latency_ms": 7319.37
-  },
-  {
-    "reranker": "AnswerDotAI-Trainic",
-    "query_id": "e8df9f0d12_creative_student_0",
-    "query_text": "docker-compose streamlit app won't run",
-    "expected_id": "e8df9f0d12",
-    "course": "llm-zoomcamp",
-    "topic": null,
-    "subtopic": null,
-    "top1_returned": "8a23cfbf67",
-    "top1_course": "machine-learning-zoomcamp",
-    "top1_score": 0.5124011039733887,
-    "num_hits": 40,
-    "latency_ms": 8042.89
+    "latency_ms": 5906.43
   },
   {
     "reranker": "bge-reranker-base",
@@ -288,10 +176,10 @@
     "topic": null,
     "subtopic": null,
     "top1_returned": "fdcf991009",
-    "top1_course": "machine-learning-zoomcamp",
+    "top1_course": "",
     "top1_score": 0.9732541441917419,
     "num_hits": 40,
-    "latency_ms": 26270.63
+    "latency_ms": 30525.92
   },
   {
     "reranker": "bge-reranker-base",
@@ -302,10 +190,10 @@
     "topic": null,
     "subtopic": null,
     "top1_returned": "80a2e18431",
-    "top1_course": "machine-learning-zoomcamp",
+    "top1_course": "",
     "top1_score": 0.5285927653312683,
     "num_hits": 40,
-    "latency_ms": 34311.41
+    "latency_ms": 15824.57
   },
   {
     "reranker": "bge-reranker-base",
@@ -316,37 +204,9 @@
     "topic": null,
     "subtopic": null,
     "top1_returned": "27b149393b",
-    "top1_course": "machine-learning-zoomcamp",
+    "top1_course": "",
     "top1_score": 0.9428053498268127,
     "num_hits": 40,
-    "latency_ms": 23655.66
-  },
-  {
-    "reranker": "bge-reranker-base",
-    "query_id": "e8df9f0d12_grounded_analyst_2",
-    "query_text": "OCI runtime create failed in docker-compose",
-    "expected_id": "e8df9f0d12",
-    "course": "llm-zoomcamp",
-    "topic": null,
-    "subtopic": null,
-    "top1_returned": "b1cb53ac6a",
-    "top1_course": "machine-learning-zoomcamp",
-    "top1_score": 0.7524918913841248,
-    "num_hits": 40,
-    "latency_ms": 43391.43
-  },
-  {
-    "reranker": "bge-reranker-base",
-    "query_id": "e8df9f0d12_creative_student_0",
-    "query_text": "docker-compose streamlit app won't run",
-    "expected_id": "e8df9f0d12",
-    "course": "llm-zoomcamp",
-    "topic": null,
-    "subtopic": null,
-    "top1_returned": "dc705a3c4e",
-    "top1_course": "machine-learning-zoomcamp",
-    "top1_score": 0.7488576173782349,
-    "num_hits": 40,
-    "latency_ms": 24516.14
+    "latency_ms": 18706.73
   }
 ]

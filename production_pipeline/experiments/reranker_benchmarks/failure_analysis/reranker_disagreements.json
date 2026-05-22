@@ -28,34 +28,6 @@
     "num_unique_top1": 3
   },
   {
-    "query_id": "e8df9f0d12_grounded_analyst_2",
-    "query_text": "OCI runtime create failed in docker-compose",
-    "expected_id": "e8df9f0d12",
-    "course": "llm-zoomcamp",
-    "top1_by_reranker": {
-      "TinyBERT": "98e0d0b961",
-      "MiniLM-L6": "98e0d0b961",
-      "mxbai-xsmall": "b1cb53ac6a",
-      "AnswerDotAI-Trainic": "8a23cfbf67",
-      "bge-reranker-base": "b1cb53ac6a"
-    },
-    "num_unique_top1": 3
-  },
-  {
-    "query_id": "e8df9f0d12_creative_student_0",
-    "query_text": "docker-compose streamlit app won't run",
-    "expected_id": "e8df9f0d12",
-    "course": "llm-zoomcamp",
-    "top1_by_reranker": {
-      "TinyBERT": "27b149393b",
-      "MiniLM-L6": "27b149393b",
-      "mxbai-xsmall": "27b149393b",
-      "AnswerDotAI-Trainic": "8a23cfbf67",
-      "bge-reranker-base": "dc705a3c4e"
-    },
-    "num_unique_top1": 3
-  },
-  {
     "query_id": "e8df9f0d12_grounded_analyst_1",
     "query_text": "streamlit app not running in docker-compose",
     "expected_id": "e8df9f0d12",
