@@ -5,6 +5,9 @@ Core evaluation processing functions for the ONNX Cross-Encoder matrix.
 RESPONSIBILITY: Manages individual test query iteration execution flows.
 """
 import logging
+import hashlib
+import json
+from pathlib import Path
 import traceback
 import time
 from typing import Any, Dict, List, Optional, Tuple
@@ -92,14 +95,31 @@ def _evaluate_single_query(client: QdrantClient, query_item: Dict[str, Any], idx
     hit_courses = tuple(c.get('payload', {}).get('course', '') for c in reranked_hits)
     return QueryResult(query_id=str(query_item.get('query_id') or query_item.get('id', idx)), query_text=query_text, expected_id=str(query_item.get('expected_id') or query_item.get('expected_doc_id') or query_item.get('document_id', '')), course=str(query_item.get('course', '')), topic=topic_map.get(query_text) if topic_map else None, subtopic=None, hit_ids=hit_ids, hit_scores=hit_scores, hit_courses=hit_courses, latency_ms=latency_ms, code_integrity_ref=0.0)
 
+def _build_cache_key(collection: str, model_name: str, test_set: List[Dict[str, Any]]) -> str:
+    """RESPONSIBILITY: Stable cache key from collection + model + sorted query ids."""
+    query_ids = sorted(str(q.get('query_id', i)) for i, q in enumerate(test_set))
+    key_str = collection + model_name + ''.join(query_ids)
+    return hashlib.md5(key_str.encode()).hexdigest()
+
+
 def _build_retrieved_cache(
     client: QdrantClient,
     test_set: List[Dict[str, Any]],
     collection: str,
     config: Dict[str, Any],
     embedding_model: SentenceTransformer,
+    model_name: str = '',
+    cache_dir: Optional[Path] = None,
+    reset: bool = False,
 ) -> Dict[str, Dict]:
     """RESPONSIBILITY: Retrieve and embed all queries once, cache results for reuse across rerankers."""
+    if cache_dir and model_name and not reset:
+        cache_key = _build_cache_key(collection, model_name, test_set)
+        cache_file = Path(cache_dir) / f"retrieved_{cache_key}.json"
+        if cache_file.exists():
+            logger.info("Disk cache hit — loading candidates from %s", cache_file)
+            return json.loads(cache_file.read_text())
+
     cache = {}
     logger.info("Pre-fetching candidates for %d queries (shared across all rerankers)...", len(test_set))
     for idx, query_item in enumerate(test_set, start=1):
@@ -135,6 +155,14 @@ def _build_retrieved_cache(
         if idx % 50 == 0:
             logger.info("Pre-fetch progress: %d/%d queries", idx, len(test_set))
     logger.info("Pre-fetch complete: %d queries cached", len(cache))
+
+    if cache_dir and model_name:
+        cache_key = _build_cache_key(collection, model_name, test_set)
+        cache_file = Path(cache_dir) / f"retrieved_{cache_key}.json"
+        Path(cache_dir).mkdir(parents=True, exist_ok=True)
+        cache_file.write_text(json.dumps(cache))
+        logger.info("Disk cache saved to %s", cache_file)
+
     return cache
 
 
@@ -218,6 +246,8 @@ def execute_matrix_evaluation(
     embedding_model: SentenceTransformer,
     topic_map: Optional[Dict[str, Any]] = None,
     target_override: str = None,
+    cache_dir: Optional[Path] = None,
+    reset: bool = False,
 ) -> List[Any]:
     """RESPONSIBILITY: Retrieve once, rerank with all models in parallel."""
     from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -235,6 +265,9 @@ def execute_matrix_evaluation(
         collection=collection,
         config=retrieval_config,
         embedding_model=embedding_model,
+        model_name=embedding_entry.get('name', ''),
+        cache_dir=cache_dir,
+        reset=reset,
     )
 
     if not retrieved_cache:

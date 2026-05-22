@@ -89,6 +89,8 @@ def main() -> None:
             embedding_model=embedding_model,
             topic_map=topic_map,
             target_override=getattr(args, 'reranker', None),
+            cache_dir=config.cache_dir,
+            reset=config.reset,
         )
         _persist_final_reports(summaries, config.output_dir)
     except Exception as e:

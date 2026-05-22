@@ -1,3 +1,6 @@
+'''
+src/rag_pipeline/core/paths.py
+'''
 import json
 from pathlib import Path
 from typing import Optional, Dict, Any
