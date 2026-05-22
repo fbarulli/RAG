@@ -10,7 +10,7 @@ from typing import List, Dict, Tuple
 import logging
 from tqdm import tqdm
 
-from ._reranker_runner import RerankerRunner
+from .reranker_runner import RerankerRunner
 from ..core.paths import Paths
 
 logger = logging.getLogger(__name__)

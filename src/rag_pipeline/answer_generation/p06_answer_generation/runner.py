@@ -90,7 +90,7 @@ class QueryRetriever:
     def retrieve(self, query: str, top_k: int=5, course: Optional[str]=None, mode: str='vector') -> list[str]:
         """Retrieve using full shared logic."""
         vector = self.model.encode(query).tolist()
-        from rag_pipeline.ingestion._benchmark_metrics.retrievers import run_vector_retrieval, run_entity_boosted_retrieval, run_hybrid_rrf_retrieval
+        from rag_pipeline.ingestion.benchmark_metrics_data.retrievers import run_vector_retrieval, run_entity_boosted_retrieval, run_hybrid_rrf_retrieval
         config = {'limit': top_k}
         if mode == 'entity_boosted':
             result = run_entity_boosted_retrieval(client=self.client, collection=self.collection, query_vector=vector, course_filter=course, config=config, top_k=top_k)

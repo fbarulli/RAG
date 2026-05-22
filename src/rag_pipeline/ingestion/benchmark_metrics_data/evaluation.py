@@ -5,7 +5,7 @@ Evaluation orchestration - ties retrievers to test data.
 import logging
 from dataclasses import dataclass
 from typing import Any, Optional, TYPE_CHECKING
-from .._benchmark_types import QueryResult
+from ..benchmark_types import QueryResult
 from .core import check_code_integrity
 from .retrievers import run_es_retrieval, run_vector_retrieval, run_vector_retrieval_with_reranker, run_hybrid_rrf_retrieval, run_entity_boosted_retrieval
 if TYPE_CHECKING:
@@ -71,7 +71,7 @@ def _apply_reranking(search_result, rc: RetrievalConfig, query: str):
     Post-rerank scores use descending reciprocal rank (1/rank) as a proxy
     so rank-weighted metrics like NDCG remain meaningful.
     """
-    from .._benchmark_reranker import evaluate_with_reranker
+    from ..benchmark_reranker import evaluate_with_reranker
     hit_ids = search_result.hit_ids
     hit_scores = search_result.hit_scores
     reranker_latency_ms = search_result.reranker_latency_ms
@@ -158,7 +158,7 @@ def evaluate_config(client, collection: str, model, test_set: list[dict], topic_
     integrity_cache = _build_integrity_cache(test_set)
     if query_vectors is not None:
         logger.info(f'Vector check — dim={len(query_vectors[0])}, sample={query_vectors[0][:3]}')
-        from .._benchmark_metrics.retrievers import run_entity_boosted_retrieval
+        from ..benchmark_metrics_data.retrievers import run_entity_boosted_retrieval
         test_result = run_entity_boosted_retrieval(client=rc.client, collection=rc.collection, query_vector=query_vectors[0], course_filter=test_set[0]['course'], config=rc.config, top_k=5, ner_category=None, ner_primary_entity=None)
         logger.info(f'Test retrieval OK — hits={len(test_result.hit_ids)}')
     logger.info(f'Integrity cache built — {len(integrity_cache)} entries.')

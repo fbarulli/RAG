@@ -13,11 +13,11 @@ from qdrant_client import QdrantClient
 from sentence_transformers import SentenceTransformer
 
 from configs.benchmark_cli import create_benchmark_parser
-from ._benchmark_config import BenchmarkConfig
-from ._onnx_bench_config import load_matrix_configs
-from ._onnx_bench import prepare_sliced_test_set, setup_bi_encoder_context, parse_runtime_hyperparameters, execute_matrix_evaluation
-from ._benchmark_report import print_full_benchmark_report, save_benchmark_results, save_performance_summary
-from ._onnx_bench_failure_analysis import save_failure_analysis
+from .benchmark_config import BenchmarkConfig
+from .onnx_bench_config import load_matrix_configs
+from .onnx_bench import prepare_sliced_test_set, setup_bi_encoder_context, parse_runtime_hyperparameters, execute_matrix_evaluation
+from .benchmark_report import print_full_benchmark_report, save_benchmark_results, save_performance_summary
+from .onnx_bench_failure_analysis import save_failure_analysis
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(name)s: %(message)s', handlers=[logging.StreamHandler(sys.stdout)])
 logger = logging.getLogger(__name__)

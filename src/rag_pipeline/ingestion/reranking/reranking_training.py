@@ -10,9 +10,9 @@ from sentence_transformers.cross_encoder import CrossEncoderTrainer, CrossEncode
 
 from ...core.paths import Paths
 from ...core.logging import get_logger
-from .._reranker_config import get_model_config
-from ._reranking_triples import load_train_data, get_or_generate_triples
-from ._reranking_evaluator import create_proper_evaluator
+from ..reranker_config import get_model_config
+from .reranking_triples import load_train_data, get_or_generate_triples
+from .reranking_evaluator import create_proper_evaluator
 
 logger = get_logger(__name__)
 

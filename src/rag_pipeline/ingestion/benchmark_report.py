@@ -25,7 +25,7 @@ from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 from rag_pipeline.core.logging import get_logger
-from ._benchmark_types import MetricSummary
+from .benchmark_types import MetricSummary
 logger = get_logger(__name__)
 
 def _format_summary(s: MetricSummary) -> list[str]:

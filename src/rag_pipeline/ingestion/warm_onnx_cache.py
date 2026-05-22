@@ -7,8 +7,8 @@ defined in rerankers.json into the ONNX cache.
 import logging
 import sys
 import traceback
-from ._onnx_bench_engine import load_matrix_configs
-from ._onnx_model_loader import ONNXModelLoader
+from .onnx_bench_engine import load_matrix_configs
+from .onnx_model_loader import ONNXModelLoader
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(name)s: %(message)s', handlers=[logging.StreamHandler(sys.stdout)])
 logger = logging.getLogger('warm_onnx_cache')
 

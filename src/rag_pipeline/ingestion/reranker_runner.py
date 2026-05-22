@@ -7,8 +7,8 @@ import logging
 from typing import List, Tuple, Optional
 import numpy as np
 
-from ._onnx_cross_encoder import ONNXCrossEncoder
-from ._reranker_config import get_model_config
+from .onnx_cross_encoder import ONNXCrossEncoder
+from .reranker_config import get_model_config
 
 logger = logging.getLogger(__name__)
 

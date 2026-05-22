@@ -13,11 +13,11 @@ import time
 from typing import Any, Dict, List, Optional, Tuple
 from qdrant_client import QdrantClient
 from sentence_transformers import SentenceTransformer
-from ._onnx_bench_config import extract_active_environment
-from ._reranker_runner import RerankerRunner
-from ._benchmark_metrics.evaluation import run_entity_boosted_retrieval
-from ._benchmark_metrics.aggregation import aggregate_metrics
-from ._benchmark_types import QueryResult
+from .onnx_bench_config import extract_active_environment
+from .reranker_runner import RerankerRunner
+from .benchmark_metrics_data.evaluation import run_entity_boosted_retrieval
+from .benchmark_metrics_data.aggregation import aggregate_metrics
+from .benchmark_types import QueryResult
 logger = logging.getLogger(__name__)
 
 def _extract_query_text(query_item: Dict[str, Any]) -> str:

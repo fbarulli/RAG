@@ -52,7 +52,7 @@ from sentence_transformers import SentenceTransformer
 from tqdm import tqdm
 from rag_pipeline.core.logging import get_logger
 from rag_pipeline.core.schemas import FAQDocument
-from ._benchmark_config import BenchmarkConfig
+from .benchmark_config import BenchmarkConfig
 from configs.benchmark_cli import create_ingestion_parser
 logger = get_logger(__name__)
 

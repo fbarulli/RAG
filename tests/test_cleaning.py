@@ -3,7 +3,7 @@ import pytest
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from rag_pipeline.cleaning.p02_parse import clean_answer
+from rag_pipeline.cleaning.parse import clean_answer
 
 def test_inline_code_stripped():
     assert clean_answer('Use `pip install` for setup.') == 'Use pip install for setup.'

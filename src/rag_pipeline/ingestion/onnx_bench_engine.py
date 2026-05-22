@@ -5,7 +5,7 @@ ONNX Benchmark Engine - using the cleaned reranker
 
 import logging
 from typing import Dict, Any
-from ._reranker_runner import RerankerRunner
+from .reranker_runner import RerankerRunner
 
 logger = logging.getLogger(__name__)
 

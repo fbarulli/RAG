@@ -3,7 +3,7 @@ Aggregation of per-query results into metric summaries.
 """
 from statistics import stdev, mean
 from typing import Optional
-from .._benchmark_types import MetricSummary, QueryResult
+from ..benchmark_types import MetricSummary, QueryResult
 from .core import compute_recall_at_k, compute_reciprocal_rank, compute_ndcg_at_k, compute_latency_percentiles, safe_mean
 
 def aggregate_metrics(results: list[QueryResult], config_name: str, model_name: str, topic: Optional[int]=None, subtopic: Optional[int]=None) -> MetricSummary:

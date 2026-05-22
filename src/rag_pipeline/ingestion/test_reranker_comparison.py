@@ -13,9 +13,9 @@ from typing import List, Dict
 from rag_pipeline.core.paths import Paths
 from rag_pipeline.core.logging import get_logger
 logger = get_logger(__name__)
-from ._benchmark_config import BenchmarkConfig
-from ._benchmark_metrics.retrievers import run_entity_boosted_retrieval
-from ._benchmark_reranker import evaluate_with_reranker
+from .benchmark_config import BenchmarkConfig
+from .benchmark_metrics_data.retrievers import run_entity_boosted_retrieval
+from .benchmark_reranker import evaluate_with_reranker
 RETRIEVAL_CANDIDATE_MULTIPLIER = 4
 PRODUCTION_CONFIG = 'entity_boosted'
 PRODUCTION_MODEL = 'BAAI/bge-base-en-v1.5'

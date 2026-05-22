@@ -9,7 +9,7 @@ from typing import List, Dict, Any
 
 from ...core.paths import Paths
 from ...core.logging import get_logger
-from .._create_training_triples import generate_training_triples
+from ..create_training_triples import generate_training_triples
 
 logger = get_logger(__name__)
 

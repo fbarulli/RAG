@@ -4,7 +4,6 @@
 
 ## Pipeline Overview
 
-See [pipeline_diagram.md](pipeline_diagram.md) for the full dataflow.
 
 ### High-level Steps
 
@@ -27,7 +26,7 @@ See [pipeline_diagram.md](pipeline_diagram.md) for the full dataflow.
 - **p04_stratified_test_split.py** — Creates `train.jsonl` + `test.jsonl` (stratified by course/section).
 
 **Key outputs**:
-- `rag_pipeline/p01_data_cleaning/data/processed/clean.jsonl` (~1140 docs)
+- `data/processed/clean.jsonl` (~1140 docs)
 - `test.jsonl` (used downstream)
 
 ### p02_eda
@@ -73,8 +72,7 @@ End-to-end RAG inference with chosen retriever/reranker/config.
 # Install
 uv sync
 
-# Run full clean pipeline (recommended)
-uv run python -m production_pipeline.cleaning.pipeline
+
 
 # Or individual stages via just (see justfile)
 just clean-pipeline

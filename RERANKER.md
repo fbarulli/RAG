@@ -108,7 +108,7 @@ python -m rag_pipeline.ingestion._onnx_bench_runner --sample-size 20
 python -m rag_pipeline.ingestion._onnx_bench_runner --model bge-reranker-base
 ```
 
-Results are written to `production_pipeline/experiments/reranker_benchmarks/`:
+Results are written to `experiments/reranker_benchmarks/`:
 ```
 reranker_benchmarks/
 ├── benchmark_results.json              # per-model MetricSummary
@@ -198,7 +198,7 @@ The reranker scores `(query_text, answer)` pairs — only the answer text, not t
 
 ### ONNX runtime
 
-All rerankers are compiled to ONNX and run on CPU via `onnxruntime`. Quantization is applied where supported to reduce memory and improve throughput. Models are cached in `production_pipeline/experiments/onnx_cache/`.
+All rerankers are compiled to ONNX and run on CPU via `onnxruntime`. Quantization is applied where supported to reduce memory and improve throughput. Models are cached in `experiments/onnx_cache/`.
 
 ### Retrieval ceiling
 

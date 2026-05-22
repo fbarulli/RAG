@@ -15,7 +15,7 @@ from pathlib import Path
 from statistics import mean
 from typing import Dict, List, Optional
 
-from ._benchmark_types import MetricSummary, QueryResult
+from .benchmark_types import MetricSummary, QueryResult
 
 logger = logging.getLogger(__name__)
 

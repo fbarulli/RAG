@@ -13,8 +13,8 @@ import threading
 from functools import lru_cache
 from typing import List, Dict, Tuple, Optional
 import logging
-from ._rerankers import load_rerankers
-from ._reranker_runner import run_reranking
+from .rerankers import load_rerankers
+from .reranker_runner import run_reranking
 logger = logging.getLogger(__name__)
 _LOADED_RERANKER_CACHE: Dict[str, dict] = {}
 _CACHE_LOCK = threading.Lock()

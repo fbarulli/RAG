@@ -30,7 +30,7 @@ def extract_active_environment() -> Tuple[str, str]:
     model = DEFAULT_MODEL
     collection = DEFAULT_COLLECTION
     try:
-        from rag_pipeline.ingestion._benchmark_config import load_defaults
+        from rag_pipeline.ingestion.benchmark_config import load_defaults
         defaults_data = load_defaults()
         model = defaults_data.get('production_model', model)
         collection = defaults_data.get('qdrant', {}).get('collection', collection)

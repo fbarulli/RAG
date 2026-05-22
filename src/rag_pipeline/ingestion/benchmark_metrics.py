@@ -58,8 +58,8 @@ from statistics import mean, quantiles, stdev, mean
 from typing import Optional
 from qdrant_client.models import Filter, FieldCondition, MatchValue, SearchParams
 from elasticsearch import Elasticsearch
-from ._benchmark_types import MetricSummary, QueryResult
-from ._benchmark_reranker import evaluate_with_reranker
+from .benchmark_types import MetricSummary, QueryResult
+from .benchmark_reranker import evaluate_with_reranker
 
 def check_code_integrity(text: str) -> float:
     """

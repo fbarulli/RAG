@@ -7,7 +7,7 @@ import logging
 from typing import Dict, List, Tuple, Union, Optional
 import numpy as np
 import os
-from rag_pipeline.ingestion._onnx_model_loader import ONNXModelLoader
+from rag_pipeline.ingestion.onnx_model_loader import ONNXModelLoader
 
 logger = logging.getLogger(__name__)
 

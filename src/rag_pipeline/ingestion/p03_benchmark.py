@@ -4,10 +4,10 @@ p04_ingestion/p03_benchmark.py
 import sys
 import traceback
 from rag_pipeline.core.logging import get_logger
-from ._benchmark_metrics.evaluation import evaluate_config
-from ._benchmark_metrics.aggregation import aggregate_metrics
-from ._benchmark_report import print_full_benchmark_report, save_benchmark_results, save_performance_summary
-from ._benchmark_config import BenchmarkConfig
+from .benchmark_metrics_data.evaluation import evaluate_config
+from .benchmark_metrics_data.aggregation import aggregate_metrics
+from .benchmark_report import print_full_benchmark_report, save_benchmark_results, save_performance_summary
+from .benchmark_config import BenchmarkConfig
 from configs.benchmark_cli import create_benchmark_parser
 logger = get_logger(__name__)
 

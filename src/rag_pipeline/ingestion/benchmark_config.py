@@ -42,7 +42,7 @@ from typing import Optional, List, Tuple
 from rag_pipeline.core.paths import Paths
 from functools import cached_property
 from rag_pipeline.core.logging import get_logger
-from ._benchmark_loader import load_defaults
+from .benchmark_loader import load_defaults
 logger = get_logger(__name__)
 
 @dataclass
@@ -221,7 +221,7 @@ class BenchmarkConfig:
 
     def get_model_entries(self) -> list[dict]:
         """Return model registry entries for the configured model list."""
-        from ._benchmark_loader import load_model_registry, get_model_entry
+        from .benchmark_loader import load_model_registry, get_model_entry
         if self.models:
             return [get_model_entry(m) for m in self.models]
         return load_model_registry(enabled_only=True)
@@ -239,7 +239,7 @@ class BenchmarkConfig:
         """
         if self.configs_path is None:
             raise ValueError("configs_path is not set — pass --configs-path or add 'retrieval_configs' to defaults.json")
-        from ._benchmark_loader import load_configs
+        from .benchmark_loader import load_configs
         configs = load_configs(self.configs_path)
         if self.config:
             if self.config not in configs:
@@ -261,7 +261,7 @@ class BenchmarkConfig:
         """
         if self.test_set_path is None:
             raise ValueError("test_set_path is not set — pass --test-set or add 'test_jsonl' to defaults.json")
-        from ._benchmark_loader import load_test_set
+        from .benchmark_loader import load_test_set
         test_set = load_test_set(self.test_set_path, self.clean_path)
         if self.quick and limit is None:
             limit = 20
@@ -279,7 +279,7 @@ class BenchmarkConfig:
         if self.topic_path is None:
             logger.warning('topic_path is not set — skipping NER enrichment')
             return {}
-        from ._benchmark_loader import load_topic_assignments
+        from .benchmark_loader import load_topic_assignments
         try:
             return load_topic_assignments(self.topic_path, model=model_name)
         except (FileNotFoundError, KeyError) as e:

@@ -4,7 +4,7 @@ Helper to run benchmark with different rerankers (one at a time).
 """
 import logging
 from typing import Dict
-from ._benchmark_reranker import evaluate_with_reranker
+from .benchmark_reranker import evaluate_with_reranker
 logger = logging.getLogger(__name__)
 
 def run_benchmark_with_reranker(query: str, candidates: list, reranker_name: str=None, top_k: int=5):

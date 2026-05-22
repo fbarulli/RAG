@@ -6,7 +6,7 @@ All functions return SearchResult.
 import time
 from typing import Optional, TYPE_CHECKING
 from qdrant_client.models import Filter, FieldCondition, MatchValue, SearchParams
-from .._benchmark_types import SearchResult
+from ..benchmark_types import SearchResult
 if TYPE_CHECKING:
     from elasticsearch import Elasticsearch
 
@@ -119,7 +119,7 @@ def run_vector_retrieval_with_reranker(client, collection: str, query_vector: li
     """
     Vector retrieval + Reranking
     """
-    from .._benchmark_reranker import evaluate_with_reranker
+    from ..benchmark_reranker import evaluate_with_reranker
     import time
     start_total = time.perf_counter()
     fetch_k = max(top_k * 3, 30)
