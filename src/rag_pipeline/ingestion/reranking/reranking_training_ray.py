@@ -137,7 +137,7 @@ def train_loop_per_worker(config: dict) -> None:
 
                 with torch.cuda.amp.autocast(enabled=config["fp16"]):
                     scores = model(**flat_kwargs).logits.squeeze(-1).view(B, G)
-                    loss   = loss_fn(scores, mask)
+                    loss   = loss_fn(scores, batch["mask"])
 
                 optimizer.zero_grad()
                 scaler.scale(loss).backward()
