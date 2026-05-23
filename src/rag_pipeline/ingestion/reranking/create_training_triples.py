@@ -8,9 +8,8 @@ import logging
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from tqdm import tqdm
+from tqdm import tqdm  # type: ignore[import-untyped]
 
-from ..onnx_bench import _generate_query_embedding
 from ..benchmark_metrics_data.retrievers import run_entity_boosted_retrieval
 
 logger = logging.getLogger(__name__)
@@ -25,7 +24,7 @@ def generate_training_triples(
     embedding_model: Any,
     retrieval_config: Dict[str, Any],
     topic_map: Optional[Dict[str, Any]] = None,
-    output_path: str = None,
+    output_path: Optional[str] = None,
 ) -> List[Dict]:
     """
     Generate training triples using ground truth positives from train.jsonl.
@@ -38,15 +37,24 @@ def generate_training_triples(
         f"hard_negatives={num_hard_negatives} | entity_boosted={topic_map is not None}"
     )
 
-    for item in tqdm(train_items, desc="Generating triples"):
+    # Pre-encode all valid queries in one batch — much faster than one-by-one on CPU
+    valid_items = [
+        item for item in train_items
+        if (item.get("question") or item.get("query", "")) and item.get("answer", "")
+    ]
+    queries = [item.get("question") or item.get("query", "") for item in valid_items]
+    logger.info(f"Batch encoding {len(queries)} queries...")
+    vectors = embedding_model.encode(queries, batch_size=32, convert_to_numpy=True, show_progress_bar=True)
+    query_vectors = {queries[i]: vectors[i].tolist() for i in range(len(queries))}
+    logger.info("Batch encoding complete.")
+
+    for item in tqdm(valid_items, desc="Generating triples"):
         query = item.get("question") or item.get("query", "")
         correct_answer = item.get("answer", "")
         correct_id = item.get("id", "")
         course = item.get("course", "")
-        if not query or not correct_answer:
-            continue
 
-        query_vector = _generate_query_embedding(query, embedding_model)
+        query_vector = query_vectors.get(query)
         if not query_vector:
             continue
 

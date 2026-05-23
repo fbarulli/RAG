@@ -92,7 +92,7 @@ def main() -> None:
                 save_steps=cfg["save_steps"],
                 eval_steps=cfg["eval_steps"],
                 save_strategy=cfg["save_strategy"],
-                evaluation_strategy=cfg["evaluation_strategy"],
+                eval_strategy=cfg["eval_strategy"],
                 load_best_model_at_end=cfg["load_best_model_at_end"],
                 metric_for_best_model=cfg["metric_for_best_model"],
                 greater_is_better=cfg["greater_is_better"],

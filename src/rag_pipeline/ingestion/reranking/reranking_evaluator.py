@@ -36,4 +36,4 @@ def create_proper_evaluator(
         for q, v in query_map.items()
         if v["positive"] and v["negative"]
     ]
-    return CrossEncoderRerankingEvaluator.from_input_examples(eval_data, name="dev")
+    return CrossEncoderRerankingEvaluator(samples=eval_data, name="dev")
