@@ -188,7 +188,7 @@ def train_loop_per_worker(config: dict) -> None:
 # ---------------------------------------------------------------------------
 
 def main() -> None:
-    args = create_base_parser("Reranker Ray training").parse_args()
+    args, _ = create_base_parser("Reranker Ray training").parse_known_args()
 
     try:
         cfg = RayTrainingConfig.from_rerankers_json()
