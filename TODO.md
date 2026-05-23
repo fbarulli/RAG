@@ -1,3 +1,98 @@
+## Handoff — Ray Reranker Training Pipeline
+
+### Current State
+- VM: Docker running, Qdrant up on port 6333, Cloudflare tunnel active
+- Training pipeline fully optimized and tested locally on CPU with 200 stratified triples
+- TinyBERT selected as test model (`cross-encoder/ms-marco-TinyBERT-L-2-v2`)
+- Local CPU run completed successfully (3 epochs, loss ~3.5)
+
+### Remaining Blocker
+`train_loop_per_worker` has 3 Ray-context calls that fail outside `trainer.fit()`. GPU is only accessible from the Colab notebook kernel, not over SSH. Need to wrap these in Colab directly:
+
+```python
+import pathlib
+p = pathlib.Path("/content/RAG-a-muffin/src/rag_pipeline/ingestion/reranking/reranking_training_ray.py")
+src = p.read_text()
+
+src = src.replace(
+    "    model = ray_torch.prepare_model(model)",
+    "    try:\n        model = ray_torch.prepare_model(model)\n    except Exception:\n        model = model.to(device)"
+)
+src = src.replace(
+    "        dataloader = ray_torch.prepare_data_loader(dataloader)",
+    "        try:\n            dataloader = ray_torch.prepare_data_loader(dataloader)\n        except Exception:\n            pass"
+)
+p.write_text(src)
+print("OK")
+```
+
+Then apply the same fixes on the VM and commit.
+
+### Colab Training Cell (after fix)
+```python
+import sys, json, importlib
+sys.path.insert(0, '/content/RAG-a-muffin/src')
+import os
+os.chdir('/content/RAG-a-muffin')
+from pathlib import Path
+
+p = Path('configs/rerankers.json')
+cfg_json = json.loads(p.read_text())
+cfg_json['ray_training']['use_gpu'] = True
+cfg_json['ray_training']['fp16'] = True
+p.write_text(json.dumps(cfg_json, indent=2))
+
+from rag_pipeline.ingestion.reranking.reranking_config_ray import RayTrainingConfig
+from rag_pipeline.ingestion.reranking.reranking_training_ray import train_loop_per_worker
+
+cfg = RayTrainingConfig.from_rerankers_json()
+triples = json.loads(Path(cfg.triples_path).read_text())
+cfg_dict = cfg.to_dict()
+cfg_dict['triples'] = triples
+
+train_loop_per_worker(cfg_dict)
+```
+
+### Config State (VM `configs/rerankers.json`)
+```json
+ray_training.model_key        = "TinyBERT"
+ray_training.output_subdir    = "TinyBERT-finetuned-test"
+ray_training.use_gpu          = false   ← set True in Colab cell
+ray_training.fp16             = false   ← set True in Colab cell
+ray_training.epochs           = 3
+ray_training.batch_size       = 16
+ray_training.log_every_n_steps = 5
+training.sample_size          = 200
+```
+
+### File Map
+| File | Change |
+|---|---|
+| `reranking_dataset.py` | `PreTrainedTokenizerFast`, accepts `list[dict]`, optimized collate |
+| `reranking_training_ray.py` | batch `.to(device)`, report accumulation, driver loads triples, `parse_known_args`, Ray context try/except for `get_context` + `prepare_model` (partial) |
+| `configs/rerankers.json` | `ray_training` block added |
+| `experiments/reranker_training/triples_sample_200.json` | 200 stratified triples |
+| `colab.ipynb` | Updated with correct cells |
+
+### Next Steps
+1. Fix `prepare_model` + `prepare_data_loader` in Colab (cell above)
+2. Confirm training runs on GPU — watch for `Moving model to device: cuda`
+3. If successful, switch `model_key` to `bge-reranker-base`, `sample_size` to 965, run full training
+4. Download finetuned model, add to `configs/rerankers.json` models list
+5. Run holdout benchmark — target: beat `entity_boosted` Hit@5=94.0% / MRR=0.84
+
+
+
+
+
+
+
+
+
+
+
+
+
 Based on what I've seen, here are the most impactful directions ranked by likely ROI:
 High impact, lower effort
 
