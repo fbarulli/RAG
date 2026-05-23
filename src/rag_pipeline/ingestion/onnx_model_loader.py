@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any, Optional, Tuple, TYPE_CHECKING
 if TYPE_CHECKING:
     from transformers import PreTrainedTokenizer
-    from optimum.onnxruntime import ORTModelForSequenceClassification
+    from optimum.onnxruntime import ORTModelForSequenceClassification  # type: ignore[import-untyped]
 logger = logging.getLogger(__name__)
 CACHE_REQUIRED_FILES = ['model.onnx', 'config.json']
 CACHE_TOKENIZER_FILES = ['tokenizer.json', 'tokenizer_config.json', 'special_tokens_map.json']
@@ -47,7 +47,7 @@ class ONNXModelLoader:
     def _verify_dependencies(self, export_needed: bool=False) -> None:
         """Assert required packages are present in the environment."""
         try:
-            from optimum.onnxruntime import ORTModelForSequenceClassification
+            from optimum.onnxruntime import ORTModelForSequenceClassification  # type: ignore[import-untyped]
             from transformers import AutoTokenizer
             if export_needed:
                 import torch
@@ -77,7 +77,7 @@ class ONNXModelLoader:
 
     def _load_from_cache(self) -> Tuple[Any, Any]:
         """Loads model and tokenizer from the local cache directory."""
-        from optimum.onnxruntime import ORTModelForSequenceClassification
+        from optimum.onnxruntime import ORTModelForSequenceClassification  # type: ignore[import-untyped]
         from transformers import AutoTokenizer
         cache_path_str = str(self.local_onnx_path)
         try:
@@ -90,7 +90,7 @@ class ONNXModelLoader:
 
     def _export_and_cache(self) -> Tuple[Any, Any]:
         """Exports the model from Hugging Face Hub to ONNX and saves to local cache."""
-        from optimum.onnxruntime import ORTModelForSequenceClassification
+        from optimum.onnxruntime import ORTModelForSequenceClassification  # type: ignore[import-untyped]
         from transformers import AutoTokenizer
         try:
             tokenizer = AutoTokenizer.from_pretrained(self.model_name)

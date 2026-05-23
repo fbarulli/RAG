@@ -28,4 +28,7 @@ def load_rerankers(selected: Optional[str]=None) -> List[Dict]:
 
 def get_reranker_model(reranker_config: Dict) -> str:
     """Get the actual model name from config entry"""
-    return reranker_config.get('model')
+    model = reranker_config.get('model')
+    if model is None:
+        raise ValueError(f"'model' key missing from reranker config: {reranker_config}")
+    return model

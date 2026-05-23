@@ -4,13 +4,23 @@ Evaluation orchestration - ties retrievers to test data.
 """
 import logging
 from dataclasses import dataclass
-from typing import Any, Optional, TYPE_CHECKING
+from typing import Any, Optional, TypedDict, TYPE_CHECKING
 from ..benchmark_types import QueryResult
 from .core import check_code_integrity
 from .retrievers import run_es_retrieval, run_vector_retrieval, run_vector_retrieval_with_reranker, run_hybrid_rrf_retrieval, run_entity_boosted_retrieval
 if TYPE_CHECKING:
     from elasticsearch import Elasticsearch
 logger = logging.getLogger(__name__)
+
+class QueryContext(TypedDict):
+    query: str
+    expected_id: str
+    course: str
+    topic: Optional[int]
+    subtopic: Optional[int]
+    ner_category: Optional[str]
+    ner_primary_entity: Optional[str]
+    query_vector: Optional[list]
 
 @dataclass(frozen=True)
 class RetrievalConfig:
@@ -54,6 +64,8 @@ def _run_retrieval(rc: RetrievalConfig, query: str, query_vector: Optional[list]
     """Dispatch to the correct retriever based on search_type."""
     if rc.search_type == 'bm25' and rc.es is not None:
         return run_es_retrieval(es=rc.es, index=rc.es_index, query_text=query, course_filter=course, config=rc.config, top_k=rc.retrieval_k)
+    if query_vector is None:
+        raise ValueError(f"query_vector is None for search_type={rc.search_type!r}")
     if rc.search_type == 'hybrid_rrf' and rc.es is not None:
         return run_hybrid_rrf_retrieval(client=rc.client, collection=rc.collection, query_vector=query_vector, es=rc.es, es_index=rc.es_index, query_text=query, course_filter=course, config=rc.config, top_k=rc.retrieval_k)
     if rc.search_type == 'entity_boosted':
@@ -61,6 +73,7 @@ def _run_retrieval(rc: RetrievalConfig, query: str, query_vector: Optional[list]
     if rc.use_reranker and rc.reranker_name:
         return run_vector_retrieval_with_reranker(client=rc.client, collection=rc.collection, query_vector=query_vector, query_text=query, course_filter=course, config=rc.config, top_k=rc.top_k, reranker_name=rc.reranker_name)
     return run_vector_retrieval(client=rc.client, collection=rc.collection, query_vector=query_vector, course_filter=course, config=rc.config, top_k=rc.top_k)
+
 
 def _apply_reranking(search_result, rc: RetrievalConfig, query: str):
     """
@@ -88,13 +101,13 @@ def _apply_reranking(search_result, rc: RetrievalConfig, query: str):
     reranker_latency_ms = rerank_metrics.get('reranker_latency_ms', 0.0)
     return (hit_ids, hit_scores, reranker_latency_ms)
 
-def _build_query_context(idx: int, test: dict, topic_map: dict, query_vectors: Optional[list]) -> dict:
+def _build_query_context(idx: int, test: dict, topic_map: dict, query_vectors: Optional[list]) -> QueryContext:
     """Extract and return all per-query context fields."""
     expected_id = test['expected_id']
     topic_info = topic_map.get(expected_id, {})
     return {'query': test['query'], 'expected_id': expected_id, 'course': test['course'], 'topic': topic_info.get('topic'), 'subtopic': topic_info.get('subtopic'), 'ner_category': topic_info.get('ner_category'), 'ner_primary_entity': topic_info.get('ner_primary_entity'), 'query_vector': query_vectors[idx] if query_vectors is not None else None}
 
-def _retrieve_and_rerank(ctx: dict, rc: RetrievalConfig) -> tuple:
+def _retrieve_and_rerank(ctx: QueryContext, rc: RetrievalConfig) -> tuple:
     """Run retrieval then optional reranking. Returns (search_result, hit_ids, hit_scores, reranker_latency_ms)."""
     logger.debug(f"calling _run_retrieval query={ctx['query']!r}")
     search_result = _run_retrieval(rc=rc, query=ctx['query'], query_vector=ctx['query_vector'], course=ctx['course'], ner_category=ctx['ner_category'], ner_primary_entity=ctx['ner_primary_entity'])
@@ -102,9 +115,9 @@ def _retrieve_and_rerank(ctx: dict, rc: RetrievalConfig) -> tuple:
     hit_ids, hit_scores, reranker_latency_ms = _apply_reranking(search_result=search_result, rc=rc, query=ctx['query'])
     return (search_result, hit_ids, hit_scores, reranker_latency_ms)
 
-def _build_query_result(test: dict, ctx: dict, search_result, hit_ids: tuple, hit_scores: tuple, reranker_latency_ms: float, integrity_cache: dict) -> QueryResult:
+def _build_query_result(test: dict, ctx: QueryContext, search_result, hit_ids: tuple, hit_scores: tuple, reranker_latency_ms: float, integrity_cache: dict) -> QueryResult:
     """Assemble the final QueryResult from retrieval outputs."""
-    return QueryResult(query_id=test['query_id'], query_text=ctx['query'], expected_id=ctx['expected_id'], course=ctx['course'], topic=ctx['topic'], subtopic=ctx['subtopic'], query_type=test.get('query_type', 'unknown'), hit_ids=hit_ids, hit_scores=hit_scores, hit_courses=search_result.hit_courses, latency_ms=search_result.latency_ms, reranker_latency_ms=reranker_latency_ms, code_integrity_ref=integrity_cache.get(ctx['expected_id']), code_integrity_retrieved=check_code_integrity(search_result.top_answer) if search_result.top_answer else None)
+    return QueryResult(query_id=test['query_id'], query_text=ctx['query'], expected_id=ctx['expected_id'], course=ctx['course'], topic=ctx['topic'], subtopic=ctx['subtopic'], query_type=test.get('query_type', 'unknown'), hit_ids=hit_ids, hit_scores=hit_scores, hit_courses=search_result.hit_courses, latency_ms=search_result.latency_ms, reranker_latency_ms=reranker_latency_ms, code_integrity_ref=float(integrity_cache.get(ctx['expected_id']) or 0.0), code_integrity_retrieved=check_code_integrity(search_result.top_answer) if search_result.top_answer else None)
 
 def _evaluate_single(idx: int, test: dict, topic_map: dict, query_vectors: Optional[list], integrity_cache: dict[str, float], rc: RetrievalConfig) -> QueryResult:
     """

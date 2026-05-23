@@ -41,6 +41,7 @@ dependencies = [
     "openai>=2.32.0",
     "optimum[onnxruntime]>=2.1.0",
     "pypdf>=6.10.2",
+    "pyright>=1.1.409",
     "pytest>=9.0.3",
     "python-docx>=1.2.0",
     "python-dotenv>=1.2.2",

@@ -10,17 +10,17 @@ from ..benchmark_types import SearchResult
 if TYPE_CHECKING:
     from elasticsearch import Elasticsearch
 
-def run_es_retrieval(es: 'Elasticsearch', index: str, query_text: str, course_filter: str, config: dict, top_k: int) -> SearchResult:
+def run_es_retrieval(es: 'Elasticsearch', index: str, query_text: str, course_filter: Optional[str], config: dict, top_k: int) -> SearchResult:
     """BM25 retrieval via Elasticsearch."""
     start = time.perf_counter()
     boost_q = config.get('boost_question', 1.0)
     boost_t = config.get('boost_text', 1.0)
     if boost_q > 0 and boost_t > 0:
-        must_clause = [{'multi_match': {'query': query_text, 'fields': [f'question^{boost_q}', f'answer^{boost_t}']}}]
+        must_clause = [{'multi_match': {'query': query_text, 'fields': [f'question^{boost_q}', f'answer^{boost_t}']}}]  # type: ignore[dict-item]
     elif boost_q > 0:
-        must_clause = [{'match': {'question': {'query': query_text, 'boost': boost_q}}}]
+        must_clause = [{'match': {'question': {'query': query_text, 'boost': boost_q}}}]  # type: ignore[dict-item]
     else:
-        must_clause = [{'match': {'answer': {'query': query_text, 'boost': boost_t}}}]
+        must_clause = [{'match': {'answer': {'query': query_text, 'boost': boost_t}}}]  # type: ignore[dict-item]
     body = {'query': {'bool': {'must': must_clause, 'filter': [{'term': {'course': course_filter}}] if course_filter else []}}, 'size': top_k}
     resp = es.search(index=index, body=body)
     latency_ms = (time.perf_counter() - start) * 1000
@@ -29,9 +29,9 @@ def run_es_retrieval(es: 'Elasticsearch', index: str, query_text: str, course_fi
     hit_courses = tuple((h['_source'].get('course', '') for h in hits))
     hit_scores = tuple((float(h['_score']) for h in hits))
     top_answer = hits[0]['_source'].get('answer') if hits else None
-    return SearchResult(hit_ids=hit_ids, hit_scores=hit_scores, hit_courses=hit_courses, top_answer=top_answer, latency_ms=latency_ms)
+    return SearchResult(hit_ids=hit_ids, hit_scores=hit_scores, hit_courses=hit_courses, top_answer=top_answer, latency_ms=latency_ms, hit_answers=tuple())
 
-def run_vector_retrieval(client, collection: str, query_vector: list, course_filter: str, config: dict, top_k: int) -> SearchResult:
+def run_vector_retrieval(client, collection: str, query_vector: list, course_filter: Optional[str], config: dict, top_k: int) -> SearchResult:
     """Pure vector retrieval via Qdrant."""
     start = time.perf_counter()
     must_conditions: list = []
@@ -42,7 +42,7 @@ def run_vector_retrieval(client, collection: str, query_vector: list, course_fil
         match = cond.get('match', {})
         if key and 'value' in match:
             must_conditions.append(FieldCondition(key=key, match=MatchValue(value=match['value'])))
-    query_filter = Filter(must=must_conditions) if must_conditions else None
+    query_filter = Filter(must=must_conditions) if must_conditions else None  # type: ignore[arg-type]
     effective_limit = config.get('limit', top_k)
     search_params = None
     if config.get('hnsw_ef'):
@@ -57,14 +57,14 @@ def run_vector_retrieval(client, collection: str, query_vector: list, course_fil
     top_answer = points[0].payload.get('answer') if points else None
     return SearchResult(hit_ids=hit_ids, hit_scores=hit_scores, hit_courses=hit_courses, top_answer=top_answer, latency_ms=latency_ms, hit_answers=hit_answers)
 
-def run_hybrid_rrf_retrieval(client, collection: str, query_vector: list, es: 'Elasticsearch', es_index: str, query_text: str, course_filter: str, config: dict, top_k: int) -> SearchResult:
+def run_hybrid_rrf_retrieval(client, collection: str, query_vector: list, es: 'Elasticsearch', es_index: str, query_text: str, course_filter: Optional[str], config: dict, top_k: int) -> SearchResult:
     """Reciprocal Rank Fusion over Qdrant (vector) + Elasticsearch (BM25)."""
     start = time.perf_counter()
     k_rrf = config.get('rrf_k', 60)
     must_conditions = []
     if course_filter:
         must_conditions.append(FieldCondition(key='course', match=MatchValue(value=course_filter)))
-    query_filter = Filter(must=must_conditions) if must_conditions else None
+    query_filter = Filter(must=must_conditions) if must_conditions else None  # type: ignore[arg-type]
     vector_result = client.query_points(collection_name=collection, query=query_vector, limit=top_k, query_filter=query_filter, with_payload=True, with_vectors=False)
     vector_items = [(p.payload.get('es_id', ''), p.payload.get('course', ''), p.payload.get('answer', '')) for p in vector_result.points]
     bm25_result = run_es_retrieval(es=es, index=es_index, query_text=query_text, course_filter=course_filter, config=config, top_k=top_k)
@@ -91,9 +91,9 @@ def run_hybrid_rrf_retrieval(client, collection: str, query_vector: list, es: 'E
         if not top_answer and bm25_result.hit_ids and (sorted_ids[0] == bm25_result.hit_ids[0]):
             top_answer = bm25_result.top_answer
     latency_ms = (time.perf_counter() - start) * 1000
-    return SearchResult(hit_ids=tuple(sorted_ids), hit_scores=scores, hit_courses=courses, top_answer=top_answer, latency_ms=latency_ms)
+    return SearchResult(hit_ids=tuple(sorted_ids), hit_scores=scores, hit_courses=courses, top_answer=top_answer, latency_ms=latency_ms, hit_answers=tuple())
 
-def run_entity_boosted_retrieval(client, collection: str, query_vector: list, course_filter: str, config: dict, top_k: int, ner_category: Optional[str]=None, ner_primary_entity: Optional[str]=None) -> SearchResult:
+def run_entity_boosted_retrieval(client, collection: str, query_vector: list, course_filter: Optional[str], config: dict, top_k: int, ner_category: Optional[str]=None, ner_primary_entity: Optional[str]=None) -> SearchResult:
     """Vector search with soft entity boosting via Qdrant should clauses."""
     start = time.perf_counter()
     must_conditions = []
@@ -104,7 +104,7 @@ def run_entity_boosted_retrieval(client, collection: str, query_vector: list, co
         should_conditions.append(FieldCondition(key='ner_primary_entity', match=MatchValue(value=ner_primary_entity)))
     if ner_category and ner_category not in ('OTHER', 'UNKNOWN'):
         should_conditions.append(FieldCondition(key='ner_category', match=MatchValue(value=ner_category)))
-    query_filter = Filter(must=must_conditions, should=should_conditions or None) if must_conditions or should_conditions else None
+    query_filter = Filter(must=must_conditions, should=should_conditions or None) if must_conditions or should_conditions else None  # type: ignore[arg-type]
     result = client.query_points(collection_name=collection, query=query_vector, limit=top_k, query_filter=query_filter, with_payload=True, with_vectors=False)
     latency_ms = (time.perf_counter() - start) * 1000
     points = result.points
@@ -115,7 +115,7 @@ def run_entity_boosted_retrieval(client, collection: str, query_vector: list, co
     top_answer = points[0].payload.get('answer') if points else None
     return SearchResult(hit_ids=hit_ids, hit_scores=hit_scores, hit_courses=hit_courses, hit_answers=hit_answers, top_answer=top_answer, latency_ms=latency_ms)
 
-def run_vector_retrieval_with_reranker(client, collection: str, query_vector: list, query_text: str, course_filter: str, config: dict, top_k: int, reranker_name: Optional[str]=None) -> SearchResult:
+def run_vector_retrieval_with_reranker(client, collection: str, query_vector: list, query_text: str, course_filter: Optional[str], config: dict, top_k: int, reranker_name: Optional[str]=None) -> SearchResult:
     """
     Vector retrieval + Reranking
     """

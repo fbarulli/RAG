@@ -12,7 +12,7 @@ from rag_pipeline.ingestion.onnx_model_loader import ONNXModelLoader
 logger = logging.getLogger(__name__)
 
 try:
-    from tqdm import tqdm
+    from tqdm import tqdm  # type: ignore[import-untyped]
     HAS_TQDM = True
 except ImportError:
     HAS_TQDM = False
@@ -115,7 +115,7 @@ class ONNXCrossEncoder:
     def _sigmoid(x: np.ndarray) -> np.ndarray:
         """Stable sigmoid."""
         try:
-            from scipy.special import expit
+            from scipy.special import expit  # type: ignore[import-untyped]
             return expit(x)
         except ImportError:
             x = np.clip(x, -500, 500)

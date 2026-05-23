@@ -38,7 +38,7 @@ import argparse
 from dataclasses import dataclass, field
 from functools import cached_property
 from pathlib import Path
-from typing import Optional, List, Tuple
+from typing import Any, Optional, List, Tuple
 from rag_pipeline.core.paths import Paths
 from functools import cached_property
 from rag_pipeline.core.logging import get_logger
@@ -172,7 +172,7 @@ class BenchmarkConfig:
             v = getattr(args, key, None)
             return Path(v) if v is not None else getattr(self, attr)
 
-        def _val(attr: str, arg_attr: Optional[str]=None) -> object:
+        def _val(attr: str, arg_attr: Optional[str]=None) -> Any:
             """Return CLI value if present, otherwise keep current value."""
             key = arg_attr or attr
             v = getattr(args, key, None)

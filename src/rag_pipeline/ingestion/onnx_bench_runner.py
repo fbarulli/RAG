@@ -7,7 +7,8 @@ RESPONSIBILITY: Manages top-level application bootstrapping and reporting lifecy
 import logging
 import sys
 import traceback
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
+from pathlib import Path
 
 from qdrant_client import QdrantClient
 from sentence_transformers import SentenceTransformer
@@ -58,8 +59,10 @@ def _resolve_topic_map(config: BenchmarkConfig, model_name: str) -> Dict[str, An
         return None
 
 
-def _persist_final_reports(summaries: List[Any], output_dir: str) -> None:
+def _persist_final_reports(summaries: List[Any], output_dir: Optional[Path]) -> None:
     """RESPONSIBILITY: Passes metrics out to terminal layouts and saves structured reports to disk."""
+    if output_dir is None:
+        raise ValueError("output_dir is not set — cannot save reports")
     if not summaries:
         logger.warning('⚠️ Benchmarks terminated. Zero successful summaries generated.')
         return

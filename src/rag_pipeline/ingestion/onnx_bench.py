@@ -34,7 +34,7 @@ def _generate_query_embedding(query_text: str, embedding_model: SentenceTransfor
 
 def _execute_vector_search(client: QdrantClient, collection: str, query_vector: List[float], config: Dict[str, Any]) -> Optional[Any]:
     """RESPONSIBILITY: Executes the network search pass against the Qdrant backend."""
-    return run_entity_boosted_retrieval(client=client, collection=collection, query_vector=query_vector, course_filter=config.get('course_filter') or None, config=config, top_k=40, ner_category=None, ner_primary_entity=None)
+    return run_entity_boosted_retrieval(client=client, collection=collection, query_vector=query_vector, course_filter=str(config.get('course_filter')) if config.get('course_filter') else None, config=config, top_k=40, ner_category=None, ner_primary_entity=None)
 
 def _extract_hit_ids_safely(retrieval_result: Any) -> List[Any]:
     """RESPONSIBILITY: Safe schema interface extractor handling both custom objects and raw dict formats."""
@@ -83,7 +83,7 @@ def _score_and_sort_candidates(encoder: Any, query_text: str, candidates: List[D
     candidates.sort(key=lambda x: x["score"], reverse=True)
     return (candidates, latency_ms)
 
-def _evaluate_single_query(client: QdrantClient, query_item: Dict[str, Any], idx: int, collection: str, config: Dict[str, Any], encoder: Any, embedding_model: SentenceTransformer, topic_map: Optional[Dict[str, Any]]=None) -> Optional[Dict[str, Any]]:
+def _evaluate_single_query(client: QdrantClient, query_item: Dict[str, Any], idx: int, collection: str, config: Dict[str, Any], encoder: Any, embedding_model: SentenceTransformer, topic_map: Optional[Dict[str, Any]]=None) -> Optional[QueryResult]:
     """RESPONSIBILITY: Orchestrates a single query through retrieval and ranking evaluation steps."""
     query_text = _extract_query_text(query_item)
     candidates = _retrieve_vector_candidates(client, collection, query_item, config, embedding_model)
@@ -93,7 +93,7 @@ def _evaluate_single_query(client: QdrantClient, query_item: Dict[str, Any], idx
     hit_ids = tuple(c.get('es_id', '') or c.get('payload', {}).get('es_id', '') for c in reranked_hits)
     hit_scores = tuple(float(c.get('score', 0.0)) for c in reranked_hits)
     hit_courses = tuple(c.get('payload', {}).get('course', '') for c in reranked_hits)
-    return QueryResult(query_id=str(query_item.get('query_id') or query_item.get('id', idx)), query_text=query_text, expected_id=str(query_item.get('expected_id') or query_item.get('expected_doc_id') or query_item.get('document_id', '')), course=str(query_item.get('course', '')), topic=topic_map.get(query_text) if topic_map else None, subtopic=None, hit_ids=hit_ids, hit_scores=hit_scores, hit_courses=hit_courses, latency_ms=latency_ms, code_integrity_ref=0.0)
+    return QueryResult(query_id=str(query_item.get('query_id') or query_item.get('id', idx)), query_text=query_text, expected_id=str(query_item.get('expected_id') or query_item.get('expected_doc_id') or query_item.get('document_id', '')), course=str(query_item.get('course', '')), topic=int(topic_map.get(query_text, {}).get('topic')) if topic_map and topic_map.get(query_text, {}).get('topic') is not None else None, subtopic=None, hit_ids=hit_ids, hit_scores=hit_scores, hit_courses=hit_courses, latency_ms=latency_ms, code_integrity_ref=0.0)
 
 def _build_cache_key(collection: str, model_name: str, test_set: List[Dict[str, Any]]) -> str:
     """RESPONSIBILITY: Stable cache key from collection + model + sorted query ids."""
@@ -192,7 +192,7 @@ def run_benchmark_loop(
                 query_text=query_text,
                 expected_id=str(query_item.get('expected_id') or query_item.get('expected_doc_id') or query_item.get('document_id', '')),
                 course=str(query_item.get('course', '')),
-                topic=topic_map.get(query_text) if topic_map else None,
+                topic=int(topic_map.get(query_text, {}).get('topic')) if topic_map and topic_map.get(query_text, {}).get('topic') is not None else None,
                 subtopic=None,
                 hit_ids=hit_ids,
                 hit_scores=hit_scores,
@@ -245,7 +245,7 @@ def execute_matrix_evaluation(
     retrieval_config: Dict[str, Any],
     embedding_model: SentenceTransformer,
     topic_map: Optional[Dict[str, Any]] = None,
-    target_override: str = None,
+    target_override: Optional[str] = None,
     cache_dir: Optional[Path] = None,
     reset: bool = False,
 ) -> List[Any]:
