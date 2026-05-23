@@ -75,5 +75,24 @@
     "gpu_batch_size": 32,
     "cpu_threshold_small": 4,
     "cpu_threshold_medium": 8
+  },
+  "ray_training": {
+    "model_key": "bge-reranker-base",
+    "output_subdir": "bge-reranker-base-finetuned",
+    "max_length": 512,
+    "num_labels": 1,
+    "max_negatives": 5,
+    "dataloader_num_workers": 2,
+    "epochs": 3,
+    "batch_size": 16,
+    "lr": 2e-05,
+    "weight_decay": 0.01,
+    "warmup_ratio": 0.1,
+    "grad_clip": 1.0,
+    "fp16": false,
+    "log_every_n_steps": 50,
+    "alpha": 0.5,
+    "num_workers": 1,
+    "use_gpu": false
   }
 }

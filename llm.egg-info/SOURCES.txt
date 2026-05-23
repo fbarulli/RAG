@@ -92,8 +92,13 @@ src/rag_pipeline/ingestion/benchmark_metrics_data/evaluation.py
 src/rag_pipeline/ingestion/benchmark_metrics_data/retrievers.py
 src/rag_pipeline/ingestion/reranking/__init__.py
 src/rag_pipeline/ingestion/reranking/create_training_triples.py
+src/rag_pipeline/ingestion/reranking/ray_test.py
+src/rag_pipeline/ingestion/reranking/reranking_config_ray.py
+src/rag_pipeline/ingestion/reranking/reranking_dataset.py
 src/rag_pipeline/ingestion/reranking/reranking_evaluator.py
+src/rag_pipeline/ingestion/reranking/reranking_loss.py
 src/rag_pipeline/ingestion/reranking/reranking_training.py
+src/rag_pipeline/ingestion/reranking/reranking_training_ray.py
 src/rag_pipeline/ingestion/reranking/reranking_triples.py
 tests/test_cleaning.py
 tests/test_dedup_logic.py

@@ -43,6 +43,7 @@ Requires-Dist: python-dotenv>=1.2.2
 Requires-Dist: pyyaml>=6.0.3
 Requires-Dist: qdrant-client>=1.17.1
 Requires-Dist: ragas>=0.4.3
+Requires-Dist: ray>=2.55.1
 Requires-Dist: redis>=7.4.0
 Requires-Dist: scikit-learn>=1.8.0
 Requires-Dist: scipy>=1.17.1

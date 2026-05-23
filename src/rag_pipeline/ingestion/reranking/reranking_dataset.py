@@ -3,32 +3,47 @@ reranking_dataset.py
 ====================
 Dataset and collation for listwise reranker fine-tuning.
 
-Each item in the triples JSON becomes a QueryGroup: one query paired with
-its positive answer and N hard negatives. Groups with fewer than
+Each item in the triples list becomes a QueryGroup: one query paired with
+its positive answer and N hard negatives.  Groups with fewer than
 max_negatives real negatives are padded with the positive text; padding
 positions are masked out in the loss so they contribute no gradient.
 
+Design notes
+------------
+* The raw triples list is accepted as an in-memory argument (loaded once
+  on the driver, shared via Ray object store) — no per-worker file I/O.
+* __getitem__ returns a plain dict instead of a dataclass to eliminate
+  per-sample Python object allocation on the hot path.
+* make_collate_fn uses a fast HuggingFace tokenizer and batch_encode_plus
+  with padding="longest" so sequence length is tight to the actual batch,
+  not padded to max_length globally.
+* The validity mask is pre-allocated as a (B, G) bool tensor and filled
+  with scatter ops — no list-of-lists → tensor conversion per batch.
+
 Public API
 ----------
-    QueryGroup          dataclass
+    QueryGroup          dataclass  (used for type annotations / external callers)
     RerankerDataset     torch.utils.data.Dataset
     make_collate_fn()   -> Callable
 """
 from __future__ import annotations
 
-import json
 import logging
 import traceback
 from dataclasses import dataclass
-from pathlib import Path
-from typing import Callable
+from typing import Any, Callable
 
 import torch
 from torch.utils.data import Dataset
-from transformers import AutoTokenizer
+from transformers import AutoTokenizer, PreTrainedTokenizerFast
 
 logger = logging.getLogger(__name__)
 
+
+# ---------------------------------------------------------------------------
+# QueryGroup — kept as a dataclass for external callers / type annotations,
+# but the dataset itself stores plain dicts for speed.
+# ---------------------------------------------------------------------------
 
 @dataclass
 class QueryGroup:
@@ -48,35 +63,34 @@ class QueryGroup:
     n_real_negatives: int
 
 
+# ---------------------------------------------------------------------------
+# Dataset
+# ---------------------------------------------------------------------------
+
 class RerankerDataset(Dataset):
     """
-    Loads triples from a JSON file and exposes them as QueryGroups.
+    Wraps an in-memory triples list as a torch Dataset.
 
     Parameters
     ----------
-    triples_path  : absolute path to triples_sample_*.json
-    max_negatives : maximum hard negatives per group; shorter lists are padded
+    triples       : list of triple dicts, already loaded by the driver.
+                    Each dict must contain "query", "positive", and either
+                    "hard_negatives" or "negatives".
+    max_negatives : maximum hard negatives per group; shorter lists are
+                    padded with the positive text (masked out in loss).
+
+    Notes
+    -----
+    Accepts a pre-loaded list rather than a file path so the data is read
+    once on the Ray driver and shared through the object store — workers
+    never touch disk for training data.
     """
 
-    def __init__(self, triples_path: str, max_negatives: int) -> None:
-        path = Path(triples_path)
-        if not path.exists():
-            raise FileNotFoundError(
-                f"Triples file not found: {path}. "
-                "Run create_training_triples.py first."
-            )
-
-        logger.info("Loading triples from %s", path)
-        try:
-            raw: list[dict] = json.loads(path.read_text(encoding="utf-8"))
-        except Exception:
-            logger.error("Failed to parse triples JSON\n%s", traceback.format_exc())
-            raise
-
-        self.groups: list[QueryGroup] = []
+    def __init__(self, triples: list[dict[str, Any]], max_negatives: int) -> None:
+        self._groups: list[dict[str, Any]] = []
         skipped = 0
 
-        for item in raw:
+        for item in triples:
             try:
                 negs   = item.get("hard_negatives") or item.get("negatives") or []
                 negs   = list(negs[:max_negatives])
@@ -86,35 +100,46 @@ class RerankerDataset(Dataset):
                 while len(negs) < max_negatives:
                     negs.append(item["positive"])
 
-                self.groups.append(QueryGroup(
-                    query            = item["query"],
-                    positive         = item["positive"],
-                    negatives        = negs,
-                    n_real_negatives = n_real,
-                ))
+                # Plain dict — avoids dataclass __init__ overhead on hot path
+                self._groups.append({
+                    "query":            item["query"],
+                    "positive":         item["positive"],
+                    "negatives":        negs,
+                    "n_real_negatives": n_real,
+                })
             except KeyError as exc:
-                logger.warning("Skipping malformed triple (missing key %s): %s", exc, item)
+                logger.warning(
+                    "Skipping malformed triple (missing key %s): %s", exc, item
+                )
                 skipped += 1
 
         logger.info(
             "RerankerDataset ready — %d groups loaded, %d skipped, "
             "max_negatives=%d",
-            len(self.groups), skipped, max_negatives,
+            len(self._groups), skipped, max_negatives,
         )
 
     def __len__(self) -> int:
-        return len(self.groups)
+        return len(self._groups)
 
-    def __getitem__(self, idx: int) -> QueryGroup:
-        return self.groups[idx]
+    def __getitem__(self, idx: int) -> dict[str, Any]:
+        return self._groups[idx]
 
 
-def make_collate_fn(tokenizer: AutoTokenizer, max_length: int) -> Callable:
+# ---------------------------------------------------------------------------
+# Collate function factory
+# ---------------------------------------------------------------------------
+
+def make_collate_fn(tokenizer: PreTrainedTokenizerFast, max_length: int) -> Callable:
     """
     Build a collate function for DataLoader.
 
     Each group is tokenised as (1 + max_negatives) query-passage pairs:
         [query, positive], [query, neg_0], ..., [query, neg_{N-1}]
+
+    The tokenizer must be a fast tokenizer (use_fast=True).  Padding is
+    set to "longest" so the sequence dimension is tight to the batch —
+    not inflated to max_length on every call.
 
     Returns a batch dict with shapes:
         input_ids / attention_mask / token_type_ids : (B, G, seq_len)
@@ -123,26 +148,24 @@ def make_collate_fn(tokenizer: AutoTokenizer, max_length: int) -> Callable:
             False = padding position (zeroed out in loss)
     """
 
-    def _collate(batch: list[QueryGroup]) -> dict[str, torch.Tensor]:
-        all_pairs: list[tuple[str, str]] = []
-        masks:     list[list[int]]       = []
+    def _collate(batch: list[dict[str, Any]]) -> dict[str, torch.Tensor]:
+        B = len(batch)
+        G = 1 + len(batch[0]["negatives"])   # 1 positive + max_negatives
 
+        # Build flat pair lists in one pass
+        queries:  list[str] = []
+        passages: list[str] = []
         for g in batch:
-            all_pairs.append((g.query, g.positive))
-            for neg in g.negatives:
-                all_pairs.append((g.query, neg))
-
-            masks.append(
-                [1]
-                + [1] * g.n_real_negatives
-                + [0] * (len(g.negatives) - g.n_real_negatives)
-            )
+            queries.append(g["query"])
+            passages.append(g["positive"])
+            for neg in g["negatives"]:
+                queries.append(g["query"])
+                passages.append(neg)
 
         try:
-            encoded = tokenizer(
-                [p[0] for p in all_pairs],
-                [p[1] for p in all_pairs],
-                padding=True,
+            encoded = tokenizer.batch_encode_plus(
+                list(zip(queries, passages)),
+                padding="longest",          # tight to the batch, not max_length
                 truncation=True,
                 max_length=max_length,
                 return_tensors="pt",
@@ -151,14 +174,20 @@ def make_collate_fn(tokenizer: AutoTokenizer, max_length: int) -> Callable:
             logger.error("Tokenisation failed\n%s", traceback.format_exc())
             raise
 
-        B = len(batch)
-        G = 1 + len(batch[0].negatives)   # 1 positive + max_negatives
         L = encoded["input_ids"].shape[1]
+
+        # Pre-allocate bool mask — all True, then zero out padding cols
+        mask = torch.ones(B, G, dtype=torch.bool)
+        for i, g in enumerate(batch):
+            n_real = g["n_real_negatives"]
+            # Positions [n_real+1 .. G-1] are padding (0-indexed; col 0 = positive)
+            if n_real < G - 1:
+                mask[i, n_real + 1:] = False
 
         result: dict[str, torch.Tensor] = {
             "input_ids":      encoded["input_ids"].view(B, G, L),
             "attention_mask": encoded["attention_mask"].view(B, G, L),
-            "mask":           torch.tensor(masks, dtype=torch.bool),
+            "mask":           mask,
         }
         if "token_type_ids" in encoded:
             result["token_type_ids"] = encoded["token_type_ids"].view(B, G, L)

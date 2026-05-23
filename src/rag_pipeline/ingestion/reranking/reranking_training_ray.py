@@ -39,7 +39,7 @@ from transformers import (
     get_linear_schedule_with_warmup,
 )
 
-from configs.benchmark_cli import create_reranker_training_parser
+from configs.benchmark_cli import create_base_parser
 from rag_pipeline.ingestion.reranking.reranking_config_ray import RayTrainingConfig
 from rag_pipeline.ingestion.reranking.reranking_dataset import RerankerDataset, make_collate_fn
 from rag_pipeline.ingestion.reranking.reranking_loss import AdaptiveListwiseLoss
@@ -83,7 +83,7 @@ def train_loop_per_worker(config: dict) -> None:
 
     # --- Data ---
     try:
-        dataset    = RerankerDataset(config["triples_path"], config["max_negatives"])
+        dataset    = RerankerDataset(config["triples"], config["max_negatives"])
         collate    = make_collate_fn(tokenizer, config["max_length"])
         dataloader = DataLoader(
             dataset,
@@ -115,7 +115,8 @@ def train_loop_per_worker(config: dict) -> None:
         config["epochs"], total_steps, warmup_steps, config["lr"], config["alpha"],
     )
 
-    global_step = 0
+    global_step    = 0
+    _pending_metrics: list[dict] = []
 
     for epoch in range(config["epochs"]):
         model.train()
@@ -123,19 +124,16 @@ def train_loop_per_worker(config: dict) -> None:
 
         for batch in dataloader:
             try:
-                input_ids      = batch["input_ids"].to(device)
-                attention_mask = batch["attention_mask"].to(device)
-                mask           = batch["mask"].to(device)
-                B, G, L        = input_ids.shape
+                has_tti = "token_type_ids" in batch
+                batch   = {k: v.to(device) for k, v in batch.items()}
+                B, G, L = batch["input_ids"].shape
 
                 flat_kwargs: dict = {
-                    "input_ids":      input_ids.view(B * G, L),
-                    "attention_mask": attention_mask.view(B * G, L),
+                    "input_ids":      batch["input_ids"].view(B * G, L),
+                    "attention_mask": batch["attention_mask"].view(B * G, L),
                 }
-                if "token_type_ids" in batch:
-                    flat_kwargs["token_type_ids"] = (
-                        batch["token_type_ids"].to(device).view(B * G, L)
-                    )
+                if has_tti:
+                    flat_kwargs["token_type_ids"] = batch["token_type_ids"].view(B * G, L)
 
                 with torch.cuda.amp.autocast(enabled=config["fp16"]):
                     scores = model(**flat_kwargs).logits.squeeze(-1).view(B, G)
@@ -158,16 +156,14 @@ def train_loop_per_worker(config: dict) -> None:
             epoch_loss  += loss.item()
             global_step += 1
 
+            _pending_metrics.append({"step": global_step, "loss": loss.item(), "epoch": epoch})
             if global_step % config["log_every_n_steps"] == 0:
                 logger.info(
                     "epoch=%d  step=%d  loss=%.4f",
                     epoch, global_step, loss.item(),
                 )
-                ray.train.report({
-                    "step":  global_step,
-                    "loss":  loss.item(),
-                    "epoch": epoch,
-                })
+                ray.train.report(_pending_metrics[-1])
+                _pending_metrics.clear()
 
         avg_loss = epoch_loss / len(dataloader)
         logger.info("Epoch %d/%d complete — avg_loss=%.4f", epoch + 1, config["epochs"], avg_loss)
@@ -192,7 +188,7 @@ def train_loop_per_worker(config: dict) -> None:
 # ---------------------------------------------------------------------------
 
 def main() -> None:
-    args = create_reranker_training_parser().parse_args()
+    args = create_base_parser("Reranker Ray training").parse_args()
 
     try:
         cfg = RayTrainingConfig.from_rerankers_json()
@@ -204,11 +200,19 @@ def main() -> None:
 
     logger.info("Effective config:\n%s", json.dumps(cfg.to_dict(), indent=2))
 
+    _triples_path = Path(cfg.triples_path)
+    if not _triples_path.exists():
+        raise FileNotFoundError(f"Triples not found: {_triples_path}. Run create_training_triples.py first.")
+    triples = json.loads(_triples_path.read_text(encoding="utf-8"))
+    logger.info("Loaded %d triples from %s", len(triples), _triples_path)
+    cfg_dict = cfg.to_dict()
+    cfg_dict["triples"] = triples
+
     ray.init(ignore_reinit_error=True)
 
     trainer = TorchTrainer(
         train_loop_per_worker = train_loop_per_worker,
-        train_loop_config     = cfg.to_dict(),
+        train_loop_config     = cfg_dict,
         scaling_config        = ScalingConfig(
             num_workers = cfg.num_workers,
             use_gpu     = cfg.use_gpu,
