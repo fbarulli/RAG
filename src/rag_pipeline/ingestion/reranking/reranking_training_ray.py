@@ -65,8 +65,13 @@ def train_loop_per_worker(config: dict) -> None:
     """
     import ray.train.torch as ray_torch
 
-    worker_rank = ray.train.get_context().get_world_rank()
-    device      = ray_torch.get_device()
+    try:
+        worker_rank = ray.train.get_context().get_world_rank()
+        device      = ray_torch.get_device()
+    except Exception:
+        worker_rank = 0
+        import torch
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     logger.info("Worker %d starting on device %s", worker_rank, device)
 
     # --- Model ---
