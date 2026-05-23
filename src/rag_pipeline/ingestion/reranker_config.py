@@ -4,10 +4,10 @@ Uses your central Paths class from core
 """
 
 import json
-from typing import List, Dict
+from typing import Any, Dict, List
 from ..core.paths import Paths   # Correct import path
 
-def load_reranker_config() -> List[Dict]:
+def load_reranker_config() -> Dict[str, Any]:
     """Load rerankers.json using the central Paths class"""
     try:
         # Use Paths to resolve the config
@@ -25,9 +25,11 @@ def load_reranker_config() -> List[Dict]:
     
     # Fallback
     print("Using fallback reranker config")
-    return [
-        {"name": "MiniLM-L6", "model": "cross-encoder/ms-marco-MiniLM-L-6-v2", "max_length": 512}
-    ]
+    return {
+        "models": [
+            {"name": "MiniLM-L6", "model": "cross-encoder/ms-marco-MiniLM-L-6-v2", "max_length": 512}
+        ]
+    }
 
 
 def get_model_config(model_key: str) -> Dict:

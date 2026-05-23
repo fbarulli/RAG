@@ -34,7 +34,7 @@ def _generate_query_embedding(query_text: str, embedding_model: SentenceTransfor
 
 def _execute_vector_search(client: QdrantClient, collection: str, query_vector: List[float], config: Dict[str, Any]) -> Optional[Any]:
     """RESPONSIBILITY: Executes the network search pass against the Qdrant backend."""
-    return run_entity_boosted_retrieval(client=client, collection=collection, query_vector=query_vector, course_filter=config.get('course_filter', 'all'), config=config, top_k=40, ner_category=None, ner_primary_entity=None)
+    return run_entity_boosted_retrieval(client=client, collection=collection, query_vector=query_vector, course_filter=config.get('course_filter') or None, config=config, top_k=40, ner_category=None, ner_primary_entity=None)
 
 def _extract_hit_ids_safely(retrieval_result: Any) -> List[Any]:
     """RESPONSIBILITY: Safe schema interface extractor handling both custom objects and raw dict formats."""
@@ -235,7 +235,7 @@ def prepare_sliced_test_set(config: Any, args: Any) -> List[Dict[str, Any]]:
 
 def parse_runtime_hyperparameters(args: Any) -> Dict[str, Any]:
     """RESPONSIBILITY: Organizes unvarying extraction configurations for retriever components."""
-    return {'boost_question': 5.0, 'boost_text': 5.0, 'rrf_k': 60, 'course_filter': getattr(args, 'course_filter', 'machine-learning-zoomcamp')}
+    return {'boost_question': 5.0, 'boost_text': 5.0, 'rrf_k': 60, 'course_filter': getattr(args, 'course_filter', None)}
 
 def execute_matrix_evaluation(
     client: QdrantClient,

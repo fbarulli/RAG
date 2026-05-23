@@ -14,25 +14,23 @@ Config: onnx_BAAI_bge-reranker-base | Model: BAAI/bge-base-en-v1.5
 
 Config: onnx_BAAI_bge-reranker-base | Model: bge-reranker-base
   Queries: 2
-  Hit Rate @1: 0.0% | @3: 0.0% | @5: 0.0% | @10: 0.0%
-  MRR: 0.0000 | NDCG@10: 0.0000
-  Latency: p50=12139.6ms | p95=50188.9ms | p99=50188.9ms
+  Hit Rate @1: 50.0% | @3: 100.0% | @5: 100.0% | @10: 100.0%
+  MRR: 0.7500 | NDCG@10: 0.8155
+  Latency: p50=20682.7ms | p95=46606.4ms | p99=46606.4ms
   Code Integrity (Ref): 0.0% | (Retrieved): N/A
-  Cross-Course Contamination: 100.00%
-  Rank Std Dev: 0.00   (lower is better)
-  Failures (Hit@10=0): 2
-  Avg Failure Similarity: 0.7357
+  Cross-Course Contamination: 50.00%
+  Rank Std Dev: 0.71   (lower is better)
+  Failures (Hit@10=0): 0
 
 Config: onnx_answerdotai_answerai-colbert-small-v1 | Model: AnswerDotAI-Trainic
   Queries: 2
   Hit Rate @1: 0.0% | @3: 0.0% | @5: 0.0% | @10: 0.0%
-  MRR: 0.0000 | NDCG@10: 0.0000
-  Latency: p50=13148.3ms | p95=31992.7ms | p99=31992.7ms
+  MRR: 0.0250 | NDCG@10: 0.0000
+  Latency: p50=15617.9ms | p95=22514.8ms | p99=22514.8ms
   Code Integrity (Ref): 0.0% | (Retrieved): N/A
   Cross-Course Contamination: 100.00%
   Rank Std Dev: 0.00   (lower is better)
-  Failures (Hit@10=0): 2
-  Avg Failure Similarity: 0.4991
+  Failures (Hit@10=0): 0
 
 Config: onnx_answerdotai_answerai-colbert-small-v1 | Model: BAAI/bge-base-en-v1.5
   Queries: 3
@@ -57,15 +55,14 @@ Config: onnx_cross-encoder_ms-marco-MiniLM-L-6-v2 | Model: BAAI/bge-base-en-v1.5
   Avg Failure Similarity: 0.9368
 
 Config: onnx_cross-encoder_ms-marco-MiniLM-L-6-v2 | Model: MiniLM-L6
-  Queries: 2
-  Hit Rate @1: 0.0% | @3: 0.0% | @5: 0.0% | @10: 0.0%
-  MRR: 0.0000 | NDCG@10: 0.0000
-  Latency: p50=8527.3ms | p95=22994.4ms | p99=22994.4ms
+  Queries: 3
+  Hit Rate @1: 0.0% | @3: 66.7% | @5: 66.7% | @10: 100.0%
+  MRR: 0.3254 | NDCG@10: 0.4881
+  Latency: p50=9974.0ms | p95=10811.3ms | p99=10811.3ms
   Code Integrity (Ref): 0.0% | (Retrieved): N/A
   Cross-Course Contamination: 100.00%
-  Rank Std Dev: 0.00   (lower is better)
-  Failures (Hit@10=0): 2
-  Avg Failure Similarity: 0.9114
+  Rank Std Dev: 2.65   (lower is better)
+  Failures (Hit@10=0): 0
 
 Config: onnx_cross-encoder_ms-marco-TinyBERT-L-2-v2 | Model: BAAI/bge-base-en-v1.5
   Queries: 3
@@ -80,14 +77,13 @@ Config: onnx_cross-encoder_ms-marco-TinyBERT-L-2-v2 | Model: BAAI/bge-base-en-v1
 
 Config: onnx_cross-encoder_ms-marco-TinyBERT-L-2-v2 | Model: TinyBERT
   Queries: 3
-  Hit Rate @1: 0.0% | @3: 0.0% | @5: 0.0% | @10: 0.0%
-  MRR: 0.0000 | NDCG@10: 0.0000
-  Latency: p50=686.7ms | p95=15381.2ms | p99=15381.2ms
+  Hit Rate @1: 33.3% | @3: 33.3% | @5: 33.3% | @10: 100.0%
+  MRR: 0.4083 | NDCG@10: 0.5348
+  Latency: p50=926.8ms | p95=5227.2ms | p99=5227.2ms
   Code Integrity (Ref): 0.0% | (Retrieved): N/A
-  Cross-Course Contamination: 100.00%
-  Rank Std Dev: 0.00   (lower is better)
-  Failures (Hit@10=0): 3
-  Avg Failure Similarity: 0.9670
+  Cross-Course Contamination: 66.67%
+  Rank Std Dev: 4.73   (lower is better)
+  Failures (Hit@10=0): 0
 
 Config: onnx_mixedbread-ai_mxbai-rerank-xsmall-v1 | Model: BAAI/bge-base-en-v1.5
   Queries: 3
@@ -101,13 +97,12 @@ Config: onnx_mixedbread-ai_mxbai-rerank-xsmall-v1 | Model: BAAI/bge-base-en-v1.5
   Avg Failure Similarity: 0.4357
 
 Config: onnx_mixedbread-ai_mxbai-rerank-xsmall-v1 | Model: mxbai-xsmall
-  Queries: 2
-  Hit Rate @1: 0.0% | @3: 0.0% | @5: 0.0% | @10: 0.0%
-  MRR: 0.0000 | NDCG@10: 0.0000
-  Latency: p50=12889.3ms | p95=35791.9ms | p99=35791.9ms
+  Queries: 3
+  Hit Rate @1: 66.7% | @3: 100.0% | @5: 100.0% | @10: 100.0%
+  MRR: 0.8333 | NDCG@10: 0.8770
+  Latency: p50=14871.4ms | p95=32590.7ms | p99=32590.7ms
   Code Integrity (Ref): 0.0% | (Retrieved): N/A
-  Cross-Course Contamination: 100.00%
-  Rank Std Dev: 0.00   (lower is better)
-  Failures (Hit@10=0): 2
-  Avg Failure Similarity: 0.3452
+  Cross-Course Contamination: 33.33%
+  Rank Std Dev: 0.58   (lower is better)
+  Failures (Hit@10=0): 0
 

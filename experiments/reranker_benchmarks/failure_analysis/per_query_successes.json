@@ -1,1 +1,145 @@
-[]
+[
+  {
+    "reranker": "TinyBERT",
+    "query_id": "e8df9f0d12_orig",
+    "query_text": "Docker: When trying to run a streamlit app using docker-compose, I get: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: \"streamlit\": executable file not found in $PATH: unknown. The app runs fine outside of docker-compose",
+    "expected_id": "e8df9f0d12",
+    "course": "llm-zoomcamp",
+    "topic": null,
+    "rank": 10,
+    "score_at_rank": 0.15855619311332703,
+    "latency_ms": 5227.17
+  },
+  {
+    "reranker": "TinyBERT",
+    "query_id": "e8df9f0d12_grounded_analyst_0",
+    "query_text": "docker-compose streamlit executable file not found",
+    "expected_id": "e8df9f0d12",
+    "course": "llm-zoomcamp",
+    "topic": null,
+    "rank": 8,
+    "score_at_rank": 0.8135839104652405,
+    "latency_ms": 923.03
+  },
+  {
+    "reranker": "TinyBERT",
+    "query_id": "e8df9f0d12_grounded_analyst_1",
+    "query_text": "streamlit app not running in docker-compose",
+    "expected_id": "e8df9f0d12",
+    "course": "llm-zoomcamp",
+    "topic": null,
+    "rank": 1,
+    "score_at_rank": 0.9994370341300964,
+    "latency_ms": 926.78
+  },
+  {
+    "reranker": "MiniLM-L6",
+    "query_id": "e8df9f0d12_orig",
+    "query_text": "Docker: When trying to run a streamlit app using docker-compose, I get: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: \"streamlit\": executable file not found in $PATH: unknown. The app runs fine outside of docker-compose",
+    "expected_id": "e8df9f0d12",
+    "course": "llm-zoomcamp",
+    "topic": null,
+    "rank": 7,
+    "score_at_rank": 0.9452630281448364,
+    "latency_ms": 10811.33
+  },
+  {
+    "reranker": "MiniLM-L6",
+    "query_id": "e8df9f0d12_grounded_analyst_0",
+    "query_text": "docker-compose streamlit executable file not found",
+    "expected_id": "e8df9f0d12",
+    "course": "llm-zoomcamp",
+    "topic": null,
+    "rank": 3,
+    "score_at_rank": 0.9004089832305908,
+    "latency_ms": 9973.97
+  },
+  {
+    "reranker": "MiniLM-L6",
+    "query_id": "e8df9f0d12_grounded_analyst_1",
+    "query_text": "streamlit app not running in docker-compose",
+    "expected_id": "e8df9f0d12",
+    "course": "llm-zoomcamp",
+    "topic": null,
+    "rank": 2,
+    "score_at_rank": 0.9932047128677368,
+    "latency_ms": 8978.22
+  },
+  {
+    "reranker": "AnswerDotAI-Trainic",
+    "query_id": "e8df9f0d12_grounded_analyst_0",
+    "query_text": "docker-compose streamlit executable file not found",
+    "expected_id": "e8df9f0d12",
+    "course": "llm-zoomcamp",
+    "topic": null,
+    "rank": 40,
+    "score_at_rank": 0.4967864155769348,
+    "latency_ms": 22514.77
+  },
+  {
+    "reranker": "AnswerDotAI-Trainic",
+    "query_id": "e8df9f0d12_grounded_analyst_1",
+    "query_text": "streamlit app not running in docker-compose",
+    "expected_id": "e8df9f0d12",
+    "course": "llm-zoomcamp",
+    "topic": null,
+    "rank": 40,
+    "score_at_rank": 0.49732503294944763,
+    "latency_ms": 15617.91
+  },
+  {
+    "reranker": "mxbai-xsmall",
+    "query_id": "e8df9f0d12_orig",
+    "query_text": "Docker: When trying to run a streamlit app using docker-compose, I get: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: \"streamlit\": executable file not found in $PATH: unknown. The app runs fine outside of docker-compose",
+    "expected_id": "e8df9f0d12",
+    "course": "llm-zoomcamp",
+    "topic": null,
+    "rank": 1,
+    "score_at_rank": 0.64886075258255,
+    "latency_ms": 32590.69
+  },
+  {
+    "reranker": "mxbai-xsmall",
+    "query_id": "e8df9f0d12_grounded_analyst_0",
+    "query_text": "docker-compose streamlit executable file not found",
+    "expected_id": "e8df9f0d12",
+    "course": "llm-zoomcamp",
+    "topic": null,
+    "rank": 2,
+    "score_at_rank": 0.4160741865634918,
+    "latency_ms": 14871.37
+  },
+  {
+    "reranker": "mxbai-xsmall",
+    "query_id": "e8df9f0d12_grounded_analyst_1",
+    "query_text": "streamlit app not running in docker-compose",
+    "expected_id": "e8df9f0d12",
+    "course": "llm-zoomcamp",
+    "topic": null,
+    "rank": 1,
+    "score_at_rank": 0.686700701713562,
+    "latency_ms": 12976.27
+  },
+  {
+    "reranker": "bge-reranker-base",
+    "query_id": "e8df9f0d12_grounded_analyst_0",
+    "query_text": "docker-compose streamlit executable file not found",
+    "expected_id": "e8df9f0d12",
+    "course": "llm-zoomcamp",
+    "topic": null,
+    "rank": 2,
+    "score_at_rank": 0.9429476857185364,
+    "latency_ms": 46606.42
+  },
+  {
+    "reranker": "bge-reranker-base",
+    "query_id": "e8df9f0d12_grounded_analyst_1",
+    "query_text": "streamlit app not running in docker-compose",
+    "expected_id": "e8df9f0d12",
+    "course": "llm-zoomcamp",
+    "topic": null,
+    "rank": 1,
+    "score_at_rank": 0.9873330593109131,
+    "latency_ms": 20682.71
+  }
+]
