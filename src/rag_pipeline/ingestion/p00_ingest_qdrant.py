@@ -22,7 +22,7 @@ DEFAULT_INPUT = Paths.processed_dir() / 'clean.jsonl'
 QDRANT_HOST = 'localhost'
 QDRANT_PORT = 6333
 BATCH_SIZE = 100
-DEFAULT_TOPIC_ASSIGNMENTS = Path('rag_pipeline/p02_eda/experiments/topic_assignments_all.json')
+DEFAULT_TOPIC_ASSIGNMENTS = Paths.topic_assignments()
 
 def load_ner_map(model_name: str) -> dict[str, dict]:
     """Load NER tags and topic assignments keyed by document id."""

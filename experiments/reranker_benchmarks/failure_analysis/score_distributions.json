@@ -8,30 +8,30 @@
   },
   {
     "reranker": "MiniLM-L6",
-    "failure_top1_score_avg": 0.9368,
+    "failure_top1_score_avg": 0.9114,
     "success_top1_score_avg": null,
-    "failure_count": 3,
-    "success_count": 0
-  },
-  {
-    "reranker": "mxbai-xsmall",
-    "failure_top1_score_avg": 0.4357,
-    "success_top1_score_avg": null,
-    "failure_count": 3,
+    "failure_count": 2,
     "success_count": 0
   },
   {
     "reranker": "AnswerDotAI-Trainic",
-    "failure_top1_score_avg": 0.5125,
+    "failure_top1_score_avg": 0.4991,
     "success_top1_score_avg": null,
-    "failure_count": 3,
+    "failure_count": 2,
+    "success_count": 0
+  },
+  {
+    "reranker": "mxbai-xsmall",
+    "failure_top1_score_avg": 0.3452,
+    "success_top1_score_avg": null,
+    "failure_count": 2,
     "success_count": 0
   },
   {
     "reranker": "bge-reranker-base",
-    "failure_top1_score_avg": 0.8149,
+    "failure_top1_score_avg": 0.7357,
     "success_top1_score_avg": null,
-    "failure_count": 3,
+    "failure_count": 2,
     "success_count": 0
   }
 ]

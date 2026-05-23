@@ -1,19 +1,5 @@
 [
   {
-    "query_id": "e8df9f0d12_orig",
-    "query_text": "Docker: When trying to run a streamlit app using docker-compose, I get: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: \"streamlit\": executable file not found in $PATH: unknown. The app runs fine outside of docker-compose",
-    "expected_id": "e8df9f0d12",
-    "course": "llm-zoomcamp",
-    "top1_by_reranker": {
-      "TinyBERT": "12d79208b3",
-      "MiniLM-L6": "12d79208b3",
-      "mxbai-xsmall": "a5ee2dc890",
-      "AnswerDotAI-Trainic": "0b60cbb594",
-      "bge-reranker-base": "fdcf991009"
-    },
-    "num_unique_top1": 4
-  },
-  {
     "query_id": "e8df9f0d12_grounded_analyst_0",
     "query_text": "docker-compose streamlit executable file not found",
     "expected_id": "e8df9f0d12",
@@ -21,8 +7,8 @@
     "top1_by_reranker": {
       "TinyBERT": "80a2e18431",
       "MiniLM-L6": "80a2e18431",
+      "AnswerDotAI-Trainic": 9506089527,
       "mxbai-xsmall": "27b149393b",
-      "AnswerDotAI-Trainic": "8a23cfbf67",
       "bge-reranker-base": "80a2e18431"
     },
     "num_unique_top1": 3
@@ -35,8 +21,8 @@
     "top1_by_reranker": {
       "TinyBERT": "27b149393b",
       "MiniLM-L6": "27b149393b",
+      "AnswerDotAI-Trainic": 9506089527,
       "mxbai-xsmall": "27b149393b",
-      "AnswerDotAI-Trainic": "8a23cfbf67",
       "bge-reranker-base": "27b149393b"
     },
     "num_unique_top1": 2

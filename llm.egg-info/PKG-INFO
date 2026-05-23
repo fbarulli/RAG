@@ -28,6 +28,7 @@ Requires-Dist: llama-index-embeddings-huggingface>=0.7.0
 Requires-Dist: llama-index-llms-litellm>=0.7.1
 Requires-Dist: matplotlib>=3.10.9
 Requires-Dist: minisearch>=1.0.1
+Requires-Dist: mypy>=2.1.0
 Requires-Dist: nltk>=3.9.4
 Requires-Dist: nomic>=3.9.0
 Requires-Dist: numpy>=2.4.4

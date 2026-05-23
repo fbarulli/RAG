@@ -16,9 +16,8 @@ def load_reranker_config() -> List[Dict]:
         if rerankers_path.exists():
             with open(rerankers_path, encoding="utf-8") as f:
                 data = json.load(f)
-            models = data.get("models", [])
-            print(f"✅ Loaded {len(models)} reranker models from configs/rerankers.json")
-            return models
+            print(f"✅ Loaded reranker config from configs/rerankers.json")
+            return data
         else:
             print(f"⚠️ rerankers.json not found at {rerankers_path}")
     except Exception as e:
@@ -33,7 +32,7 @@ def load_reranker_config() -> List[Dict]:
 
 def get_model_config(model_key: str) -> Dict:
     """Get config by model name/key (e.g. 'MiniLM-L6', 'bge-reranker-base')"""
-    models = load_reranker_config()
+    models = load_reranker_config().get("models", [])
     
     for m in models:
         if m.get("name") == model_key or m.get("model") == model_key:

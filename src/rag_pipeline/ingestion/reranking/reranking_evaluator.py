@@ -1,20 +1,29 @@
 """
-src/rag_pipeline/ingestion/reranking/_reranking_evaluator.py
-Single responsibility: Create proper reranking evaluator.
+src/rag_pipeline/ingestion/reranking/reranking_evaluator.py
+Single responsibility: Create evaluator for cross-encoder training.
 """
 import random
-from typing import List, Dict
+from typing import Dict, List
 
+from datasets import Dataset
 from sentence_transformers.cross_encoder.evaluation import CrossEncoderRerankingEvaluator
 
 
-def create_proper_evaluator(examples: List[List], holdout_fraction: float = 0.2):
+def create_proper_evaluator(
+    train_examples: Dataset,
+    holdout_fraction: float = 0.2,
+):
+    """Create a reranking evaluator from a Dataset with query/document/label columns."""
     random.seed(42)
-    holdout_size = max(10, int(len(examples) * holdout_fraction))
-    holdout = random.sample(examples, holdout_size)
+    rows = [train_examples[i] for i in range(len(train_examples))]
+    holdout_size = max(10, int(len(rows) * holdout_fraction))
+    holdout = random.sample(rows, holdout_size)
 
     query_map: Dict[str, Dict[str, List[str]]] = {}
-    for q, doc, label in holdout:
+    for row in holdout:
+        q = row["query"]
+        doc = row["document"]
+        label = row["label"]
         if q not in query_map:
             query_map[q] = {"positive": [], "negative": []}
         if label == 1.0:
@@ -24,6 +33,7 @@ def create_proper_evaluator(examples: List[List], holdout_fraction: float = 0.2)
 
     eval_data = [
         {"query": q, "positive": v["positive"], "negative": v["negative"]}
-        for q, v in query_map.items() if v["positive"] and v["negative"]
+        for q, v in query_map.items()
+        if v["positive"] and v["negative"]
     ]
     return CrossEncoderRerankingEvaluator.from_input_examples(eval_data, name="dev")

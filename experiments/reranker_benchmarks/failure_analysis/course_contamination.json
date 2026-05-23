@@ -1,1 +1,123 @@
-[]
+[
+  {
+    "reranker": "TinyBERT",
+    "query_id": "e8df9f0d12_orig",
+    "query_text": "Docker: When trying to run a streamlit app using docker-compose, I get: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: \"streamlit\": executable file not found in $PATH: unknown. The app runs fine outside of docker-compose",
+    "expected_course": "llm-zoomcamp",
+    "top1_course": "machine-learning-zoomcamp",
+    "top1_id": "12d79208b3",
+    "top1_score": 0.9528460502624512,
+    "expected_id": "e8df9f0d12",
+    "expected_found": false
+  },
+  {
+    "reranker": "TinyBERT",
+    "query_id": "e8df9f0d12_grounded_analyst_0",
+    "query_text": "docker-compose streamlit executable file not found",
+    "expected_course": "llm-zoomcamp",
+    "top1_course": "machine-learning-zoomcamp",
+    "top1_id": "80a2e18431",
+    "top1_score": 0.9566639065742493,
+    "expected_id": "e8df9f0d12",
+    "expected_found": false
+  },
+  {
+    "reranker": "TinyBERT",
+    "query_id": "e8df9f0d12_grounded_analyst_1",
+    "query_text": "streamlit app not running in docker-compose",
+    "expected_course": "llm-zoomcamp",
+    "top1_course": "machine-learning-zoomcamp",
+    "top1_id": "27b149393b",
+    "top1_score": 0.9913968443870544,
+    "expected_id": "e8df9f0d12",
+    "expected_found": false
+  },
+  {
+    "reranker": "MiniLM-L6",
+    "query_id": "e8df9f0d12_grounded_analyst_0",
+    "query_text": "docker-compose streamlit executable file not found",
+    "expected_course": "llm-zoomcamp",
+    "top1_course": "machine-learning-zoomcamp",
+    "top1_id": "80a2e18431",
+    "top1_score": 0.8294080495834351,
+    "expected_id": "e8df9f0d12",
+    "expected_found": false
+  },
+  {
+    "reranker": "MiniLM-L6",
+    "query_id": "e8df9f0d12_grounded_analyst_1",
+    "query_text": "streamlit app not running in docker-compose",
+    "expected_course": "llm-zoomcamp",
+    "top1_course": "machine-learning-zoomcamp",
+    "top1_id": "27b149393b",
+    "top1_score": 0.9933577179908752,
+    "expected_id": "e8df9f0d12",
+    "expected_found": false
+  },
+  {
+    "reranker": "AnswerDotAI-Trainic",
+    "query_id": "e8df9f0d12_grounded_analyst_0",
+    "query_text": "docker-compose streamlit executable file not found",
+    "expected_course": "llm-zoomcamp",
+    "top1_course": "machine-learning-zoomcamp",
+    "top1_id": 9506089527,
+    "top1_score": 0.4989168345928192,
+    "expected_id": "e8df9f0d12",
+    "expected_found": false
+  },
+  {
+    "reranker": "AnswerDotAI-Trainic",
+    "query_id": "e8df9f0d12_grounded_analyst_1",
+    "query_text": "streamlit app not running in docker-compose",
+    "expected_course": "llm-zoomcamp",
+    "top1_course": "machine-learning-zoomcamp",
+    "top1_id": 9506089527,
+    "top1_score": 0.4992029368877411,
+    "expected_id": "e8df9f0d12",
+    "expected_found": false
+  },
+  {
+    "reranker": "mxbai-xsmall",
+    "query_id": "e8df9f0d12_grounded_analyst_0",
+    "query_text": "docker-compose streamlit executable file not found",
+    "expected_course": "llm-zoomcamp",
+    "top1_course": "machine-learning-zoomcamp",
+    "top1_id": "27b149393b",
+    "top1_score": 0.24486443400382996,
+    "expected_id": "e8df9f0d12",
+    "expected_found": false
+  },
+  {
+    "reranker": "mxbai-xsmall",
+    "query_id": "e8df9f0d12_grounded_analyst_1",
+    "query_text": "streamlit app not running in docker-compose",
+    "expected_course": "llm-zoomcamp",
+    "top1_course": "machine-learning-zoomcamp",
+    "top1_id": "27b149393b",
+    "top1_score": 0.4455485939979553,
+    "expected_id": "e8df9f0d12",
+    "expected_found": false
+  },
+  {
+    "reranker": "bge-reranker-base",
+    "query_id": "e8df9f0d12_grounded_analyst_0",
+    "query_text": "docker-compose streamlit executable file not found",
+    "expected_course": "llm-zoomcamp",
+    "top1_course": "machine-learning-zoomcamp",
+    "top1_id": "80a2e18431",
+    "top1_score": 0.5285927653312683,
+    "expected_id": "e8df9f0d12",
+    "expected_found": false
+  },
+  {
+    "reranker": "bge-reranker-base",
+    "query_id": "e8df9f0d12_grounded_analyst_1",
+    "query_text": "streamlit app not running in docker-compose",
+    "expected_course": "llm-zoomcamp",
+    "top1_course": "machine-learning-zoomcamp",
+    "top1_id": "27b149393b",
+    "top1_score": 0.9428053498268127,
+    "expected_id": "e8df9f0d12",
+    "expected_found": false
+  }
+]

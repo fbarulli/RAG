@@ -33,6 +33,7 @@ dependencies = [
     "llama-index-llms-litellm>=0.7.1",
     "matplotlib>=3.10.9",
     "minisearch>=1.0.1",
+    "mypy>=2.1.0",
     "nltk>=3.9.4",
     "nomic>=3.9.0",
     "numpy>=2.4.4",

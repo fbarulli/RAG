@@ -66,7 +66,6 @@ src/rag_pipeline/ingestion/benchmark_report.py
 src/rag_pipeline/ingestion/benchmark_reranker.py
 src/rag_pipeline/ingestion/benchmark_types.py
 src/rag_pipeline/ingestion/benchmark_with_reranker.py
-src/rag_pipeline/ingestion/create_training_triples.py
 src/rag_pipeline/ingestion/embedding_cache.py
 src/rag_pipeline/ingestion/ingest_models.py
 src/rag_pipeline/ingestion/onnx_bench.py
@@ -92,6 +91,7 @@ src/rag_pipeline/ingestion/benchmark_metrics_data/core.py
 src/rag_pipeline/ingestion/benchmark_metrics_data/evaluation.py
 src/rag_pipeline/ingestion/benchmark_metrics_data/retrievers.py
 src/rag_pipeline/ingestion/reranking/__init__.py
+src/rag_pipeline/ingestion/reranking/create_training_triples.py
 src/rag_pipeline/ingestion/reranking/reranking_evaluator.py
 src/rag_pipeline/ingestion/reranking/reranking_training.py
 src/rag_pipeline/ingestion/reranking/reranking_triples.py

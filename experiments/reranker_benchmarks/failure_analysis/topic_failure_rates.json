@@ -12,17 +12,8 @@
     "reranker": "MiniLM-L6",
     "topic": null,
     "subtopic": null,
-    "num_queries": 3,
-    "failure_count": 3,
-    "failure_rate": 1.0,
-    "hit_rate_5": 0.0
-  },
-  {
-    "reranker": "mxbai-xsmall",
-    "topic": null,
-    "subtopic": null,
-    "num_queries": 3,
-    "failure_count": 3,
+    "num_queries": 2,
+    "failure_count": 2,
     "failure_rate": 1.0,
     "hit_rate_5": 0.0
   },
@@ -30,8 +21,17 @@
     "reranker": "AnswerDotAI-Trainic",
     "topic": null,
     "subtopic": null,
-    "num_queries": 3,
-    "failure_count": 3,
+    "num_queries": 2,
+    "failure_count": 2,
+    "failure_rate": 1.0,
+    "hit_rate_5": 0.0
+  },
+  {
+    "reranker": "mxbai-xsmall",
+    "topic": null,
+    "subtopic": null,
+    "num_queries": 2,
+    "failure_count": 2,
     "failure_rate": 1.0,
     "hit_rate_5": 0.0
   },
@@ -39,8 +39,8 @@
     "reranker": "bge-reranker-base",
     "topic": null,
     "subtopic": null,
-    "num_queries": 3,
-    "failure_count": 3,
+    "num_queries": 2,
+    "failure_count": 2,
     "failure_rate": 1.0,
     "hit_rate_5": 0.0
   }

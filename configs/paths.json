@@ -5,7 +5,7 @@
   "experiments_dir": "experiments",
   "clean_jsonl": "data/processed/clean.jsonl",
   "test_jsonl": "data/processed/test.jsonl",
-  "topic_assignments": "experiments/topic_assignments_all.json",
+  "topic_assignments": "src/rag_pipeline/eda/p02_eda/experiments/topic_assignments_all.json",
   "retrieval_configs": "configs/retrieval_configs.json",
   "models_config": "configs/models.json",
   "rerankers_config": "configs/rerankers.json",
