@@ -26,6 +26,7 @@ src/rag_pipeline/core/__init__.py
 src/rag_pipeline/core/gem_client.py
 src/rag_pipeline/core/llm_client.py
 src/rag_pipeline/core/logging.py
+src/rag_pipeline/core/multi_llm_client.py
 src/rag_pipeline/core/paths.py
 src/rag_pipeline/core/schemas.py
 src/rag_pipeline/eda/__init__.py
@@ -60,6 +61,7 @@ src/rag_pipeline/generation/p03_generation/p02_generate_queries.py
 src/rag_pipeline/generation/p03_generation/p03_add_ood.py
 src/rag_pipeline/ingestion/__init__.py
 src/rag_pipeline/ingestion/benchmark_config.py
+src/rag_pipeline/ingestion/benchmark_finetuned.py
 src/rag_pipeline/ingestion/benchmark_loader.py
 src/rag_pipeline/ingestion/benchmark_metrics.py
 src/rag_pipeline/ingestion/benchmark_report.py
@@ -100,5 +102,7 @@ src/rag_pipeline/ingestion/reranking/reranking_loss.py
 src/rag_pipeline/ingestion/reranking/reranking_training.py
 src/rag_pipeline/ingestion/reranking/reranking_training_ray.py
 src/rag_pipeline/ingestion/reranking/reranking_triples.py
+src/rag_pipeline/service/__init__.py
+src/rag_pipeline/service/cascading_model.py
 tests/test_cleaning.py
 tests/test_dedup_logic.py

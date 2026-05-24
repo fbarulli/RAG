@@ -7,6 +7,7 @@ Description-Content-Type: text/markdown
 Requires-Dist: aiohttp>=3.13.5
 Requires-Dist: asyncio>=4.0.0
 Requires-Dist: bertopic>=0.17.4
+Requires-Dist: ddgs>=9.14.4
 Requires-Dist: dotenv>=0.9.9
 Requires-Dist: einops>=0.8.2
 Requires-Dist: elasticsearch==8.19.3
@@ -14,6 +15,7 @@ Requires-Dist: faiss-cpu>=1.13.2
 Requires-Dist: flair>=0.15.1
 Requires-Dist: flask>=3.1.3
 Requires-Dist: gradio>=6.13.0
+Requires-Dist: groq>=1.2.0
 Requires-Dist: ipykernel>=7.2.0
 Requires-Dist: jupyter>=1.1.1
 Requires-Dist: jupyter-http-over-ws>=0.0.8
@@ -49,6 +51,7 @@ Requires-Dist: scikit-learn>=1.8.0
 Requires-Dist: scipy>=1.17.1
 Requires-Dist: seaborn>=0.13.2
 Requires-Dist: sentence-transformers>=5.4.1
+Requires-Dist: smolagents>=1.25.0
 Requires-Dist: spacy>=3.8.14
 Requires-Dist: statsmodels>=0.14.6
 Requires-Dist: tdqm>=0.0.1
