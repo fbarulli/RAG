@@ -20,7 +20,8 @@ from __future__ import annotations
 
 from typing import Any, Optional
 
-from smolagents import LiteLLMModel
+from rag_pipeline.core.llm_config import DEFAULT_CASCADE
+from rag_pipeline.schemas import ProviderConfig, MultiLLMResult
 from smolagents.models import ChatMessage, MessageRole, TokenUsage
 
 from rag_pipeline.core.multi_llm_client import (
