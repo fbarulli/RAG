@@ -94,3 +94,23 @@ class Paths:
         if stage not in mapping:
             raise ValueError(f"Unknown stage: {stage}. Available: {list(mapping)}")
         return cls.base() / mapping[stage]
+
+    @classmethod
+    def topics_dir(cls) -> Path:
+        return cls._resolve("topics_dir")
+
+    @classmethod
+    def topics_experiments_dir(cls) -> Path:
+        return cls._resolve("topics_experiments_dir")
+
+    @classmethod
+    def topics_output_dir(cls) -> Path:
+        return cls._resolve("topics_output_dir")
+
+    @classmethod
+    def topics_rules_dir(cls) -> Path:
+        return cls._resolve("topics_rules_dir")
+
+    @classmethod
+    def entity_patterns(cls) -> Path:
+        return cls._resolve("entity_patterns")
