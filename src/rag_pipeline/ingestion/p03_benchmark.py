@@ -22,9 +22,18 @@ def _parse_config(args) -> tuple[BenchmarkConfig, dict]:
     all_configs = config.get_configs()
     if args.config:
         if args.config not in all_configs:
-            raise KeyError(f"Config '{args.config}' not found.")
+            raise KeyError(f"Config '{args.config}' not found. Available: {sorted(all_configs)}")
         logger.info(f'Running single config: {args.config}')
         return config, {args.config: all_configs[args.config]}
+    keys = getattr(args, 'configs', None)
+    if keys:
+        # Accept both --configs a b c and --configs a,b,c
+        flat = [k for entry in keys for k in entry.split(',')]
+        missing = [k for k in flat if k not in all_configs]
+        if missing:
+            raise KeyError(f"Config(s) not found: {missing}. Available: {sorted(all_configs)}")
+        logger.info(f'Running configs subset: {flat}')
+        return config, {k: all_configs[k] for k in flat}
     return config, all_configs
 
 

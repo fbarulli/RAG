@@ -107,6 +107,7 @@ def create_benchmark_parser() -> argparse.ArgumentParser:
     """
     parser = create_base_parser(description='Run the retrieval benchmark for embedding/reranker models.')
     parser.add_argument('--model', type=str, required=False, default=None, help="Model to benchmark (matches 'name' in models.json). Omitting this runs all models.")
+    parser.add_argument('--configs', type=str, nargs='+', default=None, help='One or more retrieval config keys to run (default: all). Comma-separated or space-separated.')
     return parser
 
 def create_multi_benchmark_parser() -> argparse.ArgumentParser:

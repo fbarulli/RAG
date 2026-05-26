@@ -135,3 +135,109 @@ def run_vector_retrieval_with_reranker(client, collection: str, query_vector: li
     final_answers = tuple((id_to_answer.get(doc_id, '') for doc_id in final_hit_ids))
     total_latency_ms = (time.perf_counter() - start_total) * 1000
     return SearchResult(hit_ids=final_hit_ids, hit_scores=final_scores, hit_courses=initial_result.hit_courses[:len(final_hit_ids)], top_answer=final_answers[0] if final_answers else None, latency_ms=total_latency_ms, hit_answers=final_answers)
+
+def _normalize_scores(scores: list[float]) -> list[float]:
+    """Min-max normalize scores to [0, 1]. Returns uniform zeros if range is zero."""
+    if not scores:
+        return []
+    s_min, s_max = min(scores), max(scores)
+    s_range = s_max - s_min
+    if s_range == 0.0:
+        return [0.0] * len(scores)
+    return [(s - s_min) / s_range for s in scores]
+
+
+def run_hybrid_dbsf_retrieval(
+    client,
+    collection: str,
+    query_vector: list,
+    es: "Elasticsearch",
+    es_index: str,
+    query_text: str,
+    course_filter: Optional[str],
+    config: dict,
+    top_k: int,
+) -> SearchResult:
+    """
+    Distribution-Based Score Fusion hybrid retrieval.
+    Normalizes vector and BM25 scores independently to [0, 1],
+    then combines with explicit weights (vector_weight + bm25_weight).
+    Prefer over RRF when the dense model is strong.
+    """
+    import logging
+    import traceback
+    import time
+
+    log = logging.getLogger(__name__)
+    start = time.perf_counter()
+
+    vector_weight = config.get("vector_weight", 0.7)
+    bm25_weight = config.get("bm25_weight", 0.3)
+    fetch_k = max(top_k * 2, 20)
+
+    must_conditions: list = []
+    if course_filter:
+        must_conditions.append(FieldCondition(key="course", match=MatchValue(value=course_filter)))
+    query_filter = Filter(must=must_conditions) if must_conditions else None
+
+    try:
+        vector_result = client.query_points(
+            collection_name=collection,
+            query=query_vector,
+            limit=fetch_k,
+            query_filter=query_filter,
+            with_payload=True,
+            with_vectors=False,
+        )
+    except Exception:
+        log.error("DBSF: Qdrant query_points failed\n%s", traceback.format_exc())
+        raise
+
+    try:
+        bm25_result = run_es_retrieval(
+            es=es,
+            index=es_index,
+            query_text=query_text,
+            course_filter=course_filter,
+            config=config,
+            top_k=fetch_k,
+        )
+    except Exception:
+        log.error("DBSF: Elasticsearch BM25 retrieval failed\n%s", traceback.format_exc())
+        raise
+
+    vector_points = vector_result.points
+    v_norm = _normalize_scores([float(p.score) for p in vector_points])
+    b_norm = _normalize_scores(list(bm25_result.hit_scores))
+
+    id_to_score: dict[str, float] = {}
+    id_to_course: dict[str, str] = {}
+    id_to_answer: dict[str, str] = {}
+
+    for p, norm_score in zip(vector_points, v_norm):
+        doc_id = p.payload.get("es_id", "")
+        id_to_score[doc_id] = id_to_score.get(doc_id, 0.0) + vector_weight * norm_score
+        id_to_course.setdefault(doc_id, p.payload.get("course", ""))
+        id_to_answer.setdefault(doc_id, p.payload.get("answer", ""))
+
+    for doc_id, course, norm_score in zip(bm25_result.hit_ids, bm25_result.hit_courses, b_norm):
+        id_to_score[doc_id] = id_to_score.get(doc_id, 0.0) + bm25_weight * norm_score
+        id_to_course.setdefault(doc_id, course)
+
+    sorted_ids = sorted(id_to_score, key=lambda x: -id_to_score[x])[:top_k]
+    latency_ms = (time.perf_counter() - start) * 1000
+
+    log.debug(
+        "DBSF: collection=%s top_k=%d vector_weight=%.2f bm25_weight=%.2f "
+        "candidates=%d latency_ms=%.1f",
+        collection, top_k, vector_weight, bm25_weight, len(id_to_score), latency_ms,
+    )
+
+    return SearchResult(
+        hit_ids=tuple(sorted_ids),
+        hit_scores=tuple(id_to_score[d] for d in sorted_ids),
+        hit_courses=tuple(id_to_course.get(d, "") for d in sorted_ids),
+        hit_answers=tuple(id_to_answer.get(d, "") for d in sorted_ids),
+        top_answer=id_to_answer.get(sorted_ids[0]) if sorted_ids else None,
+        latency_ms=latency_ms,
+    )

@@ -67,6 +67,10 @@ class Paths:
     @classmethod
     def reranker_results_dir(cls) -> Path:
         return cls._resolve("reranker_results_dir")
+    
+    @classmethod
+    def retrieval_configs(cls) -> Path:
+        return cls._resolve("retrieval_configs")
 
     @classmethod
     def input_file(cls, stage: str) -> Path:

@@ -13,7 +13,7 @@ from pathlib import Path
 from tqdm import tqdm
 from sentence_transformers import SentenceTransformer
 from qdrant_client import QdrantClient
-from qdrant_client.models import Distance, VectorParams, PointStruct
+from qdrant_client.models import Distance, VectorParams, PointStruct, HnswConfigDiff
 from rag_pipeline.core.paths import Paths
 from rag_pipeline.core.schemas import FAQDocument
 from rag_pipeline.core.logging import get_logger
@@ -42,7 +42,7 @@ def main(model_name: str, input_path: Path=DEFAULT_INPUT, host: str=QDRANT_HOST,
     ner_map = load_ner_map(model_name)
     logger.info(f'NER map loaded: {len(ner_map)} entries')
     client = QdrantClient(host=host, port=port)
-    questions = [d.question for d in docs]
+    questions = [f"{d.question} {d.answer}" for d in docs]
     short_name = model_name.split('/')[-1].replace('-', '_').replace('.', '_')
     collection = f'faqs_{short_name}'
     logger.info(f'Model: {model_name}')
@@ -56,7 +56,15 @@ def main(model_name: str, input_path: Path=DEFAULT_INPUT, host: str=QDRANT_HOST,
     if client.collection_exists(collection):
         logger.info(f'Deleting existing collection: {collection}')
         client.delete_collection(collection)
-    client.create_collection(collection_name=collection, vectors_config=VectorParams(size=dims, distance=Distance.COSINE))
+    client.create_collection(
+        collection_name=collection,
+        vectors_config=VectorParams(size=dims, distance=Distance.COSINE),
+        hnsw_config=HnswConfigDiff(
+            m=16,
+            ef_construct=200,
+            full_scan_threshold=10000,
+        ),
+    )
     logger.info(f'Upserting {len(docs)} points to Qdrant...')
     for i in tqdm(range(0, len(docs), BATCH_SIZE), desc='Batches'):
         batch_docs = docs[i:i + BATCH_SIZE]

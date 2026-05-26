@@ -2,12 +2,13 @@
 rag_pipeline/p04_ingestion/_benchmark_metrics/evaluation.py
 Evaluation orchestration - ties retrievers to test data.
 """
+import json
 import logging
 from dataclasses import dataclass
 from typing import Any, Optional, TypedDict, TYPE_CHECKING
 from ..benchmark_types import QueryResult
 from .core import check_code_integrity
-from .retrievers import run_es_retrieval, run_vector_retrieval, run_vector_retrieval_with_reranker, run_hybrid_rrf_retrieval, run_entity_boosted_retrieval
+from .retrievers import run_es_retrieval, run_vector_retrieval, run_vector_retrieval_with_reranker, run_hybrid_rrf_retrieval, run_entity_boosted_retrieval, run_hybrid_dbsf_retrieval
 if TYPE_CHECKING:
     from elasticsearch import Elasticsearch
 logger = logging.getLogger(__name__)
@@ -51,13 +52,40 @@ def _build_integrity_cache(test_set: list[dict]) -> dict[str, float]:
     """
     return {test['expected_id']: check_code_integrity(test['answer']) for test in test_set}
 
+
+def _load_retrieval_configs() -> dict:
+    """Load retrieval_configs.json via Paths — single source of truth."""
+    from rag_pipeline.core.paths import Paths
+    path = Paths.retrieval_configs()
+    with open(path, encoding='utf-8') as f:
+        return json.load(f)
+
+
+def _search_types_requiring_es() -> frozenset:
+    """Search types that require an Elasticsearch connection, derived from retrieval_configs.json."""
+    return frozenset(
+        v['search_type'] for v in _load_retrieval_configs().values()
+        if 'hybrid' in v.get('search_type', '') or v.get('search_type') == 'bm25'
+    )
+
+
+def _search_types_requiring_vector() -> frozenset:
+    """Search types that require an embedding model, derived from retrieval_configs.json."""
+    return frozenset(
+        v['search_type'] for v in _load_retrieval_configs().values()
+        if v.get('search_type') != 'bm25'
+    )
+
+
 def _validate_config(rc: RetrievalConfig, model) -> None:
     """Raise early if required dependencies are missing for the chosen search type."""
-    if rc.search_type in ('bm25', 'hybrid_rrf') and rc.es is None:
-        raise ValueError(f"Search type '{rc.search_type}' requires Elasticsearch connection. Provide 'es' parameter or use a different config.")
-    if rc.search_type in ('vector', 'hybrid_rrf', 'entity_boosted') and model is None:
-        raise ValueError(f"Search type '{rc.search_type}' requires an embedding model. Provide 'model' parameter or use a different config.")
-    if rc.use_reranker and rc.search_type == 'bm25' and (model is None):
+    es_types = _search_types_requiring_es()
+    vec_types = _search_types_requiring_vector()
+    if rc.search_type in es_types and rc.es is None:
+        raise ValueError(f"Search type '{rc.search_type}' requires Elasticsearch. ES-requiring types: {sorted(es_types)}")
+    if rc.search_type in vec_types and model is None:
+        raise ValueError(f"Search type '{rc.search_type}' requires an embedding model. Vector types: {sorted(vec_types)}")
+    if rc.use_reranker and rc.search_type == 'bm25' and model is None:
         raise ValueError("Reranking with bm25 requires an embedding model for the reranker. Provide 'model' parameter.")
 
 def _run_retrieval(rc: RetrievalConfig, query: str, query_vector: Optional[list], course: str, ner_category: Optional[str], ner_primary_entity: Optional[str]):
@@ -68,6 +96,8 @@ def _run_retrieval(rc: RetrievalConfig, query: str, query_vector: Optional[list]
         raise ValueError(f"query_vector is None for search_type={rc.search_type!r}")
     if rc.search_type == 'hybrid_rrf' and rc.es is not None:
         return run_hybrid_rrf_retrieval(client=rc.client, collection=rc.collection, query_vector=query_vector, es=rc.es, es_index=rc.es_index, query_text=query, course_filter=course, config=rc.config, top_k=rc.retrieval_k)
+    if rc.search_type == 'hybrid_dbsf' and rc.es is not None:
+        return run_hybrid_dbsf_retrieval(client=rc.client, collection=rc.collection, query_vector=query_vector, es=rc.es, es_index=rc.es_index, query_text=query, course_filter=course, config=rc.config, top_k=rc.retrieval_k)
     if rc.search_type == 'entity_boosted':
         return run_entity_boosted_retrieval(client=rc.client, collection=rc.collection, query_vector=query_vector, course_filter=course, config=rc.config, top_k=rc.retrieval_k, ner_category=ner_category, ner_primary_entity=ner_primary_entity)
     if rc.use_reranker and rc.reranker_name:
@@ -161,7 +191,7 @@ def evaluate_config(client, collection: str, model, test_set: list[dict], topic_
     rc = RetrievalConfig(search_type=search_type, use_reranker=use_reranker, reranker_name=reranker_name, retrieval_k=top_k * 4 if use_reranker else top_k, top_k=top_k, client=client, collection=collection, config=config, es=es, es_index=es_index)
     _validate_config(rc, model)
     query_vectors = None
-    if search_type in ('vector', 'hybrid_rrf', 'entity_boosted'):
+    if search_type in _search_types_requiring_vector():
         queries = [test['query'] for test in test_set]
         print(f'DEBUG: encoding {len(queries)} queries', flush=True)
         print(f'DEBUG: first 3 queries: {queries[:3]}', flush=True)
