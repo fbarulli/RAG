@@ -72,6 +72,15 @@ class Paths:
     def retrieval_configs(cls) -> Path:
         return cls._resolve("retrieval_configs")
 
+    @staticmethod
+    def collection_for_model(model_name: str) -> str:
+        """Derive Qdrant collection name from model name — single source of truth.
+        Mirrors the transform in p00_ingest_qdrant.py.
+        e.g. 'BAAI/bge-base-en-v1.5' -> 'faqs_bge_base_en_v1_5'
+        """
+        short = model_name.split('/')[-1].replace('-', '_').replace('.', '_')
+        return f'faqs_{short}'
+
     @classmethod
     def input_file(cls, stage: str) -> Path:
         mapping = cls._load_config().get("input_mapping", {})

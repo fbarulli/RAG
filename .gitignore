@@ -7,3 +7,11 @@ experiments/onnx_cache/
 experiments/embeddings/
 .venv/
 __pycache__/
+
+# Experiment artifacts — generated, not source
+experiments/embeddings/*.npy
+experiments/reranker_benchmarks/*.jsonl
+experiments/reranker_models/
+experiments/reranker_training/
+experiments/onnx_cache/
+experiments/benchmark_state.json

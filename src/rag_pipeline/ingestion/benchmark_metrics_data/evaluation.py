@@ -38,10 +38,7 @@ class RetrievalConfig:
 
 def _encode_queries(model, test_set: list[dict], encode_batch_size: int) -> list[list[float]]:
     queries = [test['query'] for test in test_set]
-    print(f'DEBUG _encode_queries: {len(queries)} queries, batch_size={encode_batch_size}', flush=True)
-    print(f'DEBUG _encode_queries: model type={type(model).__name__}', flush=True)
     vectors = model.encode(queries, batch_size=encode_batch_size, convert_to_numpy=True, show_progress_bar=True)
-    print(f'DEBUG _encode_queries: vectors shape={vectors.shape}', flush=True)
     return vectors.tolist()
 
 def _build_integrity_cache(test_set: list[dict]) -> dict[str, float]:
@@ -164,15 +161,10 @@ def _run_evaluation_loop(test_set: list[dict], topic_map: dict, query_vectors: O
     for idx, test in enumerate(test_set):
         if idx % 10 == 0:
             logger.info(f'Progress: {idx}/{total} queries evaluated')
-        print(f"DEBUG loop: idx={idx} course={test.get('course')} ner_category={topic_map.get(test.get('expected_id'), {}).get('ner_category')}", flush=True)
         try:
             ctx = _build_query_context(idx, test, topic_map, query_vectors)
-            print(f"DEBUG: ctx built — query={ctx['query'][:40]!r} vector_dim={(len(ctx['query_vector']) if ctx['query_vector'] else None)}", flush=True)
-            print(f'DEBUG: calling _run_retrieval', flush=True)
             search_result = _run_retrieval(rc=rc, query=ctx['query'], query_vector=ctx['query_vector'], course=ctx['course'], ner_category=ctx['ner_category'], ner_primary_entity=ctx['ner_primary_entity'])
-            print(f'DEBUG: _run_retrieval done — hits={len(search_result.hit_ids)}', flush=True)
             hit_ids, hit_scores, reranker_latency_ms = _apply_reranking(search_result=search_result, rc=rc, query=ctx['query'])
-            print(f'DEBUG: reranking done', flush=True)
             results.append(_build_query_result(test, ctx, search_result, hit_ids, hit_scores, reranker_latency_ms, integrity_cache))
         except Exception as e:
             logger.error(f"Query '{test.get('query_id', idx)}' failed: {e}", exc_info=True)
@@ -193,11 +185,7 @@ def evaluate_config(client, collection: str, model, test_set: list[dict], topic_
     query_vectors = None
     if search_type in _search_types_requiring_vector():
         queries = [test['query'] for test in test_set]
-        print(f'DEBUG: encoding {len(queries)} queries', flush=True)
-        print(f'DEBUG: first 3 queries: {queries[:3]}', flush=True)
-        print(f'DEBUG: batch_size={encode_batch_size}', flush=True)
         query_vectors = _encode_queries(model, test_set, encode_batch_size)
-        print(f'DEBUG: encoding done — {len(query_vectors)} vectors, dim={len(query_vectors[0])}', flush=True)
     integrity_cache = _build_integrity_cache(test_set)
     if query_vectors is not None:
         logger.info(f'Vector check — dim={len(query_vectors[0])}, sample={query_vectors[0][:3]}')

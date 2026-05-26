@@ -1,78 +1,203 @@
 # RAG-a-muffin
 
-**Production-grade RAG pipeline** for the DataTalks.Club FAQ knowledge base (4 courses). Focuses on **clean data → rich metadata (topics + NER) → multi-vector ingestion → benchmarking + LLM-as-judge evaluation**.
+Production-grade RAG pipeline for the [DataTalks.Club](https://datatalks.club) FAQ knowledge base (4 courses: ML Zoomcamp, DE Zoomcamp, MLOps Zoomcamp, LLM Zoomcamp).
 
-## Pipeline Overview
+**Architecture**: clean data → NER/topic metadata → context-enriched vector ingestion → benchmarked retrieval → LLM-as-judge evaluation → end-to-end answer generation.
 
+## Benchmark Results
 
-### High-level Steps
+Production config: `entity_boosted` · Model: `BAAI/bge-base-en-v1.5` · 453 queries
 
-1. **p01_data_cleaning** — Raw → Clean structured data
-2. **p02_eda** — Exploratory analysis, topic modeling, entity patterns, model comparison
-3. **p03_generation** — Synthetic test queries (in-domain + OOD)
-4. **p04_ingestion** — Vector stores (Qdrant + Elasticsearch), multi-model embeddings, benchmarking
-5. **p05_evaluation** — Diverse test sets + LLM-as-judge scoring
-6. **p06_answer_generation** — End-to-end RAG response generation
+| Config | H@1 | H@3 | H@5 | H@10 | MRR | p50 latency |
+|---|---|---|---|---|---|---|
+| **entity_boosted** ✅ | **85.9%** | **95.4%** | **96.7%** | **97.8%** | **0.9088** | **9.2ms** |
+| hybrid_dbsf | 81.5% | 94.9% | 96.5% | 97.4% | 0.8793 | 22.0ms |
+| vector_default | 80.1% | 93.6% | 95.8% | 97.1% | 0.8702 | 7.2ms |
+| hybrid_rrf | 78.8% | 91.2% | 94.3% | 97.4% | 0.8560 | 15.8ms |
 
-**Main orchestrator**: `rag_pipeline/cleaning.pipeline.py`
+On original (non-synthetic) queries: **H@1 100% · MRR 1.0000**. Zero cross-course contamination across all configs.
 
-## Detailed Steps & Outputs
+Key design decisions:
+- Embeddings encode `question + answer` (not question-only) for richer context matching
+- NER entity boosting via Qdrant `should` clauses adds 5.8pp H@1 over pure vector search
+- HNSW `ef_construct=200` for higher-quality index graphs at ingest time
+- Collection name derived from model name at runtime — `Paths.collection_for_model(model_name)`
 
-### p01_data_cleaning
-- **p00_load_llm_queries.py** — Loads any pre-generated LLM queries if needed.
-- **p01_download.py** — Downloads `faq.zip` from DataTalksClub/faq repo and extracts MD files.
-- **p02_parse.py** — Parses markdown into structured JSONL (`id`, `question`, `answer`, `course`, `section`). Cleans images, HTML, headers, Jinja macros.
-- **p03_dedup.py** — Deduplicates at ~95% similarity threshold.
-- **p04_stratified_test_split.py** — Creates `train.jsonl` + `test.jsonl` (stratified by course/section).
+## Pipeline Stages
 
-**Key outputs**:
-- `data/processed/clean.jsonl` (~1140 docs)
-- `test.jsonl` (used downstream)
+```
+p01 cleaning → p02 eda → p03 generation → p04 ingestion → p05 evaluation → p06 answer generation
+```
 
-### p02_eda
-- Topic modeling (BERTopic) across multiple embedding models.
-- Topic validation + subtopics.
-- NER/entity pattern learning + merging.
-- Embedding model comparison + TF-IDF analysis.
+### p01 — Data Cleaning (`src/rag_pipeline/cleaning/`)
 
-**Key outputs**:
-- Topic assignments per model.
-- `eda_summary.json`
-- Entity patterns for boosting.
+Downloads and cleans the DataTalks.Club FAQ markdown files into structured JSONL.
 
-### p03_generation
-- Samples documents.
-- Generates synthetic queries with LLMs.
-- Adds out-of-distribution (OOD / "chaos monkey") queries.
+| Script | Role |
+|---|---|
+| `download.py` | Downloads `faq.zip` from DataTalksClub/faq, extracts MD files |
+| `parse.py` | Parses markdown → structured JSONL (`id`, `question`, `answer`, `course`, `section`). Strips images, HTML, Jinja macros |
+| `dedup.py` | Deduplicates at ~95% similarity threshold |
+| `stratified_test_split.py` | Stratified train/test split by course + section |
 
-**Outputs**: Augmented test query sets.
+Outputs: `data/processed/clean.jsonl` (~1204 docs), `data/processed/test.jsonl`
 
-### p04_ingestion
-- **p00_ingest_es.py** / **p00_ingest_qdrant.py** — Ingestion into ES (BM25 + dense) and Qdrant (per-model collections).
-- **p02_ingest_models.py** — Multi-embedding support.
-- Benchmarking with/without rerankers, payload filtering (topic/NER boosting).
+### p02 — EDA (`src/rag_pipeline/eda/p02_eda/`)
 
-**Outputs**:
-- Qdrant collections (e.g. `faqs_bge_base_en_v1.5`)
-- Elasticsearch `faqs_complete` index
-- Benchmark results (`experiments/benchmark_results.json`)
+Topic modeling and entity pattern learning used to enrich document payloads at ingest time.
 
-### p05_evaluation
-- Generates diverse test queries.
-- **p05_llm_judge.py** — Uses LLM (e.g. via Grok or local) to score faithfulness + factual correctness.
+- BERTopic topic modeling across multiple embedding models
+- NER entity pattern extraction and merging
+- TF-IDF course similarity analysis
+- Embedding model comparison
 
-**Outputs**: Judge scores, failure analysis.
+Outputs: `topic_assignments_all.json`, entity patterns for payload boosting
 
-### p06_answer_generation
-End-to-end RAG inference with chosen retriever/reranker/config.
+### p03 — Synthetic Query Generation (`src/rag_pipeline/generation/p03_generation/`)
+
+Generates test queries for benchmarking across multiple styles:
+
+| Query type | Description |
+|---|---|
+| `original` | Direct FAQ question rephrase |
+| `grounded_analyst` | Technical, precise phrasing |
+| `creative_student` | Casual student phrasing |
+| `chaos_monkey` | Vague/indirect stress-test queries |
+
+Outputs: `data/processed/eval_queries_tiered.jsonl`
+
+### p04 — Ingestion & Benchmarking (`src/rag_pipeline/ingestion/`)
+
+Ingests documents into Qdrant and Elasticsearch, runs retrieval benchmarks.
+
+**Ingest:**
+```bash
+# Qdrant (vector search)
+uv run python -m rag_pipeline.ingestion.p00_ingest_qdrant --model "BAAI/bge-base-en-v1.5"
+
+# Elasticsearch (BM25)
+uv run python -m rag_pipeline.ingestion.p00_ingest_es --model "BAAI/bge-base-en-v1.5"
+```
+
+**Benchmark:**
+```bash
+# Run specific configs
+uv run python -m rag_pipeline.ingestion.p03_benchmark \
+  --model "BAAI/bge-base-en-v1.5" \
+  --configs entity_boosted vector_default hybrid_dbsf
+
+# Run all configs for all models
+uv run python -m rag_pipeline.ingestion.p04_multi_model_benchmark
+```
+
+Available retrieval configs (defined in `configs/retrieval_configs.json`):
+
+| Config | Search type | Notes |
+|---|---|---|
+| `entity_boosted` | Vector + NER payload boost | **Production default** |
+| `vector_default` | Pure vector | Baseline |
+| `hybrid_dbsf` | DBSF vector + BM25 | Requires Elasticsearch |
+| `hybrid_rrf` | RRF vector + BM25 | Requires Elasticsearch |
+| `bm25_default` | BM25 only | Elasticsearch only |
+
+Reranker infrastructure (`reranker_runner.py`, `onnx_*`) is present for future use — not active in production configs.
+
+Outputs: `experiments/reranker_benchmarks/benchmark_results.json`, per-config `*_query_results.jsonl`
+
+### p05 — Evaluation (`src/rag_pipeline/evaluation/p05_evaluation/`)
+
+LLM-as-judge scoring for faithfulness and factual correctness.
+
+```bash
+uv run python -m rag_pipeline.evaluation.p05_evaluation.p05_llm_judge
+```
+
+Outputs: Judge scores, failure analysis in `experiments/reranker_benchmarks/failure_analysis/`
+
+### p06 — Answer Generation (`src/rag_pipeline/answer_generation/p06_answer_generation/`)
+
+End-to-end RAG: retrieve context → generate answer → evaluate.
+
+```bash
+uv run python -m rag_pipeline.answer_generation.p06_answer_generation.runner
+```
 
 ## Quick Start
 
 ```bash
-# Install
+# 1. Install dependencies
 uv sync
 
+# 2. Start vector store + search services
+just up
 
+# 3. Run full cleaning pipeline
+just run all
 
-# Or individual stages via just (see justfile)
-just clean-pipeline
+# 4. Ingest into Qdrant and Elasticsearch
+uv run python -m rag_pipeline.ingestion.p00_ingest_qdrant --model "BAAI/bge-base-en-v1.5"
+uv run python -m rag_pipeline.ingestion.p00_ingest_es --model "BAAI/bge-base-en-v1.5"
+
+# 5. Benchmark
+uv run python -m rag_pipeline.ingestion.p03_benchmark \
+  --model "BAAI/bge-base-en-v1.5" \
+  --configs entity_boosted vector_default
+```
+
+## Configuration
+
+All configuration is JSON-driven — no hardcoded values in source.
+
+| File | Purpose |
+|---|---|
+| `configs/defaults.json` | Production model, Qdrant/ES hosts, benchmark defaults |
+| `configs/retrieval_configs.json` | Retrieval strategy definitions |
+| `configs/models.json` | Embedding model registry |
+| `configs/rerankers.json` | Reranker model registry |
+| `configs/paths.json` | All filesystem paths (single source of truth for `Paths` class) |
+
+The `Paths` class (`src/rag_pipeline/core/paths.py`) resolves all paths relative to the project root. Collection names are derived from model names at runtime via `Paths.collection_for_model(model_name)` — updating `production_model` in `defaults.json` is sufficient to switch models everywhere.
+
+## Infrastructure
+
+Services are defined in `compose.yml`:
+
+```bash
+just up        # start Qdrant + Elasticsearch
+just down      # stop services
+just down-v    # stop + remove volumes
+just ps        # check status
+just logs      # tail all logs
+```
+
+| Service | Port | Purpose |
+|---|---|---|
+| Qdrant | 6333 (HTTP), 6334 (gRPC) | Vector search |
+| Elasticsearch | 9200 | BM25 keyword search |
+
+## Development
+
+```bash
+just lint       # ruff check + format
+just typecheck  # mypy
+just test       # pytest with coverage
+just help       # list all targets
+```
+
+## Project Structure
+
+```
+src/rag_pipeline/
+├── core/           # Paths, logging, LLM client, schemas
+├── cleaning/       # p01: download, parse, dedup, split
+├── eda/            # p02: topic modeling, NER, embedding comparison
+├── generation/     # p03: synthetic query generation
+├── ingestion/      # p04: ingest, benchmark, retrieval configs
+├── evaluation/     # p05: LLM-as-judge
+└── answer_generation/  # p06: end-to-end RAG
+configs/            # JSON config files (single source of truth)
+data/
+├── raw/            # Downloaded source files
+└── processed/      # clean.jsonl, test.jsonl, eval queries
+experiments/        # Benchmark results and model artifacts
+```

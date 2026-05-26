@@ -43,8 +43,8 @@ def main(model_name: str, input_path: Path=DEFAULT_INPUT, host: str=QDRANT_HOST,
     logger.info(f'NER map loaded: {len(ner_map)} entries')
     client = QdrantClient(host=host, port=port)
     questions = [f"{d.question} {d.answer}" for d in docs]
-    short_name = model_name.split('/')[-1].replace('-', '_').replace('.', '_')
-    collection = f'faqs_{short_name}'
+    from rag_pipeline.core.paths import Paths
+    collection = Paths.collection_for_model(model_name)
     logger.info(f'Model: {model_name}')
     logger.info(f'Collection: {collection}')
     logger.info('Loading embedding model...')

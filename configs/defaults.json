@@ -4,8 +4,7 @@
     "host": "localhost",
     "port": 6333,
     "grpc_port": 6334,
-    "distance": "Cosine",
-    "collection": "faqs_bge_base_en_v1_5"
+    "distance": "Cosine"
   },
   "elasticsearch": {
     "host": "http://localhost:9200",

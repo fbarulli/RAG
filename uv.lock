@@ -3328,6 +3328,7 @@ dependencies = [
     { name = "einops" },
     { name = "elasticsearch" },
     { name = "faiss-cpu" },
+    { name = "fastapi" },
     { name = "flair" },
     { name = "flask" },
     { name = "gradio" },
@@ -3359,6 +3360,7 @@ dependencies = [
     { name = "pytest" },
     { name = "python-docx" },
     { name = "python-dotenv" },
+    { name = "python-multipart" },
     { name = "pyyaml" },
     { name = "qdrant-client" },
     { name = "ragas" },
@@ -3375,6 +3377,7 @@ dependencies = [
     { name = "tdqm" },
     { name = "tiktoken" },
     { name = "tqdm" },
+    { name = "uvicorn" },
 ]
 
 [package.metadata]
@@ -3387,6 +3390,7 @@ requires-dist = [
     { name = "einops", specifier = ">=0.8.2" },
     { name = "elasticsearch", specifier = "==8.19.3" },
     { name = "faiss-cpu", specifier = ">=1.13.2" },
+    { name = "fastapi", specifier = ">=0.136.1" },
     { name = "flair", specifier = ">=0.15.1" },
     { name = "flask", specifier = ">=3.1.3" },
     { name = "gradio", specifier = ">=6.13.0" },
@@ -3418,6 +3422,7 @@ requires-dist = [
     { name = "pytest", specifier = ">=9.0.3" },
     { name = "python-docx", specifier = ">=1.2.0" },
     { name = "python-dotenv", specifier = ">=1.2.2" },
+    { name = "python-multipart", specifier = ">=0.0.27" },
     { name = "pyyaml", specifier = ">=6.0.3" },
     { name = "qdrant-client", specifier = ">=1.17.1" },
     { name = "ragas", specifier = ">=0.4.3" },
@@ -3434,6 +3439,7 @@ requires-dist = [
     { name = "tdqm", specifier = ">=0.0.1" },
     { name = "tiktoken", specifier = ">=0.12.0" },
     { name = "tqdm", specifier = ">=4.67.3" },
+    { name = "uvicorn", specifier = ">=0.46.0" },
 ]
 
 [[package]]
