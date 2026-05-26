@@ -1,0 +1,13 @@
+term,course,tfidf_score
+pipenv,machine-learning-zoomcamp,0.0725
+pipenv,mlops-zoomcamp,0.076
+training,machine-learning-zoomcamp,0.0783
+training,mlops-zoomcamp,0.0668
+aws,machine-learning-zoomcamp,0.062
+aws,mlops-zoomcamp,0.0808
+flask,machine-learning-zoomcamp,0.0715
+flask,mlops-zoomcamp,0.0576
+sklearn,machine-learning-zoomcamp,0.064
+sklearn,mlops-zoomcamp,0.0627
+volume,data-engineering-zoomcamp,0.0686
+volume,mlops-zoomcamp,0.0554

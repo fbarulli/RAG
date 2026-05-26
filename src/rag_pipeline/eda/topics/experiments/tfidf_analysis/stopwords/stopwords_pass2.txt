@@ -1,0 +1,1345 @@
+01
+05
+11
+12
+127
+14
+16
+20
+2023
+2024
+2025
+21
+24
+27
+30
+42
+50
+a
+able
+about
+above
+accepted
+accepts
+access key
+accessible
+accessing
+according
+accordingly
+account automatically
+accounts
+achieve certificate
+across
+activate
+activated
+actual
+adapt
+additionally
+address
+addresses
+adds
+adjustment
+admin
+advance
+advanced
+advised
+after
+afterward
+afterwards
+again
+against
+ahead
+ai
+alexey
+algorithm
+algorithms
+all
+allocate
+allowing
+almost
+alone
+along
+alongside
+already
+also
+alternative method
+alternative use
+alternatively
+alternatively run
+alternatively use
+although
+always
+am
+among
+amongst
+amoungst
+amount
+an
+anaconda
+and
+announcements
+another
+any
+anyhow
+anyone
+anything
+anyway
+anywhere
+api key
+apis
+app
+appear certificate
+application
+applications
+applied
+applies
+apply
+approaches
+apps
+apt
+are
+aren
+argument
+arguments
+arises
+around
+as
+asking
+assign
+assigned
+assigned random
+assigned students
+associated
+at
+attempting
+authenticate
+authentication
+auto
+automatic
+automatically assigned
+avoid
+azure
+back
+backend
+base
+bash
+basics
+be
+became
+because
+become
+becomes
+becoming
+been
+before
+beforehand
+beginning
+behavior
+behind
+being
+below
+beneficial
+beside
+besides
+best practice
+beta
+between
+beyond
+bill
+bin
+binary
+blob
+blog
+bookmarks
+both
+bottom
+browser
+bucket
+budget
+bug
+build
+build docker
+built
+but
+by
+calculate
+call
+called
+calling
+calls
+can
+cannot
+cant
+capabilities
+cardinality
+carefully
+cases
+categorical
+caused
+causes
+causing
+certificate end
+certificate need
+certificates
+checking
+choices
+chose
+chunks
+ci
+class
+class use
+clean
+clear
+cli
+clone repo
+cloning
+close
+closest
+cloud
+cmd
+co
+code
+codespace
+cohort don
+cohort specific
+cohorts
+cohorts folder
+collect
+columns
+command
+commands
+commit
+commit changes
+committed
+communicate
+community
+compiled
+completed
+completely
+complying
+complying rule
+compose yaml
+computer
+computes
+computing
+con
+concepts
+concurrency
+config
+config file
+configuration file
+configurations
+configured
+configuring
+conflicts
+connecting
+connection
+consider following
+consistency
+consistent
+console
+consult
+consuming
+contain
+container
+contains
+contents
+continue
+convert
+converted
+copy
+corresponding
+costs
+could
+couldnt
+counts
+course
+courses
+courses datatalks
+covered
+create
+creates
+creates new
+creating
+creation
+credentials
+credit
+credit card
+criterion
+cross
+crucial
+cry
+csv
+csv file
+ctrl
+custom
+daily
+dashboard
+dashboard ensure
+data directory
+data quality
+data types
+database
+dataframes
+dataset
+datatalksclub
+datatype
+db
+de
+deadlines
+dedicated
+default docker
+default pandas
+default region
+define
+defining
+definition
+denied
+dependencies
+dependency
+depending
+depends
+describe
+described
+desktop
+detail
+detailed
+details refer
+determine
+dictionary
+dictvectorizer
+did
+didn
+differently
+dimensionality
+directories
+directory contains
+disabled
+discover
+discuss
+disk
+disk space
+displayed
+distribution
+dlt
+do
+docker desktop
+docker group
+docker network
+docker note
+docker run
+docker service
+docker using
+docs
+documentation additional
+documents
+does exist
+does work
+doesn require
+doesn work
+domain
+don want
+done
+double quotes
+down
+downgrade
+download data
+download files
+downloaded
+downloading
+drive
+driver
+dtc
+due
+duration
+during
+each
+earlier
+early
+earn
+earn certificate
+easier
+easiest
+easy
+edit profile
+editor
+effect
+efficient
+efficiently
+eg
+eight
+either
+elbakyan
+eleven
+eligible
+else
+elsewhere
+email
+empty
+enable
+enabling
+encoded
+encoding
+encounter following
+encountered
+encountered error
+encountered following
+encountering
+end final
+enough
+ensure correct
+ensure docker
+ensures
+enter
+entries
+env file
+environment following
+environment variable
+equivalent
+error error
+error fix
+error indicates
+error issue
+error like
+error message
+error occurs
+error solution
+error trying
+error typically
+error update
+error using
+escape
+estimate
+etc
+eu
+evaluate
+evaluated randomly
+evaluates
+evaluating
+even
+event
+ever
+every
+everyone
+everything
+everywhere
+exactly
+example make
+example resolve
+example use
+except
+executable
+execute following
+executed
+executing
+executing following
+execution
+exist
+exists
+expect
+experience
+experiment
+experiments
+explained
+explanation
+explicitly
+export
+extension
+external
+faced
+failed
+failing
+false
+faq
+faq document
+faster
+feature
+features
+fellow students
+fetch
+few
+field
+fifteen
+fifty
+file named
+file path
+file size
+file use
+file using
+filename
+fill
+filter
+filtering
+final grade
+find
+fine
+fire
+first
+fits
+five
+fix
+fix issue
+float
+floats
+flow
+focus
+folders
+follow guidelines
+followed
+following check
+following environment
+following install
+following lines
+following terminal
+follows
+for
+form closed
+format
+formatting
+former
+formerly
+forty
+forward
+found
+four
+free tier
+fresh
+from
+front
+full
+function
+functions
+further
+future
+gb
+generally
+generates
+generating
+generic
+get
+gets
+git
+git repository
+github account
+github issue
+github repository
+give
+global
+go
+google
+got
+grade receive
+grades
+grades peer
+grading projects
+grant
+green
+groups
+guarantee
+guidance
+guide
+guide free
+guidelines defined
+had
+handling
+happen
+has
+hasnt
+have
+having
+he
+help
+helpful
+helps
+hence
+her
+here
+hereafter
+hereby
+herein
+hereupon
+hers
+herself
+him
+himself
+his
+hit
+hitting
+home
+homework
+host
+how
+however
+http
+http localhost
+https github
+https www
+hugging
+hugging face
+hundred
+i
+iam
+idea
+ideas
+identical
+identify
+ie
+if
+ignore
+image
+immediately
+implement
+implementation
+implemented
+imported
+improve
+in
+inc
+includes
+indeed
+index
+indicating
+indices
+info
+information
+information refer
+ingestion
+initially
+insert
+inside docker
+install docker
+install necessary
+installation
+installation guide
+installer
+installing
+instruction
+instructions
+instructions video
+instructor
+instructors
+int
+integer
+integration
+intel
+interest
+interface
+interpreter
+into
+invalid
+ip
+ip address
+ipynb
+is
+isn
+issue arises
+issue caused
+issue follow
+issue occurs
+issue use
+issues
+it
+items
+its
+itself
+january
+kaggle
+keep
+keys
+kill
+kill process
+large
+large datasets
+last
+late
+later
+latest
+latest versions
+latter
+latterly
+launch
+launching
+lead
+leading
+leads
+learning public
+learning submitting
+least
+leave
+left
+length
+less
+lesson
+lessons
+libraries
+license
+limit
+line dockerfile
+lines
+linked
+linux docker
+linux use
+lists
+live cohort
+loads
+local development
+local folder
+local machine
+located
+location
+logic
+logical
+login
+logs
+loop
+lost
+lower
+ls
+ltd
+lucid
+lucid elbakyan
+mac
+machine learning
+machines
+macos use
+made
+makes
+making
+manage
+management
+manager
+managing
+mandatory
+manual
+many
+map
+markdown
+matching
+materials
+matter
+maximum
+may
+me
+mean
+meanwhile
+median score
+medium
+memory usage
+mentioned
+menu
+messages
+methods
+metrics
+microsoft
+might
+mill
+mine
+minimal
+minute
+minutes
+mismatch
+missing
+missing values
+ml
+models using
+modified
+module
+more
+moreover
+most
+mostly
+move
+moved
+much
+multiple times
+must
+my
+myself
+name
+namely
+nan
+nan values
+navigate folder
+nbconvert
+need add
+need convert
+need install
+need manually
+need run
+needing
+needs
+neither
+network
+networks
+never
+nevertheless
+new environment
+new folder
+new terminal
+next
+nickname
+nine
+no
+nobody
+node
+none
+noone
+nor
+normal
+normalize
+not
+notebook python
+notebook use
+notebook using
+notes
+nothing
+now
+nowhere
+null
+numerical
+numpy
+object
+objects
+occasionally
+occur
+occurred
+occurs
+of
+off
+offers
+office
+office hours
+often
+old
+older
+on
+once
+one
+online
+only
+onto
+open source
+opening
+operating
+optional
+or
+orchestrator
+org
+original
+os
+other
+others
+otherwise
+our
+ours
+ourselves
+out
+outdated
+outputs
+outside
+over
+overflow
+overview
+own
+package manager
+packages
+pages
+pair
+pandas dataframes
+panel
+parameter
+parameters
+parsing
+part
+particular
+particularly
+parts
+passed
+passing
+password
+path path
+patterns
+pay
+pd
+peer reviewer
+peers
+per
+performance
+perhaps
+permission
+persist
+persists
+pip
+pip install
+pipelines
+place
+plain
+playlist
+please
+popular
+port
+ports
+possible
+potentially
+powershell
+practice
+practices
+pre
+prediction
+prepare
+preprocessing
+present
+press
+preventing
+prevents
+previous
+previously
+primarily
+print
+prints
+prior
+problem
+proceed
+process id
+processed
+processes
+processing
+produce
+product
+progress
+project
+projects fellow
+prompt
+prompted
+prompts
+proper
+properly
+provider
+providers
+provides
+pruning
+public
+published
+pull
+pushed
+put
+py script
+pyarrow
+python 10
+python file
+python installed
+python instead
+python library
+python versions
+python wget
+queries
+query
+quick
+quick fix
+quickly
+quotes
+raises
+ran
+randomly assigned
+ranking
+rate
+rather
+re
+reached
+reading
+real
+really
+reasons
+rebuild
+receive median
+received
+recent
+recognized
+recorded
+recorded videos
+records
+references
+regardless
+regenerate
+region
+region default
+register
+registered
+registering
+registry
+reinstall
+release
+released
+reload
+remember
+remote
+remotely
+removal
+removed
+removing
+rename
+repeat
+replace actual
+replacing
+report
+reporting
+reports
+repositories
+represents
+reproducibility
+require
+required
+requirement
+requires
+resolution
+resolved
+response
+responsible
+responsible grading
+restart docker
+retrieval
+returns
+review criteria
+reviewer
+reviewers peer
+reviewing
+rmse
+row
+rows
+rules
+run docker
+run locally
+run script
+run terminal
+running
+runtime
+s3
+same
+save changes
+scenarios
+schedule
+schema
+scikit
+scikit learn
+score grades
+scratch
+search channel
+seconds
+see
+seem
+seemed
+seeming
+seems
+seen
+selected
+selecting
+send
+sequence
+series
+serious
+server
+serves
+sessions
+set
+setups
+several
+shape
+shared
+she
+shell
+ships
+short
+should
+show
+shown
+side
+sign
+since
+sincere
+site
+six
+sixty
+sizes
+slightly
+slim
+snippet
+so
+socket
+solution add
+solution ensure
+solutions
+solve
+some
+somehow
+someone
+something
+sometime
+sometimes
+somewhere
+sort
+spaces
+sparse
+specifically
+specified
+specifying
+ssh
+ssh config
+ssl
+stable
+stack
+stack overflow
+standard
+start
+started
+starter
+starts
+startup
+statement
+steps install
+still
+stop
+stopping
+storage
+store data
+stored
+stores
+strategy
+stream
+strings
+structured
+student
+students submitted
+style
+sub
+submit projects
+submitted evaluated
+submitted responsible
+successful
+successfully
+such
+sudo
+suffice
+sufficient
+suggested
+suggests
+suitable
+support
+supported
+suppress
+syntax
+system
+systems
+tab
+table
+tables
+tag
+take
+takes
+target
+task
+tasks
+telegram
+ten
+term
+terminal run
+terminal use
+testing
+text editor
+tf
+than
+that
+the
+their
+them
+themselves
+then
+thence
+there
+thereafter
+thereby
+therefore
+therein
+thereupon
+these
+they
+thick
+thin
+things
+think
+third
+this
+those
+though
+three
+through
+throughout
+thru
+thus
+tier
+time run
+times
+tips
+to
+together
+token
+toml
+too
+tool
+top
+topic
+total
+toward
+towards
+track
+tracking
+transform
+transformation
+treated
+tree
+tried
+tries
+true
+truth
+try using
+trying
+trying run
+trying use
+tutorial
+twelve
+twenty
+two
+type
+ubuntu
+ui
+un
+unable
+under
+understand
+unique
+unit
+unix
+unknown
+until
+unused
+up
+update line
+update path
+updated
+updating
+upload
+uploading
+upon
+uri
+urls
+us
+usd
+use cases
+use different
+use docker
+use git
+use gitignore
+use raw
+username password
+using aws
+using different
+using docker
+using error
+using following
+using jupyter
+using pandas
+using pip
+using python
+utility
+utils
+uv
+valid
+validate
+validation
+ve
+verification
+verified
+versa
+version
+very
+via
+vice
+vice versa
+videos
+virtual
+virtual environment
+visit
+visual
+visual studio
+vm
+volumes
+vscode
+want install
+want use
+warnings
+was
+watching
+way
+ways
+we
+web
+website
+well
+were
+wget
+wget download
+what
+whatever
+wheel
+when
+whence
+whenever
+where
+whereafter
+whereas
+whereby
+wherein
+whereupon
+wherever
+whether
+which
+whichever
+while
+whither
+who
+whoever
+whole
+whom
+whose
+why
+will
+window
+windows
+wish
+with
+within
+without
+won
+workarounds
+worked
+workers
+workflow
+working directory
+workshop
+worth
+would
+wrapper
+write
+writing
+written
+www
+year
+yet
+yield
+you
+your
+yours
+yourself
+yourselves
+youtube channel
+zero
+zip
