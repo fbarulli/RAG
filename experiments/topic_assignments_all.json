@@ -1,0 +1,11 @@
+{
+  "default": "general",
+  "kestra": "orchestration",
+  "airflow": "orchestration",
+  "mage": "orchestration",
+  "dlt": "data_engineering",
+  "prefect": "orchestration",
+  "dbt": "data_engineering",
+  "kafka": "data_engineering",
+  "spark": "data_engineering"
+}

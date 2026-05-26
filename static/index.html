@@ -247,31 +247,38 @@
     font-family: var(--font-mono);
   }
 
-  /* thinking indicator */
-  .thinking {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 16px;
+  /* progress indicator */
+  .progress-box {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    color: var(--muted);
-    font-size: 12px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     animation: slidein 0.2s ease;
   }
-  .dots {
-    display: flex; gap: 4px;
+  .progress-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--muted);
   }
-  .dots span {
-    width: 5px; height: 5px;
+  .progress-stage { color: var(--accent); font-weight: 500; }
+  .progress-pct   { font-variant-numeric: tabular-nums; }
+  .progress-track {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
     background: var(--accent);
-    border-radius: 50%;
-    opacity: 0.3;
-    animation: pulse 1.2s ease-in-out infinite;
+    border-radius: 2px;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 8px var(--accent);
   }
-  .dots span:nth-child(2) { animation-delay: 0.2s; }
-  .dots span:nth-child(3) { animation-delay: 0.4s; }
 
   /* ── input area ── */
   .input-area {
@@ -337,6 +344,26 @@
     font-size: 10px;
     color: var(--text);
   }
+
+  /* context drawer */
+  .context-toggle {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 10px; color: var(--muted); cursor: pointer;
+    background: none; border: none; padding: 4px 0;
+    font-family: var(--font-mono); letter-spacing: 0.06em;
+    text-transform: uppercase; transition: color 0.15s;
+  }
+  .context-toggle:hover { color: var(--accent); }
+  .context-toggle .chevron { transition: transform 0.2s; display: inline-block; }
+  .context-toggle.open .chevron { transform: rotate(90deg); }
+  .context-body {
+    display: none; background: var(--bg);
+    border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 12px 14px; font-size: 11.5px; color: var(--muted);
+    white-space: pre-wrap; word-break: break-word; line-height: 1.7;
+    max-height: 300px; overflow-y: auto; scrollbar-width: thin;
+  }
+  .context-body.open { display: block; }
 
   /* ── animations ── */
   @keyframes fadein { from { opacity: 0 } to { opacity: 1 } }
@@ -472,7 +499,7 @@
     if (es) es.remove();
   }
 
-  function appendMessage(role, text, docIds = [], latencyMs = null) {
+  function appendMessage(role, text, docIds = [], latencyMs = null, context = null) {
     hideEmptyState();
     const container = document.getElementById('messages');
 
@@ -495,6 +522,7 @@
       </div>
       <div class="msg-body">${escapeHtml(text)}</div>
       ${docIds.length ? `<div class="doc-sources">${docIds.map(id => `<span class="doc-tag">${escapeHtml(id)}</span>`).join('')}</div>` : ''}
+      ${context ? `<button class="context-toggle" onclick="toggleContext(this)"><span class="chevron">▶</span> retrieved context</button><div class="context-body">${escapeHtml(context)}</div>` : ''}
     `;
 
     container.appendChild(msg);
@@ -556,6 +584,7 @@
     return {
       answer: data.answer || data.generated_answer || '(no answer returned)',
       docIds: data.doc_ids || data.retrieved_doc_ids || [],
+      context: data.context || null,
       latencyMs: data.latency_ms || clientLatency
     };
   }
@@ -585,9 +614,9 @@
     const thinking = appendThinking();
 
     try {
-      const { answer, docIds, latencyMs } = await queryRAG(query, course, style, topK);
+      const { answer, docIds, context, latencyMs } = await queryRAG(query, course, style, topK);
       removeThinking();
-      appendMessage('assistant', answer, docIds, latencyMs);
+      appendMessage('assistant', answer, docIds, latencyMs, context);
     } catch (err) {
       removeThinking();
       appendMessage('error', `Request failed: ${err.message}\n\nMake sure the RAG pipeline server is running at ${API_BASE} and the /api/query endpoint is available.`);
@@ -596,6 +625,11 @@
       document.getElementById('send-btn').disabled = false;
       input.focus();
     }
+  }
+
+  function toggleContext(btn) {
+    btn.classList.toggle('open');
+    btn.nextElementSibling.classList.toggle('open');
   }
 </script>
 </body>

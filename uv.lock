@@ -3377,6 +3377,7 @@ dependencies = [
     { name = "tdqm" },
     { name = "tiktoken" },
     { name = "tqdm" },
+    { name = "umap-learn" },
     { name = "uvicorn" },
 ]
 
@@ -3439,6 +3440,7 @@ requires-dist = [
     { name = "tdqm", specifier = ">=0.0.1" },
     { name = "tiktoken", specifier = ">=0.12.0" },
     { name = "tqdm", specifier = ">=4.67.3" },
+    { name = "umap-learn", specifier = ">=0.5.12" },
     { name = "uvicorn", specifier = ">=0.46.0" },
 ]
 

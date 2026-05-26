@@ -1,6 +1,6 @@
 """
 RAG-a-muffin FastAPI server.
-Usage: uv run uvicorn server:app --reload
+Usage: uv run uvicorn static.server:app --reload
 """
 import json
 import time
@@ -127,7 +127,57 @@ async def health():
 
 
 # ── serve frontend ─────────────────────────────────────────────────
-# Place rag_chatbot.html in the project root as 'static/index.html'
+from fastapi.responses import FileResponse
 _static = Paths.base() / "static"
-if _static.exists():
-    app.mount("/", StaticFiles(directory=str(_static), html=True), name="static")
+
+@app.get("/")
+async def index():
+    return FileResponse(str(_static / "index.html"))
+# ── embeddings / UMAP ──────────────────────────────────────────────
+import numpy as np
+from functools import lru_cache
+
+@lru_cache(maxsize=1)
+def get_umap_projection():
+    """Scroll all vectors from Qdrant, fit UMAP, return (reducer, points)."""
+    import umap
+    client = get_context_retriever().client
+    collection = Paths.collection_for_model(_model)
+
+    vectors, ids, courses = [], [], []
+    offset = None
+    while True:
+        points, offset = client.scroll(
+            collection_name=collection, limit=100, offset=offset,
+            with_payload=True, with_vectors=True
+        )
+        for p in points:
+            vectors.append(p.vector)
+            ids.append(p.payload.get('es_id', str(p.id)))
+            courses.append(p.payload.get('course', 'unknown'))
+        if offset is None:
+            break
+
+    X = np.array(vectors)
+    reducer = umap.UMAP(n_components=2, random_state=42, n_neighbors=15, min_dist=0.1)
+    coords = reducer.fit_transform(X)
+    return reducer, coords, ids, courses
+
+@app.get("/api/embeddings")
+async def embeddings():
+    _, coords, ids, courses = get_umap_projection()
+    return {
+        "points": [
+            {"x": float(coords[i,0]), "y": float(coords[i,1]), "id": ids[i], "course": courses[i]}
+            for i in range(len(ids))
+        ]
+    }
+
+@app.post("/api/embed-query")
+async def embed_query(req: QueryRequest):
+    from sentence_transformers import SentenceTransformer
+    reducer, _, _, _ = get_umap_projection()
+    model = SentenceTransformer(_model)
+    vec = model.encode(req.query)
+    coord = reducer.transform([vec])[0]
+    return {"x": float(coord[0]), "y": float(coord[1])}

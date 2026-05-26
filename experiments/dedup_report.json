@@ -1,0 +1,8 @@
+{
+  "input_count": 1207,
+  "output_count": 1207,
+  "removed_count": 0,
+  "threshold": 0.95,
+  "course_aware": true,
+  "removed": []
+}

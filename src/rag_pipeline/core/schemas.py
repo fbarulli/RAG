@@ -47,3 +47,41 @@ class MultiLLMResult:
     completion_tokens: int
     is_second_opinion: bool = False
     fallback_used: bool = False
+
+@dataclass(frozen=True)
+class TopicAssignment:
+    """Represents a single question with its assigned topic and NER category."""
+    question: str
+    topic: int
+    topic_name: str
+    ner_category: str
+    model: str
+
+
+@dataclass
+class TopicAssignments:
+    """Container for all topic modeling results."""
+    models: list[str]
+    results: dict[str, dict]   # model -> {metadata, assignments}
+    
+    def save(self, path: Optional[Path] = None):
+        """Save to standard location using Paths"""
+        from rag_pipeline.core.paths import Paths
+        if path is None:
+            path = Paths.topic_assignments()
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with open(path, 'w') as f:
+            json.dump({
+                "models": self.models,
+                "results": self.results
+            }, f, indent=2)
+    
+    @classmethod
+    def load(cls) -> "TopicAssignments":
+        from rag_pipeline.core.paths import Paths
+        path = Paths.topic_assignments()
+        if not path.exists():
+            raise FileNotFoundError(f"Topic assignments not found at {path}")
+        with open(path) as f:
+            data = json.load(f)
+        return cls(models=data["models"], results=data["results"])
