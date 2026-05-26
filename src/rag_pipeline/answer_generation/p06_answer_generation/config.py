@@ -3,6 +3,8 @@ from dataclasses import dataclass, field
 from typing import Literal
 import json
 from rag_pipeline.core.paths import Paths
+
+_DEFAULTS = json.load(open(Paths.base() / 'configs' / 'defaults.json'))
 PromptStyle = Literal['strict', 'relaxed', 'minimal', 'verbose']
 
 @dataclass
@@ -19,7 +21,7 @@ class PromptConfig:
 
 def load_prompt_configs() -> dict[PromptStyle, PromptConfig]:
     """Load prompt configs from retrieval_prompts.json."""
-    path = Paths.configs_dir() / 'retrieval_prompts.json'
+    path = Paths.base() / 'configs' / 'retrieval_prompts.json'
     with open(path) as f:
         raw = json.load(f)
     return {style: PromptConfig(**cfg) for style, cfg in raw.items()}
@@ -41,10 +43,10 @@ def get_prompt_config(style: PromptStyle) -> PromptConfig:
 class GenerationConfig:
     """Configuration for answer generation."""
     prompt_style: PromptStyle = 'strict'
-    llm_model: str = Paths.get('llm_model', 'nvidia_nim/meta/llama-3.1-70b-instruct')
-    retrieval_model: str = Paths.get('retrieval_model', 'BAAI/bge-base-en-v1.5')
-    retrieval_config: str = Paths.get('retrieval_config', 'entity_boosted')
-    qdrant_host: str = Paths.get('qdrant_host', 'localhost')
+    llm_model: str = field(default_factory=lambda: _DEFAULTS['llm_model'])
+    retrieval_model: str = field(default_factory=lambda: _DEFAULTS['production_model'])
+    retrieval_config: str = field(default_factory=lambda: _DEFAULTS['production_config'])
+    qdrant_host: str = field(default_factory=lambda: _DEFAULTS['qdrant']['host'])
     qdrant_port: int = 6333
     top_k: int = 3
     temperature: float = field(init=False)

@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAG-a-muffin · FAQ Assistant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #0d0f0e;
+    --surface:   #151918;
+    --border:    #222825;
+    --border-hi: #2e3830;
+    --text:      #d8e0dc;
+    --muted:     #5a6860;
+    --accent:    #4fffb0;
+    --accent-dim:#1a4034;
+    --user-bg:   #1b2621;
+    --error:     #ff6b6b;
+    --radius:    6px;
+    --font-mono: 'DM Mono', monospace;
+    --font-ui:   'Syne', sans-serif;
+  }
+
+  html, body {
+    height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── layout ── */
+  .app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 780px;
+    margin: 0 auto;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+  }
+
+  /* ── header ── */
+  header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    flex-shrink: 0;
+  }
+  .logo-mark {
+    width: 32px; height: 32px;
+    background: var(--accent);
+    border-radius: 4px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+  .logo-mark svg { width: 18px; height: 18px; }
+  .header-text h1 {
+    font-family: var(--font-ui);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.02em;
+  }
+  .header-text p {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .status-pill {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .status-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 6px var(--accent);
+  }
+
+  /* config bar */
+  .config-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    flex-shrink: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .config-bar label {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+  .config-bar select {
+    background: var(--surface);
+    border: 1px solid var(--border-hi);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    outline: none;
+  }
+  .config-bar select:focus { border-color: var(--accent); }
+  .config-sep { color: var(--border-hi); margin: 0 4px; }
+
+  /* ── messages ── */
+  .messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-hi) transparent;
+  }
+
+  /* empty state */
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    gap: 12px;
+    color: var(--muted);
+    text-align: center;
+    padding: 40px;
+    animation: fadein 0.4s ease;
+  }
+  .empty-state .big-icon {
+    font-size: 36px;
+    opacity: 0.4;
+  }
+  .empty-state p {
+    font-size: 13px;
+    max-width: 340px;
+    line-height: 1.8;
+  }
+  .pill-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 8px;
+  }
+  .suggestion-pill {
+    background: var(--surface);
+    border: 1px solid var(--border-hi);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .suggestion-pill:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* message rows */
+  .msg {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    animation: slidein 0.2s ease;
+  }
+  .msg-meta {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .msg-meta .tag {
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 9px;
+  }
+  .msg.user .msg-meta { color: var(--accent); }
+  .msg.user .msg-meta .tag { background: var(--accent-dim); color: var(--accent); }
+  .msg.assistant .msg-meta .tag { background: var(--border); color: var(--muted); }
+
+  .msg-body {
+    padding: 14px 16px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    line-height: 1.75;
+    font-size: 13.5px;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .msg.user .msg-body {
+    background: var(--user-bg);
+    border-color: var(--border-hi);
+  }
+  .msg.assistant .msg-body {
+    background: var(--surface);
+  }
+  .msg.error .msg-body {
+    background: #1a0f0f;
+    border-color: #3d1010;
+    color: var(--error);
+  }
+
+  /* doc sources */
+  .doc-sources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .doc-tag {
+    font-size: 10px;
+    background: var(--bg);
+    border: 1px solid var(--border-hi);
+    color: var(--muted);
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-family: var(--font-mono);
+  }
+
+  /* thinking indicator */
+  .thinking {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--muted);
+    font-size: 12px;
+    animation: slidein 0.2s ease;
+  }
+  .dots {
+    display: flex; gap: 4px;
+  }
+  .dots span {
+    width: 5px; height: 5px;
+    background: var(--accent);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: pulse 1.2s ease-in-out infinite;
+  }
+  .dots span:nth-child(2) { animation-delay: 0.2s; }
+  .dots span:nth-child(3) { animation-delay: 0.4s; }
+
+  /* ── input area ── */
+  .input-area {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    padding: 16px 24px;
+    flex-shrink: 0;
+  }
+  .input-row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+  }
+  textarea {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--border-hi);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    line-height: 1.6;
+    padding: 10px 14px;
+    border-radius: var(--radius);
+    resize: none;
+    min-height: 44px;
+    max-height: 160px;
+    outline: none;
+    transition: border-color 0.15s;
+    overflow-y: auto;
+  }
+  textarea::placeholder { color: var(--muted); }
+  textarea:focus { border-color: var(--accent); }
+
+  .send-btn {
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    border-radius: var(--radius);
+    width: 44px; height: 44px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: opacity 0.15s, transform 0.1s;
+  }
+  .send-btn:hover { opacity: 0.85; }
+  .send-btn:active { transform: scale(0.94); }
+  .send-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+  .send-btn svg { width: 18px; height: 18px; }
+
+  .input-hint {
+    margin-top: 8px;
+    font-size: 10px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+  }
+  kbd {
+    background: var(--border);
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text);
+  }
+
+  /* ── animations ── */
+  @keyframes fadein { from { opacity: 0 } to { opacity: 1 } }
+  @keyframes slidein { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @keyframes pulse { 0%,100% { opacity: 0.3 } 50% { opacity: 1 } }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- header -->
+  <header>
+    <div class="logo-mark">
+      <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="6" height="6" rx="1" fill="#0d0f0e"/>
+        <rect x="10" y="2" width="6" height="6" rx="1" fill="#0d0f0e" opacity=".5"/>
+        <rect x="2" y="10" width="6" height="6" rx="1" fill="#0d0f0e" opacity=".5"/>
+        <rect x="10" y="10" width="6" height="6" rx="1" fill="#0d0f0e" opacity=".3"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <h1>RAG-a-muffin</h1>
+      <p>DataTalks.Club FAQ Assistant · entity_boosted · BAAI/bge-base-en-v1.5</p>
+    </div>
+    <div class="status-pill">
+      <div class="status-dot"></div>
+      ready
+    </div>
+  </header>
+
+  <!-- config bar -->
+  <div class="config-bar">
+    <label>course</label>
+    <select id="course-select">
+      <option value="">all courses</option>
+      <option value="ml-zoomcamp">ML Zoomcamp</option>
+      <option value="de-zoomcamp">DE Zoomcamp</option>
+      <option value="mlops-zoomcamp">MLOps Zoomcamp</option>
+      <option value="llm-zoomcamp">LLM Zoomcamp</option>
+    </select>
+    <span class="config-sep">·</span>
+    <label>style</label>
+    <select id="style-select">
+      <option value="strict">strict</option>
+      <option value="relaxed">relaxed</option>
+      <option value="minimal">minimal</option>
+      <option value="verbose">verbose</option>
+    </select>
+    <span class="config-sep">·</span>
+    <label>top_k</label>
+    <select id="topk-select">
+      <option value="1">1</option>
+      <option value="3" selected>3</option>
+      <option value="5">5</option>
+    </select>
+  </div>
+
+  <!-- messages -->
+  <div class="messages" id="messages">
+    <div class="empty-state" id="empty-state">
+      <div class="big-icon">⬡</div>
+      <p>Ask anything about the DataTalks.Club courses — ML, DE, MLOps, or LLM Zoomcamp.</p>
+      <div class="pill-group">
+        <button class="suggestion-pill" onclick="useSuggestion(this)">How do I install Docker for the DE course?</button>
+        <button class="suggestion-pill" onclick="useSuggestion(this)">What is MLflow used for?</button>
+        <button class="suggestion-pill" onclick="useSuggestion(this)">How do I submit homework?</button>
+        <button class="suggestion-pill" onclick="useSuggestion(this)">What's the difference between RAG and fine-tuning?</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- input -->
+  <div class="input-area">
+    <div class="input-row">
+      <textarea
+        id="query-input"
+        placeholder="Ask a question about the courses…"
+        rows="1"
+        onkeydown="handleKey(event)"
+        oninput="autoResize(this)"
+      ></textarea>
+      <button class="send-btn" id="send-btn" onclick="sendMessage()" title="Send">
+        <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 9L3 3l2 6-2 6 12-6z" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+    <div class="input-hint">
+      <span><kbd>Enter</kbd> send · <kbd>Shift+Enter</kbd> newline</span>
+      <span id="char-count" style="color: var(--muted)"></span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // ── Config ────────────────────────────────────────────────────────
+  // Point this at your running RAG pipeline server.
+  // Expected: POST /api/query  → { answer, doc_ids, latency_ms }
+  const API_BASE = window.location.origin;
+
+  // ── State ─────────────────────────────────────────────────────────
+  let isLoading = false;
+
+  // ── Helpers ───────────────────────────────────────────────────────
+  function autoResize(el) {
+    el.style.height = 'auto';
+    el.style.height = Math.min(el.scrollHeight, 160) + 'px';
+    document.getElementById('char-count').textContent = el.value.length > 0 ? `${el.value.length} chars` : '';
+  }
+
+  function handleKey(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  }
+
+  function useSuggestion(el) {
+    const input = document.getElementById('query-input');
+    input.value = el.textContent.trim();
+    autoResize(input);
+    input.focus();
+  }
+
+  function scrollToBottom() {
+    const msgs = document.getElementById('messages');
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function hideEmptyState() {
+    const es = document.getElementById('empty-state');
+    if (es) es.remove();
+  }
+
+  function appendMessage(role, text, docIds = [], latencyMs = null) {
+    hideEmptyState();
+    const container = document.getElementById('messages');
+
+    const msg = document.createElement('div');
+    msg.className = `msg ${role}`;
+
+    const roleName = role === 'user' ? 'you' : role === 'error' ? 'error' : 'assistant';
+    const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    let metaExtras = '';
+    if (latencyMs !== null && role === 'assistant') {
+      metaExtras = `<span style="color:var(--muted)">${latencyMs}ms</span>`;
+    }
+
+    msg.innerHTML = `
+      <div class="msg-meta">
+        <span class="tag">${roleName}</span>
+        <span>${timestamp}</span>
+        ${metaExtras}
+      </div>
+      <div class="msg-body">${escapeHtml(text)}</div>
+      ${docIds.length ? `<div class="doc-sources">${docIds.map(id => `<span class="doc-tag">${escapeHtml(id)}</span>`).join('')}</div>` : ''}
+    `;
+
+    container.appendChild(msg);
+    scrollToBottom();
+    return msg;
+  }
+
+  function appendThinking() {
+    hideEmptyState();
+    const container = document.getElementById('messages');
+    const el = document.createElement('div');
+    el.className = 'thinking';
+    el.id = 'thinking-indicator';
+    el.innerHTML = `
+      <div class="dots"><span></span><span></span><span></span></div>
+      <span>retrieving context…</span>
+    `;
+    container.appendChild(el);
+    scrollToBottom();
+    return el;
+  }
+
+  function removeThinking() {
+    const el = document.getElementById('thinking-indicator');
+    if (el) el.remove();
+  }
+
+  function escapeHtml(str) {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  // ── API call ──────────────────────────────────────────────────────
+  async function queryRAG(query, course, style, topK) {
+    const start = performance.now();
+    const res = await fetch(`${API_BASE}/api/query`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        query,
+        course: course || null,
+        prompt_style: style,
+        top_k: parseInt(topK),
+        rerank: true
+      })
+    });
+
+    if (!res.ok) {
+      const err = await res.text().catch(() => `HTTP ${res.status}`);
+      throw new Error(err || `HTTP ${res.status}`);
+    }
+
+    const data = await res.json();
+    const clientLatency = Math.round(performance.now() - start);
+
+    return {
+      answer: data.answer || data.generated_answer || '(no answer returned)',
+      docIds: data.doc_ids || data.retrieved_doc_ids || [],
+      latencyMs: data.latency_ms || clientLatency
+    };
+  }
+
+  // ── Main send ─────────────────────────────────────────────────────
+  async function sendMessage() {
+    if (isLoading) return;
+
+    const input = document.getElementById('query-input');
+    const query = input.value.trim();
+    if (!query) return;
+
+    const course = document.getElementById('course-select').value;
+    const style  = document.getElementById('style-select').value;
+    const topK   = document.getElementById('topk-select').value;
+
+    // clear input
+    input.value = '';
+    autoResize(input);
+    document.getElementById('char-count').textContent = '';
+
+    // disable UI
+    isLoading = true;
+    document.getElementById('send-btn').disabled = true;
+
+    appendMessage('user', query);
+    const thinking = appendThinking();
+
+    try {
+      const { answer, docIds, latencyMs } = await queryRAG(query, course, style, topK);
+      removeThinking();
+      appendMessage('assistant', answer, docIds, latencyMs);
+    } catch (err) {
+      removeThinking();
+      appendMessage('error', `Request failed: ${err.message}\n\nMake sure the RAG pipeline server is running at ${API_BASE} and the /api/query endpoint is available.`);
+    } finally {
+      isLoading = false;
+      document.getElementById('send-btn').disabled = false;
+      input.focus();
+    }
+  }
+</script>
+</body>
+</html>

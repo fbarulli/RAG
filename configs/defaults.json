@@ -30,5 +30,6 @@
   },
   "production_config": "entity_boosted",
   "production_model": "BAAI/bge-base-en-v1.5",
-  "llm_model": "nvidia_nim/meta/llama-3.1-70b-instruct"
+  "llm_model": "nvidia_nim/meta/llama-3.1-70b-instruct",
+  "static_llm_model": "nvidia_nim/meta/llama-3.1-8b-instruct"
 }

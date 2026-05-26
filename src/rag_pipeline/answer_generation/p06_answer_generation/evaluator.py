@@ -7,7 +7,7 @@ from rag_pipeline.logging import get_logger
 from rag_pipeline.core.paths import Paths
 from rag_pipeline.core.llm_client import call_llm, LLMResult
 logger = get_logger(__name__)
-JUDGE_LLM = Paths.get('judge_llm', 'nvidia_nim/meta/llama-3.1-70b-instruct')
+JUDGE_LLM = json.load(open(Paths.base() / 'configs' / 'defaults.json'))['llm_model']
 JUDGE_MAX_TOKENS = 150
 JUDGE_TEMPERATURE = 0.0
 JUDGE_PROMPT = 'You are evaluating a Q&A system for a course FAQ.\n\nUSER QUESTION: {query}\n\nREFERENCE ANSWER (ground truth):\n{reference}\n\nGENERATED ANSWER (to evaluate):\n{generated}\n\nRate the generated answer on two metrics (0.0 to 1.0):\n\n1. faithfulness: Does the generated answer address the user\'s question?\n   - 1.0 = Fully addresses the question\n   - 0.5 = Partially addresses the question\n   - 0.0 = Does not address the question at all\n\n2. factual_correctness: Does the generated answer match the reference answer\'s facts?\n   - 1.0 = All facts are correct and match reference\n   - 0.5 = Some facts match, some are incorrect/missing\n   - 0.0 = No facts match or contradicts reference\n\nOutput ONLY JSON: {{"faithfulness": 0.0, "factual_correctness": 0.0}}'
