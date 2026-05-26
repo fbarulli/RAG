@@ -1,44 +1,30 @@
-"""
-Public Functions for Topic Clustering:
+import sys
+import logging
+from pathlib import Path
+from typing import List, Dict, Any
 
-def cluster_topics(questions: list[str], embedding_model_name: str, min_topic_size: int = 5, min_samples: int = 1, stopwords: list[str] | None = None) -> tuple[BERTopic, list[int], list[float], np.ndarray]:
-    Run BERTopic with explicit HDBSCAN configuration.
-    I/O: questions (list[str]), embedding_model_name (str), min_topic_size (int), min_samples (int), stopwords (list[str] | None) -> tuple[BERTopic, list[int], list[float], np.ndarray]
+# Setup logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(levelname)s | %(message)s')
+logger = logging.getLogger(__name__)
 
-_topic_cluster.py
-=================
-Core clustering logic for topic modeling.
-Wraps BERTopic and HDBSCAN with configurable, permissive defaults to minimize outliers.
-"""
-import numpy as np
-from bertopic import BERTopic
-from hdbscan import HDBSCAN
-from sentence_transformers import SentenceTransformer
-from sklearn.feature_extraction.text import CountVectorizer
-from rag_pipeline.logging import get_logger
-logger = get_logger(__name__)
+# Add project root to path
+project_root = Path(__file__).resolve().parents[5]
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
 
-def cluster_topics(questions: list[str], embedding_model_name: str, min_topic_size: int=5, min_samples: int=1, stopwords: list[str] | None=None) -> tuple[BERTopic, list[int], list[float], np.ndarray]:
-    """
-    Run BERTopic with explicit HDBSCAN configuration.
+from src.rag_pipeline.eda.topics.config import TopicsConfig
+
+
+class TopicCluster:
+    """Handles embedding + clustering logic."""
     
-    Args:
-        questions: List of FAQ question strings.
-        embedding_model_name: SentenceTransformer model name/path.
-        min_topic_size: HDBSCAN min_cluster_size parameter.
-        min_samples: HDBSCAN min_samples parameter (lower = fewer outliers).
-        
-    Returns:
-        Tuple of (topic_model, topic_labels, probabilities, embeddings)
-    """
-    logger.info(f'Loading embedding model: {embedding_model_name}')
-    logger.info(f'[cluster_topics] stopwords received: {(len(stopwords) if stopwords else 0)}')
-    embedder = SentenceTransformer(embedding_model_name, trust_remote_code=True)
-    logger.info('Encoding questions...')
-    embeddings = embedder.encode(questions, convert_to_numpy=True)
-    hdbscan_model = HDBSCAN(min_cluster_size=min_topic_size, min_samples=min_samples, prediction_data=True)
-    vectorizer_model = CountVectorizer(stop_words=stopwords or 'english', ngram_range=(1, 2))
-    topic_model = BERTopic(embedding_model=embedder, hdbscan_model=hdbscan_model, vectorizer_model=vectorizer_model, verbose=True)
-    logger.info(f'Clustering topics (min_cluster_size={min_topic_size}, min_samples={min_samples})...')
-    topics, probs = topic_model.fit_transform(questions, embeddings=embeddings)
-    return (topic_model, topics, probs, embeddings)
+    def __init__(self, model_name: str):
+        self.config = TopicsConfig
+        self.model_name = model_name
+        logger.info(f"TopicCluster initialized with model: {model_name}")
+    
+    def run_clustering(self, documents: List[Dict[str, Any]], force_recluster: bool = False) -> List[Dict[str, Any]]:
+        """Run clustering on documents."""
+        logger.info(f"Running clustering on {len(documents)} documents using {self.model_name}")
+        # TODO: implement actual clustering later
+        return documents

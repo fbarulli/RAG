@@ -1,70 +1,60 @@
-"""
-Merge per-model topic assignments and apply final classification rules.
-"""
+import sys
+import logging
 import json
 from pathlib import Path
 from collections import Counter
-from rag_pipeline.logging import get_logger
-from .topic_rules import ClassificationRules
+from typing import Dict, Any
 
-logger = get_logger(__name__)
+# Setup logging + project root
+logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(levelname)s | %(message)s')
+logger = logging.getLogger(__name__)
 
-EXP_DIR = Path(__file__).parent / "experiments"
-OUTPUT_PATH = EXP_DIR / "topic_assignments_all.json"
+project_root = Path(__file__).resolve().parents[5]
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
 
-
-def merge(exp_dir: Path = EXP_DIR, output_path: Path = OUTPUT_PATH) -> None:
-    rules = ClassificationRules.load(exp_dir.parent / "rules")
-
-    merged = {'models': [], 'results': {}}
-
-    files = sorted(
-        f for f in exp_dir.glob("topic_assignments_*.json")
-        if f.name != "topic_assignments_all.json" and "_validated" not in f.name
-    )
-
-    for f in files:
-        with open(f) as fh:
-            data = json.load(fh)
-
-        model = data.get('metadata', {}).get('model', f.stem)
-        reclassified = 0
-
-        for a in data.get('assignments', []):
-            original = a.get('ner_category', 'OTHER')
-            updated = rules.reclassify(original, a.get('question', ''))
-            if updated != original:
-                a['ner_category'] = updated
-                reclassified += 1
-
-        logger.info(f"[merge] {model}: {len(data.get('assignments', []))} assignments, {reclassified} reclassified")
-
-        merged['models'].append(model)
-        merged['results'][model] = data   # Keep full original data per model
-
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(output_path, 'w') as fh:
-        json.dump(merged, fh, indent=2)
-
-    logger.info(f"Saved merged file with {len(merged['models'])} models")
-
-    # Summary
-    print(f"\n{'='*70}")
-    print(f"Merged {len(merged['models'])} models → {output_path.name}")
-    print(f"{'='*70}")
-
-    for model in merged['models']:
-        assignments = merged['results'][model].get('assignments', [])
-        n = len(assignments)
-        if n == 0: continue
-        cats = Counter(a.get('ner_category', 'MISSING') for a in assignments)
-        outliers = sum(1 for a in assignments if a.get('topic') == -1)
-
-        print(f"\n {model}  ({n} questions)")
-        print(f"   outliers : {outliers} ({outliers / n:.1%})")
-        for cat, count in cats.most_common():
-            print(f"   {cat:12s} {count:5d} ({count / n:.1%})")
+from src.rag_pipeline.eda.topics.config import TopicsConfig
+from src.rag_pipeline.core.paths import Paths
 
 
-if __name__ == "__main__":
-    merge()
+class TopicMerger:
+    """Merges per-model assignments and applies final rules."""
+    
+    def __init__(self):
+        self.config = TopicsConfig
+        logger.info("TopicMerger initialized")
+    
+    def merge(self, force: bool = False) -> Dict[str, Any]:
+        """Merge all model results into one file."""
+        logger.info("Starting merge process...")
+        
+        exp_dir = self.config.EXPERIMENTS_DIR
+        output_path = self.config.get_output_path("topic_assignments_all.json")
+        
+        # TODO: Load rules and reclassify (to be implemented next)
+        merged = {
+            "metadata": {"models_merged": []},
+            "results": {}
+        }
+        
+        # Find all per-model files
+        files = sorted(
+            f for f in exp_dir.glob("topic_assignments_*.json")
+            if f.name != "topic_assignments_all.json"
+        )
+        
+        logger.info(f"Found {len(files)} model assignment files")
+        
+        for f in files:
+            with open(f, encoding="utf-8") as fh:
+                data = json.load(fh)
+            model = data.get('metadata', {}).get('model', f.stem)
+            merged["metadata"]["models_merged"].append(model)
+            merged["results"][model] = data
+        
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(output_path, 'w', encoding="utf-8") as fh:
+            json.dump(merged, fh, indent=2)
+        
+        logger.info(f"Merged {len(files)} models → {output_path}")
+        return merged

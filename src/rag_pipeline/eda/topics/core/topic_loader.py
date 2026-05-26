@@ -1,92 +1,54 @@
-"""
-
-
-Public Functions for Topic Document Loading:
-
-def load_documents(path: Path) -> list[dict]:
-    Load and validate documents from a JSONL file.
-    I/O: path (Path) -> list[dict]
-
-def group_by_course(docs: list[dict]) -> dict[str, list[dict]]:
-    Group documents by course for stratified analysis.
-    I/O: docs (list[dict]) -> dict[str, list[dict]]
-
-
-
-
-
-_topic_loader.py
-================
-Load and validate FAQ documents from JSONL for topic modeling.
-
-Single responsibility: read input, validate schema, return clean list.
-No topic logic, no embedding logic, no output logic.
-
-Functions:
-    load_documents(path: Path) -> list[dict]
-"""
+import sys
+import logging
 import json
-from collections import defaultdict
 from pathlib import Path
-from rag_pipeline.logging import get_logger
-logger = get_logger(__name__)
-REQUIRED_FIELDS = {'id', 'question', 'course'}
+from typing import List, Dict, Any
 
-def load_documents(path: Path) -> list[dict]:
-    """
-    Load and validate documents from a JSONL file.
-    
-    Args:
-        path: Path to input JSONL file
-        
-    Returns:
-        List of validated document dicts with required fields
-        
-    Raises:
-        FileNotFoundError: If input path does not exist
-        ValueError: If no valid documents could be loaded
-    """
-    if not path.exists():
-        raise FileNotFoundError(f'Input file not found: {path}')
-    docs = []
-    skipped = 0
-    with open(path, encoding='utf-8') as f:
-        for line_num, line in enumerate(f, 1):
-            if not line.strip():
-                continue
-            try:
-                doc = json.loads(line)
-            except json.JSONDecodeError as e:
-                logger.warning(f'Line {line_num}: JSON parse error: {e}')
-                skipped += 1
-                continue
-            missing = REQUIRED_FIELDS - doc.keys()
-            if missing:
-                doc_id = doc.get('id', f'line_{line_num}')
-                logger.warning(f'Line {line_num} [{doc_id}]: Missing required fields {missing}')
-                skipped += 1
-                continue
-            if not doc['question'].strip():
-                logger.warning(f"Line {line_num} [{doc['id']}]: Empty question field")
-                skipped += 1
-                continue
-            docs.append(doc)
-    if not docs:
-        raise ValueError(f'No valid documents loaded from {path}')
-    logger.info(f'Loaded {len(docs)} valid documents ({skipped} skipped) from {path}')
-    return docs
+# Setup logging + project root
+logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(levelname)s | %(message)s')
+logger = logging.getLogger(__name__)
 
-def group_by_course(docs: list[dict]) -> dict[str, list[dict]]:
-    """
-    Group documents by course for stratified analysis.
+project_root = Path(__file__).resolve().parents[5]
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+from src.rag_pipeline.eda.topics.config import TopicsConfig
+from src.rag_pipeline.core.paths import Paths
+
+
+class TopicLoader:
+    """Loads raw data and previous topic assignments."""
     
-    Args:
-        docs: List of validated document dicts
-        
-    Returns:
-        Dict mapping course name -> list of docs in that course
-    """
-    by_course = defaultdict(list)
-    for doc in docs:
-        by_course[doc['course']].append(doc)
-    return dict(by_course)
+    def __init__(self):
+        self.config = TopicsConfig
+        logger.info("TopicLoader initialized")
+    
+    def load_clean_data(self) -> List[Dict[str, Any]]:
+        """Load the main clean dataset using central Paths."""
+        logger.info("Loading clean data from central Paths...")
+        try:
+            data_path = Paths.input_file("eda")
+            logger.info(f"Loading from: {data_path}")
+            
+            if not data_path.exists():
+                logger.error(f"File not found: {data_path}")
+                return []
+            
+            with open(data_path, encoding="utf-8") as f:
+                data = [json.loads(line) for line in f if line.strip()]
+            
+            logger.info(f"Successfully loaded {len(data)} documents")
+            return data
+        except Exception as e:
+            logger.error("Failed to load clean data", exc_info=True)
+            return []
+    
+    def load_previous_assignments(self, model_name: str) -> Dict[str, Any]:
+        """Load existing topic assignments for a model."""
+        logger.info(f"Loading previous assignments for {model_name}")
+        path = self.config.EXPERIMENTS_DIR / f"topic_assignments_{model_name.replace('/', '_').replace('-', '_')}.json"
+        if path.exists():
+            with open(path, encoding="utf-8") as f:
+                return json.load(f)
+        logger.warning(f"No previous assignments found for {model_name}")
+        return {}

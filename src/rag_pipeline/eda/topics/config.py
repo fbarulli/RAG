@@ -1,7 +1,13 @@
 from pathlib import Path
 from typing import List, Dict
+import sys
 
-from ....core.paths import Paths
+# Ensure project root is in path
+project_root = Path(__file__).resolve().parents[4]
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+from src.rag_pipeline.core.paths import Paths
 import json
 
 
@@ -22,18 +28,15 @@ class TopicsConfig:
             data = json.load(f)
         return [m for m in data.get("models", []) if m.get("enabled", False)]
     
-    # Dynamically loaded enabled models, sorted by tier preference
     @classmethod
     def get_embedding_models(cls) -> List[str]:
         models = cls._load_models()
-        # Sort: balanced -> fast -> experimental
         tier_order = {"balanced": 0, "fast": 1, "experimental": 2}
         sorted_models = sorted(models, key=lambda m: tier_order.get(m.get("tier"), 99))
         return [m["name"] for m in sorted_models]
     
-    DEFAULT_MODEL = "BAAI/bge-base-en-v1.5"   # still keep winner as default for safety
+    DEFAULT_MODEL = "BAAI/bge-base-en-v1.5"
     
-    # Thresholds
     CLUSTER_CONFIDENCE_THRESHOLD = 0.75
     RULE_OVERRIDE_THRESHOLD = 0.40
     
