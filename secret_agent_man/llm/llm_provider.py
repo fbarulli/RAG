@@ -6,8 +6,8 @@ from __future__ import annotations
 import time
 from typing import Optional, TYPE_CHECKING
 
-from rag_pipeline.core.schemas import MultiLLMResult
-from rag_pipeline.logging import get_logger
+from secret_agent_man.llm.schemas import MultiLLMResult
+from secret_agent_man.logging import get_logger
 
 if TYPE_CHECKING:
     from litellm import Router

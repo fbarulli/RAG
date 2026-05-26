@@ -1,0 +1,37 @@
+[
+  {
+    "name": "nvidia",
+    "model": "nvidia_nim/meta/llama-3.1-70b-instruct",
+    "env_key": "NVIDIA_API_KEY",
+    "rpm": 10,
+    "tpm": 10000
+  },
+  {
+    "name": "groq",
+    "model": "groq/llama-3.3-70b-versatile",
+    "env_key": "GROQ_API_KEY",
+    "rpm": 30,
+    "tpm": 12000
+  },
+  {
+    "name": "groq_fast",
+    "model": "groq/llama-3.1-8b-instant",
+    "env_key": "GROQ_API_KEY",
+    "rpm": 30,
+    "tpm": 20000
+  },
+  {
+    "name": "openrouter",
+    "model": "openrouter/meta-llama/llama-3.1-70b-instruct",
+    "env_key": "OPENROUTER_API_KEY",
+    "rpm": 20,
+    "tpm": 20000
+  },
+  {
+    "name": "huggingface",
+    "model": "huggingface/meta-llama/Llama-3.1-70B-Instruct",
+    "env_key": "HUGGINGFACE_API_KEY",
+    "rpm": 10,
+    "tpm": 10000
+  }
+]

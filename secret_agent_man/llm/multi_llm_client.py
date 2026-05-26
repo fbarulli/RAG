@@ -5,10 +5,10 @@ from __future__ import annotations
 
 from typing import Optional
 
-from rag_pipeline.core.schemas import ProviderConfig, MultiLLMResult
-from rag_pipeline.core.llm_config import build_router, DEFAULT_CASCADE
-from rag_pipeline.core.llm_provider import call_router
-from rag_pipeline.logging import get_logger
+from secret_agent_man.llm.schemas import ProviderConfig, MultiLLMResult
+from secret_agent_man.llm.llm_config import build_router, DEFAULT_CASCADE
+from secret_agent_man.llm.llm_provider import call_router
+from secret_agent_man.logging import get_logger
 
 logger = get_logger(__name__)
 

@@ -8,8 +8,8 @@ import os
 from pathlib import Path
 from typing import Optional
 
-from rag_pipeline.core.schemas import ProviderConfig
-from rag_pipeline.logging import get_logger
+from secret_agent_man.llm.schemas import ProviderConfig
+from secret_agent_man.logging import get_logger
 
 logger = get_logger(__name__)
 

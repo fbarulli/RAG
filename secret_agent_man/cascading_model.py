@@ -21,7 +21,8 @@ from __future__ import annotations
 from typing import Any, Optional
 
 from rag_pipeline.core.llm_config import DEFAULT_CASCADE
-from rag_pipeline.schemas import ProviderConfig, MultiLLMResult
+from rag_pipeline.core.schemas import ProviderConfig, MultiLLMResult
+from smolagents import LiteLLMModel
 from smolagents.models import ChatMessage, MessageRole, TokenUsage
 
 from rag_pipeline.core.multi_llm_client import (
@@ -31,7 +32,7 @@ from rag_pipeline.core.multi_llm_client import (
     DEFAULT_CASCADE,
     ProviderConfig,
 )
-from rag_pipeline.logging import get_logger
+from secret_agent_man.llm.logging import get_logger
 
 logger = get_logger(__name__)
 

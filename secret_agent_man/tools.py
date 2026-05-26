@@ -14,14 +14,40 @@ import re
 from typing import TYPE_CHECKING
 
 from smolagents import Tool
-from rag_pipeline.logging import get_logger
+from secret_agent_man.llm.logging import get_logger
 
 if TYPE_CHECKING:
     from secret_agent_man.cascading_model import CascadingModel
 
 logger = get_logger(__name__)
 
+import subprocess
 
+class RunCommandTool(Tool):
+    name = "run_command"
+    description = (
+        "Runs a shell command on the local Linux terminal and returns stdout + stderr. "
+        "Use for filesystem operations, git, or any CLI task. "
+        "Input: command (str) — the shell command to execute. "
+        "Returns: combined stdout and stderr as a string."
+    )
+    inputs = {
+        "command": {
+            "type": "string",
+            "description": "The shell command to run.",
+        }
+    }
+    output_type = "string"
+
+    def forward(self, command: str) -> str:
+        result = subprocess.run(
+            command, shell=True, capture_output=True, text=True
+        )
+        output = result.stdout + result.stderr
+        logger.info(f"RunCommandTool: cmd='{command}' rc={result.returncode}")
+        return output.strip() or f"(exit code {result.returncode})"
+    
+    
 class SecondOpinionTool(Tool):
     """
     Ask a different LLM provider for a second opinion on the same prompt.

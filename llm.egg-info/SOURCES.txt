@@ -23,8 +23,11 @@ src/rag_pipeline/cleaning/load_llm_queries.py
 src/rag_pipeline/cleaning/parse.py
 src/rag_pipeline/cleaning/stratified_test_split.py
 src/rag_pipeline/core/__init__.py
+src/rag_pipeline/core/cooldown.py
 src/rag_pipeline/core/gem_client.py
 src/rag_pipeline/core/llm_client.py
+src/rag_pipeline/core/llm_config.py
+src/rag_pipeline/core/llm_provider.py
 src/rag_pipeline/core/logging.py
 src/rag_pipeline/core/multi_llm_client.py
 src/rag_pipeline/core/paths.py
@@ -102,7 +105,5 @@ src/rag_pipeline/ingestion/reranking/reranking_loss.py
 src/rag_pipeline/ingestion/reranking/reranking_training.py
 src/rag_pipeline/ingestion/reranking/reranking_training_ray.py
 src/rag_pipeline/ingestion/reranking/reranking_triples.py
-src/rag_pipeline/service/__init__.py
-src/rag_pipeline/service/cascading_model.py
 tests/test_cleaning.py
 tests/test_dedup_logic.py
