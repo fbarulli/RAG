@@ -1,3 +1,147 @@
+# RAG-a-muffin Ablation Handoff
+_Last updated: 2026-05-27_
+
+---
+
+## Current state
+
+### Ablation results so far (config: `entity_boosted`, 453 queries, all query types)
+
+| Experiment | H@1 | MRR | ΔH@1 | Notes |
+|---|---|---|---|---|
+| baseline | 76.2% | 0.839 | — | full pipeline |
+| no_entity | 80.3% | 0.872 | +4.1pp | removing entity boost helps |
+| no_category | 88.6% | 0.923 | +12.4pp | removing category helps significantly |
+| no_topics | 88.6% | 0.923 | +12.4pp | same as no_category |
+| skip_ner | TBD | — | — | not yet run successfully |
+| skip_cluster | TBD | — | — | rerun ablation, in progress |
+| skip_rules | TBD | — | — | not yet run |
+| empty_patterns | TBD | — | — | not yet run |
+
+**Key finding:** The `entity_boosted` config's `should` clause on `ner_primary_entity` actively hurts
+retrieval. 335/453 queries have an entity tag; the boost is firing but misfiring enough to cost ~12pp.
+Removing NER enrichment entirely likely equals or beats the enriched baseline.
+
+---
+
+## Bugs fixed this session
+
+| File | Fix |
+|---|---|
+| `topic_modeling.py` | `subtopic_min_size` not unpacked from defaults in `main()` |
+| `topic_modeling.py` | `subtopic_min_size` missing from `process_model()` signature and call site |
+| `topic_modeling.py` | `run_clustering_raw` now returns `embeddings` (4-tuple) |
+| `topic_modeling.py` | `_apply_subtopics` signature fixed — was passing `topic_model/questions/topics`, now passes `assignments/questions/embeddings/subtopic_threshold/subtopic_min_size` |
+| `topic_cluster.py` | `run_clustering_raw` encodes embeddings explicitly and returns them |
+| `topic_subtopics.py` | `a.topic` → `a['topic']` (dicts passed, not dataclasses) |
+| `ablation/cli.py` | Added 5 missing `add_argument` calls: `--null-topics`, `--skip-ner`, `--empty-entity-patterns`, `--skip-cluster`, `--skip-rules` |
+
+---
+
+## Corpus sampler results (`entity_boosted`, `grounded_analyst` queries)
+
+Performance is good enough at reduced corpus sizes — exact numbers in:
+`ablation/results/corpus_sampler/corpus_sampler__entity_boosted__BAAI_bge-base-en-v1.5.json`
+
+Note: `original` query type gives H@1≈fraction (trivial — source doc is in corpus),
+so always benchmark corpus size against `grounded_analyst` or `creative_student`.
+
+---
+
+## Outstanding work
+
+### 1. Finish remaining ablations
+```bash
+# skip_cluster is in progress — if it crashed, retry:
+uv run python -m ablation run --name skip_cluster     --skip-cluster        --configs entity_boosted
+uv run python -m ablation run --name skip_rules       --skip-rules          --configs entity_boosted
+uv run python -m ablation run --name empty_patterns   --empty-entity-patterns --configs entity_boosted
+```
+
+### 2. Run ablation report
+```bash
+uv run python -m ablation report
+```
+
+### 3. Re-run ablations against generated queries only
+The current ablation results mix all query types. To isolate signal:
+```bash
+uv run python -m ablation run --name baseline_gen     --configs entity_boosted  # then filter in report
+```
+Or add `--query-type grounded_analyst creative_student` flag to the ablation benchmark call
+(not yet implemented — would need to thread through `experiment.py` → `p03_benchmark` call).
+
+### 4. Investigate entity_boosted config
+The `should` clause boosts on `ner_primary_entity` match — but this is hurting, not helping.
+Options:
+- Tune boost weight (currently implicit Qdrant default)
+- Switch to a `must_not` or remove entity from `should` entirely
+- Test a config variant that only uses entity for tie-breaking
+
+### 5. Commit current state
+Key files modified this session, none committed:
+```
+src/rag_pipeline/eda/topics/core/topic_modeling.py
+src/rag_pipeline/eda/topics/core/topic_cluster.py
+src/rag_pipeline/eda/topics/core/topic_subtopics.py
+ablation/cli.py
+ablation/corpus_sampler.py   ← new file
+```
+
+---
+
+## Architecture notes
+
+### Why entity_boosted hurts
+- `run_entity_boosted_retrieval` adds a Qdrant `should` clause matching `ner_primary_entity` on the payload
+- NER tags on test queries come from `topic_assignments_all.json` keyed by `expected_doc_id`
+- 335/453 queries have a non-null entity tag → boost fires
+- NER classification errors cause the boost to favor wrong documents
+- `no_category` and `no_topics` both score identically (+12.4pp) suggesting the effect is
+  not from category/topic directly but from a correlated change in the assignments file
+
+### Topic map lookup chain
+```
+test.jsonl → expected_doc_id
+           → benchmark_loader.load_test_set() maps to expected_id
+           → benchmark_config.get_topic_map() → load_topic_assignments()
+           → keyed by corpus doc ID in topic_assignments_all.json
+           → ner_category, ner_primary_entity passed to retriever
+```
+453/470 test queries resolve to a topic map entry (17 missing = docs not in assignments).
+
+### Ablation patch flow
+```
+ablation run → Patch.apply_to_assignments() patches topic_assignments_all.json in-place
+             → p03_benchmark reads patched file via Paths.topic_assignments()
+             → finally block restores original from git
+```
+Rerun ablations (skip_cluster, skip_rules, empty_patterns) also re-run topic modeling
+before ingesting — takes ~5 min each.
+
+---
+
+## Commands reference
+
+```bash
+# Run ablation
+uv run python -m ablation run --name <name> [--null-entity] [--null-category] \
+  [--null-topics] [--skip-ner] [--skip-cluster] [--skip-rules] \
+  [--empty-entity-patterns] --configs entity_boosted
+
+# Compare two experiments
+uv run python -m ablation compare baseline__entity_boosted no_entity__entity_boosted
+uv run python -m ablation compare baseline__entity_boosted no_entity__entity_boosted --show losses
+
+# Summary table
+uv run python -m ablation report
+
+# Corpus size ablation (grounded_analyst queries only)
+uv run python -m ablation.corpus_sampler --query-type grounded_analyst
+uv run python -m ablation.corpus_sampler --fractions 1.0 0.8 0.6 0.4 0.2 --query-type creative_student
+```
+
+
 ---
 
 ## How to run the pipeline

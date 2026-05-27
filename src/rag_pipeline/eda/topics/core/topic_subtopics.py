@@ -50,7 +50,7 @@ def build_subtopics(assignments: list, questions: list[str], embeddings: np.ndar
     """
     if not isinstance(embeddings, np.ndarray) or embeddings.ndim != 2:
         raise ValueError(f'embeddings must be a 2-D np.ndarray, got {type(embeddings).__name__}' + (f' with ndim={embeddings.ndim}' if isinstance(embeddings, np.ndarray) else ''))
-    topic_sizes: Counter[int] = Counter((a.topic for a in assignments))
+    topic_sizes: Counter[int] = Counter((a['topic'] if isinstance(a, dict) else a.topic for a in assignments))
     large_topics = {t for t, size in topic_sizes.items() if t != -1 and size > subtopic_threshold}
     if not large_topics:
         logger.info('No topics exceed subtopic threshold; skipping subtopic generation')
@@ -62,7 +62,7 @@ def build_subtopics(assignments: list, questions: list[str], embeddings: np.ndar
     subtopic_cache: dict[str, SubtopicRecord] = {}
     for i, parent_topic in enumerate(sorted(large_topics), 1):
         logger.info(f'Subtopic generation [{i}/{len(large_topics)}] topic {parent_topic}')
-        parent_indices = [idx for idx, a in enumerate(assignments) if a.topic == parent_topic]
+        parent_indices = [idx for idx, a in enumerate(assignments) if (a['topic'] if isinstance(a, dict) else a.topic) == parent_topic]
         if not parent_indices:
             continue
         parent_questions = [questions[idx] for idx in parent_indices]

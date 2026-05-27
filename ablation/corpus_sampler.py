@@ -77,7 +77,7 @@ def _run(cmd: str, env: dict | None = None) -> None:
         raise RuntimeError(f"Command failed (exit {result.returncode}): {cmd}")
 
 
-def _parse_benchmark_output(output_dir: Path, config: str) -> tuple[float | None, float | None]:
+def _parse_benchmark_output(output_dir: Path, config: str, model: str) -> tuple[float | None, float | None]:
     """Find H@1 and MRR from benchmark_results.json written by save_benchmark_results."""
     candidates = list(output_dir.glob("*.json")) + list(output_dir.glob("**/*.json"))
     for path in sorted(candidates, key=lambda p: p.stat().st_mtime, reverse=True):
@@ -87,7 +87,7 @@ def _parse_benchmark_output(output_dir: Path, config: str) -> tuple[float | None
             continue
         if isinstance(data, list):
             for row in data:
-                if row.get("config_name") == config:
+                if row.get("config_name") == config and row.get("model_name") == model:
                     h1  = row.get("hit_rate_1")
                     mrr = row.get("mrr")
                     if h1 is not None:
@@ -108,6 +108,7 @@ def run_fraction(
     tmp_dir: Path,
     host: str,
     port: int,
+    query_type: str = "grounded_analyst",
 ) -> dict:
     sampled = _stratified_sample(docs, fraction, seed)
     n = len(sampled)
@@ -137,7 +138,7 @@ def run_fraction(
         f'uv run python -m rag_pipeline.ingestion.p03_benchmark '
         f'--model "{model}" '
         f'--configs {config} '
-        f'--query-type original '
+        f'--query-type {query_type} '
         f'--output-dir "{bench_dir}" '
         f'--no-resume '
         f'--reset '
@@ -147,7 +148,7 @@ def run_fraction(
     )
 
     # 3. Parse results
-    h1, mrr = _parse_benchmark_output(bench_dir, config)
+    h1, mrr = _parse_benchmark_output(bench_dir, config, model)
     if h1 is None:
         logger.warning("Could not parse H@1 from benchmark output in %s", bench_dir)
 
@@ -158,9 +159,9 @@ def run_fraction(
 # Report
 # ---------------------------------------------------------------------------
 
-def _print_report(rows: list[dict], config: str) -> None:
+def _print_report(rows: list[dict], config: str, query_type: str = "original") -> None:
     print(f"\n{'=' * 62}")
-    print(f"  Corpus Size Ablation | config={config} | query_type=original")
+    print(f"  Corpus Size Ablation | config={config} | query_type={query_type}")
     print(f"{'=' * 62}")
     print(f"  {'Fraction':>8}  {'N docs':>7}  {'H@1':>8}  {'MRR':>8}  {'ΔH@1':>8}")
     print(f"  {'-' * 58}")
@@ -208,6 +209,8 @@ def main() -> None:
         "--input", type=Path, default=Paths.input_file("eda"),
         help="Corpus JSONL (default: data/processed/clean.jsonl)",
     )
+    parser.add_argument("--query-type", default="grounded_analyst",
+        help="Query type to benchmark (default: grounded_analyst)")
     parser.add_argument("--host", default="localhost")
     parser.add_argument("--port", type=int, default=6333)
     args = parser.parse_args()
@@ -234,6 +237,7 @@ def main() -> None:
                     model=args.model,
                     config=args.config,
                     seed=args.seed,
+                    query_type=args.query_type,
                     tmp_dir=tmp_dir,
                     host=args.host,
                     port=args.port,
@@ -263,7 +267,7 @@ def main() -> None:
     except Exception as e:
         logger.error("RESTORE FAILED — re-run ingest manually: %s", e)
 
-    _print_report(rows, args.config)
+    _print_report(rows, args.config, args.query_type)
 
     out_path = RESULTS_DIR / f"corpus_sampler__{args.config}__{args.model.replace('/', '_')}.json"
     with open(out_path, "w") as f:

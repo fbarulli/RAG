@@ -166,6 +166,7 @@ def process_model(
     min_topic_size: int,
     min_samples: int,
     subtopic_threshold: int,
+    subtopic_min_size: int,
     input_path: Path,
 ) -> None:
     logger.info("Processing model: %s", model_name)
@@ -211,6 +212,7 @@ def main() -> None:
     min_topic_size = args.min_topic_size or defaults["min_topic_size"]
     min_samples = args.min_samples or defaults["min_samples"]
     subtopic_threshold = args.subtopic_threshold or defaults["subtopic_threshold"]
+    subtopic_min_size = defaults.get("subtopic_min_size", 5)
     input_path = args.input or Paths.input_file("eda")
     base_output = args.output or Paths.topics_default_output()
     embedding_model = args.embedding_model or TopicsConfig.DEFAULT_MODEL
@@ -228,6 +230,7 @@ def main() -> None:
             min_topic_size=min_topic_size,
             min_samples=min_samples,
             subtopic_threshold=subtopic_threshold,
+            subtopic_min_size=subtopic_min_size,
             input_path=input_path,
         )
 
