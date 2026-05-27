@@ -5,7 +5,7 @@
   "experiments_dir": "experiments",
   "clean_jsonl": "data/processed/clean.jsonl",
   "test_jsonl": "data/processed/test.jsonl",
-  "topic_assignments": "src/rag_pipeline/eda/topics/experiments/topic_assignments_all.json",
+  "topic_assignments": "src/rag_pipeline/eda/topics/output/topic_assignments_all.json",
   "retrieval_configs": "configs/retrieval_configs.json",
   "models_config": "configs/models.json",
   "rerankers_config": "configs/rerankers.json",
@@ -25,5 +25,6 @@
   "topics_experiments_dir": "src/rag_pipeline/eda/topics/experiments",
   "topics_output_dir": "src/rag_pipeline/eda/topics/output",
   "topics_rules_dir": "src/rag_pipeline/eda/topics/rules",
-  "entity_patterns": "src/rag_pipeline/eda/topics/entity_patterns.json"
+  "entity_patterns": "src/rag_pipeline/eda/topics/entity_patterns.json",
+  "topics_default_output": "src/rag_pipeline/eda/topics/experiments/topic_assignments.json"
 }

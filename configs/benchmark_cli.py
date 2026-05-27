@@ -108,6 +108,7 @@ def create_benchmark_parser() -> argparse.ArgumentParser:
     parser = create_base_parser(description='Run the retrieval benchmark for embedding/reranker models.')
     parser.add_argument('--model', type=str, required=False, default=None, help="Model to benchmark (matches 'name' in models.json). Omitting this runs all models.")
     parser.add_argument('--configs', type=str, nargs='+', default=None, help='One or more retrieval config keys to run (default: all). Comma-separated or space-separated.')
+    parser.add_argument('--query-type', type=str, nargs='+', default=None, help='Filter test set to specific query types e.g. original grounded_analyst chaos_monkey creative_student')
     return parser
 
 def create_multi_benchmark_parser() -> argparse.ArgumentParser:
@@ -136,4 +137,18 @@ def create_generation_parser() -> argparse.ArgumentParser:
     g.add_argument('--limit', type=int, default=None, help='Limit number of test queries for quick testing')
     g.add_argument('--temperature', type=float, default=None, help='Override temperature (otherwise per-prompt-style)')
     g.add_argument('--max-tokens', type=int, default=None, help='Override max tokens (otherwise per-prompt-style)')
+    return parser
+
+
+def create_topic_modeling_parser() -> argparse.ArgumentParser:
+    """Parser for topic_modeling.py."""
+    parser = argparse.ArgumentParser(description='Run BERTopic on cleaned FAQs')
+    g = parser.add_argument_group('topic modeling')
+    g.add_argument('--input', type=Path, default=None)
+    g.add_argument('--output', type=Path, default=None)
+    g.add_argument('--embedding-model', type=str, default=None)
+    g.add_argument('--min-topic-size', type=int, default=None)
+    g.add_argument('--min-samples', type=int, default=None)
+    g.add_argument('--subtopic-threshold', type=int, default=None)
+    g.add_argument('--run-all', action='store_true', default=False)
     return parser

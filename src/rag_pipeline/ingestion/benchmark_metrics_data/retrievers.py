@@ -102,8 +102,6 @@ def run_entity_boosted_retrieval(client, collection: str, query_vector: list, co
     should_conditions = []
     if ner_primary_entity:
         should_conditions.append(FieldCondition(key='ner_primary_entity', match=MatchValue(value=ner_primary_entity)))
-    if ner_category and ner_category not in ('OTHER', 'UNKNOWN'):
-        should_conditions.append(FieldCondition(key='ner_category', match=MatchValue(value=ner_category)))
     query_filter = Filter(must=must_conditions, should=should_conditions or None) if must_conditions or should_conditions else None  # type: ignore[arg-type]
     result = client.query_points(collection_name=collection, query=query_vector, limit=top_k, query_filter=query_filter, with_payload=True, with_vectors=False)
     latency_ms = (time.perf_counter() - start) * 1000

@@ -2,7 +2,7 @@ from pathlib import Path
 import json
 from rag_pipeline.core.paths import Paths
 from rag_pipeline.logging import get_logger
-from rag_pipeline.schemas import TopicAssignments
+from rag_pipeline.core.schemas import TopicAssignments
 
 logger = get_logger(__name__)
 

@@ -1,42 +1,44 @@
-import sys
-import logging
+# src/rag_pipeline/eda/topics/core/topic_assignments.py
 import json
-from pathlib import Path
-from typing import List, Dict, Any
+import logging
+from typing import Any, Dict, List
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(levelname)s | %(message)s')
+from src.rag_pipeline.core.paths import Paths
+
 logger = logging.getLogger(__name__)
 
-project_root = Path(__file__).resolve().parents[5]
-if str(project_root) not in sys.path:
-    sys.path.insert(0, str(project_root))
 
-from src.rag_pipeline.eda.topics.config import TopicsConfig
-from src.rag_pipeline.core.paths import Paths
+def _load_json(path) -> Dict[str, Any]:
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def _iter_assignments(data: Dict[str, Any]):
+    for model_data in data.get("results", {}).values():
+        yield from model_data.get("assignments", [])
 
 
 class TopicAssignments:
-    """Handles loading, saving, and enriching topic assignments."""
-    
-    def __init__(self):
-        self.config = TopicsConfig
-        logger.info("TopicAssignments handler initialized")
-    
+    """Loads and queries the merged topic assignments file."""
+
     def load_merged(self) -> Dict[str, Any]:
-        """Load the final merged assignments."""
-        path = self.config.get_output_path("topic_assignments_all.json")
-        if path.exists():
-            with open(path, encoding="utf-8") as f:
-                return json.load(f)
-        logger.warning("Merged assignments file not found")
-        return {}
-    
-    def get_sample(self, n: int = 3) -> List[Dict]:
-        """Return sample assignments for inspection."""
+        path = Paths.topic_assignments()
+        if not path.exists():
+            logger.warning("Merged assignments file not found: %s", path)
+            return {}
+        try:
+            data = _load_json(path)
+            logger.info("Loaded merged assignments from %s", path)
+            return data
+        except Exception:
+            logger.error("Failed to load merged assignments", exc_info=True)
+            return {}
+
+    def get_sample(self, n: int = 3) -> List[Dict[str, Any]]:
         data = self.load_merged()
-        assignments = []
-        for model_data in data.get("results", {}).values():
-            assignments.extend(model_data.get("assignments", []))
-            if len(assignments) >= n:
+        results: List[Dict[str, Any]] = []
+        for assignment in _iter_assignments(data):
+            results.append(assignment)
+            if len(results) >= n:
                 break
-        return assignments[:n]
+        return results

@@ -1,85 +1,108 @@
+# src/rag_pipeline/eda/topics/classification/topic_rules.py
 """
-Hybrid Data-Driven Classification Rules.
-Combines: manual seeds + TF-IDF terms + NER-derived entities.
+Hybrid classification rules.
+Loads signals from entity_patterns.json — no hardcoded terms.
+Reclassifies OTHER using rules, but defers to cluster signal when confidence is high.
 """
-from pathlib import Path
 import json
+import re
 from dataclasses import dataclass
-from typing import Set
-from rag_pipeline.logging import get_logger
+from pathlib import Path
+from typing import Any
+
+from src.rag_pipeline.logging import get_logger
+from src.rag_pipeline.core.paths import Paths
 
 logger = get_logger(__name__)
 
+_PRIORITY = ["ERROR", "ADMIN", "LANGUAGE", "TOOL", "CONCEPT"]
+
+
+def _load_entity_patterns() -> dict[str, list[str]]:
+    with open(Paths.entity_patterns(), encoding="utf-8") as f:
+        return json.load(f)
+
+
+def _word_match(signal: str, text: str) -> bool:
+    """Whole-word match for short signals (<=3 chars), substring for longer."""
+    if len(signal) <= 3:
+        return bool(re.search(rf"\b{re.escape(signal)}\b", text))
+    return signal in text
+
+
+def _cluster_majority_category(
+    topic_id: int,
+    all_assignments: list[dict[str, Any]],
+    min_confidence: float = 0.8,
+) -> str | None:
+    if topic_id == -1:
+        return None
+    peers = [a for a in all_assignments if a.get("topic") == topic_id]
+    if not peers:
+        return None
+    counts: dict[str, int] = {}
+    for a in peers:
+        cat = a.get("ner_category", "OTHER")
+        if cat != "OTHER":
+            counts[cat] = counts.get(cat, 0) + 1
+    if not counts:
+        return None
+    top_cat = max(counts, key=lambda c: counts[c])
+    confidence = counts[top_cat] / len(peers)
+    if confidence >= min_confidence:
+        logger.debug("Cluster %d majority=%s confidence=%.2f", topic_id, top_cat, confidence)
+        return top_cat
+    return None
+
+
 @dataclass
 class ClassificationRules:
-    error_signals: Set[str]
-    admin_signals: Set[str]
-    concept_signals: Set[str]
+    signals: dict[str, set[str]]
 
     @classmethod
-    def load(cls, rules_dir: Path) -> "ClassificationRules":
-        """Load seed rules + enrich from TF-IDF and NER patterns."""
-        rules_path = rules_dir / "classification_rules.json"
-        tfidf_path = rules_dir / "data_driven_terms.json"
-        ner_path = rules_dir.parent / "entity_patterns.json"
+    def load(cls) -> "ClassificationRules":
+        patterns = _load_entity_patterns()
+        signals = {cat: set(terms) for cat, terms in patterns.items()}
+        for cat, terms in signals.items():
+            logger.info("Loaded %d signals for %s", len(terms), cat)
+        return cls(signals=signals)
 
-        # Load base seeds
-        if not rules_path.exists():
-            logger.warning(f"Base rules not found: {rules_path}")
-            error, admin, concept = set(), set(), set()
-        else:
-            with open(rules_path) as f:
-                data = json.load(f)
-            error = set(data.get("error_signals", []))
-            admin = set(data.get("admin_signals", []))
-            concept = set(data.get("concept_signals", []))
-
-        # Enrich with TF-IDF
-        if tfidf_path.exists():
-            try:
-                with open(tfidf_path) as f:
-                    tf = json.load(f)
-                error.update(tf.get("error_terms", [])[:20])
-                admin.update(tf.get("admin_terms", [])[:20])
-                concept.update(tf.get("concept_terms", [])[:20])
-            except Exception as e:
-                logger.warning(f"TF-IDF enrichment failed: {e}")
-
-        # Enrich with NER patterns (best source for entities)
-        if ner_path.exists():
-            try:
-                with open(ner_path) as f:
-                    ner_data = json.load(f)
-                
-                # Extract high-value entities
-                for pattern in ner_data.get("patterns", []):
-                    label = pattern.get("label", "")
-                    token = pattern.get("pattern", [{}])[0].get("LOWER", "")
-                    if token:
-                        if label in ["ERROR", "EXCEPTION"]:
-                            error.add(token)
-                        elif label in ["ADMIN", "COURSE_EVENT"]:
-                            admin.add(token)
-                        elif label in ["CONCEPT", "TECH_TERM"]:
-                            concept.add(token)
-            except Exception as e:
-                logger.warning(f"NER enrichment failed: {e}")
-
-        logger.info(f"Loaded rules → Error: {len(error)}, Admin: {len(admin)}, Concept: {len(concept)}")
-        return cls(error_signals=error, admin_signals=admin, concept_signals=concept)
-
-    def reclassify(self, current_category: str, question: str) -> str:
-        """Priority: ERROR > ADMIN > CONCEPT"""
+    def reclassify(
+        self,
+        current_category: str,
+        question: str,
+        topic_id: int = -1,
+        all_assignments: list[dict[str, Any]] | None = None,
+    ) -> tuple[str, str]:
+        """
+        Returns (new_category, source) where source is one of:
+            'unchanged' — already classified, not OTHER
+            'cluster'   — cluster majority signal
+            'rules'     — keyword match
+            'fallback'  — stayed OTHER
+        """
         if current_category != "OTHER":
-            return current_category
+            return current_category, "unchanged"
+
+        import os
+        if all_assignments is not None and not os.getenv("ABLATION_SKIP_CLUSTER"):
+            cluster_cat = _cluster_majority_category(topic_id, all_assignments)
+            if cluster_cat:
+                return cluster_cat, "cluster"
 
         q_lower = question.lower().strip()
+        if not os.getenv("ABLATION_SKIP_RULES"):
+            for cat in _PRIORITY:
+                if cat not in self.signals:
+                    continue
+                if any(_word_match(sig, q_lower) for sig in self.signals[cat]):
+                    return cat, "rules"
 
-        if any(sig in q_lower for sig in self.error_signals):
-            return "ERROR"
-        if any(sig in q_lower for sig in self.admin_signals):
-            return "ADMIN"
-        if any(sig in q_lower for sig in self.concept_signals):
-            return "CONCEPT"
-
-        return "OTHER"
+        return "OTHER", "fallback"
+    def extract_entity(self, category: str, question: str) -> str | None:
+        """Return the first matching signal for category in question, or None."""
+        q_lower = question.lower().strip()
+        for sig in self.signals.get(category, []):
+            if _word_match(sig, q_lower):
+                return sig
+        return None

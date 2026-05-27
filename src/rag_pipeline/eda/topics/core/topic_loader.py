@@ -1,54 +1,43 @@
-import sys
-import logging
+# src/rag_pipeline/eda/topics/core/topic_loader.py
 import json
-from pathlib import Path
-from typing import List, Dict, Any
+import logging
+from typing import Any, Dict, List
 
-# Setup logging + project root
-logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(levelname)s | %(message)s')
+from src.rag_pipeline.core.paths import Paths
+
 logger = logging.getLogger(__name__)
 
-project_root = Path(__file__).resolve().parents[5]
-if str(project_root) not in sys.path:
-    sys.path.insert(0, str(project_root))
 
-from src.rag_pipeline.eda.topics.config import TopicsConfig
-from src.rag_pipeline.core.paths import Paths
+def _model_assignment_path(model_name: str):
+    safe = model_name.replace("/", "_").replace("-", "_")
+    return Paths.topics_experiments_dir() / f"topic_assignments_{safe}.json"
 
 
 class TopicLoader:
-    """Loads raw data and previous topic assignments."""
-    
-    def __init__(self):
-        self.config = TopicsConfig
-        logger.info("TopicLoader initialized")
-    
+    """Loads raw data and per-model topic assignments."""
+
     def load_clean_data(self) -> List[Dict[str, Any]]:
-        """Load the main clean dataset using central Paths."""
-        logger.info("Loading clean data from central Paths...")
+        path = Paths.input_file("eda")
+        if not path.exists():
+            logger.error("Clean data not found: %s", path)
+            return []
         try:
-            data_path = Paths.input_file("eda")
-            logger.info(f"Loading from: {data_path}")
-            
-            if not data_path.exists():
-                logger.error(f"File not found: {data_path}")
-                return []
-            
-            with open(data_path, encoding="utf-8") as f:
+            with open(path, encoding="utf-8") as f:
                 data = [json.loads(line) for line in f if line.strip()]
-            
-            logger.info(f"Successfully loaded {len(data)} documents")
+            logger.info("Loaded %d documents from %s", len(data), path)
             return data
-        except Exception as e:
+        except Exception:
             logger.error("Failed to load clean data", exc_info=True)
             return []
-    
+
     def load_previous_assignments(self, model_name: str) -> Dict[str, Any]:
-        """Load existing topic assignments for a model."""
-        logger.info(f"Loading previous assignments for {model_name}")
-        path = self.config.EXPERIMENTS_DIR / f"topic_assignments_{model_name.replace('/', '_').replace('-', '_')}.json"
-        if path.exists():
+        path = _model_assignment_path(model_name)
+        if not path.exists():
+            logger.warning("No previous assignments for %s at %s", model_name, path)
+            return {}
+        try:
             with open(path, encoding="utf-8") as f:
                 return json.load(f)
-        logger.warning(f"No previous assignments found for {model_name}")
-        return {}
+        except Exception:
+            logger.error("Failed to load assignments for %s", model_name, exc_info=True)
+            return {}

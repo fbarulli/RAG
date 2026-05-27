@@ -1,173 +1,144 @@
+# src/rag_pipeline/eda/topics/classification/topic_ner.py
 """
-
-Public Functions for Domain-Aware NER and Question Tagging:
-
-def build_ner(tfidf_terms_path: Path, bridge_concepts_path: Path) -> Language:
-    Build a SpaCy pipeline with an EntityRuler seeded from TF-IDF outputs.
-    I/O: tfidf_terms_path (Path), bridge_concepts_path (Path) -> Language
-
-def tag_questions(questions: list[str], nlp: Language) -> list[dict]:
-    Tag each question with detected entities and a top-level category.
-    I/O: questions (list[str]), nlp (Language) -> list[dict]
-
-
-
-
-
-_topic_ner.py
-=============
 Domain-aware NER for topic taxonomy using SpaCy EntityRuler.
-Seeded from TF-IDF top terms and bridge concepts — no hardcoded guessing.
+Seeded from entity_patterns.json — no hardcoded term lists.
 
-Entity labels
--------------
-TOOL        : specific tools (docker, mlflow, spark, kestra, dbt ...)
-LANGUAGE    : programming/query languages (python, sql, java, pyspark ...)
-CONCEPT     : ML/data concepts (embedding, regression, precision ...)
-ERROR       : questions containing error/exception/warning signals
-ADMIN       : course logistics (certificate, cohort, homework, office hours ...)
-
-Usage
------
-    import from rag_pipeline.eda.topics.topic_ner import build_ner, tag_questions
-
-    nlp = build_ner(
-        tfidf_terms_path=Path("...tfidf_terms_long.csv"),
-        bridge_concepts_path=Path("...bridge_concepts.csv"),
-    )
-    tagged = tag_questions(questions, nlp)
+Entity labels: TOOL, LANGUAGE, CONCEPT, ERROR, ADMIN
 """
 from __future__ import annotations
 import csv
 import traceback
 from pathlib import Path
+
 import spacy
 from spacy.language import Language
-from rag_pipeline.logging import get_logger
+
+from src.rag_pipeline.logging import get_logger
+from src.rag_pipeline.core.paths import Paths
+
 logger = get_logger(__name__)
-_LANGUAGES: frozenset[str] = frozenset({'python', 'sql', 'java', 'pyspark', 'bash', 'yaml', 'json', 'javascript', 'typescript', 'r', 'scala', 'go', 'rust'})
-_ADMIN_TERMS: frozenset[str] = frozenset({'certificate', 'cohort', 'deadline', 'donate', 'donation', 'sponsor', 'office hours', 'self-paced', 'graduate', 'graduation', 'leaderboard', 'peer review', 'prerequisite', 'homework', 'capstone', 'recorded', 'miss a session', 'get help', 'skip topics', 'how much theory', 'special hardware', 'system design', 'support'})
-_ERROR_SIGNALS: frozenset[str] = frozenset({'error', 'exception', 'traceback', 'failed', 'failure', 'warning', 'cannot', "can't", 'unable', 'not found', 'permission denied', 'attributeerror', 'valueerror', 'typeerror', 'importerror', 'modulenotfounderror', 'filenotfounderror', 'keyerror', 'indexerror', 'oserror', 'runtimeerror', 'nameerror'})
-_TOOL_OVERRIDE: frozenset[str] = frozenset({'docker', 'kubernetes', 'terraform', 'airflow', 'kafka', 'spark', 'kestra', 'dbt', 'mlflow', 'prefect', 'mage', 'dagster', 'flask', 'fastapi', 'streamlit', 'jupyter', 'github', 'git', 'postgres', 'postgresql', 'bigquery', 'gcs', 'gcp', 'aws', 'ec2', 's3', 'lambda', 'pipenv', 'conda', 'pip', 'poetry', 'langchain', 'openai', 'huggingface', 'qdrant', 'elasticsearch', 'redis', 'mongodb', 'mysql', 'sqlite'})
-_CONCEPT_TERMS: frozenset[str] = frozenset({'embedding', 'embeddings', 'regression', 'classification', 'precision', 'recall', 'accuracy', 'overfitting', 'underfitting', 'gradient', 'backpropagation', 'attention', 'transformer', 'tokenizer', 'vectorizer', 'tfidf', 'tf-idf', 'cosine similarity', 'clustering', 'dimensionality reduction', 'umap', 'pca', 'hdbscan', 'bertopic', 'rag', 'retrieval', 'fine-tuning', 'inference', 'training', 'deployment', 'monitoring', 'batch', 'streaming'})
 
-def build_ner(tfidf_terms_path: Path, bridge_concepts_path: Path) -> Language:
-    """
-    Build a SpaCy pipeline with an EntityRuler seeded from TF-IDF outputs.
 
-    Parameters
-    ----------
-    tfidf_terms_path    : path to tfidf_terms_long.csv
-    bridge_concepts_path: path to bridge_concepts.csv
+def _load_entity_patterns() -> dict[str, list[str]]:
+    import json
+    with open(Paths.entity_patterns(), encoding="utf-8") as f:
+        return json.load(f)
 
-    Returns
-    -------
-    SpaCy Language object with entity_ruler added
-    """
-    try:
-        nlp = spacy.load('en_core_web_sm', disable=['ner'])
-        ruler = nlp.add_pipe('entity_ruler', config={'overwrite_ents': True})
-        patterns: list[dict] = []
-        tfidf_terms = _load_tfidf_terms(tfidf_terms_path)
-        bridge_terms = _load_bridge_terms(bridge_concepts_path)
-        all_domain_terms = tfidf_terms | bridge_terms
-        for term in all_domain_terms:
-            label = _classify_term(term)
-            patterns.append({'label': label, 'pattern': term})
-            if term != term.title():
-                patterns.append({'label': label, 'pattern': term.title()})
-        for lang in _LANGUAGES:
-            patterns.append({'label': 'LANGUAGE', 'pattern': lang})
-            patterns.append({'label': 'LANGUAGE', 'pattern': lang.upper()})
-        for term in _ADMIN_TERMS:
-            patterns.append({'label': 'ADMIN', 'pattern': term})
-            patterns.append({'label': 'ADMIN', 'pattern': term.title()})
-        ruler.add_patterns(patterns)
-        logger.info(f'[build_ner] EntityRuler built: {len(patterns)} patterns | tfidf_terms={len(tfidf_terms)}, bridge_terms={len(bridge_terms)}')
-        return nlp
-    except Exception:
-        logger.error('[build_ner] Failed.\n' + traceback.format_exc())
-        raise
-
-def tag_questions(questions: list[str], nlp: Language) -> list[dict]:
-    """
-    Tag each question with detected entities and a top-level category.
-
-    Parameters
-    ----------
-    questions   : list of question strings
-    nlp         : fitted SpaCy pipeline from build_ner()
-
-    Returns
-    -------
-    List of dicts with keys:
-        question    : original string
-        entities    : list of {text, label} dicts
-        category    : top-level category (ADMIN, ERROR, TOOL, LANGUAGE, CONCEPT, OTHER)
-        primary_entity : most prominent entity text (for subtopic grouping)
-    """
-    try:
-        results = []
-        for doc in nlp.pipe(questions, batch_size=64):
-            entities = [{'text': ent.text.lower(), 'label': ent.label_} for ent in doc.ents]
-            question_lower = doc.text.lower()
-            category = _resolve_category(question_lower, entities)
-            primary = _primary_entity(entities, category)
-            results.append({'question': doc.text, 'entities': entities, 'category': category, 'primary_entity': primary})
-        logger.info(f'[tag_questions] Tagged {len(results)} questions')
-        return results
-    except Exception:
-        logger.error('[tag_questions] Failed.\n' + traceback.format_exc())
-        raise
 
 def _load_tfidf_terms(path: Path) -> set[str]:
     terms = set()
-    with open(path, encoding='utf-8') as f:
+    if not path.exists():
+        logger.warning("TF-IDF terms file not found: %s", path)
+        return terms
+    with open(path, encoding="utf-8") as f:
         for row in csv.DictReader(f):
-            terms.add(row['term'].strip().lower())
+            terms.add(row["term"].strip().lower())
     return terms
+
 
 def _load_bridge_terms(path: Path) -> set[str]:
     terms = set()
-    with open(path, encoding='utf-8') as f:
+    if not path.exists():
+        logger.warning("Bridge concepts file not found: %s", path)
+        return terms
+    with open(path, encoding="utf-8") as f:
         for row in csv.DictReader(f):
-            terms.add(row['term'].strip().lower())
+            terms.add(row["term"].strip().lower())
     return terms
 
-def _classify_term(term: str) -> str:
-    """Assign entity label to a TF-IDF term."""
-    if term in _TOOL_OVERRIDE:
-        return 'TOOL'
-    if term in _LANGUAGES:
-        return 'LANGUAGE'
-    if term in _CONCEPT_TERMS:
-        return 'CONCEPT'
-    for tool in _TOOL_OVERRIDE:
-        if tool in term:
-            return 'TOOL'
-    return 'TOOL'
 
-def _resolve_category(question_lower: str, entities: list[dict]) -> str:
+def _classify_term(term: str, patterns: dict[str, list[str]]) -> str:
+    """Assign entity label using entity_patterns.json — no hardcoded fallbacks."""
+    for cat in ["TOOL", "LANGUAGE", "CONCEPT", "ADMIN", "ERROR"]:
+        if term in patterns.get(cat, []):
+            return cat
+    return "TOOL"  # conservative default for unknown TF-IDF terms
+
+
+def _resolve_category(question_lower: str, entities: list[dict], error_signals: set[str]) -> str:
     """Priority: ADMIN > ERROR > LANGUAGE > TOOL > CONCEPT > OTHER."""
-    labels = {e['label'] for e in entities}
-    if 'ADMIN' in labels:
-        return 'ADMIN'
-    if any((sig in question_lower for sig in _ERROR_SIGNALS)):
-        return 'ERROR'
-    if 'LANGUAGE' in labels:
-        return 'LANGUAGE'
-    if 'TOOL' in labels:
-        return 'TOOL'
-    if 'CONCEPT' in labels:
-        return 'CONCEPT'
-    return 'OTHER'
+    labels = {e["label"] for e in entities}
+    if "ADMIN" in labels:
+        return "ADMIN"
+    if any(sig in question_lower for sig in error_signals):
+        return "ERROR"
+    if "LANGUAGE" in labels:
+        return "LANGUAGE"
+    if "TOOL" in labels:
+        return "TOOL"
+    if "CONCEPT" in labels:
+        return "CONCEPT"
+    return "OTHER"
+
 
 def _primary_entity(entities: list[dict], category: str) -> str | None:
-    """Return the most relevant entity for subtopic grouping."""
-    priority_label = {'TOOL': 'TOOL', 'LANGUAGE': 'LANGUAGE', 'CONCEPT': 'CONCEPT', 'ERROR': 'TOOL', 'ADMIN': None, 'OTHER': None}.get(category)
+    priority_label = {
+        "TOOL": "TOOL",
+        "LANGUAGE": "LANGUAGE",
+        "CONCEPT": "CONCEPT",
+        "ERROR": "TOOL",
+        "ADMIN": None,
+        "OTHER": None,
+    }.get(category)
     if priority_label is None:
         return None
     for e in entities:
-        if e['label'] == priority_label:
-            return e['text']
+        if e["label"] == priority_label:
+            return e["text"]
     return None
+
+
+def build_ner(tfidf_terms_path: Path, bridge_concepts_path: Path) -> Language:
+    """Build a SpaCy pipeline with EntityRuler seeded from entity_patterns.json + TF-IDF."""
+    try:
+        entity_patterns = _load_entity_patterns()
+        nlp = spacy.load("en_core_web_sm", disable=["ner"])
+        ruler = nlp.add_pipe("entity_ruler", config={"overwrite_ents": True})
+        patterns: list[dict] = []
+
+        # seed from entity_patterns.json
+        for cat, terms in entity_patterns.items():
+            for term in terms:
+                patterns.append({"label": cat, "pattern": term})
+                if term != term.title():
+                    patterns.append({"label": cat, "pattern": term.title()})
+
+        # enrich with TF-IDF and bridge terms
+        tfidf_terms = _load_tfidf_terms(tfidf_terms_path)
+        bridge_terms = _load_bridge_terms(bridge_concepts_path)
+        for term in tfidf_terms | bridge_terms:
+            label = _classify_term(term, entity_patterns)
+            patterns.append({"label": label, "pattern": term})
+
+        ruler.add_patterns(patterns)
+        logger.info(
+            "EntityRuler built | patterns=%d tfidf=%d bridge=%d",
+            len(patterns), len(tfidf_terms), len(bridge_terms),
+        )
+        return nlp
+    except Exception:
+        logger.error("build_ner failed", exc_info=True)
+        raise
+
+
+def tag_questions(questions: list[str], nlp: Language) -> list[dict]:
+    """Tag each question with entities and top-level category."""
+    try:
+        entity_patterns = _load_entity_patterns()
+        error_signals = set(entity_patterns.get("ERROR", []))
+        results = []
+        for doc in nlp.pipe(questions, batch_size=64):
+            entities = [{"text": ent.text.lower(), "label": ent.label_} for ent in doc.ents]
+            category = _resolve_category(doc.text.lower(), entities, error_signals)
+            primary = _primary_entity(entities, category)
+            results.append({
+                "question": doc.text,
+                "entities": entities,
+                "category": category,
+                "primary_entity": primary,
+            })
+        logger.info("Tagged %d questions", len(results))
+        return results
+    except Exception:
+        logger.error("tag_questions failed", exc_info=True)
+        raise

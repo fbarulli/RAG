@@ -62,6 +62,9 @@ def _load_embedding_model(model_entry: dict):
 def _load_test_set(config: BenchmarkConfig, args) -> list[dict]:
     """Load and optionally truncate the test set."""
     test_set = config.get_test_set()
+    if hasattr(args, 'query_type') and args.query_type:
+        test_set = [q for q in test_set if q.get('query_type') in args.query_type]
+        print(f'[INFO] Filtered to query types {args.query_type}: {len(test_set)} queries')
     if hasattr(args, 'sample_size') and args.sample_size > 0:
         test_set = test_set[:args.sample_size]
     print(f"[INFO] Running on {len(test_set)} queries (full dataset: {getattr(args, 'sample_size', 0) == 0})")

@@ -114,3 +114,21 @@ class Paths:
     @classmethod
     def entity_patterns(cls) -> Path:
         return cls._resolve("entity_patterns")
+    
+    @classmethod
+    def topics_default_output(cls) -> Path:
+        return cls._resolve("topics_default_output")
+    
+    @classmethod
+    def topic_modeling_defaults(cls) -> dict:
+        import json
+        cfg = cls.base() / "configs" / "defaults.json"
+        with open(cfg, encoding="utf-8") as f:
+            data = json.load(f)
+        if "topic_modeling" not in data:
+            raise KeyError("'topic_modeling' section missing from configs/defaults.json")
+        return data["topic_modeling"]
+
+    @classmethod
+    def stopwords_path(cls) -> Path:
+        return cls.topics_experiments_dir() / "tfidf_analysis" / "stopwords" / "stopwords_pass2.txt"
