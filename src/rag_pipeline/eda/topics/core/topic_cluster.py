@@ -51,10 +51,11 @@ class TopicCluster:
             verbose=False,
 
         )
-        topics, probs = topic_model.fit_transform(questions)
+        embeddings = embedding_model.encode(questions, show_progress_bar=False)
+        topics, probs = topic_model.fit_transform(questions, embeddings)
         logger.info(
             "Clustering complete | topics=%d outliers=%d",
             len(set(topics) - {-1}),
             sum(1 for t in topics if t == -1),
         )
-        return topic_model, list(topics), list(probs)
+        return topic_model, list(topics), list(probs), embeddings

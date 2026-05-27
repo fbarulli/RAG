@@ -107,18 +107,18 @@ def _build_assignments(
 
 def _apply_subtopics(
     assignments: list[dict],
-    topics: list[int],
-    topic_model: Any,
     questions: list[str],
+    embeddings,
     subtopic_threshold: int,
+    subtopic_min_size: int,
 ) -> list[dict]:
     from src.rag_pipeline.eda.topics.core.topic_subtopics import build_subtopics as generate_subtopics
-    topic_counts = {t: topics.count(t) for t in set(topics) if t != -1}
+    topic_counts = {t: sum(1 for a in assignments if a["topic"] == t) for t in set(a["topic"] for a in assignments) if t != -1}
     large_topics = [t for t, c in topic_counts.items() if c > subtopic_threshold]
     if not large_topics:
         return assignments
     logger.info("Found %d topics > %d docs — generating subtopics", len(large_topics), subtopic_threshold)
-    subtopic_map = generate_subtopics(topic_model, questions, topics)
+    subtopic_map = generate_subtopics(assignments, questions, embeddings, subtopic_threshold, subtopic_min_size)
     for t_id, sub_info in subtopic_map.items():
         for local in sub_info:
             idx = local["orig_idx"]
@@ -174,7 +174,7 @@ def process_model(
     stopwords = load_stopwords(Paths.stopwords_path())
 
     clusterer = TopicCluster(model_name)
-    topic_model, topics, probs = clusterer.run_clustering_raw(
+    topic_model, topics, probs, embeddings = clusterer.run_clustering_raw(
         questions=questions,
         min_topic_size=min_topic_size,
         min_samples=min_samples,
@@ -192,7 +192,7 @@ def process_model(
             a["ner_category"] = new_cat
     if subtopic_threshold > 0:
         assignments = _apply_subtopics(
-            assignments, topics, topic_model, questions, subtopic_threshold
+            assignments, questions, embeddings, subtopic_threshold, subtopic_min_size
         )
 
     report = _build_report(model_name, docs, topics, assignments, min_topic_size, min_samples)
