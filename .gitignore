@@ -15,3 +15,7 @@ experiments/reranker_models/
 experiments/reranker_training/
 experiments/onnx_cache/
 experiments/benchmark_state.json
+
+# Ignore ablation experiment results
+ablation/results/*.json
+ablation/results/*.jsonl
