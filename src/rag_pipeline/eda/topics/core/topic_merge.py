@@ -30,11 +30,11 @@ def _write_merged(data: Dict[str, Any], output_path: Path) -> None:
 class TopicMerger:
     """Merges per-model assignment files into a single output."""
 
-    def merge(self, force: bool = False) -> Dict[str, Any]:
+    def merge(self, force: bool = False, only: "Path | None" = None) -> Dict[str, Any]:
         exp_dir = Paths.topics_experiments_dir()
         output_path = Paths.topic_assignments()
 
-        files = _find_model_files(exp_dir)
+        files = [only] if only is not None else _find_model_files(exp_dir)
         logger.info("Found %d model assignment files", len(files))
 
         merged: Dict[str, Any] = {"metadata": {"models_merged": []}, "results": {}}
@@ -42,13 +42,28 @@ class TopicMerger:
         for f in files:
             try:
                 data = _load_model_file(f)
-            except Exception:
-                logger.error("Failed to load %s", f, exc_info=True)
+                
+                # Validation: Ensure the file has the expected BERTopic report structure
+                if not isinstance(data, dict) or "metadata" not in data:
+                    logger.warning("Skipping %s: Missing metadata root", f)
+                    continue
+                
+                model = data.get("metadata", {}).get("model", f.stem)
+                merged["metadata"]["models_merged"].append(model)
+                merged["results"][model] = data
+                
+            except (json.JSONDecodeError, Exception) as e:
+                logger.error("Failed to load %s: %s", f, e, exc_info=True)
                 continue
-            model = data.get("metadata", {}).get("model", f.stem)
-            merged["metadata"]["models_merged"].append(model)
-            merged["results"][model] = data
 
         _write_merged(merged, output_path)
         logger.info("Merged %d models → %s", len(files), output_path)
         return merged
+
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--only", type=Path, default=None)
+    args = parser.parse_args()
+    TopicMerger().merge(only=args.only)

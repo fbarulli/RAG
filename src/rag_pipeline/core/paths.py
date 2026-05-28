@@ -140,7 +140,7 @@ class Paths:
     
     @classmethod
     def topics_default_output(cls) -> Path:
-        return cls._require(cls._resolve("topics_default_output"), "Run: uv run python -m rag_pipeline.eda.topics.core.topic_modeling  (generates patterns)")
+        return cls._resolve("topics_default_output")
     
     @classmethod
     def defaults(cls) -> dict:

@@ -1,162 +1,60 @@
-```markdown
-# RAG-a-muffin — Developer Handoff (updated)
+# RAG-a-muffin — Developer Handoff (updated 2026-05-29)
 
-## Benchmark status
-| Config | H@1 | MRR | Notes |
+## Benchmark status (all vs vector_default baseline)
+| Experiment | entity_boosted H@1 | vector_default H@1 | Delta vs vector |
 |---|---|---|---|
-| entity_boosted (README) | 85.9% | 0.9088 | Original run — files not recoverable |
-| entity_boosted (current) | 80.3% | 0.8719 | **Entity boost contributing 0pp** |
-| vector_default (current) | 80.3% | 0.8719 | Same as boosted — boost is broken |
+| vector_default | — | 80.3% | — |
+| no_generic_entity | 85.5% | — | +5.2pp |
+| baseline | 88.8% | — | +8.5pp |
+| no_noisy_entities | 89.2% | — | +8.9pp |
+| no_rules | 89.4% | — | +9.1pp |
+| **no_cluster** | **92.7%** | — | **+12.4pp** |
 
-## Why the boost is broken
-Qdrant payloads contain `ner_category` and `ner_primary_entity` correctly:
-```
-LANGUAGE python / ADMIN course / TOOL git / TOOL vs code ...
-```
-But `configs/retrieval_configs.json` entity_boosted config has no `should` clause referencing those fields:
-```json
-"entity_boosted": {
-    "name": "Entity Boosted",
-    "search_type": "entity_boosted",
-    "boost_question": 5.0,
-    "boost_text": 5.0
-}
-```
-The boost logic must live in the retrieval runner, not the config. Find it:
-```bash
-grep -rn "entity_boosted\|ner_category\|ner_primary_entity\|should" \
-  src/rag_pipeline/ingestion/ 2>/dev/null | grep -v ".pyc"
-```
-That is the first thing to fix next session.
+> ⚠️ `no_cluster` gain is from entity extraction fix becoming active on fresh topic modeling rerun,
+> NOT from skipping cluster (cluster is a confirmed no-op). True fixed baseline not yet committed —
+> run full rerun pipeline below to establish it.
+
+### By query type — no_cluster (current best)
+| query_type | n | entity_boosted H@1 | vector_default H@1 | Boost delta |
+|---|---|---|---|---|
+| chaos_monkey | 147 | 87.1% | 65.3% | +21.8pp |
+| creative_student | 120 | 92.5% | 83.3% | +9.2pp |
+| grounded_analyst | 147 | 95.9% | 87.1% | +8.8pp |
+| original | 49 | 100.0% | 98.0% | +2.0pp |
 
 ---
 
-## Data flow
-```
-data/processed/clean.jsonl  (1207 docs, fields: id, question, answer, course, section)
-  │
-  ▼
-BERTopic clustering                     topic_cluster.py::TopicCluster.run_clustering_raw()
-  → topic_id, topic_probability          probs are per-topic arrays — use .max() or hasattr check
-  → keywords (TF-IDF, list of tuples)
-  │
-  ▼
-spaCy EntityRuler                       topic_modeling.py::_tag_ner()
-  → ner_category                         TOOL/ERROR/CONCEPT/LANGUAGE/ADMIN/OTHER
-  → ner_primary_entity                   e.g. "python", "docker" — only EntityRuler sets this
-  │                                      keyword rules do NOT set this — produces garbage if tried
-  ▼
-_build_assignments()                    topic_modeling.py
-  → one dict per doc, all fields merged
-  │
-  ▼
-ClassificationRules.reclassify()        topic_rules.py — post-pass on OTHER docs only
-  → cluster majority (≥0.8 confidence)  defers to embedding neighborhood
-  → keyword rules (priority order)       ERROR > ADMIN > LANGUAGE > TOOL > CONCEPT
-  → fallback OTHER                       genuinely ambiguous — correct, do not force
-  signals loaded from entity_patterns.json — never hardcode terms in Python
-  NOTE: only ner_category is updated — ner_primary_entity is NOT touched here
-  │
-  ▼
-topic_assignments_BAAI_bge_base_en_v1.5.json   (per-model, in experiments/)
-  │
-  ▼
-TopicMerger().merge()                   topic_merge.py — NO main(), call directly
-  → topic_assignments_all.json          (output/ — single source for ingestion)
-  │
-  ▼
-ingest_qdrant.py                    indexes into Qdrant with NER fields as payload
-  → collection: faqs_bge_base_en_v1_5  name derived from model at runtime
-  │
-  ▼
-benchmark.py                        453 queries from eval_queries_tiered.jsonl
-  → H@1 / H@3 / H@5 / H@10 / MRR      expected_id field links query to correct doc
-```
+## Critical finding: entity boost works, but entity quality varies
 
----
+The boost has been firing correctly all along. `evaluation.py:_build_query_context()` looks up
+`ner_primary_entity` from `topic_map` keyed by `expected_id` — the corpus document's assignment,
+not the query file. The query file's missing NER fields (`eval_queries_tiered.jsonl` predates NER)
+are irrelevant — benchmark joins correctly at runtime.
 
-## How to run the pipeline
-```bash
-# 1. topic modeling (single model)
-uv run python -m rag_pipeline.eda.topics.core.topic_modeling \
-  --embedding-model "BAAI/bge-base-en-v1.5" \
-  --output src/rag_pipeline/eda/topics/experiments/topic_assignments_BAAI_bge_base_en_v1.5.json
+### Entity quality breakdown (current corpus, BAAI/bge-base-en-v1.5)
+| Category | Docs | Unique entities | Avg docs/entity | Quality |
+|---|---|---|---|---|
+| TOOL | 541 | 84 | 6.4 | ✅ specific |
+| LANGUAGE | 48 | 7 | 6.9 | ✅ specific |
+| CONCEPT | 148 | 62 | 2.4 | ✅ mostly specific |
+| ADMIN | 219 | 55 | 4.0 | ⚠️ generic tail |
+| ERROR | 227 | 51 | 4.5 | ⚠️ generic tail |
 
-# 2. merge (must call directly — no main())
-uv run python -c "
-from src.rag_pipeline.eda.topics.core.topic_merge import TopicMerger
-TopicMerger().merge()
-"
+### Top noisy entities (>20 docs, currently in GENERIC_ENTITIES set)
+| Entity | Docs | Category | Action |
+|---|---|---|---|
+| error | 100 | ERROR | ❌ prune |
+| homework | 66 | ADMIN | ❌ prune |
+| course | 37 | ADMIN | ❌ prune |
+| project | 28 | ADMIN | ❌ prune |
+| model | 23 | CONCEPT | ❌ prune |
+| docker | 78 | TOOL | ✅ keep |
+| python | 34 | LANGUAGE | ✅ keep |
+| gcp | 46 | TOOL | ✅ keep |
+| dbt | 41 | TOOL | ✅ keep |
+| aws | 28 | TOOL | ✅ keep |
 
-# 3. ingest
-uv run python -m src.rag_pipeline.ingestion.ingest_qdrant --model "BAAI/bge-base-en-v1.5"
-
-# 4. benchmark
-uv run python -m rag_pipeline.ingestion.benchmark \
-  --model "BAAI/bge-base-en-v1.5" \
-  --configs entity_boosted vector_default
-```
-
----
-
-## Paths — single source of truth
-All paths resolve through `Paths` → `configs/paths.json`. Never use `__file__` relative paths.
-
-```python
-from src.rag_pipeline.core.paths import Paths
-
-Paths.topic_assignments()        # output/topic_assignments_all.json
-Paths.topics_experiments_dir()   # src/.../topics/experiments/
-Paths.entity_patterns()          # src/.../topics/entity_patterns.json
-Paths.input_file("eda")          # data/processed/clean.jsonl
-Paths.topic_modeling_defaults()  # configs/defaults.json → topic_modeling section
-Paths.stopwords_path()           # experiments/tfidf_analysis/stopwords/stopwords_pass2.txt
-Paths.collection_for_model(m)    # derives Qdrant collection name from model name
-```
-
-Adding a new path:
-1. Add key to `configs/paths.json`
-2. Add `@classmethod` to `src/rag_pipeline/core/paths.py`
-3. Use `Paths.my_new_path()` everywhere
-
----
-
-## Config — single source of truth
-```python
-# reading defaults
-defaults = Paths.topic_modeling_defaults()
-min_topic_size = args.min_topic_size or defaults["min_topic_size"]  # CLI overrides config
-
-# never do this
-defaults.get("key", hardcoded_fallback)  # fallbacks hide missing config — fail loudly
-```
-
-| File | Owns |
-|---|---|
-| `configs/paths.json` | All filesystem paths |
-| `configs/defaults.json` | Runtime defaults — thresholds, batch sizes, hosts |
-| `configs/retrieval_configs.json` | Retrieval strategy definitions |
-| `configs/benchmark_cli.py` | All argparse parser factories — never inline |
-| `src/rag_pipeline/eda/topics/entity_patterns.json` | All NER signals — edit here only |
-
----
-
-## Standards (never break these)
-```python
-# logging
-from src.rag_pipeline.logging import get_logger
-logger = get_logger(__name__)
-logger.info("Processing %s docs=%d", model, len(docs))  # % formatting, never f-strings
-
-# NO bare logging in library modules
-import logging; logging.basicConfig(...)  # entrypoint only
-
-# NO sys.path manipulation
-import sys; sys.path.insert(0, ...)  # Paths handles root resolution
-
-# NO relative __file__ paths
-Path(__file__).parent / "something"  # use Paths instead
-```
+Specific ERROR terms (`valueerror`, `typeerror`, `importerror`, `attributeerror`) are fine — keep them.
 
 ---
 
@@ -165,39 +63,163 @@ Path(__file__).parent / "something"  # use Paths instead
 1. spaCy EntityRuler          sets ner_category + ner_primary_entity (entity text)
 2. Cluster majority (≥0.8)    overrides OTHER via embedding neighborhood
 3. Keyword rules               ERROR > ADMIN > LANGUAGE > TOOL > CONCEPT
-4. Fallback OTHER              ~14 genuinely ambiguous docs — do not force
+4. Fallback OTHER              ~17 genuinely ambiguous docs — do not force
 ```
 
-Source: `entity_patterns.json` (flat lists keyed by category)
-```json
-{ "TOOL": ["docker", "airflow", ...], "ERROR": ["access denied", ...] }
-```
+## Pipeline stage verdicts
 
-`ClassificationRules.load()` reads this. `ClassificationRules.reclassify(category, question, topic_id, all_assignments)` returns `(new_category, source)` where source ∈ `unchanged | cluster | rules | fallback`.
+### ✅ spaCy EntityRuler — working as intended
+- Sets `ner_category` + `ner_primary_entity` for 941/1207 docs
+- `no_generic_entity` (-3.3pp from baseline) confirms these entities are real signal
+- Removing them hurts — they are doing useful work
 
-Whole-word matching for signals ≤3 chars (prevents `'r'` matching every word containing r).
+### ✅ Cluster majority vote — confirmed no-op (not broken, genuinely irrelevant)
+- Only 17 docs reach cluster branch (those remaining OTHER after spaCy + rules)
+- None have a clear cluster majority → `_cluster_majority_category` returns None for all 17
+- Root cause: ≥0.8 threshold too aggressive for this dataset; most clusters are mixed-category
+- 0pp delta is a real finding, not a bug
+
+### ⚠️ Keyword rules — mildly hurting (+0.6pp when skipped)
+- 249 docs reclassified by rules: CONCEPT:70, TOOL:62, ADMIN:61, ERROR:52, LANGUAGE:4
+- Rules assign entities correctly but generic ERROR/ADMIN/CONCEPT terms poison the boost
+- Specific TOOL/LANGUAGE rule matches are fine; the problem is generic category signals
+- Fix: prune generic terms from `entity_patterns.json` rather than disabling rules entirely
+
+### ✅ Topics/subtopics — confirmed no-op for current retriever
+- `no_topics` 0pp delta — topic_id in payload not used by `entity_boosted` retriever
+- `run_entity_boosted_retrieval` only uses `ner_primary_entity` and `ner_category` in should clause
+- Topics may become useful with a different retrieval strategy (e.g. topic-filtered search)
 
 ---
 
-## Key files touched this session
-| File | Change |
-|---|---|
-| `topic_modeling.py` | Fixed BERTopic stopwords kwarg, prob scalar bug, wrong subtopics import, wired ClassificationRules |
-| `topic_cluster.py` | Removed invalid `stopwords=` kwarg from BERTopic init |
-| `topic_rules.py` | Added `extract_entity()` method (present but not called — leave it) |
-| `schemas.py` | Added missing `from pathlib import Path` |
-| `entity_patterns.json` | ~60 new signals: MCP, Elastic Beanstalk, Prefect, Evidently, Faust, Flink, Pipenv, etc. |
+## Bugs fixed this session
+
+### 1. `ner_primary_entity` never populated after reclassification
+**File:** `src/rag_pipeline/eda/topics/core/topic_modeling.py`
+**Fix:** After `reclassify()` changes a category, call `rules.extract_entity(new_cat, question)`
+and write result to `a["ner_primary_entity"]` if currently None. This was the root cause of the
+apparent no_cluster gain — fresh topic modeling runs now produce correctly populated entities.
+
+### 2. `classification_source` never written to assignment dict
+**File:** `src/rag_pipeline/eda/topics/core/topic_modeling.py`
+**Fix:** Added `a["classification_source"] = source` after reclassify call.
+All docs were showing `classification_source: None`, making ablation diagnostics impossible.
+
+### 3. `TopicMerger.merge()` globbed all stale per-model files
+**File:** `src/rag_pipeline/eda/topics/core/topic_merge.py`
+**Fix:** Added `only: Path | None = None` parameter. Ablation experiments were being drowned
+out by 5 stale per-model files from May 23, producing identical results to baseline.
+
+### 4. `TopicMerger` had no `__main__` entry point
+**File:** `src/rag_pipeline/eda/topics/core/topic_merge.py`
+**Fix:** Added `if __name__ == "__main__"` block with `--only` argparse flag.
+`experiment.py` previously called it via `-c` string which broke on paths containing `/`.
+
+### 5. `experiment.py` merge call used broken shell quoting
+**File:** `src/rag_pipeline/ablation/experiment.py`
+**Fix:** Replaced broken `-c "TopicMerger().merge(only=Path(\"...\"))"` with
+`-m rag_pipeline.eda.topics.core.topic_merge --only "{out}"`.
 
 ---
 
 ## Immediate next steps
-1. **Find and fix the entity boost** — grep for where `entity_boosted` search_type is handled in the retrieval runner. The Qdrant `should` clause must reference `ner_primary_entity` payload field on inbound queries. This is why 85.9% → 80.3%.
-2. **Confirm 85.9% is recoverable** — once boost is wired, re-ingest and benchmark. If still 80.3%, the original run used different entity assignments.
-3. **Run ablation experiments** — one variable at a time:
-   - Null out `ner_primary_entity` → benchmark (isolates entity contribution)
-   - Null out `ner_category` → benchmark (isolates category filter contribution)
-   - Disable cluster majority → benchmark
-   - Disable keyword rules → benchmark
-4. **Add `reclassify_source` to assignment schema** — useful for diagnostics.
-5. **Add `main()` to `topic_merge.py`** — currently can't be run as a module.
+
+### 1. Establish true fixed baseline (required before any further ablation)
+```bash
+uv run python -m rag_pipeline.eda.topics.core.topic_modeling \
+  --embedding-model "BAAI/bge-base-en-v1.5" \
+  --output "src/rag_pipeline/eda/topics/experiments/topic_assignments_BAAI_bge_base_en_v1.5.json" && \
+uv run python -m rag_pipeline.eda.topics.core.topic_merge \
+  --only "src/rag_pipeline/eda/topics/experiments/topic_assignments_BAAI_bge_base_en_v1.5.json" && \
+uv run python -m rag_pipeline.ingestion.ingest_qdrant --model "BAAI/bge-base-en-v1.5" && \
+uv run python -m rag_pipeline.ingestion.benchmark \
+  --model "BAAI/bge-base-en-v1.5" --configs entity_boosted vector_default
 ```
+
+### 2. Run full ablation suite
+```bash
+# fast experiments only
+uv run python -m rag_pipeline.ablation flow --configs entity_boosted vector_default
+
+# include slow reruns
+uv run python -m rag_pipeline.ablation flow --configs entity_boosted vector_default --rerun
+```
+
+---
+
+## What is left
+
+### 🔴 High priority
+- [ ] **Establish true fixed baseline** — run full rerun pipeline above, commit result
+- [ ] **Prune noisy entity patterns** — remove `error`, `homework`, `course`, `project`, `model`
+  from `entity_patterns.json`. Keep specific ERROR terms (valueerror, typeerror, etc).
+  Re-run baseline after pruning to measure gain.
+- [ ] **Commit restructured src/ and ablation/**
+
+### 🟡 Medium priority
+- [ ] **Asymmetric NER (Question-First, Answer-Fallback)** — extract entity from Question first;
+  fall back to Answer if Question is generic. Requires full topic modeling rerun across all models.
+- [ ] **Cluster threshold** — 0.8 too aggressive; try 0.6 to see if cluster gains any real signal
+- [ ] **Corpus sampling** — minimum corpus size with corpus_sampler.py.
+  Fix naming mismatch: `ml-zoomcamp` vs `machine-learning-zoomcamp` in test set first.
+- [ ] **Reranker integration** — Vector → Reranker pipeline with best Cross-Encoder
+
+### 🟢 Low priority
+- [ ] **`ingest_qdrant` payload-only mode** — add `--payload-only` flag to skip vector re-upload
+  for experiments that only change NER payload fields (saves ~30s per experiment)
+- [ ] **Pydantic Assignment schema** — silent None fields caused 2 bugs this session.
+  Migrate after ablation suite complete; one focused PR with before/after benchmark.
+- [ ] **Update RERANKER.md** — document entity boosting vs pure vector findings
+- [ ] **`eval_queries_tiered.jsonl` NER stamping** — query file predates NER pipeline.
+  Benchmark joins correctly at runtime via topic_map, so this is cosmetic only.
+
+---
+
+## Data flow
+```
+data/processed/clean.jsonl  (1207 docs)
+  │
+  ▼
+BERTopic clustering                     topic_modeling.py
+  → topic_id, topic_probability
+  → keywords (TF-IDF)
+  │
+  ▼
+spaCy EntityRuler                       _tag_ner()
+  → ner_category + ner_primary_entity   TOOL/ERROR/CONCEPT/LANGUAGE/ADMIN/OTHER
+  │                                     941 docs categorised here
+  ▼
+_build_assignments()                    266 docs stay OTHER
+  │
+  ▼
+ClassificationRules.reclassify()        topic_rules.py — post-pass on OTHER docs only
+  → cluster majority (≥0.8)            → 0 docs changed (no clear majority)
+  → keyword rules                       → 249 docs changed (mildly hurts retrieval)
+  → fallback OTHER                      → 17 docs stay OTHER
+  NOTE: extract_entity() called after reclassify to populate ner_primary_entity ← fixed this session
+  │
+  ▼
+topic_assignments_{slug}.json           per-model, experiments/
+  │
+  ▼
+TopicMerger().merge(only=path)          topic_merge.py — always pass --only for ablation runs
+  → topic_assignments_all.json          output/ — single source for ingestion
+  │
+  ▼
+ingest_qdrant.py                        NER fields stored as Qdrant payload
+  │
+  ▼
+benchmark.py                            453 queries → H@1 / MRR
+  NER for boost looked up from topic_map[expected_id] at runtime — NOT from query file
+```
+
+---
+
+## Key files modified this session
+| File | Change |
+|---|---|
+| `topic_modeling.py` | `classification_source` write-back; `extract_entity` after reclassify |
+| `topic_merge.py` | `only` param on `merge()`; `__main__` block with `--only` flag |
+| `experiment.py` | Fixed merge call to `-m` module; fixed broken shell quoting |
+| `cli.py` | Added `flow` command — runs full experiment suite in sequence |
+| `benchmark_cli.py` | Added `flow` subparser with `--rerun` flag |

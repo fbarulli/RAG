@@ -8,8 +8,9 @@ Run:
     uv run python -m rag_pipeline.eda.topics.core.topic_modeling --embedding-model "BAAI/bge-small-en-v1.5"
 """
 import json
+import gc
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional
 
 from rag_pipeline.logging import get_logger
 from rag_pipeline.core.paths import Paths
@@ -37,8 +38,12 @@ def _model_output_path(base: Path, model_name: str, run_all: bool) -> Path:
 def _load_documents(path: Path) -> list[dict]:
     if not path.exists():
         raise FileNotFoundError(f"Input file not found: {path}")
-    with open(path, encoding="utf-8") as f:
-        return [json.loads(line) for line in f if line.strip()]
+    try:
+        with open(path, encoding="utf-8") as f:
+            return [json.loads(line) for line in f if line.strip()]
+    except Exception as e:
+        logger.error("Failed to load documents from %s: %s", path, e)
+        raise
 
 
 def _reassign_outliers(
@@ -50,8 +55,11 @@ def _reassign_outliers(
     outlier_indices = [i for i, t in enumerate(topics) if t == -1]
     if not outlier_indices:
         return topics, probs
+        
     outlier_questions = [questions[i] for i in outlier_indices]
+    # approximate_distribution returns (probs, topics)
     topic_distr, _ = topic_model.approximate_distribution(outlier_questions)
+    
     for idx, dist in zip(outlier_indices, topic_distr):
         best_topic = int(dist.argmax())
         best_prob = float(dist.max())
@@ -62,10 +70,13 @@ def _reassign_outliers(
 
 
 def _tag_ner(questions: list[str]) -> dict[str, dict]:
+    """Performs NER tagging. Called once per session to avoid redundant computation."""
+    logger.info("Starting NER tagging for %d questions...", len(questions))
     nlp = build_base_nlp()
     missed = extract_missed_terms(questions, nlp)
     suggestions = suggest_patterns(missed, min_count=3)
     nlp = update_entity_ruler(nlp, suggestions)
+    
     tagged: dict[str, dict] = {}
     for doc in nlp.pipe(questions, batch_size=64):
         ents = list(doc.ents)
@@ -73,6 +84,7 @@ def _tag_ner(questions: list[str]) -> dict[str, dict]:
             "category": ents[0].label_ if ents else "OTHER",
             "primary_entity": ents[0].text.lower() if ents else None,
         }
+    logger.info("NER tagging complete.")
     return tagged
 
 
@@ -86,9 +98,13 @@ def _build_assignments(
     assignments = []
     for i, doc in enumerate(docs):
         topic_id = topics[i]
-        prob = float(probs[i].max()) if hasattr(probs[i], "max") else float(probs[i]) if i < len(probs) else 0.0
+        # Clean probability extraction
+        p_val = probs[i]
+        prob = float(p_val.max()) if hasattr(p_val, "max") else float(p_val)
+        
         keywords = topic_model.get_topic(topic_id) if topic_id != -1 else []
         ner = ner_tagged.get(doc["question"], {})
+        
         assignments.append({
             "id": doc["id"],
             "course": doc.get("course", "unknown"),
@@ -113,12 +129,17 @@ def _apply_subtopics(
     subtopic_min_size: int,
 ) -> list[dict]:
     from rag_pipeline.eda.topics.core.topic_subtopics import build_subtopics as generate_subtopics
-    topic_counts = {t: sum(1 for a in assignments if a["topic"] == t) for t in set(a["topic"] for a in assignments) if t != -1}
+    
+    topic_counts = {t: sum(1 for a in assignments if a["topic"] == t) 
+                    for t in set(a["topic"] for a in assignments) if t != -1}
+    
     large_topics = [t for t, c in topic_counts.items() if c > subtopic_threshold]
     if not large_topics:
         return assignments
+        
     logger.info("Found %d topics > %d docs — generating subtopics", len(large_topics), subtopic_threshold)
     subtopic_map = generate_subtopics(assignments, questions, embeddings, subtopic_threshold, subtopic_min_size)
+    
     for t_id, sub_info in subtopic_map.items():
         for local in sub_info:
             idx = local["orig_idx"]
@@ -139,11 +160,10 @@ def _build_report(
 ) -> dict:
     outlier_count = sum(1 for a in assignments if a["topic"] == -1)
     outlier_ratio = outlier_count / len(assignments) if assignments else 0.0
+    
     if outlier_ratio > 0.2:
-        logger.warning(
-            "High outlier ratio %.1f%% — consider tuning parameters",
-            outlier_ratio * 100,
-        )
+        logger.warning("High outlier ratio %.1f%% — consider tuning parameters", outlier_ratio * 100)
+        
     return {
         "metadata": {
             "model": model_name,
@@ -168,6 +188,7 @@ def process_model(
     subtopic_threshold: int,
     subtopic_min_size: int,
     input_path: Path,
+    ner_tagged: dict[str, dict],
 ) -> None:
     logger.info("Processing model: %s", model_name)
     docs = _load_documents(input_path)
@@ -183,14 +204,18 @@ def process_model(
     )
 
     topics, probs = _reassign_outliers(topic_model, questions, topics, probs)
-    ner_tagged = _tag_ner(questions)
     assignments = _build_assignments(docs, topics, probs, topic_model, ner_tagged)
 
     rules = ClassificationRules.load()
     for a in assignments:
         new_cat, source = rules.reclassify(a["ner_category"], a["question"], a["topic"], assignments)
+        a["classification_source"] = source
         if source != "unchanged":
             a["ner_category"] = new_cat
+            if a.get("ner_primary_entity") is None:
+                entity = rules.extract_entity(new_cat, a["question"])
+                a["ner_primary_entity"] = entity
+            
     if subtopic_threshold > 0:
         assignments = _apply_subtopics(
             assignments, questions, embeddings, subtopic_threshold, subtopic_min_size
@@ -200,7 +225,13 @@ def process_model(
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2)
+        
     logger.info("Saved %d assignments → %s", len(assignments), output_path)
+    
+    # Explicit cleanup to prevent CPU memory bloat during --run-all
+    del topic_model
+    del embeddings
+    gc.collect()
 
 
 # --- entrypoint -------------------------------------------------------------
@@ -209,21 +240,27 @@ def main() -> None:
     defaults = Paths.topic_modeling_defaults()
     args = create_topic_modeling_parser().parse_args()
 
-    min_topic_size = args.min_topic_size or defaults["min_topic_size"]
-    min_samples = args.min_samples or defaults["min_samples"]
-    subtopic_threshold = args.subtopic_threshold or defaults["subtopic_threshold"]
-    subtopic_min_size = defaults.get("subtopic_min_size", 5)
+    min_topic_size     = args.min_topic_size     if args.min_topic_size     is not None else defaults["min_topic_size"]
+    min_samples        = args.min_samples        if args.min_samples        is not None else defaults["min_samples"]
+    subtopic_threshold = args.subtopic_threshold if args.subtopic_threshold is not None else defaults["subtopic_threshold"]
+    subtopic_min_size = defaults["subtopic_min_size"]
     input_path = args.input or Paths.input_file("eda")
     base_output = args.output or Paths.topics_default_output()
     embedding_model = args.embedding_model or TopicsConfig.DEFAULT_MODEL
 
     models_to_run = TopicsConfig.get_embedding_models() if args.run_all else [embedding_model]
 
+    # OPTIMIZATION: Tag NER once for the session, not once per model
+    docs = _load_documents(input_path)
+    questions = [d["question"] for d in docs]
+    ner_tagged = _tag_ner(questions)
+
     for model in models_to_run:
         target = _model_output_path(base_output, model, args.run_all)
         if args.run_all and target.exists():
             logger.info("Skipping %s — %s already exists", model, target.name)
             continue
+            
         process_model(
             model_name=model,
             output_path=target,
@@ -232,6 +269,7 @@ def main() -> None:
             subtopic_threshold=subtopic_threshold,
             subtopic_min_size=subtopic_min_size,
             input_path=input_path,
+            ner_tagged=ner_tagged,
         )
 
 

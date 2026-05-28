@@ -1,0 +1,24 @@
+{
+  "name": "no_cluster",
+  "patch": "skip_cluster",
+  "configs": [
+    "entity_boosted"
+  ],
+  "model": "BAAI/bge-base-en-v1.5",
+  "timestamp": "2026-05-28T22:27:58.987104+00:00",
+  "metrics": {
+    "entity_boosted": {
+      "h1": 0.9265658747300216,
+      "h3": 0.978401727861771,
+      "h5": 0.9870410367170627,
+      "h10": 0.9956803455723542,
+      "mrr": 0.955032740237924,
+      "p50_ms": 8.436561998678371
+    }
+  },
+  "result_files": [
+    "/workspaces/RAG-a-muffin/experiments/ablation_results/no_cluster__entity_boosted_query_results.jsonl"
+  ],
+  "git_commit": "a139fe9ee1f85062280e4830fc2515848fcd17d6",
+  "corpus_size": 1207
+}

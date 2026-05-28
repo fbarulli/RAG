@@ -1,4 +1,4 @@
-# rag_pipeline/ablation/report.py
+# src/rag_pipeline/ablation/report.py
 """
 Print summary table across all completed experiments, with per-query-type breakdown.
 
@@ -27,7 +27,9 @@ def check_regressions(results: list[dict], ci: bool = False) -> bool:
     baseline_path = Paths.experiments_dir() / "baseline.json"
     if not baseline_path.exists():
         if ci:
-            print("[ci] No baseline.json found — skipping regression check")
+            print("[ERROR] No baseline.json found. Regression check is REQUIRED for CI.")
+            return True # Signal failure in CI
+        print("[WARN] No baseline.json found — skipping regression check")
         return False
 
     baseline = json.load(open(baseline_path))

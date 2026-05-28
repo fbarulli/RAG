@@ -72,6 +72,56 @@ def cmd_run(args) -> None:
             print(f"  {qt:<22} {len(hits):>5} {sum(hits)/len(hits):>7.1%}")
 
 
+def cmd_flow(args) -> None:
+    from rag_pipeline.ablation.experiment import Experiment, Patch
+    from rag_pipeline.core.paths import Paths
+
+    defaults = {}
+    if args.configs:
+        defaults["configs"] = args.configs
+    if args.model:
+        defaults["model"] = args.model
+
+    # fast payload-only experiments first
+    fast = [
+        ("baseline",           Patch()),
+        ("no_entity",          Patch(null_entity=True)),
+        ("no_category",        Patch(null_category=True)),
+        ("no_topics",          Patch(null_topics=True)),
+        ("no_generic_entity",  Patch(null_generic_entities=True)),
+        ("low_conf_null_50",   Patch(null_low_confidence_topics=True, topic_prob_threshold=0.5)),
+        ("low_conf_null_40",   Patch(null_low_confidence_topics=True, topic_prob_threshold=0.4)),
+    ]
+
+    # slow rerun experiments — only if --rerun passed
+    slow = [
+        ("no_cluster",       Patch(skip_cluster=True)),
+        ("no_rules",         Patch(skip_rules=True)),
+        ("empty_patterns",   Patch(empty_entity_patterns=True)),
+    ]
+
+    suite = fast + (slow if args.rerun else [])
+    print(f"Running {len(suite)} experiments ({len(fast)} fast" + (f", {len(slow)} slow" if args.rerun else ", rerun skipped") + ")")
+
+    for name, patch in suite:
+        print("\n" + "="*50)
+        exp = Experiment(name=name, patch=patch, **defaults)
+        try:
+            result = exp.run()
+            for cfg, metrics in result.metrics.items():
+                h1  = metrics.get("h1",  metrics.get("hit_at_1", "?"))
+                mrr = metrics.get("mrr", "?")
+                h1_str  = f"{h1:.1%}"  if isinstance(h1,  float) else str(h1)
+                mrr_str = f"{mrr:.4f}" if isinstance(mrr, float) else str(mrr)
+                print(f"  {name:<25} {cfg:<25} H@1={h1_str}  MRR={mrr_str}")
+        except Exception as e:
+            print(f"  ERROR in {name}: {e}")
+            continue
+
+    print("\n" + "="*50)
+    print("Flow complete. Run: uv run python -m rag_pipeline.ablation report")
+
+
 def cmd_compare(args) -> None:
     from rag_pipeline.ablation.compare import compare, summary, print_diff
     rows = compare(args.exp_a, args.exp_b, top_k=args.top_k)
@@ -99,6 +149,7 @@ def main() -> None:
         "run":     cmd_run,
         "compare": cmd_compare,
         "report":  cmd_report,
+        "flow":    cmd_flow,
     }
     dispatch[args.command](args)
 

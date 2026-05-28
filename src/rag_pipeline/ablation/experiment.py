@@ -143,7 +143,8 @@ class Experiment:
 
         assignments_path    = Paths.topic_assignments()
         entity_patterns_path = Paths.entity_patterns()
-        original_assignments = _load_from_git(assignments_path)
+        with open(assignments_path, encoding="utf-8") as f:
+            original_assignments = json.load(f)
         original_patterns    = entity_patterns_path.read_text(encoding="utf-8")
 
         try:
@@ -228,9 +229,7 @@ class Experiment:
             env=env,
         )
         _run(
-            'uv run python -c "'
-            'from rag_pipeline.eda.topics.core.topic_merge import TopicMerger; '
-            'TopicMerger().merge()"',
+            f'uv run python -m rag_pipeline.eda.topics.core.topic_merge --only "{out}"',
             env=env,
         )
         _run(f'uv run python -m rag_pipeline.ingestion.ingest_qdrant --model "{self.model}"')

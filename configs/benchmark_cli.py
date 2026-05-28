@@ -215,6 +215,11 @@ def create_ablation_parser() -> argparse.ArgumentParser:
 
     # ── report ───────────────────────────────────────────────────────────────
     rep_p = sub.add_parser("report", help="Print summary table of all completed experiments")
+
+    flow_p = sub.add_parser("flow", help="Run the full ablation suite in sequence")
+    flow_p.add_argument("--configs", nargs="+", default=None, help="Override configs for all experiments")
+    flow_p.add_argument("--model",   default=None, help="Override model for all experiments")
+    flow_p.add_argument("--rerun",   action="store_true", default=False, help="Include slow rerun experiments (skip_cluster, skip_rules, empty_patterns)")
     rep_p.add_argument("--ci", action="store_true", default=False, help="Exit 1 if any regression exceeds threshold")
 
     return parser

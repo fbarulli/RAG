@@ -35,6 +35,7 @@
   "topic_modeling": {
     "min_topic_size": 5,
     "min_samples": 1,
-    "subtopic_threshold": 40
+    "subtopic_threshold": 40,
+    "subtopic_min_size": 5
   }
 }
