@@ -35,7 +35,7 @@ def _results_dir() -> Path:
 def _production_defaults() -> tuple[str, list[str]]:
     """Return (production_model, [production_config]) from defaults.json."""
     d = Paths.defaults()
-    model  = d.get("production_model", "BAAI/bge-base-en-v1.5")
+    model  = d.get("production_model")
     config = d.get("production_config", "entity_boosted")
     return model, [config]
 

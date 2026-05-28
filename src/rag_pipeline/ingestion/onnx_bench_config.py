@@ -7,8 +7,6 @@ import logging
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 logger = logging.getLogger(__name__)
-DEFAULT_COLLECTION = 'faqs_bge_base_en_v1_5'
-DEFAULT_MODEL = 'BAAI/bge-base-en-v1.5'
 
 def load_matrix_configs(config_path: str='configs/rerankers.json') -> List[Dict[str, Any]]:
     """RESPONSIBILITY: Parses cross-encoder matrix models out of the JSON file configuration."""
@@ -27,14 +25,15 @@ def load_matrix_configs(config_path: str='configs/rerankers.json') -> List[Dict[
 
 def extract_active_environment() -> Tuple[str, str]:
     """RESPONSIBILITY: Isolates operational database collection names and production model identifiers."""
-    model = DEFAULT_MODEL
-    collection = DEFAULT_COLLECTION
     try:
-        from rag_pipeline.ingestion.benchmark_config import load_defaults
+        from rag_pipeline.ingestion.benchmark_loader import load_defaults
         defaults_data = load_defaults()
-        model = defaults_data.get('production_model', model)
-        collection = defaults_data.get('qdrant', {}).get('collection', collection)
-        logger.info('Loaded environment defaults: model=%s, collection=%s', model, collection)
+        model = defaults_data.get("production_model")
+        collection = defaults_data.get("qdrant", {}).get("collection")
+        if not model:
+            raise ValueError("production_model missing in defaults.json")
+        logger.info("Loaded environment defaults: model=%s, collection=%s", model, collection)
     except Exception as e:
-        logger.warning('Failed to load environment defaults, using primitives fallback. Error: %s', e)
+        logger.error("Failed to load defaults.json: %s", e)
+        raise
     return (model, collection)

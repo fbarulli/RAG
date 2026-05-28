@@ -200,7 +200,7 @@ def main() -> None:
         help="Corpus fractions to test, largest first (default: 1.0 0.8 0.6 0.4 0.2)",
     )
     parser.add_argument(
-        "--model", default=defaults.get("production_model", "BAAI/bge-base-en-v1.5"),
+        "--model", default=defaults.get("production_model"),
         help="Embedding model (default: production_model from defaults.json)",
     )
     parser.add_argument(

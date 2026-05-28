@@ -32,7 +32,7 @@ class TopicsConfig:
         sorted_models = sorted(models, key=lambda m: tier_order.get(m.get("tier"), 99))
         return [m["name"] for m in sorted_models]
     
-    DEFAULT_MODEL = "BAAI/bge-base-en-v1.5"
+    DEFAULT_MODEL = None
     
     CLUSTER_CONFIDENCE_THRESHOLD = 0.75
     RULE_OVERRIDE_THRESHOLD = 0.40

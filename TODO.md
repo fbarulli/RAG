@@ -203,8 +203,8 @@ uv run pytest tests/ -v
 Next session (1–2 hours):
   1.3  Check compare.py
   1.2  Audit grep for remaining hardcoded paths
-  1.1  Fix run_clean_pipeline.py
-  → bash audit.sh
+  
+  
 
 Following session (2–3 hours):
   2.1  ablation_config.json + Paths.ablation_config()
