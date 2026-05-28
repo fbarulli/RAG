@@ -1,0 +1,24 @@
+{
+  "name": "no_generic_entity",
+  "patch": "no_generic_entity",
+  "configs": [
+    "entity_boosted"
+  ],
+  "model": "BAAI/bge-base-en-v1.5",
+  "timestamp": "2026-05-28T16:01:20.312472+00:00",
+  "metrics": {
+    "entity_boosted": {
+      "h1": 0.8552915766738661,
+      "h3": 0.9503239740820735,
+      "h5": 0.9654427645788337,
+      "h10": 0.980561555075594,
+      "mrr": 0.9054407076005349,
+      "p50_ms": 9.225439000147162
+    }
+  },
+  "result_files": [
+    "/workspaces/RAG-a-muffin/experiments/ablation_results/no_generic_entity__entity_boosted_query_results.jsonl"
+  ],
+  "git_commit": "83e4133141fa8291a6e1902e59ddfb98f98a199c",
+  "corpus_size": 1207
+}

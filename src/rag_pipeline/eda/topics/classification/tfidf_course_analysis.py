@@ -69,7 +69,7 @@ def load_cleaned_data(eda_stats_path: Path | None=None) -> tuple[pd.DataFrame, d
     eda_stats   : parsed EDA dict (empty dict if path not provided)
     """
     if eda_stats_path is None:
-        eda_stats_path = Path('/workspaces/LLM/rag_pipeline/experiments/eda_summary.json')
+        eda_stats_path = Paths.experiments_dir() / 'eda_summary.json'
     logger.info(f'[load_cleaned_data] CALLED with eda_stats_path = {eda_stats_path}')
     try:
         path = Paths.clean_jsonl()
@@ -778,7 +778,7 @@ def save_results(tfidf_results: dict, bridges: dict, bridge_characterisations: d
         raise
 
 def main() -> None:
-    eda_stats_path = Path('/workspaces/LLM/rag_pipeline/experiments/eda_summary.json')
+    eda_stats_path = Paths.experiments_dir() / 'eda_summary.json'
     df, eda_stats = load_cleaned_data(eda_stats_path=eda_stats_path)
     logger.info(f'experiments_dir = {Paths.experiments_dir()}')
     logger.info(f'eda_stats_path = {eda_stats_path}')

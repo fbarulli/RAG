@@ -31,6 +31,9 @@ def cmd_run(args) -> None:
             empty_entity_patterns=args.empty_entity_patterns,
             skip_cluster=args.skip_cluster,
             skip_rules=args.skip_rules,
+            null_generic_entities=args.null_generic_entity,
+            null_low_confidence_topics=args.null_low_confidence_topics,
+            topic_prob_threshold=args.topic_prob_threshold,
         ),
         configs=args.configs,
         model=args.model,
@@ -43,6 +46,30 @@ def cmd_run(args) -> None:
         h1_str  = f"{h1:.1%}"  if isinstance(h1,  float) else str(h1)
         mrr_str = f"{mrr:.4f}" if isinstance(mrr, float) else str(mrr)
         print(f"  {cfg:<25} H@1={h1_str}  MRR={mrr_str}")
+
+    # per-query-type breakdown from saved JSONL
+    import json
+    from collections import defaultdict
+    from rag_pipeline.core.paths import Paths
+    results_dir = Paths.ablation_results_dir()
+    for cfg in result.configs:
+        jsonl = results_dir / f"{result.name}__{cfg}_query_results.jsonl"
+        if not jsonl.exists():
+            continue
+        buckets = defaultdict(list)
+        with open(jsonl) as f:
+            for line in f:
+                row = json.loads(line)
+                qt = row.get("query_type", "unknown")
+                hit = row.get("hit_ids", [])
+                expected = row.get("expected_id", "")
+                buckets[qt].append(int(bool(hit and hit[0] == expected)))
+        print(f"\n  [{cfg}] breakdown by query type:")
+        print(f"  {'query_type':<22} {'n':>5} {'H@1':>7}")
+        print(f"  {'-' * 36}")
+        for qt in sorted(buckets):
+            hits = buckets[qt]
+            print(f"  {qt:<22} {len(hits):>5} {sum(hits)/len(hits):>7.1%}")
 
 
 def cmd_compare(args) -> None:
@@ -61,7 +88,7 @@ def cmd_compare(args) -> None:
 
 def cmd_report(args) -> None:
     from rag_pipeline.ablation.report import print_report
-    print_report()
+    print_report(ci=getattr(args, "ci", False))
 
 
 def main() -> None:

@@ -44,6 +44,8 @@ def _production_defaults() -> tuple[str, list[str]]:
 # Patch
 # ---------------------------------------------------------------------------
 
+GENERIC_ENTITIES = {"error", "homework", "course", "model", "project", "issue"}
+
 @dataclass
 class Patch:
     # payload patches (no re-run needed)
@@ -56,6 +58,10 @@ class Patch:
     # reclassify patches (env var flags, require topic modeling re-run)
     skip_cluster: bool = False           # ABLATION_SKIP_CLUSTER
     skip_rules: bool = False             # ABLATION_SKIP_RULES
+    # selective payload patches
+    null_generic_entities: bool = False
+    null_low_confidence_topics: bool = False
+    topic_prob_threshold: float = 0.5
 
     @property
     def needs_rerun(self) -> bool:
@@ -74,6 +80,12 @@ class Patch:
                 a["ner_category"] = "OTHER"
             if self.null_topics:
                 a["topic"] = -1
+            if self.null_generic_entities:
+                if a.get("ner_primary_entity") in GENERIC_ENTITIES:
+                    a["ner_primary_entity"] = None
+            if self.null_low_confidence_topics:
+                if a.get("topic_probability", 1.0) < self.topic_prob_threshold:
+                    a["topic"] = -1
         return assignments
 
     def env(self) -> dict:
@@ -93,6 +105,8 @@ class Patch:
         if self.empty_entity_patterns: parts.append("empty_patterns")
         if self.skip_cluster:          parts.append("skip_cluster")
         if self.skip_rules:            parts.append("skip_rules")
+        if self.null_generic_entities:      parts.append("no_generic_entity")
+        if self.null_low_confidence_topics: parts.append(f"low_conf_{str(self.topic_prob_threshold).replace('.', '')}")
         return "+".join(parts) if parts else "baseline"
 
 
@@ -109,6 +123,8 @@ class ExperimentResult:
     timestamp: str
     metrics: dict
     result_files: list[str]
+    git_commit: str = "unknown"
+    corpus_size: int = None
 
 
 # ---------------------------------------------------------------------------
@@ -150,6 +166,20 @@ class Experiment:
             entity_patterns_path.write_text(original_patterns, encoding="utf-8")
             logger.info("Restored original state")
 
+        git_result = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            capture_output=True, text=True, cwd=Paths.base(),
+        )
+        git_commit = git_result.stdout.strip() if git_result.returncode == 0 else "unknown"
+
+        try:
+            import json as _json
+            corpus_size = sum(
+                1 for _ in open(Paths.clean_jsonl(), encoding="utf-8")
+            )
+        except Exception:
+            corpus_size = None
+
         result = ExperimentResult(
             name=self.name,
             patch=self.patch.label(),
@@ -158,6 +188,8 @@ class Experiment:
             timestamp=datetime.now(timezone.utc).isoformat(),
             metrics=metrics,
             result_files=result_files,
+            git_commit=git_commit,
+            corpus_size=corpus_size,
         )
         meta_path = _results_dir() / f"{self.name}_meta.json"
         with open(meta_path, "w", encoding="utf-8") as f:

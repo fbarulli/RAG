@@ -192,6 +192,12 @@ def create_ablation_parser() -> argparse.ArgumentParser:
                    help="Disable cluster majority vote (re-run)")
     g.add_argument("--skip-rules",            action="store_true",
                    help="Disable keyword rules (re-run)")
+    g.add_argument("--null-generic-entity",        action="store_true", default=False,
+                   help="Null entity for generic values (no re-run)")
+    g.add_argument("--null-low-confidence-topics", action="store_true", default=False,
+                   help="Set topic=-1 for low-confidence assignments (no re-run)")
+    g.add_argument("--topic-prob-threshold",       type=float, default=0.5,
+                   help="Probability threshold for --null-low-confidence-topics")
     g2 = run_p.add_argument_group("model / config")
     g2.add_argument("--configs", nargs="+", default=[default_config],
                     help=f"Retrieval configs to benchmark "
@@ -208,6 +214,7 @@ def create_ablation_parser() -> argparse.ArgumentParser:
     cmp_p.add_argument("--show", choices=["all", "wins", "losses"], default="all")
 
     # ── report ───────────────────────────────────────────────────────────────
-    sub.add_parser("report", help="Print summary table of all completed experiments")
+    rep_p = sub.add_parser("report", help="Print summary table of all completed experiments")
+    rep_p.add_argument("--ci", action="store_true", default=False, help="Exit 1 if any regression exceeds threshold")
 
     return parser
