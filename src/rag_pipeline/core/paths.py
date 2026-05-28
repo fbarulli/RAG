@@ -169,3 +169,7 @@ class Paths:
     @classmethod
     def stopwords_path(cls) -> Path:
         return cls.topics_experiments_dir() / "tfidf_analysis" / "stopwords" / "stopwords_pass2.txt"
+
+    @classmethod
+    def embeddings_cache_dir(cls) -> Path:
+        return cls._resolve("embeddings_cache_dir")

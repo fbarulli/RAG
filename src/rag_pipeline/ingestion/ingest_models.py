@@ -25,7 +25,7 @@ def load_ner_map(topic_assignments_path: Optional[Path], model_name: str) -> dic
 
 
     
-p02_ingest_models.py
+ingest_models.py
 ====================
 Ingests FAQ documents into Qdrant using all embedding models declared in
 ``configs/models.json``.
@@ -33,8 +33,8 @@ Ingests FAQ documents into Qdrant using all embedding models declared in
 Creates separate collections per model for comparative evaluation.
 
 Run:
-    uv run python -m rag_pipeline.ingestion.p02_ingest_models
-    uv run python -m rag_pipeline.ingestion.p02_ingest_models --model BAAI/bge-base-en-v1.5
+    uv run python -m rag_pipeline.ingestion.ingest_models
+    uv run python -m rag_pipeline.ingestion.ingest_models --model BAAI/bge-base-en-v1.5
 """
 from __future__ import annotations
 import gc
