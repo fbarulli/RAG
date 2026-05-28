@@ -1,6 +1,4 @@
-Good distribution — 335/470 have entity signal, category spread looks realistic.
 
-On avoiding the mistakes — here's what actually went wrong and the systemic fix for each:
 
 **1. Ablating fields that were never wired in**
 The category/topic ablation was meaningless because the retriever never read those fields. Before designing any ablation, verify the field participates in the code path end-to-end.

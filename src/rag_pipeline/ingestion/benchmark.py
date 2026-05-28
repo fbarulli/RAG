@@ -9,7 +9,8 @@ from pathlib import Path
 from rag_pipeline.logging import get_logger
 from .benchmark_metrics_data.evaluation import evaluate_config
 from .benchmark_metrics_data.aggregation import aggregate_metrics
-from .benchmark_report import print_full_benchmark_report, save_benchmark_results, save_performance_summary
+from .benchmark_report import print_full_benchmark_report
+from .benchmark_persistence import save_benchmark_results, save_performance_summary
 from .benchmark_config import BenchmarkConfig
 from configs.benchmark_cli import create_benchmark_parser
 
@@ -133,16 +134,17 @@ def main():
 
         logger.info(f"Evaluating {model_entry['name']} | Configs: {list(configs.keys())}")
 
-        all_results = []
+        summaries = []
+        results_map = {}
         for cfg_name, cfg in configs.items():
-            cfg_name, summary, results = _run_config(
+            name, summary, results = _run_config(
                 cfg_name, cfg, config, model, model_entry, test_set, topic_map
             )
-            _save_query_results(results, cfg_name, config.output_dir)
-            all_results.append((cfg_name, summary, results))
+            _save_query_results(results, name, config.output_dir)
+            summaries.append(summary)
+            results_map[name] = results
 
-        summaries = [s for _, s, _ in all_results]
-        print_full_benchmark_report(summaries)
+        print_full_benchmark_report(summaries, query_results_map=results_map)
         save_benchmark_results(summaries, config.output_dir)
         save_performance_summary(summaries, config.output_dir)
         logger.info('✅ Benchmark complete!')

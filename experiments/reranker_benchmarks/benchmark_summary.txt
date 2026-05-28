@@ -1,16 +1,45 @@
 RETRIEVAL BENCHMARK SUMMARY
 ========================================================================================================================
 
-Config: entity_boosted | Model: BAAI/bge-base-en-v1.5
-  Queries: 463
-  Hit Rate @1: 88.6% | @3: 95.5% | @5: 96.8% | @10: 98.1%
-  MRR: 0.9231 | NDCG@10: 0.9374
-  Latency: p50=9.6ms | p95=12.4ms | p99=15.6ms
+Config: entity_boosted (chaos_monkey) | Model: BAAI/bge-base-en-v1.5
+  Queries: 6
+  Hit Rate @1: 100.0% | @3: 100.0% | @5: 100.0% | @10: 100.0%
+  MRR: 1.0000 | NDCG@10: 1.0000
+  Latency: p50=9.2ms | p95=10.1ms | p99=10.1ms
   Code Integrity (Ref): 100.0% | (Retrieved): 100.0%
   Cross-Course Contamination: 0.00%
-  Rank Std Dev: 1.61   (lower is better)
-  Failures (Hit@10=0): 9
-  Avg Failure Similarity: 0.6648
+  Rank Std Dev: 0.00   (lower is better)
+  Failures (Hit@10=0): 0
+
+Config: entity_boosted (creative_student) | Model: BAAI/bge-base-en-v1.5
+  Queries: 6
+  Hit Rate @1: 100.0% | @3: 100.0% | @5: 100.0% | @10: 100.0%
+  MRR: 1.0000 | NDCG@10: 1.0000
+  Latency: p50=9.2ms | p95=11.1ms | p99=11.1ms
+  Code Integrity (Ref): 100.0% | (Retrieved): 100.0%
+  Cross-Course Contamination: 0.00%
+  Rank Std Dev: 0.00   (lower is better)
+  Failures (Hit@10=0): 0
+
+Config: entity_boosted (grounded_analyst) | Model: BAAI/bge-base-en-v1.5
+  Queries: 6
+  Hit Rate @1: 100.0% | @3: 100.0% | @5: 100.0% | @10: 100.0%
+  MRR: 1.0000 | NDCG@10: 1.0000
+  Latency: p50=8.0ms | p95=10.2ms | p99=10.2ms
+  Code Integrity (Ref): 100.0% | (Retrieved): 100.0%
+  Cross-Course Contamination: 0.00%
+  Rank Std Dev: 0.00   (lower is better)
+  Failures (Hit@10=0): 0
+
+Config: entity_boosted (original) | Model: BAAI/bge-base-en-v1.5
+  Queries: 2
+  Hit Rate @1: 100.0% | @3: 100.0% | @5: 100.0% | @10: 100.0%
+  MRR: 1.0000 | NDCG@10: 1.0000
+  Latency: p50=8.5ms | p95=8.9ms | p99=8.9ms
+  Code Integrity (Ref): 100.0% | (Retrieved): 100.0%
+  Cross-Course Contamination: 0.00%
+  Rank Std Dev: 0.00   (lower is better)
+  Failures (Hit@10=0): 0
 
 Config: entity_boosted_dbsf | Model: BAAI/bge-base-en-v1.5
   Queries: 453
@@ -206,15 +235,14 @@ Config: onnx_mixedbread-ai_mxbai-rerank-xsmall-v1 | Model: mxbai-xsmall
   Failures (Hit@10=0): 0
 
 Config: vector_default | Model: BAAI/bge-base-en-v1.5
-  Queries: 463
-  Hit Rate @1: 80.3% | @3: 93.7% | @5: 95.9% | @10: 97.2%
-  MRR: 0.8719 | NDCG@10: 0.8970
-  Latency: p50=7.8ms | p95=9.2ms | p99=10.0ms
+  Queries: 20
+  Hit Rate @1: 100.0% | @3: 100.0% | @5: 100.0% | @10: 100.0%
+  MRR: 1.0000 | NDCG@10: 1.0000
+  Latency: p50=9.4ms | p95=11.0ms | p99=11.9ms
   Code Integrity (Ref): 100.0% | (Retrieved): 100.0%
   Cross-Course Contamination: 0.00%
-  Rank Std Dev: 1.86   (lower is better)
-  Failures (Hit@10=0): 13
-  Avg Failure Similarity: 0.6596
+  Rank Std Dev: 0.00   (lower is better)
+  Failures (Hit@10=0): 0
 
 Config: vector_with_threshold | Model: BAAI/bge-base-en-v1.5
   Queries: 453
