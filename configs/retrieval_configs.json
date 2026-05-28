@@ -28,5 +28,26 @@
     "rrf_k": 60,
     "boost_question": 5.0,
     "boost_text": 5.0
+  },
+  "entity_category_boosted": {
+    "name": "Entity + Category Boosted",
+    "search_type": "entity_category_boosted",
+    "use_entity": true,
+    "use_category": true,
+    "use_topic": false
+  },
+  "entity_topic_boosted": {
+    "name": "Entity + Topic Boosted",
+    "search_type": "entity_category_boosted",
+    "use_entity": true,
+    "use_category": false,
+    "use_topic": true
+  },
+  "entity_full_boosted": {
+    "name": "Entity + Category + Topic Boosted",
+    "search_type": "entity_category_boosted",
+    "use_entity": true,
+    "use_category": true,
+    "use_topic": true
   }
 }

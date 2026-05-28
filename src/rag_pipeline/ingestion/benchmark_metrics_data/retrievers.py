@@ -134,6 +134,87 @@ def run_vector_retrieval_with_reranker(client, collection: str, query_vector: li
     total_latency_ms = (time.perf_counter() - start_total) * 1000
     return SearchResult(hit_ids=final_hit_ids, hit_scores=final_scores, hit_courses=initial_result.hit_courses[:len(final_hit_ids)], top_answer=final_answers[0] if final_answers else None, latency_ms=total_latency_ms, hit_answers=final_answers)
 
+
+def run_entity_category_boosted_retrieval(
+    client,
+    collection: str,
+    query_vector: list,
+    course_filter: Optional[str],
+    config: dict,
+    top_k: int,
+    ner_category: Optional[str] = None,
+    ner_primary_entity: Optional[str] = None,
+    topic: Optional[int] = None,
+) -> SearchResult:
+    """
+    Vector search with soft boosting on entity, category, and/or topic.
+    All boost fields are optional should clauses — none are required.
+    Config keys (all optional):
+        boost_entity   float  weight for ner_primary_entity match (default 1.0)
+        boost_category float  weight for ner_category match       (default 1.0)
+        boost_topic    float  weight for topic match              (default 1.0)
+        use_entity     bool   enable entity boost                 (default True)
+        use_category   bool   enable category boost               (default True)
+        use_topic      bool   enable topic boost                  (default False)
+    """
+    from qdrant_client.models import ScoredPoint
+    start = time.perf_counter()
+
+    must_conditions: list = []
+    if course_filter:
+        must_conditions.append(FieldCondition(key="course", match=MatchValue(value=course_filter)))
+
+    should_conditions: list = []
+
+    use_entity   = config.get("use_entity",   True)
+    use_category = config.get("use_category", True)
+    use_topic    = config.get("use_topic",    False)
+
+    if use_entity and ner_primary_entity:
+        should_conditions.append(
+            FieldCondition(key="ner_primary_entity", match=MatchValue(value=ner_primary_entity))
+        )
+
+    if use_category and ner_category and ner_category != "OTHER":
+        should_conditions.append(
+            FieldCondition(key="ner_category", match=MatchValue(value=ner_category))
+        )
+
+    if use_topic and topic is not None and topic != -1:
+        should_conditions.append(
+            FieldCondition(key="topic", match=MatchValue(value=topic))
+        )
+
+    query_filter = (
+        Filter(must=must_conditions or None, should=should_conditions or None)  # type: ignore[arg-type]
+        if must_conditions or should_conditions
+        else None
+    )
+
+    result = client.query_points(
+        collection_name=collection,
+        query=query_vector,
+        limit=top_k,
+        query_filter=query_filter,
+        with_payload=True,
+        with_vectors=False,
+    )
+    latency_ms = (time.perf_counter() - start) * 1000
+    points = result.points
+    hit_ids     = tuple(p.payload.get("es_id",   "") for p in points)
+    hit_courses = tuple(p.payload.get("course",  "") for p in points)
+    hit_scores  = tuple(float(p.score) if p.score is not None else 0.0 for p in points)
+    hit_answers = tuple(p.payload.get("answer",  "") for p in points)
+    top_answer  = points[0].payload.get("answer") if points else None
+    return SearchResult(
+        hit_ids=hit_ids,
+        hit_scores=hit_scores,
+        hit_courses=hit_courses,
+        hit_answers=hit_answers,
+        top_answer=top_answer,
+        latency_ms=latency_ms,
+    )
+
 def _normalize_scores(scores: list[float]) -> list[float]:
     """Min-max normalize scores to [0, 1]. Returns uniform zeros if range is zero."""
     if not scores:
