@@ -2,10 +2,10 @@
 import logging
 from typing import Any, Dict, Optional
 
-from src.rag_pipeline.eda.topics.config import TopicsConfig
-from src.rag_pipeline.eda.topics.core.topic_loader import TopicLoader
-from src.rag_pipeline.eda.topics.core.topic_cluster import TopicCluster
-from src.rag_pipeline.eda.topics.core.topic_merge import TopicMerger
+from rag_pipeline.eda.topics.config import TopicsConfig
+from rag_pipeline.eda.topics.core.topic_loader import TopicLoader
+from rag_pipeline.eda.topics.core.topic_cluster import TopicCluster
+from rag_pipeline.eda.topics.core.topic_merge import TopicMerger
 
 logger = logging.getLogger(__name__)
 

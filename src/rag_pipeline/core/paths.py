@@ -7,6 +7,17 @@ from typing import Optional, Dict, Any
 
 
 class Paths:
+    @classmethod
+    def _require(cls, path: "Path", hint: str = "") -> "Path":
+        """Raise FileNotFoundError with a helpful message if path is missing."""
+        if not path.exists():
+            msg = f"Required path not found: {path}"
+            if hint:
+                msg += f"\n  Hint: {hint}"
+            raise FileNotFoundError(msg)
+        return path
+
+
     """Single source of truth — strictly reads from configs/paths.json"""
     _base: Optional[Path] = None
     _config: Optional[Dict[str, Any]] = None
@@ -54,7 +65,13 @@ class Paths:
 
     @classmethod
     def clean_jsonl(cls) -> Path:
-        return cls._resolve("clean_jsonl")
+        p = cls._resolve("clean_jsonl")
+        if not p.exists():
+            raise FileNotFoundError(
+                f"Clean JSONL not found at {p}. "
+                "Run the cleaning pipeline first."
+            )
+        return p
 
     @classmethod
     def test_jsonl(cls) -> Path:
@@ -62,11 +79,14 @@ class Paths:
 
     @classmethod
     def topic_assignments(cls) -> Path:
-        return cls._resolve("topic_assignments")
+        return cls._require(
+            cls._resolve("topic_assignments"),
+            "Run: uv run python -m rag_pipeline.eda.topics.core.topic_modeling",
+        )
 
     @classmethod
     def reranker_results_dir(cls) -> Path:
-        return cls._resolve("reranker_results_dir")
+        return cls._require(cls._resolve("reranker_results_dir"), "Run: uv run python -m rag_pipeline.eda.topics.core.topic_modeling")
     
     @classmethod
     def retrieval_configs(cls) -> Path:
@@ -75,7 +95,7 @@ class Paths:
     @staticmethod
     def collection_for_model(model_name: str) -> str:
         """Derive Qdrant collection name from model name — single source of truth.
-        Mirrors the transform in p00_ingest_qdrant.py.
+        Mirrors the transform in ingest_qdrant.py.
         e.g. 'BAAI/bge-base-en-v1.5' -> 'faqs_bge_base_en_v1_5'
         """
         short = model_name.split('/')[-1].replace('-', '_').replace('.', '_')
@@ -113,21 +133,34 @@ class Paths:
 
     @classmethod
     def entity_patterns(cls) -> Path:
-        return cls._resolve("entity_patterns")
+        return cls._require(
+            cls._resolve("entity_patterns"),
+            "Expected at configs/entity_patterns.json",
+        )
     
     @classmethod
     def topics_default_output(cls) -> Path:
-        return cls._resolve("topics_default_output")
+        return cls._require(cls._resolve("topics_default_output"), "Run: uv run python -m rag_pipeline.eda.topics.core.topic_modeling  (generates patterns)")
     
     @classmethod
-    def topic_modeling_defaults(cls) -> dict:
-        import json
+    def defaults(cls) -> dict:
+        """Full contents of configs/defaults.json."""
         cfg = cls.base() / "configs" / "defaults.json"
+        if not cfg.exists():
+            raise FileNotFoundError(f"defaults.json not found at {cfg}")
         with open(cfg, encoding="utf-8") as f:
-            data = json.load(f)
+            return json.load(f)
+
+    @classmethod
+    def topic_modeling_defaults(cls) -> dict:
+        data = cls.defaults()
         if "topic_modeling" not in data:
             raise KeyError("'topic_modeling' section missing from configs/defaults.json")
         return data["topic_modeling"]
+
+    @classmethod
+    def ablation_results_dir(cls) -> Path:
+        return cls._resolve("ablation_results_dir")
 
     @classmethod
     def stopwords_path(cls) -> Path:

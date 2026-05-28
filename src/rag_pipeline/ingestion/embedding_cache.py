@@ -33,7 +33,7 @@ import tempfile
 from pathlib import Path
 from typing import Optional
 import numpy as np
-from rag_pipeline.core.logging import get_logger
+from rag_pipeline.logging import get_logger
 logger = get_logger(__name__)
 
 def get_cache_path(cache_dir: Path, model_short_name: str) -> Path:

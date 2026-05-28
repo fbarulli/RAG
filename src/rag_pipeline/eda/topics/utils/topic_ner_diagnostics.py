@@ -30,7 +30,7 @@ from collections import Counter
 from pathlib import Path
 import spacy
 from spacy.lang.en.stop_words import STOP_WORDS
-import from rag_pipeline.eda.topics.entity_pattern_learner import build_base_nlp, extract_missed_terms, suggest_patterns, update_entity_ruler
+from rag_pipeline.eda.topics.entity_pattern_learner import build_base_nlp, extract_missed_terms, suggest_patterns, update_entity_ruler
 DATA_PATH = Path('rag_pipeline/p02_eda/experiments/topic_assignments_BAAI_bge_base_en_v1.5.json')
 _ERROR_SIGNALS = {'error', 'exception', 'failed', 'failure', 'warning', 'cannot', "can't", 'unable', 'not found', 'permission denied', 'attributeerror', 'valueerror', 'typeerror', 'importerror', 'modulenotfounderror', 'filenotfounderror', 'keyerror', 'oserror', 'runtimeerror', 'nameerror', 'traceback', 'convergencewarning', 'futurewarning', 'userwarning', 'deprecationwarning', 'timeout', 'refused', 'denied', 'crash', 'invalid', 'unrecognized', 'could not', 'no module', 'no such'}
 _ADMIN_SIGNALS = {'certificate', 'homework', 'deadline', 'cohort', 'office hours', 'self-paced', 'graduate', 'leaderboard', 'peer review', 'capstone', 'lecture', 'video', 'live', 'recorded', 'session', 'weeks', 'module', 'form', 'confirmation', 'email', 'registration', 'enroll'}

@@ -21,7 +21,7 @@ from collections import Counter
 from typing import TypedDict
 import numpy as np
 from bertopic import BERTopic
-from src.rag_pipeline.logging import get_logger
+from rag_pipeline.logging import get_logger
 logger = get_logger(__name__)
 _PRECOMPUTED = 'precomputed'
 _KEYWORDS_PER_SUBTOPIC = 5

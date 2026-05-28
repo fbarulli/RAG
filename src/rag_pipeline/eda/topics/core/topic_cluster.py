@@ -2,7 +2,7 @@
 import logging
 from typing import Any
 
-from src.rag_pipeline.logging import get_logger
+from rag_pipeline.logging import get_logger
 
 logger = get_logger(__name__)
 

@@ -5,11 +5,8 @@ import sys
 # Ensure project root is in path
 project_root = Path(__file__).resolve().parents[4]
 if str(project_root) not in sys.path:
-    sys.path.insert(0, str(project_root))
-
-from src.rag_pipeline.core.paths import Paths
+    from rag_pipeline.core.paths import Paths
 import json
-
 
 class TopicsConfig:
     """Topics pipeline configuration — single source of truth via central configs."""

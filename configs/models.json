@@ -1,7 +1,6 @@
 {
   "_comment": "Embedding model registry. Each entry defines a model and its ingestion/evaluation metadata.",
   "_winner": "BAAI/bge-base-en-v1.5",
-
   "models": [
     {
       "name": "BAAI/bge-small-en-v1.5",
@@ -71,9 +70,7 @@
       "description": "Nomic 1.5, requires trust_remote_code. Disabled by default."
     }
   ],
-
   "embeddings_cache_dir": "experiments/embeddings",
-
   "ingestion": {
     "batch_size": 100,
     "encode_batch_size": 64,

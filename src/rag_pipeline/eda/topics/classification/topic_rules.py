@@ -10,8 +10,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from src.rag_pipeline.logging import get_logger
-from src.rag_pipeline.core.paths import Paths
+from rag_pipeline.logging import get_logger
+from rag_pipeline.core.paths import Paths
 
 logger = get_logger(__name__)
 

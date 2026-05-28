@@ -11,16 +11,16 @@ import json
 from pathlib import Path
 from typing import Any
 
-from src.rag_pipeline.logging import get_logger
-from src.rag_pipeline.core.paths import Paths
-from src.rag_pipeline.eda.topics.config import TopicsConfig
-from src.rag_pipeline.eda.topics.core.topic_cluster import TopicCluster
-from src.rag_pipeline.eda.topics.classification.tfidf_stopwords import load_stopwords
-from src.rag_pipeline.eda.topics.classification.entity_pattern_learner import (
+from rag_pipeline.logging import get_logger
+from rag_pipeline.core.paths import Paths
+from rag_pipeline.eda.topics.config import TopicsConfig
+from rag_pipeline.eda.topics.core.topic_cluster import TopicCluster
+from rag_pipeline.eda.topics.classification.tfidf_stopwords import load_stopwords
+from rag_pipeline.eda.topics.classification.entity_pattern_learner import (
     build_base_nlp, extract_missed_terms, suggest_patterns, update_entity_ruler,
 )
 from configs.benchmark_cli import create_topic_modeling_parser
-from src.rag_pipeline.eda.topics.classification.topic_rules import ClassificationRules
+from rag_pipeline.eda.topics.classification.topic_rules import ClassificationRules
 
 logger = get_logger(__name__)
 
@@ -112,7 +112,7 @@ def _apply_subtopics(
     subtopic_threshold: int,
     subtopic_min_size: int,
 ) -> list[dict]:
-    from src.rag_pipeline.eda.topics.core.topic_subtopics import build_subtopics as generate_subtopics
+    from rag_pipeline.eda.topics.core.topic_subtopics import build_subtopics as generate_subtopics
     topic_counts = {t: sum(1 for a in assignments if a["topic"] == t) for t in set(a["topic"] for a in assignments) if t != -1}
     large_topics = [t for t, c in topic_counts.items() if c > subtopic_threshold]
     if not large_topics:

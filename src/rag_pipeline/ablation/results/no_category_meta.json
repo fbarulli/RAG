@@ -1,0 +1,22 @@
+{
+  "name": "no_category",
+  "patch": "no_category",
+  "configs": [
+    "entity_boosted"
+  ],
+  "model": "BAAI/bge-base-en-v1.5",
+  "timestamp": "2026-05-27T21:34:37.129126+00:00",
+  "metrics": {
+    "entity_boosted": {
+      "h1": 0.8855291576673866,
+      "h3": 0.9546436285097192,
+      "h5": 0.9676025917926566,
+      "h10": 0.980561555075594,
+      "mrr": 0.9231272926737291,
+      "p50_ms": 8.579610000197135
+    }
+  },
+  "result_files": [
+    "/workspaces/RAG-a-muffin/ablation/results/no_category__entity_boosted_query_results.jsonl"
+  ]
+}

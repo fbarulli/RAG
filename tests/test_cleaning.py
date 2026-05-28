@@ -1,8 +1,6 @@
 """tests/test_cleaning.py"""
 import pytest
-import sys
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).parent.parent))
 from rag_pipeline.cleaning.parse import clean_answer
 
 def test_inline_code_stripped():

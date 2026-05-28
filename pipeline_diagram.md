@@ -54,11 +54,11 @@ flowchart TD
 
     subgraph p04 [p04_ingestion - Vector Stores + Benchmark]
         direction TB
-        p04_00q[p00_ingest_qdrant.py - per model]
-        p04_00es[p00_ingest_es.py]
+        p04_00q[ingest_qdrant.py - per model]
+        p04_00es[ingest_es.py]
         p04_02[p02_ingest_models.py]
-        p04_03[p03_benchmark.py]
-        p04_04[p04_multi_model_benchmark.py]
+        p04_03[benchmark.py]
+        p04_04[benchmark_multi_model.py]
         
         p04_00q --> p04_00es
         p04_00es --> p04_02 --> p04_03 --> p04_04
@@ -71,17 +71,17 @@ flowchart TD
     Benchmarks --> p05
     p03 --> p05
 
-    subgraph p05 [p05_evaluation - LLM-as-Judge]
-        p05_01a[p01_generate_diverse_test_queries.py]
-        p05_01[p01_generate_test_queries.py]
-        p05_05[p05_llm_judge.py]
+    subgraph p05 [evaluation - LLM-as-Judge]
+        p05_01a[generate_diverse_test_queries.py]
+        p05_01[generate_test_queries.py]
+        p05_05[llm_judge.py]
         p05_01a --> p05_01 --> p05_05
     end
 
     p05 --> JudgeResults[(judge_results.json)]
 
     %% Final stage
-    JudgeResults --> p06[p06_answer_generation<br/>End-to-end RAG]
+    JudgeResults --> p06[answer_generation<br/>End-to-end RAG]
 
     %% ==================== TESTING / DEBUG ====================
     subgraph Testing[Testing & Debugging Modules]

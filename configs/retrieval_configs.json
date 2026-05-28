@@ -49,5 +49,21 @@
     "use_entity": true,
     "use_category": true,
     "use_topic": true
+  },
+  "entity_section_boosted": {
+    "name": "Entity + Section Boosted",
+    "search_type": "entity_category_boosted",
+    "use_entity": true,
+    "use_category": false,
+    "use_topic": false,
+    "use_section": true
+  },
+  "entity_category_section_boosted": {
+    "name": "Entity + Category + Section Boosted",
+    "search_type": "entity_category_boosted",
+    "use_entity": true,
+    "use_category": true,
+    "use_topic": false,
+    "use_section": true
   }
 }

@@ -41,7 +41,7 @@ from pathlib import Path
 from typing import Any, Optional, List, Tuple
 from rag_pipeline.core.paths import Paths
 from functools import cached_property
-from rag_pipeline.core.logging import get_logger
+from rag_pipeline.logging import get_logger
 from .benchmark_loader import load_defaults
 logger = get_logger(__name__)
 

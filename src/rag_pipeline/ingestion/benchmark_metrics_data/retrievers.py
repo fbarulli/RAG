@@ -3,6 +3,7 @@ rag_pipeline/p04_ingestion/_benchmark_metrics/retrievers.py
 Retrieval implementations for different search types.
 All functions return SearchResult.
 """
+import re
 import time
 from typing import Optional, TYPE_CHECKING
 from qdrant_client.models import Filter, FieldCondition, MatchValue, SearchParams
@@ -135,6 +136,16 @@ def run_vector_retrieval_with_reranker(client, collection: str, query_vector: li
     return SearchResult(hit_ids=final_hit_ids, hit_scores=final_scores, hit_courses=initial_result.hit_courses[:len(final_hit_ids)], top_answer=final_answers[0] if final_answers else None, latency_ms=total_latency_ms, hit_answers=final_answers)
 
 
+def _normalize_section(section: Optional[str]) -> Optional[str]:
+    """Normalize section to module-N prefix for fuzzy boosting."""
+    if not section:
+        return None
+    s = str(section).lower().strip()
+    if s.startswith("project"):
+        return "project"
+    m = re.match(r"(module-\d+)", s)
+    return m.group(1) if m else s
+
 def run_entity_category_boosted_retrieval(
     client,
     collection: str,
@@ -145,9 +156,10 @@ def run_entity_category_boosted_retrieval(
     ner_category: Optional[str] = None,
     ner_primary_entity: Optional[str] = None,
     topic: Optional[int] = None,
+    section: Optional[str] = None,
 ) -> SearchResult:
     """
-    Vector search with soft boosting on entity, category, and/or topic.
+    Vector search with soft boosting on entity, category, topic, and/or section.
     All boost fields are optional should clauses — none are required.
     Config keys (all optional):
         boost_entity   float  weight for ner_primary_entity match (default 1.0)
@@ -184,6 +196,14 @@ def run_entity_category_boosted_retrieval(
         should_conditions.append(
             FieldCondition(key="topic", match=MatchValue(value=topic))
         )
+
+    use_section = config.get("use_section", False)
+    if use_section and section:
+        norm = _normalize_section(section)
+        if norm:
+            should_conditions.append(
+                FieldCondition(key="section", match=MatchValue(value=norm))
+            )
 
     query_filter = (
         Filter(must=must_conditions or None, should=should_conditions or None)  # type: ignore[arg-type]

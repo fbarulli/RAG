@@ -101,19 +101,20 @@ def create_ingestion_parser() -> argparse.ArgumentParser:
 
 def create_benchmark_parser() -> argparse.ArgumentParser:
     """
-    Parser for ``p03_benchmark.py`` (benchmarks models).
+    Parser for ``benchmark.py`` (benchmarks models).
 
     If ``--model`` is omitted, the script runs all models found in the config.
     """
     parser = create_base_parser(description='Run the retrieval benchmark for embedding/reranker models.')
     parser.add_argument('--model', type=str, required=False, default=None, help="Model to benchmark (matches 'name' in models.json). Omitting this runs all models.")
+    parser.add_argument('--collection', type=str, default=None, help="Override Qdrant collection name for this benchmark run.")
     parser.add_argument('--configs', type=str, nargs='+', default=None, help='One or more retrieval config keys to run (default: all). Comma-separated or space-separated.')
     parser.add_argument('--query-type', type=str, nargs='+', default=None, help='Filter test set to specific query types e.g. original grounded_analyst chaos_monkey creative_student')
     return parser
 
 def create_multi_benchmark_parser() -> argparse.ArgumentParser:
     """
-    Parser for ``p04_multi_model_benchmark.py``.
+    Parser for ``benchmark_multi_model.py``.
 
     No additional arguments beyond the shared base — ``--models`` from the
     base parser is sufficient for selecting a subset of models.
@@ -122,7 +123,7 @@ def create_multi_benchmark_parser() -> argparse.ArgumentParser:
 
 def create_generation_parser() -> argparse.ArgumentParser:
     """
-    Parser for ``p06_answer_generation.runner.py``.
+    Parser for ``answer_generation.runner.py``.
 
     Adds generation-specific arguments for prompt styles and top-k values.
     """
@@ -151,4 +152,62 @@ def create_topic_modeling_parser() -> argparse.ArgumentParser:
     g.add_argument('--min-samples', type=int, default=None)
     g.add_argument('--subtopic-threshold', type=int, default=None)
     g.add_argument('--run-all', action='store_true', default=False)
+    return parser
+
+
+def create_ablation_parser() -> argparse.ArgumentParser:
+    """
+    Parser for ``rag_pipeline.ablation`` CLI.
+
+    Defaults for --model and --configs are read from defaults.json at call time
+    so they stay in sync with the rest of the pipeline without hardcoding.
+    """
+    from rag_pipeline.core.paths import Paths
+    d = Paths.defaults()
+    default_model  = d.get("production_model",  "BAAI/bge-base-en-v1.5")
+    default_config = d.get("production_config", "entity_boosted")
+
+    parser = argparse.ArgumentParser(
+        prog="rag_pipeline.ablation",
+        description="Run, compare, and report ablation experiments.",
+    )
+    sub = parser.add_subparsers(dest="command", required=True)
+
+    # ── run ──────────────────────────────────────────────────────────────────
+    run_p = sub.add_parser("run", help="Run a named experiment")
+    run_p.add_argument("--name", required=True,
+                       help="Experiment name (used for output files)")
+    g = run_p.add_argument_group("patch flags")
+    g.add_argument("--null-entity",           action="store_true",
+                   help="Set ner_primary_entity=None in payload (no re-run)")
+    g.add_argument("--null-category",         action="store_true",
+                   help="Set ner_category=OTHER in payload (no re-run)")
+    g.add_argument("--null-topics",           action="store_true",
+                   help="Set topic=-1 in payload (no re-run)")
+    g.add_argument("--skip-ner",              action="store_true",
+                   help="Null entity+category before assignments are built (no re-run)")
+    g.add_argument("--empty-entity-patterns", action="store_true",
+                   help="Wipe entity_patterns.json before topic modeling (re-run)")
+    g.add_argument("--skip-cluster",          action="store_true",
+                   help="Disable cluster majority vote (re-run)")
+    g.add_argument("--skip-rules",            action="store_true",
+                   help="Disable keyword rules (re-run)")
+    g2 = run_p.add_argument_group("model / config")
+    g2.add_argument("--configs", nargs="+", default=[default_config],
+                    help=f"Retrieval configs to benchmark "
+                         f"(default: {default_config!r} from defaults.json)")
+    g2.add_argument("--model", default=default_model,
+                    help=f"Embedding model "
+                         f"(default: {default_model!r} from defaults.json)")
+
+    # ── compare ──────────────────────────────────────────────────────────────
+    cmp_p = sub.add_parser("compare", help="Diff two experiment result files query-by-query")
+    cmp_p.add_argument("exp_a", help="e.g. baseline__entity_boosted")
+    cmp_p.add_argument("exp_b", help="e.g. no_category__entity_boosted")
+    cmp_p.add_argument("--top-k", type=int, default=1)
+    cmp_p.add_argument("--show", choices=["all", "wins", "losses"], default="all")
+
+    # ── report ───────────────────────────────────────────────────────────────
+    sub.add_parser("report", help="Print summary table of all completed experiments")
+
     return parser

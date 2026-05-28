@@ -14,7 +14,7 @@ import random
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Optional
-from rag_pipeline.core.logging import get_logger
+from rag_pipeline.logging import get_logger
 from rag_pipeline.core.paths import Paths
 logger = get_logger(__name__)
 DEFAULT_INPUT = Paths.processed_dir() / 'clean.jsonl'

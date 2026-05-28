@@ -20,7 +20,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 from typing import Optional
-from rag_pipeline.core.logging import get_logger
+from rag_pipeline.logging import get_logger
 logger = get_logger(__name__)
 _HERE = Path(__file__).resolve().parent
 

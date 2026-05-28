@@ -15,10 +15,10 @@ from pydantic import BaseModel
 
 from rag_pipeline.core.paths import Paths
 from rag_pipeline.logging import get_logger
-from rag_pipeline.answer_generation.p06_answer_generation.runner import QueryRetriever
-from rag_pipeline.answer_generation.p06_answer_generation.retriever import ContextRetriever
-from rag_pipeline.answer_generation.p06_answer_generation.generator import AnswerGenerator
-from rag_pipeline.answer_generation.p06_answer_generation.config import GenerationConfig, PROMPT_CONFIGS
+from rag_pipeline.answer_generation.runner import QueryRetriever
+from rag_pipeline.answer_generation.retriever import ContextRetriever
+from rag_pipeline.answer_generation.generator import AnswerGenerator
+from rag_pipeline.answer_generation.config import GenerationConfig, PROMPT_CONFIGS
 
 logger = get_logger(__name__)
 app = FastAPI(title="RAG-a-muffin")

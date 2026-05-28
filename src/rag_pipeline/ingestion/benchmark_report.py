@@ -24,7 +24,7 @@ from collections import defaultdict
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any
-from rag_pipeline.core.logging import get_logger
+from rag_pipeline.logging import get_logger
 from .benchmark_types import MetricSummary
 logger = get_logger(__name__)
 

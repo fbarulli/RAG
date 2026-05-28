@@ -65,11 +65,11 @@ TopicMerger().merge()                   topic_merge.py — NO main(), call direc
   → topic_assignments_all.json          (output/ — single source for ingestion)
   │
   ▼
-p00_ingest_qdrant.py                    indexes into Qdrant with NER fields as payload
+ingest_qdrant.py                    indexes into Qdrant with NER fields as payload
   → collection: faqs_bge_base_en_v1_5  name derived from model at runtime
   │
   ▼
-p03_benchmark.py                        453 queries from eval_queries_tiered.jsonl
+benchmark.py                        453 queries from eval_queries_tiered.jsonl
   → H@1 / H@3 / H@5 / H@10 / MRR      expected_id field links query to correct doc
 ```
 
@@ -89,10 +89,10 @@ TopicMerger().merge()
 "
 
 # 3. ingest
-uv run python -m src.rag_pipeline.ingestion.p00_ingest_qdrant --model "BAAI/bge-base-en-v1.5"
+uv run python -m src.rag_pipeline.ingestion.ingest_qdrant --model "BAAI/bge-base-en-v1.5"
 
 # 4. benchmark
-uv run python -m rag_pipeline.ingestion.p03_benchmark \
+uv run python -m rag_pipeline.ingestion.benchmark \
   --model "BAAI/bge-base-en-v1.5" \
   --configs entity_boosted vector_default
 ```

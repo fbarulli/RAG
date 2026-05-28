@@ -50,7 +50,7 @@ from qdrant_client.http.exceptions import UnexpectedResponse
 from qdrant_client.models import Distance, PointStruct, VectorParams
 from sentence_transformers import SentenceTransformer
 from tqdm import tqdm
-from rag_pipeline.core.logging import get_logger
+from rag_pipeline.logging import get_logger
 from rag_pipeline.core.schemas import FAQDocument
 from .benchmark_config import BenchmarkConfig
 from configs.benchmark_cli import create_ingestion_parser

@@ -73,21 +73,21 @@ Ingests documents into Qdrant and Elasticsearch, runs retrieval benchmarks.
 **Ingest:**
 ```bash
 # Qdrant (vector search)
-uv run python -m rag_pipeline.ingestion.p00_ingest_qdrant --model "BAAI/bge-base-en-v1.5"
+uv run python -m rag_pipeline.ingestion.ingest_qdrant --model "BAAI/bge-base-en-v1.5"
 
 # Elasticsearch (BM25)
-uv run python -m rag_pipeline.ingestion.p00_ingest_es --model "BAAI/bge-base-en-v1.5"
+uv run python -m rag_pipeline.ingestion.ingest_es --model "BAAI/bge-base-en-v1.5"
 ```
 
 **Benchmark:**
 ```bash
 # Run specific configs
-uv run python -m rag_pipeline.ingestion.p03_benchmark \
+uv run python -m rag_pipeline.ingestion.benchmark \
   --model "BAAI/bge-base-en-v1.5" \
   --configs entity_boosted vector_default hybrid_dbsf
 
 # Run all configs for all models
-uv run python -m rag_pipeline.ingestion.p04_multi_model_benchmark
+uv run python -m rag_pipeline.ingestion.benchmark_multi_model
 ```
 
 Available retrieval configs (defined in `configs/retrieval_configs.json`):
@@ -104,22 +104,22 @@ Reranker infrastructure (`reranker_runner.py`, `onnx_*`) is present for future u
 
 Outputs: `experiments/reranker_benchmarks/benchmark_results.json`, per-config `*_query_results.jsonl`
 
-### p05 — Evaluation (`src/rag_pipeline/evaluation/p05_evaluation/`)
+### p05 — Evaluation (`src/rag_pipeline/evaluation/evaluation/`)
 
 LLM-as-judge scoring for faithfulness and factual correctness.
 
 ```bash
-uv run python -m rag_pipeline.evaluation.p05_evaluation.p05_llm_judge
+uv run python -m rag_pipeline.evaluation.llm_judge
 ```
 
 Outputs: Judge scores, failure analysis in `experiments/reranker_benchmarks/failure_analysis/`
 
-### p06 — Answer Generation (`src/rag_pipeline/answer_generation/p06_answer_generation/`)
+### p06 — Answer Generation (`src/rag_pipeline/answer_generation/answer_generation/`)
 
 End-to-end RAG: retrieve context → generate answer → evaluate.
 
 ```bash
-uv run python -m rag_pipeline.answer_generation.p06_answer_generation.runner
+uv run python -m rag_pipeline.answer_generation.runner
 ```
 
 ## Quick Start
@@ -135,11 +135,11 @@ just up
 just run all
 
 # 4. Ingest into Qdrant and Elasticsearch
-uv run python -m rag_pipeline.ingestion.p00_ingest_qdrant --model "BAAI/bge-base-en-v1.5"
-uv run python -m rag_pipeline.ingestion.p00_ingest_es --model "BAAI/bge-base-en-v1.5"
+uv run python -m rag_pipeline.ingestion.ingest_qdrant --model "BAAI/bge-base-en-v1.5"
+uv run python -m rag_pipeline.ingestion.ingest_es --model "BAAI/bge-base-en-v1.5"
 
 # 5. Benchmark
-uv run python -m rag_pipeline.ingestion.p03_benchmark \
+uv run python -m rag_pipeline.ingestion.benchmark \
   --model "BAAI/bge-base-en-v1.5" \
   --configs entity_boosted vector_default
 ```

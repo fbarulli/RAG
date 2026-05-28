@@ -85,7 +85,7 @@ def _validate_config(rc: RetrievalConfig, model) -> None:
     if rc.use_reranker and rc.search_type == 'bm25' and model is None:
         raise ValueError("Reranking with bm25 requires an embedding model for the reranker. Provide 'model' parameter.")
 
-def _run_retrieval(rc: RetrievalConfig, query: str, query_vector: Optional[list], course: str, ner_category: Optional[str], ner_primary_entity: Optional[str], topic: Optional[int] = None):
+def _run_retrieval(rc: RetrievalConfig, query: str, query_vector: Optional[list], course: str, ner_category: Optional[str], ner_primary_entity: Optional[str], topic: Optional[int] = None, section: Optional[str] = None):
     """Dispatch to the correct retriever based on search_type."""
     if rc.search_type == 'bm25' and rc.es is not None:
         return run_es_retrieval(es=rc.es, index=rc.es_index, query_text=query, course_filter=course, config=rc.config, top_k=rc.retrieval_k)
@@ -98,7 +98,7 @@ def _run_retrieval(rc: RetrievalConfig, query: str, query_vector: Optional[list]
     if rc.search_type == 'entity_boosted':
         return run_entity_boosted_retrieval(client=rc.client, collection=rc.collection, query_vector=query_vector, course_filter=course, config=rc.config, top_k=rc.retrieval_k, ner_category=ner_category, ner_primary_entity=ner_primary_entity)
     if rc.search_type == 'entity_category_boosted':
-        return run_entity_category_boosted_retrieval(client=rc.client, collection=rc.collection, query_vector=query_vector, course_filter=course, config=rc.config, top_k=rc.retrieval_k, ner_category=ner_category, ner_primary_entity=ner_primary_entity, topic=topic)
+        return run_entity_category_boosted_retrieval(client=rc.client, collection=rc.collection, query_vector=query_vector, course_filter=course, config=rc.config, top_k=rc.retrieval_k, ner_category=ner_category, ner_primary_entity=ner_primary_entity, topic=topic, section=section)
     if rc.use_reranker and rc.reranker_name:
         return run_vector_retrieval_with_reranker(client=rc.client, collection=rc.collection, query_vector=query_vector, query_text=query, course_filter=course, config=rc.config, top_k=rc.top_k, reranker_name=rc.reranker_name)
     return run_vector_retrieval(client=rc.client, collection=rc.collection, query_vector=query_vector, course_filter=course, config=rc.config, top_k=rc.top_k)
@@ -134,12 +134,12 @@ def _build_query_context(idx: int, test: dict, topic_map: dict, query_vectors: O
     """Extract and return all per-query context fields."""
     expected_id = test['expected_id']
     topic_info = topic_map.get(expected_id, {})
-    return {'query': test['query'], 'expected_id': expected_id, 'course': test['course'], 'topic': topic_info.get('topic'), 'subtopic': topic_info.get('subtopic'), 'ner_category': topic_info.get('ner_category'), 'ner_primary_entity': topic_info.get('ner_primary_entity'), 'query_vector': query_vectors[idx] if query_vectors is not None else None}
+    return {'query': test['query'], 'expected_id': expected_id, 'course': test['course'], 'topic': topic_info.get('topic'), 'subtopic': topic_info.get('subtopic'), 'ner_category': topic_info.get('ner_category'), 'ner_primary_entity': topic_info.get('ner_primary_entity'), 'section': topic_info.get('section'), 'query_vector': query_vectors[idx] if query_vectors is not None else None}
 
 def _retrieve_and_rerank(ctx: QueryContext, rc: RetrievalConfig) -> tuple:
     """Run retrieval then optional reranking. Returns (search_result, hit_ids, hit_scores, reranker_latency_ms)."""
     logger.debug(f"calling _run_retrieval query={ctx['query']!r}")
-    search_result = _run_retrieval(rc=rc, query=ctx['query'], query_vector=ctx['query_vector'], course=ctx['course'], ner_category=ctx['ner_category'], ner_primary_entity=ctx['ner_primary_entity'], topic=ctx.get('topic'))
+    search_result = _run_retrieval(rc=rc, query=ctx['query'], query_vector=ctx['query_vector'], course=ctx['course'], ner_category=ctx['ner_category'], ner_primary_entity=ctx['ner_primary_entity'], topic=ctx.get('topic'), section=ctx.get('section'))
     logger.debug(f'_run_retrieval returned hits={len(search_result.hit_ids)}')
     hit_ids, hit_scores, reranker_latency_ms = _apply_reranking(search_result=search_result, rc=rc, query=ctx['query'])
     return (search_result, hit_ids, hit_scores, reranker_latency_ms)
@@ -165,7 +165,7 @@ def _run_evaluation_loop(test_set: list[dict], topic_map: dict, query_vectors: O
             logger.info(f'Progress: {idx}/{total} queries evaluated')
         try:
             ctx = _build_query_context(idx, test, topic_map, query_vectors)
-            search_result = _run_retrieval(rc=rc, query=ctx['query'], query_vector=ctx['query_vector'], course=ctx['course'], ner_category=ctx['ner_category'], ner_primary_entity=ctx['ner_primary_entity'], topic=ctx.get('topic'))
+            search_result = _run_retrieval(rc=rc, query=ctx['query'], query_vector=ctx['query_vector'], course=ctx['course'], ner_category=ctx['ner_category'], ner_primary_entity=ctx['ner_primary_entity'], topic=ctx.get('topic'), section=ctx.get('section'))
             hit_ids, hit_scores, reranker_latency_ms = _apply_reranking(search_result=search_result, rc=rc, query=ctx['query'])
             results.append(_build_query_result(test, ctx, search_result, hit_ids, hit_scores, reranker_latency_ms, integrity_cache))
         except Exception as e:

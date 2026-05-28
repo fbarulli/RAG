@@ -13,8 +13,8 @@ from pathlib import Path
 import spacy
 from spacy.language import Language
 
-from src.rag_pipeline.logging import get_logger
-from src.rag_pipeline.core.paths import Paths
+from rag_pipeline.logging import get_logger
+from rag_pipeline.core.paths import Paths
 
 logger = get_logger(__name__)
 
