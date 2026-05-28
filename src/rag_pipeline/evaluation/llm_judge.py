@@ -27,11 +27,12 @@ from rag_pipeline.core.paths import Paths
 logger = get_logger(__name__)
 DEFAULT_QUERY_RESULTS = Paths.experiments_dir() / 'benchmark_query_results.json'
 DEFAULT_OUTPUT = Paths.experiments_dir() / 'judge_results.json'
-DEFAULT_MODEL = 'BAAI/bge-base-en-v1.5'
-DEFAULT_CONFIG = 'hybrid_rrf'
-JUDGE_LLM = 'nvidia_nim/meta/llama-3.1-70b-instruct'
-QDRANT_HOST = 'localhost'
-QDRANT_PORT = 6333
+_defaults = Paths.defaults()
+DEFAULT_MODEL = _defaults["production_model"]
+DEFAULT_CONFIG = _defaults["production_config"]
+JUDGE_LLM = _defaults["llm_model"]
+QDRANT_HOST = _defaults["qdrant"]["host"]
+QDRANT_PORT = _defaults["qdrant"]["port"]
 BATCH_SAVE_EVERY = 10
 JUDGE_PROMPT = 'FAQ retrieval judge. Score the retrieved answer.\n\nQ: {query}\nREF: {reference}\nGOT: {retrieved}\n\nfaithfulness: does GOT address Q? (1.0=yes, 0.5=partial, 0.0=no)\nfactual_correctness: does GOT match REF facts? (1.0=all, 0.5=some, 0.0=none)\n\nOutput ONLY: {{"faithfulness": <float>, "factual_correctness": <float>}}'
 

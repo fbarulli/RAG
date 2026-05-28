@@ -163,5 +163,9 @@ class Paths:
         return cls._resolve("ablation_results_dir")
 
     @classmethod
+    def ablation_config(cls) -> Path:
+        return cls._require(cls.base() / "configs" / "ablation_config.json", "configs/ablation_config.json")
+
+    @classmethod
     def stopwords_path(cls) -> Path:
         return cls.topics_experiments_dir() / "tfidf_analysis" / "stopwords" / "stopwords_pass2.txt"

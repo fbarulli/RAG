@@ -163,6 +163,13 @@ class Experiment:
         with open(meta_path, "w", encoding="utf-8") as f:
             json.dump(asdict(result), f, indent=2)
         logger.info("Saved → %s", meta_path)
+
+        if self.name == "baseline":
+            baseline_path = Paths.experiments_dir() / "baseline.json"
+            with open(baseline_path, "w", encoding="utf-8") as f:
+                json.dump(asdict(result), f, indent=2)
+            logger.info("Baseline snapshot → %s", baseline_path)
+
         return result
 
     def _run_payload_only(self, assignments_path: Path, original: dict) -> None:

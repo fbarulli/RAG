@@ -1,134 +1,70 @@
-# Structural Cleanup Handoff
-_Updated: 2026-05-28_
+Good output. Here's the analysis and exactly what to fix:
 
 ---
 
-## Conventions (established this session — follow these everywhere)
+## 1.3 — `compare.py` fix (straightforward)
 
-### Paths
-- **Single source of truth**: all filesystem paths live in `configs/paths.json`, resolved via `Paths` class in `src/rag_pipeline/core/paths.py`
-- **Never hardcode paths** in module bodies, dataclass defaults, or CLI defaults. No `Path(__file__).resolve().parent / "results"` outside of `paths.py` itself
-- **Never use `ROOT =`** or similar module-level path constants — they were sys.path hacks and are all gone
-- Use `Paths._resolve("key")` for paths that may not exist yet; use `Paths._require(Paths._resolve("key"), "hint")` for paths that must exist at call time
-- To add a new path: add the key to `configs/paths.json`, add a classmethod to `Paths`, done
-
-**Current Paths methods:**
-```
-Paths.base()                  → project root (pyproject.toml location)
-Paths.raw_dir()               → data/raw
-Paths.processed_dir()         → data/processed
-Paths.experiments_dir()       → experiments/
-Paths.clean_jsonl()           → data/processed/clean.jsonl          [_require]
-Paths.test_jsonl()            → data/processed/test.jsonl
-Paths.topic_assignments()     → .../output/topic_assignments_all.json [_require]
-Paths.retrieval_configs()     → configs/retrieval_configs.json
-Paths.reranker_results_dir()  → experiments/reranker_benchmarks/    [_require]
-Paths.ablation_results_dir()  → experiments/ablation_results/
-Paths.input_file(stage)       → from input_mapping in paths.json
-Paths.output_file(stage)      → from output_mapping in paths.json
-Paths.topics_dir()            → src/rag_pipeline/eda/topics/
-Paths.topics_experiments_dir()→ .../topics/experiments/
-Paths.topics_output_dir()     → .../topics/output/
-Paths.topics_rules_dir()      → .../topics/rules/
-Paths.entity_patterns()       → configs/entity_patterns.json        [_require]
-Paths.topics_default_output() → .../experiments/topic_assignments.json [_require]
-Paths.stopwords_path()        → .../tfidf_analysis/stopwords/stopwords_pass2.txt
-Paths.defaults()              → configs/defaults.json (full dict)
-Paths.topic_modeling_defaults()→ defaults.json["topic_modeling"] slice
+```bash
+sed -n '1,30p' src/rag_pipeline/ablation/compare.py
 ```
 
-### Logging
-- Always import from `rag_pipeline.logging`: `from rag_pipeline.logging import get_logger`
-- Never use `rag_pipeline.core.logging` (re-export shim, kept but not used directly)
-- Always: `logger = get_logger(__name__)` at module level
+We already know line 15 is `RESULTS_DIR = Path(__file__).resolve().parent / "results"`. The fix:
 
-### CLI / argparse
-- All argparse **parser factories** live in `configs/benchmark_cli.py`
-- Each script/module calls the appropriate factory; no `ArgumentParser(...)` construction outside `benchmark_cli.py`
-- Defaults for `--model` and `--configs` / `--config` always read from `Paths.defaults()` at factory call time — never hardcoded strings
-- Available factories:
-  ```
-  create_base_parser()            → shared path/qdrant/es/model/tuning/flag args
-  create_ingestion_parser()       → base + --model (singular)
-  create_benchmark_parser()       → base + --model + --collection + --configs + --query-type
-  create_multi_benchmark_parser() → base only
-  create_generation_parser()      → base + generation args
-  create_topic_modeling_parser()  → standalone topic modeling args
-  create_ablation_parser()        → run/compare/report subcommands + patch flags
-  ```
+```bash
+# Check what _load and the rest of the file look like before editing
+cat src/rag_pipeline/ablation/compare.py
+```
 
-### Imports
-- Package is installed as `rag_pipeline` (via `where = ["src"]` in pyproject.toml)
-- Always `from rag_pipeline.x import y` — never `from src.rag_pipeline.x import y`
-- No `sys.path.insert` anywhere — package is installed editable via `uv pip install -e .`
-- `ablation` now lives at `src/rag_pipeline/ablation/` — import as `rag_pipeline.ablation`
-
-### Defaults / config
-- Runtime defaults (model, config name, qdrant host/port, batch sizes) live in `configs/defaults.json`
-- Access via `Paths.defaults()` — returns the full dict; slice as needed
-- Never duplicate these values as Python constants in module bodies
-
----
-
-## What's done
-
-### Day 1 ✓
-- Fixed 25 `src.rag_pipeline` imports → `rag_pipeline`
-- Standardised logging import → `rag_pipeline.logging` everywhere
-- Removed all `sys.path.insert` hacks (5 files) and all orphaned fragments they left behind
-- Fixed `pyproject.toml` project name (`llm` → `rag-pipeline`)
-- Moved `entity_patterns.json` → `configs/` and updated `paths.json`
-
-### Day 2 ✓
-- Moved `ablation/` → `src/rag_pipeline/ablation/`
-- Separated test query NER tags from corpus assignments (2.2)
-- Added `Paths._require()`, `Paths.defaults()`, `Paths.ablation_results_dir()` (2.3)
-- Fixed all syntax errors left by botched sys.path removal (6 files across corpus_sampler, experiment, cli, test_cleaning, topic_ner_diagnostics)
-
-### Day 3 (partial) ✓
-- Rewrote `corpus_sampler.py` — all hardcoded paths/defaults replaced with `Paths`
-- Rewrote `experiment.py` — `RESULTS_DIR` constant gone, `Experiment.model` and `Experiment.configs` defaults from `Paths.defaults()`
-- Rewrote `report.py` — `RESULTS_DIR` constant gone, uses `Paths.ablation_results_dir()`
-- Added `create_ablation_parser()` to `configs/benchmark_cli.py`
-- Rewrote `cli.py` — now just command dispatch, all arg definitions in `benchmark_cli.py`
-
----
-
-## Todo
-
-### Priority 1 — Remaining hardcoded paths/constants (do next)
-
-#### 1.1 Fix `run_clean_pipeline.py`
-Currently has module-level constants that bypass `Paths` entirely:
+Then apply:
 ```python
-PROJECT   = Path(__file__).parent.parent          # → Paths.base()
-TOPIC_DIR = PROJECT / 'rag_pipeline/p02_eda/...'  # → Paths.topics_experiments_dir()
-BENCH_DIR = PROJECT / 'rag_pipeline/experiments'  # → Paths.reranker_results_dir()
-TEST_FILE = PROJECT / 'rag_pipeline/p01_data_...' # → Paths.test_jsonl()
-MODELS    = ['BAAI/bge-base-en-v1.5', ...]        # → load from configs/models.json
-JUDGE_MODEL  = 'BAAI/bge-base-en-v1.5'            # → Paths.defaults()["production_model"]
-JUDGE_CONFIG = 'entity_boosted'                    # → Paths.defaults()["production_config"]
-```
-Also uses `rag_pipeline.p02_eda._topic_merge` — check if this module path is still valid
-after the eda restructure, or if it should be `rag_pipeline.eda.topics.core.topic_merge`.
+# Remove this line:
+RESULTS_DIR = Path(__file__).resolve().parent / "results"
 
-Also: `_build_payload_indexes()` hardcodes `host='localhost', port=6333`
-→ `Paths.defaults()["qdrant"]["host/port"]`
-
-#### 1.2 Audit remaining files for hardcoded paths
-Run this to find remaining offenders:
-```bash
-grep -rn "Path(__file__)" --include="*.py" src/ | grep -v __pycache__ | grep -v "paths.py"
-grep -rn "BAAI/bge-base-en-v1.5\|entity_boosted" --include="*.py" src/ | grep -v __pycache__ | grep -v "test_"
+# Replace the _load function's path line with:
+from rag_pipeline.core.paths import Paths
+# ...
+path = Paths.reranker_results_dir() / f"{name}_query_results.jsonl"
 ```
 
-#### 1.3 `compare.py` — check for hardcoded RESULTS_DIR
-Not reviewed this session. Likely has the same `RESULTS_DIR = Path(__file__).resolve().parent / "results"` pattern.
-```bash
-head -20 src/rag_pipeline/ablation/compare.py
-```
+But confirm the full file first — paste the output of `cat src/rag_pipeline/ablation/compare.py`.
 
 ---
+
+## 1.2 — Audit results, ranked by priority
+
+**Fix now** (functional bugs / real hardcoded paths):
+
+| File | Line | Issue |
+|---|---|---|
+| `compare.py` | 15 | `RESULTS_DIR` constant → `Paths.reranker_results_dir()` |
+| `answer_generation/runner.py` | 209 | `'BAAI/bge-base-en-v1.5'` default → `Paths.defaults()["production_model"]` |
+| `answer_generation/retriever.py` | 39 | same model default in `__init__` |
+| `evaluation/llm_judge.py` | 30 | `DEFAULT_MODEL` constant → `Paths.defaults()` |
+| `evaluation/p05_evaluation/_failure_analysis.py` | 12 | hardcoded open() path → `Paths.topic_assignments()` |
+| `eda/topics/classification/tfidf_course_analysis.py` | 89 | hardcoded `clean.jsonl` path → `Paths.clean_jsonl()` |
+| `eda/topics/config.py` | 6 | `project_root = Path(__file__).parents[4]` → `Paths.base()` |
+
+**Skip for now** (not path bugs):
+
+- `entity_boosted` hits in `evaluation.py`, `retrievers.py`, `runner.py` — those are **search type string literals** used in conditionals, not config defaults. Leave them.
+- `BAAI/bge-base-en-v1.5` in docstrings, `--help` examples, `TEST_MODELS` list, `ner_from_config.py`/`entity_pattern_learner.py` dict key lookups — these are either documentation or data-dependent keys, not defaults to centralise.
+- `core/gem_client.py` and `core/llm_config.py` — these use `Path(__file__)` to find sibling config files (providers.json etc.), which is the **correct pattern** for self-contained core modules. Leave them.
+
+---
+
+Run these next to get the full content of the files that need editing:
+
+```bash
+cat src/rag_pipeline/ablation/compare.py
+cat src/rag_pipeline/answer_generation/runner.py | grep -n "BAAI\|production_model\|retrieval_model" | head -20
+sed -n '35,45p' src/rag_pipeline/answer_generation/retriever.py
+sed -n '25,35p' src/rag_pipeline/evaluation/llm_judge.py
+sed -n '8,20p' src/rag_pipeline/evaluation/p05_evaluation/_failure_analysis.py
+sed -n '55,95p' src/rag_pipeline/eda/topics/classification/tfidf_course_analysis.py
+cat src/rag_pipeline/eda/topics/config.py
+```
+
+Paste all of that and I'll write the exact diffs.
 
 ### Priority 2 — Ablation as a proper pipeline step (Day 3 remainder)
 

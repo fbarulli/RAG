@@ -49,23 +49,9 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import sys
 from rag_pipeline.core.paths import Paths
+from rag_pipeline.logging import get_logger
 from .tfidf_stopwords import BRIDGE_CONCEPT_WHITELIST, apply_code_stripping, balance_corpus, build_stopword_list, load_stopwords, save_stopwords
-print(f'Paths.__file__ location: {Paths.base()}')
-print(f"pyproject.toml exists at base? {(Paths.base() / 'pyproject.toml').exists()}")
-print(f'experiments_dir: {Paths.experiments_dir()}')
-logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(name)s — %(message)s')
-logger = logging.getLogger(__name__)
-
-class Paths:
-    _base = Path(__file__).parent
-
-    @classmethod
-    def processed_dir(cls) -> Path:
-        return cls._base / 'data' / 'processed'
-
-    @classmethod
-    def experiments_dir(cls) -> Path:
-        return cls._base / 'experiments'
+logger = get_logger(__name__)
 VECTORIZER_PARAMS: dict = dict(ngram_range=(1, 2), min_df=2, max_df=0.85, sublinear_tf=True, strip_accents='unicode')
 
 def load_cleaned_data(eda_stats_path: Path | None=None) -> tuple[pd.DataFrame, dict]:
@@ -86,7 +72,7 @@ def load_cleaned_data(eda_stats_path: Path | None=None) -> tuple[pd.DataFrame, d
         eda_stats_path = Path('/workspaces/LLM/rag_pipeline/experiments/eda_summary.json')
     logger.info(f'[load_cleaned_data] CALLED with eda_stats_path = {eda_stats_path}')
     try:
-        path = Path(__file__).parent.parent / 'p01_data_cleaning' / 'data' / 'processed' / 'clean.jsonl'
+        path = Paths.clean_jsonl()
         if not path.exists():
             raise FileNotFoundError(f'No document file found at {path}.')
         df = pd.read_json(path, lines=True)

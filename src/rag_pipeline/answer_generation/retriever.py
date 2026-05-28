@@ -36,7 +36,11 @@ def _clean_answer(text: str) -> str:
 class ContextRetriever:
     """Retrieve and optionally rerank documents from Qdrant for answer generation."""
 
-    def __init__(self, host: str='localhost', port: int=6333, model_name: str='BAAI/bge-base-en-v1.5', reranker_model: str='cross-encoder/ms-marco-MiniLM-L-6-v2'):
+    def __init__(self, host: str | None=None, port: int | None=None, model_name: str | None=None, reranker_model: str='cross-encoder/ms-marco-MiniLM-L-6-v2'):
+        _d = Paths.defaults()
+        host = host or _d["qdrant"]["host"]
+        port = port or _d["qdrant"]["port"]
+        model_name = model_name or _d["production_model"]
         self.client = QdrantClient(host=host, port=port)
         self.model_name = model_name
         self.reranker_model = reranker_model

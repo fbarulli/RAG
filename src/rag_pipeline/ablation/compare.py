@@ -10,13 +10,11 @@ Usage:
 """
 import json
 from collections import defaultdict
-from pathlib import Path
-
-RESULTS_DIR = Path(__file__).resolve().parent / "results"
+from rag_pipeline.core.paths import Paths
 
 
 def _load(name: str) -> dict[str, dict]:
-    path = RESULTS_DIR / f"{name}_query_results.jsonl"
+    path = Paths.reranker_results_dir() / f"{name}_query_results.jsonl"
     if not path.exists():
         raise FileNotFoundError(f"No results file: {path}")
     records = {}

@@ -8,8 +8,12 @@ def main() -> None:
 import json
 from collections import Counter, defaultdict
 from pathlib import Path
-results = json.load(open('rag_pipeline/experiments/benchmark_query_results.json'))
-ner_map = {a['id']: a for a in json.load(open('rag_pipeline/p02_eda/experiments/topic_assignments_all.json'))['results']['BAAI/bge-base-en-v1.5']['assignments']}
+from rag_pipeline.core.paths import Paths
+from rag_pipeline.logging import get_logger
+logger = get_logger(__name__)
+_defaults = Paths.defaults()
+results = json.load(open(Paths.experiments_dir() / 'benchmark_query_results.json'))
+ner_map = {a['id']: a for a in json.load(open(Paths.topic_assignments()))['results'][_defaults['production_model']]['assignments']}
 failures = [r for r in results if not r['hit']]
 passes = [r for r in results if r['hit']]
 print(f'Total: {len(results)} | Pass: {len(passes)} | Fail: {len(failures)}\n')

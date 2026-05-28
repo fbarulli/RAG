@@ -1,0 +1,13 @@
+{
+  "regression_threshold_pp": 2.0,
+  "configs_to_test": ["entity_boosted"],
+  "experiments": [
+    {"name": "no_entity",      "flags": ["--null-entity"]},
+    {"name": "no_category",    "flags": ["--null-category"]},
+    {"name": "no_topics",      "flags": ["--null-topics"]},
+    {"name": "skip_ner",       "flags": ["--skip-ner"]},
+    {"name": "skip_cluster",   "flags": ["--skip-cluster"]},
+    {"name": "skip_rules",     "flags": ["--skip-rules"]},
+    {"name": "empty_patterns", "flags": ["--empty-entity-patterns"]}
+  ]
+}

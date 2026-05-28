@@ -1,12 +1,7 @@
 from pathlib import Path
 from typing import List, Dict
-import sys
-
-# Ensure project root is in path
-project_root = Path(__file__).resolve().parents[4]
-if str(project_root) not in sys.path:
-    from rag_pipeline.core.paths import Paths
 import json
+from rag_pipeline.core.paths import Paths
 
 class TopicsConfig:
     """Topics pipeline configuration — single source of truth via central configs."""

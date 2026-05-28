@@ -206,8 +206,9 @@ def _p50(values: list[float]) -> float:
 
 def run_pipeline(retrieval_model: Optional[str]=None, llm_model: Optional[str]=None, prompt_styles: Optional[list[str]]=None, top_k_values: Optional[list[int]]=None, limit: Optional[int]=None, rerank: bool=True) -> None:
     """Run answer generation pipeline directly from test set."""
-    retrieval_model = retrieval_model or 'BAAI/bge-base-en-v1.5'
-    llm_model = llm_model or 'nvidia_nim/meta/llama-3.1-70b-instruct'
+    _d = Paths.defaults()
+    retrieval_model = retrieval_model or _d["production_model"]
+    llm_model = llm_model or _d["llm_model"]
     prompt_styles = prompt_styles or list(PROMPT_CONFIGS.keys())
     top_k_values = top_k_values or TOP_K_VALUES
     test_queries = load_test_queries(Paths.test_jsonl(), limit)

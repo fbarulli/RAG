@@ -9,7 +9,6 @@ rag_pipeline.egg-info/requires.txt
 rag_pipeline.egg-info/top_level.txt
 src/rag_pipeline/__init__.py
 src/rag_pipeline/logging.py
-src/rag_pipeline/run_clean_pipeline.py
 src/rag_pipeline/ablation/__init__.py
 src/rag_pipeline/ablation/__main__.py
 src/rag_pipeline/ablation/cli.py
