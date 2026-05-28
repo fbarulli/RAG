@@ -22,18 +22,10 @@ from pathlib import Path
 from typing import Optional
 from rag_pipeline.logging import get_logger
 logger = get_logger(__name__)
-_HERE = Path(__file__).resolve().parent
-
-def find_project_root(start_path: Path) -> Path:
-    """Find project root by looking for 'configs' directory."""
-    for parent in start_path.parents:
-        if (parent / 'configs').exists():
-            return parent
-    return start_path.parents[3]
-_PROJECT_ROOT = find_project_root(_HERE)
-_CONFIGS_DIR = _PROJECT_ROOT / 'configs'
-DEFAULTS_PATH = _CONFIGS_DIR / 'defaults.json'
-MODELS_CONFIG_PATH = _CONFIGS_DIR / 'models.json'
+from rag_pipeline.core.paths import Paths
+# Using central Paths (single source of truth)
+DEFAULTS_PATH = Paths.base() / "configs" / "defaults.json"
+MODELS_CONFIG_PATH = Paths.base() / "configs" / "models.json"
 
 def load_defaults() -> dict:
     """Load defaults.json, raising FileNotFoundError if missing."""
