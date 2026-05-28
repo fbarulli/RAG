@@ -1,6 +1,7 @@
 """
 benchmark_report.py
-Ultra-minimal reporting.
+Simplified reporting. Focuses on summary metrics.
+Trace data remains available in .jsonl result files.
 """
 from typing import Optional
 from .benchmark_types import MetricSummary, QueryResult
@@ -30,25 +31,3 @@ def print_full_benchmark_report(summaries: list[MetricSummary], query_results_ma
     print(f"\n{'=' * 110}")
     print(f"OVERALL WINNER: {_short_model_name(winner.model_name)} | {winner.config_name} (MRR: {winner.mrr:.4f})")
     print('=' * 110)
-
-    # 3. Per-Query Type Trace
-    if query_results_map:
-        print(f"\n{'QUERY TYPE TRACE (Hit@1)':^110}")
-        configs = list(query_results_map.keys())
-        print(f"{'Query Type':<25} | {'Expected':<12} | " + " | ".join([f"{cfg:<15}" for cfg in configs]))
-        print("-" * 110)
-        
-        # Use the first config as the reference list
-        master_results = query_results_map[configs[0]]
-        for res in master_results:
-            row_hits = []
-            for cfg in configs:
-                # Find the result for this specific query ID in this config's list
-                cfg_res = next((r for r in query_results_map[cfg] if r.query_id == res.query_id), None)
-                if cfg_res and cfg_res.hit_ids and cfg_res.hit_ids[0] == res.expected_id:
-                    row_hits.append("HIT")
-                else:
-                    row_hits.append("MISS")
-            
-            # res.query_type is 'original', 'grounded_analyst', etc.
-            print(f"{res.query_type:<25} | {str(res.expected_id):<12} | " + " | ".join([f"{h:<15}" for h in row_hits]))

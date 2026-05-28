@@ -1,0 +1,24 @@
+{
+  "name": "baseline",
+  "patch": "baseline",
+  "configs": [
+    "entity_boosted"
+  ],
+  "model": "BAAI/bge-base-en-v1.5",
+  "timestamp": "2026-05-28T20:08:13.594203+00:00",
+  "metrics": {
+    "entity_boosted": {
+      "h1": 0.8855291576673866,
+      "h3": 0.9546436285097192,
+      "h5": 0.9676025917926566,
+      "h10": 0.980561555075594,
+      "mrr": 0.9231272926737291,
+      "p50_ms": 8.671530000356142
+    }
+  },
+  "result_files": [
+    "/workspaces/RAG-a-muffin/experiments/ablation_results/baseline__entity_boosted_query_results.jsonl"
+  ],
+  "git_commit": "53cdf43597915545129010daf4c831fa6ff5353c",
+  "corpus_size": 1207
+}

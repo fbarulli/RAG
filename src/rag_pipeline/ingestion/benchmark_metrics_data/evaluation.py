@@ -1,3 +1,4 @@
+from pathlib import Path
 """
 rag_pipeline/p04_ingestion/_benchmark_metrics/evaluation.py
 Evaluation orchestration - ties retrievers to test data.
@@ -9,6 +10,8 @@ from typing import Any, Optional, TypedDict, TYPE_CHECKING
 from ..benchmark_types import QueryResult
 from .core import check_code_integrity
 from .retrievers import run_es_retrieval, run_vector_retrieval, run_vector_retrieval_with_reranker, run_hybrid_rrf_retrieval, run_entity_boosted_retrieval, run_hybrid_dbsf_retrieval, run_entity_category_boosted_retrieval
+import numpy as np
+from ..embedding_cache import load_cached_embeddings, save_embeddings_cache
 if TYPE_CHECKING:
     from elasticsearch import Elasticsearch
 logger = logging.getLogger(__name__)
@@ -36,9 +39,29 @@ class RetrievalConfig:
     es: Optional[Any]
     es_index: str
 
-def _encode_queries(model, test_set: list[dict], encode_batch_size: int) -> list[list[float]]:
+def _encode_queries(model, test_set: list[dict], encode_batch_size: int, cache_dir: Optional[Path] = None, model_name: Optional[str] = None) -> list[list[float]]:
     queries = [test['query'] for test in test_set]
+    num_queries = len(queries)
+    
+    if cache_dir and model_name:
+        slug = model_name.replace('/', '_').replace('-', '_').lower()
+        cache_key = f'queries_{slug}'
+        logger.info(f'Checking embedding cache: {cache_dir}/{cache_key}.npy (expected rows: {num_queries})')
+        
+        cached = load_cached_embeddings(cache_dir, cache_key, num_queries)
+        if cached is not None:
+            logger.info(f'Cache HIT: Loaded {num_queries} query vectors from disk.')
+            return cached.tolist()
+        logger.info('Cache MISS: Proceeding to encode queries.')
+
+    logger.info(f'Encoding {num_queries} queries on CPU...')
     vectors = model.encode(queries, batch_size=encode_batch_size, convert_to_numpy=True, show_progress_bar=True)
+    
+    if cache_dir and model_name:
+        slug = model_name.replace('/', '_').replace('-', '_').lower()
+        save_embeddings_cache(cache_dir, f'queries_{slug}', vectors)
+        logger.info(f'Saved query embeddings to cache: queries_{slug}.npy')
+        
     return vectors.tolist()
 
 def _build_integrity_cache(test_set: list[dict]) -> dict[str, float]:
@@ -166,7 +189,7 @@ def _run_evaluation_loop(test_set: list[dict], topic_map: dict, query_vectors: O
     logger.info(f'Evaluation complete — {len(results)}/{total} queries succeeded.')
     return results
 
-def evaluate_config(client, collection: str, model, test_set: list[dict], topic_map: dict, config: dict, top_k: int, es: 'Elasticsearch | None'=None, es_index: str='faqs', encode_batch_size: int=32) -> list[QueryResult]:
+def evaluate_config(client, collection: str, model, test_set: list[dict], topic_map: dict, config: dict, top_k: int, es: 'Elasticsearch | None'=None, es_index: str='faqs', encode_batch_size: int=32, cache_dir: Optional[Path] = None, model_name: Optional[str] = None) -> list[QueryResult]:
     """
     Evaluate one (config, model) pair against the full test set.
     Applies reranking post-retrieval for any search_type when config
@@ -180,7 +203,7 @@ def evaluate_config(client, collection: str, model, test_set: list[dict], topic_
     query_vectors = None
     if search_type in _search_types_requiring_vector():
         queries = [test['query'] for test in test_set]
-        query_vectors = _encode_queries(model, test_set, encode_batch_size)
+        query_vectors = _encode_queries(model, test_set, encode_batch_size, cache_dir=cache_dir, model_name=model_name)
     integrity_cache = _build_integrity_cache(test_set)
     if query_vectors is not None:
         logger.info(f'Vector check — dim={len(query_vectors[0])}, sample={query_vectors[0][:3]}')
