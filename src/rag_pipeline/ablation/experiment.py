@@ -89,12 +89,7 @@ class Patch:
         return assignments
 
     def env(self) -> dict:
-        e = {}
-        if self.skip_cluster:
-            e["ABLATION_SKIP_CLUSTER"] = "1"
-        if self.skip_rules:
-            e["ABLATION_SKIP_RULES"] = "1"
-        return e
+        return {}
 
     def label(self) -> str:
         parts = []
@@ -223,10 +218,12 @@ class Experiment:
         env  = {**os.environ, **self.patch.env()}
         slug = self.model.replace("/", "_").replace("-", "_")
         out  = Paths.topics_experiments_dir() / f"topic_assignments_{slug}.json"
+        cluster_flag = "--skip-cluster" if self.patch.skip_cluster else ""
+        rules_flag   = "--skip-rules"   if self.patch.skip_rules   else ""
         _run(
             f'uv run python -m rag_pipeline.eda.topics.core.topic_modeling '
-            f'--embedding-model "{self.model}" --output "{out}"',
-            env=env,
+            f'--embedding-model "{self.model}" --output "{out}" '
+            f'{cluster_flag} {rules_flag}'.strip()
         )
         _run(
             f'uv run python -m rag_pipeline.eda.topics.core.topic_merge --only "{out}"',

@@ -73,6 +73,8 @@ class ClassificationRules:
         question: str,
         topic_id: int = -1,
         all_assignments: list[dict[str, Any]] | None = None,
+        skip_cluster: bool = False,
+        skip_rules: bool = False,
     ) -> tuple[str, str]:
         """
         Returns (new_category, source) where source is one of:
@@ -84,19 +86,18 @@ class ClassificationRules:
         if current_category != "OTHER":
             return current_category, "unchanged"
 
-        import os
-        if all_assignments is not None and not os.getenv("ABLATION_SKIP_CLUSTER"):
-            cluster_cat = _cluster_majority_category(topic_id, all_assignments)
-            if cluster_cat:
-                return cluster_cat, "cluster"
-
         q_lower = question.lower().strip()
-        if not os.getenv("ABLATION_SKIP_RULES"):
+        if not skip_rules:
             for cat in _PRIORITY:
                 if cat not in self.signals:
                     continue
                 if any(_word_match(sig, q_lower) for sig in self.signals[cat]):
                     return cat, "rules"
+
+        if not skip_cluster and all_assignments is not None:
+            cluster_cat = _cluster_majority_category(topic_id, all_assignments)
+            if cluster_cat:
+                return cluster_cat, "cluster"
 
         return "OTHER", "fallback"
     def extract_entity(self, category: str, question: str) -> str | None:

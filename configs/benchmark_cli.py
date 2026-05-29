@@ -152,6 +152,8 @@ def create_topic_modeling_parser() -> argparse.ArgumentParser:
     g.add_argument('--min-samples', type=int, default=None)
     g.add_argument('--subtopic-threshold', type=int, default=None)
     g.add_argument('--run-all', action='store_true', default=False)
+    g.add_argument('--skip-cluster', action='store_true', default=False)
+    g.add_argument('--skip-rules', action='store_true', default=False)
     return parser
 
 

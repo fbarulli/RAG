@@ -11,15 +11,15 @@
     "hit_rate_10": 0.9935205183585313,
     "mrr": 0.9496331722033667,
     "ndcg_10": 0.9606393740176673,
-    "latency_p50": 9.452538997720694,
-    "latency_p95": 11.22286899772007,
-    "latency_p99": 12.408680999214994,
+    "latency_p50": 6.648783999935404,
+    "latency_p95": 8.10730899979717,
+    "latency_p99": 8.631647000129306,
     "avg_code_integrity_ref": 1.0,
     "avg_code_integrity_retrieved": 1.0,
     "cross_course_contamination": 0.0,
     "rank_std": 1.057521182481187,
     "failure_count": 3,
-    "avg_failure_similarity": 0.6603019766666667
+    "avg_failure_similarity": 0.6603019866666667
   },
   {
     "config_name": "entity_boosted (chaos_monkey)",

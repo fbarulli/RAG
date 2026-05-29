@@ -2,25 +2,34 @@
 Canonical schemas for FAQ documents and LLM results.
 """
 from dataclasses import dataclass, asdict
+from pydantic import BaseModel, ConfigDict, field_validator
 from typing import Optional
 from pathlib import Path
 import json
 
 
-@dataclass(frozen=True)
-class FAQDocument:
-    """Immutable, typed representation of a FAQ document."""
+class FAQDocument(BaseModel):
+    """Immutable, validated FAQ document. Raises ValidationError on bad data."""
+    model_config = ConfigDict(frozen=True)
+
     id: str
     question: str
     answer: str
     course: str
     section: Optional[str] = None
 
+    @field_validator("id", "question", "answer", "course")
+    @classmethod
+    def not_empty(cls, v: str) -> str:
+        if not v or not v.strip():
+            raise ValueError("must not be empty or whitespace-only")
+        return v
+
     def to_dict(self) -> dict:
-        return asdict(self)
+        return self.model_dump()
 
     def to_json(self) -> str:
-        return json.dumps(self.to_dict(), ensure_ascii=False)
+        return json.dumps(self.model_dump(), ensure_ascii=False)
 
     @classmethod
     def from_dict(cls, data: dict) -> "FAQDocument":

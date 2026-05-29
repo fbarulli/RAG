@@ -189,6 +189,8 @@ def process_model(
     subtopic_min_size: int,
     input_path: Path,
     ner_tagged: dict[str, dict],
+    skip_cluster: bool = False,
+    skip_rules: bool = False,
 ) -> None:
     logger.info("Processing model: %s", model_name)
     docs = _load_documents(input_path)
@@ -208,7 +210,7 @@ def process_model(
 
     rules = ClassificationRules.load()
     for a in assignments:
-        new_cat, source = rules.reclassify(a["ner_category"], a["question"], a["topic"], assignments)
+        new_cat, source = rules.reclassify(a["ner_category"], a["question"], a["topic"], assignments, skip_cluster=skip_cluster, skip_rules=skip_rules)
         a["classification_source"] = source
         if source != "unchanged":
             a["ner_category"] = new_cat
@@ -270,6 +272,8 @@ def main() -> None:
             subtopic_min_size=subtopic_min_size,
             input_path=input_path,
             ner_tagged=ner_tagged,
+            skip_cluster=getattr(args, "skip_cluster", False),
+            skip_rules=getattr(args, "skip_rules", False),
         )
 
 

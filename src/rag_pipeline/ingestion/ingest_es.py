@@ -15,7 +15,7 @@ from sentence_transformers import SentenceTransformer
 
 from rag_pipeline.core.paths import Paths
 from rag_pipeline.core.schemas import FAQDocument
-from rag_pipeline.ingestion.ingest_models import load_cached_embeddings, save_embeddings_cache
+from rag_pipeline.ingestion.embedding_cache import load_cached_embeddings, save_embeddings_cache
 from rag_pipeline.logging import get_logger
 
 logger = get_logger(__name__)

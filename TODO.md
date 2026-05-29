@@ -1,88 +1,6 @@
-# 🛠️ RAG-a-muffin: Technical Roadmap & Architecture Notes
-
-This document serves as the source of truth for the current architectural state, identified bottlenecks, and the plan for improving retrieval performance.
-
----
-
-## 🏗️ Core Architecture
-
-### 1. The Path & Config System (The "No-Magic-Strings" Rule)
-To prevent the project from breaking when files move or environments change, we have decoupled the filesystem from the logic.
-
-**A. Centralized Path Resolution (`Paths` Class)**
-Instead of using `Path("../data/file.json")` inside modules, we use `src/rag_pipeline/core/paths.py`.
-- **Mechanism:** The `Paths` class acts as a static resolver. It reads `configs/paths.json` at runtime and returns absolute paths relative to the project root.
-- **The Benefit:** To move the entire data folder, you change **one line** in a JSON file rather than searching and replacing paths in 50 different Python files.
-- **Example:** `Paths.topic_assignments()` $\rightarrow$ resolves to `output/topic_assignments_all.json`.
-
-**B. Configuration-Driven Logic (JSON $\rightarrow$ Class)**
-We use a "Configuration Object" pattern to handle runtime settings:
-- **`configs/defaults.json`**: Holds global constants (batch sizes, hosts, ports).
-- **`configs/retrieval_configs.json`**: Defines the behavior of retrieval strategies (weights, filters).
-- **`BenchmarkConfig` Class**: A wrapper that loads these JSONs and allows **CLI Overrides**. (e.g., if you pass `--top-k 50` on the CLI, it overrides the JSON default).
-
-### 2. The Retriever Facade
-The retrieval layer has been split to separate concerns and ensure maintainability:
-- **`retrievers.py`**: A thin facade. Only imports and exports functions to maintain compatibility with `evaluation.py`.
-- **`es_retrievers.py`**: Pure BM25 logic (Elasticsearch).
-- **`qdrant_retrievers.py`**: Pure Vector logic and Qdrant filter construction.
-- **`composite_retrievers.py`**: Hybrid (RRF/DBSF) and Boosted logic.
-
----
-
-## ⚡ Performance Optimizations
-
-### 1. Embedding Caching (CPU Optimization)
-To eliminate redundant computation on CPU-only hardware, we implemented a `.npy` caching layer in `src/rag_pipeline/ingestion/embedding_cache.py`.
-- **Query Cache:** Test query vectors are cached by model slug. This makes the startup of a benchmark run nearly instantaneous.
-- **Corpus Cache:** Corpus embeddings (Question + Answer) are cached. This prevents `ablation run` from spending minutes re-encoding the dataset every time a topic patch is applied.
-
-### 2. Ingestion Pipeline
-- Moved from manual loops to high-performance Qdrant point uploading.
-- Integrated the cache check into `ingest_qdrant.py` to ensure "compute once, read many."
-
----
-
-## 🔍 Findings & Critical Insights
-
-### 1. The "NER Poisoning" Effect
-**Finding:** The `entity_boosted` configuration significantly hurt performance (~12pp drop in H@1) compared to `vector_default`.
-- **Root Cause:** The `entity_patterns.json` contains generic signals (e.g., `"error"`, `"project"`, `"course"`). 
-- **The Mechanic:** Because Qdrant uses a `should` clause for boosting, any document containing these generic terms gets a score boost. In a technical FAQ, almost every document contains the word "error," causing the retriever to promote irrelevant noise and displace the correct answer.
-- **Conclusion:** NER signals must be **high-precision**. Generic terms must be pruned.
-
-### 2. Topic Modeling Logic
-- **Clustering Signal:** Clustering on `Question` alone is insufficient. `Question + Answer` provides the technical context (e.g., "Airflow", "K8s") necessary for accurate topic discovery.
-- **Outlier Management:** Use `approximate_distribution` to reassign outliers to the next most likely topic to reduce the "Topic -1" count.
-
----
-
-## 📅 TODO & Future Work
-
-### 🔴 High Priority (Precision & Performance)
-- [ ] **Prune Entity Patterns:** Audit `configs/entity_patterns.json` and remove generic signals. Keep only specific `TOOL`, `LANGUAGE`, and `CONCEPT` terms.
-- [ ] **Asymmetric NER Tagging:** Implement "Question-First, Answer-Fallback" logic.
-    - Extract from Question $\rightarrow$ If `TOOL/LANGUAGE`, use as `primary_entity`.
-    - If Question is generic $\rightarrow$ Extract from Answer $\rightarrow$ If `TOOL/LANGUAGE`, use as `primary_entity`.
-    - Otherwise $\rightarrow$ `OTHER`.
-- [ ] **Complete Ablation Suite:** Run the remaining `skip_cluster`, `skip_rules`, and `empty_patterns` experiments to quantify the exact value of each pipeline stage.
-
-### 🟡 Medium Priority (Refinement)
-- [ ] **Corpus Sampling:** Use `corpus_sampler.py` to find the minimum training set size that preserves H@1 performance.
-- [ ] **ID Normalization:** Resolve naming inconsistencies between the corpus (`machine-learning-zoomcamp`) and test queries (`ml-zoomcamp`).
-- [ ] **Reranker Integration:** Move from simple Vector retrieval to a `Vector $\rightarrow$ Reranker` pipeline using the best-performing Cross-Encoder.
-
-### 🟢 Low Priority (Maintenance)
-- [ ] **Full Suite Commit:** Once the "No-Entity" baseline is recovered, commit the restructured `src/` and `ablation/` directories.
-- [ ] **Documentation:** Update `RERANKER.md` with the final findings on entity boosting vs. pure vector search.
-
-
-
-
-
 ```bash
 cat > HANDOFF.md << 'EOF'
-# Ablation Handoff — 2026-05-28
+# Ablation Handoff — 2026-05-29
 
 ## Baseline (current best)
 | Config | H@1 | MRR |
@@ -100,48 +18,125 @@ cat > HANDOFF.md << 'EOF'
 ---
 
 ## Completed Experiments
-| Name | Delta H@1 | Finding |
-|---|---|---|
-| no_generic_entity | -3.3pp | Generic entities HELP, especially chaos_monkey |
-| low_conf_null_50 | 0pp | No effect — 47% of docs below 0.5 threshold |
-| low_conf_null_40 | 0pp | No effect — topic probability is not driving retrieval |
-| no_cluster | 0pp | is a confirmed no-op|
+| Name | H@1 | MRR | Delta | Finding |
+|---|---|---|---|---|
+| no_generic_entity | 85.5% | 0.9054 | -3.3pp | Generic entities HELP, don't poison |
+| low_conf_null_50 | 88.8% | 0.9242 | 0pp | Topic probability not driving retrieval |
+| low_conf_null_40 | 88.8% | 0.9242 | 0pp | Confirmed — 47% docs below 0.5 but no effect |
+| no_cluster | 92.4% | 0.9540 | +3.6pp | ← best result, cluster was poisoning chaos_monkey |
+| no_cluster_no_rules | 88.8% | 0.9242 | 0pp | Rules + cluster cancel each other exactly |
+| rules_first | 91.8% | 0.9496 | +3.0pp | Better than baseline, cluster still adds noise as fallback |
 
 ---
 
+## Key Findings
 
+### Cluster majority vote is harmful
+`_cluster_majority_category` stamps the majority NER category onto every doc
+in a BERTopic cluster at 80% confidence. BERTopic clusters by topical
+proximity, not entity type — mixed-entity clusters propagate mislabels.
+
+The env var fix (`ABLATION_SKIP_CLUSTER`) was a silent failure — env vars
+passed via subprocess `env=` do not propagate correctly. Fixed by wiring
+`--skip-cluster` and `--skip-rules` as explicit CLI flags through
+`create_topic_modeling_parser` → `process_model` → `rules.reclassify`.
+
+### Rules-first is the right order
+`reclassify` now runs keyword rules before cluster fallback. Cluster only
+fires on docs that rules can't classify. Still 0.6pp behind `no_cluster` —
+cluster adds noise even as fallback because it votes on `ner_category` only,
+not `ner_primary_entity`, so it can't reinforce the signal driving retrieval.
+
+### Encoding mismatch discovered
+- `ingest_qdrant.py` encodes Q+A — `f"{d.question} {d.answer}"`
+- `ingest_models.py` encodes question-only — `[d.question for d in docs]`
+- Ablation uses `ingest_qdrant`, benchmark uses `ingest_models`
+- Every result so far compares different vector spaces
+- Not yet fixed — encode_mode work is next
 
 ---
 
-## Known Good
-- `ingest_qdrant.py` — refactored, caching added, no hardcoded vars
-- `ingest_es.py` — refactored, caching added, no hardcoded vars
-- `topic_modeling.py` — `or` pattern fixed, `_require` fixed, `subtopic_min_size` in defaults
-- `topic_assignments_all.json` — valid JSON, re-downloaded + re-merged
-- All imports verified clean
+## Code fixes this session
+| File | Fix |
+|---|---|
+| `ingest_qdrant.py` | Fixed `src.` prefix import; imports from `embedding_cache` |
+| `ingest_es.py` | Imports from `embedding_cache` not `ingest_models` |
+| `ingest_models.py` | Removed dead `shutil`/`tempfile` imports |
+| `core/schemas.py` | `FAQDocument` migrated to Pydantic — validates empty fields |
+| `core/paths.py` | Added `embeddings_cache_dir`; fixed `topics_default_output` to `_resolve` |
+| `topic_rules.py` | Removed `os.getenv` — explicit `skip_cluster`/`skip_rules` bool params |
+| `topic_modeling.py` | Fixed `or` pattern → `is not None`; `subtopic_min_size` from defaults |
+| `ablation/experiment.py` | Replaced `_load_from_git` with direct read; CLI flags replace env vars |
+| `benchmark_cli.py` | Added `--skip-cluster`, `--skip-rules` to topic modeling parser |
+| `configs/defaults.json` | Added `subtopic_min_size: 5` |
 
 ---
 
-## What Is Left
-1. **Verify no_cluster silent failure** — diff assignments or add logging to topic_rules.py
-2. **chaos_monkey gap** — 78.9% is the only meaningful remaining gap. If no_cluster
-   is confirmed a no-op, investigate what the 147 failing chaos queries look like.
-   Is it a retrieval problem or a query formulation problem?
-3. **Question-First, Answer-Fallback NER strategy** — deferred until ablation suite
-   is fully trusted. Requires full topic modeling rerun across all models.
-4. **Corpus sampling** — minimum corpus size investigation with corpus_sampler.py.
-   Fix naming mismatch: `ml-zoomcamp` vs `machine-learning-zoomcamp` in test set.
-5. **Commit** — restructured src/ and ablation/ once no_cluster is resolved.
+## What is left
+
+### 1. Encode mode ablation (next)
+Add `--encode-mode question|qa` to `benchmark_cli` and `create_ingestion_parser`.
+Wire through `BenchmarkConfig`, `ingest_qdrant`, `ingest_models`.
+`Paths.collection_for_model` needs `encode_mode` param — Q+A gets `_qa` suffix
+to avoid cache/collection collisions.
+Cache keys: question-only uses existing short name, Q+A uses `qa_` prefix.
+
+### 2. Multi-category tagging
+`FAQDocument` and Qdrant payload currently hold one `ner_category` and one
+`ner_primary_entity`. A document like "Why does my Docker container fail?"
+is simultaneously TOOL and ERROR — the second signal is discarded.
+Schema change: `ner_categories: list[str]`, `ner_entities: list[str]`.
+Retriever `should` clause iterates the list instead of a single value.
+
+### 3. Cluster entity voting
+If cluster stays as fallback after rules, add `ner_primary_entity` majority
+vote alongside the existing category vote. Docs without a keyword rule match
+would inherit the dominant entity from cluster peers — giving entity boosting
+more coverage on ambiguous docs.
+
+### 4. Folder restructure (deferred, non-urgent)
+`src/rag_pipeline/ingestion/` is too flat. Proposed:
+```
+ingestion/
+├── corpus.py          — load_corpus only
+├── ner_map.py         — unified NER loading (3 duplicates exist)
+├── encoder.py         — encode_mode aware, uses embedding_cache
+├── qdrant/
+│   ├── collection.py
+│   ├── points.py
+│   └── ingest.py
+└── benchmark/         — all benchmark_*.py files
+```
+
+### 5. Corpus sampling
+Minimum corpus size investigation with `corpus_sampler.py`.
+Fix naming mismatch: `ml-zoomcamp` vs `machine-learning-zoomcamp` in test set
+(`_course_name_map` in `benchmark_loader.py` handles this but needs audit).
+
+### 6. Commit
+Once encode_mode ablation is done and multi-category tagging is tested,
+commit restructured `src/` and updated `ablation/`.
 
 ---
 
-## Files Modified This Session
-- `src/rag_pipeline/ingestion/ingest_qdrant.py`
-- `src/rag_pipeline/ingestion/ingest_es.py`
-- `src/rag_pipeline/core/paths.py` — added `embeddings_cache_dir`, fixed `topics_default_output`
-- `src/rag_pipeline/ablation/experiment.py` — replaced `_load_from_git` with direct read
-- `src/rag_pipeline/eda/topics/core/topic_modeling.py` — fixed `or` pattern, `_require`, fallback
-- `configs/defaults.json` — added `subtopic_min_size: 5`
+## Commands to resume
+```bash
+# Run remaining ablation experiments
+uv run python -m rag_pipeline.ablation run --name no_rules --skip-rules
+uv run python -m rag_pipeline.ablation run --name optimized --null-generic-entity --null-low-confidence-topics
+
+# Full report
+uv run python -m rag_pipeline.ablation report
+
+# Verify imports still clean after any changes
+python -c "
+from rag_pipeline.core.schemas import FAQDocument
+from rag_pipeline.ingestion.ingest_qdrant import main
+from rag_pipeline.ingestion.ingest_es import main
+from rag_pipeline.ingestion.embedding_cache import load_cached_embeddings, save_embeddings_cache
+print('OK')
+"
+```
 EOF
 echo "Done"
 ```
