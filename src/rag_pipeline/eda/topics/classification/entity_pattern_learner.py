@@ -1,3 +1,4 @@
+from rag_pipeline.core.paths import Paths
 """
 def load_questions(data_path: Path) -> List[str]:
 
@@ -47,7 +48,7 @@ def load_questions(data_path: Path) -> List[str]:
     """Load questions from topic_assignments_all.json"""
     with open(data_path) as f:
         data = json.load(f)
-        assignments = data['results']['BAAI/bge-base-en-v1.5']['assignments']
+        assignments = data['results'][Paths.defaults()['production_model']]['assignments']
         return [a['question'] for a in assignments]
 
 def build_base_nlp() -> spacy.Language:

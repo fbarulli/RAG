@@ -1,3 +1,4 @@
+from rag_pipeline.core.paths import Paths
 """
 Public Functions for Config-Driven NER Pipeline:
 
@@ -79,7 +80,7 @@ if __name__ == '__main__':
     if data_path.exists():
         with open(data_path) as f:
             data = json.load(f)
-            assignments = data['results']['BAAI/bge-base-en-v1.5']['assignments']
+            assignments = data['results'][Paths.defaults()['production_model']]['assignments']
             questions = [a['question'] for a in assignments]
         detected = 0
         for doc in nlp.pipe([q.lower() for q in questions], batch_size=64):

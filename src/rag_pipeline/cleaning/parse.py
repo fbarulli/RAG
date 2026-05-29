@@ -85,15 +85,16 @@ def parse_file(filepath: str, course: str, section: str) -> Tuple[Optional[FAQDo
         frontmatter = yaml.safe_load(frontmatter_str) or {}
     except yaml.YAMLError as exc:
         return (None, f'YAML parse error: {exc}')
-    doc_id: str = frontmatter.get('id', '')
+    doc_id = frontmatter.get('id', '')
     question = frontmatter.get('question', '')
     if not doc_id:
         return (None, "Missing 'id' field in frontmatter")
+    if not isinstance(doc_id, str):
+        return (None, f"'id' must be a string, got {type(doc_id).__name__}: {doc_id!r} — quote it in frontmatter")
     if not question:
         return (None, "Missing 'question' field in frontmatter")
     if not isinstance(question, str):
-        print(f'  Warning: non-string question in {filepath}: {question!r} — coercing to str')
-        question = str(question)
+        return (None, f"'question' must be a string, got {type(question).__name__}: {question!r} — quote it in frontmatter")
     return (FAQDocument(id=doc_id, question=question.strip(), answer=clean_answer(body), course=course, section=section), None)
 
 def walk_raw_dir(raw_dir: str) -> Generator[Tuple[str, str, str], None, None]:

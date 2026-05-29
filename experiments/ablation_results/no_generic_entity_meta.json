@@ -6,15 +6,15 @@
     "vector_default"
   ],
   "model": "BAAI/bge-base-en-v1.5",
-  "timestamp": "2026-05-28T23:23:35.872202+00:00",
+  "timestamp": "2026-05-29T09:44:37.402684+00:00",
   "metrics": {
     "entity_boosted": {
-      "h1": 0.8833693304535637,
-      "h3": 0.9697624190064795,
-      "h5": 0.980561555075594,
-      "h10": 0.9935205183585313,
-      "mrr": 0.929066817511742,
-      "p50_ms": 8.999181998660788
+      "h1": 0.8898488120950324,
+      "h3": 0.9740820734341252,
+      "h5": 0.9848812095032398,
+      "h10": 0.9956803455723542,
+      "mrr": 0.9341064143439953,
+      "p50_ms": 12.107547000141494
     },
     "vector_default": {
       "h1": 0.8034557235421166,
@@ -22,13 +22,13 @@
       "h5": 0.958963282937365,
       "h10": 0.9719222462203023,
       "mrr": 0.8719033905858958,
-      "p50_ms": 9.52905000303872
+      "p50_ms": 11.020984999959182
     }
   },
   "result_files": [
     "/workspaces/RAG-a-muffin/experiments/ablation_results/no_generic_entity__entity_boosted_query_results.jsonl",
     "/workspaces/RAG-a-muffin/experiments/ablation_results/no_generic_entity__vector_default_query_results.jsonl"
   ],
-  "git_commit": "a139fe9ee1f85062280e4830fc2515848fcd17d6",
+  "git_commit": "79ff2bfcb6c1bbe6234825936fe336b3647f4d9c",
   "corpus_size": 1207
 }

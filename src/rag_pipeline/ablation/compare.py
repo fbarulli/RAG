@@ -14,7 +14,7 @@ from rag_pipeline.core.paths import Paths
 
 
 def _load(name: str) -> dict[str, dict]:
-    path = Paths.reranker_results_dir() / f"{name}_query_results.jsonl"
+    path = Paths.ablation_results_dir() / f"{name}_query_results.jsonl"
     if not path.exists():
         raise FileNotFoundError(f"No results file: {path}")
     records = {}
@@ -86,6 +86,29 @@ def breakdown(rows: list[dict]) -> dict[str, dict]:
             "a_beats_b": sum(1 for r in qrows if r["delta"] == -1),
         }
     return result
+
+
+def breakdown_from_jsonl(jsonl_path) -> None:
+    """Print per-query-type H@1 breakdown from a single experiment JSONL file."""
+    import json
+    from collections import defaultdict
+    from pathlib import Path
+    jsonl_path = Path(jsonl_path)
+    if not jsonl_path.exists():
+        return
+    buckets = defaultdict(list)
+    with open(jsonl_path) as f:
+        for line in f:
+            row = json.loads(line)
+            qt = row.get("query_type", "unknown")
+            hit = row.get("hit_ids", [])
+            expected = row.get("expected_id", "")
+            buckets[qt].append(int(bool(hit and hit[0] == expected)))
+    print(f"  {'query_type':<22} {'n':>5} {'H@1':>7}")
+    print(f"  {'-' * 36}")
+    for qt in sorted(buckets):
+        hits = buckets[qt]
+        print(f"  {qt:<22} {len(hits):>5} {sum(hits)/len(hits):>7.1%}")
 
 
 def print_diff(rows: list[dict], show: str = "all") -> None:

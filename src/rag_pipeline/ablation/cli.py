@@ -48,28 +48,13 @@ def cmd_run(args) -> None:
         print(f"  {cfg:<25} H@1={h1_str}  MRR={mrr_str}")
 
     # per-query-type breakdown from saved JSONL
-    import json
-    from collections import defaultdict
+    from rag_pipeline.ablation.compare import breakdown_from_jsonl
     from rag_pipeline.core.paths import Paths
     results_dir = Paths.ablation_results_dir()
     for cfg in result.configs:
         jsonl = results_dir / f"{result.name}__{cfg}_query_results.jsonl"
-        if not jsonl.exists():
-            continue
-        buckets = defaultdict(list)
-        with open(jsonl) as f:
-            for line in f:
-                row = json.loads(line)
-                qt = row.get("query_type", "unknown")
-                hit = row.get("hit_ids", [])
-                expected = row.get("expected_id", "")
-                buckets[qt].append(int(bool(hit and hit[0] == expected)))
         print(f"\n  [{cfg}] breakdown by query type:")
-        print(f"  {'query_type':<22} {'n':>5} {'H@1':>7}")
-        print(f"  {'-' * 36}")
-        for qt in sorted(buckets):
-            hits = buckets[qt]
-            print(f"  {qt:<22} {len(hits):>5} {sum(hits)/len(hits):>7.1%}")
+        breakdown_from_jsonl(jsonl)
 
 
 def cmd_flow(args) -> None:
@@ -117,6 +102,13 @@ def cmd_flow(args) -> None:
         except Exception as e:
             print(f"  ERROR in {name}: {e}")
             continue
+        from rag_pipeline.ablation.compare import breakdown_from_jsonl
+        from rag_pipeline.core.paths import Paths
+        results_dir = Paths.ablation_results_dir()
+        for cfg in result.configs:
+            jsonl = results_dir / f"{result.name}__{cfg}_query_results.jsonl"
+            print(f"\n  [{cfg}] breakdown by query type:")
+            breakdown_from_jsonl(jsonl)
 
     print("\n" + "="*50)
     print("Flow complete. Run: uv run python -m rag_pipeline.ablation report")

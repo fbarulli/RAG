@@ -2,11 +2,11 @@
   "name": "no_rules",
   "patch": "skip_rules",
   "configs": [
-    "vector_default",
-    "entity_boosted"
+    "entity_boosted",
+    "vector_default"
   ],
   "model": "BAAI/bge-base-en-v1.5",
-  "timestamp": "2026-05-28T23:04:01.734125+00:00",
+  "timestamp": "2026-05-29T09:53:37.342782+00:00",
   "metrics": {
     "entity_boosted": {
       "h1": 0.8941684665226782,
@@ -14,7 +14,7 @@
       "h5": 0.9697624190064795,
       "h10": 0.9827213822894169,
       "mrr": 0.929066817511742,
-      "p50_ms": 8.878263000951847
+      "p50_ms": 9.493483999904129
     },
     "vector_default": {
       "h1": 0.8034557235421166,
@@ -22,13 +22,13 @@
       "h5": 0.958963282937365,
       "h10": 0.9719222462203023,
       "mrr": 0.8719033905858958,
-      "p50_ms": 9.16022399906069
+      "p50_ms": 9.560825999869849
     }
   },
   "result_files": [
-    "/workspaces/RAG-a-muffin/experiments/ablation_results/no_rules__vector_default_query_results.jsonl",
-    "/workspaces/RAG-a-muffin/experiments/ablation_results/no_rules__entity_boosted_query_results.jsonl"
+    "/workspaces/RAG-a-muffin/experiments/ablation_results/no_rules__entity_boosted_query_results.jsonl",
+    "/workspaces/RAG-a-muffin/experiments/ablation_results/no_rules__vector_default_query_results.jsonl"
   ],
-  "git_commit": "a139fe9ee1f85062280e4830fc2515848fcd17d6",
+  "git_commit": "79ff2bfcb6c1bbe6234825936fe336b3647f4d9c",
   "corpus_size": 1207
 }
