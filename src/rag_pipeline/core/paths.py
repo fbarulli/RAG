@@ -173,3 +173,7 @@ class Paths:
     @classmethod
     def embeddings_cache_dir(cls) -> Path:
         return cls._resolve("embeddings_cache_dir")
+
+    @classmethod
+    def models_config(cls) -> Path:
+        return cls._resolve("models_config")
