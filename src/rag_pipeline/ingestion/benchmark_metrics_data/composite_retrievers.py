@@ -12,12 +12,13 @@ def _normalize_scores(scores: list[float]) -> list[float]:
     s_range = s_max - s_min
     return [(s - s_min) / s_range if s_range > 0 else 0.0 for s in scores]
 
-def run_entity_category_boosted_retrieval(client, collection, query_vector, course_filter, config, top_k, ner_category=None, ner_primary_entity=None, topic=None, section=None, **kwargs) -> SearchResult:
+def run_entity_category_boosted_retrieval(client, collection, query_vector, course_filter, config, top_k, ner_category=None, ner_primary_entity=None, ner_entities=None, topic=None, section=None, **kwargs) -> SearchResult:
     start = time.perf_counter()
     should = []
     
-    if config.get("use_entity", True) and ner_primary_entity:
-        should.append({'key': 'ner_primary_entity', 'match': {'value': ner_primary_entity}})
+    if config.get("use_entity", True):
+        for _e in (ner_entities or ([ner_primary_entity] if ner_primary_entity else [])):
+            should.append({'key': 'ner_primary_entity', 'match': {'value': _e}})
     if config.get("use_category", True) and ner_category and ner_category != "OTHER":
         should.append({'key': 'ner_category', 'match': {'value': ner_category}})
     if config.get("use_topic", False) and topic is not None and topic != -1:

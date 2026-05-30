@@ -3,7 +3,6 @@ benchmark_persistence.py
 Handles the storage, merging, and historical tracking of benchmark results.
 """
 import json
-from dataclasses import asdict
 from pathlib import Path
 from typing import Any, Optional
 from rag_pipeline.logging import get_logger
@@ -27,7 +26,7 @@ def _merge_summaries(existing: dict[tuple[str, str], dict[str, Any]], new_summar
     """Upsert new results into existing history."""
     merged = dict(existing)
     for s in new_summaries:
-        merged[s.model_name, s.config_name] = asdict(s)
+        merged[s.model_name, s.config_name] = s.model_dump()
     return [MetricSummary(**row) for row in merged.values()]
 
 def save_benchmark_results(summaries: list[MetricSummary], output_dir: Path) -> None:
@@ -39,13 +38,13 @@ def save_benchmark_results(summaries: list[MetricSummary], output_dir: Path) -> 
     merged = _merge_summaries(existing, summaries)
     
     with results_path.open('w', encoding='utf-8') as f:
-        json.dump([asdict(s) for s in merged], f, indent=2, ensure_ascii=False)
+        json.dump([s.model_dump() for s in merged], f, indent=2, ensure_ascii=False)
     logger.info(f'Saved benchmark results to {results_path}')
 
 def save_performance_summary(summaries: list[MetricSummary], output_dir: Path) -> None:
     """Create the canonical ranking file (reranker_benchmark_performance.json)."""
     output_dir.mkdir(parents=True, exist_ok=True)
-    all_rows = [asdict(s) for s in summaries if s.num_queries > 0]
+    all_rows = [s.model_dump() for s in summaries if s.num_queries > 0]
     if not all_rows: return
     
     # Find best config per model

@@ -1,0 +1,14 @@
+artifact_uri: file:///workspaces/RAG-a-muffin/experiments/mlflow/283947656642110333/361cf10e7b154edbb7fdaa2b57e9a0f4/artifacts
+end_time: 1780169393629
+entry_point_name: ''
+experiment_id: '283947656642110333'
+lifecycle_stage: active
+run_id: 361cf10e7b154edbb7fdaa2b57e9a0f4
+run_name: ablation__baseline__entity_boosted
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1780169393603
+status: 3
+tags: []
+user_id: root

@@ -1,0 +1,14 @@
+artifact_uri: file:///workspaces/RAG-a-muffin/experiments/mlflow/851699134810605479/5fc01f6fb47944488dcdfc579c93e9a0/artifacts
+end_time: 1780166198596
+entry_point_name: ''
+experiment_id: '851699134810605479'
+lifecycle_stage: active
+run_id: 5fc01f6fb47944488dcdfc579c93e9a0
+run_name: BAAI/bge-base-en-v1.5__entity_boosted
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1780166198576
+status: 3
+tags: []
+user_id: root

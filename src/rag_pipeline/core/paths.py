@@ -87,6 +87,33 @@ class Paths:
     @classmethod
     def reranker_results_dir(cls) -> Path:
         return cls._require(cls._resolve("reranker_results_dir"), "Run: uv run python -m rag_pipeline.eda.topics.core.topic_modeling")
+
+    @classmethod
+    def _load_db_config(cls) -> dict:
+        cfg = cls.base() / "configs" / "db.json"
+        if not cfg.exists():
+            raise FileNotFoundError(f"db.json not found at {cfg}")
+        import json
+        with open(cfg, encoding="utf-8") as f:
+            return json.load(f)
+
+    @classmethod
+    def results_db(cls) -> Path:
+        p = cls.base() / cls._load_db_config()["results_db"]
+        p.parent.mkdir(parents=True, exist_ok=True)
+        return p
+
+    @classmethod
+    def mlflow_db(cls) -> Path:
+        p = cls.base() / cls._load_db_config()["mlflow_db"]
+        p.parent.mkdir(parents=True, exist_ok=True)
+        return p
+
+    @classmethod
+    def mlflow_dir(cls) -> Path:
+        p = cls.mlflow_db().parent
+        p.mkdir(parents=True, exist_ok=True)
+        return p
     
     @classmethod
     def retrieval_configs(cls) -> Path:

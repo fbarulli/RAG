@@ -1,0 +1,8 @@
+artifact_location: file:///workspaces/RAG-a-muffin/experiments/mlflow/851699134810605479
+creation_time: 1780166198147
+experiment_id: '851699134810605479'
+last_update_time: 1780166198147
+lifecycle_stage: active
+name: rag-retrieval
+trace_location: null
+workspace: default

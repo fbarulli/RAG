@@ -28,5 +28,6 @@
   "entity_patterns": "configs/entity_patterns.json",
   "topics_default_output": "src/rag_pipeline/eda/topics/experiments/topic_assignments.json",
   "ablation_results_dir": "experiments/ablation_results",
-  "configs_dir": "configs"
+  "configs_dir": "configs",
+  "mlflow_dir": "experiments/mlflow"
 }

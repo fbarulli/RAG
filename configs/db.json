@@ -1,0 +1,5 @@
+{
+  "_comment": "Database configuration. Single source of truth for all DB paths and settings.",
+  "results_db": "experiments/rag_results.db",
+  "mlflow_db": "experiments/mlflow/mlflow.db"
+}

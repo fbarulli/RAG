@@ -5,12 +5,23 @@ import json
 from pydantic import BaseModel
 
 
+class DocNERInfo(BaseModel, frozen=True):
+    """NER payload for a single document. Single source of truth for field defaults."""
+    ner_category: str = "OTHER"
+    ner_primary_entity: Optional[str] = None
+    ner_entities: list[str] = []
+    topic: int = -1
+    subtopic: Optional[int] = None
+
+
 class TopicAssignment(BaseModel, frozen=True):
     """A single question with its assigned topic and NER category."""
     question: str
     topic: int
     topic_name: str
     ner_category: str
+    ner_entities: list[str] = []
+    ner_categories: list[str] = []
     model: str
 
 

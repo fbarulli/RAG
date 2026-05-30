@@ -36,7 +36,8 @@
         "min_topic_size": 5,
         "min_samples": 1,
         "subtopic_threshold": 40,
-        "subtopic_min_size": 5
+        "subtopic_min_size": 5,
+        "ner_batch_size": 5
     },
     "production_encode_mode": "qa",
     "entity_freq_threshold": 999

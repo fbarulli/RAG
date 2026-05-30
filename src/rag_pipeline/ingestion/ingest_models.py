@@ -53,6 +53,7 @@ from tqdm import tqdm
 from rag_pipeline.logging import get_logger
 from rag_pipeline.core.schemas import FAQDocument
 from rag_pipeline.core.models import EncodeMode
+from rag_pipeline.core.models import DocNERInfo
 from .benchmark_config import BenchmarkConfig
 from configs.benchmark_cli import create_ingestion_parser
 logger = get_logger(__name__)
@@ -112,7 +113,7 @@ def load_corpus(input_path: Path) -> list[FAQDocument]:
     logger.info(f'Loaded {len(docs)} documents from {input_path} ({skipped} skipped)')
     return docs
 
-def load_ner_map(topic_assignments_path: Optional[Path], model_name: str) -> dict[str, dict]:
+def load_ner_map(topic_assignments_path: Optional[Path], model_name: str) -> dict[str, DocNERInfo]:
     """
     Load topic/NER assignments for a specific model.
 
@@ -130,7 +131,7 @@ def load_ner_map(topic_assignments_path: Optional[Path], model_name: str) -> dic
     if model_name not in data['results']:
         logger.warning(f"No topic assignments for '{model_name}' — skipping NER enrichment")
         return {}
-    mapping = {a['id']: {'ner_category': a.get('ner_category', 'OTHER'), 'ner_primary_entity': a.get('ner_primary_entity'), 'topic': a.get('topic', -1), 'subtopic': a.get('subtopic')} for a in data['results'][model_name].get('assignments', [])}
+    mapping = {a['id']: DocNERInfo(ner_category=a.get('ner_category', 'OTHER'), ner_primary_entity=a.get('ner_primary_entity'), ner_entities=a.get('ner_entities', []), topic=a.get('topic', -1), subtopic=a.get('subtopic')) for a in data['results'][model_name].get('assignments', [])}
     logger.info(f"Loaded NER enrichment for {len(mapping)} documents for model '{model_name}'")
     return mapping
 
@@ -139,9 +140,9 @@ def _doc_id_to_uuid(doc_id: str) -> str:
     import uuid
     return str(uuid.uuid5(uuid.NAMESPACE_DNS, str(doc_id)))
 
-def _prepare_payload(doc: FAQDocument, ner_info: dict) -> dict:
+def _prepare_payload(doc: FAQDocument, ner_info: DocNERInfo) -> dict:
     """Prepare Qdrant payload with NER enrichment."""
-    return {'es_id': doc.id, 'question': doc.question, 'answer': doc.answer, 'course': doc.course, 'section': doc.section, 'ner_category': ner_info['ner_category'], 'ner_primary_entity': ner_info['ner_primary_entity'], 'topic': ner_info['topic'], 'subtopic': ner_info['subtopic']}
+    return {'es_id': doc.id, 'question': doc.question, 'answer': doc.answer, 'course': doc.course, 'section': doc.section, 'ner_category': ner_info.ner_category, 'ner_primary_entity': ner_info.ner_primary_entity, 'ner_entities': ner_info.ner_entities, 'topic': ner_info.topic, 'subtopic': ner_info.subtopic}
 
 def _create_points_batch(batch_docs: list[FAQDocument], batch_vecs: np.ndarray, ner_map: dict) -> list[PointStruct]:
     """Create a batch of Qdrant points."""
@@ -206,7 +207,7 @@ def _get_embeddings(model_entry: dict, docs: list[FAQDocument], config: Benchmar
         logger.error(f"Failed to encode model '{model_name}': {e}")
         return None
 
-def _load_ner_map(topic_path: Path, model_name: str) -> dict[str, dict]:
+def _load_ner_map(topic_path: Path, model_name: str) -> dict[str, DocNERInfo]:
     """Load NER/topic enrichment for a model. Raises if missing."""
     import json
     if not topic_path.exists():
@@ -216,12 +217,12 @@ def _load_ner_map(topic_path: Path, model_name: str) -> dict[str, dict]:
     if 'results' not in data:
         raise KeyError(f"Topic assignments file missing 'results' key")
     if model_name not in data['results']:
-        raise KeyError(f"Model '{model_name}' not found in topic assignments. Run: uv run python -m rag_pipeline.eda.p02_topic_modeling --embedding-model {model_name} --run-all")
+        raise KeyError(f"Model '{model_name}' not found in topic assignments. Run: uv run python -m rag_pipeline.eda.topics.core.topic_modeling --embedding-model {model_name} --run-all")
     assignments = data['results'][model_name].get('assignments', [])
     mapping = {}
     for a in assignments:
         doc_id = a['id']
-        mapping[doc_id] = {'ner_category': a['ner_category'], 'ner_primary_entity': a.get('ner_primary_entity'), 'topic': a['topic'], 'subtopic': a.get('subtopic')}
+        mapping[doc_id] = DocNERInfo(ner_category=a.get('ner_category', 'OTHER'), ner_primary_entity=a.get('ner_primary_entity'), ner_entities=a.get('ner_entities', []), topic=a.get('topic', -1), subtopic=a.get('subtopic'))
     logger.info(f"Loaded NER enrichment for {len(mapping)} documents for '{model_name}'")
     return mapping
 
@@ -255,7 +256,7 @@ def ingest_one_model(*, model_entry: dict, docs: list[FAQDocument], client: Qdra
     ner_map = _load_ner_map(config.topic_path, model_name)
     missing_docs = [doc.id for doc in docs if doc.id not in ner_map]
     if missing_docs:
-        raise RuntimeError(f"❌ Model '{model_name}' missing NER data for {len(missing_docs)} documents.\n   First 5 missing IDs: {missing_docs[:5]}\n\n   Generate missing data with:\n   uv run python -m rag_pipeline.eda.p02_topic_modeling \\\n       --embedding-model {model_name} \\\n       --run-all\n\n   Then re-run this ingestion.")
+        raise RuntimeError(f"❌ Model '{model_name}' missing NER data for {len(missing_docs)} documents.\n   First 5 missing IDs: {missing_docs[:5]}\n\n   Generate missing data with:\n   uv run python -m rag_pipeline.eda.topics.core.topic_modeling \\\n       --embedding-model {model_name} \\\n       --run-all\n\n   Then re-run this ingestion.")
     logger.info(f'✅ NER coverage: {len(ner_map)}/{n_docs} documents (100%)')
     if not _ensure_collection(client, collection, dims):
         return False

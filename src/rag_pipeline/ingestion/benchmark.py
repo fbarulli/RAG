@@ -13,6 +13,7 @@ from .benchmark_report import print_full_benchmark_report
 from .benchmark_persistence import save_benchmark_results, save_performance_summary
 from .benchmark_config import BenchmarkConfig
 from configs.benchmark_cli import create_benchmark_parser
+from rag_pipeline.mlflow.logger import log_benchmark_run
 
 logger = get_logger(__name__)
 
@@ -144,6 +145,7 @@ def main():
             _save_query_results(results, name, config.output_dir)
             summaries.append(summary)
             results_map[name] = results
+            log_benchmark_run(name, summary, results, model_entry, tags={"collection": model_entry["collection"]})
 
         print_full_benchmark_report(summaries, query_results_map=results_map)
         save_benchmark_results(summaries, config.output_dir)

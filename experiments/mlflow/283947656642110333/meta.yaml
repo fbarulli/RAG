@@ -1,0 +1,8 @@
+artifact_location: file:///workspaces/RAG-a-muffin/experiments/mlflow/283947656642110333
+creation_time: 1780167498389
+experiment_id: '283947656642110333'
+last_update_time: 1780167498389
+lifecycle_stage: active
+name: rag-ablation
+trace_location: null
+workspace: default

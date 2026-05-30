@@ -41,6 +41,14 @@ def compute_latency_percentiles(latencies: list[float]) -> dict[str, float]:
 def safe_mean(values: list[float]) -> float:
     return mean(values) if values else 0.0
 
+def compute_map(hits: tuple[str, ...], expected_id: str) -> float:
+    """Mean Average Precision for single ground truth document."""
+    if expected_id not in hits:
+        return 0.0
+    rank = hits.index(expected_id) + 1
+    return 1.0 / rank
+
+
 def compute_recall_at_k(hits: tuple[str, ...], expected_id: str, k: int) -> bool:
     """Recall@K for single ground truth document."""
     return expected_id in hits[:k]

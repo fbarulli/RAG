@@ -9,6 +9,7 @@ Run:
 """
 import json
 import gc
+import re
 from pathlib import Path
 from typing import Any, Optional
 
@@ -69,20 +70,30 @@ def _reassign_outliers(
     return topics, probs
 
 
+def _expand_urls(text: str) -> str:
+    """Expand URL-buried tokens so spaCy can tag them (e.g. public.ecr.aws/lambda/python:3.8)."""
+    # Only expand tokens that look like URLs/paths, not all punctuation
+    return re.sub(r'(?:https?://|(?:[a-z0-9_-]+\.){2,}[a-z]{2,}(?:[/:.@][\w.-]*)*)',
+        lambda m: m.group(0).replace('/', ' ').replace(':', ' ').replace('.', ' ').replace('@', ' '),
+        text)
+
+
 def _tag_ner(questions: list[str]) -> dict[str, dict]:
-    """Performs NER tagging. Called once per session to avoid redundant computation."""
+    """spaCy NER — emits all entities, not just ents[0]."""
     logger.info("Starting NER tagging for %d questions...", len(questions))
     nlp = build_base_nlp()
     missed = extract_missed_terms(questions, nlp)
     suggestions = suggest_patterns(missed, min_count=3)
     nlp = update_entity_ruler(nlp, suggestions)
-    
+    expanded = [_expand_urls(q) for q in questions]
     tagged: dict[str, dict] = {}
-    for doc in nlp.pipe(questions, batch_size=64):
+    for original, doc in zip(questions, nlp.pipe(expanded, batch_size=64)):
         ents = list(doc.ents)
-        tagged[doc.text] = {
+        tagged[original] = {
             "category": ents[0].label_ if ents else "OTHER",
             "primary_entity": ents[0].text.lower() if ents else None,
+            "entities": [e.text.lower() for e in ents],
+            "categories": list(dict.fromkeys(e.label_ for e in ents)),
         }
     logger.info("NER tagging complete.")
     return tagged
@@ -114,6 +125,8 @@ def _build_assignments(
             "question": doc["question"],
             "ner_category": ner.get("category", "OTHER"),
             "ner_primary_entity": ner.get("primary_entity"),
+            "ner_entities": ner.get("entities", []),
+            "ner_categories": ner.get("categories", []),
             "subtopic": None,
             "subtopic_keywords": [],
             "keywords": keywords,
@@ -217,6 +230,8 @@ def process_model(
             if a.get("ner_primary_entity") is None:
                 entity = rules.extract_entity(new_cat, a["question"])
                 a["ner_primary_entity"] = entity
+                if entity and entity not in a["ner_entities"]:
+                    a["ner_entities"].append(entity)
             
     if subtopic_threshold > 0:
         assignments = _apply_subtopics(

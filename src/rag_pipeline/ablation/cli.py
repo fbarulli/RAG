@@ -41,8 +41,8 @@ def cmd_run(args) -> None:
     result = exp.run()
     print(f"\nExperiment '{result.name}' complete")
     for cfg, metrics in result.metrics.items():
-        h1  = metrics.get("h1",  metrics.get("hit_at_1", "?"))
-        mrr = metrics.get("mrr", "?")
+        h1  = metrics.hit_rate_1
+        mrr = metrics.mrr
         h1_str  = f"{h1:.1%}"  if isinstance(h1,  float) else str(h1)
         mrr_str = f"{mrr:.4f}" if isinstance(mrr, float) else str(mrr)
         print(f"  {cfg:<25} H@1={h1_str}  MRR={mrr_str}")
@@ -96,8 +96,8 @@ def cmd_flow(args) -> None:
         try:
             result = exp.run()
             for cfg, metrics in result.metrics.items():
-                h1  = metrics.get("h1",  metrics.get("hit_at_1", "?"))
-                mrr = metrics.get("mrr", "?")
+                h1  = metrics.hit_rate_1
+                mrr = metrics.mrr
                 h1_str  = f"{h1:.1%}"  if isinstance(h1,  float) else str(h1)
                 mrr_str = f"{mrr:.4f}" if isinstance(mrr, float) else str(mrr)
                 print(f"  {name:<25} {cfg:<25} H@1={h1_str}  MRR={mrr_str}")

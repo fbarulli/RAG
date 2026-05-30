@@ -5,20 +5,20 @@
     "entity_boosted"
   ],
   "model": "BAAI/bge-base-en-v1.5",
-  "timestamp": "2026-05-30T14:12:22.472411+00:00",
+  "timestamp": "2026-05-30T17:57:15.964114+00:00",
   "metrics": {
     "entity_boosted": {
-      "h1": 0.9222462203023758,
-      "h3": 0.978401727861771,
-      "h5": 0.9870410367170627,
-      "h10": 0.9956803455723542,
-      "mrr": 0.952872913024101,
-      "p50_ms": 7.110437999472197
+      "h1": 0.8617710583153347,
+      "h3": 0.9352051835853131,
+      "h5": 0.9481641468682506,
+      "h10": 0.9568034557235421,
+      "mrr": 0.9009976344749564,
+      "p50_ms": 9.333362002507783
     }
   },
   "result_files": [
     "/workspaces/RAG-a-muffin/experiments/ablation_results/no_category__entity_boosted_query_results.jsonl"
   ],
-  "git_commit": "68fd55941ebc49f80b34a0ba9005266ca283f180",
+  "git_commit": "d04fe6c9e77447baeedc9cf6bf91fed1fbb6e2d4",
   "corpus_size": 1207
 }

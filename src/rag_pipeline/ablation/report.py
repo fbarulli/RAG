@@ -19,7 +19,8 @@ def _results_dir() -> Path:
 
 
 def load_all() -> list[dict]:
-    return [json.load(open(p)) for p in sorted(_results_dir().glob("*_meta.json"))]
+    from rag_pipeline.core.models import ExperimentResult
+    return [ExperimentResult.model_validate(json.load(open(p))).model_dump() for p in sorted(_results_dir().glob("*_meta.json"))]
 
 
 def check_regressions(results: list[dict], ci: bool = False) -> bool:
@@ -89,17 +90,23 @@ def _qt_breakdown(name: str, cfg: str) -> dict:
 
 def _fmt_row(name, patch, cfg, m, qt_data, widths):
     E, P, C, qt_w = widths
-    h1  = m.get("h1",  "?")
-    h5  = m.get("h5",  "?")
-    mrr = m.get("mrr", "?")
-    h1_str  = f"{h1:>7.1%}" if isinstance(h1,  (int, float)) else f"{h1:>7}"
-    h5_str  = f"{h5:>7.1%}" if isinstance(h5,  (int, float)) else f"{h5:>7}"
-    mrr_str = f"{mrr:>8.4f}" if isinstance(mrr, (int, float)) else f"{mrr:>8}"
+    h1      = m.get("h1",          "?")
+    h5      = m.get("h5",          "?")
+    mrr     = m.get("mrr",         "?")
+    ndcg    = m.get("ndcg_10",     "?")
+    p50     = m.get("latency_p50", "?")
+    fail    = m.get("failure_rate","?")
+    h1_str   = f"{h1:>7.1%}"   if isinstance(h1,   (int, float)) else f"{h1:>7}"
+    h5_str   = f"{h5:>7.1%}"   if isinstance(h5,   (int, float)) else f"{h5:>7}"
+    mrr_str  = f"{mrr:>8.4f}"  if isinstance(mrr,  (int, float)) else f"{mrr:>8}"
+    ndcg_str = f"{ndcg:>8.4f}" if isinstance(ndcg, (int, float)) else f"{ndcg:>8}"
+    p50_str  = f"{p50:>7.1f}"  if isinstance(p50,  (int, float)) else f"{p50:>7}"
+    fail_str = f"{fail:>7.1%}" if isinstance(fail, (int, float)) else f"{fail:>7}"
     qt_str = "".join(
         f" {qt_data[qt]:>{qt_w}.1%}" if qt in qt_data else f" {chr(8212):>{qt_w}}"
         for qt in QUERY_TYPES
     )
-    return f"{name:<{E}} {patch:<{P}} {cfg:<{C}}{h1_str} {h5_str} {mrr_str}{qt_str}"
+    return f"{name:<{E}} {patch:<{P}} {cfg:<{C}}{h1_str} {h5_str} {mrr_str}{ndcg_str}{p50_str}{fail_str}{qt_str}"
 
 
 def print_report(results: Optional[list[dict]] = None, ci: bool = False) -> None:
@@ -126,7 +133,7 @@ def print_report(results: Optional[list[dict]] = None, ci: bool = False) -> None
                  "grounded_analyst": "grounded", "original": "original"}
     header = (
         f"{'Experiment':<{E}} {'Patch':<{P}} {'Config':<{C}}"
-        f" {'H@1':>7} {'H@5':>7} {'MRR':>8}"
+        f" {'H@1':>7} {'H@5':>7} {'MRR':>8} {'NDCG@10':>8} {'p50ms':>7} {'fail':>7}"
         + "".join(f" {qt_abbrev.get(qt, qt):>{qt_w}}" for qt in QUERY_TYPES)
     )
     divider = "-" * len(header)

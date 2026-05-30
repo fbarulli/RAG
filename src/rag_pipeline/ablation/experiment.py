@@ -20,8 +20,11 @@ from pathlib import Path
 from pydantic import BaseModel, Field
 
 from rag_pipeline.core.models import Patch, ExperimentResult, GENERIC_ENTITIES, EncodeMode
+from rag_pipeline.ingestion.benchmark_types import MetricSummary
 from rag_pipeline.core.paths import Paths
 from rag_pipeline.logging import get_logger
+from rag_pipeline.mlflow.ablation_logger import log_ablation_run
+from rag_pipeline.db.store import save_experiment_result
 
 logger = get_logger(__name__)
 
@@ -106,6 +109,8 @@ class Experiment(BaseModel):
                 json.dump(result.model_dump(), f, indent=2)
             logger.info("Baseline snapshot → %s", baseline_path)
 
+        log_ablation_run(result)
+        save_experiment_result(result, Paths.ablation_results_dir())
         return result
 
     def _run_payload_only(self, assignments_path: Path, original: dict) -> None:
@@ -115,7 +120,7 @@ class Experiment(BaseModel):
         )
         with open(assignments_path, "w", encoding="utf-8") as f:
             json.dump(patched, f, indent=2)
-        _run(f'uv run python -m rag_pipeline.ingestion.ingest_models --models "{self.model}" --encode-mode "{self.encode_mode.value}"')
+        _run(f'uv run python -m rag_pipeline.ingestion.ingest_models --models "{self.model}" --encode-mode "{self.encode_mode.value}" --no-skip-existing')
 
     def _run_with_rerun(self, entity_patterns_path: Path) -> None:
         if self.patch.empty_entity_patterns:
@@ -137,7 +142,7 @@ class Experiment(BaseModel):
             f'uv run python -m rag_pipeline.eda.topics.core.topic_merge --only "{out}"',
             env=env,
         )
-        _run(f'uv run python -m rag_pipeline.ingestion.ingest_models --models "{self.model}" --encode-mode "{self.encode_mode.value}"')
+        _run(f'uv run python -m rag_pipeline.ingestion.ingest_models --models "{self.model}" --encode-mode "{self.encode_mode.value}" --no-skip-existing')
 
 
 # ---------------------------------------------------------------------------
@@ -171,14 +176,7 @@ def _collect_results(name: str, configs: list[str], model: str) -> tuple[dict, l
             rows = json.load(f)
         for row in rows:
             if row.get("model_name") == model and row.get("config_name") in configs:
-                metrics[row["config_name"]] = {
-                    "h1":    row.get("hit_rate_1"),
-                    "h3":    row.get("hit_rate_3"),
-                    "h5":    row.get("hit_rate_5"),
-                    "h10":   row.get("hit_rate_10"),
-                    "mrr":   row.get("mrr"),
-                    "p50_ms": row.get("latency_p50"),
-                }
+                metrics[row["config_name"]] = MetricSummary.from_benchmark_row(row)
 
     result_files = []
     results_dir  = Paths.ablation_results_dir()

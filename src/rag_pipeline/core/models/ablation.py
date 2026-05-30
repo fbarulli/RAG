@@ -1,6 +1,7 @@
 """Ablation experiment schemas."""
 from __future__ import annotations
 from pydantic import BaseModel, Field, computed_field
+from rag_pipeline.ingestion.benchmark_types import MetricSummary
 
 GENERIC_ENTITIES = {"error", "homework", "course", "model", "project", "issue"}
 
@@ -70,7 +71,7 @@ class ExperimentResult(BaseModel):
     configs: list[str]
     model: str
     timestamp: str
-    metrics: dict
+    metrics: dict[str, MetricSummary]
     result_files: list[str]
     git_commit: str = "unknown"
     corpus_size: int | None = None
