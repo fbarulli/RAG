@@ -15,15 +15,15 @@
       "hit_rate_10": 0.980561555075594,
       "mrr": 0.9242072062806405,
       "ndcg_10": 0.938189474021234,
-      "latency_p50": 9.720139999899402,
-      "latency_p95": 11.870246999933443,
-      "latency_p99": 13.950664999811124,
+      "latency_p50": 7.918772999801149,
+      "latency_p95": 9.508309999546327,
+      "latency_p99": 10.786369999550516,
       "avg_code_integrity_ref": 1.0,
       "avg_code_integrity_retrieved": 1.0,
       "cross_course_contamination": 0.0,
       "rank_std": 1.60550789650296,
       "failure_count": 9,
-      "avg_failure_similarity": 0.664750258888889
+      "avg_failure_similarity": 0.6647502622222222
     }
   ],
   "all_results": [
@@ -39,37 +39,15 @@
       "hit_rate_10": 0.980561555075594,
       "mrr": 0.9242072062806405,
       "ndcg_10": 0.938189474021234,
-      "latency_p50": 9.720139999899402,
-      "latency_p95": 11.870246999933443,
-      "latency_p99": 13.950664999811124,
+      "latency_p50": 7.918772999801149,
+      "latency_p95": 9.508309999546327,
+      "latency_p99": 10.786369999550516,
       "avg_code_integrity_ref": 1.0,
       "avg_code_integrity_retrieved": 1.0,
       "cross_course_contamination": 0.0,
       "rank_std": 1.60550789650296,
       "failure_count": 9,
-      "avg_failure_similarity": 0.664750258888889
-    },
-    {
-      "config_name": "vector_default",
-      "model_name": "BAAI/bge-base-en-v1.5",
-      "topic": null,
-      "subtopic": null,
-      "num_queries": 463,
-      "hit_rate_1": 0.8034557235421166,
-      "hit_rate_3": 0.937365010799136,
-      "hit_rate_5": 0.958963282937365,
-      "hit_rate_10": 0.9719222462203023,
-      "mrr": 0.8719033905858958,
-      "ndcg_10": 0.8969981291107711,
-      "latency_p50": 9.329252000043198,
-      "latency_p95": 11.476610999579862,
-      "latency_p99": 13.897704999635607,
-      "avg_code_integrity_ref": 1.0,
-      "avg_code_integrity_retrieved": 1.0,
-      "cross_course_contamination": 0.0,
-      "rank_std": 1.8615963414615688,
-      "failure_count": 13,
-      "avg_failure_similarity": 0.6595927069230769
+      "avg_failure_similarity": 0.6647502622222222
     }
   ]
 }

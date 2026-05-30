@@ -38,6 +38,8 @@ Run:
 """
 from __future__ import annotations
 import gc
+import tempfile
+import shutil
 import json
 import uuid
 from pathlib import Path
@@ -50,6 +52,7 @@ from sentence_transformers import SentenceTransformer
 from tqdm import tqdm
 from rag_pipeline.logging import get_logger
 from rag_pipeline.core.schemas import FAQDocument
+from rag_pipeline.core.models import EncodeMode
 from .benchmark_config import BenchmarkConfig
 from configs.benchmark_cli import create_ingestion_parser
 logger = get_logger(__name__)
@@ -180,7 +183,9 @@ def _get_embeddings(model_entry: dict, docs: list[FAQDocument], config: Benchmar
     short_name = model_entry['short_name']
     n_docs = len(docs)
     if not config.force_encode:
-        vectors = load_cached_embeddings(config.cache_dir, short_name, n_docs)
+        encode_mode = getattr(config, 'encode_mode', EncodeMode.question)
+        cache_key = f'{short_name}{encode_mode.suffix}'
+        vectors = load_cached_embeddings(config.cache_dir, cache_key, n_docs)
         if vectors is not None:
             return vectors
     try:
@@ -188,8 +193,11 @@ def _get_embeddings(model_entry: dict, docs: list[FAQDocument], config: Benchmar
         trust = model_entry.get('trust_remote_code', False)
         model = SentenceTransformer(model_name, trust_remote_code=trust)
         logger.info('Encoding questions…')
-        vectors = model.encode([d.question for d in docs], batch_size=config.encode_batch_size, show_progress_bar=True, convert_to_numpy=True)
-        save_embeddings_cache(config.cache_dir, short_name, vectors)
+        encode_mode = getattr(config, 'encode_mode', EncodeMode.question)
+        texts = [encode_mode.encode_text(d.question, d.answer) for d in docs]
+        vectors = model.encode(texts, batch_size=config.encode_batch_size, show_progress_bar=True, convert_to_numpy=True)
+        cache_key = f'{short_name}{encode_mode.suffix}'
+        save_embeddings_cache(config.cache_dir, cache_key, vectors)
         del model
         gc.collect()
         logger.info('Model unloaded from memory.')
@@ -221,7 +229,9 @@ def ingest_one_model(*, model_entry: dict, docs: list[FAQDocument], client: Qdra
     """Ingest a single model into Qdrant. Hard fails on missing NER data."""
     model_name = model_entry['name']
     short_name = model_entry['short_name']
-    collection = model_entry['collection']
+    from rag_pipeline.core.paths import Paths
+    encode_mode = getattr(config, 'encode_mode', EncodeMode.question)
+    collection = Paths.collection_for_model(model_name, encode_mode)
     n_docs = len(docs)
     logger.info('=' * 60)
     logger.info(f'Model      : {model_name}')

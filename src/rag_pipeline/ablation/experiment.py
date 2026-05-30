@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from pydantic import BaseModel, Field
 
-from rag_pipeline.core.models import Patch, ExperimentResult, GENERIC_ENTITIES
+from rag_pipeline.core.models import Patch, ExperimentResult, GENERIC_ENTITIES, EncodeMode
 from rag_pipeline.core.paths import Paths
 from rag_pipeline.logging import get_logger
 
@@ -36,8 +36,9 @@ logger = get_logger(__name__)
 class Experiment(BaseModel):
     name: str
     patch: Patch
-    configs: list[str] = Field(default_factory=lambda: _production_defaults()[1])
-    model: str         = Field(default_factory=lambda: _production_defaults()[0])
+    configs: list[str] = Field(default_factory=lambda: [Paths.defaults()["production_config"]])
+    model: str         = Field(default_factory=lambda: Paths.defaults()["production_model"])
+    encode_mode: EncodeMode = Field(default_factory=lambda: EncodeMode(Paths.defaults().get("production_encode_mode", "question")))
 
     def run(self) -> ExperimentResult:
         logger.info("Running experiment: %s (patch=%s)", self.name, self.patch.label())
@@ -55,9 +56,10 @@ class Experiment(BaseModel):
                 self._run_payload_only(assignments_path, original_assignments)
 
             cfg_args = " ".join(self.configs)
+            collection = Paths.collection_for_model(self.model, self.encode_mode)
             _run(
                 f'uv run python -m rag_pipeline.ingestion.benchmark '
-                f'--model "{self.model}" --configs {cfg_args}'
+                f'--model "{self.model}" --configs {cfg_args} --collection "{collection}"'
             )
             metrics, result_files = _collect_results(self.name, self.configs, self.model)
 
@@ -93,15 +95,15 @@ class Experiment(BaseModel):
             git_commit=git_commit,
             corpus_size=corpus_size,
         )
-        meta_path = _results_dir() / f"{self.name}_meta.json"
+        meta_path = Paths.ablation_results_dir() / f"{self.name}_meta.json"
         with open(meta_path, "w", encoding="utf-8") as f:
-            json.dump(asdict(result), f, indent=2)
+            json.dump(result.model_dump(), f, indent=2)
         logger.info("Saved → %s", meta_path)
 
         if self.name == "baseline":
             baseline_path = Paths.experiments_dir() / "baseline.json"
             with open(baseline_path, "w", encoding="utf-8") as f:
-                json.dump(asdict(result), f, indent=2)
+                json.dump(result.model_dump(), f, indent=2)
             logger.info("Baseline snapshot → %s", baseline_path)
 
         return result
@@ -113,7 +115,7 @@ class Experiment(BaseModel):
         )
         with open(assignments_path, "w", encoding="utf-8") as f:
             json.dump(patched, f, indent=2)
-        _run(f'uv run python -m rag_pipeline.ingestion.ingest_qdrant --model "{self.model}"')
+        _run(f'uv run python -m rag_pipeline.ingestion.ingest_models --models "{self.model}" --encode-mode "{self.encode_mode.value}"')
 
     def _run_with_rerun(self, entity_patterns_path: Path) -> None:
         if self.patch.empty_entity_patterns:
@@ -135,7 +137,7 @@ class Experiment(BaseModel):
             f'uv run python -m rag_pipeline.eda.topics.core.topic_merge --only "{out}"',
             env=env,
         )
-        _run(f'uv run python -m rag_pipeline.ingestion.ingest_qdrant --model "{self.model}"')
+        _run(f'uv run python -m rag_pipeline.ingestion.ingest_models --models "{self.model}" --encode-mode "{self.encode_mode.value}"')
 
 
 # ---------------------------------------------------------------------------
@@ -179,7 +181,7 @@ def _collect_results(name: str, configs: list[str], model: str) -> tuple[dict, l
                 }
 
     result_files = []
-    results_dir  = _results_dir()
+    results_dir  = Paths.ablation_results_dir()
     for cfg in configs:
         src = bench_dir / f"{cfg}_query_results.jsonl"
         if src.exists():

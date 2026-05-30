@@ -93,13 +93,15 @@ class Paths:
         return cls._resolve("retrieval_configs")
 
     @staticmethod
-    def collection_for_model(model_name: str) -> str:
+    def collection_for_model(model_name: str, encode_mode = "question") -> str:
         """Derive Qdrant collection name from model name — single source of truth.
-        Mirrors the transform in ingest_qdrant.py.
+        Single source of truth for collection naming.
         e.g. 'BAAI/bge-base-en-v1.5' -> 'faqs_bge_base_en_v1_5'
+        e.g. encode_mode='qa' -> 'faqs_bge_base_en_v1_5_qa'
         """
         short = model_name.split('/')[-1].replace('-', '_').replace('.', '_')
-        return f'faqs_{short}'
+        suffix = encode_mode.suffix if hasattr(encode_mode, "suffix") else ""
+        return f'faqs_{short}{suffix}'
 
     @classmethod
     def input_file(cls, stage: str) -> Path:
@@ -177,3 +179,10 @@ class Paths:
     @classmethod
     def models_config(cls) -> Path:
         return cls._resolve("models_config")
+    @classmethod
+    def configs_dir(cls) -> Path:
+        return cls._resolve("configs_dir")
+
+    @classmethod
+    def service_config(cls) -> Path:
+        return cls.configs_dir() / "service.json"

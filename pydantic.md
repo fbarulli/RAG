@@ -1,3 +1,100 @@
+# Session Notes — 2026-05-29
+
+## Goal
+Consolidate two ingestion paths (`ingest_qdrant.py` and `ingest_models.py`) and validate
+encode mode (`question` vs `qa`) with a real benchmark comparison.
+
+---
+
+## 1. Ablation Migration: `ingest_qdrant.py` → `ingest_models.py`
+
+**Decision:** migrate. `ingest_models.py` is strictly better — batching, tqdm, atomic cache
+writes, skip_existing, hard NER failure, multi-model support, correct encode_mode wiring.
+
+**Arg mapping:**
+
+| `ingest_qdrant.py` | `ingest_models.py` |
+|---|---|
+| `--model` | `--models` |
+| `--input` | `--clean-path` |
+| `--host` | `--qdrant-host` |
+| `--port` | `--qdrant-port` |
+
+All args already existed in `configs/benchmark_cli.py` — no new args needed.
+
+**Files changed:**
+- `src/rag_pipeline/ablation/experiment.py` — 2 call sites
+- `src/rag_pipeline/ablation/corpus_sampler.py` — 2 call sites (fraction re-ingest + restore)
+
+---
+
+## 2. Bug Fixes in `ingest_models.py`
+
+### Missing stdlib imports
+`tempfile` and `shutil` were used but never imported. Added both.
+
+### Embedding cache key ignores encode_mode
+Cache key was `{short_name}.npy` regardless of encode mode. QA ingest was loading
+question-mode vectors from cache, producing identical collections.
+
+**Fix:** cache key is now `{short_name}_qa.npy` when `encode_mode == 'qa'`,
+`{short_name}.npy` otherwise. Applied to both load and save paths.
+
+---
+
+## 3. Benchmark Results
+
+### Question mode (`faqs_bge_base_en_v1_5`)
+| Config | H@1 | MRR |
+|---|---|---|
+| entity_boosted | 83.6% | 0.9023 |
+| vector_default | 70.8% | 0.7906 |
+
+### QA mode (`faqs_bge_base_en_v1_5_qa`)
+| Config | H@1 | MRR |
+|---|---|---|
+| entity_boosted | **92.2%** | **0.9529** |
+| vector_default | **80.3%** | **0.8719** |
+
+**QA encode mode is uniformly better across all configs (+8-10pp H@1).**
+The `__q_only` collection is orphaned from pipeline naming and can be deleted.
+
+---
+
+## 4. `BenchmarkConfig` — Dataclass → Pydantic
+
+**Why:** project standard is Pydantic everywhere.
+
+**Gotcha:** `cached_property` descriptors (`qdrant_client`, `es_client`) are picked up
+as fields unless opted out:
+```python
+model_config = ConfigDict(ignored_types=(cached_property,))
+```
+
+**Changes:**
+- `@dataclass` → `BaseModel`
+- `encode_mode: str` → `encode_mode: Literal['question', 'qa']` — validated at construction
+- `__repr__`: `__dataclass_fields__` → `model_fields`
+- `_bool_flag` in `merge_args`: was returning `None` when flag absent; Pydantic rejects
+  `None` for `bool` fields. Fixed to fall back to `getattr(self, attr)`.
+
+---
+
+## 5. Open / Next
+
+- [ ] `benchmark_report.py` — column widths not dynamic (breaks on long config names),
+  no per-query-type breakdown. `query_results_map` passed but unused.
+- [ ] Verify `results_map` key format in `benchmark.py` before rewriting report.
+- [ ] `ablation/TODO.md` line 195 still references `ingest_qdrant` — update or delete.
+- [ ] Delete orphaned `faqs_bge_base_en_v1_5__q_only` collection from Qdrant.
+
+
+
+
+
+
+
+
 # RAG-a-muffin Handoff — 2026-05-29
 
 ## What was done this session

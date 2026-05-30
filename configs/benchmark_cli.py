@@ -97,6 +97,7 @@ def create_ingestion_parser() -> argparse.ArgumentParser:
     """
     parser = create_base_parser(description='Ingest FAQ documents into Qdrant for one or all embedding models.')
     parser.add_argument('--model', type=str, default=None, help="Ingest only this model (must match 'name' in models.json). Overrides --models.")
+    parser.add_argument('--encode-mode', type=str, choices=['question', 'qa', 'answer'], default='question', help="Encoding mode: 'question' (default) or 'qa' (question + answer).")
     return parser
 
 def create_benchmark_parser() -> argparse.ArgumentParser:
@@ -166,8 +167,9 @@ def create_ablation_parser() -> argparse.ArgumentParser:
     """
     from rag_pipeline.core.paths import Paths
     d = Paths.defaults()
-    default_model  = d.get("production_model",  "BAAI/bge-base-en-v1.5")
-    default_config = d.get("production_config", "entity_boosted")
+    default_model       = d.get("production_model",       "BAAI/bge-base-en-v1.5")
+    default_config      = d.get("production_config",      "entity_boosted")
+    default_encode_mode = d.get("production_encode_mode", "question")
 
     parser = argparse.ArgumentParser(
         prog="rag_pipeline.ablation",
@@ -207,6 +209,9 @@ def create_ablation_parser() -> argparse.ArgumentParser:
     g2.add_argument("--model", default=default_model,
                     help=f"Embedding model "
                          f"(default: {default_model!r} from defaults.json)")
+    g2.add_argument("--encode-mode", default=default_encode_mode,
+                    choices=["question", "qa", "answer"],
+                    help=f"Encoding mode (default: {default_encode_mode!r} from defaults.json)")
 
     # ── compare ──────────────────────────────────────────────────────────────
     cmp_p = sub.add_parser("compare", help="Diff two experiment result files query-by-query")

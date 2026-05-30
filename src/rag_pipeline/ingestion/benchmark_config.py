@@ -35,19 +35,20 @@ Typical usage
 """
 from __future__ import annotations
 import argparse
-from dataclasses import dataclass, field
 from functools import cached_property
 from pathlib import Path
 from typing import Any, Optional, List, Tuple
+from pydantic import BaseModel, ConfigDict
 from rag_pipeline.core.paths import Paths
-from functools import cached_property
+from rag_pipeline.core.models import EncodeMode
 from rag_pipeline.logging import get_logger
 from .benchmark_loader import load_defaults
 logger = get_logger(__name__)
 
-@dataclass
-class BenchmarkConfig:
+class BenchmarkConfig(BaseModel):
     """Resolved configuration for benchmark and ingestion scripts."""
+
+    model_config = ConfigDict(ignored_types=(cached_property,))
     test_set_path: Optional[Path] = None
     clean_path: Optional[Path] = None
     topic_path: Optional[Path] = None
@@ -72,6 +73,7 @@ class BenchmarkConfig:
     reset: bool = False
     fail_fast: bool = False
     model_timeout: int = 3600
+    encode_mode: EncodeMode = EncodeMode.question
 
     @cached_property
     def qdrant_client(self):
@@ -181,10 +183,9 @@ class BenchmarkConfig:
         def _bool_flag(attr: str, cli_attr: Optional[str]=None) -> bool:
             """Return CLI boolean flag if explicitly set, otherwise current value."""
             key = cli_attr or attr
-            if hasattr(args, key):
-                return getattr(args, key)
-            return getattr(self, attr)
-        return BenchmarkConfig(test_set_path=_path('test_set_path', 'test_set'), clean_path=_path('clean_path'), topic_path=_path('topic_path'), configs_path=_path('configs_path'), output_dir=_path('output_dir'), cache_dir=_path('cache_dir'), qdrant_host=str(_val('qdrant_host')), qdrant_port=int(_val('qdrant_port')), es_host=_val('es_host') if _val('es_host') is not None else None, es_index=str(_val('es_index')), models=resolved_models, config=_val('config') if _val('config') is not None else None, top_k=int(_val('top_k')), encode_batch_size=int(_val('encode_batch_size')), batch_size=int(_val('batch_size')), quick=_bool_flag('quick'), force_encode=_bool_flag('force_encode'), skip_existing=_bool_flag('skip_existing'), no_detail=_bool_flag('no_detail'), auto_prepare=_bool_flag('auto_prepare'), resume=_bool_flag('resume'), reset=_bool_flag('reset'), fail_fast=_bool_flag('fail_fast'), model_timeout=int(_val('model_timeout', 'timeout')))
+            v = getattr(args, key, None)
+            return v if v is not None else getattr(self, attr)
+        return BenchmarkConfig(test_set_path=_path('test_set_path', 'test_set'), clean_path=_path('clean_path'), topic_path=_path('topic_path'), configs_path=_path('configs_path'), output_dir=_path('output_dir'), cache_dir=_path('cache_dir'), qdrant_host=str(_val('qdrant_host')), qdrant_port=int(_val('qdrant_port')), es_host=_val('es_host') if _val('es_host') is not None else None, es_index=str(_val('es_index')), models=resolved_models, config=_val('config') if _val('config') is not None else None, top_k=int(_val('top_k')), encode_batch_size=int(_val('encode_batch_size')), batch_size=int(_val('batch_size')), quick=_bool_flag('quick'), force_encode=_bool_flag('force_encode'), skip_existing=_bool_flag('skip_existing'), no_detail=_bool_flag('no_detail'), auto_prepare=_bool_flag('auto_prepare'), resume=_bool_flag('resume'), reset=_bool_flag('reset'), fail_fast=_bool_flag('fail_fast'), model_timeout=int(_val('model_timeout', 'timeout')), encode_mode=EncodeMode(_val('encode_mode') or 'question'))
 
     def validate(self) -> Tuple[bool, List[str]]:
         """Validate config before running benchmark. Returns (is_valid, issues)."""
@@ -289,9 +290,9 @@ class BenchmarkConfig:
     def __repr__(self) -> str:
         """Compact representation showing non-default values."""
         items = []
-        for field_name in self.__dataclass_fields__:
+        for field_name, field_info in self.model_fields.items():
             value = getattr(self, field_name)
-            default = getattr(self.__class__, field_name).default
+            default = field_info.default
             if value != default:
                 if isinstance(value, list) and len(value) > 3:
                     value = value[:3] + [f'... ({len(value)} total)']

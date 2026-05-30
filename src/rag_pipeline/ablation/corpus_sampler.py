@@ -119,11 +119,11 @@ def run_fraction(
 
     # 1. Re-ingest (overwrites the real collection)
     _run(
-        f'uv run python -m rag_pipeline.ingestion.ingest_qdrant '
-        f'--model "{model}" '
-        f'--input "{corpus_path}" '
-        f'--host {host} '
-        f'--port {port}'
+        f'uv run python -m rag_pipeline.ingestion.ingest_models '
+        f'--models "{model}" '
+        f'--clean-path "{corpus_path}" '
+        f'--qdrant-host {host} '
+        f'--qdrant-port {port}'
     )
 
     # 2. Benchmark — original queries only, isolated output dir
@@ -266,11 +266,11 @@ def main() -> None:
     logger.info("Restoring full corpus (%d docs)…", len(docs))
     try:
         _run(
-            f'uv run python -m rag_pipeline.ingestion.ingest_qdrant '
-            f'--model "{args.model}" '
-            f'--input "{args.input}" '
-            f'--host {args.host} '
-            f'--port {args.port}'
+            f'uv run python -m rag_pipeline.ingestion.ingest_models '
+            f'--models "{args.model}" '
+            f'--clean-path "{args.input}" '
+            f'--qdrant-host {args.host} '
+            f'--qdrant-port {args.port}'
         )
         logger.info("Full corpus restored.")
     except Exception as e:

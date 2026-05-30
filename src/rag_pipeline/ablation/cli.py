@@ -66,6 +66,8 @@ def cmd_flow(args) -> None:
         defaults["configs"] = args.configs
     if args.model:
         defaults["model"] = args.model
+    if getattr(args, "encode_mode", None):
+        defaults["encode_mode"] = args.encode_mode
 
     # fast payload-only experiments first
     fast = [

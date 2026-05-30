@@ -14,9 +14,11 @@ from rag_pipeline.core.paths import Paths
 
 
 def _load(name: str) -> dict[str, dict]:
-    path = Paths.ablation_results_dir() / f"{name}_query_results.jsonl"
-    if not path.exists():
-        raise FileNotFoundError(f"No results file: {path}")
+    results_dir = Paths.ablation_results_dir()
+    matches = sorted(results_dir.glob(f"{name}__*_query_results.jsonl"))
+    if not matches:
+        raise FileNotFoundError(f"No results file matching: {results_dir}/{name}__*_query_results.jsonl")
+    path = matches[0]
     records = {}
     with open(path, encoding="utf-8") as f:
         for line in f:

@@ -104,6 +104,7 @@ def _run_config(cfg_name: str, cfg: dict, config: BenchmarkConfig,
     """Evaluate one retrieval config and return (cfg_name, summary, results)."""
     logger.info(f'  Running: {cfg_name}')
     logger.info(f'Config dict: {cfg}')
+    logger.info(f'Collection: {model_entry["collection"]}')
     results = evaluate_config(
         client=config.qdrant_client,
         collection=model_entry['collection'],

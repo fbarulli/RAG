@@ -2,33 +2,23 @@
   "name": "no_cluster",
   "patch": "skip_cluster",
   "configs": [
-    "entity_boosted",
-    "vector_default"
+    "entity_boosted"
   ],
   "model": "BAAI/bge-base-en-v1.5",
-  "timestamp": "2026-05-29T09:50:18.370981+00:00",
+  "timestamp": "2026-05-30T14:17:12.338444+00:00",
   "metrics": {
     "entity_boosted": {
-      "h1": 0.9244060475161987,
-      "h3": 0.978401727861771,
-      "h5": 0.9870410367170627,
-      "h10": 0.9956803455723542,
-      "mrr": 0.9539528266310124,
-      "p50_ms": 9.22865600023215
-    },
-    "vector_default": {
-      "h1": 0.8034557235421166,
-      "h3": 0.937365010799136,
-      "h5": 0.958963282937365,
-      "h10": 0.9719222462203023,
-      "mrr": 0.8719033905858958,
-      "p50_ms": 9.689492000234168
+      "h1": 0.8876889848812095,
+      "h3": 0.9352051835853131,
+      "h5": 0.9438444924406048,
+      "h10": 0.9524838012958964,
+      "mrr": 0.9139960231752889,
+      "p50_ms": 7.8021280005486915
     }
   },
   "result_files": [
-    "/workspaces/RAG-a-muffin/experiments/ablation_results/no_cluster__entity_boosted_query_results.jsonl",
-    "/workspaces/RAG-a-muffin/experiments/ablation_results/no_cluster__vector_default_query_results.jsonl"
+    "/workspaces/RAG-a-muffin/experiments/ablation_results/no_cluster__entity_boosted_query_results.jsonl"
   ],
-  "git_commit": "79ff2bfcb6c1bbe6234825936fe336b3647f4d9c",
+  "git_commit": "68fd55941ebc49f80b34a0ba9005266ca283f180",
   "corpus_size": 1207
 }

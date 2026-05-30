@@ -14,3 +14,4 @@ __all__ = [
     "ExperimentResult",
     "GENERIC_ENTITIES",
 ]
+from rag_pipeline.core.models.encode_mode import EncodeMode
