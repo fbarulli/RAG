@@ -1,69 +1,69 @@
 {
-  "vector_default": {
-    "name": "Vector Default",
-    "search_type": "vector",
-    "use_vector": true
-  },
-  "bm25_default": {
-    "name": "BM25 Default",
-    "search_type": "bm25",
-    "boost_question": 20.0,
-    "boost_text": 1.0
-  },
-  "bm25_balanced": {
-    "name": "BM25 Balanced",
-    "search_type": "bm25",
-    "boost_question": 5.0,
-    "boost_text": 5.0
-  },
-  "bm25_question_only": {
-    "name": "BM25 Question Only",
-    "search_type": "bm25",
-    "boost_question": 1.0,
-    "boost_text": 0.0
-  },
-  "entity_boosted": {
-    "name": "Entity Boosted",
-    "search_type": "entity_boosted",
-    "rrf_k": 60,
-    "boost_question": 5.0,
-    "boost_text": 5.0
-  },
-  "entity_category_boosted": {
-    "name": "Entity + Category Boosted",
-    "search_type": "entity_category_boosted",
-    "use_entity": true,
-    "use_category": true,
-    "use_topic": false
-  },
-  "entity_topic_boosted": {
-    "name": "Entity + Topic Boosted",
-    "search_type": "entity_category_boosted",
-    "use_entity": true,
-    "use_category": false,
-    "use_topic": true
-  },
-  "entity_full_boosted": {
-    "name": "Entity + Category + Topic Boosted",
-    "search_type": "entity_category_boosted",
-    "use_entity": true,
-    "use_category": true,
-    "use_topic": true
-  },
-  "entity_section_boosted": {
-    "name": "Entity + Section Boosted",
-    "search_type": "entity_category_boosted",
-    "use_entity": true,
-    "use_category": false,
-    "use_topic": false,
-    "use_section": true
-  },
-  "entity_category_section_boosted": {
-    "name": "Entity + Category + Section Boosted",
-    "search_type": "entity_category_boosted",
-    "use_entity": true,
-    "use_category": true,
-    "use_topic": false,
-    "use_section": true
-  }
+    "vector_default": {
+        "name": "Vector Default",
+        "search_type": "vector",
+        "use_vector": true
+    },
+    "bm25_default": {
+        "name": "BM25 Default",
+        "search_type": "bm25",
+        "boost_question": 20.0,
+        "boost_text": 1.0
+    },
+    "bm25_balanced": {
+        "name": "BM25 Balanced",
+        "search_type": "bm25",
+        "boost_question": 5.0,
+        "boost_text": 5.0
+    },
+    "bm25_question_only": {
+        "name": "BM25 Question Only",
+        "search_type": "bm25",
+        "boost_question": 1.0,
+        "boost_text": 0.0
+    },
+    "entity_boosted": {
+        "name": "Entity Boosted",
+        "search_type": "entity_boosted",
+        "rrf_k": 60,
+        "boost_question": 5.0,
+        "boost_text": 5.0
+    },
+    "entity_category_boosted": {
+        "name": "Entity + Category Boosted",
+        "search_type": "entity_category_boosted",
+        "use_entity": true,
+        "use_category": true,
+        "use_topic": false
+    },
+    "entity_topic_boosted": {
+        "name": "Entity + Topic Boosted",
+        "search_type": "entity_category_boosted",
+        "use_entity": true,
+        "use_category": false,
+        "use_topic": true
+    },
+    "entity_full_boosted": {
+        "name": "Entity + Category + Topic Boosted",
+        "search_type": "entity_category_boosted",
+        "use_entity": true,
+        "use_category": true,
+        "use_topic": true
+    },
+    "entity_section_boosted": {
+        "name": "Entity + Section Boosted",
+        "search_type": "entity_category_boosted",
+        "use_entity": true,
+        "use_category": false,
+        "use_topic": false,
+        "use_section": true
+    },
+    "entity_category_section_boosted": {
+        "name": "Entity + Category + Section Boosted",
+        "search_type": "entity_category_boosted",
+        "use_entity": true,
+        "use_category": true,
+        "use_topic": false,
+        "use_section": true
+    }
 }

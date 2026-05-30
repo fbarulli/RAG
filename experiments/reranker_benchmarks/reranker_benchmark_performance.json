@@ -1,7 +1,7 @@
 {
   "winner_model": "BAAI/bge-base-en-v1.5",
   "winner_config": "entity_boosted",
-  "winner_mrr": 0.9242072062806405,
+  "winner_mrr": 0.952872913024101,
   "best_per_model": [
     {
       "config_name": "entity_boosted",
@@ -9,21 +9,21 @@
       "topic": null,
       "subtopic": null,
       "num_queries": 463,
-      "hit_rate_1": 0.8876889848812095,
-      "hit_rate_3": 0.9546436285097192,
-      "hit_rate_5": 0.9676025917926566,
-      "hit_rate_10": 0.980561555075594,
-      "mrr": 0.9242072062806405,
-      "ndcg_10": 0.938189474021234,
-      "latency_p50": 7.918772999801149,
-      "latency_p95": 9.508309999546327,
-      "latency_p99": 10.786369999550516,
+      "hit_rate_1": 0.9222462203023758,
+      "hit_rate_3": 0.978401727861771,
+      "hit_rate_5": 0.9870410367170627,
+      "hit_rate_10": 0.9956803455723542,
+      "mrr": 0.952872913024101,
+      "ndcg_10": 0.9635963291935387,
+      "latency_p50": 7.887014000516501,
+      "latency_p95": 9.399474000019836,
+      "latency_p99": 10.371972999564605,
       "avg_code_integrity_ref": 1.0,
       "avg_code_integrity_retrieved": 1.0,
       "cross_course_contamination": 0.0,
-      "rank_std": 1.60550789650296,
-      "failure_count": 9,
-      "avg_failure_similarity": 0.6647502622222222
+      "rank_std": 0.953492007569576,
+      "failure_count": 2,
+      "avg_failure_similarity": 0.7092631300000001
     }
   ],
   "all_results": [
@@ -33,21 +33,21 @@
       "topic": null,
       "subtopic": null,
       "num_queries": 463,
-      "hit_rate_1": 0.8876889848812095,
-      "hit_rate_3": 0.9546436285097192,
-      "hit_rate_5": 0.9676025917926566,
-      "hit_rate_10": 0.980561555075594,
-      "mrr": 0.9242072062806405,
-      "ndcg_10": 0.938189474021234,
-      "latency_p50": 7.918772999801149,
-      "latency_p95": 9.508309999546327,
-      "latency_p99": 10.786369999550516,
+      "hit_rate_1": 0.9222462203023758,
+      "hit_rate_3": 0.978401727861771,
+      "hit_rate_5": 0.9870410367170627,
+      "hit_rate_10": 0.9956803455723542,
+      "mrr": 0.952872913024101,
+      "ndcg_10": 0.9635963291935387,
+      "latency_p50": 7.887014000516501,
+      "latency_p95": 9.399474000019836,
+      "latency_p99": 10.371972999564605,
       "avg_code_integrity_ref": 1.0,
       "avg_code_integrity_retrieved": 1.0,
       "cross_course_contamination": 0.0,
-      "rank_std": 1.60550789650296,
-      "failure_count": 9,
-      "avg_failure_similarity": 0.6647502622222222
+      "rank_std": 0.953492007569576,
+      "failure_count": 2,
+      "avg_failure_similarity": 0.7092631300000001
     }
   ]
 }

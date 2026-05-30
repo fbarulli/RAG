@@ -38,5 +38,6 @@
         "subtopic_threshold": 40,
         "subtopic_min_size": 5
     },
-    "production_encode_mode": "qa"
+    "production_encode_mode": "qa",
+    "entity_freq_threshold": 999
 }

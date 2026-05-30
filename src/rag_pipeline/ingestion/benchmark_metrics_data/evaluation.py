@@ -5,7 +5,7 @@ Evaluation orchestration - ties retrievers to test data.
 """
 import json
 import logging
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any, Optional, TypedDict, TYPE_CHECKING
 from ..benchmark_types import QueryResult
 from .core import check_code_integrity
@@ -38,6 +38,8 @@ class RetrievalConfig:
     config: dict
     es: Optional[Any]
     es_index: str
+    entity_freq_map: dict = field(default_factory=dict)
+    entity_freq_threshold: int = 999
 
 def _encode_queries(model, test_set: list[dict], encode_batch_size: int, cache_dir: Optional[Path] = None, model_name: Optional[str] = None) -> list[list[float]]:
     queries = [test['query'] for test in test_set]
@@ -119,9 +121,13 @@ def _run_retrieval(rc: RetrievalConfig, query: str, query_vector: Optional[list]
     if rc.search_type == 'hybrid_dbsf' and rc.es is not None:
         return run_hybrid_dbsf_retrieval(client=rc.client, collection=rc.collection, query_vector=query_vector, es=rc.es, es_index=rc.es_index, query_text=query, course_filter=course, config=rc.config, top_k=rc.retrieval_k)
     if rc.search_type == 'entity_boosted':
-        return run_entity_boosted_retrieval(client=rc.client, collection=rc.collection, query_vector=query_vector, course_filter=course, config=rc.config, top_k=rc.retrieval_k, ner_category=ner_category, ner_primary_entity=ner_primary_entity, query_type=query_type)
+        _threshold = rc.entity_freq_threshold
+        _eff_entity = ner_primary_entity if (ner_primary_entity and rc.entity_freq_map.get(ner_primary_entity, 0) <= _threshold) else None
+        return run_entity_boosted_retrieval(client=rc.client, collection=rc.collection, query_vector=query_vector, course_filter=course, config=rc.config, top_k=rc.retrieval_k, ner_category=ner_category, ner_primary_entity=_eff_entity, query_type=query_type)
     if rc.search_type == 'entity_category_boosted':
-        return run_entity_category_boosted_retrieval(client=rc.client, collection=rc.collection, query_vector=query_vector, course_filter=course, config=rc.config, top_k=rc.retrieval_k, ner_category=ner_category, ner_primary_entity=ner_primary_entity, topic=topic, section=section)
+        _threshold = rc.entity_freq_threshold
+        _eff_entity = ner_primary_entity if (ner_primary_entity and rc.entity_freq_map.get(ner_primary_entity, 0) <= _threshold) else None
+        return run_entity_category_boosted_retrieval(client=rc.client, collection=rc.collection, query_vector=query_vector, course_filter=course, config=rc.config, top_k=rc.retrieval_k, ner_category=ner_category, ner_primary_entity=_eff_entity, topic=topic, section=section)
     if rc.use_reranker and rc.reranker_name:
         return run_vector_retrieval_with_reranker(client=rc.client, collection=rc.collection, query_vector=query_vector, query_text=query, course_filter=course, config=rc.config, top_k=rc.top_k, reranker_name=rc.reranker_name)
     return run_vector_retrieval(client=rc.client, collection=rc.collection, query_vector=query_vector, course_filter=course, config=rc.config, top_k=rc.top_k)
@@ -198,7 +204,11 @@ def evaluate_config(client, collection: str, model, test_set: list[dict], topic_
     use_reranker = config.get('reranker', False)
     reranker_name = config.get('reranker_name') if use_reranker else None
     search_type = config.get('search_type', 'vector')
-    rc = RetrievalConfig(search_type=search_type, use_reranker=use_reranker, reranker_name=reranker_name, retrieval_k=top_k * 4 if use_reranker else top_k, top_k=top_k, client=client, collection=collection, config=config, es=es, es_index=es_index)
+    from collections import Counter
+    from rag_pipeline.core.paths import Paths as _Paths
+    entity_freq_map = Counter(v.get('ner_primary_entity') for v in topic_map.values() if v.get('ner_primary_entity'))
+    entity_freq_threshold = _Paths.defaults().get('entity_freq_threshold', 999)
+    rc = RetrievalConfig(search_type=search_type, use_reranker=use_reranker, reranker_name=reranker_name, retrieval_k=top_k * 4 if use_reranker else top_k, top_k=top_k, client=client, collection=collection, config=config, es=es, es_index=es_index, entity_freq_map=dict(entity_freq_map), entity_freq_threshold=entity_freq_threshold)
     _validate_config(rc, model)
     query_vectors = None
     if search_type in _search_types_requiring_vector():
