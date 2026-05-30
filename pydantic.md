@@ -1,314 +1,201 @@
-# RAG-a-muffin Handoff — 2026-05-30c
+# RAG-a-muffin Handoff — 2026-05-30d
 
-## Baseline (pre-session, from ablation at commit `68fd559`)
+## Baseline (end of session)
 | Config | H@1 | H@5 | MRR |
-|--------|-----|-----|-----|
-| entity_boosted (QA collection) | 92.2% | 98.7% | 0.9529 |
+|---|---|---|---|
+| entity_boosted (faqs_bge_base_en_v1_5_qa) | 89.8% | 98.5% | 0.9377 |
 
-## Current state (end of session)
-| Config | Collection | H@1 | H@5 | MRR |
-|--------|-----------|-----|-----|-----|
-| entity_boosted | faqs_bge_base_en_v1_5_qa | 89.6% | 98.5% | 0.9366 |
+Query type breakdown:
+| Type | n | H@1 |
+|---|---|---|
+| chaos_monkey | 147 | 83.0% |
+| creative_student | 120 | 90.8% |
+| grounded_analyst | 147 | 93.2% |
+| original | 49 | 98.0% |
 
-The 2.6% H@1 gap vs baseline is under investigation. Root cause is likely `_expand_urls` shifting some `ner_primary_entity` values (64 docs changed). MLflow was added this session to track experiments going forward.
+DB verified metrics:
+- `ndcg_1` = 0.8985 (equals H@1 by definition — correct)
+- `ndcg_5` = 0.9488
+- `map_score` = 0.9377
+- `latency_p99` = 19.7ms
 
 ---
 
 ## What was done this session
 
-### 1. Multi-entity fix: `_tag_ner` emits full entity list (carried from previous session)
-Already in place at session start. Confirmed working.
+### 1. MLflow infrastructure wired end-to-end
+- `src/rag_pipeline/mlflow/` created as dedicated module
+- `mlflow_logger.py` moved from `ingestion/` → `mlflow/logger.py`
+- `mlflow/ablation_logger.py` created — logs per-config metrics + JSONL artifact per ablation run
+- Both loggers now use SQLite backend (`sqlite:///{Paths.mlflow_db()}`) — fixes file store deprecation warning
+- `benchmark.py` wired: calls `log_benchmark_run` after each `_run_config`
+- `experiment.py` wired: calls `log_ablation_run` before `return result`
+- MLflow experiment names: `"rag-retrieval"` (benchmark), `"rag-ablation"` (ablation)
 
-### 2. Bug fix: reclassified docs now append to `ner_entities`
-`src/rag_pipeline/eda/topics/core/topic_modeling.py` — after `extract_entity` sets `ner_primary_entity` on reclassified docs, the entity is now also appended to `ner_entities` if not already present:
-```python
-a["ner_primary_entity"] = entity
-if entity and entity not in a["ner_entities"]:
-    a["ner_entities"].append(entity)
+### 2. SQLite results DB (`experiments/rag_results.db`)
+- `src/rag_pipeline/db/` created with `models.py`, `engine.py`, `store.py`
+- Schema: `corpus`, `runs`, `run_metrics`, `query_results`
+- No ORM relationships — explicit SQL joins in `store.py` to avoid SQLModel forward-ref issues
+- `save_experiment_result(result, ablation_results_dir)` wired into `experiment.py`
+- DB config in `configs/db.json`, accessed via `Paths.results_db()` and `Paths.mlflow_db()`
+
+### 3. `MetricsSnapshot` → `MetricSummary` consolidation
+- `MetricsSnapshot` deleted from `core/models/ablation.py`
+- `MetricSummary` (in `benchmark_types.py`) is now the single metrics class
+- `MetricSummary.from_benchmark_row(row)` classmethod added — handles both short (`h1`) and full (`hit_rate_1`) field names
+- `ExperimentResult.metrics` is now `dict[str, MetricSummary]`
+- `RunMetrics` in `db/models.py` mirrors `MetricSummary` fields exactly
+- All callers updated: `experiment.py`, `store.py`, `ablation_logger.py`, `cli.py`, `report.py`, `__init__.py`
+
+### 4. New metrics added throughout
+Added to `core.py`, `aggregation.py`, `MetricSummary`, `RunMetrics`:
+- `ndcg_1`, `ndcg_5` — via existing `compute_ndcg_at_k`
+- `map_score` — new `compute_map` function in `core.py`
+- `latency_p99` — was computed but not propagated; now fully wired
+
+### 5. Ablation report extended
+`report.py` `_fmt_row` and header now show: `H@1, H@5, MRR, NDCG@10, p50ms, fail%` + query type columns
+
+### 6. `load_all()` validates through Pydantic
+`report.py` now calls `ExperimentResult.model_validate()` on each `_meta.json` — catches schema drift on load
+
+### 7. Ingest always uses `--no-skip-existing` in ablation
+Both `_run_payload_only` and `_run_with_rerun` in `experiment.py` now pass `--no-skip-existing` to `ingest_models`
+
+### 8. `configs/db.json` added
+```json
+{
+  "_comment": "Database configuration.",
+  "results_db": "experiments/rag_results.db",
+  "mlflow_db": "experiments/mlflow/mlflow.db"
+}
 ```
-**Caveat**: `extract_entity` returns classification signals (e.g. `ask good questions`, `could not`), not clean named entities. These are useful for category inference but noisy for retrieval. This is a known limitation — see open issues below.
-
-### 3. URL entity pre-processing: `_expand_urls`
-Added to `_tag_ner` to help spaCy tag entities buried in URLs like `public.ecr.aws/lambda/python:3.8`.
-```python
-def _expand_urls(text: str) -> str:
-    return re.sub(r'(?:https?://|(?:[a-z0-9_-]+\.){2,}[a-z]{2,}(?:[/:.@][\w.-]*)*)',
-        lambda m: m.group(0).replace('/', ' ').replace(':', ' ').replace('.', ' ').replace('@', ' '),
-        text)
-```
-Pipe expanded text through spaCy but key results by original text so the assignment dict stays correct. The regex only fires on actual URLs/paths — not general punctuation — to avoid scrambling normal text tokenization.
-
-### 4. `ner_entities` wired end-to-end through ingestion
-**`ingest_models.py` fixes:**
-- Added `DocNERInfo` import
-- Both `load_ner_map` and `_load_ner_map` now return `dict[str, DocNERInfo]` (was `dict[str, dict]`)
-- Both now read `ner_entities` from assignments JSON via `a.get('ner_entities', [])`
-- `_prepare_payload` type hint changed from `ner_info: dict` to `ner_info: DocNERInfo`
-- Hardcoded module path `rag_pipeline.eda.p02_topic_modeling` fixed to `rag_pipeline.eda.topics.core.topic_modeling`
-
-### 5. `QueryResult` and `MetricSummary` migrated to Pydantic
-`src/rag_pipeline/ingestion/benchmark_types.py` — both classes converted from `@dataclass(frozen=True)` to `BaseModel, frozen=True`. `SearchResult` also converted.
-- `to_dict()` now calls `self.model_dump()` instead of `asdict(self)`
-- `benchmark_persistence.py` updated: removed `from dataclasses import asdict`, all `asdict(s)` → `s.model_dump()`
-- All 6 `QueryResult(...)` call sites and 3 `MetricSummary(...)` call sites are compatible — Pydantic v2 keyword construction is identical to dataclass
-
-New fields added to `QueryResult`:
-```python
-ner_primary_entity: Optional[str] = None
-ner_entities: tuple[str, ...] = ()
-rank: Optional[int] = None        # exact rank of correct answer, None if not retrieved
-hit_at_1: bool = False
-hit_at_3: bool = False
-hit_at_5: bool = False
-```
-These are populated in `_build_query_result` in `evaluation.py` from `ctx['ner_primary_entity']`, `ctx['ner_entities']`, and computed rank.
-
-### 6. MLflow infrastructure added
-```bash
-uv add mlflow
-```
-- `src/rag_pipeline/ingestion/mlflow_logger.py` created — `log_benchmark_run(cfg_name, summary, results, model_entry, tags)` logs aggregate metrics + per-query JSONL artifact
-- `Paths.mlflow_dir()` added to `src/rag_pipeline/core/paths.py` — auto-creates directory
-- `configs/paths.json` — added `"mlflow_dir": "experiments/mlflow"`
-- Experiment name: `"rag-retrieval"`, tracking URI: `file://{Paths.mlflow_dir()}`
-- **Not yet wired into `benchmark.py`** — next step is calling `log_benchmark_run` inside `main()` after `_run_config`
-
-Metrics logged per run:
-`h1, h3, h5, h10, mrr, ndcg_10, latency_p50, latency_p95, failure_rate, cross_course, rank_std`
-
-Per-query artifact fields:
-`query_id, query_text, expected_id, course, topic, subtopic, query_type, ner_primary_entity, ner_entities, rank, hit_at_1, hit_at_3, hit_at_5, hit_ids, hit_scores, latency_ms`
+`Paths` now has `results_db()`, `mlflow_db()`, `mlflow_dir()` reading from this file.
 
 ---
 
 ## Architecture & dataflow
 
-### Full pipeline (topic modeling → Qdrant → retrieval)
-
+### Metrics flow (single source of truth)
 ```
-topic_modeling.py
-  └─ _tag_ner(questions)          # spaCy NER, emits full entity list
-       └─ _expand_urls(text)      # pre-process URL-buried tokens
-  └─ _build_assignments(...)      # writes ner_entities, ner_categories per doc
-  └─ process_model(...)           # writes per-model JSON to experiments/
-       └─ reclassify loop         # may update ner_category + ner_primary_entity
-  └─ writes: experiments/topic_assignments_{slug}.json
-
-topic_merge.py (TopicMerger.merge())
-  └─ reads: experiments/topic_assignments_*.json  (all models)
-  └─ wraps in: {"metadata": {...}, "results": {model_name: file_contents}}
-  └─ writes: output/topic_assignments_all.json    ← Paths.topic_assignments()
-
-ingest_models.py
-  └─ _load_ner_map(path, model_name)   # reads results[model_name]['assignments']
-       └─ returns dict[str, DocNERInfo]
-  └─ _prepare_payload(doc, ner_info)   # writes all DocNERInfo fields to Qdrant payload
-  └─ _create_points_batch(...)         # assembles PointStructs
-  └─ client.upsert(...)                # pushes to Qdrant
-
-evaluation.py (_run_retrieval)
-  └─ reads ner_entities from topic_map (QueryContext)
-  └─ filters by entity_freq_threshold (from defaults.json, currently 999 = effectively off)
-  └─ passes filtered ner_entities list to retriever
-
-composite_retrievers.py (run_entity_category_boosted_retrieval)
-  └─ iterates ner_entities, one should clause per entity
-  └─ matches against ner_primary_entity field in Qdrant
-  └─ fallback: uses ner_primary_entity if ner_entities is empty
+aggregation.py::aggregate_metrics()
+  └─ returns MetricSummary
+       ├─ benchmark.py → save_benchmark_results (JSON backup)
+       ├─ benchmark.py → log_benchmark_run (MLflow: rag-retrieval)
+       └─ experiment.py::_collect_results()
+            └─ MetricSummary.from_benchmark_row(row)
+                 └─ ExperimentResult.metrics[cfg]
+                      ├─ ablation_logger.py → log_ablation_run (MLflow: rag-ablation)
+                      └─ store.py → save_experiment_result → RunMetrics (SQLite)
 ```
 
-### Qdrant payload fields (per document)
+### DB schema
 ```
-es_id, question, answer, course, section,
-ner_category, ner_primary_entity,
-ner_entities (list[str]),   ← NEW this session
-topic, subtopic
+corpus        (es_id PK, question, answer, course, section, ner_*, topic, subtopic)
+runs          (run_id PK, experiment, patch, config, model, git_commit, timestamp, corpus_size)
+run_metrics   (run_id FK, num_queries, hit_rate_1..10, mrr, ndcg_1/5/10, map_score,
+               latency_p50/95/99, avg_code_integrity_*, cross_course_contamination,
+               rank_std, failure_count, avg_failure_similarity)
+query_results (id PK, run_id FK, query_id, query_text, expected_id FK→corpus,
+               course, topic, subtopic, query_type, hit_ids, hit_scores,
+               latency_ms, hit_at_1, hit_at_5, rank)
 ```
 
-### Qdrant collections (current)
-| Collection | Encode mode | Notes |
-|---|---|---|
-| faqs_bge_base_en_v1_5 | question | Old baseline collection |
-| faqs_bge_base_en_v1_5_qa | qa | Current production collection |
-| faqs_bge_base_en_v1_5_answer | answer | Exists, not used in benchmarks |
-
----
-
-## Pydantic implementation
-
-### Single source of truth: `DocNERInfo`
-`src/rag_pipeline/core/models/topics.py`:
+### Key paths
 ```python
-class DocNERInfo(BaseModel, frozen=True):
-    ner_category: str = "OTHER"
-    ner_primary_entity: Optional[str] = None
-    ner_entities: list[str] = []
-    topic: int = -1
-    subtopic: Optional[int] = None
+Paths.results_db()     # experiments/rag_results.db
+Paths.mlflow_db()      # experiments/mlflow/mlflow.db
+Paths.mlflow_dir()     # experiments/mlflow/
 ```
 
-**Rule**: add new NER fields here only. They propagate automatically to `_load_ner_map` (reads from JSON), `_prepare_payload` (writes to Qdrant), and `_build_query_context` (reads into evaluation). No other files need touching unless the retriever uses the field.
-
-**Do not** use `.get('ner_entities', [])` anywhere — use attribute access on `DocNERInfo` instances.
-
-### Topic assignments JSON schemas
-Two formats exist:
-
-**Per-model file** (written by `topic_modeling.py --run-all`):
-```json
-{"metadata": {"model": "...", ...}, "assignments": [...]}
+### Module layout
 ```
-
-**Merged file** (written by `topic_merge.py`, read by `ingest_models.py`):
-```json
-{"metadata": {"models_merged": [...]}, "results": {"model_name": <per-model file contents>}}
-```
-
-The ablation runner reads from `git show HEAD:...` — always commit before running ablation.
-
----
-
-## Path resolution — always use `Paths`
-```python
-from rag_pipeline.core.paths import Paths
-Paths.clean_jsonl()                              # corpus
-Paths.topic_assignments()                        # output/topic_assignments_all.json
-Paths.topics_default_output()                    # experiments/topic_assignments.json (flat, no --run-all)
-Paths.topics_experiments_dir()                   # experiments/ dir
-Paths.ablation_results_dir()
-Paths.reranker_results_dir()                     # misnamed — actually benchmark output
-Paths.collection_for_model(model, encode_mode)   # Qdrant collection name
-Paths.defaults()                                 # configs/defaults.json
-Paths.mlflow_dir()                               # experiments/mlflow (auto-created)
-Paths.defaults()["entity_freq_threshold"]        # never hardcode
-Paths.defaults()["production_model"]
-Paths.defaults()["static_llm_model"]
-```
-
----
-
-## How to make changes correctly
-
-### Editing source files
-```bash
-uv run python - << 'EOF'
-from pathlib import Path
-p = Path("src/rag_pipeline/...")
-t = p.read_text()
-old = "exact string"
-new = "replacement"
-assert t.count(old) == 1, f"matched {t.count(old)} times"
-t = t.replace(old, new, 1)
-p.write_text(t)
-print("OK")
-EOF
-```
-If `OK` is not printed, the string didn't match. Use `cat -A file | sed -n 'N,Mp'` to get exact whitespace before retrying.
-
-### Changing production defaults
-Edit `configs/defaults.json`. Never hardcode. Current values:
-```json
-{
-    "production_model":       "BAAI/bge-base-en-v1.5",
-    "production_config":      "entity_boosted",
-    "production_encode_mode": "qa",
-    "entity_freq_threshold":  999,
-    "static_llm_model":       "nvidia_nim/meta/llama-3.1-8b-instruct",
-    "topic_modeling": {
-        "min_topic_size":     5,
-        "min_samples":        1,
-        "subtopic_threshold": 40,
-        "subtopic_min_size":  5,
-        "ner_batch_size":     5
-    }
-}
-```
-
-### Full pipeline re-run sequence
-```bash
-# 1. Topic modeling (per-model file for merger)
-rm src/rag_pipeline/eda/topics/experiments/topic_assignments_BAAI_bge_base_en_v1.5.json
-uv run python -m rag_pipeline.eda.topics.core.topic_modeling \
-    --embedding-model "BAAI/bge-base-en-v1.5" --run-all
-
-# 2. Merge all models into production file
-python -c "from rag_pipeline.eda.topics.core.topic_merge import TopicMerger; TopicMerger().merge(); print('OK')"
-
-# 3. Validate JSON
-python -c "import json; json.load(open('src/rag_pipeline/eda/topics/output/topic_assignments_all.json')); print('valid')"
-
-# 4. Re-ingest (always use --no-skip-existing when payload schema changed)
-uv run python -m rag_pipeline.ingestion.ingest_models \
-    --model "BAAI/bge-base-en-v1.5" \
-    --encode-mode qa \
-    --no-skip-existing
-
-# 5. Benchmark
-uv run python -m rag_pipeline.ingestion.benchmark \
-    --model "BAAI/bge-base-en-v1.5" \
-    --collection faqs_bge_base_en_v1_5_qa \
-    --configs entity_boosted
-
-# 6. Ablation (commit first — reads from git HEAD)
-git add -A && git commit -m "..."
-uv run python -m rag_pipeline.ablation flow --configs entity_boosted --rerun
+src/rag_pipeline/
+  db/
+    __init__.py
+    models.py       — SQLModel table definitions (no ORM relationships)
+    engine.py       — get_engine(), init_db(), get_session()
+    store.py        — ExperimentResult → DB (save_experiment_result)
+  mlflow/
+    __init__.py
+    logger.py       — log_benchmark_run (rag-retrieval experiment)
+    ablation_logger.py — log_ablation_run (rag-ablation experiment)
 ```
 
 ---
 
 ## Known issues & open items
 
-### 1. Resolve 89.6% vs 92.2% gap (immediate)
-64 docs have changed `ner_primary_entity` vs the 92.2% baseline commit (`68fd559`). Suspect: `_expand_urls` regex shifting entity boundaries for some edge cases. Approach with MLflow:
-- Run baseline (no URL expansion) vs current as tracked experiments
-- Identify which of the 64 changed docs are in the failing queries
+### 1. 89.8% vs 92.2% baseline gap (immediate — carried from previous session)
+Still unresolved. `_expand_urls` shifted 64 docs' `ner_primary_entity`. MLflow now tracking — run the planned experiments:
 
-### 2. Noisy `ner_primary_entity` from `extract_entity` (known, not fixed)
-When `reclassify` fires (`classification_source == 'rules'`), `extract_entity` returns category keyword signals (e.g. `ask good questions`, `could not`, `out of space`) as `ner_primary_entity`. These pollute Qdrant and the retriever's should clauses. 257 docs are reclassified.
-- Potential fix: don't set `ner_primary_entity` when `classification_source == 'rules'`; category alone is sufficient for boosting
-- Needs experiment to verify impact
+| Experiment | Description |
+|---|---|
+| `baseline_spacy` | no URL expansion — reproduce 92.2% |
+| `url_expand` | with `_expand_urls` — measure impact |
+| `no_rules_primary` | rules reclassify without setting primary entity |
 
-### 3. MLflow integration (in progress)
-Infrastructure done. One step remaining to be functional:
-
-**Wire into `benchmark.py` `main()`** — add after `_run_config` call:
-```python
-from .mlflow_logger import log_benchmark_run
-# inside the for loop, after: name, summary, results = _run_config(...)
-log_benchmark_run(name, summary, results, model_entry, tags={"collection": model_entry["collection"]})
-```
-
-Then wire into ablation:
-- `ablation/experiment.py` — call `log_benchmark_run` per patch run, add `"patch"` tag
-
-Planned experiments once wired:
-| Experiment | NER system | URL expansion | Goal |
-|---|---|---|---|
-| baseline_spacy | build_base_nlp | off | reproduce 92.2% |
-| url_expand | build_base_nlp | on | measure _expand_urls impact |
-| config_ner | build_ner_from_config | off | compare 632-term dictionary vs spaCy |
-| config_ner_url | build_ner_from_config | on | combined |
-| no_rules_primary | rules reclassify, no primary | — | fix noisy extract_entity primaries |
-
-### 4. Cross-encoder reranking (deferred)
-`cross-encoder/ms-marco-MiniLM-L-6-v2`, ~10-20ms/query on CPU. Infrastructure exists. Never benchmarked against QA collection.
 ```bash
-uv run python -m rag_pipeline.ingestion.benchmark_with_reranker \
-    --model "BAAI/bge-base-en-v1.5" \
-    --collection faqs_bge_base_en_v1_5_qa \
-    --configs entity_boosted
+uv run python -m rag_pipeline.ablation run --name baseline_spacy
+uv run python -m rag_pipeline.ablation run --name url_expand
 ```
 
-### 5. Housekeeping (deferred)
-- Rename `reranker_results_dir` → `benchmark_results_dir` (3 callers)
-- Model registry Pydantic model (`core/models/registry.py` skeleton exists)
-- `GENERIC_ENTITIES` centralization
-- Remaining dataclass → Pydantic migrations (`QueryResult`, `MetricSummary`, `SearchResult` done this session)
-- Cluster entity voting (unblocked by multi-entity schema)
-- `llm_ner.py` — keep as future option
+### 2. All old ablation results deleted — need full rerun
+All JSONLs and `_meta.json` files were cleared for clean slate. Re-run all ablations:
+```bash
+uv run python -m rag_pipeline.ablation flow --configs entity_boosted --rerun
+```
+
+### 3. DB → report pipeline not complete
+`_collect_results` in `experiment.py` still reads from `benchmark_results.json`, not the DB. The report therefore shows old metrics (`ndcg_1/5`, `map_score`, `latency_p99` are None in report). Next step: rewrite `_collect_results` to query `run_metrics` from SQLite directly.
+
+### 4. `corpus` table not yet populated
+`CorpusDoc` table exists but is empty. Populate from `clean.jsonl`:
+```bash
+uv run python -c "
+from rag_pipeline.db.store import populate_corpus
+populate_corpus()
+"
+```
+`populate_corpus()` needs to be written in `store.py`.
+
+### 5. Architecture auto-generation (planned)
+Decision made: generate `ARCHITECTURE.json` by walking imports and class usages, for LLM context loading. Not yet implemented.
+
+### 6. MLflow UI traces 500 errors (low priority)
+UI `/traces/metrics` and `/datasets/search` endpoints 500 with SQLite backend on this MLflow version. Run data is accessible via `mlflow.search_runs()`. Not worth fixing now.
+
+### 7. Ablation `report.py` reads old `_meta.json` format
+`load_all()` calls `ExperimentResult.model_validate()` which coerces old dicts. After full rerun this is a non-issue.
+
+### 8. Noisy `ner_primary_entity` from `extract_entity` (carried)
+257 reclassified docs have category keywords as `ner_primary_entity`. Fix: don't set when `classification_source == 'rules'`.
+
+### 9. Cross-encoder reranking (deferred)
+Never benchmarked against QA collection. Infrastructure exists.
 
 ---
 
+## How to re-run everything cleanly
+```bash
+# 1. Clean DB
+rm -f experiments/rag_results.db
+
+# 2. Run all ablations
+uv run python -m rag_pipeline.ablation flow --configs entity_boosted --rerun
+
+# 3. Check report
+uv run python -m rag_pipeline.ablation report
+
+# 4. Check DB
+python -c "
+import sqlite3
+con = sqlite3.connect('experiments/rag_results.db')
+cols = [d[1] for d in con.execute('PRAGMA table_info(run_metrics)').fetchall()]
+for row in con.execute('SELECT * FROM run_metrics').fetchall():
+    print(dict(zip(cols, row)))
+"
+```
 ## Ablation summary (pre-session baseline, QA collection)
 
 | Experiment | Delta H@1 | Meaning |
