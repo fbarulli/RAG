@@ -53,8 +53,9 @@ def evaluate_with_reranker(
             documents=[(c.get("faq_question", "") + " " + (c.get("answer") or c.get("text", ""))).strip() for c in retrieved_candidates],
         )
         latency_ms = (time.perf_counter() - start_rerank) * 1000
+        doc_texts = [(c.get("faq_question", "") + " " + (c.get("answer") or c.get("text", ""))).strip() for c in retrieved_candidates]
         score_map = {doc: score for doc, score in doc_score_pairs}
-        sorted_candidates = sorted(retrieved_candidates, key=lambda c: score_map.get(c.get("answer") or c.get("text", ""), 0.0), reverse=True)
+        sorted_candidates = [c for _, c in sorted(enumerate(retrieved_candidates), key=lambda x: score_map.get(doc_texts[x[0]], 0.0), reverse=True)]
         reranked_ids = [c.get("es_id", "") for c in sorted_candidates[:top_k]]
         total_ms = (time.perf_counter() - start) * 1000
         metrics = {

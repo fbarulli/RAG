@@ -31,6 +31,9 @@ def run_entity_category_boosted_retrieval(client, collection, query_vector, cour
 
     query_filter = build_qdrant_filter(course_filter, should_configs=should)
     result = client.query_points(collection_name=collection, query=query_vector, limit=top_k, query_filter=query_filter)
+    if not result.points and should:
+        fallback_filter = build_qdrant_filter(course_filter)
+        result = client.query_points(collection_name=collection, query=query_vector, limit=top_k, query_filter=fallback_filter)
     return parse_qdrant_points(result.points, (time.perf_counter() - start) * 1000)
 
 def run_entity_boosted_retrieval(*args, **kwargs) -> SearchResult:

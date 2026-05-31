@@ -1,0 +1,3 @@
+2026-05-31 20:28:52,862 - rag_pipeline.ablation.experiment - INFO - Running experiment: mxbai_topk5 (patch=llm_ner)
+2026-05-31 20:28:57,437 - rag_pipeline.ablation.experiment - INFO - Assignments after patch: has_primary=1074 has_entities=1074 total=1207
+2026-05-31 20:29:19,107 - rag_pipeline.ablation.experiment - INFO - Collection after ingest (sample 100): has_primary=90 has_entities=90

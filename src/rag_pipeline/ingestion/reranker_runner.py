@@ -30,7 +30,8 @@ class RerankerRunner:
             self._onnx_reranker = ONNXCrossEncoder(
                 model_name=self.model_name,
                 max_length=self.max_length,
-                provider="CPUExecutionProvider"
+                provider="CPUExecutionProvider",
+                quantize=self.model_config.get("quantization", False)
             )
         return self._onnx_reranker
 

@@ -1,36 +1,15 @@
 {
-  "winner_model": "BAAI/bge-base-en-v1.5",
-  "winner_config": "entity_boosted_tinybert",
-  "winner_mrr": 0.9833333333333333,
-  "best_per_model": [
-    {
-      "config_name": "entity_boosted_tinybert",
-      "model_name": "BAAI/bge-base-en-v1.5",
-      "topic": null,
-      "subtopic": null,
-      "num_queries": 100,
-      "hit_rate_1": 0.97,
-      "hit_rate_3": 1.0,
-      "hit_rate_5": 1.0,
-      "hit_rate_10": 1.0,
-      "mrr": 0.9833333333333333,
-      "ndcg_1": 0.97,
-      "ndcg_5": 0.987618595071429,
-      "ndcg_10": 0.987618595071429,
-      "map_score": 0.9833333333333333,
-      "latency_p50": 10.411278999526985,
-      "latency_p95": 12.400007995893247,
-      "latency_p99": 14.202997997927014,
-      "avg_code_integrity_ref": 1.0,
-      "avg_code_integrity_retrieved": 1.0,
-      "cross_course_contamination": 0.0,
-      "rank_std": 0.24287836253956216,
-      "failure_count": 0,
-      "avg_failure_similarity": null
-    }
+  "name": "rerankers_v3_sample",
+  "patch": "llm_ner",
+  "configs": [
+    "entity_boosted_tinybert",
+    "entity_boosted_minilm",
+    "entity_boosted_mxbai"
   ],
-  "all_results": [
-    {
+  "model": "BAAI/bge-base-en-v1.5",
+  "timestamp": "2026-05-31T21:07:07.365155+00:00",
+  "metrics": {
+    "entity_boosted_tinybert": {
       "config_name": "entity_boosted_tinybert",
       "model_name": "BAAI/bge-base-en-v1.5",
       "topic": null,
@@ -55,7 +34,7 @@
       "failure_count": 0,
       "avg_failure_similarity": null
     },
-    {
+    "entity_boosted_minilm": {
       "config_name": "entity_boosted_minilm",
       "model_name": "BAAI/bge-base-en-v1.5",
       "topic": null,
@@ -80,7 +59,7 @@
       "failure_count": 0,
       "avg_failure_similarity": null
     },
-    {
+    "entity_boosted_mxbai": {
       "config_name": "entity_boosted_mxbai",
       "model_name": "BAAI/bge-base-en-v1.5",
       "topic": null,
@@ -105,5 +84,12 @@
       "failure_count": 0,
       "avg_failure_similarity": null
     }
-  ]
+  },
+  "result_files": [
+    "/workspaces/RAG-a-muffin/experiments/results/ablation/rerankers_v3_sample__entity_boosted_tinybert_query_results.jsonl",
+    "/workspaces/RAG-a-muffin/experiments/results/ablation/rerankers_v3_sample__entity_boosted_minilm_query_results.jsonl",
+    "/workspaces/RAG-a-muffin/experiments/results/ablation/rerankers_v3_sample__entity_boosted_mxbai_query_results.jsonl"
+  ],
+  "git_commit": "01247bce661fc514b9c5ae27e6234a0391fb8fd3",
+  "corpus_size": 1207
 }

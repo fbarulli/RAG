@@ -21,7 +21,7 @@ class ONNXModelLoader:
     Ensures consistency between the tokenizer and the exported ONNX graph.
     """
 
-    def __init__(self, model_name: str, provider: str='CPUExecutionProvider', cache_dir: str='experiments/onnx_cache'):
+    def __init__(self, model_name: str, provider: str='CPUExecutionProvider', cache_dir: str='experiments/onnx_cache', quantize: bool=False):
         """
         Initializes the ONNX Model Loader.
 
@@ -33,6 +33,7 @@ class ONNXModelLoader:
         self.model_name = model_name
         self.provider = provider
         self.cache_dir = Path(cache_dir)
+        self.quantize = quantize
         model_hash = hashlib.md5(model_name.encode()).hexdigest()
         self.local_onnx_path = self.cache_dir / f"{model_hash}_{model_name.replace('/', '_')}"
         export_needed = not self._is_cache_valid()
@@ -81,7 +82,9 @@ class ONNXModelLoader:
         from transformers import AutoTokenizer
         cache_path_str = str(self.local_onnx_path)
         try:
-            model = ORTModelForSequenceClassification.from_pretrained(cache_path_str, provider=self.provider)
+            quant_file = self.local_onnx_path / 'model_quantized.onnx'
+            file_name = 'model_quantized.onnx' if (self.quantize and quant_file.exists()) else 'model.onnx'
+            model = ORTModelForSequenceClassification.from_pretrained(cache_path_str, file_name=file_name, provider=self.provider)
             tokenizer = AutoTokenizer.from_pretrained(cache_path_str)
             return (model, tokenizer)
         except Exception as e:
@@ -97,9 +100,20 @@ class ONNXModelLoader:
             logger.info('Exporting %s to ONNX format...', self.model_name)
             model = ORTModelForSequenceClassification.from_pretrained(self.model_name, export=True, provider=self.provider)
             self.local_onnx_path.mkdir(parents=True, exist_ok=True)
-            logger.info('Saving artifacts to cache: %s', self.local_onnx_path)
-            model.save_pretrained(str(self.local_onnx_path))
-            tokenizer.save_pretrained(str(self.local_onnx_path))
+            if self.quantize:
+                logger.info('Quantizing to int8: %s', self.local_onnx_path)
+                from optimum.onnxruntime import ORTQuantizer
+                from optimum.onnxruntime.configuration import AutoQuantizationConfig
+                model.save_pretrained(str(self.local_onnx_path))
+                tokenizer.save_pretrained(str(self.local_onnx_path))
+                quantizer = ORTQuantizer.from_pretrained(str(self.local_onnx_path))
+                qconfig = AutoQuantizationConfig.avx512_vnni(is_static=False, per_channel=False)
+                quantizer.quantize(save_dir=str(self.local_onnx_path), quantization_config=qconfig)
+                model = ORTModelForSequenceClassification.from_pretrained(str(self.local_onnx_path), file_name='model_quantized.onnx', provider=self.provider)
+            else:
+                logger.info('Saving artifacts to cache: %s', self.local_onnx_path)
+                model.save_pretrained(str(self.local_onnx_path))
+                tokenizer.save_pretrained(str(self.local_onnx_path))
             return (model, tokenizer)
         except Exception as e:
             logger.error('Export failed for %s: %s', self.model_name, e)

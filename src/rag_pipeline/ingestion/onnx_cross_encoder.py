@@ -26,7 +26,8 @@ class ONNXCrossEncoder:
 
     def __init__(self, model_name: str, max_length: int = 512, 
                  provider: str = 'CPUExecutionProvider', 
-                 cache_dir: str = 'experiments/onnx_cache'):
+                 cache_dir: str = 'experiments/onnx_cache',
+                 quantize: bool = False):
         self.model_name = model_name
         self.max_length = max_length
         self.provider = provider
@@ -40,7 +41,8 @@ class ONNXCrossEncoder:
         self.model_loader = ONNXModelLoader(
             model_name=model_name, 
             provider=provider, 
-            cache_dir=cache_dir
+            cache_dir=cache_dir,
+            quantize=quantize
         )
         self.model = self.model_loader.model
         self.tokenizer = self.model_loader.tokenizer

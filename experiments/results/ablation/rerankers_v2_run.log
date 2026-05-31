@@ -1,0 +1,5 @@
+2026-05-31 20:42:14,253 - rag_pipeline.ablation.experiment - INFO - Running experiment: rerankers_v2 (patch=llm_ner)
+2026-05-31 20:42:17,277 - rag_pipeline.ablation.experiment - INFO - Assignments after patch: has_primary=1074 has_entities=1074 total=1207
+2026-05-31 20:42:31,885 - rag_pipeline.ablation.experiment - INFO - Collection after ingest (sample 100): has_primary=90 has_entities=90
+2026-05-31 21:01:01,812 - rag_pipeline.ablation.experiment - INFO - Restored original state
+2026-05-31 21:01:01,821 - rag_pipeline.ablation.experiment - INFO - Saved → /workspaces/RAG-a-muffin/experiments/results/ablation/rerankers_v2_meta.json
