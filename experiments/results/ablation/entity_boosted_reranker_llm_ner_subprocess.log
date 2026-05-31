@@ -1,0 +1,99 @@
+
+--- CMD: uv run python -m rag_pipeline.ingestion.ingest_models --models "BAAI/bge-base-en-v1.5" --encode-mode "qa" --no-skip-existing
+--- RC: 0
+2026-05-31 18:49:52,375 - rag_pipeline.ingestion.benchmark_loader - INFO - Loaded 11 model entries from /workspaces/RAG-a-muffin/configs/models.json
+2026-05-31 18:49:52,742 - __main__ - INFO - Loaded 1207 documents from /workspaces/RAG-a-muffin/data/processed/clean.jsonl (0 skipped)
+2026-05-31 18:49:52,860 - __main__ - INFO - Connected to Qdrant at localhost:6333
+2026-05-31 18:49:52,861 - rag_pipeline.ingestion.benchmark_loader - INFO - Loaded 11 model entries from /workspaces/RAG-a-muffin/configs/models.json
+2026-05-31 18:49:52,861 - __main__ - INFO - Ingesting 1 model(s): ['BAAI/bge-base-en-v1.5']
+2026-05-31 18:49:52,861 - __main__ - INFO - ============================================================
+2026-05-31 18:49:52,861 - __main__ - INFO - Model      : BAAI/bge-base-en-v1.5
+2026-05-31 18:49:52,861 - __main__ - INFO - Collection : faqs_bge_base_en_v1_5_qa
+2026-05-31 18:49:52,866 - __main__ - INFO - Loaded embeddings from cache: /workspaces/RAG-a-muffin/experiments/embeddings/bge_base_en_v1_5_qa.npy shape=(1207, 768)
+2026-05-31 18:49:52,866 - __main__ - INFO - Embedding dims: 768
+2026-05-31 18:49:53,405 - __main__ - INFO - Loaded NER enrichment for 1207 documents for 'BAAI/bge-base-en-v1.5'
+2026-05-31 18:49:53,430 - __main__ - INFO - ✅ NER coverage: 1207/1207 documents (100%)
+2026-05-31 18:49:53,436 - __main__ - INFO - Deleting existing collection: faqs_bge_base_en_v1_5_qa
+2026-05-31 18:49:53,560 - __main__ - INFO - Upserting 1207 points to Qdrant…
+
+Batches:   0%|          | 0/13 [00:00<?, ?it/s]
+Batches:  15%|█▌        | 2/13 [00:00<00:00, 11.46it/s]
+Batches:  31%|███       | 4/13 [00:00<00:00, 12.42it/s]
+Batches:  46%|████▌     | 6/13 [00:00<00:00, 12.86it/s]
+Batches:  62%|██████▏   | 8/13 [00:00<00:00, 13.26it/s]
+Batches:  77%|███████▋  | 10/13 [00:00<00:00, 13.54it/s]
+Batches:  92%|█████████▏| 12/13 [00:00<00:00, 13.66it/s]
+Batches: 100%|██████████| 13/13 [00:00<00:00, 14.15it/s]
+2026-05-31 18:49:54,488 - __main__ - INFO - ✅ Done: 1207 documents indexed in 'faqs_bge_base_en_v1_5_qa'
+2026-05-31 18:49:54,490 - __main__ - INFO - ============================================================
+2026-05-31 18:49:54,490 - __main__ - INFO - INGESTION COMPLETE
+2026-05-31 18:49:54,490 - __main__ - INFO - ============================================================
+2026-05-31 18:49:54,490 - __main__ - INFO - Successful: 1 models
+2026-05-31 18:49:54,490 - __main__ - INFO -    - BAAI/bge-base-en-v1.5
+2026-05-31 18:49:54,490 - __main__ - INFO - All models ingested successfully.
+
+--- CMD: uv run python -m rag_pipeline.ingestion.ingest_models --models "BAAI/bge-base-en-v1.5" --encode-mode "qa" --no-skip-existing
+--- RC: 0
+2026-05-31 18:55:13,725 - rag_pipeline.ingestion.benchmark_loader - INFO - Loaded 11 model entries from /workspaces/RAG-a-muffin/configs/models.json
+2026-05-31 18:55:14,018 - __main__ - INFO - Loaded 1207 documents from /workspaces/RAG-a-muffin/data/processed/clean.jsonl (0 skipped)
+2026-05-31 18:55:14,131 - __main__ - INFO - Connected to Qdrant at localhost:6333
+2026-05-31 18:55:14,131 - rag_pipeline.ingestion.benchmark_loader - INFO - Loaded 11 model entries from /workspaces/RAG-a-muffin/configs/models.json
+2026-05-31 18:55:14,131 - __main__ - INFO - Ingesting 1 model(s): ['BAAI/bge-base-en-v1.5']
+2026-05-31 18:55:14,132 - __main__ - INFO - ============================================================
+2026-05-31 18:55:14,132 - __main__ - INFO - Model      : BAAI/bge-base-en-v1.5
+2026-05-31 18:55:14,132 - __main__ - INFO - Collection : faqs_bge_base_en_v1_5_qa
+2026-05-31 18:55:14,139 - __main__ - INFO - Loaded embeddings from cache: /workspaces/RAG-a-muffin/experiments/embeddings/bge_base_en_v1_5_qa.npy shape=(1207, 768)
+2026-05-31 18:55:14,139 - __main__ - INFO - Embedding dims: 768
+2026-05-31 18:55:14,724 - __main__ - INFO - Loaded NER enrichment for 1207 documents for 'BAAI/bge-base-en-v1.5'
+2026-05-31 18:55:14,751 - __main__ - INFO - ✅ NER coverage: 1207/1207 documents (100%)
+2026-05-31 18:55:14,757 - __main__ - INFO - Deleting existing collection: faqs_bge_base_en_v1_5_qa
+2026-05-31 18:55:14,852 - __main__ - INFO - Upserting 1207 points to Qdrant…
+
+Batches:   0%|          | 0/13 [00:00<?, ?it/s]
+Batches:  15%|█▌        | 2/13 [00:00<00:00, 11.74it/s]
+Batches:  31%|███       | 4/13 [00:00<00:00, 11.54it/s]
+Batches:  46%|████▌     | 6/13 [00:00<00:00, 12.09it/s]
+Batches:  62%|██████▏   | 8/13 [00:00<00:00, 12.27it/s]
+Batches:  77%|███████▋  | 10/13 [00:00<00:00, 12.71it/s]
+Batches:  92%|█████████▏| 12/13 [00:00<00:00, 12.73it/s]
+Batches: 100%|██████████| 13/13 [00:00<00:00, 13.26it/s]
+2026-05-31 18:55:15,840 - __main__ - INFO - ✅ Done: 1207 documents indexed in 'faqs_bge_base_en_v1_5_qa'
+2026-05-31 18:55:15,840 - __main__ - INFO - ============================================================
+2026-05-31 18:55:15,841 - __main__ - INFO - INGESTION COMPLETE
+2026-05-31 18:55:15,841 - __main__ - INFO - ============================================================
+2026-05-31 18:55:15,841 - __main__ - INFO - Successful: 1 models
+2026-05-31 18:55:15,841 - __main__ - INFO -    - BAAI/bge-base-en-v1.5
+2026-05-31 18:55:15,841 - __main__ - INFO - All models ingested successfully.
+
+--- CMD: uv run python -m rag_pipeline.ingestion.ingest_models --models "BAAI/bge-base-en-v1.5" --encode-mode "qa" --no-skip-existing
+--- RC: 0
+2026-05-31 18:57:15,812 - rag_pipeline.ingestion.benchmark_loader - INFO - Loaded 11 model entries from /workspaces/RAG-a-muffin/configs/models.json
+2026-05-31 18:57:16,110 - __main__ - INFO - Loaded 1207 documents from /workspaces/RAG-a-muffin/data/processed/clean.jsonl (0 skipped)
+2026-05-31 18:57:16,229 - __main__ - INFO - Connected to Qdrant at localhost:6333
+2026-05-31 18:57:16,229 - rag_pipeline.ingestion.benchmark_loader - INFO - Loaded 11 model entries from /workspaces/RAG-a-muffin/configs/models.json
+2026-05-31 18:57:16,229 - __main__ - INFO - Ingesting 1 model(s): ['BAAI/bge-base-en-v1.5']
+2026-05-31 18:57:16,229 - __main__ - INFO - ============================================================
+2026-05-31 18:57:16,230 - __main__ - INFO - Model      : BAAI/bge-base-en-v1.5
+2026-05-31 18:57:16,230 - __main__ - INFO - Collection : faqs_bge_base_en_v1_5_qa
+2026-05-31 18:57:16,238 - __main__ - INFO - Loaded embeddings from cache: /workspaces/RAG-a-muffin/experiments/embeddings/bge_base_en_v1_5_qa.npy shape=(1207, 768)
+2026-05-31 18:57:16,238 - __main__ - INFO - Embedding dims: 768
+2026-05-31 18:57:16,819 - __main__ - INFO - Loaded NER enrichment for 1207 documents for 'BAAI/bge-base-en-v1.5'
+2026-05-31 18:57:16,846 - __main__ - INFO - ✅ NER coverage: 1207/1207 documents (100%)
+2026-05-31 18:57:16,853 - __main__ - INFO - Deleting existing collection: faqs_bge_base_en_v1_5_qa
+2026-05-31 18:57:16,954 - __main__ - INFO - Upserting 1207 points to Qdrant…
+
+Batches:   0%|          | 0/13 [00:00<?, ?it/s]
+Batches:  15%|█▌        | 2/13 [00:00<00:00, 11.57it/s]
+Batches:  31%|███       | 4/13 [00:00<00:00, 12.58it/s]
+Batches:  46%|████▌     | 6/13 [00:00<00:00, 12.93it/s]
+Batches:  62%|██████▏   | 8/13 [00:00<00:00, 12.96it/s]
+Batches:  77%|███████▋  | 10/13 [00:00<00:00, 13.02it/s]
+Batches:  92%|█████████▏| 12/13 [00:00<00:00, 13.08it/s]
+Batches: 100%|██████████| 13/13 [00:00<00:00, 13.72it/s]
+2026-05-31 18:57:17,908 - __main__ - INFO - ✅ Done: 1207 documents indexed in 'faqs_bge_base_en_v1_5_qa'
+2026-05-31 18:57:17,910 - __main__ - INFO - ============================================================
+2026-05-31 18:57:17,910 - __main__ - INFO - INGESTION COMPLETE
+2026-05-31 18:57:17,910 - __main__ - INFO - ============================================================
+2026-05-31 18:57:17,910 - __main__ - INFO - Successful: 1 models
+2026-05-31 18:57:17,910 - __main__ - INFO -    - BAAI/bge-base-en-v1.5
+2026-05-31 18:57:17,910 - __main__ - INFO - All models ingested successfully.

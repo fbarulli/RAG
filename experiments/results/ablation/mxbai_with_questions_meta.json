@@ -1,0 +1,41 @@
+{
+  "name": "mxbai_with_questions",
+  "patch": "llm_ner",
+  "configs": [
+    "entity_boosted_mxbai"
+  ],
+  "model": "BAAI/bge-base-en-v1.5",
+  "timestamp": "2026-05-31T20:25:49.800374+00:00",
+  "metrics": {
+    "entity_boosted_mxbai": {
+      "config_name": "entity_boosted_mxbai",
+      "model_name": "BAAI/bge-base-en-v1.5",
+      "topic": null,
+      "subtopic": null,
+      "num_queries": 100,
+      "hit_rate_1": 0.97,
+      "hit_rate_3": 1.0,
+      "hit_rate_5": 1.0,
+      "hit_rate_10": 1.0,
+      "mrr": 0.985,
+      "ndcg_1": 0.97,
+      "ndcg_5": 0.9889278926071436,
+      "ndcg_10": 0.9889278926071436,
+      "map_score": 0.985,
+      "latency_p50": 10.408578003989533,
+      "latency_p95": 13.028039000346325,
+      "latency_p99": 15.34796899795765,
+      "avg_code_integrity_ref": 1.0,
+      "avg_code_integrity_retrieved": 1.0,
+      "cross_course_contamination": 0.0,
+      "rank_std": 0.1714466079977653,
+      "failure_count": 0,
+      "avg_failure_similarity": null
+    }
+  },
+  "result_files": [
+    "/workspaces/RAG-a-muffin/experiments/results/ablation/mxbai_with_questions__entity_boosted_mxbai_query_results.jsonl"
+  ],
+  "git_commit": "37eec210f5cb09f63b9d9bf18f58c8a5b28b25f4",
+  "corpus_size": 1207
+}

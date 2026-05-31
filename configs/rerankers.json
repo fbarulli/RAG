@@ -28,13 +28,6 @@
       "max_length": 512,
       "reranker": true,
       "quantization": false
-    },
-    {
-      "name": "bge-reranker-base",
-      "model": "BAAI/bge-reranker-base",
-      "max_length": 512,
-      "reranker": true,
-      "quantization": true
     }
   ],
   "training": {

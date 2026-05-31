@@ -1,205 +1,114 @@
-# Reranker Benchmarking & Training
-
-## Overview
-
-This document covers the reranker evaluation pipeline for RAG-a-muffin — why we built it, how it works, what the data looks like, and what the next step (fine-tuning) looks like.
-
-The goal is to find or train a cross-encoder reranker that improves over the baseline `entity_boosted` retrieval configuration, which currently achieves **Hit@5=94.0% / MRR=0.84** on 453 queries using `BAAI/bge-base-en-v1.5`.
+# RAG-a-muffin Handoff — 2026-05-31 (Session 4)
 
 ---
 
-## Baseline Retrieval Performance
+## Branch
+`mlflow-tracking` (continued from Session 3)
 
-Before introducing rerankers, the bi-encoder retrieval pipeline was benchmarked across several configurations:
+## What was done this session
 
-| Config | Hit@5 | MRR | Notes |
-|---|---|---|---|
-| `entity_boosted` | 94.0% | 0.84 | **Production baseline** |
-| `hybrid_rrf` | 92.7% | 0.81 | BM25 + vector via RRF |
-| `vector_default` | 90.5% | 0.79 | Pure vector, no boosting |
-| `bm25_balanced` | 87.9% | 0.76 | BM25 with balanced field weights |
-| `bm25_default` | 77.0% | 0.68 | BM25 question-only |
+### 1. Failure analysis module
+New file: `src/rag_pipeline/ingestion/benchmark_metrics_data/failure_analysis.py`
 
-The `entity_boosted` config uses Qdrant `should` clauses to soft-boost results that match the NER entity and category extracted from the query. This is the ceiling a reranker needs to beat to justify added latency.
+- `FailureRecord` dataclass with `cluster_bucket` and `is_rank2` properties
+- `triage()` — buckets failures by entity cluster size, returns `actionable_failures` (excludes `chaos_monkey`)
+- Formatted terminal output: summary header, mode breakdown with bar charts, cluster table, per-query detail view
+- CLI: `uv run python -m rag_pipeline.ingestion.benchmark_metrics_data.failure_analysis <jsonl> <assignments_json> [--detail <bucket>]`
 
----
+### 2. Failure mode analysis (llm_ner, 42 failures)
 
-## Why Rerank?
-
-Bi-encoders compress query and document into independent vectors — fast, but lossy. A cross-encoder sees the full `(query, document)` pair at once, allowing fine-grained token-level interaction. For a FAQ domain where the correct answer is often semantically close to several wrong ones, this interaction matters.
-
-The hypothesis: a well-trained cross-encoder can push the correct document to rank 1 even when the bi-encoder retrieves it at rank 3–5.
-
----
-
-## Data
-
-| Split | File | Size | Purpose |
-|---|---|---|---|
-| Corpus | `data/processed/clean.jsonl` | 1,204 docs | Source of truth — ingested into Qdrant |
-| Train | `data/processed/train.jsonl` | 965 queries | Fine-tuning reranker |
-| Test (holdout) | `data/processed/test.jsonl` | 470 queries | Final evaluation only |
-
-### Train set schema
-```json
-{
-  "id": "9f9a1b9e4f",
-  "question": "Terraform: Teardown of BigQuery Dataset",
-  "answer": "When running terraform destroy...",
-  "course": "data-engineering-zoomcamp",
-  "section": "module-1-terraform"
-}
-```
-
-The train set contains `(question, answer)` pairs from 4 courses:
-- `data-engineering-zoomcamp`
-- `machine-learning-zoomcamp`
-- `mlops-zoomcamp`
-- `llm-zoomcamp`
-
-Each `id` maps directly to an `es_id` in Qdrant, so the correct document can be retrieved for any training query.
-
-### Test set schema
-```json
-{
-  "id": "e8df9f0d12_orig",
-  "question": "Docker: When trying to run a streamlit app...",
-  "expected_doc_id": "e8df9f0d12",
-  "course": "llm-zoomcamp",
-  "answer": "...",
-  "query_type": "original",
-  "source": "llm_generated"
-}
-```
-
-The test set has an explicit `expected_doc_id` — the ground truth document the retriever should rank first.
-
----
-
-## Off-the-shelf Reranker Benchmark
-
-Before fine-tuning, five pre-trained ONNX cross-encoders were evaluated to establish a baseline and identify which architecture is most promising for fine-tuning:
-
-| Name | Model | Quantized |
+| bucket | failures | rank-2 |
 |---|---|---|
-| TinyBERT | `cross-encoder/ms-marco-TinyBERT-L-2-v2` | Yes |
-| MiniLM-L6 | `cross-encoder/ms-marco-MiniLM-L-6-v2` | Yes |
-| mxbai-xsmall | `mixedbread-ai/mxbai-rerank-xsmall-v1` | Yes |
-| AnswerDotAI-Trainic | `answerdotai/answerai-colbert-small-v1` | No |
-| bge-reranker-base | `BAAI/bge-reranker-base` | Yes |
+| no_entity | 15 | 9 |
+| 2-5 | 8 | 6 |
+| 6-15 | 2 | 2 |
+| 16-40 | 2 | 2 |
+| 40+ | 15 | 7 |
 
-### How the benchmark works
+**Two distinct modes identified:**
+- **Mode A — reranking (26 failures):** correct doc retrieved, wrong rank. Cross-encoder fix.
+- **Mode B — routing (16 failures):** entity missing or rank > 2.
+  - 10 of 15 no_entity failures are `chaos_monkey` — unreliable ground truth, not actionable
+  - 5 no_entity `grounded_analyst` failures are real — all rank-2, valid expected_ids
 
-1. For each query in the test set, the bi-encoder retrieves 40 candidate documents from Qdrant using `entity_boosted` retrieval
-2. Each reranker scores all 40 `(query, answer)` pairs
-3. Candidates are re-sorted by reranker score
-4. Metrics are computed against `expected_doc_id`
+### 3. Cross-encoder viability confirmed
+- Tested `ms-marco-MiniLM-L-2-v2` on wget failure case — reranked correctly, 32ms for 2 pairs
+- ONNX infrastructure fully wired end-to-end: `ONNXCrossEncoder` → `RerankerRunner` → `evaluate_with_reranker` → `_apply_reranking`
+- `hit_answers` confirmed populated by `run_entity_boosted_retrieval` — cross-encoder receives real text, not empty strings
+- `_apply_reranking` already skips only `search_type == 'vector'` — entity_boosted goes through it automatically
 
-### Run it
-
-```bash
-# Full test set
-python -m rag_pipeline.ingestion._onnx_bench_runner
-
-# Quick sample (N queries)
-python -m rag_pipeline.ingestion._onnx_bench_runner --sample-size 20
-
-# Single reranker
-python -m rag_pipeline.ingestion._onnx_bench_runner --model bge-reranker-base
-```
-
-Results are written to `experiments/reranker_benchmarks/`:
-```
-reranker_benchmarks/
-├── benchmark_results.json              # per-model MetricSummary
-├── benchmark_summary.txt               # human-readable table
-├── reranker_benchmark_performance.json # ranked winner view
-└── failure_analysis/
-    ├── per_query_failures.json         # every missed query per reranker
-    ├── per_query_successes.json        # every hit with rank found
-    ├── topic_failure_rates.json        # failure rate grouped by topic
-    ├── course_contamination.json       # top-1 from wrong course
-    ├── hard_queries.json               # failed by ALL rerankers
-    ├── reranker_disagreements.json     # rerankers disagree on rank-1
-    └── score_distributions.json       # avg top-1 score on hits vs misses
-```
-
-### Expected result
-
-Off-the-shelf MS-MARCO models perform poorly on this domain without fine-tuning. The benchmark is designed to confirm this and identify which model has the best architecture for domain adaptation — not to find a production-ready model.
-
-The key diagnostic is `hard_queries.json` — queries that every reranker fails on point to either retrieval gaps (bi-encoder not returning the correct doc in top-40) or genuinely ambiguous queries.
-
----
-
-## Fine-tuning Plan (Next Step)
-
-The correct training loop is:
-
-### 1. Generate training triplets
-
-For each `(question, answer)` pair in `train.jsonl`:
-- **Positive**: the correct answer (`answer` field, `id` matches `es_id` in Qdrant)
-- **Hard negatives**: top-K documents retrieved by the bi-encoder that are NOT the correct answer
-
-Hard negatives are more effective than random negatives because they force the reranker to learn subtle distinctions — the same kind of distinctions it will face at inference time.
-
-### 2. Fine-tune
-
-Target model: `BAAI/bge-reranker-base` (best balance of size and quality from the benchmark).
-
-Training objective: cross-entropy over `(query, positive, [negatives])` using `sentence-transformers` `CrossEncoderTrainer`.
-
-```python
-from sentence_transformers.cross_encoder import CrossEncoder
-from sentence_transformers.cross_encoder.training_args import CrossEncoderTrainingArguments
-
-model = CrossEncoder("BAAI/bge-reranker-base")
-# train with (query, positive, hard_negatives) triplets from train.jsonl
-```
-
-### 3. Evaluate on holdout
-
-```bash
-python -m rag_pipeline.ingestion._onnx_bench_runner --model bge-reranker-base-finetuned
-```
-
-Compare against:
-- Baseline `entity_boosted`: Hit@5=94.0%, MRR=0.84
-- Off-the-shelf `bge-reranker-base` benchmark score
-
-### Success criterion
-
-Fine-tuned reranker must beat `entity_boosted` Hit@5 and MRR on the holdout test set to justify the added inference latency.
-
----
-
-## Architecture Notes
-
-### Candidate payload
-
-Each candidate passed to the reranker contains:
+### 4. Reranker configs added to retrieval_configs.json
 ```json
-{
-  "es_id": "e8df9f0d12",
-  "question": "Docker: When trying to run a streamlit app...",
-  "answer": "To resolve this issue: 1. Ensure you have created a Dockerfile...",
-  "payload": {
-    "course": "llm-zoomcamp",
-    "section": "module-6",
-    "ner_category": "TOOL",
-    "ner_primary_entity": "docker",
-    "topic": 19
-  }
-}
+"entity_boosted_tinybert":  { ...entity_boosted base..., "reranker": true, "reranker_name": "TinyBERT" }
+"entity_boosted_minilm":    { ...entity_boosted base..., "reranker": true, "reranker_name": "MiniLM-L6" }
+"entity_boosted_mxbai":     { ...entity_boosted base..., "reranker": true, "reranker_name": "mxbai-xsmall" }
 ```
 
-The reranker scores `(query_text, answer)` pairs — only the answer text, not the question or metadata. Future work could explore concatenating `question + answer` as the document representation.
+### 5. bge-reranker-base removed from rerankers.json
+Too large for CPU. Remaining models: TinyBERT, MiniLM-L6, mxbai-xsmall, AnswerDotAI-Trainic.
 
-### ONNX runtime
+### 6. --sample-size wired into ablation CLI
+- `configs/benchmark_cli.py` — `--sample-size` added to `create_ablation_parser()`
+- `src/rag_pipeline/ablation/experiment.py` — `sample_size: int = 0` field on `Experiment`, passed as `--sample-size` in benchmark subprocess command
+- `src/rag_pipeline/ablation/cli.py` — `sample_size=args.sample_size` passed to `Experiment()`
 
-All rerankers are compiled to ONNX and run on CPU via `onnxruntime`. Quantization is applied where supported to reduce memory and improve throughput. Models are cached in `experiments/onnx_cache/`.
+### 7. Reranker eager loading + progress log improvement
+`src/rag_pipeline/ingestion/benchmark_metrics_data/evaluation.py`:
+- Pre-loads reranker via `_get_runner()` before `_run_evaluation_loop` so model download/compile is visible in logs
+- Progress log now includes `[reranker=<name>]` when reranking is active
 
-### Retrieval ceiling
+---
 
-The reranker can only promote documents that the bi-encoder retrieves. With 40 candidates per query, the bi-encoder recall ceiling is the hard upper bound on reranker performance. If the correct document is not in the top-40, no reranker can fix it. The `hard_queries.json` failure analysis helps distinguish retrieval failures from reranking failures.
+## In progress at handoff
+Reranker sample benchmark running:
+```bash
+uv run python -m rag_pipeline.ablation run \
+    --name entity_boosted_rerankers_sample \
+    --use-llm-ner \
+    --configs entity_boosted_tinybert entity_boosted_minilm entity_boosted_mxbai \
+    --sample-size 20
+```
+If still running, check: `experiments/results/ablation/entity_boosted_rerankers_sample_subprocess.log`
+
+---
+
+## Remaining work
+
+### Immediate
+- **Read sample results** — compare TinyBERT vs MiniLM-L6 vs mxbai H@1 and latency on the 20-query sample
+- **Run full benchmark** on winning reranker with `--use-llm-ner`, no `--sample-size`
+- **Warm ONNX cache** before full run if not already done: `uv run python -m rag_pipeline.ingestion.warm_onnx_cache`
+- **5 grounded_analyst no_entity failures** — these have valid ground truth and no entity assigned; worth a manual look at the queries to understand if query-time NER could fix them
+
+### Deferred (from previous sessions)
+- **Improve LLM NER coverage** — 133 docs still have no entity
+- **Validate wikineural fallback quality** — 206 docs use wikineural fallback
+- **Run full ablation with `--use-llm-ner`** across all configs
+- **Sparse retrieval** — SPLADE query encoding blocked
+- **Known issue #2** — noisy reclassified primaries
+- **Known issue #4** — `reranker_results_dir` misnamed
+- **Known issue #5** — `es_index` hardcoded
+- **ColBERT** — needs `colbert-ai` package
+- **89.8% → 92.2% gap** — original 92.2% at commit `68fd559` still unbeaten; current ceiling 90.9%
+
+---
+
+## Key files changed this session
+- `src/rag_pipeline/ingestion/benchmark_metrics_data/failure_analysis.py` — new
+- `src/rag_pipeline/ingestion/benchmark_metrics_data/evaluation.py` — eager reranker load, progress log
+- `src/rag_pipeline/ablation/experiment.py` — `sample_size` field, passed to benchmark subprocess
+- `src/rag_pipeline/ablation/cli.py` — `sample_size` wired from args to `Experiment`
+- `configs/benchmark_cli.py` — `--sample-size` in `create_ablation_parser()`
+- `configs/retrieval_configs.json` — 3 reranker configs added
+- `configs/rerankers.json` — `bge-reranker-base` removed
+
+---
+
+## Benchmark results so far
+
+| Experiment | H@1 | MRR |
+|---|---|---|
+| baseline | 89.8% | 0.9377 |
+| llm_ner | **90.9%** | **0.9441** |
+| entity_boosted_rerankers_sample | pending |
+

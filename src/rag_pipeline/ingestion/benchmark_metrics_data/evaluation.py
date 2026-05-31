@@ -159,7 +159,8 @@ def _apply_reranking(search_result, rc: RetrievalConfig, query: str):
         logger.warning(f"Reranker '{rc.reranker_name}' skipped — retrieval returned no candidates for search_type='{rc.search_type}'.")
         return (hit_ids, hit_scores, reranker_latency_ms)
     hit_answers = getattr(search_result, 'hit_answers', None) or [''] * len(hit_ids)
-    candidates = [{'es_id': hit_ids[i], 'question': query, 'answer': hit_answers[i]} for i in range(len(hit_ids))]
+    hit_questions = getattr(search_result, 'hit_questions', None) or [''] * len(hit_ids)
+    candidates = [{'es_id': hit_ids[i], 'question': query, 'answer': hit_answers[i], 'faq_question': hit_questions[i]} for i in range(len(hit_ids))]
     reranked_ids, rerank_metrics = evaluate_with_reranker(query=query, retrieved_candidates=candidates, reranker_name=rc.reranker_name, top_k=rc.top_k)
     hit_ids = tuple(reranked_ids)
     hit_scores = tuple((1.0 / (rank + 1) for rank in range(len(hit_ids))))
@@ -190,11 +191,11 @@ def _evaluate_single(idx: int, test: dict, topic_map: dict, query_vectors: Optio
     return _build_query_result(test, ctx, search_result, hit_ids, hit_scores, reranker_latency_ms, integrity_cache)
 
 def _run_evaluation_loop(test_set: list[dict], topic_map: dict, query_vectors: Optional[list], integrity_cache: dict, rc: RetrievalConfig) -> list[QueryResult]:
+    from tqdm import tqdm
     results: list[QueryResult] = []
     total = len(test_set)
-    for idx, test in enumerate(test_set):
-        if idx % 10 == 0:
-            logger.info(f'Progress: {idx}/{total} queries evaluated')
+    rerank_note = f' [{rc.reranker_name}]' if rc.use_reranker else ''
+    for idx, test in enumerate(tqdm(test_set, desc=f'Evaluating{rerank_note}', unit='q')):
         try:
             ctx = _build_query_context(idx, test, topic_map, query_vectors)
             search_result = _run_retrieval(rc=rc, query=ctx['query'], query_vector=ctx['query_vector'], course=ctx['course'], ner_category=ctx['ner_category'], ner_primary_entity=ctx['ner_primary_entity'], ner_entities=ctx.get('ner_entities', []), topic=ctx.get('topic'), section=ctx.get('section'), query_type=test.get("query_type", "unknown"))
@@ -218,7 +219,7 @@ def evaluate_config(client, collection: str, model, test_set: list[dict], topic_
     from rag_pipeline.core.paths import Paths as _Paths
     entity_freq_map = Counter(v.ner_primary_entity for v in topic_map.values() if v.ner_primary_entity)
     entity_freq_threshold = _Paths.defaults().get('entity_freq_threshold', 999)
-    rc = RetrievalConfig(search_type=search_type, use_reranker=use_reranker, reranker_name=reranker_name, retrieval_k=top_k * 4 if use_reranker else top_k, top_k=top_k, client=client, collection=collection, config=config, es=es, es_index=es_index, entity_freq_map=dict(entity_freq_map), entity_freq_threshold=entity_freq_threshold)
+    rc = RetrievalConfig(search_type=search_type, use_reranker=use_reranker, reranker_name=reranker_name, retrieval_k=top_k * 2 if use_reranker else top_k, top_k=top_k, client=client, collection=collection, config=config, es=es, es_index=es_index, entity_freq_map=dict(entity_freq_map), entity_freq_threshold=entity_freq_threshold)
     _validate_config(rc, model)
     query_vectors = None
     if search_type in _search_types_requiring_vector():
@@ -231,4 +232,8 @@ def evaluate_config(client, collection: str, model, test_set: list[dict], topic_
         test_result = run_entity_boosted_retrieval(client=rc.client, collection=rc.collection, query_vector=query_vectors[0], course_filter=test_set[0]['course'], config=rc.config, top_k=rc.top_k, ner_category=None, ner_primary_entity=None)
         logger.info(f'Test retrieval OK — hits={len(test_result.hit_ids)}')
     logger.info(f'Integrity cache built — {len(integrity_cache)} entries.')
+    if use_reranker and reranker_name:
+        from ..benchmark_reranker import _get_runner
+        logger.info(f"Pre-loading reranker: {reranker_name}")
+        _get_runner(reranker_name)
     return _run_evaluation_loop(test_set=test_set, topic_map=topic_map, query_vectors=query_vectors, integrity_cache=integrity_cache, rc=rc)

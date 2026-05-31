@@ -88,7 +88,7 @@ def _run_config(cfg_name: str, cfg: dict, config: BenchmarkConfig,
                 model, model_entry: dict, test_set: list, topic_map: dict) -> tuple:
     """Evaluate one retrieval config and return (cfg_name, summary, results)."""
     logger.info(f'  Running: {cfg_name}')
-    logger.info(f'Config dict: {cfg}')
+    logger.info(f'Config dict: {cfg} | top_k={config.top_k}')
     from rag_pipeline.core.paths import Paths
     collection = Paths.collection_for_model(model_entry['name'], config.encode_mode)
     logger.info(f'Collection: {collection}')

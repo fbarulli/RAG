@@ -69,7 +69,7 @@ def _add_flag_args(parser: argparse.ArgumentParser) -> None:
     g.add_argument('--reset', action='store_true', default=False, help='Wipe benchmark state before running')
     g.add_argument('--fail-fast', action='store_true', default=False, help='Abort on the first model/config error')
     g.add_argument('--timeout', type=int, default=None, help='Per-model timeout in seconds (default: 3600)')
-    parser.add_argument('--sample-size', type=int, default=0, help='Number of queries to sample. 0 = full dataset (default).')
+    g.add_argument('--sample-size', type=int, default=0, help='Number of queries to sample. 0 = full dataset (default).')
 
 def create_base_parser(description: str='', **kwargs) -> argparse.ArgumentParser:
     """
@@ -204,6 +204,8 @@ def create_ablation_parser() -> argparse.ArgumentParser:
                        help="Replace NER entities with LLM-extracted ones")
     g.add_argument("--topic-prob-threshold",       type=float, default=0.5,
                    help="Probability threshold for --null-low-confidence-topics")
+    g.add_argument("--sample-size", type=int, default=0,
+                   help="Number of queries to sample. 0 = full dataset (default).")
     g2 = run_p.add_argument_group("model / config")
     g2.add_argument("--configs", nargs="+", default=[default_config],
                     help=f"Retrieval configs to benchmark "
@@ -232,3 +234,41 @@ def create_ablation_parser() -> argparse.ArgumentParser:
     rep_p.add_argument("--ci", action="store_true", default=False, help="Exit 1 if any regression exceeds threshold")
 
     return parser
+
+
+
+
+
+def create_failure_analysis_parser() -> argparse.ArgumentParser:
+    """Parser for benchmark failure triage.
+
+    Example::
+        python -m rag_pipeline.ingestion.benchmark_metrics_data.failure_analysis \\
+            experiments/results/ablation/llm_ner__entity_boosted_query_results.jsonl \\
+            src/rag_pipeline/eda/topics/output/topic_assignments_all.json
+    """
+    p = argparse.ArgumentParser(
+        description="Triage benchmark failures by cluster size and failure mode."
+    )
+    p.add_argument(
+        "results_jsonl",
+        type=Path,
+        help="Per-query JSONL from a benchmark run.",
+    )
+    p.add_argument(
+        "assignments_json",
+        type=Path,
+        help="topic_assignments_all.json — used to compute entity cluster sizes.",
+    )
+    p.add_argument(
+        "--model-key",
+        default="BAAI/bge-base-en-v1.5",
+        help="Model key inside topic_assignments_all.json (default: %(default)s).",
+    )
+    p.add_argument(
+        "--detail",
+        choices=["no_entity", "1", "2-5", "6-15", "16-40", "40+"],
+        help="Dump per-query detail for one cluster-size bucket.",
+    )
+    return p
+

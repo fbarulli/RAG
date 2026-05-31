@@ -28,7 +28,8 @@ def parse_qdrant_points(points: Any, latency_ms: float) -> SearchResult:
         hit_scores=tuple(float(p.score) if p.score is not None else 0.0 for p in points),
         top_answer=points[0].payload.get('answer') if points else None,
         latency_ms=latency_ms,
-        hit_answers=tuple(p.payload.get('answer', '') for p in points)
+        hit_answers=tuple(p.payload.get('answer', '') for p in points),
+        hit_questions=tuple(p.payload.get('question', '') for p in points)
     )
 
 def run_vector_retrieval(client, collection: str, query_vector: list, course_filter: Optional[str], config: dict, top_k: int) -> SearchResult:

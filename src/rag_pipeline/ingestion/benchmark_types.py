@@ -18,6 +18,7 @@ class SearchResult(BaseModel, frozen=True):
     top_answer: Optional[str]
     latency_ms: float
     hit_answers: tuple[str, ...]
+    hit_questions: tuple[str, ...] = ()
     reranker_latency_ms: float = 0.0
 
 

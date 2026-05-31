@@ -43,6 +43,7 @@ class Experiment(BaseModel):
     configs: list[str] = Field(default_factory=lambda: [Paths.defaults()["production_config"]])
     model: str         = Field(default_factory=lambda: Paths.defaults()["production_model"])
     encode_mode: EncodeMode = Field(default_factory=lambda: EncodeMode(Paths.defaults().get("production_encode_mode", "question")))
+    sample_size: int = 0
 
     def run(self) -> ExperimentResult:
         import logging
@@ -77,7 +78,8 @@ class Experiment(BaseModel):
             collection = Paths.collection_for_model(self.model, self.encode_mode)
             _run(
                 f'uv run python -m rag_pipeline.ingestion.benchmark '
-                f'--model "{self.model}" --configs {cfg_args} --collection "{collection}"',
+                f'--model "{self.model}" --configs {cfg_args} --collection "{collection}"'
+                + (f' --sample-size {self.sample_size}' if getattr(self, "sample_size", 0) > 0 else ''),
                 run_id=self.name
             )
             metrics, result_files = _collect_results(self.name, self.configs, self.model)
@@ -204,14 +206,14 @@ def _verify_collection(model: str, encode_mode, patch: 'Patch') -> None:
 def _run(cmd: str, env: dict = None, run_id: str = "unknown") -> None:
     log_path = Paths.ablation_results_dir() / f"{run_id}_subprocess.log"
     log_path.parent.mkdir(parents=True, exist_ok=True)
-    result = subprocess.run(cmd, shell=True, cwd=Paths.base(), env=env or os.environ, capture_output=True, text=True)
     with open(log_path, "a") as f:
         f.write(f"\n--- CMD: {cmd}\n")
-        f.write(f"--- RC: {result.returncode}\n")
-        if result.stdout: f.write(result.stdout)
-        if result.stderr: f.write(result.stderr)
-    if result.returncode != 0:
-        raise RuntimeError(f"Command failed (rc={result.returncode}): {cmd}\nSTDERR: {result.stderr[-2000:]}")
+    tee_cmd = f'{cmd} 2>&1 | tee -a {log_path}'
+    rc = subprocess.call(tee_cmd, shell=True, cwd=Paths.base(), env=env or os.environ)
+    with open(log_path, "a") as f:
+        f.write(f"--- RC: {rc}\n")
+    if rc != 0:
+        raise RuntimeError(f"Command failed (rc={rc}): {cmd}")
 
 
 def _collect_results(name: str, configs: list[str], model: str) -> tuple[dict, list[str]]:

@@ -50,7 +50,7 @@ def evaluate_with_reranker(
         start_rerank = time.perf_counter()
         doc_score_pairs = runner.rerank(
             query=query,
-            documents=[c.get("answer") or c.get("text", "") for c in retrieved_candidates],
+            documents=[(c.get("faq_question", "") + " " + (c.get("answer") or c.get("text", ""))).strip() for c in retrieved_candidates],
         )
         latency_ms = (time.perf_counter() - start_rerank) * 1000
         score_map = {doc: score for doc, score in doc_score_pairs}

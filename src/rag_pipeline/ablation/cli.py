@@ -63,6 +63,7 @@ def cmd_run(args) -> None:
         patch=patch,
         configs=args.configs,
         model=args.model,
+        sample_size=args.sample_size,
     )
     result = exp.run()
     print(f"\nExperiment '{result.name}' complete")
