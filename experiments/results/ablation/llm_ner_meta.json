@@ -1,0 +1,41 @@
+{
+  "name": "llm_ner",
+  "patch": "llm_ner",
+  "configs": [
+    "entity_boosted"
+  ],
+  "model": "BAAI/bge-base-en-v1.5",
+  "timestamp": "2026-05-31T18:08:51.825121+00:00",
+  "metrics": {
+    "entity_boosted": {
+      "config_name": "entity_boosted",
+      "model_name": "BAAI/bge-base-en-v1.5",
+      "topic": null,
+      "subtopic": null,
+      "num_queries": 463,
+      "hit_rate_1": 0.9092872570194385,
+      "hit_rate_3": 0.978401727861771,
+      "hit_rate_5": 0.9848812095032398,
+      "hit_rate_10": 0.9913606911447084,
+      "mrr": 0.9440810449449757,
+      "ndcg_1": 0.9092872570194385,
+      "ndcg_5": 0.9538928283288111,
+      "ndcg_10": 0.9560064467883342,
+      "map_score": 0.9440810449449757,
+      "latency_p50": 9.196569000778254,
+      "latency_p95": 11.974599998211488,
+      "latency_p99": 12.92480000120122,
+      "avg_code_integrity_ref": 1.0,
+      "avg_code_integrity_retrieved": 1.0,
+      "cross_course_contamination": 0.0,
+      "rank_std": 1.1403726278087114,
+      "failure_count": 4,
+      "avg_failure_similarity": 0.6370792075
+    }
+  },
+  "result_files": [
+    "/workspaces/RAG-a-muffin/experiments/results/ablation/llm_ner__entity_boosted_query_results.jsonl"
+  ],
+  "git_commit": "3316c32287de984954897832ef342c6311f2e1ce",
+  "corpus_size": 1207
+}

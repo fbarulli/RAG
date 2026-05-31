@@ -82,32 +82,16 @@ def _save_query_results(results: list, cfg_name: str, output_dir: Path) -> None:
     out = output_dir / f"{cfg_name}_query_results.jsonl"
     with out.open("w") as f:
         for r in results:
-            f.write(json.dumps({
-                "query_id":                r.query_id,
-                "query_text":              r.query_text,
-                "expected_id":             r.expected_id,
-                "course":                  r.course,
-                "topic":                   r.topic,
-                "subtopic":                r.subtopic,
-                "query_type":              r.query_type,
-                "hit_ids":                 list(r.hit_ids),
-                "hit_scores":              list(r.hit_scores),
-                "latency_ms":              r.latency_ms,
-                "reranker_latency_ms":     r.reranker_latency_ms,
-                "code_integrity_ref":      r.code_integrity_ref,
-                "code_integrity_retrieved": r.code_integrity_retrieved,
-            }) + "\n")
-    logger.info(f"QueryResults saved → {out}")
-
+            f.write(json.dumps(r.model_dump()) + "\n")
 
 def _run_config(cfg_name: str, cfg: dict, config: BenchmarkConfig,
                 model, model_entry: dict, test_set: list, topic_map: dict) -> tuple:
     """Evaluate one retrieval config and return (cfg_name, summary, results)."""
     logger.info(f'  Running: {cfg_name}')
     logger.info(f'Config dict: {cfg}')
-    logger.info(f'Collection: {model_entry["collection"]}')
     from rag_pipeline.core.paths import Paths
     collection = Paths.collection_for_model(model_entry['name'], config.encode_mode)
+    logger.info(f'Collection: {collection}')
     results = evaluate_config(
         client=config.qdrant_client,
         collection=collection,
@@ -149,7 +133,7 @@ def main():
             _save_query_results(results, name, config.output_dir)
             summaries.append(summary)
             results_map[name] = results
-            log_benchmark_run(name, cfg, summary, results, model_entry, encode_mode=config.encode_mode.value, tags={"collection": model_entry["collection"]})
+            log_benchmark_run(name, cfg, summary, results, model_entry, encode_mode=config.encode_mode.value)
 
         print_full_benchmark_report(summaries, query_results_map=results_map)
         save_benchmark_results(summaries, config.output_dir)

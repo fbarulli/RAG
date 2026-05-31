@@ -9,6 +9,7 @@ Run:
 """
 import json
 import gc
+import os
 import re
 from pathlib import Path
 from typing import Any, Optional
@@ -85,7 +86,7 @@ def _tag_ner(questions: list[str]) -> dict[str, dict]:
     missed = extract_missed_terms(questions, nlp)
     suggestions = suggest_patterns(missed, min_count=3)
     nlp = update_entity_ruler(nlp, suggestions)
-    expanded = [_expand_urls(q) for q in questions]
+    expanded = [_expand_urls(q) for q in questions] if os.environ.get("RAG_SKIP_URL_EXPAND") != "1" else questions
     tagged: dict[str, dict] = {}
     for original, doc in zip(questions, nlp.pipe(expanded, batch_size=64)):
         ents = list(doc.ents)
@@ -228,10 +229,16 @@ def process_model(
         if source != "unchanged":
             a["ner_category"] = new_cat
             if a.get("ner_primary_entity") is None:
-                entity = rules.extract_entity(new_cat, a["question"])
-                a["ner_primary_entity"] = entity
-                if entity and entity not in a["ner_entities"]:
-                    a["ner_entities"].append(entity)
+                existing = a.get("ner_entities", [])
+                if existing:
+                    # spaCy found entities — use the first one, don't override with rules
+                    a["ner_primary_entity"] = existing[0]
+                else:
+                    # spaCy found nothing — fall back to rules signal
+                    entity = rules.extract_entity(new_cat, a["question"])
+                    a["ner_primary_entity"] = entity
+                    if entity and entity not in a["ner_entities"]:
+                        a["ner_entities"].append(entity)
             
     if subtopic_threshold > 0:
         assignments = _apply_subtopics(

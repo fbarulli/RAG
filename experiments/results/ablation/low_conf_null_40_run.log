@@ -1,0 +1,5 @@
+2026-05-31 16:08:21,937 - rag_pipeline.ablation.experiment - INFO - Running experiment: low_conf_null_40 (patch=low_conf_04)
+2026-05-31 16:08:24,835 - rag_pipeline.ablation.experiment - INFO - Assignments after patch: has_primary=1190 has_entities=1190 total=1207
+2026-05-31 16:08:36,890 - rag_pipeline.ablation.experiment - INFO - Collection after ingest (sample 100): has_primary=97 has_entities=97
+2026-05-31 16:08:57,286 - rag_pipeline.ablation.experiment - INFO - Restored original state
+2026-05-31 16:08:57,293 - rag_pipeline.ablation.experiment - INFO - Saved → /workspaces/RAG-a-muffin/experiments/results/ablation/low_conf_null_40_meta.json

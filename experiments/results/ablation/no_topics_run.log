@@ -1,0 +1,5 @@
+2026-05-31 16:06:35,885 - rag_pipeline.ablation.experiment - INFO - Running experiment: no_topics (patch=no_topics)
+2026-05-31 16:06:38,783 - rag_pipeline.ablation.experiment - INFO - Assignments after patch: has_primary=1190 has_entities=1190 total=1207
+2026-05-31 16:06:50,059 - rag_pipeline.ablation.experiment - INFO - Collection after ingest (sample 100): has_primary=97 has_entities=97
+2026-05-31 16:07:10,775 - rag_pipeline.ablation.experiment - INFO - Restored original state
+2026-05-31 16:07:10,780 - rag_pipeline.ablation.experiment - INFO - Saved → /workspaces/RAG-a-muffin/experiments/results/ablation/no_topics_meta.json

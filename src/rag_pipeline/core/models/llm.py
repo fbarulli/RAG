@@ -8,6 +8,8 @@ class ProviderConfig(BaseModel, frozen=True):
     name: str
     model: str
     env_key: str
+    rpm: int = 60
+    tpm: int = 100000
 
 
 class MultiLLMResult(BaseModel, frozen=True):

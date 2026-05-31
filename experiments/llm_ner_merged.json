@@ -1,0 +1,8728 @@
+{
+  "29e58c5c37": {
+    "ner_primary_entity": "python",
+    "ner_entities": [
+      "python"
+    ],
+    "source": "wikineural"
+  },
+  "4f1fe161b1": {
+    "ner_primary_entity": "github codespaces",
+    "ner_entities": [
+      "github codespaces"
+    ],
+    "source": "wikineural"
+  },
+  "b92da7c113": {
+    "ner_primary_entity": "install script",
+    "ner_entities": [
+      "install script",
+      "myservername"
+    ],
+    "source": "llm"
+  },
+  "a8219681ec": {
+    "ner_primary_entity": "gcp",
+    "ner_entities": [
+      "gcp",
+      "aws"
+    ],
+    "source": "llm"
+  },
+  "8b0214d089": {
+    "ner_primary_entity": "wsl",
+    "ner_entities": [
+      "windows",
+      "wsl"
+    ],
+    "source": "llm"
+  },
+  "a83f047f52": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "1ba19ed6a0": {
+    "ner_primary_entity": "git bash",
+    "ner_entities": [
+      "git bash"
+    ],
+    "source": "llm"
+  },
+  "e5dc51eac9": {
+    "ner_primary_entity": "vs code",
+    "ner_entities": [
+      "vs code",
+      "tab"
+    ],
+    "source": "llm"
+  },
+  "5b54567e89": {
+    "ner_primary_entity": "html",
+    "ner_entities": [
+      "html"
+    ],
+    "source": "wikineural"
+  },
+  "994ef10e79": {
+    "ner_primary_entity": "github codespaces",
+    "ner_entities": [
+      "github codespaces",
+      "github"
+    ],
+    "source": "llm"
+  },
+  "1b03f3dadf": {
+    "ner_primary_entity": "chrome remote desktop",
+    "ner_entities": [
+      "chrome remote desktop"
+    ],
+    "source": "llm"
+  },
+  "3d24f7796d": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "github",
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "dcb8885c9b": {
+    "ner_primary_entity": "vm",
+    "ner_entities": [
+      "vm"
+    ],
+    "source": "wikineural"
+  },
+  "a3776dc060": {
+    "ner_primary_entity": "python",
+    "ner_entities": [
+      "python"
+    ],
+    "source": "llm"
+  },
+  "10407876a1": {
+    "ner_primary_entity": "ssh",
+    "ner_entities": [
+      "ssh"
+    ],
+    "source": "llm"
+  },
+  "35d7874a8d": {
+    "ner_primary_entity": "jupyter",
+    "ner_entities": [
+      "jupyter"
+    ],
+    "source": "llm"
+  },
+  "c2f39b0ef3": {
+    "ner_primary_entity": "jupytext",
+    "ner_entities": [
+      "jupyter",
+      "jupytext"
+    ],
+    "source": "llm"
+  },
+  "a1b2c3d4e5": {
+    "ner_primary_entity": "anaconda",
+    "ner_entities": [
+      "anaconda"
+    ],
+    "source": "llm"
+  },
+  "a0e992e6ef": {
+    "ner_primary_entity": "w",
+    "ner_entities": [
+      "w"
+    ],
+    "source": "wikineural"
+  },
+  "19aaf65b2a": {
+    "ner_primary_entity": "aws",
+    "ner_entities": [
+      "aws"
+    ],
+    "source": "wikineural"
+  },
+  "9aa9591efc": {
+    "ner_primary_entity": "gcp",
+    "ner_entities": [
+      "gcp"
+    ],
+    "source": "llm"
+  },
+  "d4c56f568d": {
+    "ner_primary_entity": "gcp free trial vs sandbox",
+    "ner_entities": [
+      "gcp free trial vs sandbox"
+    ],
+    "source": "wikineural"
+  },
+  "e834a2ff3e": {
+    "ner_primary_entity": "gcp",
+    "ner_entities": [
+      "gcp"
+    ],
+    "source": "llm"
+  },
+  "9e508f2212": {
+    "ner_primary_entity": "course",
+    "ner_entities": [
+      "course"
+    ],
+    "source": "wikineural"
+  },
+  "bfafa427b3": {
+    "ner_primary_entity": "course",
+    "ner_entities": [
+      "course"
+    ],
+    "source": "wikineural"
+  },
+  "3f1424af17": {
+    "ner_primary_entity": "course",
+    "ner_entities": [
+      "course"
+    ],
+    "source": "wikineural"
+  },
+  "2d8b16c2a0": {
+    "ner_primary_entity": "course",
+    "ner_entities": [
+      "course"
+    ],
+    "source": "wikineural"
+  },
+  "52217fc51b": {
+    "ner_primary_entity": "data engineering bootcamp",
+    "ner_entities": [
+      "data engineering bootcamp"
+    ],
+    "source": "wikineural"
+  },
+  "33fc260cd8": {
+    "ner_primary_entity": "course",
+    "ner_entities": [
+      "course"
+    ],
+    "source": "wikineural"
+  },
+  "b71fb3b195": {
+    "ner_primary_entity": "zoom",
+    "ner_entities": [
+      "zoom"
+    ],
+    "source": "wikineural"
+  },
+  "e499535e82": {
+    "ner_primary_entity": "course",
+    "ner_entities": [
+      "course"
+    ],
+    "source": "wikineural"
+  },
+  "068529125b": {
+    "ner_primary_entity": "course",
+    "ner_entities": [
+      "course"
+    ],
+    "source": "wikineural"
+  },
+  "c207b8614e": {
+    "ner_primary_entity": "course",
+    "ner_entities": [
+      "course"
+    ],
+    "source": "wikineural"
+  },
+  "8ac65b2225": {
+    "ner_primary_entity": "youtube",
+    "ner_entities": [
+      "youtube"
+    ],
+    "source": "wikineural"
+  },
+  "316180784f": {
+    "ner_primary_entity": "course",
+    "ner_entities": [
+      "course"
+    ],
+    "source": "wikineural"
+  },
+  "a411de5004": {
+    "ner_primary_entity": "office hours",
+    "ner_entities": [
+      "office hours"
+    ],
+    "source": "wikineural"
+  },
+  "16005581f2": {
+    "ner_primary_entity": "edit course profile",
+    "ner_entities": [
+      "edit course profile"
+    ],
+    "source": "wikineural"
+  },
+  "3774a79c13": {
+    "ner_primary_entity": "certificate",
+    "ner_entities": [
+      "certificate"
+    ],
+    "source": "wikineural"
+  },
+  "900f60fd25": {
+    "ner_primary_entity": "certificate",
+    "ner_entities": [
+      "certificate"
+    ],
+    "source": "wikineural"
+  },
+  "69d122f12e": {
+    "ner_primary_entity": "certificate",
+    "ner_entities": [
+      "certificate"
+    ],
+    "source": "wikineural"
+  },
+  "b047f348bc": {
+    "ner_primary_entity": "certificate",
+    "ner_entities": [
+      "certificate"
+    ],
+    "source": "wikineural"
+  },
+  "d3f485cd10": {
+    "ner_primary_entity": "homework",
+    "ner_entities": [
+      "homework"
+    ],
+    "source": "wikineural"
+  },
+  "4dbd2eea47": {
+    "ner_primary_entity": "homework",
+    "ner_entities": [
+      "homework"
+    ],
+    "source": "wikineural"
+  },
+  "9d89b52976": {
+    "ner_primary_entity": "homework",
+    "ner_entities": [
+      "homework"
+    ],
+    "source": "wikineural"
+  },
+  "7255a1c3bc": {
+    "ner_primary_entity": "leaderboard",
+    "ner_entities": [
+      "leaderboard"
+    ],
+    "source": "wikineural"
+  },
+  "99bb0ceeb6": {
+    "ner_primary_entity": "\u201c office hour",
+    "ner_entities": [
+      "\u201c office hour"
+    ],
+    "source": "wikineural"
+  },
+  "721f9e0c29": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "86251abcdf": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "9b0561dbf8": {
+    "ner_primary_entity": "project attempt",
+    "ner_entities": [
+      "project attempt"
+    ],
+    "source": "wikineural"
+  },
+  "dc06a38bc6": {
+    "ner_primary_entity": "git",
+    "ner_entities": [
+      "git"
+    ],
+    "source": "llm"
+  },
+  "6314bc3029": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "05727a95dd": {
+    "ner_primary_entity": "homework and leaderboard",
+    "ner_entities": [
+      "homework and leaderboard"
+    ],
+    "source": "wikineural"
+  },
+  "6affd2987c": {
+    "ner_primary_entity": "taxi trip records",
+    "ner_entities": [
+      "taxi trip records"
+    ],
+    "source": "wikineural"
+  },
+  "d677df9ccb": {
+    "ner_primary_entity": "gzip",
+    "ner_entities": [
+      "gzip",
+      "taxi data"
+    ],
+    "source": "llm"
+  },
+  "4ee5e16952": {
+    "ner_primary_entity": "taxi data",
+    "ner_entities": [
+      "taxi data"
+    ],
+    "source": "wikineural"
+  },
+  "8585d2d7f4": {
+    "ner_primary_entity": "gzip",
+    "ner_entities": [
+      "gzip",
+      "unzip"
+    ],
+    "source": "llm"
+  },
+  "b3030c88e7": {
+    "ner_primary_entity": "wget",
+    "ner_entities": [
+      "wget"
+    ],
+    "source": "llm"
+  },
+  "6698c6cbd4": {
+    "ner_primary_entity": "wget",
+    "ner_entities": [
+      "wget"
+    ],
+    "source": "llm"
+  },
+  "542abbcb6a": {
+    "ner_primary_entity": "wget",
+    "ner_entities": [
+      "wget",
+      "macos"
+    ],
+    "source": "llm"
+  },
+  "48cae101d6": {
+    "ner_primary_entity": "curl",
+    "ner_entities": [
+      "curl"
+    ],
+    "source": "llm"
+  },
+  "c1135885e3": {
+    "ner_primary_entity": "wget",
+    "ner_entities": [
+      "wget",
+      "cloudfront"
+    ],
+    "source": "llm"
+  },
+  "5e6c4090af": {
+    "ner_primary_entity": "docker daemon",
+    "ner_entities": [
+      "docker daemon",
+      "dock"
+    ],
+    "source": "llm"
+  },
+  "46dbe4810d": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "windows",
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "bceb4aa421": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "0beb2b5df7": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "3549528659": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker",
+      "dock"
+    ],
+    "source": "llm"
+  },
+  "c7e1100613": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "linux",
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "ed8dcfbb5a": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker",
+      "dock"
+    ],
+    "source": "llm"
+  },
+  "4c8959502e": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker",
+      "dock"
+    ],
+    "source": "llm"
+  },
+  "87e92edf02": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "windows",
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "b2eabcd7dc": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker",
+      "dock"
+    ],
+    "source": "llm"
+  },
+  "30dcc71db8": {
+    "ner_primary_entity": "postgresql",
+    "ner_entities": [
+      "post",
+      "postgresql"
+    ],
+    "source": "llm"
+  },
+  "d87e3d2a14": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker",
+      "dock"
+    ],
+    "source": "llm"
+  },
+  "79e44b9c07": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker",
+      "dock"
+    ],
+    "source": "llm"
+  },
+  "381dfe5145": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "conflict",
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "1700cb2bd4": {
+    "ner_primary_entity": "docker compose",
+    "ner_entities": [
+      "docker",
+      "docker compose"
+    ],
+    "source": "llm"
+  },
+  "c6cd0fedc5": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "cannot",
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "0cc94bef66": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker",
+      "dock"
+    ],
+    "source": "llm"
+  },
+  "9e05e54958": {
+    "ner_primary_entity": "docker stop",
+    "ner_entities": [
+      "docker",
+      "docker stop"
+    ],
+    "source": "llm"
+  },
+  "1b727dde32": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker",
+      "ubuntu"
+    ],
+    "source": "llm"
+  },
+  "fa905a3e7b": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker",
+      "dock"
+    ],
+    "source": "llm"
+  },
+  "a950fda271": {
+    "ner_primary_entity": "docker-compose",
+    "ner_entities": [
+      "dock",
+      "docker-compose"
+    ],
+    "source": "llm"
+  },
+  "ac52bea382": {
+    "ner_primary_entity": "pgadmin",
+    "ner_entities": [
+      "pgadmin"
+    ],
+    "source": "llm"
+  },
+  "5baf3e8a5e": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "e43abaa421": {
+    "ner_primary_entity": "docker compose",
+    "ner_entities": [
+      "docker",
+      "docker compose"
+    ],
+    "source": "llm"
+  },
+  "73876c8348": {
+    "ner_primary_entity": "docker-compose.yml",
+    "ner_entities": [
+      "docker-compose.yml",
+      "docker - compose"
+    ],
+    "source": "llm"
+  },
+  "d3c860aa46": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "postgres",
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "ec091c69a0": {
+    "ner_primary_entity": "wsl",
+    "ner_entities": [
+      "wsl"
+    ],
+    "source": "llm"
+  },
+  "62f6c8dd8d": {
+    "ner_primary_entity": "wsl",
+    "ner_entities": [
+      "ubuntu",
+      "wsl"
+    ],
+    "source": "llm"
+  },
+  "73c8de600c": {
+    "ner_primary_entity": "wsl",
+    "ner_entities": [
+      "w",
+      "wsl"
+    ],
+    "source": "llm"
+  },
+  "16d0d756c3": {
+    "ner_primary_entity": "wsl",
+    "ner_entities": [
+      "w",
+      "wsl"
+    ],
+    "source": "llm"
+  },
+  "8b082e74c0": {
+    "ner_primary_entity": "tcp4",
+    "ner_entities": [
+      "tcp4"
+    ],
+    "source": "llm"
+  },
+  "8c1d06d681": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker engine",
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "687d54c6ba": {
+    "ner_primary_entity": "docker-compose",
+    "ner_entities": [
+      "docker",
+      "docker-compose"
+    ],
+    "source": "llm"
+  },
+  "bd56924fcb": {
+    "ner_primary_entity": "gcp",
+    "ner_entities": [
+      "gcp",
+      "ephemeral"
+    ],
+    "source": "llm"
+  },
+  "25b0348672": {
+    "ner_primary_entity": "path",
+    "ner_entities": [
+      "path",
+      "windows"
+    ],
+    "source": "llm"
+  },
+  "bad6a11a5a": {
+    "ner_primary_entity": "httperror",
+    "ner_entities": [
+      "httperror",
+      "h"
+    ],
+    "source": "llm"
+  },
+  "bc90da941d": {
+    "ner_primary_entity": "gcp",
+    "ner_entities": [
+      "gcp",
+      "gc"
+    ],
+    "source": "llm"
+  },
+  "53b423d784": {
+    "ner_primary_entity": "or-cbat-15",
+    "ner_entities": [
+      "or-cbat-15",
+      "google"
+    ],
+    "source": "llm"
+  },
+  "cdd91ef84a": {
+    "ner_primary_entity": "gcp",
+    "ner_entities": [
+      "gcp"
+    ],
+    "source": "wikineural"
+  },
+  "a1f6167da1": {
+    "ner_primary_entity": "metadata",
+    "ner_entities": [
+      "metadata",
+      "compute engine"
+    ],
+    "source": "llm"
+  },
+  "a697cb2dee": {
+    "ner_primary_entity": "google cloud",
+    "ner_entities": [
+      "google cloud"
+    ],
+    "source": "wikineural"
+  },
+  "eb759226aa": {
+    "ner_primary_entity": "ssh",
+    "ner_entities": [
+      "ssh"
+    ],
+    "source": "llm"
+  },
+  "513410225e": {
+    "ner_primary_entity": "gcp",
+    "ner_entities": [
+      "gcp",
+      "virtual machine"
+    ],
+    "source": "llm"
+  },
+  "e34580b954": {
+    "ner_primary_entity": "gcloud",
+    "ner_entities": [
+      "gcloud",
+      "billing"
+    ],
+    "source": "llm"
+  },
+  "8f9f91b4de": {
+    "ner_primary_entity": "gcloud",
+    "ner_entities": [
+      "windows",
+      "gcloud"
+    ],
+    "source": "llm"
+  },
+  "f29d45f419": {
+    "ner_primary_entity": "gcp",
+    "ner_entities": [
+      "gcp",
+      "virtual machine"
+    ],
+    "source": "llm"
+  },
+  "d8ebc91216": {
+    "ner_primary_entity": "gcp vm",
+    "ner_entities": [
+      "gcp",
+      "gcp vm"
+    ],
+    "source": "llm"
+  },
+  "51bc7e280d": {
+    "ner_primary_entity": "mkdir",
+    "ner_entities": [
+      "gcp",
+      "mkdir"
+    ],
+    "source": "llm"
+  },
+  "1ba58ae0e0": {
+    "ner_primary_entity": "vs code",
+    "ner_entities": [
+      "vs code",
+      "gcp"
+    ],
+    "source": "llm"
+  },
+  "a63d2734b2": {
+    "ner_primary_entity": "gcp",
+    "ner_entities": [
+      "gcp"
+    ],
+    "source": "llm"
+  },
+  "68f8a4b307": {
+    "ner_primary_entity": "ssh",
+    "ner_entities": [
+      "gcp",
+      "ssh"
+    ],
+    "source": "llm"
+  },
+  "d6fa41adb6": {
+    "ner_primary_entity": "gcp",
+    "ner_entities": [
+      "gcp"
+    ],
+    "source": "wikineural"
+  },
+  "af2b85f346": {
+    "ner_primary_entity": "gcloud",
+    "ner_entities": [
+      "gcloud"
+    ],
+    "source": "llm"
+  },
+  "06c61761df": {
+    "ner_primary_entity": "gcloud",
+    "ner_entities": [
+      "gcp",
+      "gcloud"
+    ],
+    "source": "llm"
+  },
+  "cdbabdd71a": {
+    "ner_primary_entity": "ssh",
+    "ner_entities": [
+      "gcp",
+      "ssh"
+    ],
+    "source": "llm"
+  },
+  "c01d835b44": {
+    "ner_primary_entity": "ssh",
+    "ner_entities": [
+      "gcp",
+      "ssh"
+    ],
+    "source": "llm"
+  },
+  "7889d2bad5": {
+    "ner_primary_entity": "ssh",
+    "ner_entities": [
+      "ssh"
+    ],
+    "source": "llm"
+  },
+  "b9cd2aaccb": {
+    "ner_primary_entity": "pgcli",
+    "ner_entities": [
+      "postgres",
+      "pgcli"
+    ],
+    "source": "llm"
+  },
+  "30622af850": {
+    "ner_primary_entity": "ingestion pipeline",
+    "ner_entities": [
+      "ingestion pipeline"
+    ],
+    "source": "llm"
+  },
+  "8ddf54cbd0": {
+    "ner_primary_entity": "pgcli",
+    "ner_entities": [
+      "pgcli"
+    ],
+    "source": "llm"
+  },
+  "05e6bff42c": {
+    "ner_primary_entity": "pgcli",
+    "ner_entities": [
+      "pgcli",
+      "errno"
+    ],
+    "source": "llm"
+  },
+  "aa8c30b777": {
+    "ner_primary_entity": "pgcli",
+    "ner_entities": [
+      "pgc",
+      "pgcli"
+    ],
+    "source": "llm"
+  },
+  "c6a6a991d8": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "45ffd3e213": {
+    "ner_primary_entity": "rrpgcli",
+    "ner_entities": [
+      "rrpgcli",
+      "rr"
+    ],
+    "source": "llm"
+  },
+  "0a6a3ccf35": {
+    "ner_primary_entity": "pgcli",
+    "ner_entities": [
+      "pgc",
+      "pgcli"
+    ],
+    "source": "llm"
+  },
+  "f291e8d311": {
+    "ner_primary_entity": "postgres",
+    "ner_entities": [
+      "postgres"
+    ],
+    "source": "llm"
+  },
+  "4277a9cb86": {
+    "ner_primary_entity": "macbook pro m2",
+    "ner_entities": [
+      "macbook pro m2"
+    ],
+    "source": "wikineural"
+  },
+  "117164c439": {
+    "ner_primary_entity": "pgadmin",
+    "ner_entities": [
+      "pgadmin"
+    ],
+    "source": "llm"
+  },
+  "0cfd7f7ed6": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "wikineural"
+  },
+  "2efd03d7f8": {
+    "ner_primary_entity": "pgadmin",
+    "ner_entities": [
+      "pgadmin",
+      "pg"
+    ],
+    "source": "llm"
+  },
+  "0d6dc0d041": {
+    "ner_primary_entity": "pandas",
+    "ner_entities": [
+      "pandas",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "5b4c133384": {
+    "ner_primary_entity": "pandas",
+    "ner_entities": [
+      "pandas",
+      "ip"
+    ],
+    "source": "llm"
+  },
+  "e80e8216d5": {
+    "ner_primary_entity": "curl",
+    "ner_entities": [
+      "python",
+      "curl"
+    ],
+    "source": "llm"
+  },
+  "e0c1900c47": {
+    "ner_primary_entity": "pandas",
+    "ner_entities": [
+      "pandas",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "fbfa475350": {
+    "ner_primary_entity": "pyarrow",
+    "ner_entities": [
+      "pyarrow",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "26ff32cb35": {
+    "ner_primary_entity": "sqlalchemy",
+    "ner_entities": [
+      "importerror",
+      "sqlalchemy"
+    ],
+    "source": "llm"
+  },
+  "5f8cf90bb4": {
+    "ner_primary_entity": "read_sql_query",
+    "ner_entities": [
+      "read_sql_query",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "bac852d170": {
+    "ner_primary_entity": "column",
+    "ner_entities": [
+      "column",
+      "sql"
+    ],
+    "source": "llm"
+  },
+  "358cb2fd4d": {
+    "ner_primary_entity": "sql",
+    "ner_entities": [
+      "sql"
+    ],
+    "source": "llm"
+  },
+  "5f560784b0": {
+    "ner_primary_entity": "postgres",
+    "ner_entities": [
+      "postgres"
+    ],
+    "source": "llm"
+  },
+  "8fe89183d7": {
+    "ner_primary_entity": "pgadmin",
+    "ner_entities": [
+      "pgadmin",
+      "postgres"
+    ],
+    "source": "llm"
+  },
+  "56d8f7ae9a": {
+    "ner_primary_entity": "postgresql",
+    "ner_entities": [
+      "postgresql"
+    ],
+    "source": "llm"
+  },
+  "dec5edee6a": {
+    "ner_primary_entity": "terraform",
+    "ner_entities": [
+      "terraform"
+    ],
+    "source": "llm"
+  },
+  "31053272e0": {
+    "ner_primary_entity": "terraform",
+    "ner_entities": [
+      "terraform : error : post",
+      "terraform"
+    ],
+    "source": "llm"
+  },
+  "a5a163f51d": {
+    "ner_primary_entity": "terraform",
+    "ner_entities": [
+      "terraform"
+    ],
+    "source": "llm"
+  },
+  "feb57d99da": {
+    "ner_primary_entity": "terraform",
+    "ner_entities": [
+      "terraform"
+    ],
+    "source": "llm"
+  },
+  "dd3e6999fd": {
+    "ner_primary_entity": "jwt",
+    "ner_entities": [
+      "jwt",
+      "##ror 400 bad request"
+    ],
+    "source": "llm"
+  },
+  "55c0047f8b": {
+    "ner_primary_entity": "terraform",
+    "ner_entities": [
+      "terraform"
+    ],
+    "source": "llm"
+  },
+  "de1924abdb": {
+    "ner_primary_entity": "terraform",
+    "ner_entities": [
+      "terraform"
+    ],
+    "source": "llm"
+  },
+  "d0f76f4669": {
+    "ner_primary_entity": "terraform",
+    "ner_entities": [
+      "terraform"
+    ],
+    "source": "llm"
+  },
+  "76f95c1d28": {
+    "ner_primary_entity": "terraform",
+    "ner_entities": [
+      "terraform"
+    ],
+    "source": "llm"
+  },
+  "4a6d04a2c3": {
+    "ner_primary_entity": "googleapi",
+    "ner_entities": [
+      "googleapi",
+      "terra"
+    ],
+    "source": "llm"
+  },
+  "5849afe5f6": {
+    "ner_primary_entity": "terraform",
+    "ner_entities": [
+      "terraform"
+    ],
+    "source": "llm"
+  },
+  "fa8cbc8f40": {
+    "ner_primary_entity": "google provider",
+    "ner_entities": [
+      "terraform",
+      "google provider"
+    ],
+    "source": "llm"
+  },
+  "9f9a1b9e4f": {
+    "ner_primary_entity": "terraform",
+    "ner_entities": [
+      "terraform",
+      "terraform : teardown of bigquery dataset"
+    ],
+    "source": "llm"
+  },
+  "64d0d03a6f": {
+    "ner_primary_entity": "terraform error 412",
+    "ner_entities": [
+      "terraform error",
+      "terraform error 412"
+    ],
+    "source": "llm"
+  },
+  "5bf119a791": {
+    "ner_primary_entity": "kestra",
+    "ner_entities": [
+      "kestra",
+      "##stra"
+    ],
+    "source": "llm"
+  },
+  "f1c31510e6": {
+    "ner_primary_entity": "faq",
+    "ner_entities": [
+      "faq"
+    ],
+    "source": "wikineural"
+  },
+  "bcc6781b6e": {
+    "ner_primary_entity": "kestra",
+    "ner_entities": [
+      "kestra"
+    ],
+    "source": "llm"
+  },
+  "16481ac8f7": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "program files",
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "db53f69d74": {
+    "ner_primary_entity": "pgadmin",
+    "ner_entities": [
+      "pgadmin"
+    ],
+    "source": "llm"
+  },
+  "00e8093b90": {
+    "ner_primary_entity": "kestra",
+    "ner_entities": [
+      "kestra"
+    ],
+    "source": "llm"
+  },
+  "06775a8677": {
+    "ner_primary_entity": "gcloud",
+    "ner_entities": [
+      "google cloud",
+      "gcloud"
+    ],
+    "source": "llm"
+  },
+  "70722b98b6": {
+    "ner_primary_entity": "kestra",
+    "ner_entities": [
+      "kestra"
+    ],
+    "source": "llm"
+  },
+  "dda62d0ef0": {
+    "ner_primary_entity": "gcp_setup",
+    "ner_entities": [
+      "gcp_setup",
+      "bucket permission denied error"
+    ],
+    "source": "llm"
+  },
+  "c18119ba32": {
+    "ner_primary_entity": "invalid dataset id error",
+    "ner_entities": [
+      "invalid dataset id error",
+      "er"
+    ],
+    "source": "llm"
+  },
+  "5db9bca6a9": {
+    "ner_primary_entity": "sigill",
+    "ner_entities": [
+      "mac m4 macos",
+      "sigill"
+    ],
+    "source": "llm"
+  },
+  "5d66421473": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "ke",
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "acd25600d1": {
+    "ner_primary_entity": "python",
+    "ner_entities": [
+      "python"
+    ],
+    "source": "llm"
+  },
+  "7fc105290f": {
+    "ner_primary_entity": "postgresql",
+    "ner_entities": [
+      "postgresql"
+    ],
+    "source": "llm"
+  },
+  "b7ff18706c": {
+    "ner_primary_entity": "kestra",
+    "ner_entities": [
+      "kestra"
+    ],
+    "source": "llm"
+  },
+  "c493aa6b92": {
+    "ner_primary_entity": "kestra",
+    "ner_entities": [
+      "kestra",
+      "homework"
+    ],
+    "source": "llm"
+  },
+  "226d10e788": {
+    "ner_primary_entity": "kestra",
+    "ner_entities": [
+      "kestra"
+    ],
+    "source": "llm"
+  },
+  "5a0d2c0e59": {
+    "ner_primary_entity": "kestra",
+    "ner_entities": [
+      "kestra",
+      "ke"
+    ],
+    "source": "llm"
+  },
+  "39328a73c7": {
+    "ner_primary_entity": "kestra",
+    "ner_entities": [
+      "kestra"
+    ],
+    "source": "llm"
+  },
+  "733065c175": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "kestra",
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "f5a8ca34fa": {
+    "ner_primary_entity": "kestra outputs",
+    "ner_entities": [
+      "kestra outputs"
+    ],
+    "source": "wikineural"
+  },
+  "e14f6a8ed9": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "kestra",
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "958ab42c43": {
+    "ner_primary_entity": "docker compose",
+    "ner_entities": [
+      "kestra",
+      "docker compose"
+    ],
+    "source": "llm"
+  },
+  "91a298833a": {
+    "ner_primary_entity": "err_empty_response",
+    "ner_entities": [
+      "err_empty_response",
+      "github"
+    ],
+    "source": "llm"
+  },
+  "c717810bc6": {
+    "ner_primary_entity": "kestra",
+    "ner_entities": [
+      "kestra"
+    ],
+    "source": "llm"
+  },
+  "e32e8737da": {
+    "ner_primary_entity": "kestrel",
+    "ner_entities": [
+      "kestrel",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "ee4a3bc34d": {
+    "ner_primary_entity": "gcs",
+    "ner_entities": [
+      "gcs"
+    ],
+    "source": "wikineural"
+  },
+  "d2902a7227": {
+    "ner_primary_entity": "parquet",
+    "ner_entities": [
+      "parquet",
+      "gcs"
+    ],
+    "source": "llm"
+  },
+  "950192cbcc": {
+    "ner_primary_entity": "gcs",
+    "ner_entities": [
+      "gcs"
+    ],
+    "source": "llm"
+  },
+  "4ae927f8a0": {
+    "ner_primary_entity": "gsutil",
+    "ner_entities": [
+      "gcs",
+      "gsutil"
+    ],
+    "source": "llm"
+  },
+  "33184c75bd": {
+    "ner_primary_entity": "bad character (ascii 0) error",
+    "ner_entities": [
+      "gcs bucket",
+      "bad character (ascii 0) error"
+    ],
+    "source": "llm"
+  },
+  "a07b793f65": {
+    "ner_primary_entity": "bq",
+    "ner_entities": [
+      "bq",
+      "gcp bq"
+    ],
+    "source": "llm"
+  },
+  "0131ac93ac": {
+    "ner_primary_entity": "bigquery",
+    "ner_entities": [
+      "bigq",
+      "bigquery"
+    ],
+    "source": "llm"
+  },
+  "61b908fe84": {
+    "ner_primary_entity": "bigquery",
+    "ner_entities": [
+      "bigquery"
+    ],
+    "source": "llm"
+  },
+  "b98d573ce2": {
+    "ner_primary_entity": "bq",
+    "ner_entities": [
+      "gcp",
+      "bq"
+    ],
+    "source": "llm"
+  },
+  "57303f9d80": {
+    "ner_primary_entity": "bigquery",
+    "ner_entities": [
+      "bigquery"
+    ],
+    "source": "llm"
+  },
+  "1724e08426": {
+    "ner_primary_entity": "invalid timestamp",
+    "ner_entities": [
+      "invalid timestamp",
+      "bigquery"
+    ],
+    "source": "llm"
+  },
+  "c2a18da218": {
+    "ner_primary_entity": "timestamptype(millis)",
+    "ner_entities": [
+      "error message in bigquery",
+      "timestamptype(millis)"
+    ],
+    "source": "llm"
+  },
+  "a83247e572": {
+    "ner_primary_entity": "pandas",
+    "ner_entities": [
+      "pandas",
+      "bigquery"
+    ],
+    "source": "llm"
+  },
+  "7c97a61529": {
+    "ner_primary_entity": "bq",
+    "ner_entities": [
+      "bq - create external table",
+      "bq"
+    ],
+    "source": "llm"
+  },
+  "88f2fb38b0": {
+    "ner_primary_entity": "bq",
+    "ner_entities": [
+      "bigquery table exist and delete",
+      "bq"
+    ],
+    "source": "llm"
+  },
+  "21e010f826": {
+    "ner_primary_entity": "bigquery",
+    "ner_entities": [
+      "gcp bq - error :",
+      "bigquery"
+    ],
+    "source": "llm"
+  },
+  "7cbadfe131": {
+    "ner_primary_entity": "cloud function",
+    "ner_entities": [
+      "cloud function"
+    ],
+    "source": "llm"
+  },
+  "8bfd81c403": {
+    "ner_primary_entity": "bq",
+    "ner_entities": [
+      "bq",
+      "gcp bq"
+    ],
+    "source": "llm"
+  },
+  "66d3c42dd4": {
+    "ner_primary_entity": "bigquery",
+    "ner_entities": [
+      "bigquery"
+    ],
+    "source": "llm"
+  },
+  "625c1f542a": {
+    "ner_primary_entity": "invalid project id",
+    "ner_entities": [
+      "invalid project id",
+      "gcp bq"
+    ],
+    "source": "llm"
+  },
+  "45b587e597": {
+    "ner_primary_entity": "bigquery",
+    "ner_entities": [
+      "big",
+      "bigquery"
+    ],
+    "source": "llm"
+  },
+  "7df3102580": {
+    "ner_primary_entity": "bigquery",
+    "ner_entities": [
+      "bigquery"
+    ],
+    "source": "llm"
+  },
+  "49b5277d77": {
+    "ner_primary_entity": "date()",
+    "ner_entities": [
+      "date()",
+      "bigquery"
+    ],
+    "source": "llm"
+  },
+  "8248dd9d7f": {
+    "ner_primary_entity": "bq",
+    "ner_entities": [
+      "bq",
+      "##uster by"
+    ],
+    "source": "llm"
+  },
+  "16b4ae94ef": {
+    "ner_primary_entity": "bigquery",
+    "ner_entities": [
+      "bigquery"
+    ],
+    "source": "wikineural"
+  },
+  "24c64415c0": {
+    "ner_primary_entity": "bigquery",
+    "ner_entities": [
+      "bigquery"
+    ],
+    "source": "llm"
+  },
+  "155949a31a": {
+    "ner_primary_entity": "bq",
+    "ner_entities": [
+      "gcp",
+      "bq"
+    ],
+    "source": "llm"
+  },
+  "47f7c8310a": {
+    "ner_primary_entity": "gcp bq ml",
+    "ner_entities": [
+      "##p bq",
+      "gcp bq ml"
+    ],
+    "source": "llm"
+  },
+  "a9c1fd2a8f": {
+    "ner_primary_entity": "aws s3",
+    "ner_entities": [
+      "aws s3",
+      "homework"
+    ],
+    "source": "llm"
+  },
+  "5e0cffbc79": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "5f072b1cc7": {
+    "ner_primary_entity": "gsutil",
+    "ner_entities": [
+      "gcs",
+      "gsutil"
+    ],
+    "source": "llm"
+  },
+  "c46378ea2a": {
+    "ner_primary_entity": "homework",
+    "ner_entities": [
+      "homework"
+    ],
+    "source": "wikineural"
+  },
+  "53e0e2f585": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "f9b7353f28": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "ff76cb35fb": {
+    "ner_primary_entity": "bigquery",
+    "ner_entities": [
+      "big",
+      "bigquery"
+    ],
+    "source": "llm"
+  },
+  "55b6d6256f": {
+    "ner_primary_entity": "invalid start byte",
+    "ner_entities": [
+      "python",
+      "invalid start byte"
+    ],
+    "source": "llm"
+  },
+  "0f2a26772e": {
+    "ner_primary_entity": "generators",
+    "ner_entities": [
+      "generators",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "577dfed594": {
+    "ner_primary_entity": "pandas",
+    "ner_entities": [
+      "pandas",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "c58d3563a6": {
+    "ner_primary_entity": "int64",
+    "ner_entities": [
+      "int64",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "e5905a92e2": {
+    "ner_primary_entity": "bigquery",
+    "ner_entities": [
+      "bigquery"
+    ],
+    "source": "llm"
+  },
+  "e6c806f5fe": {
+    "ner_primary_entity": "bigquery",
+    "ner_entities": [
+      "bigquery"
+    ],
+    "source": "llm"
+  },
+  "0882fc44fa": {
+    "ner_primary_entity": "bigquery",
+    "ner_entities": [
+      "bigquery"
+    ],
+    "source": "llm"
+  },
+  "01dcc4425b": {
+    "ner_primary_entity": "bytes process",
+    "ner_entities": [
+      "bytes process"
+    ],
+    "source": "wikineural"
+  },
+  "52e74f0053": {
+    "ner_primary_entity": "lpep_pickup_datetime",
+    "ner_entities": [
+      "lpep_pickup_datetime",
+      "bigquery"
+    ],
+    "source": "llm"
+  },
+  "917b0b0fb5": {
+    "ner_primary_entity": "postgresql",
+    "ner_entities": [
+      "post",
+      "postgresql"
+    ],
+    "source": "llm"
+  },
+  "a198f6959c": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "46d95787b3": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "b72ed00c7b": {
+    "ner_primary_entity": "load_yellow_data",
+    "ner_entities": [
+      "load_yellow_data"
+    ],
+    "source": "llm"
+  },
+  "742e16e6bc": {
+    "ner_primary_entity": "ref()",
+    "ner_entities": [
+      "dbt",
+      "ref()"
+    ],
+    "source": "llm"
+  },
+  "44ff6ae3df": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "developer",
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "df2ca336d5": {
+    "ner_primary_entity": "dbt_project.yml",
+    "ner_entities": [
+      "dbt_project.yml",
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "c180431de3": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "dbt",
+      "bigquery"
+    ],
+    "source": "llm"
+  },
+  "29469cf158": {
+    "ner_primary_entity": "set",
+    "ner_entities": [
+      "set"
+    ],
+    "source": "wikineural"
+  },
+  "b4a5d32d6b": {
+    "ner_primary_entity": "dbt cloud",
+    "ner_entities": [
+      "dbt cloud"
+    ],
+    "source": "wikineural"
+  },
+  "87fddc59b7": {
+    "ner_primary_entity": "git",
+    "ner_entities": [
+      "git",
+      "setup"
+    ],
+    "source": "llm"
+  },
+  "32a878b1d5": {
+    "ner_primary_entity": "publickey",
+    "ner_entities": [
+      "publickey",
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "25f96d0b34": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "command",
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "99658f8d80": {
+    "ner_primary_entity": "ide",
+    "ner_entities": [
+      "ide"
+    ],
+    "source": "wikineural"
+  },
+  "e8fe39dd54": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "db",
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "6435e27634": {
+    "ner_primary_entity": "s3",
+    "ner_entities": [
+      "gcs",
+      "s3"
+    ],
+    "source": "llm"
+  },
+  "28f6392ce5": {
+    "ner_primary_entity": "hack",
+    "ner_entities": [
+      "hack"
+    ],
+    "source": "wikineural"
+  },
+  "e596dc3cbe": {
+    "ner_primary_entity": "dbt_utils.generate_surrogate_key",
+    "ner_entities": [
+      "dbt_utils.generate_surrogate_key",
+      "db"
+    ],
+    "source": "llm"
+  },
+  "78e4da8fa6": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "dbt",
+      "bigquery"
+    ],
+    "source": "llm"
+  },
+  "95b01285f5": {
+    "ner_primary_entity": "dbt_utils",
+    "ner_entities": [
+      "db",
+      "dbt_utils"
+    ],
+    "source": "llm"
+  },
+  "d4ec58fd16": {
+    "ner_primary_entity": "compilation errors",
+    "ner_entities": [
+      "compilation errors",
+      "lineage"
+    ],
+    "source": "llm"
+  },
+  "55fac499b0": {
+    "ner_primary_entity": "fact_trips",
+    "ner_entities": [
+      "fact_trips",
+      "build"
+    ],
+    "source": "llm"
+  },
+  "9cce7ad112": {
+    "ner_primary_entity": "build",
+    "ner_entities": [
+      "build"
+    ],
+    "source": "wikineural"
+  },
+  "5a1a61b6a8": {
+    "ner_primary_entity": "bigquery",
+    "ner_entities": [
+      "bigquery"
+    ],
+    "source": "llm"
+  },
+  "3cc457b0de": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "a31defac51": {
+    "ner_primary_entity": "staging dataset",
+    "ner_entities": [
+      "staging",
+      "staging dataset"
+    ],
+    "source": "llm"
+  },
+  "53afe4bee2": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "browser",
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "f0ad880ffb": {
+    "ner_primary_entity": "git",
+    "ner_entities": [
+      "db",
+      "git"
+    ],
+    "source": "llm"
+  },
+  "3d51ece7b9": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "continuous integration",
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "c37b2ed3a5": {
+    "ner_primary_entity": "compilation error : model",
+    "ner_entities": [
+      "compilation error : model"
+    ],
+    "source": "wikineural"
+  },
+  "8bfd724e4f": {
+    "ner_primary_entity": "nonetype",
+    "ner_entities": [
+      "nonetype"
+    ],
+    "source": "wikineural"
+  },
+  "89733da275": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "db",
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "2d05496ddf": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "db",
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "58586a16a6": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "c7ca760fed": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "github",
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "3ce6d0445f": {
+    "ner_primary_entity": "sql",
+    "ner_entities": [
+      "compilation error : model",
+      "sql"
+    ],
+    "source": "llm"
+  },
+  "2d17397995": {
+    "ner_primary_entity": "production environment",
+    "ner_entities": [
+      "production environment"
+    ],
+    "source": "wikineural"
+  },
+  "fd607affe5": {
+    "ner_primary_entity": "taxi_zone_lookup",
+    "ner_entities": [
+      "github",
+      "taxi_zone_lookup"
+    ],
+    "source": "llm"
+  },
+  "d9072c7279": {
+    "ner_primary_entity": "fact _",
+    "ner_entities": [
+      "fact _"
+    ],
+    "source": "wikineural"
+  },
+  "1d2222e38a": {
+    "ner_primary_entity": "create table",
+    "ner_entities": [
+      "create table"
+    ],
+    "source": "llm"
+  },
+  "9f2048fc73": {
+    "ner_primary_entity": "parquet",
+    "ner_entities": [
+      "parquet",
+      "parque"
+    ],
+    "source": "llm"
+  },
+  "57767e983b": {
+    "ner_primary_entity": "yaml",
+    "ner_entities": [
+      "yaml"
+    ],
+    "source": "llm"
+  },
+  "8ab8329fea": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "c547b5d5e5": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "dbt cloud",
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "ee3f7f89ba": {
+    "ner_primary_entity": "git",
+    "ner_entities": [
+      "job",
+      "git"
+    ],
+    "source": "llm"
+  },
+  "dfd4ddbf39": {
+    "ner_primary_entity": "github",
+    "ner_entities": [
+      "github"
+    ],
+    "source": "llm"
+  },
+  "778635395f": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "e5b8322bee": {
+    "ner_primary_entity": "pytz",
+    "ner_entities": [
+      "pytz",
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "eda58f442a": {
+    "ner_primary_entity": "eacces",
+    "ner_entities": [
+      "eacces",
+      "filesystemerro"
+    ],
+    "source": "llm"
+  },
+  "fee87c684a": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "dbt",
+      "dbt deploy : error"
+    ],
+    "source": "llm"
+  },
+  "6783a9bddb": {
+    "ner_primary_entity": "github",
+    "ner_entities": [
+      "github"
+    ],
+    "source": "llm"
+  },
+  "b459de9135": {
+    "ner_primary_entity": "kestra",
+    "ner_entities": [
+      "kestra",
+      "f"
+    ],
+    "source": "llm"
+  },
+  "c549d24645": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "fb43c209d9": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "8c9b0fdaa5": {
+    "ner_primary_entity": "parquet",
+    "ner_entities": [
+      "parquet"
+    ],
+    "source": "llm"
+  },
+  "faddbcb675": {
+    "ner_primary_entity": "hibernate",
+    "ner_entities": [
+      "join error on locationid",
+      "hibernate"
+    ],
+    "source": "llm"
+  },
+  "17be084780": {
+    "ner_primary_entity": "google looker studio",
+    "ner_entities": [
+      "google looker studio",
+      "google looker"
+    ],
+    "source": "llm"
+  },
+  "78fda262c6": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "a250f11737": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "db",
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "49e1ec9d84": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "db",
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "a8e992c143": {
+    "ner_primary_entity": "dbt core",
+    "ner_entities": [
+      "dbt core"
+    ],
+    "source": "llm"
+  },
+  "5d92a0583a": {
+    "ner_primary_entity": "dbt-postgres",
+    "ner_entities": [
+      "dbt-postgres"
+    ],
+    "source": "llm"
+  },
+  "23687d0f93": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "error with incorrect schema in models",
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "7cec1857a9": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "f5c9c1b46d": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "db",
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "f57e5cb1f4": {
+    "ner_primary_entity": "cloud",
+    "ner_entities": [
+      "cloud"
+    ],
+    "source": "wikineural"
+  },
+  "a4c1f2e983": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "db",
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "98b6a15ece": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "dbt",
+      "`"
+    ],
+    "source": "llm"
+  },
+  "70072fcf7a": {
+    "ner_primary_entity": "dbt-athena",
+    "ner_entities": [
+      "dbt-athena"
+    ],
+    "source": "llm"
+  },
+  "4f97c0b639": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "github",
+      "dbt"
+    ],
+    "source": "llm"
+  },
+  "5b755bf0f5": {
+    "ner_primary_entity": "gcloud",
+    "ner_entities": [
+      "gcloud",
+      "bigquery"
+    ],
+    "source": "llm"
+  },
+  "8815e0f1fd": {
+    "ner_primary_entity": "dbt",
+    "ner_entities": [
+      "dbt",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "d5328f1899": {
+    "ner_primary_entity": "bruin mcp server",
+    "ner_entities": [
+      "bruin mcp server",
+      "bruin"
+    ],
+    "source": "llm"
+  },
+  "2442e32be2": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "f04da64de9": {
+    "ner_primary_entity": "git",
+    "ner_entities": [
+      "bruin",
+      "git"
+    ],
+    "source": "llm"
+  },
+  "390f2bec4a": {
+    "ner_primary_entity": "pytz",
+    "ner_entities": [
+      "pytz",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "8ef4012c69": {
+    "ner_primary_entity": "fivetran",
+    "ner_entities": [
+      "fivetran"
+    ],
+    "source": "llm"
+  },
+  "79792b53fc": {
+    "ner_primary_entity": "ingestr",
+    "ner_entities": [
+      "ingestr"
+    ],
+    "source": "llm"
+  },
+  "c79cc0fa2f": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "4f69163546": {
+    "ner_primary_entity": "ram",
+    "ner_entities": [
+      "ram"
+    ],
+    "source": "wikineural"
+  },
+  "d07a9a8ff9": {
+    "ner_primary_entity": "duckdb",
+    "ner_entities": [
+      "duckdb",
+      "duck"
+    ],
+    "source": "llm"
+  },
+  "f1e752882b": {
+    "ner_primary_entity": "duckdb",
+    "ner_entities": [
+      "duckdb",
+      "bruin"
+    ],
+    "source": "llm"
+  },
+  "59ad389756": {
+    "ner_primary_entity": "pyspark",
+    "ner_entities": [
+      "pyspark",
+      "p"
+    ],
+    "source": "llm"
+  },
+  "14b039801e": {
+    "ner_primary_entity": "spark",
+    "ner_entities": [
+      "spark"
+    ],
+    "source": "llm"
+  },
+  "6cab9c338e": {
+    "ner_primary_entity": "head",
+    "ner_entities": [
+      "head"
+    ],
+    "source": "llm"
+  },
+  "ef01c39d63": {
+    "ner_primary_entity": "filenotfoundexception",
+    "ner_entities": [
+      "filenotfoundexception"
+    ],
+    "source": "llm"
+  },
+  "b024daf322": {
+    "ner_primary_entity": "sql",
+    "ner_entities": [
+      "sql"
+    ],
+    "source": "wikineural"
+  },
+  "772aea0210": {
+    "ner_primary_entity": "spark",
+    "ner_entities": [
+      "spark"
+    ],
+    "source": "llm"
+  },
+  "0a431f8863": {
+    "ner_primary_entity": "bigquery",
+    "ner_entities": [
+      "bigquery"
+    ],
+    "source": "llm"
+  },
+  "6e251d34b6": {
+    "ner_primary_entity": "head",
+    "ner_entities": [
+      "head"
+    ],
+    "source": "llm"
+  },
+  "3e355d74fd": {
+    "ner_primary_entity": "spark",
+    "ner_entities": [
+      "spark",
+      "spark dataframe"
+    ],
+    "source": "llm"
+  },
+  "7fa4e026d6": {
+    "ner_primary_entity": "pyspark",
+    "ner_entities": [
+      "pyspark"
+    ],
+    "source": "llm"
+  },
+  "7bff88dbd7": {
+    "ner_primary_entity": "zcat",
+    "ner_entities": [
+      "zcat",
+      "compression"
+    ],
+    "source": "llm"
+  },
+  "497269a77f": {
+    "ner_primary_entity": "google credentials",
+    "ner_entities": [
+      "spark",
+      "google credentials"
+    ],
+    "source": "llm"
+  },
+  "e3ce42af1a": {
+    "ner_primary_entity": "gcs",
+    "ner_entities": [
+      "gcs"
+    ],
+    "source": "llm"
+  },
+  "34ebc2c6de": {
+    "ner_primary_entity": "pandas",
+    "ner_entities": [
+      "pandas",
+      "type"
+    ],
+    "source": "llm"
+  },
+  "14cc6e2060": {
+    "ner_primary_entity": "memorymanager",
+    "ner_entities": [
+      "memory",
+      "memorymanager"
+    ],
+    "source": "llm"
+  },
+  "cd5d3e8423": {
+    "ner_primary_entity": "hadoop",
+    "ner_entities": [
+      "hadoop"
+    ],
+    "source": "llm"
+  },
+  "d01f2fb06b": {
+    "ner_primary_entity": "gcloud",
+    "ner_entities": [
+      "data",
+      "gcloud"
+    ],
+    "source": "llm"
+  },
+  "fdef2dfcc4": {
+    "ner_primary_entity": "lserviceexception",
+    "ner_entities": [
+      "lserviceexception",
+      "google cloud storage"
+    ],
+    "source": "llm"
+  },
+  "39fc22b5cb": {
+    "ner_primary_entity": "py4j.protocol.py4jjavaerror",
+    "ner_entities": [
+      "py4j.protocol.py4jjavaerror",
+      "py4jjavaerror"
+    ],
+    "source": "llm"
+  },
+  "fa58733a98": {
+    "ner_primary_entity": "repartition",
+    "ner_entities": [
+      "repartition",
+      "dataframe"
+    ],
+    "source": "llm"
+  },
+  "05dc43cda8": {
+    "ner_primary_entity": "jupyter",
+    "ner_entities": [
+      "jupyter",
+      "jupyter notebook"
+    ],
+    "source": "llm"
+  },
+  "0c9fc7e7d3": {
+    "ner_primary_entity": "dataproc",
+    "ner_entities": [
+      "dataproc"
+    ],
+    "source": "llm"
+  },
+  "1da0437718": {
+    "ner_primary_entity": "spark",
+    "ner_entities": [
+      "spark",
+      "##rk"
+    ],
+    "source": "llm"
+  },
+  "d707493842": {
+    "ner_primary_entity": "dataproc",
+    "ner_entities": [
+      "dataproc"
+    ],
+    "source": "wikineural"
+  },
+  "a5a8a6ac39": {
+    "ner_primary_entity": "java_home",
+    "ner_entities": [
+      "homebrew",
+      "java_home"
+    ],
+    "source": "llm"
+  },
+  "a25406395b": {
+    "ner_primary_entity": "private google access",
+    "ner_entities": [
+      "private google access"
+    ],
+    "source": "llm"
+  },
+  "db219fef17": {
+    "ner_primary_entity": "sparksession",
+    "ner_entities": [
+      "data",
+      "sparksession"
+    ],
+    "source": "llm"
+  },
+  "2b59e8e6c1": {
+    "ner_primary_entity": "spark",
+    "ner_entities": [
+      "spark"
+    ],
+    "source": "llm"
+  },
+  "c2c5634e36": {
+    "ner_primary_entity": "timestamp_ntz",
+    "ner_entities": [
+      "timestamp_ntz",
+      "spark"
+    ],
+    "source": "llm"
+  },
+  "a71d2105aa": {
+    "ner_primary_entity": "spark",
+    "ner_entities": [
+      "spark"
+    ],
+    "source": "llm"
+  },
+  "bcafec775a": {
+    "ner_primary_entity": "spark",
+    "ner_entities": [
+      "spark",
+      "spark dataframe"
+    ],
+    "source": "llm"
+  },
+  "6f04719ff8": {
+    "ner_primary_entity": "spark",
+    "ner_entities": [
+      "spark"
+    ],
+    "source": "llm"
+  },
+  "fe61ce3be4": {
+    "ner_primary_entity": "spark",
+    "ner_entities": [
+      "spark"
+    ],
+    "source": "llm"
+  },
+  "5b1d465332": {
+    "ner_primary_entity": "spark ui",
+    "ner_entities": [
+      "spark",
+      "spark ui"
+    ],
+    "source": "llm"
+  },
+  "b3bb998ae2": {
+    "ner_primary_entity": "pyspark",
+    "ner_entities": [
+      "pyspark",
+      "##y"
+    ],
+    "source": "llm"
+  },
+  "94ccf8c158": {
+    "ner_primary_entity": "docker-compose",
+    "ner_entities": [
+      "docker",
+      "docker-compose"
+    ],
+    "source": "llm"
+  },
+  "a1ea959c7e": {
+    "ner_primary_entity": "kafka",
+    "ner_entities": [
+      "kafka"
+    ],
+    "source": "llm"
+  },
+  "0a441d9976": {
+    "ner_primary_entity": "avro",
+    "ner_entities": [
+      "modulenotfounderror",
+      "avro"
+    ],
+    "source": "llm"
+  },
+  "f2a0d0c3f0": {
+    "ner_primary_entity": "redpanda",
+    "ner_entities": [
+      "redpanda"
+    ],
+    "source": "llm"
+  },
+  "b943770904": {
+    "ner_primary_entity": "sigkill",
+    "ner_entities": [
+      "sigkill"
+    ],
+    "source": "llm"
+  },
+  "dcdd7eda4d": {
+    "ner_primary_entity": "resources",
+    "ner_entities": [
+      "resources"
+    ],
+    "source": "wikineural"
+  },
+  "348f696873": {
+    "ner_primary_entity": "kafka",
+    "ner_entities": [
+      "kafka"
+    ],
+    "source": "wikineural"
+  },
+  "759b5d80ec": {
+    "ner_primary_entity": "kafka",
+    "ner_entities": [
+      "kafka",
+      "kafka python"
+    ],
+    "source": "llm"
+  },
+  "ea9c96ab72": {
+    "ner_primary_entity": "kafka.errors.nobrokersavailable",
+    "ner_entities": [
+      "nobrokersavailable",
+      "kafka.errors.nobrokersavailable"
+    ],
+    "source": "llm"
+  },
+  "443b9afd04": {
+    "ner_primary_entity": "kafka",
+    "ner_entities": [
+      "kafka"
+    ],
+    "source": "llm"
+  },
+  "664833c280": {
+    "ner_primary_entity": "docker login",
+    "ner_entities": [
+      "docker",
+      "docker login"
+    ],
+    "source": "llm"
+  },
+  "e821d8fe04": {
+    "ner_primary_entity": "build.sh",
+    "ner_entities": [
+      "build.sh",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "b2c1c1d0ec": {
+    "ner_primary_entity": "kafkatimeouterror",
+    "ner_entities": [
+      "kafkatimeouterror",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "477104b863": {
+    "ner_primary_entity": "spark-submit",
+    "ner_entities": [
+      "spark-submit",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "e7015b4263": {
+    "ner_primary_entity": "spark-submit",
+    "ner_entities": [
+      "spark-submit",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "0e8bce921a": {
+    "ner_primary_entity": "py4j.protocol.py4jjavaerror",
+    "ner_entities": [
+      "py4j.protocol.py4jjavaerror",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "d01cbfa9cb": {
+    "ner_primary_entity": "java",
+    "ner_entities": [
+      "java"
+    ],
+    "source": "wikineural"
+  },
+  "2763850d3e": {
+    "ner_primary_entity": "avro",
+    "ner_entities": [
+      "avro",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "2d274b7acd": {
+    "ner_primary_entity": "faust",
+    "ner_entities": [
+      "faust"
+    ],
+    "source": "llm"
+  },
+  "5ca6890c1a": {
+    "ner_primary_entity": "kafka",
+    "ner_entities": [
+      "java kafka",
+      "kafka"
+    ],
+    "source": "llm"
+  },
+  "cd8a62fc55": {
+    "ner_primary_entity": "kafka",
+    "ner_entities": [
+      "kafka",
+      "java"
+    ],
+    "source": "llm"
+  },
+  "d039adfb76": {
+    "ner_primary_entity": "kafka",
+    "ner_entities": [
+      "kafka",
+      "java"
+    ],
+    "source": "llm"
+  },
+  "30fbb4f5b8": {
+    "ner_primary_entity": "confluent-kafka",
+    "ner_entities": [
+      "confluent-kafka"
+    ],
+    "source": "llm"
+  },
+  "663c1e915e": {
+    "ner_primary_entity": "spark",
+    "ner_entities": [
+      "spark"
+    ],
+    "source": "llm"
+  },
+  "7c3cf3b8fc": {
+    "ner_primary_entity": "python",
+    "ner_entities": [
+      "modulenotfounderror",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "cef28035ac": {
+    "ner_primary_entity": "kafka consumer",
+    "ner_entities": [
+      "kafka consumer"
+    ],
+    "source": "llm"
+  },
+  "e08b9c753f": {
+    "ner_primary_entity": "flink",
+    "ner_entities": [
+      "pyflink",
+      "flink"
+    ],
+    "source": "llm"
+  },
+  "29e617a947": {
+    "ner_primary_entity": "post",
+    "ner_entities": [
+      "post"
+    ],
+    "source": "wikineural"
+  },
+  "6b4bd387cf": {
+    "ner_primary_entity": "json deserialization error",
+    "ner_entities": [
+      "json deserialization error",
+      "p"
+    ],
+    "source": "llm"
+  },
+  "c0e1671b46": {
+    "ner_primary_entity": "kafka",
+    "ner_entities": [
+      "kafka",
+      "kafka top"
+    ],
+    "source": "llm"
+  },
+  "b7e9d1c052": {
+    "ner_primary_entity": "flink",
+    "ner_entities": [
+      "flink"
+    ],
+    "source": "llm"
+  },
+  "ce77e05d24": {
+    "ner_primary_entity": "spark streaming",
+    "ner_entities": [
+      "spark streaming"
+    ],
+    "source": "llm"
+  },
+  "ab1b812541": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "9a2e2d2008": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "b6c7eb17d8": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "5a491cd847": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "5c5321c295": {
+    "ner_primary_entity": "project 1",
+    "ner_entities": [
+      "project 1"
+    ],
+    "source": "wikineural"
+  },
+  "2220285e58": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "1c7bfa9357": {
+    "ner_primary_entity": "databricks",
+    "ner_entities": [
+      "databricks"
+    ],
+    "source": "llm"
+  },
+  "c81e613d5a": {
+    "ner_primary_entity": "airflow",
+    "ner_entities": [
+      "airflow"
+    ],
+    "source": "llm"
+  },
+  "ec1001476f": {
+    "ner_primary_entity": "airflow",
+    "ner_entities": [
+      "airflow",
+      "dataproc"
+    ],
+    "source": "llm"
+  },
+  "ec5e405fa6": {
+    "ner_primary_entity": "key vault",
+    "ner_entities": [
+      "key vault",
+      "azure"
+    ],
+    "source": "llm"
+  },
+  "e839b64165": {
+    "ner_primary_entity": "dbt-core",
+    "ner_entities": [
+      "dbt-core",
+      "airflow task group"
+    ],
+    "source": "llm"
+  },
+  "13c4d27a91": {
+    "ner_primary_entity": "uv",
+    "ner_entities": [
+      "kestra",
+      "uv"
+    ],
+    "source": "llm"
+  },
+  "c0c68e1ee8": {
+    "ner_primary_entity": "ny",
+    "ner_entities": [
+      "ny"
+    ],
+    "source": "wikineural"
+  },
+  "df38a5d809": {
+    "ner_primary_entity": "dbt-core",
+    "ner_entities": [
+      "dbt-core"
+    ],
+    "source": "llm"
+  },
+  "d7abe28e77": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "122d2b0aed": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "ee564fdf82": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "5b5d82a924": {
+    "ner_primary_entity": "dlt",
+    "ner_entities": [
+      "home",
+      "dlt"
+    ],
+    "source": "llm"
+  },
+  "27fa940238": {
+    "ner_primary_entity": "dlt",
+    "ner_entities": [
+      "dl",
+      "dlt"
+    ],
+    "source": "llm"
+  },
+  "4ecc97beb5": {
+    "ner_primary_entity": "google colab",
+    "ner_entities": [
+      "google colab"
+    ],
+    "source": "llm"
+  },
+  "d2add610e3": {
+    "ner_primary_entity": "dlt",
+    "ner_entities": [
+      "google colab",
+      "dlt"
+    ],
+    "source": "llm"
+  },
+  "1075e9e2b6": {
+    "ner_primary_entity": "xdg-base-dir",
+    "ner_entities": [
+      "xdg-base-dir",
+      "xdg base dir speci"
+    ],
+    "source": "llm"
+  },
+  "f48b484cd4": {
+    "ner_primary_entity": "dlt",
+    "ner_entities": [
+      "apache airflow",
+      "dlt"
+    ],
+    "source": "llm"
+  },
+  "eaae17dfea": {
+    "ner_primary_entity": "dlt",
+    "ner_entities": [
+      "##stra",
+      "dlt"
+    ],
+    "source": "llm"
+  },
+  "7be69bdcb4": {
+    "ner_primary_entity": "gcs",
+    "ner_entities": [
+      "gcs"
+    ],
+    "source": "llm"
+  },
+  "3a53549d08": {
+    "ner_primary_entity": "dlt",
+    "ner_entities": [
+      "dlt"
+    ],
+    "source": "wikineural"
+  },
+  "0655c8c637": {
+    "ner_primary_entity": "@dlt.resource",
+    "ner_entities": [
+      "dl",
+      "@dlt.resource"
+    ],
+    "source": "llm"
+  },
+  "cbeb6f678b": {
+    "ner_primary_entity": "dlt mcp server",
+    "ner_entities": [
+      "vs code",
+      "dlt mcp server"
+    ],
+    "source": "llm"
+  },
+  "a01ea88b00": {
+    "ner_primary_entity": "rest",
+    "ner_entities": [
+      "rest"
+    ],
+    "source": "wikineural"
+  },
+  "9950018686": {
+    "ner_primary_entity": "dlt",
+    "ner_entities": [
+      "dl",
+      "dlt"
+    ],
+    "source": "llm"
+  },
+  "53f31cd33c": {
+    "ner_primary_entity": "dlt",
+    "ner_entities": [
+      "api",
+      "dlt"
+    ],
+    "source": "llm"
+  },
+  "7b3f0193ec": {
+    "ner_primary_entity": "dlt",
+    "ner_entities": [
+      "codex",
+      "dlt"
+    ],
+    "source": "llm"
+  },
+  "74eb249bbf": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "977bf7786c": {
+    "ner_primary_entity": "zoomcamp",
+    "ner_entities": [
+      "zoomcamp",
+      "llm zoomcamp"
+    ],
+    "source": "llm"
+  },
+  "489dd1c9d9": {
+    "ner_primary_entity": "office hours",
+    "ner_entities": [
+      "office hours"
+    ],
+    "source": "wikineural"
+  },
+  "c6c2888275": {
+    "ner_primary_entity": "gpu",
+    "ner_entities": [
+      "gpu",
+      "cloud"
+    ],
+    "source": "llm"
+  },
+  "c2903069a0": {
+    "ner_primary_entity": "leaderboard",
+    "ner_entities": [
+      "leaderboard"
+    ],
+    "source": "wikineural"
+  },
+  "4c837a4be1": {
+    "ner_primary_entity": "leaderboard",
+    "ner_entities": [
+      "leaderboard"
+    ],
+    "source": "wikineural"
+  },
+  "9f689c185f": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "96286b4be4": {
+    "ner_primary_entity": "homework",
+    "ner_entities": [
+      "homework"
+    ],
+    "source": "wikineural"
+  },
+  "bd31146b0e": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "31456f4b5f": {
+    "ner_primary_entity": "where",
+    "ner_entities": [
+      "where"
+    ],
+    "source": "wikineural"
+  },
+  "f3dd94f323": {
+    "ner_primary_entity": "wsl2",
+    "ner_entities": [
+      "w",
+      "wsl2"
+    ],
+    "source": "llm"
+  },
+  "c774542f32": {
+    "ner_primary_entity": "github",
+    "ner_entities": [
+      "github"
+    ],
+    "source": "llm"
+  },
+  "b7cdde6b25": {
+    "ner_primary_entity": "##chain",
+    "ner_entities": [
+      "##chain"
+    ],
+    "source": "wikineural"
+  },
+  "f5df151c59": {
+    "ner_primary_entity": "openai",
+    "ner_entities": [
+      "open",
+      "openai"
+    ],
+    "source": "llm"
+  },
+  "152af39a53": {
+    "ner_primary_entity": "ratelimiterror",
+    "ner_entities": [
+      "ratelimiterror",
+      "open"
+    ],
+    "source": "llm"
+  },
+  "35e1ef85a1": {
+    "ner_primary_entity": "openai",
+    "ner_entities": [
+      "open",
+      "openai"
+    ],
+    "source": "llm"
+  },
+  "554d0eb78b": {
+    "ner_primary_entity": "openai",
+    "ner_entities": [
+      "open",
+      "openai"
+    ],
+    "source": "llm"
+  },
+  "85384a18e5": {
+    "ner_primary_entity": "open ai api",
+    "ner_entities": [
+      "open ai api",
+      "open"
+    ],
+    "source": "llm"
+  },
+  "8d23fe792f": {
+    "ner_primary_entity": "au",
+    "ner_entities": [
+      "au"
+    ],
+    "source": "wikineural"
+  },
+  "233dabe430": {
+    "ner_primary_entity": "dotenv",
+    "ner_entities": [
+      "dotenv",
+      "api"
+    ],
+    "source": "llm"
+  },
+  "86d99bbf21": {
+    "ner_primary_entity": "openai_api_key",
+    "ner_entities": [
+      "jupyter",
+      "openai_api_key"
+    ],
+    "source": "llm"
+  },
+  "fe8fed31e6": {
+    "ner_primary_entity": "groq",
+    "ner_entities": [
+      "groq",
+      "opensource"
+    ],
+    "source": "llm"
+  },
+  "ee43413718": {
+    "ner_primary_entity": "groq",
+    "ner_entities": [
+      "groq",
+      "opensource"
+    ],
+    "source": "llm"
+  },
+  "3fd5c51182": {
+    "ner_primary_entity": "openai api",
+    "ner_entities": [
+      "opensource",
+      "openai api"
+    ],
+    "source": "llm"
+  },
+  "6e1d8a7b29": {
+    "ner_primary_entity": "rate limit error",
+    "ner_entities": [
+      "rate limit error",
+      "openai"
+    ],
+    "source": "llm"
+  },
+  "83da208a64": {
+    "ner_primary_entity": "hw",
+    "ner_entities": [
+      "hw"
+    ],
+    "source": "wikineural"
+  },
+  "f3a92e7c81": {
+    "ner_primary_entity": "minsearch",
+    "ner_entities": [
+      "minsearch",
+      "syntaxerror"
+    ],
+    "source": "llm"
+  },
+  "cf93377279": {
+    "ner_primary_entity": "import docx",
+    "ner_entities": [
+      "import docx",
+      "mod"
+    ],
+    "source": "llm"
+  },
+  "4d8c1f5b3a": {
+    "ner_primary_entity": "gemini",
+    "ner_entities": [
+      "gemini"
+    ],
+    "source": "llm"
+  },
+  "bf0403d21b": {
+    "ner_primary_entity": "openai",
+    "ner_entities": [
+      "openai"
+    ],
+    "source": "llm"
+  },
+  "8b2f5e9d04": {
+    "ner_primary_entity": "api key",
+    "ner_entities": [
+      "api key",
+      "api"
+    ],
+    "source": "llm"
+  },
+  "1d0b969028": {
+    "ner_primary_entity": "ollama",
+    "ner_entities": [
+      "ollama"
+    ],
+    "source": "llm"
+  },
+  "c6fc2d4d11": {
+    "ner_primary_entity": "ollam rag",
+    "ner_entities": [
+      "connection",
+      "ollam rag"
+    ],
+    "source": "llm"
+  },
+  "0d74a3616f": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "7c4e1a3b58": {
+    "ner_primary_entity": "asyncio",
+    "ner_entities": [
+      "asyncio",
+      "runt"
+    ],
+    "source": "llm"
+  },
+  "5beafdd0c8": {
+    "ner_primary_entity": "float",
+    "ner_entities": [
+      "float"
+    ],
+    "source": "llm"
+  },
+  "2a8f6c4d91": {
+    "ner_primary_entity": "non",
+    "ner_entities": [
+      "non"
+    ],
+    "source": "wikineural"
+  },
+  "d09e8d4843": {
+    "ner_primary_entity": "mcp inspector",
+    "ner_entities": [
+      "mcp",
+      "mcp inspector"
+    ],
+    "source": "llm"
+  },
+  "9e7b3f0c25": {
+    "ner_primary_entity": "attributeerror",
+    "ner_entities": [
+      "attributeerror",
+      "openai"
+    ],
+    "source": "llm"
+  },
+  "42c7af7ed5": {
+    "ner_primary_entity": "mcp inspector",
+    "ner_entities": [
+      "run mcp inspector",
+      "mcp inspector"
+    ],
+    "source": "llm"
+  },
+  "9c2fd5451c": {
+    "ner_primary_entity": "mcp server",
+    "ner_entities": [
+      "mcp server",
+      "inspect mcp server"
+    ],
+    "source": "llm"
+  },
+  "f96fde1726": {
+    "ner_primary_entity": "runtimeerror",
+    "ner_entities": [
+      "runtimeerror"
+    ],
+    "source": "llm"
+  },
+  "b9c7c6bb34": {
+    "ner_primary_entity": "tools[0].function",
+    "ner_entities": [
+      "tools[0].function",
+      "azure"
+    ],
+    "source": "llm"
+  },
+  "69430a79a8": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "aa3f597424": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "92cd22cada": {
+    "ner_primary_entity": "dot",
+    "ner_entities": [
+      "dot",
+      ". dot"
+    ],
+    "source": "llm"
+  },
+  "5c4a8d2e60": {
+    "ner_primary_entity": "vector",
+    "ner_entities": [
+      "vector"
+    ],
+    "source": "wikineural"
+  },
+  "db78580409": {
+    "ner_primary_entity": "cosine similarity",
+    "ner_entities": [
+      "cosine similarity"
+    ],
+    "source": "llm"
+  },
+  "95feb4e75b": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "a3c7e1b4f9": {
+    "ner_primary_entity": "jsondecodeerror",
+    "ner_entities": [
+      "jsondecodeerror"
+    ],
+    "source": "llm"
+  },
+  "b8f2d6a30c": {
+    "ner_primary_entity": "jupyter",
+    "ner_entities": [
+      "jupyter"
+    ],
+    "source": "llm"
+  },
+  "c1e9f4b820": {
+    "ner_primary_entity": "rate limits",
+    "ner_entities": [
+      "rate limits",
+      "evaluation"
+    ],
+    "source": "llm"
+  },
+  "15e931476c": {
+    "ner_primary_entity": "torch",
+    "ner_entities": [
+      "windows",
+      "torch"
+    ],
+    "source": "llm"
+  },
+  "4b65d5542d": {
+    "ner_primary_entity": "psycopg2",
+    "ner_entities": [
+      "psycopg2",
+      "operation"
+    ],
+    "source": "llm"
+  },
+  "641aedbbf5": {
+    "ner_primary_entity": "pandas",
+    "ner_entities": [
+      "pandas",
+      "panda"
+    ],
+    "source": "llm"
+  },
+  "5039707c1a": {
+    "ner_primary_entity": "pandas",
+    "ner_entities": [
+      "pandas",
+      "pandas dataframe"
+    ],
+    "source": "llm"
+  },
+  "b4c8ac5a0c": {
+    "ner_primary_entity": "pandas",
+    "ner_entities": [
+      "pandas",
+      "pandas dataframe"
+    ],
+    "source": "llm"
+  },
+  "66ccbb7da0": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "2e729f1271": {
+    "ner_primary_entity": "st.session.submitted",
+    "ner_entities": [
+      "true",
+      "st.session.submitted"
+    ],
+    "source": "llm"
+  },
+  "e8df9f0d12": {
+    "ner_primary_entity": "streamlit",
+    "ner_entities": [
+      "streamlit"
+    ],
+    "source": "llm"
+  },
+  "0fab61eca2": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "0a7c21fee9": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "d5fc98925d": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "9ae63755b8": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "e892d44e42": {
+    "ner_primary_entity": "caps",
+    "ner_entities": [
+      "caps"
+    ],
+    "source": "wikineural"
+  },
+  "eae0fb50aa": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "a8a7fef016": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "e76a70cde3": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "d4f7c08ea1": {
+    "ner_primary_entity": "airflow",
+    "ner_entities": [
+      "airflow"
+    ],
+    "source": "llm"
+  },
+  "9b0e2d6a47": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "6f2a8b3d10": {
+    "ner_primary_entity": "pdf",
+    "ner_entities": [
+      "pdf"
+    ],
+    "source": "wikineural"
+  },
+  "e5d8a2c761": {
+    "ner_primary_entity": "project",
+    "ner_entities": [
+      "project"
+    ],
+    "source": "wikineural"
+  },
+  "d850a0e7ea": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "6bceeebf04": {
+    "ner_primary_entity": "dlt",
+    "ner_entities": [
+      "dlt"
+    ],
+    "source": "llm"
+  },
+  "0407213397": {
+    "ner_primary_entity": "notion_pages___homework",
+    "ner_entities": [
+      "notion_pages___homework",
+      "filenotfounderror"
+    ],
+    "source": "llm"
+  },
+  "e95bfafc0e": {
+    "ner_primary_entity": "db.create_table",
+    "ner_entities": [
+      "db.create_table",
+      "filenotfounderror"
+    ],
+    "source": "llm"
+  },
+  "e394e6f738": {
+    "ner_primary_entity": "db",
+    "ner_entities": [
+      "db"
+    ],
+    "source": "wikineural"
+  },
+  "cd19f122f3": {
+    "ner_primary_entity": "dlt",
+    "ner_entities": [
+      "clickhouse",
+      "dlt"
+    ],
+    "source": "llm"
+  },
+  "0dfba07ace": {
+    "ner_primary_entity": "401 client error",
+    "ner_entities": [
+      "401 client error",
+      "note"
+    ],
+    "source": "llm"
+  },
+  "4b30b918bc": {
+    "ner_primary_entity": "requests",
+    "ner_entities": [
+      "requests"
+    ],
+    "source": "llm"
+  },
+  "0e38656cfb": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "226a4baf2f": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "4d5aa45b03": {
+    "ner_primary_entity": "jupyter noteboook",
+    "ner_entities": [
+      "jupyter",
+      "jupyter noteboook"
+    ],
+    "source": "llm"
+  },
+  "c7e2b1ef88": {
+    "ner_primary_entity": "machine learning",
+    "ner_entities": [
+      "machine learning"
+    ],
+    "source": "llm"
+  },
+  "f9c9e0b9eb": {
+    "ner_primary_entity": "fastapi",
+    "ner_entities": [
+      "fast",
+      "fastapi"
+    ],
+    "source": "llm"
+  },
+  "8fd8cd336d": {
+    "ner_primary_entity": "how",
+    "ner_entities": [
+      "how"
+    ],
+    "source": "wikineural"
+  },
+  "9155c70324": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "9cf1c56e5b": {
+    "ner_primary_entity": "github",
+    "ner_entities": [
+      "github"
+    ],
+    "source": "wikineural"
+  },
+  "e0a95572a6": {
+    "ner_primary_entity": "slack",
+    "ner_entities": [
+      "slack"
+    ],
+    "source": "wikineural"
+  },
+  "1f17886bde": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "2b5ff70c77": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "34c01677b8": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "ef6fba8f4d": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "0d854c74af": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "79e181d005": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "30bf904a5b": {
+    "ner_primary_entity": "python",
+    "ner_entities": [
+      "python"
+    ],
+    "source": "wikineural"
+  },
+  "37813677f1": {
+    "ner_primary_entity": "math",
+    "ner_entities": [
+      "math"
+    ],
+    "source": "wikineural"
+  },
+  "90323db1ac": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "2453bf4760": {
+    "ner_primary_entity": "spark",
+    "ner_entities": [
+      "spark"
+    ],
+    "source": "llm"
+  },
+  "d57d1f7b18": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "742d3dbb55": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "36c30c8e2f": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "9b3aa73ec4": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "ef9594914c": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "62f5aa4d83": {
+    "ner_primary_entity": "ds",
+    "ner_entities": [
+      "ds"
+    ],
+    "source": "wikineural"
+  },
+  "f22955c57d": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "352573dfb0": {
+    "ner_primary_entity": "python",
+    "ner_entities": [
+      "python"
+    ],
+    "source": "wikineural"
+  },
+  "edf4b7b73e": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "a11770e750": {
+    "ner_primary_entity": "slack",
+    "ner_entities": [
+      "slack"
+    ],
+    "source": "llm"
+  },
+  "41aabbd7c5": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "c02a8e0913": {
+    "ner_primary_entity": "how",
+    "ner_entities": [
+      "how"
+    ],
+    "source": "wikineural"
+  },
+  "1a4a7bd286": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "3ff40b74f9": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "679b977c92": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "e053b881de": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "c0f1901d39": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "c090262408": {
+    "ner_primary_entity": "homework",
+    "ner_entities": [
+      "homework"
+    ],
+    "source": "wikineural"
+  },
+  "7c7ec892e4": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "9d57199de9": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "89fda350ee": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "bc2e78caf3": {
+    "ner_primary_entity": "slack",
+    "ner_entities": [
+      "slack"
+    ],
+    "source": "wikineural"
+  },
+  "3b78e09b80": {
+    "ner_primary_entity": "conda",
+    "ner_entities": [
+      "conda",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "0953e15dc6": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "9198d40c17": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "9ffc454a24": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "a84ccd240c": {
+    "ner_primary_entity": "ml",
+    "ner_entities": [
+      "ml"
+    ],
+    "source": "llm"
+  },
+  "a6f7295637": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "1e54b4b3ba": {
+    "ner_primary_entity": "ml",
+    "ner_entities": [
+      "ml"
+    ],
+    "source": "wikineural"
+  },
+  "91ff5cb6b6": {
+    "ner_primary_entity": "xgboost",
+    "ner_entities": [
+      "value",
+      "xgboost"
+    ],
+    "source": "llm"
+  },
+  "7cac4328ea": {
+    "ner_primary_entity": "ssl",
+    "ner_entities": [
+      "macos",
+      "ssl"
+    ],
+    "source": "llm"
+  },
+  "55ffccb945": {
+    "ner_primary_entity": "server error 500",
+    "ner_entities": [
+      "github",
+      "server error 500"
+    ],
+    "source": "llm"
+  },
+  "6aa17f1eab": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "17eeab7562": {
+    "ner_primary_entity": "pillow",
+    "ner_entities": [
+      "image",
+      "pillow"
+    ],
+    "source": "llm"
+  },
+  "b6d8547280": {
+    "ner_primary_entity": "train.py",
+    "ner_entities": [
+      "train.py"
+    ],
+    "source": "llm"
+  },
+  "79d7bebfbf": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "3e3a6ddca7": {
+    "ner_primary_entity": "aws elastic container service",
+    "ner_entities": [
+      "aws elastic container service"
+    ],
+    "source": "llm"
+  },
+  "3e621509d2": {
+    "ner_primary_entity": "pickle",
+    "ner_entities": [
+      "pickle"
+    ],
+    "source": "llm"
+  },
+  "091ce4f5ff": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "128c829dbd": {
+    "ner_primary_entity": "reproducibility",
+    "ner_entities": [
+      "reproducibility"
+    ],
+    "source": "wikineural"
+  },
+  "3f5dbbd3b5": {
+    "ner_primary_entity": "model",
+    "ner_entities": [
+      "model"
+    ],
+    "source": "wikineural"
+  },
+  "5a7cdb33f2": {
+    "ner_primary_entity": "google container registry",
+    "ner_entities": [
+      "google container registry"
+    ],
+    "source": "llm"
+  },
+  "424d68d110": {
+    "ner_primary_entity": "keras.preprocessing.image.image_data_generator.image_data_generator",
+    "ner_entities": [
+      "imagedatagenerator",
+      "keras.preprocessing.image.image_data_generator.image_data_generator"
+    ],
+    "source": "llm"
+  },
+  "9db0f62601": {
+    "ner_primary_entity": "unidentifiedimageerror",
+    "ner_entities": [
+      "unidentifiedimageerror"
+    ],
+    "source": "llm"
+  },
+  "0f19932601": {
+    "ner_primary_entity": "pipenv.exceptions.resolutionfailure",
+    "ner_entities": [
+      "resolutionfailure",
+      "pipenv.exceptions.resolutionfailure"
+    ],
+    "source": "llm"
+  },
+  "25ff7dd14c": {
+    "ner_primary_entity": "json.decoder.error",
+    "ner_entities": [
+      "json.decoder.error",
+      "json"
+    ],
+    "source": "llm"
+  },
+  "e855e1b1b8": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "7efbf0d444": {
+    "ner_primary_entity": "chart",
+    "ner_entities": [
+      "chart"
+    ],
+    "source": "wikineural"
+  },
+  "d2cdec8f35": {
+    "ner_primary_entity": "pandas",
+    "ner_entities": [
+      "pandas",
+      "dataframe"
+    ],
+    "source": "llm"
+  },
+  "0156cf3b62": {
+    "ner_primary_entity": "kitchenware classification competition",
+    "ner_entities": [
+      "kitchenware classification competition"
+    ],
+    "source": "wikineural"
+  },
+  "1a78bec215": {
+    "ner_primary_entity": "i",
+    "ner_entities": [
+      "i"
+    ],
+    "source": "wikineural"
+  },
+  "5851324f04": {
+    "ner_primary_entity": "github",
+    "ner_entities": [
+      "github"
+    ],
+    "source": "wikineural"
+  },
+  "840d7e7ee8": {
+    "ner_primary_entity": "jupyter",
+    "ner_entities": [
+      "jupyter",
+      "ide"
+    ],
+    "source": "llm"
+  },
+  "19e1e5c938": {
+    "ner_primary_entity": "wget",
+    "ner_entities": [
+      "wget",
+      "google colab"
+    ],
+    "source": "llm"
+  },
+  "24713fbf0d": {
+    "ner_primary_entity": "scikit-learn",
+    "ner_entities": [
+      "scikit",
+      "scikit-learn"
+    ],
+    "source": "llm"
+  },
+  "e5ceadc2f4": {
+    "ner_primary_entity": "pandas.categoricaldtype",
+    "ner_entities": [
+      "matplot",
+      "pandas.categoricaldtype"
+    ],
+    "source": "llm"
+  },
+  "2490b9e786": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "0b20afa7bb": {
+    "ner_primary_entity": "digital ocean",
+    "ner_entities": [
+      "digital ocean"
+    ],
+    "source": "wikineural"
+  },
+  "3cc0ce528e": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "7f18a34896": {
+    "ner_primary_entity": "new york yellow taxi",
+    "ner_entities": [
+      "new york yellow taxi"
+    ],
+    "source": "wikineural"
+  },
+  "165122776e": {
+    "ner_primary_entity": "r",
+    "ner_entities": [
+      "r"
+    ],
+    "source": "llm"
+  },
+  "29ef71cc59": {
+    "ner_primary_entity": "fast.ai",
+    "ner_entities": [
+      "fast.ai",
+      "huggingface"
+    ],
+    "source": "llm"
+  },
+  "c04524a66d": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker",
+      "dock"
+    ],
+    "source": "llm"
+  },
+  "d767e50478": {
+    "ner_primary_entity": "machine learning zoomcamp",
+    "ner_entities": [
+      "machine learning zoomcamp"
+    ],
+    "source": "wikineural"
+  },
+  "b75fa5280e": {
+    "ner_primary_entity": "!pip install",
+    "ner_entities": [
+      "!pip install",
+      "google colab"
+    ],
+    "source": "llm"
+  },
+  "e53752c5b7": {
+    "ner_primary_entity": "wsl",
+    "ner_entities": [
+      "wsl"
+    ],
+    "source": "llm"
+  },
+  "2909275a35": {
+    "ner_primary_entity": "numpy",
+    "ner_entities": [
+      "jupyter",
+      "numpy"
+    ],
+    "source": "llm"
+  },
+  "c5b67c62c1": {
+    "ner_primary_entity": "jupyter",
+    "ner_entities": [
+      "jupyter"
+    ],
+    "source": "llm"
+  },
+  "28991e4581": {
+    "ner_primary_entity": "429",
+    "ner_entities": [
+      "429",
+      "github"
+    ],
+    "source": "llm"
+  },
+  "d6dd8c7f90": {
+    "ner_primary_entity": "pandas",
+    "ner_entities": [
+      "pandas",
+      "parsererror"
+    ],
+    "source": "llm"
+  },
+  "4e51151a36": {
+    "ner_primary_entity": "python",
+    "ner_entities": [
+      "python"
+    ],
+    "source": "llm"
+  },
+  "ab183bd688": {
+    "ner_primary_entity": "my",
+    "ner_entities": [
+      "my"
+    ],
+    "source": "wikineural"
+  },
+  "f3a06ec752": {
+    "ner_primary_entity": "csv",
+    "ner_entities": [
+      "csv"
+    ],
+    "source": "llm"
+  },
+  "5ea323b01d": {
+    "ner_primary_entity": "wsl",
+    "ner_entities": [
+      "windows",
+      "wsl"
+    ],
+    "source": "llm"
+  },
+  "f3423f5014": {
+    "ner_primary_entity": "github",
+    "ner_entities": [
+      "github"
+    ],
+    "source": "llm"
+  },
+  "0be9e7cc3d": {
+    "ner_primary_entity": "singular matrix error",
+    "ner_entities": [
+      "singular matrix error",
+      "singular"
+    ],
+    "source": "llm"
+  },
+  "5e953f0e8e": {
+    "ner_primary_entity": "file",
+    "ner_entities": [
+      "file"
+    ],
+    "source": "wikineural"
+  },
+  "cc0048eefb": {
+    "ner_primary_entity": "github",
+    "ner_entities": [
+      "github"
+    ],
+    "source": "llm"
+  },
+  "261ca9cbab": {
+    "ner_primary_entity": "git",
+    "ner_entities": [
+      "git : fatal : au",
+      "git"
+    ],
+    "source": "llm"
+  },
+  "ba250275a3": {
+    "ner_primary_entity": "wget",
+    "ner_entities": [
+      "wget",
+      "kaggle"
+    ],
+    "source": "llm"
+  },
+  "bad28cd4e0": {
+    "ner_primary_entity": "vs code",
+    "ner_entities": [
+      "vs code"
+    ],
+    "source": "llm"
+  },
+  "a8563f2c5c": {
+    "ner_primary_entity": "ssh",
+    "ner_entities": [
+      "ssh",
+      "ss"
+    ],
+    "source": "llm"
+  },
+  "e74369cf00": {
+    "ner_primary_entity": "pandas",
+    "ner_entities": [
+      "pandas",
+      "dataframe"
+    ],
+    "source": "llm"
+  },
+  "fa28f60a1b": {
+    "ner_primary_entity": "np",
+    "ner_entities": [
+      "np",
+      "nameerror"
+    ],
+    "source": "llm"
+  },
+  "eecebb4f2f": {
+    "ner_primary_entity": "pandas",
+    "ner_entities": [
+      "pandas",
+      "dt"
+    ],
+    "source": "llm"
+  },
+  "cda76de4e9": {
+    "ner_primary_entity": "pandas",
+    "ner_entities": [
+      "pandas",
+      "panda"
+    ],
+    "source": "llm"
+  },
+  "a5caeac2b7": {
+    "ner_primary_entity": "jinja2",
+    "ner_entities": [
+      "jupyter",
+      "jinja2"
+    ],
+    "source": "llm"
+  },
+  "16af61862a": {
+    "ner_primary_entity": "wget",
+    "ner_entities": [
+      "wget",
+      "macos ventura m1"
+    ],
+    "source": "llm"
+  },
+  "ea4dbd6c83": {
+    "ner_primary_entity": "wget",
+    "ner_entities": [
+      "wget",
+      "mac"
+    ],
+    "source": "llm"
+  },
+  "59fc88dea8": {
+    "ner_primary_entity": "round",
+    "ner_entities": [
+      "round"
+    ],
+    "source": "llm"
+  },
+  "5ff9126a13": {
+    "ner_primary_entity": "jupyter",
+    "ner_entities": [
+      "jupyter"
+    ],
+    "source": "llm"
+  },
+  "68af9cffed": {
+    "ner_primary_entity": "module 1",
+    "ner_entities": [
+      "module 1"
+    ],
+    "source": "wikineural"
+  },
+  "5705d1ff6e": {
+    "ner_primary_entity": "python version 3.11",
+    "ner_entities": [
+      "python version 3.11",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "894584db1c": {
+    "ner_primary_entity": "linalgerror",
+    "ner_entities": [
+      "linalgerror"
+    ],
+    "source": "llm"
+  },
+  "b7e73fcee7": {
+    "ner_primary_entity": "floating point precision",
+    "ner_entities": [
+      "floating point precision"
+    ],
+    "source": "wikineural"
+  },
+  "b72a4be56d": {
+    "ner_primary_entity": "value",
+    "ner_entities": [
+      "value"
+    ],
+    "source": "wikineural"
+  },
+  "4115da8cbc": {
+    "ner_primary_entity": "pandas.dataframe.fillna",
+    "ner_entities": [
+      "q5",
+      "pandas.dataframe.fillna"
+    ],
+    "source": "llm"
+  },
+  "22e80c8b22": {
+    "ner_primary_entity": "pandas.series",
+    "ner_entities": [
+      "pandas.series",
+      "series"
+    ],
+    "source": "llm"
+  },
+  "061c36bce4": {
+    "ner_primary_entity": "mathematical",
+    "ner_entities": [
+      "mathematical"
+    ],
+    "source": "wikineural"
+  },
+  "6a9d87d7d1": {
+    "ner_primary_entity": "home",
+    "ner_entities": [
+      "home"
+    ],
+    "source": "wikineural"
+  },
+  "3ef50b0d88": {
+    "ner_primary_entity": "homework q7",
+    "ner_entities": [
+      "homework q7"
+    ],
+    "source": "wikineural"
+  },
+  "y97mg42O7d": {
+    "ner_primary_entity": "weights",
+    "ner_entities": [
+      "weights",
+      "homework"
+    ],
+    "source": "llm"
+  },
+  "0a166909a0": {
+    "ner_primary_entity": "minikube",
+    "ner_entities": [
+      "minikube",
+      "kubernetes"
+    ],
+    "source": "llm"
+  },
+  "ff4074063c": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "4693802714": {
+    "ner_primary_entity": "allocator",
+    "ner_entities": [
+      "allocator"
+    ],
+    "source": "llm"
+  },
+  "c25b3cc5fe": {
+    "ner_primary_entity": "protobuf",
+    "ner_entities": [
+      "protobuf"
+    ],
+    "source": "llm"
+  },
+  "12d79208b3": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "cannot connect to docker daemon",
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "b2e624ea5a": {
+    "ner_primary_entity": "hpa",
+    "ner_entities": [
+      "hpa"
+    ],
+    "source": "llm"
+  },
+  "f8533d5ffd": {
+    "ner_primary_entity": "hpa",
+    "ner_entities": [
+      "hpa"
+    ],
+    "source": "llm"
+  },
+  "bbced12feb": {
+    "ner_primary_entity": "kubernetes",
+    "ner_entities": [
+      "kubernetes",
+      "pod"
+    ],
+    "source": "llm"
+  },
+  "bcedbb12fe": {
+    "ner_primary_entity": "oserror",
+    "ner_entities": [
+      "oserror",
+      "windows"
+    ],
+    "source": "llm"
+  },
+  "47408c61b9": {
+    "ner_primary_entity": "typeerror",
+    "ner_entities": [
+      "typeerror"
+    ],
+    "source": "wikineural"
+  },
+  "02bb92c002": {
+    "ner_primary_entity": "windows",
+    "ner_entities": [
+      "windows"
+    ],
+    "source": "wikineural"
+  },
+  "5b78a9f80a": {
+    "ner_primary_entity": "choco",
+    "ner_entities": [
+      "choco"
+    ],
+    "source": "llm"
+  },
+  "92f8926c92": {
+    "ner_primary_entity": "kind",
+    "ner_entities": [
+      "install kind",
+      "kind"
+    ],
+    "source": "llm"
+  },
+  "196b1a962a": {
+    "ner_primary_entity": "localhost:8080",
+    "ner_entities": [
+      "localhost:8080",
+      "8080"
+    ],
+    "source": "llm"
+  },
+  "34d0aaa13e": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "ed397a51ef": {
+    "ner_primary_entity": "hw10",
+    "ner_entities": [
+      "hw10"
+    ],
+    "source": "wikineural"
+  },
+  "1c65bb4c0c": {
+    "ner_primary_entity": "mili",
+    "ner_entities": [
+      "mili",
+      "kubernetes"
+    ],
+    "source": "llm"
+  },
+  "fd3a06c6ee": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "23f5be95ef": {
+    "ner_primary_entity": "flask",
+    "ner_entities": [
+      "flask"
+    ],
+    "source": "llm"
+  },
+  "4076e3f3a6": {
+    "ner_primary_entity": "kind",
+    "ner_entities": [
+      "windows",
+      "kind"
+    ],
+    "source": "llm"
+  },
+  "60b2f26382": {
+    "ner_primary_entity": "linux",
+    "ner_entities": [
+      "linux"
+    ],
+    "source": "wikineural"
+  },
+  "e5c67e3439": {
+    "ner_primary_entity": "kubernetes-dashboard",
+    "ner_entities": [
+      "kubernetes-dashboard",
+      "kubernetes"
+    ],
+    "source": "llm"
+  },
+  "afc2e6e77d": {
+    "ner_primary_entity": "eksctl",
+    "ner_entities": [
+      "eksctl",
+      "aws cli"
+    ],
+    "source": "llm"
+  },
+  "b062fc29e5": {
+    "ner_primary_entity": "flask",
+    "ner_entities": [
+      "type",
+      "flask"
+    ],
+    "source": "llm"
+  },
+  "b612fa07ec": {
+    "ner_primary_entity": "aws ecr get-login",
+    "ner_entities": [
+      "aws ecr get-login"
+    ],
+    "source": "llm"
+  },
+  "f067a2c8e6": {
+    "ner_primary_entity": "aws ecr get-login",
+    "ner_entities": [
+      "aws ecr get-login"
+    ],
+    "source": "llm"
+  },
+  "1322100525": {
+    "ner_primary_entity": "tensorflow",
+    "ner_entities": [
+      "tensorflow",
+      "apple m1 mac"
+    ],
+    "source": "llm"
+  },
+  "930f795453": {
+    "ner_primary_entity": "tensorflow",
+    "ner_entities": [
+      "mac m2 apple silicon",
+      "tensorflow"
+    ],
+    "source": "llm"
+  },
+  "82bef32bca": {
+    "ner_primary_entity": "hpa",
+    "ner_entities": [
+      "hpa",
+      "hp"
+    ],
+    "source": "llm"
+  },
+  "c9f27cb21a": {
+    "ner_primary_entity": "autoscaling",
+    "ner_entities": [
+      "autoscaling",
+      "hw10 autoscaling"
+    ],
+    "source": "llm"
+  },
+  "3a0a22fda9": {
+    "ner_primary_entity": "kubectl",
+    "ner_entities": [
+      "kubectl"
+    ],
+    "source": "llm"
+  },
+  "57c116dde2": {
+    "ner_primary_entity": "kind",
+    "ner_entities": [
+      "kind"
+    ],
+    "source": "llm"
+  },
+  "74e0f64827": {
+    "ner_primary_entity": "hpa",
+    "ner_entities": [
+      "hpa",
+      "hp"
+    ],
+    "source": "llm"
+  },
+  "c1095e75a3": {
+    "ner_primary_entity": "tensorflow/serving",
+    "ner_entities": [
+      "tensorflow/serving",
+      "apple silicon"
+    ],
+    "source": "llm"
+  },
+  "59afc541fd": {
+    "ner_primary_entity": "pipenv",
+    "ner_entities": [
+      "pipenv"
+    ],
+    "source": "llm"
+  },
+  "a654b0e217": {
+    "ner_primary_entity": "git",
+    "ner_entities": [
+      "csv",
+      "git"
+    ],
+    "source": "llm"
+  },
+  "ad33c1d6f5": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "0a7e9c723a": {
+    "ner_primary_entity": "singular matrix",
+    "ner_entities": [
+      "lin",
+      "singular matrix"
+    ],
+    "source": "llm"
+  },
+  "ba636cdb18": {
+    "ner_primary_entity": "numpy.nan",
+    "ner_entities": [
+      "na",
+      "numpy.nan"
+    ],
+    "source": "llm"
+  },
+  "17d0c79f61": {
+    "ner_primary_entity": "target",
+    "ner_entities": [
+      "target"
+    ],
+    "source": "wikineural"
+  },
+  "0a4f9065b1": {
+    "ner_primary_entity": "kaggle notebooks",
+    "ner_entities": [
+      "kaggle notebooks"
+    ],
+    "source": "llm"
+  },
+  "ab0c17d01c": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "9fbb36bb16": {
+    "ner_primary_entity": "requests",
+    "ner_entities": [
+      "requests"
+    ],
+    "source": "llm"
+  },
+  "a0b5f19b14": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "aac6525676": {
+    "ner_primary_entity": "scikit-learn",
+    "ner_entities": [
+      "scikit - learn",
+      "scikit-learn"
+    ],
+    "source": "llm"
+  },
+  "5a2fac8521": {
+    "ner_primary_entity": "linearregression",
+    "ner_entities": [
+      "linearregression",
+      "line"
+    ],
+    "source": "llm"
+  },
+  "6cf4287216": {
+    "ner_primary_entity": "scikit-learn",
+    "ner_entities": [
+      "scikit",
+      "scikit-learn"
+    ],
+    "source": "llm"
+  },
+  "631e3d040c": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "0f5754c053": {
+    "ner_primary_entity": "random seed",
+    "ner_entities": [
+      "random seed"
+    ],
+    "source": "llm"
+  },
+  "6c5a79afd4": {
+    "ner_primary_entity": "pandas",
+    "ner_entities": [
+      "pandas"
+    ],
+    "source": "llm"
+  },
+  "3547bb9442": {
+    "ner_primary_entity": "numpy",
+    "ner_entities": [
+      "numpy",
+      "numpy \u2019 s generator feature"
+    ],
+    "source": "llm"
+  },
+  "9e300560ca": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "1fda7c57b0": {
+    "ner_primary_entity": "valueerror",
+    "ner_entities": [
+      "value",
+      "valueerror"
+    ],
+    "source": "llm"
+  },
+  "c6c716b9e7": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "c19b485c07": {
+    "ner_primary_entity": "standard deviation",
+    "ner_entities": [
+      "standard deviation"
+    ],
+    "source": "llm"
+  },
+  "32f4f59df6": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "b1712cc9d5": {
+    "ner_primary_entity": "shortcut",
+    "ner_entities": [
+      "shortcut"
+    ],
+    "source": "wikineural"
+  },
+  "e41007991b": {
+    "ner_primary_entity": "datafram",
+    "ner_entities": [
+      "datafram"
+    ],
+    "source": "wikineural"
+  },
+  "8d98b7c098": {
+    "ner_primary_entity": "pandas",
+    "ner_entities": [
+      "pandas",
+      "panda"
+    ],
+    "source": "llm"
+  },
+  "5020067c2b": {
+    "ner_primary_entity": "numpy",
+    "ner_entities": [
+      "numpy"
+    ],
+    "source": "llm"
+  },
+  "d781b23627": {
+    "ner_primary_entity": "pandas",
+    "ner_entities": [
+      "pandas",
+      "panda"
+    ],
+    "source": "llm"
+  },
+  "19a42e2005": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "c30519737d": {
+    "ner_primary_entity": "rmse",
+    "ner_entities": [
+      "rms",
+      "rmse"
+    ],
+    "source": "llm"
+  },
+  "077e2c96ad": {
+    "ner_primary_entity": "deep",
+    "ner_entities": [
+      "deep"
+    ],
+    "source": "wikineural"
+  },
+  "1c1a0016fc": {
+    "ner_primary_entity": "useful resource for missing data treatment",
+    "ner_entities": [
+      "useful resource for missing data treatment"
+    ],
+    "source": "wikineural"
+  },
+  "ae58046503": {
+    "ner_primary_entity": "youtube",
+    "ner_entities": [
+      "youtube"
+    ],
+    "source": "wikineural"
+  },
+  "a3eeeaa3ac": {
+    "ner_primary_entity": "rmse",
+    "ner_entities": [
+      "rms",
+      "rmse"
+    ],
+    "source": "llm"
+  },
+  "3ff258b230": {
+    "ner_primary_entity": "ridge",
+    "ner_entities": [
+      "ridge",
+      "scikit - learn ridge"
+    ],
+    "source": "llm"
+  },
+  "8af59cb98f": {
+    "ner_primary_entity": "homework",
+    "ner_entities": [
+      "homework"
+    ],
+    "source": "wikineural"
+  },
+  "af50bd4d07": {
+    "ner_primary_entity": "mean",
+    "ner_entities": [
+      "mean",
+      "q3"
+    ],
+    "source": "llm"
+  },
+  "9346394db7": {
+    "ner_primary_entity": "week",
+    "ner_entities": [
+      "week"
+    ],
+    "source": "wikineural"
+  },
+  "bdcc3ae17b": {
+    "ner_primary_entity": "rmse",
+    "ner_entities": [
+      "rmse"
+    ],
+    "source": "llm"
+  },
+  "80e735cca8": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "56018d6f07": {
+    "ner_primary_entity": "nissan",
+    "ner_entities": [
+      "nissan"
+    ],
+    "source": "wikineural"
+  },
+  "b8b91119fe": {
+    "ner_primary_entity": "mutual information score",
+    "ner_entities": [
+      "homework",
+      "mutual information score"
+    ],
+    "source": "llm"
+  },
+  "abfdc60e4a": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "06248fbd4b": {
+    "ner_primary_entity": "pandas",
+    "ner_entities": [
+      "pandas",
+      "datafram"
+    ],
+    "source": "llm"
+  },
+  "45482efa5e": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "0c6414cf51": {
+    "ner_primary_entity": "eda",
+    "ner_entities": [
+      "eda"
+    ],
+    "source": "wikineural"
+  },
+  "356445714b": {
+    "ner_primary_entity": "dictvectorizer",
+    "ner_entities": [
+      "dictvectorizer"
+    ],
+    "source": "llm"
+  },
+  "c928a85179": {
+    "ner_primary_entity": "get_feature_names",
+    "ner_entities": [
+      "futurewarning",
+      "get_feature_names"
+    ],
+    "source": "llm"
+  },
+  "b27e47d7ca": {
+    "ner_primary_entity": "logistic regression",
+    "ner_entities": [
+      "jupyter",
+      "logistic regression"
+    ],
+    "source": "llm"
+  },
+  "ef52b72189": {
+    "ner_primary_entity": "ridge",
+    "ner_entities": [
+      "ridge",
+      "understanding ridge"
+    ],
+    "source": "llm"
+  },
+  "947bf26d84": {
+    "ner_primary_entity": "pandas.get_dummies",
+    "ner_entities": [
+      "dictvectorizer",
+      "pandas.get_dummies"
+    ],
+    "source": "llm"
+  },
+  "feed303fc9": {
+    "ner_primary_entity": "convergencewarning",
+    "ner_entities": [
+      "convergencewarning"
+    ],
+    "source": "llm"
+  },
+  "0d7b521e27": {
+    "ner_primary_entity": "sparse matrix",
+    "ner_entities": [
+      "sparse matrix"
+    ],
+    "source": "llm"
+  },
+  "9610a0de1d": {
+    "ner_primary_entity": "jupyter notebooks",
+    "ner_entities": [
+      "jupyter notebooks"
+    ],
+    "source": "llm"
+  },
+  "f969361ef4": {
+    "ner_primary_entity": "mutual information",
+    "ner_entities": [
+      "hw3 q3",
+      "mutual information"
+    ],
+    "source": "llm"
+  },
+  "e35e6adc78": {
+    "ner_primary_entity": "onehotencoder",
+    "ner_entities": [
+      "onehotencoder"
+    ],
+    "source": "llm"
+  },
+  "146d28247c": {
+    "ner_primary_entity": "pandas.get_dummies",
+    "ner_entities": [
+      "pandas.get_dummies",
+      "onehotencoder"
+    ],
+    "source": "llm"
+  },
+  "548dcc8a3c": {
+    "ner_primary_entity": "onehotencoder",
+    "ner_entities": [
+      "type",
+      "onehotencoder"
+    ],
+    "source": "llm"
+  },
+  "c85cd9f595": {
+    "ner_primary_entity": "cor",
+    "ner_entities": [
+      "cor"
+    ],
+    "source": "wikineural"
+  },
+  "c4be895874": {
+    "ner_primary_entity": "non",
+    "ner_entities": [
+      "non"
+    ],
+    "source": "wikineural"
+  },
+  "862909f457": {
+    "ner_primary_entity": "featurehasher",
+    "ner_entities": [
+      "featurehasher"
+    ],
+    "source": "llm"
+  },
+  "03e27c386a": {
+    "ner_primary_entity": "dictvectorizer",
+    "ner_entities": [
+      "dictvectorizer",
+      "dictvertorizer"
+    ],
+    "source": "llm"
+  },
+  "6be83091d9": {
+    "ner_primary_entity": "encoding techniques",
+    "ner_entities": [
+      "encoding techniques"
+    ],
+    "source": "wikineural"
+  },
+  "5686aea16e": {
+    "ner_primary_entity": "accuracy_score",
+    "ner_entities": [
+      "jupyter",
+      "accuracy_score"
+    ],
+    "source": "llm"
+  },
+  "28f7297895": {
+    "ner_primary_entity": "scikit-learn",
+    "ner_entities": [
+      "scikit-learn"
+    ],
+    "source": "llm"
+  },
+  "1fe12ec81c": {
+    "ner_primary_entity": "keyerror",
+    "ner_entities": [
+      "keyerro",
+      "keyerror"
+    ],
+    "source": "llm"
+  },
+  "92d84c1a65": {
+    "ner_primary_entity": "dictvectorizer",
+    "ner_entities": [
+      "dictvectorizer"
+    ],
+    "source": "llm"
+  },
+  "babaec2a7d": {
+    "ner_primary_entity": "typeerror",
+    "ner_entities": [
+      "typeerror"
+    ],
+    "source": "wikineural"
+  },
+  "e8177805be": {
+    "ner_primary_entity": "pandas",
+    "ner_entities": [
+      "pandas",
+      "at"
+    ],
+    "source": "llm"
+  },
+  "61ea97f62e": {
+    "ner_primary_entity": "pandas.read_csv",
+    "ner_entities": [
+      "panda",
+      "pandas.read_csv"
+    ],
+    "source": "llm"
+  },
+  "6c86147699": {
+    "ner_primary_entity": "lbfgs",
+    "ner_entities": [
+      "lbfgs",
+      "logisticregression"
+    ],
+    "source": "llm"
+  },
+  "71f360d8eb": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "16711f1a2f": {
+    "ner_primary_entity": "feature",
+    "ner_entities": [
+      "feature"
+    ],
+    "source": "wikineural"
+  },
+  "cbd581f803": {
+    "ner_primary_entity": "q6",
+    "ner_entities": [
+      "q6"
+    ],
+    "source": "llm"
+  },
+  "4b0519f085": {
+    "ner_primary_entity": "q5",
+    "ner_entities": [
+      "q5"
+    ],
+    "source": "wikineural"
+  },
+  "40abba5fd9": {
+    "ner_primary_entity": "random seed",
+    "ner_entities": [
+      "homework",
+      "random seed"
+    ],
+    "source": "llm"
+  },
+  "b5c44e4f07": {
+    "ner_primary_entity": "c",
+    "ner_entities": [
+      "c"
+    ],
+    "source": "wikineural"
+  },
+  "1a96e5837b": {
+    "ner_primary_entity": "homework",
+    "ner_entities": [
+      "homework"
+    ],
+    "source": "wikineural"
+  },
+  "a7e230bfb4": {
+    "ner_primary_entity": "scikit-learn",
+    "ner_entities": [
+      "scikit-learn"
+    ],
+    "source": "llm"
+  },
+  "ce78527441": {
+    "ner_primary_entity": "q4",
+    "ner_entities": [
+      "q4"
+    ],
+    "source": "wikineural"
+  },
+  "56ebfe8111": {
+    "ner_primary_entity": "csv",
+    "ner_entities": [
+      "csv",
+      "homework"
+    ],
+    "source": "llm"
+  },
+  "afd915ae5b": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "636cd61ba8": {
+    "ner_primary_entity": "random_state",
+    "ner_entities": [
+      "random_state"
+    ],
+    "source": "llm"
+  },
+  "234fd096e4": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "fd83a2e6ad": {
+    "ner_primary_entity": "valueerror",
+    "ner_entities": [
+      "valueerror"
+    ],
+    "source": "llm"
+  },
+  "ebcd9b6783": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "573c63b800": {
+    "ner_primary_entity": "auc",
+    "ner_entities": [
+      "au",
+      "auc"
+    ],
+    "source": "llm"
+  },
+  "c213e31ea0": {
+    "ner_primary_entity": "auc",
+    "ner_entities": [
+      "auc"
+    ],
+    "source": "llm"
+  },
+  "24d2042733": {
+    "ner_primary_entity": "kfold",
+    "ner_entities": [
+      "kfold"
+    ],
+    "source": "llm"
+  },
+  "2488656439": {
+    "ner_primary_entity": "ovr",
+    "ner_entities": [
+      "ovr",
+      "valueerror"
+    ],
+    "source": "llm"
+  },
+  "6a8dccc107": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "139ae54c4f": {
+    "ner_primary_entity": "predict_proba",
+    "ner_entities": [
+      "predict_proba"
+    ],
+    "source": "llm"
+  },
+  "921879ea38": {
+    "ner_primary_entity": "roc",
+    "ner_entities": [
+      "roc"
+    ],
+    "source": "llm"
+  },
+  "80176f658d": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "3c04f56b5d": {
+    "ner_primary_entity": "roc curve",
+    "ner_entities": [
+      "roc curve"
+    ],
+    "source": "llm"
+  },
+  "fed6cad07b": {
+    "ner_primary_entity": "numpy",
+    "ner_entities": [
+      "numpy"
+    ],
+    "source": "llm"
+  },
+  "02cd286eb8": {
+    "ner_primary_entity": "scikit-learn",
+    "ner_entities": [
+      "recall",
+      "scikit-learn"
+    ],
+    "source": "llm"
+  },
+  "4c3e29589e": {
+    "ner_primary_entity": "cross validation",
+    "ner_entities": [
+      "cross validation"
+    ],
+    "source": "llm"
+  },
+  "861531763b": {
+    "ner_primary_entity": "scikit-learn",
+    "ner_entities": [
+      "model",
+      "scikit-learn"
+    ],
+    "source": "llm"
+  },
+  "70eceb1a01": {
+    "ner_primary_entity": "precision",
+    "ner_entities": [
+      "precision"
+    ],
+    "source": "wikineural"
+  },
+  "18e9b4b2a2": {
+    "ner_primary_entity": "precision",
+    "ner_entities": [
+      "precision"
+    ],
+    "source": "wikineural"
+  },
+  "bdc4c489fd": {
+    "ner_primary_entity": "f",
+    "ner_entities": [
+      "f"
+    ],
+    "source": "wikineural"
+  },
+  "ce5f41e600": {
+    "ner_primary_entity": "matplotlib",
+    "ner_entities": [
+      "matplotlib",
+      "precision - recall curve"
+    ],
+    "source": "llm"
+  },
+  "f29b4790fc": {
+    "ner_primary_entity": "stratified k-fold",
+    "ner_entities": [
+      "stratified k-fold",
+      "stratified"
+    ],
+    "source": "llm"
+  },
+  "f6aa440092": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "13102dfe14": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "79b2760cc5": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "385807829b": {
+    "ner_primary_entity": "undefinedmetricwarning",
+    "ner_entities": [
+      "undefinedmetricwarning"
+    ],
+    "source": "llm"
+  },
+  "866f5d58d2": {
+    "ner_primary_entity": "auc",
+    "ner_entities": [
+      "auc"
+    ],
+    "source": "wikineural"
+  },
+  "6739977244": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "a64b95ea2c": {
+    "ner_primary_entity": "q4",
+    "ner_entities": [
+      "q4"
+    ],
+    "source": "wikineural"
+  },
+  "186ed3fc35": {
+    "ner_primary_entity": "homework",
+    "ner_entities": [
+      "homework"
+    ],
+    "source": "wikineural"
+  },
+  "7c90af9692": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "8351543816": {
+    "ner_primary_entity": "homework",
+    "ner_entities": [
+      "homework"
+    ],
+    "source": "wikineural"
+  },
+  "f7f0800d02": {
+    "ner_primary_entity": "auc",
+    "ner_entities": [
+      "au",
+      "auc"
+    ],
+    "source": "llm"
+  },
+  "1b89887a15": {
+    "ner_primary_entity": "q1",
+    "ner_entities": [
+      "q1"
+    ],
+    "source": "wikineural"
+  },
+  "a638d65685": {
+    "ner_primary_entity": "wsl",
+    "ner_entities": [
+      "wsl"
+    ],
+    "source": "llm"
+  },
+  "85fa1b961a": {
+    "ner_primary_entity": "kaggle api",
+    "ner_entities": [
+      "jupyter nb",
+      "kaggle api"
+    ],
+    "source": "llm"
+  },
+  "faa864b7f6": {
+    "ner_primary_entity": "ubuntu",
+    "ner_entities": [
+      "ubuntu"
+    ],
+    "source": "wikineural"
+  },
+  "dce5e4842c": {
+    "ner_primary_entity": "python",
+    "ner_entities": [
+      "python"
+    ],
+    "source": "llm"
+  },
+  "accd08bead": {
+    "ner_primary_entity": "wsl",
+    "ner_entities": [
+      "w",
+      "wsl"
+    ],
+    "source": "llm"
+  },
+  "9df18c830e": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "7064ef8f01": {
+    "ner_primary_entity": "import",
+    "ner_entities": [
+      "import",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "371f4a6519": {
+    "ner_primary_entity": "docker daemon",
+    "ner_entities": [
+      "docker daemon",
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "a43ed572fa": {
+    "ner_primary_entity": "pipenv",
+    "ner_entities": [
+      "pipenv",
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "b2781bc5f8": {
+    "ner_primary_entity": "pipenv",
+    "ner_entities": [
+      "pipenv"
+    ],
+    "source": "llm"
+  },
+  "af2a35cdf2": {
+    "ner_primary_entity": "pipfile.lock",
+    "ner_entities": [
+      "pipfile.lock",
+      "pipfile"
+    ],
+    "source": "llm"
+  },
+  "ec6919a46b": {
+    "ner_primary_entity": "flask",
+    "ner_entities": [
+      "no",
+      "flask"
+    ],
+    "source": "llm"
+  },
+  "2dc4089953": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "9802179265": {
+    "ner_primary_entity": "dockerfile",
+    "ner_entities": [
+      "dockerfile"
+    ],
+    "source": "llm"
+  },
+  "951b79cf6b": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "macos",
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "acdd201a06": {
+    "ner_primary_entity": "docker images",
+    "ner_entities": [
+      "docker images",
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "768fa21d6b": {
+    "ner_primary_entity": "pipenv",
+    "ner_entities": [
+      "pipenv"
+    ],
+    "source": "llm"
+  },
+  "2acc8ec64a": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "10316840ce": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "26a0558e81": {
+    "ner_primary_entity": "pipfile",
+    "ner_entities": [
+      "pipfile"
+    ],
+    "source": "llm"
+  },
+  "3e4e288e93": {
+    "ner_primary_entity": "pipenv",
+    "ner_entities": [
+      "pipenv"
+    ],
+    "source": "llm"
+  },
+  "4b501f0a25": {
+    "ner_primary_entity": "mutablemapping",
+    "ner_entities": [
+      "mutablemapping",
+      "at"
+    ],
+    "source": "llm"
+  },
+  "f6d64d22b9": {
+    "ner_primary_entity": "virtualenv",
+    "ner_entities": [
+      "value",
+      "virtualenv"
+    ],
+    "source": "llm"
+  },
+  "f2f7180201": {
+    "ner_primary_entity": "remote disconnected",
+    "ner_entities": [
+      "remote disconnected",
+      "connection"
+    ],
+    "source": "llm"
+  },
+  "ced071dd97": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "pipfile",
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "efae76d03c": {
+    "ner_primary_entity": "pipfile",
+    "ner_entities": [
+      "pipfile",
+      "dock"
+    ],
+    "source": "llm"
+  },
+  "ed90e0f589": {
+    "ner_primary_entity": "port is already allocated",
+    "ner_entities": [
+      "port is already allocated",
+      "bind"
+    ],
+    "source": "llm"
+  },
+  "84301e35dd": {
+    "ner_primary_entity": "connectionerror",
+    "ner_entities": [
+      "connectionerror"
+    ],
+    "source": "llm"
+  },
+  "f884543e2c": {
+    "ner_primary_entity": "md5sum",
+    "ner_entities": [
+      "md5sum"
+    ],
+    "source": "llm"
+  },
+  "de0726d5ea": {
+    "ner_primary_entity": "web",
+    "ner_entities": [
+      "web"
+    ],
+    "source": "wikineural"
+  },
+  "e8e58afd7b": {
+    "ner_primary_entity": "pickle",
+    "ner_entities": [
+      "pickle"
+    ],
+    "source": "llm"
+  },
+  "8a8f00802a": {
+    "ner_primary_entity": "pipenv",
+    "ner_entities": [
+      "pipenv",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "554fac782d": {
+    "ner_primary_entity": "pipfile.lock",
+    "ner_entities": [
+      "pipfile.lock"
+    ],
+    "source": "llm"
+  },
+  "03331f413e": {
+    "ner_primary_entity": "aws",
+    "ner_entities": [
+      "aws",
+      "a"
+    ],
+    "source": "llm"
+  },
+  "f580e98fdc": {
+    "ner_primary_entity": "waitress",
+    "ner_entities": [
+      "windows",
+      "waitress"
+    ],
+    "source": "llm"
+  },
+  "8b15cafd96": {
+    "ner_primary_entity": "lang",
+    "ner_entities": [
+      "lang"
+    ],
+    "source": "llm"
+  },
+  "0e2b70a390": {
+    "ner_primary_entity": "terminal used",
+    "ner_entities": [
+      "terminal used"
+    ],
+    "source": "wikineural"
+  },
+  "748ffe7992": {
+    "ner_primary_entity": "waitress",
+    "ner_entities": [
+      "malformed",
+      "waitress"
+    ],
+    "source": "llm"
+  },
+  "cde1c48afc": {
+    "ner_primary_entity": "curl",
+    "ner_entities": [
+      "http",
+      "curl"
+    ],
+    "source": "llm"
+  },
+  "5ba1e7ba64": {
+    "ner_primary_entity": "eb local",
+    "ner_entities": [
+      "notsupportederro",
+      "eb local"
+    ],
+    "source": "llm"
+  },
+  "4d94846cbe": {
+    "ner_primary_entity": "requests",
+    "ner_entities": [
+      "requests",
+      "requests error"
+    ],
+    "source": "llm"
+  },
+  "cee7450404": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "6d91bd8f56": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "f5b6e3f04b": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "993a359b90": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "9e5f381432": {
+    "ner_primary_entity": "aws elastic beanstalk",
+    "ner_entities": [
+      "aws elastic beanstalk"
+    ],
+    "source": "llm"
+  },
+  "01514d66d5": {
+    "ner_primary_entity": "dockerfile",
+    "ner_entities": [
+      "dockerfile",
+      "aws elasticbean"
+    ],
+    "source": "llm"
+  },
+  "d66d501514": {
+    "ner_primary_entity": "git",
+    "ner_entities": [
+      "command",
+      "git"
+    ],
+    "source": "llm"
+  },
+  "57ec9fbb5d": {
+    "ner_primary_entity": "dockerfile",
+    "ner_entities": [
+      "dockerfile"
+    ],
+    "source": "llm"
+  },
+  "6ae0381ba8": {
+    "ner_primary_entity": "launch templates",
+    "ner_entities": [
+      "auto scaling",
+      "launch templates"
+    ],
+    "source": "llm"
+  },
+  "a6755bdf4d": {
+    "ner_primary_entity": "aws launch configurations",
+    "ner_entities": [
+      "aws launch configurations",
+      "launch configur"
+    ],
+    "source": "llm"
+  },
+  "cc8c2d4b32": {
+    "ner_primary_entity": "aws elastic beanstalk",
+    "ner_entities": [
+      "aws elastic beanstalk"
+    ],
+    "source": "llm"
+  },
+  "11f27e4673": {
+    "ner_primary_entity": "gunicorn",
+    "ner_entities": [
+      "gunicorn"
+    ],
+    "source": "llm"
+  },
+  "c8d2668615": {
+    "ner_primary_entity": "pyenv",
+    "ner_entities": [
+      "python",
+      "pyenv"
+    ],
+    "source": "llm"
+  },
+  "a173b94288": {
+    "ner_primary_entity": "pipenv",
+    "ner_entities": [
+      "pipenv",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "a75f85c9da": {
+    "ner_primary_entity": "pipenv",
+    "ner_entities": [
+      "pipenv"
+    ],
+    "source": "llm"
+  },
+  "9db5014252": {
+    "ner_primary_entity": "jupyter notebook",
+    "ner_entities": [
+      "ju",
+      "jupyter notebook"
+    ],
+    "source": "llm"
+  },
+  "e842ae080e": {
+    "ner_primary_entity": "gunicorn",
+    "ner_entities": [
+      "gunicorn",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "74c19141ab": {
+    "ner_primary_entity": "gunicorn",
+    "ner_entities": [
+      "gunicorn",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "1b08427cd4": {
+    "ner_primary_entity": "\u2018 ping",
+    "ner_entities": [
+      "\u2018 ping"
+    ],
+    "source": "wikineural"
+  },
+  "80a2e18431": {
+    "ner_primary_entity": "gunicorn",
+    "ner_entities": [
+      "gunicorn"
+    ],
+    "source": "llm"
+  },
+  "fca4671a69": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "69e5f9cbf8": {
+    "ner_primary_entity": "uvicorn",
+    "ner_entities": [
+      "fast",
+      "uvicorn"
+    ],
+    "source": "llm"
+  },
+  "2d5c32331e": {
+    "ner_primary_entity": "userwarning",
+    "ner_entities": [
+      "user",
+      "userwarning"
+    ],
+    "source": "llm"
+  },
+  "91b5235316": {
+    "ner_primary_entity": "pipenv",
+    "ner_entities": [
+      "pipenv",
+      "pipfile"
+    ],
+    "source": "llm"
+  },
+  "fe5fb33959": {
+    "ner_primary_entity": "modulenotfounderror",
+    "ner_entities": [
+      "modulenotfounderror"
+    ],
+    "source": "llm"
+  },
+  "bbabf5b235": {
+    "ner_primary_entity": "gunicorn",
+    "ner_entities": [
+      "docker",
+      "gunicorn"
+    ],
+    "source": "llm"
+  },
+  "15daf894c7": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker",
+      "apple silicon"
+    ],
+    "source": "llm"
+  },
+  "7fd7378773": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "f6dbc97ce3": {
+    "ner_primary_entity": "aws launch template",
+    "ner_entities": [
+      "auto scaling",
+      "aws launch template"
+    ],
+    "source": "llm"
+  },
+  "55c1151596": {
+    "ner_primary_entity": "eb local",
+    "ner_entities": [
+      "not",
+      "eb local"
+    ],
+    "source": "llm"
+  },
+  "675f59049a": {
+    "ner_primary_entity": "eb init",
+    "ner_entities": [
+      "eb init",
+      "eb"
+    ],
+    "source": "llm"
+  },
+  "2aa1a84ee3": {
+    "ner_primary_entity": "fastapi",
+    "ner_entities": [
+      "fastapi"
+    ],
+    "source": "llm"
+  },
+  "07c4486da9": {
+    "ner_primary_entity": "flask",
+    "ner_entities": [
+      "connection",
+      "flask"
+    ],
+    "source": "llm"
+  },
+  "29ada2d598": {
+    "ner_primary_entity": "pipenv",
+    "ner_entities": [
+      "pipenv"
+    ],
+    "source": "wikineural"
+  },
+  "65cbd9be62": {
+    "ner_primary_entity": "pip install",
+    "ner_entities": [
+      "pip install",
+      "u"
+    ],
+    "source": "llm"
+  },
+  "0767b0bd38": {
+    "ner_primary_entity": "modulenotfounderror",
+    "ner_entities": [
+      "modulenotfounderror",
+      "##ot"
+    ],
+    "source": "llm"
+  },
+  "aa92a4f1b1": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker",
+      "dock"
+    ],
+    "source": "llm"
+  },
+  "a5ee2dc890": {
+    "ner_primary_entity": "docker pull",
+    "ner_entities": [
+      "docker pull",
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "32c95df124": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "3ab0a03ad2": {
+    "ner_primary_entity": "homework q6",
+    "ner_entities": [
+      "homework q6"
+    ],
+    "source": "wikineural"
+  },
+  "0b60cbb594": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "fa4068ee43": {
+    "ner_primary_entity": "m1",
+    "ner_entities": [
+      "m1"
+    ],
+    "source": "wikineural"
+  },
+  "091cf6f73e": {
+    "ner_primary_entity": "xgboost",
+    "ner_entities": [
+      "xgboost"
+    ],
+    "source": "llm"
+  },
+  "dc86b83814": {
+    "ner_primary_entity": "pandas.read_csv",
+    "ner_entities": [
+      "panda",
+      "pandas.read_csv"
+    ],
+    "source": "llm"
+  },
+  "c6f2a2afe5": {
+    "ner_primary_entity": "jupyter notebook",
+    "ner_entities": [
+      "google collab notebook",
+      "jupyter notebook"
+    ],
+    "source": "llm"
+  },
+  "7ec4b76943": {
+    "ner_primary_entity": "xgboost",
+    "ner_entities": [
+      "xgboost"
+    ],
+    "source": "llm"
+  },
+  "049c4cee4e": {
+    "ner_primary_entity": "random forest",
+    "ner_entities": [
+      "sci",
+      "random forest"
+    ],
+    "source": "llm"
+  },
+  "b78f247dc5": {
+    "ner_primary_entity": "valueerror",
+    "ner_entities": [
+      "valueerror"
+    ],
+    "source": "llm"
+  },
+  "23f66acd0a": {
+    "ner_primary_entity": "xgb.dmatrix",
+    "ner_entities": [
+      "value",
+      "xgb.dmatrix"
+    ],
+    "source": "llm"
+  },
+  "bc2d83ddc7": {
+    "ner_primary_entity": "xgboost",
+    "ner_entities": [
+      "how to install xgboost",
+      "xgboost"
+    ],
+    "source": "llm"
+  },
+  "c33a1ac422": {
+    "ner_primary_entity": "xgboost",
+    "ner_entities": [
+      "xgboost"
+    ],
+    "source": "llm"
+  },
+  "11783b6524": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "609792b49e": {
+    "ner_primary_entity": "stdout",
+    "ner_entities": [
+      "stdout",
+      "cap"
+    ],
+    "source": "llm"
+  },
+  "3a1f2deaa8": {
+    "ner_primary_entity": "valueerror",
+    "ner_entities": [
+      "valueerror"
+    ],
+    "source": "llm"
+  },
+  "04109cf821": {
+    "ner_primary_entity": "scikit-learn",
+    "ner_entities": [
+      "scikit-learn"
+    ],
+    "source": "llm"
+  },
+  "2ab69926dc": {
+    "ner_primary_entity": "valueerror",
+    "ner_entities": [
+      "valueerror"
+    ],
+    "source": "llm"
+  },
+  "744f73a640": {
+    "ner_primary_entity": "auc",
+    "ner_entities": [
+      "auc"
+    ],
+    "source": "llm"
+  },
+  "e80cb08772": {
+    "ner_primary_entity": "dictvectorizer",
+    "ner_entities": [
+      "dictvectorizer"
+    ],
+    "source": "llm"
+  },
+  "fee2e5fbda": {
+    "ner_primary_entity": "feature importance",
+    "ner_entities": [
+      "feature importance"
+    ],
+    "source": "wikineural"
+  },
+  "7fa434b922": {
+    "ner_primary_entity": "root_meas_square",
+    "ner_entities": [
+      "rms",
+      "root_meas_square"
+    ],
+    "source": "llm"
+  },
+  "9b9e23bca0": {
+    "ner_primary_entity": "importance",
+    "ner_entities": [
+      "importance"
+    ],
+    "source": "wikineural"
+  },
+  "a51d605063": {
+    "ner_primary_entity": "xgboost.core.xgboosterror",
+    "ner_entities": [
+      "xgboosterror",
+      "xgboost.core.xgboosterror"
+    ],
+    "source": "llm"
+  },
+  "c0dcde5293": {
+    "ner_primary_entity": "information gain",
+    "ner_entities": [
+      "information gain"
+    ],
+    "source": "wikineural"
+  },
+  "025c1ba06b": {
+    "ner_primary_entity": "data leakage",
+    "ner_entities": [
+      "data leakage"
+    ],
+    "source": "llm"
+  },
+  "8a5d89cbae": {
+    "ner_primary_entity": "xgboost",
+    "ner_entities": [
+      "xgboost"
+    ],
+    "source": "llm"
+  },
+  "c0444b72ca": {
+    "ner_primary_entity": "decisiontreeclassifier",
+    "ner_entities": [
+      "decisiontreeclassifier"
+    ],
+    "source": "wikineural"
+  },
+  "0655982228": {
+    "ner_primary_entity": "permutation_importance",
+    "ner_entities": [
+      "permutation_importance",
+      "tra"
+    ],
+    "source": "llm"
+  },
+  "257c14ccec": {
+    "ner_primary_entity": "xgboost",
+    "ner_entities": [
+      "xgb",
+      "xgboost"
+    ],
+    "source": "llm"
+  },
+  "c2f713127c": {
+    "ner_primary_entity": "xgboost",
+    "ner_entities": [
+      "xgboost"
+    ],
+    "source": "llm"
+  },
+  "c04cf606ed": {
+    "ner_primary_entity": "pandas.to_numeric",
+    "ner_entities": [
+      "csv",
+      "pandas.to_numeric"
+    ],
+    "source": "llm"
+  },
+  "a9dddac58b": {
+    "ner_primary_entity": "overfitting",
+    "ner_entities": [
+      "overfitting"
+    ],
+    "source": "llm"
+  },
+  "66c3aaa71f": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "89f4d77539": {
+    "ner_primary_entity": "tensorflow",
+    "ner_entities": [
+      "tensorflow"
+    ],
+    "source": "llm"
+  },
+  "7ab955e247": {
+    "ner_primary_entity": "kaggle",
+    "ner_entities": [
+      "kaggle"
+    ],
+    "source": "llm"
+  },
+  "76134388e5": {
+    "ner_primary_entity": "google colab",
+    "ner_entities": [
+      "google colab"
+    ],
+    "source": "llm"
+  },
+  "f3254c8c94": {
+    "ner_primary_entity": "cuda",
+    "ner_entities": [
+      "cuda",
+      "ubuntu"
+    ],
+    "source": "llm"
+  },
+  "7915e5968b": {
+    "ner_primary_entity": "valueerror",
+    "ner_entities": [
+      "value",
+      "valueerror"
+    ],
+    "source": "llm"
+  },
+  "4538b68902": {
+    "ner_primary_entity": "host key verification failed",
+    "ner_entities": [
+      "host",
+      "host key verification failed"
+    ],
+    "source": "llm"
+  },
+  "cd934427d8": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "57e17a3e5f": {
+    "ner_primary_entity": "model",
+    "ner_entities": [
+      "model"
+    ],
+    "source": "wikineural"
+  },
+  "2ab8be1a97": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "0e58ef1736": {
+    "ner_primary_entity": "unzip",
+    "ner_entities": [
+      "unzip"
+    ],
+    "source": "llm"
+  },
+  "6c51e7d7bb": {
+    "ner_primary_entity": "imageio",
+    "ner_entities": [
+      "imageio",
+      "keras"
+    ],
+    "source": "llm"
+  },
+  "98f2d2b078": {
+    "ner_primary_entity": "keras",
+    "ner_entities": [
+      "keras"
+    ],
+    "source": "llm"
+  },
+  "55a29a88a1": {
+    "ner_primary_entity": "h",
+    "ner_entities": [
+      "h"
+    ],
+    "source": "wikineural"
+  },
+  "c0ceddd1a3": {
+    "ner_primary_entity": "threading",
+    "ner_entities": [
+      "threading"
+    ],
+    "source": "llm"
+  },
+  "ee14ae778d": {
+    "ner_primary_entity": "tensorflow",
+    "ner_entities": [
+      "tensorflow"
+    ],
+    "source": "llm"
+  },
+  "05c264fddf": {
+    "ner_primary_entity": "pytorch",
+    "ner_entities": [
+      "pytorch"
+    ],
+    "source": "llm"
+  },
+  "ace84c3970": {
+    "ner_primary_entity": "keras",
+    "ner_entities": [
+      "keras"
+    ],
+    "source": "llm"
+  },
+  "e3c5c81223": {
+    "ner_primary_entity": "nvidia-smi",
+    "ner_entities": [
+      "nvidia-smi"
+    ],
+    "source": "llm"
+  },
+  "38c419b57c": {
+    "ner_primary_entity": "nvitop",
+    "ner_entities": [
+      "gpu",
+      "nvitop"
+    ],
+    "source": "llm"
+  },
+  "52fbe7351e": {
+    "ner_primary_entity": "cnn/flatten",
+    "ner_entities": [
+      "line",
+      "cnn/flatten"
+    ],
+    "source": "llm"
+  },
+  "ddc7d09c3d": {
+    "ner_primary_entity": "keras",
+    "ner_entities": [
+      "##as",
+      "keras"
+    ],
+    "source": "llm"
+  },
+  "92eac8d507": {
+    "ner_primary_entity": "tensorflow",
+    "ner_entities": [
+      "ten",
+      "tensorflow"
+    ],
+    "source": "llm"
+  },
+  "bc8bd71f9c": {
+    "ner_primary_entity": "oom",
+    "ner_entities": [
+      "gpu",
+      "oom"
+    ],
+    "source": "llm"
+  },
+  "39112d0ede": {
+    "ner_primary_entity": "t4 gpu",
+    "ner_entities": [
+      "t4 gpu",
+      "t4"
+    ],
+    "source": "llm"
+  },
+  "2584892a72": {
+    "ner_primary_entity": "tensorflow.keras.preprocessing.image.image_dataset_from_directory",
+    "ner_entities": [
+      "imagedatagenerator",
+      "tensorflow.keras.preprocessing.image.image_dataset_from_directory"
+    ],
+    "source": "llm"
+  },
+  "56e523f708": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "ad7e934f1c": {
+    "ner_primary_entity": "conv2d",
+    "ner_entities": [
+      "pytorch",
+      "conv2d"
+    ],
+    "source": "llm"
+  },
+  "f5e5120ecb": {
+    "ner_primary_entity": "tensorflow.keras.preprocessing.image",
+    "ner_entities": [
+      "tensorflow.keras.preprocessing.image",
+      "importerror"
+    ],
+    "source": "llm"
+  },
+  "2d0e38492f": {
+    "ner_primary_entity": "keras",
+    "ner_entities": [
+      "keras"
+    ],
+    "source": "wikineural"
+  },
+  "f7bef3f0f8": {
+    "ner_primary_entity": "cuda",
+    "ner_entities": [
+      "cuda",
+      "pytorch"
+    ],
+    "source": "llm"
+  },
+  "b14f3a1086": {
+    "ner_primary_entity": "python",
+    "ner_entities": [
+      "python"
+    ],
+    "source": "wikineural"
+  },
+  "07cc362868": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "5f69e4c975": {
+    "ner_primary_entity": "onnx runtime",
+    "ner_entities": [
+      "onnx runt",
+      "onnx runtime"
+    ],
+    "source": "llm"
+  },
+  "b634303091": {
+    "ner_primary_entity": "echo",
+    "ner_entities": [
+      "$",
+      "echo"
+    ],
+    "source": "llm"
+  },
+  "ac62d9ccf0": {
+    "ner_primary_entity": "aws-cli",
+    "ner_entities": [
+      "aws-cli",
+      "aw"
+    ],
+    "source": "llm"
+  },
+  "b1ecde8177": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "f14bb9c2ba": {
+    "ner_primary_entity": "ecr",
+    "ner_entities": [
+      "ecr",
+      "error"
+    ],
+    "source": "llm"
+  },
+  "c336d11260": {
+    "ner_primary_entity": "ls",
+    "ner_entities": [
+      "ls"
+    ],
+    "source": "llm"
+  },
+  "ae3626c120": {
+    "ner_primary_entity": "importerror",
+    "ner_entities": [
+      "importerror",
+      "interpreterwrapper"
+    ],
+    "source": "llm"
+  },
+  "1c62848f3d": {
+    "ner_primary_entity": "pip",
+    "ner_entities": [
+      "warning",
+      "pip"
+    ],
+    "source": "llm"
+  },
+  "52d7a5d6b2": {
+    "ner_primary_entity": "aws configure",
+    "ner_entities": [
+      "aws configure",
+      "aws"
+    ],
+    "source": "llm"
+  },
+  "320a5c1b9a": {
+    "ner_primary_entity": "json",
+    "ner_entities": [
+      "json"
+    ],
+    "source": "wikineural"
+  },
+  "29f149ff07": {
+    "ner_primary_entity": "tensorflow",
+    "ner_entities": [
+      "x",
+      "tensorflow"
+    ],
+    "source": "llm"
+  },
+  "8637328bbb": {
+    "ner_primary_entity": "get-file\n\n(note: i assume you want the most specific technical entity",
+    "ner_entities": [
+      "get-file\n\n(note: i assume you want the most specific technical entity",
+      "powershell"
+    ],
+    "source": "llm"
+  },
+  "5484fc22f7": {
+    "ner_primary_entity": "lambda",
+    "ner_entities": [
+      "lambda"
+    ],
+    "source": "llm"
+  },
+  "6bdfe65552": {
+    "ner_primary_entity": "aws serverless framework",
+    "ner_entities": [
+      "aws serverless framework"
+    ],
+    "source": "llm"
+  },
+  "98e0d0b961": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "m1 mac",
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "1a166fc048": {
+    "ner_primary_entity": "api gateway",
+    "ner_entities": [
+      "api",
+      "api gateway"
+    ],
+    "source": "llm"
+  },
+  "8b5cf23fcf": {
+    "ner_primary_entity": "tflite_runtime",
+    "ner_entities": [
+      "t",
+      "tflite_runtime"
+    ],
+    "source": "llm"
+  },
+  "2fc75f3eed": {
+    "ner_primary_entity": "numpy",
+    "ner_entities": [
+      "numpy"
+    ],
+    "source": "llm"
+  },
+  "fdcf991009": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "5d9aed1fd0": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "814a8657e2": {
+    "ner_primary_entity": "ec2",
+    "ner_entities": [
+      "ec2",
+      "aws"
+    ],
+    "source": "llm"
+  },
+  "71a682959a": {
+    "ner_primary_entity": "tensorflow",
+    "ner_entities": [
+      "tensorflow"
+    ],
+    "source": "llm"
+  },
+  "ec7b94d408": {
+    "ner_primary_entity": "iam",
+    "ner_entities": [
+      "serverless",
+      "iam"
+    ],
+    "source": "llm"
+  },
+  "cb7c81f796": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "69c624cc4e": {
+    "ner_primary_entity": "optimizer_experimental",
+    "ner_entities": [
+      "optimizer_experimental"
+    ],
+    "source": "llm"
+  },
+  "8a23cfbf67": {
+    "ner_primary_entity": "aws lambda",
+    "ner_entities": [
+      "aws lambda + docker",
+      "aws lambda"
+    ],
+    "source": "llm"
+  },
+  "eba3d936f6": {
+    "ner_primary_entity": "tensorflow",
+    "ner_entities": [
+      "tensorflow"
+    ],
+    "source": "llm"
+  },
+  "c4ad81910b": {
+    "ner_primary_entity": "udocker",
+    "ner_entities": [
+      "udocker",
+      "google colab"
+    ],
+    "source": "llm"
+  },
+  "18cb2be438": {
+    "ner_primary_entity": "lambda",
+    "ner_entities": [
+      "lambda",
+      "lambda api"
+    ],
+    "source": "llm"
+  },
+  "ffab512d4f": {
+    "ner_primary_entity": "pip",
+    "ner_entities": [
+      "github",
+      "pip"
+    ],
+    "source": "llm"
+  },
+  "8d914fcbe3": {
+    "ner_primary_entity": "tf lite",
+    "ner_entities": [
+      "tf lite",
+      "python"
+    ],
+    "source": "llm"
+  },
+  "ed312ff54d": {
+    "ner_primary_entity": "aws lambda",
+    "ner_entities": [
+      "aws lambda"
+    ],
+    "source": "llm"
+  },
+  "69fde52a67": {
+    "ner_primary_entity": "aws sam cli",
+    "ner_entities": [
+      "aws sam cli",
+      "lambda function"
+    ],
+    "source": "llm"
+  },
+  "dc705a3c4e": {
+    "ner_primary_entity": "tflite_runtime",
+    "ner_entities": [
+      "tflite_runtime",
+      "tflite"
+    ],
+    "source": "llm"
+  },
+  "b1cb53ac6a": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "lambda",
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "82cf92503d": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker",
+      "hw9 docker"
+    ],
+    "source": "llm"
+  },
+  "7b7188f8f7": {
+    "ner_primary_entity": "onnx",
+    "ner_entities": [
+      "onnx",
+      "h"
+    ],
+    "source": "llm"
+  },
+  "f0d6914717": {
+    "ner_primary_entity": "hw9",
+    "ner_entities": [
+      "hw9"
+    ],
+    "source": "wikineural"
+  },
+  "9506089527": {
+    "ner_primary_entity": "aws lambda",
+    "ner_entities": [
+      "aws lambda"
+    ],
+    "source": "llm"
+  },
+  "04b9f695e8": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "6e943f57bc": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "d8f72f3007": {
+    "ner_primary_entity": "x",
+    "ner_entities": [
+      "x"
+    ],
+    "source": "wikineural"
+  },
+  "2c1cb358cb": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "6834d136c1": {
+    "ner_primary_entity": "learning",
+    "ner_entities": [
+      "learning"
+    ],
+    "source": "wikineural"
+  },
+  "307139bab1": {
+    "ner_primary_entity": "github",
+    "ner_entities": [
+      "github"
+    ],
+    "source": "wikineural"
+  },
+  "8ea1e7e31f": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "9f4011849d": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "0291007215": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "9a458a7035": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "1480ed67d4": {
+    "ner_primary_entity": "\u2019",
+    "ner_entities": [
+      "\u2019"
+    ],
+    "source": "wikineural"
+  },
+  "2a71bf594b": {
+    "ner_primary_entity": "neu",
+    "ner_entities": [
+      "neu"
+    ],
+    "source": "wikineural"
+  },
+  "e06817165e": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "a71cea59c0": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "27b149393b": {
+    "ner_primary_entity": "streamlit",
+    "ner_entities": [
+      "streamlit"
+    ],
+    "source": "llm"
+  },
+  "066863566f": {
+    "ner_primary_entity": "fastapi",
+    "ner_entities": [
+      "fast",
+      "fastapi"
+    ],
+    "source": "llm"
+  },
+  "96e6c5ea38": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "fde155ddfb": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "7f10dde6f8": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "418e8948e7": {
+    "ner_primary_entity": "course",
+    "ner_entities": [
+      "course"
+    ],
+    "source": "wikineural"
+  },
+  "46b6399b91": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "4deedf3100": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "99c8a70fdf": {
+    "ner_primary_entity": "cohort",
+    "ner_entities": [
+      "cohort"
+    ],
+    "source": "wikineural"
+  },
+  "4c40b4805c": {
+    "ner_primary_entity": "co",
+    "ner_entities": [
+      "co"
+    ],
+    "source": "wikineural"
+  },
+  "50ebc48eea": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "edf5668d39": {
+    "ner_primary_entity": "homework",
+    "ner_entities": [
+      "homework"
+    ],
+    "source": "wikineural"
+  },
+  "90b9e103c7": {
+    "ner_primary_entity": "home",
+    "ner_entities": [
+      "home"
+    ],
+    "source": "wikineural"
+  },
+  "df10d8e0e7": {
+    "ner_primary_entity": "home",
+    "ner_entities": [
+      "home"
+    ],
+    "source": "wikineural"
+  },
+  "b1a18890f2": {
+    "ner_primary_entity": "homework",
+    "ner_entities": [
+      "homework"
+    ],
+    "source": "wikineural"
+  },
+  "1497aabe44": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "mlflow"
+    ],
+    "source": "llm"
+  },
+  "b7bd817c2a": {
+    "ner_primary_entity": "mage",
+    "ner_entities": [
+      "mage"
+    ],
+    "source": "llm"
+  },
+  "c842475338": {
+    "ner_primary_entity": "homework",
+    "ner_entities": [
+      "homework"
+    ],
+    "source": "wikineural"
+  },
+  "dfb6836d0b": {
+    "ner_primary_entity": "ml",
+    "ner_entities": [
+      "ml"
+    ],
+    "source": "wikineural"
+  },
+  "a0de15febf": {
+    "ner_primary_entity": "project",
+    "ner_entities": [
+      "project"
+    ],
+    "source": "wikineural"
+  },
+  "7ab6b70d2c": {
+    "ner_primary_entity": "project",
+    "ner_entities": [
+      "project"
+    ],
+    "source": "wikineural"
+  },
+  "f6544a339e": {
+    "ner_primary_entity": "project",
+    "ner_entities": [
+      "project"
+    ],
+    "source": "wikineural"
+  },
+  "33700d36a3": {
+    "ner_primary_entity": "homework and leaderboard",
+    "ner_entities": [
+      "homework and leaderboard"
+    ],
+    "source": "wikineural"
+  },
+  "ae2520ab59": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "896989c9f1": {
+    "ner_primary_entity": "invalidparameterexception",
+    "ner_entities": [
+      "invalidparameterexception",
+      "lambda"
+    ],
+    "source": "llm"
+  },
+  "c841197256": {
+    "ner_primary_entity": "c",
+    "ner_entities": [
+      "c"
+    ],
+    "source": "wikineural"
+  },
+  "5daddf3efc": {
+    "ner_primary_entity": "home",
+    "ner_entities": [
+      "home"
+    ],
+    "source": "wikineural"
+  },
+  "0190b37350": {
+    "ner_primary_entity": "mlops",
+    "ner_entities": [
+      "mlops"
+    ],
+    "source": "wikineural"
+  },
+  "e865d7adf7": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "cd806dd7d0": {
+    "ner_primary_entity": "jupyter",
+    "ner_entities": [
+      "jupyter"
+    ],
+    "source": "llm"
+  },
+  "1b29ba4c54": {
+    "ner_primary_entity": "jupyter notebook",
+    "ner_entities": [
+      "jupyter",
+      "jupyter notebook"
+    ],
+    "source": "llm"
+  },
+  "db8427d6cf": {
+    "ner_primary_entity": "github",
+    "ner_entities": [
+      "github"
+    ],
+    "source": "wikineural"
+  },
+  "47d9cd9aca": {
+    "ner_primary_entity": "jupyter",
+    "ner_entities": [
+      "jupyter",
+      "jupy"
+    ],
+    "source": "llm"
+  },
+  "23ed7bdf10": {
+    "ner_primary_entity": "wsl",
+    "ner_entities": [
+      "w",
+      "wsl"
+    ],
+    "source": "llm"
+  },
+  "2383fdd2f6": {
+    "ner_primary_entity": "gitignore",
+    "ner_entities": [
+      "gitignore",
+      "git"
+    ],
+    "source": "llm"
+  },
+  "bcd4190972": {
+    "ner_primary_entity": "gitignore",
+    "ner_entities": [
+      "gitignore"
+    ],
+    "source": "wikineural"
+  },
+  "11a7ea6c2c": {
+    "ner_primary_entity": "aws",
+    "ner_entities": [
+      "aws"
+    ],
+    "source": "llm"
+  },
+  "1fa4030823": {
+    "ner_primary_entity": "ibm cloud",
+    "ner_entities": [
+      "ibm cloud"
+    ],
+    "source": "llm"
+  },
+  "9f6380d76b": {
+    "ner_primary_entity": "aws",
+    "ner_entities": [
+      "aws"
+    ],
+    "source": "llm"
+  },
+  "ce2a690d31": {
+    "ner_primary_entity": "aws",
+    "ner_entities": [
+      "aws"
+    ],
+    "source": "wikineural"
+  },
+  "5af20a05fe": {
+    "ner_primary_entity": "aws ec2",
+    "ner_entities": [
+      "aws",
+      "aws ec2"
+    ],
+    "source": "llm"
+  },
+  "e04431f782": {
+    "ner_primary_entity": "private key file",
+    "ner_entities": [
+      "un",
+      "private key file"
+    ],
+    "source": "llm"
+  },
+  "af5f29b64f": {
+    "ner_primary_entity": "ssh",
+    "ner_entities": [
+      "aws",
+      "ssh"
+    ],
+    "source": "llm"
+  },
+  "cf068009f1": {
+    "ner_primary_entity": "ec2",
+    "ner_entities": [
+      "ec2",
+      "aws ec2"
+    ],
+    "source": "llm"
+  },
+  "fb9846ce91": {
+    "ner_primary_entity": "vs code",
+    "ner_entities": [
+      "vs code"
+    ],
+    "source": "llm"
+  },
+  "c670950570": {
+    "ner_primary_entity": "gcp",
+    "ner_entities": [
+      "gcp"
+    ],
+    "source": "llm"
+  },
+  "e8dbc40d0c": {
+    "ner_primary_entity": "x",
+    "ner_entities": [
+      "x"
+    ],
+    "source": "wikineural"
+  },
+  "1695e67099": {
+    "ner_primary_entity": "missing",
+    "ner_entities": [
+      "missing"
+    ],
+    "source": "wikineural"
+  },
+  "b6197e7348": {
+    "ner_primary_entity": "mean_squared_error",
+    "ner_entities": [
+      "mean_squared_error"
+    ],
+    "source": "llm"
+  },
+  "5c4e6ef8ca": {
+    "ner_primary_entity": "rmse",
+    "ner_entities": [
+      "rmse"
+    ],
+    "source": "llm"
+  },
+  "885a92b3ee": {
+    "ner_primary_entity": "seaborn",
+    "ner_entities": [
+      "seaborn"
+    ],
+    "source": "llm"
+  },
+  "84805fe2dd": {
+    "ner_primary_entity": "keyerror",
+    "ner_entities": [
+      "keyerror"
+    ],
+    "source": "llm"
+  },
+  "36182df492": {
+    "ner_primary_entity": "pyarrow",
+    "ner_entities": [
+      "pyarrow",
+      "importerror"
+    ],
+    "source": "llm"
+  },
+  "ac851e936b": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "108295493e": {
+    "ner_primary_entity": "kernel",
+    "ner_entities": [
+      "kernel"
+    ],
+    "source": "wikineural"
+  },
+  "575e56b819": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "2d1c6920b6": {
+    "ner_primary_entity": "matplotlib",
+    "ner_entities": [
+      "distplot",
+      "matplotlib"
+    ],
+    "source": "llm"
+  },
+  "886fddb311": {
+    "ner_primary_entity": "rmse",
+    "ner_entities": [
+      "rms",
+      "rmse"
+    ],
+    "source": "llm"
+  },
+  "52d606a66e": {
+    "ner_primary_entity": "scikit-learn",
+    "ner_entities": [
+      "scikit-learn"
+    ],
+    "source": "llm"
+  },
+  "e107978d25": {
+    "ner_primary_entity": "onehotencoder",
+    "ner_entities": [
+      "onehotencoder"
+    ],
+    "source": "llm"
+  },
+  "e8bd670973": {
+    "ner_primary_entity": "cl",
+    "ner_entities": [
+      "cl"
+    ],
+    "source": "wikineural"
+  },
+  "63fb307920": {
+    "ner_primary_entity": "one - hot encoding",
+    "ner_entities": [
+      "one - hot encoding"
+    ],
+    "source": "wikineural"
+  },
+  "663dda52c8": {
+    "ner_primary_entity": "root mean square error",
+    "ner_entities": [
+      "root mean square error",
+      "rmse"
+    ],
+    "source": "llm"
+  },
+  "148d5d0ed7": {
+    "ner_primary_entity": "rmse",
+    "ner_entities": [
+      "rms",
+      "rmse"
+    ],
+    "source": "llm"
+  },
+  "8f917f3f3e": {
+    "ner_primary_entity": "jupyter notebook",
+    "ner_entities": [
+      "jupyter notebook"
+    ],
+    "source": "llm"
+  },
+  "1913720953": {
+    "ner_primary_entity": "ny taxis",
+    "ner_entities": [
+      "ny taxis"
+    ],
+    "source": "wikineural"
+  },
+  "d99433c04b": {
+    "ner_primary_entity": "pycharm",
+    "ner_entities": [
+      "pycharm"
+    ],
+    "source": "llm"
+  },
+  "afdcab5249": {
+    "ner_primary_entity": "running out of memory",
+    "ner_entities": [
+      "running out of memory"
+    ],
+    "source": "wikineural"
+  },
+  "4aa018f478": {
+    "ner_primary_entity": "anaconda",
+    "ner_entities": [
+      "anaconda"
+    ],
+    "source": "llm"
+  },
+  "3f9286329a": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "e00d5b3f65": {
+    "ner_primary_entity": "permission denied (publickey)",
+    "ner_entities": [
+      "permission denied (publickey)",
+      "aws"
+    ],
+    "source": "llm"
+  },
+  "3b76daefb2": {
+    "ner_primary_entity": "rmse",
+    "ner_entities": [
+      "rms",
+      "rmse"
+    ],
+    "source": "llm"
+  },
+  "c29959db3a": {
+    "ner_primary_entity": "sklearn",
+    "ner_entities": [
+      "sklearn",
+      "can \u2019 t"
+    ],
+    "source": "llm"
+  },
+  "1bc7beaf5d": {
+    "ner_primary_entity": "wsl2",
+    "ner_entities": [
+      "wsl2"
+    ],
+    "source": "llm"
+  },
+  "8894361030": {
+    "ner_primary_entity": "dictionary vectorizer",
+    "ner_entities": [
+      "dictionary vectorizer"
+    ],
+    "source": "llm"
+  },
+  "866d3bbbed": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "linux",
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "fd2cad423e": {
+    "ner_primary_entity": "uv",
+    "ner_entities": [
+      "uv"
+    ],
+    "source": "llm"
+  },
+  "f346d2cc80": {
+    "ner_primary_entity": "mean_squared_error",
+    "ner_entities": [
+      "typeerror",
+      "mean_squared_error"
+    ],
+    "source": "llm"
+  },
+  "0d2700ae06": {
+    "ner_primary_entity": "seaborn",
+    "ner_entities": [
+      "seaborn : boxplot",
+      "seaborn"
+    ],
+    "source": "llm"
+  },
+  "a55ee615db": {
+    "ner_primary_entity": "pyarrow",
+    "ner_entities": [
+      "pyarrow",
+      "panda"
+    ],
+    "source": "llm"
+  },
+  "92ff36d48e": {
+    "ner_primary_entity": "kernel died",
+    "ner_entities": [
+      "kernel died",
+      "model training on github codespaces"
+    ],
+    "source": "llm"
+  },
+  "d4b4db8e70": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "e75e477ce2": {
+    "ner_primary_entity": "local",
+    "ner_entities": [
+      "local"
+    ],
+    "source": "wikineural"
+  },
+  "186389973c": {
+    "ner_primary_entity": "localhost",
+    "ner_entities": [
+      "localhost"
+    ],
+    "source": "llm"
+  },
+  "3a2a22f115": {
+    "ner_primary_entity": "valueerror",
+    "ner_entities": [
+      "value",
+      "valueerror"
+    ],
+    "source": "llm"
+  },
+  "42e6f685af": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "mlflow"
+    ],
+    "source": "llm"
+  },
+  "ac12e26845": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "mlflow",
+      "u"
+    ],
+    "source": "llm"
+  },
+  "aed2f8ddb9": {
+    "ner_primary_entity": "experiment",
+    "ner_entities": [
+      "experiment"
+    ],
+    "source": "llm"
+  },
+  "c47c3317f6": {
+    "ner_primary_entity": "hash mismatch",
+    "ner_entities": [
+      "hash mismatch error with package installation",
+      "hash mismatch"
+    ],
+    "source": "llm"
+  },
+  "2dab05f2be": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "how to delete an experiment permanently from",
+      "mlflow"
+    ],
+    "source": "llm"
+  },
+  "d1b7664c6c": {
+    "ner_primary_entity": "git",
+    "ner_entities": [
+      "git",
+      "how to update git public repo without overwriting changes"
+    ],
+    "source": "llm"
+  },
+  "8a8e4f34a7": {
+    "ner_primary_entity": "2^16",
+    "ner_entities": [
+      "image",
+      "2^16"
+    ],
+    "source": "llm"
+  },
+  "690948b58d": {
+    "ner_primary_entity": "mlflowclient",
+    "ner_entities": [
+      "mlflowclient"
+    ],
+    "source": "llm"
+  },
+  "37e1b6b9bc": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "mlflow",
+      "mlflow autolog"
+    ],
+    "source": "llm"
+  },
+  "944a62abe6": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "mlflow"
+    ],
+    "source": "llm"
+  },
+  "7032c161df": {
+    "ner_primary_entity": "xgboost",
+    "ner_entities": [
+      "autolog model signature failure",
+      "xgboost"
+    ],
+    "source": "llm"
+  },
+  "fb9f6e511b": {
+    "ner_primary_entity": "mlflowexception",
+    "ner_entities": [
+      "mlflowexception",
+      "mlflowexception : unable to set a deleted experiment"
+    ],
+    "source": "llm"
+  },
+  "c34fc43e93": {
+    "ner_primary_entity": "mlflowexception",
+    "ner_entities": [
+      "set a deleted experiment",
+      "mlflowexception"
+    ],
+    "source": "llm"
+  },
+  "160cd7cf05": {
+    "ner_primary_entity": "oserror[errno 28]",
+    "ner_entities": [
+      "no space left on device",
+      "oserror[errno 28]"
+    ],
+    "source": "llm"
+  },
+  "3b5e939644": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "ml",
+      "mlflow"
+    ],
+    "source": "llm"
+  },
+  "cdd6cd3f29": {
+    "ner_primary_entity": "homework q3",
+    "ner_entities": [
+      "homework q3"
+    ],
+    "source": "wikineural"
+  },
+  "31a648c28a": {
+    "ner_primary_entity": "protobuf",
+    "ner_entities": [
+      "protobuf",
+      "proto"
+    ],
+    "source": "llm"
+  },
+  "3fd406c55c": {
+    "ner_primary_entity": "ssh",
+    "ner_entities": [
+      "ssh",
+      "aws ec2"
+    ],
+    "source": "llm"
+  },
+  "6686406223": {
+    "ner_primary_entity": "artifacts",
+    "ner_entities": [
+      "artifacts"
+    ],
+    "source": "llm"
+  },
+  "76d72f3776": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "ml",
+      "mlflow"
+    ],
+    "source": "llm"
+  },
+  "4cff59a281": {
+    "ner_primary_entity": "setuptools",
+    "ner_entities": [
+      "set",
+      "setuptools"
+    ],
+    "source": "llm"
+  },
+  "85d2a669c6": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "mlflow"
+    ],
+    "source": "llm"
+  },
+  "ad15f21a9f": {
+    "ner_primary_entity": "flask",
+    "ner_entities": [
+      "mlflow",
+      "flask"
+    ],
+    "source": "llm"
+  },
+  "f7cd7d85ab": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "mlflow",
+      "windows filenotfounderror"
+    ],
+    "source": "llm"
+  },
+  "fabdc4421c": {
+    "ner_primary_entity": "hpo.py",
+    "ner_entities": [
+      "operand type error",
+      "hpo.py"
+    ],
+    "source": "llm"
+  },
+  "601b847b43": {
+    "ner_primary_entity": "scikit-learn",
+    "ner_entities": [
+      "scikit - learn",
+      "scikit-learn"
+    ],
+    "source": "llm"
+  },
+  "ac877b2d3d": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "mlflow"
+    ],
+    "source": "llm"
+  },
+  "03f9c129fc": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "mlflow"
+    ],
+    "source": "llm"
+  },
+  "0a545e0e4c": {
+    "ner_primary_entity": "sqlite",
+    "ner_entities": [
+      "sqlite"
+    ],
+    "source": "llm"
+  },
+  "86a6321b3d": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "dcccce53fc": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "22b02585bf": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "mlflow",
+      "max"
+    ],
+    "source": "llm"
+  },
+  "d71f8cb2d0": {
+    "ner_primary_entity": "attributeerror",
+    "ner_entities": [
+      "attributeerror"
+    ],
+    "source": "wikineural"
+  },
+  "d4c21886e6": {
+    "ner_primary_entity": "wandb",
+    "ner_entities": [
+      "wandb"
+    ],
+    "source": "llm"
+  },
+  "13fecb68a8": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "warning",
+      "mlflow"
+    ],
+    "source": "llm"
+  },
+  "bfbe05dcd9": {
+    "ner_primary_entity": "xgboost",
+    "ner_entities": [
+      "xgboost"
+    ],
+    "source": "llm"
+  },
+  "47c771de0d": {
+    "ner_primary_entity": "wget",
+    "ner_entities": [
+      "wget"
+    ],
+    "source": "llm"
+  },
+  "e525587d40": {
+    "ner_primary_entity": "github",
+    "ner_entities": [
+      "github",
+      "google colab"
+    ],
+    "source": "llm"
+  },
+  "d30594cef3": {
+    "ner_primary_entity": "train",
+    "ner_entities": [
+      "train"
+    ],
+    "source": "wikineural"
+  },
+  "6b1c62c9cf": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "mlflow",
+      "mlflow tracking"
+    ],
+    "source": "llm"
+  },
+  "76e6d9e8ce": {
+    "ner_primary_entity": "openssl",
+    "ner_entities": [
+      "openssl"
+    ],
+    "source": "llm"
+  },
+  "4d08d35199": {
+    "ner_primary_entity": "mlflowclient",
+    "ner_entities": [
+      "at",
+      "mlflowclient"
+    ],
+    "source": "llm"
+  },
+  "460343cb44": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "auto",
+      "mlflow"
+    ],
+    "source": "llm"
+  },
+  "58a9c117d5": {
+    "ner_primary_entity": "hyperopt",
+    "ner_entities": [
+      "hyperopt",
+      "hy"
+    ],
+    "source": "llm"
+  },
+  "a0ac7f4f77": {
+    "ner_primary_entity": "xgboost",
+    "ner_entities": [
+      "xgboost"
+    ],
+    "source": "llm"
+  },
+  "a76d315b86": {
+    "ner_primary_entity": "github",
+    "ner_entities": [
+      "github"
+    ],
+    "source": "wikineural"
+  },
+  "c1768edac2": {
+    "ner_primary_entity": "mlflowclient",
+    "ner_entities": [
+      "mlflowclient"
+    ],
+    "source": "llm"
+  },
+  "250d8d1c81": {
+    "ner_primary_entity": "text editor",
+    "ner_entities": [
+      "text editor"
+    ],
+    "source": "wikineural"
+  },
+  "d317ebf313": {
+    "ner_primary_entity": "mage",
+    "ner_entities": [
+      "pi",
+      "mage"
+    ],
+    "source": "llm"
+  },
+  "60da2ce9c6": {
+    "ner_primary_entity": "docker-compose",
+    "ner_entities": [
+      "mage",
+      "docker-compose"
+    ],
+    "source": "llm"
+  },
+  "ba50d9e0bc": {
+    "ner_primary_entity": "mage",
+    "ner_entities": [
+      "mage",
+      "codespaces"
+    ],
+    "source": "llm"
+  },
+  "74daf4433d": {
+    "ner_primary_entity": "codespaces",
+    "ner_entities": [
+      "codespaces"
+    ],
+    "source": "llm"
+  },
+  "563feb7fd1": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "078039f4e3": {
+    "ner_primary_entity": "mage time series bar chart not showing",
+    "ner_entities": [
+      "mage time series bar chart not showing"
+    ],
+    "source": "wikineural"
+  },
+  "1e05eabc5c": {
+    "ner_primary_entity": "mag",
+    "ner_entities": [
+      "mag"
+    ],
+    "source": "wikineural"
+  },
+  "e065665622": {
+    "ner_primary_entity": "mage dashboard",
+    "ner_entities": [
+      "mage dashboard"
+    ],
+    "source": "llm"
+  },
+  "85c83560c5": {
+    "ner_primary_entity": "helper",
+    "ner_entities": [
+      "helper"
+    ],
+    "source": "wikineural"
+  },
+  "cc4481d2fa": {
+    "ner_primary_entity": "at",
+    "ner_entities": [
+      "at"
+    ],
+    "source": "wikineural"
+  },
+  "e2806ae236": {
+    "ner_primary_entity": "global",
+    "ner_entities": [
+      "global"
+    ],
+    "source": "wikineural"
+  },
+  "fa12df76a7": {
+    "ner_primary_entity": "typeerror",
+    "ner_entities": [
+      "typeerror"
+    ],
+    "source": "llm"
+  },
+  "8231e2605d": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "mlflow"
+    ],
+    "source": "llm"
+  },
+  "7100f168a2": {
+    "ner_primary_entity": "github codespace",
+    "ner_entities": [
+      "github codespace"
+    ],
+    "source": "llm"
+  },
+  "7deae3a8eb": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "ml",
+      "mlflow"
+    ],
+    "source": "llm"
+  },
+  "d94e5cc566": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "mlflow",
+      "q"
+    ],
+    "source": "llm"
+  },
+  "b88d825b12": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "mlflow",
+      "q"
+    ],
+    "source": "llm"
+  },
+  "0afee51849": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "mlflow",
+      "q"
+    ],
+    "source": "llm"
+  },
+  "b395e1c5ec": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "376ba649d7": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "attributeerror",
+      "mlflow"
+    ],
+    "source": "llm"
+  },
+  "3e58074bee": {
+    "ner_primary_entity": "prefect",
+    "ner_entities": [
+      "prefect",
+      "error"
+    ],
+    "source": "llm"
+  },
+  "b3fe59d431": {
+    "ner_primary_entity": "keyerror: \u2018rmse_linearregression\u2019",
+    "ner_entities": [
+      "keyerror: \u2018rmse_linearregression\u2019"
+    ],
+    "source": "llm"
+  },
+  "f74891d445": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "bd885d3d4d": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker",
+      "dock"
+    ],
+    "source": "llm"
+  },
+  "6ba940e0fd": {
+    "ner_primary_entity": "global data product",
+    "ner_entities": [
+      "global data product"
+    ],
+    "source": "wikineural"
+  },
+  "9cfe589a2e": {
+    "ner_primary_entity": "valueerror",
+    "ner_entities": [
+      "valueerror"
+    ],
+    "source": "llm"
+  },
+  "e00253e2df": {
+    "ner_primary_entity": "out of memory error",
+    "ner_entities": [
+      "out of memory",
+      "out of memory error"
+    ],
+    "source": "llm"
+  },
+  "74974bf558": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "2d292454ac": {
+    "ner_primary_entity": "powershell",
+    "ner_entities": [
+      "windows",
+      "powershell"
+    ],
+    "source": "llm"
+  },
+  "a2d10b83d9": {
+    "ner_primary_entity": "pipenv",
+    "ner_entities": [
+      "pipenv",
+      "pipen"
+    ],
+    "source": "llm"
+  },
+  "7fa713d6c7": {
+    "ner_primary_entity": "module",
+    "ner_entities": [
+      "https",
+      "module"
+    ],
+    "source": "llm"
+  },
+  "1b858ee8bb": {
+    "ner_primary_entity": "six",
+    "ner_entities": [
+      "six",
+      "pip."
+    ],
+    "source": "llm"
+  },
+  "ecba2d4d27": {
+    "ner_primary_entity": "pipenv",
+    "ner_entities": [
+      "pipenv"
+    ],
+    "source": "llm"
+  },
+  "afd037e097": {
+    "ner_primary_entity": "pipenv",
+    "ner_entities": [
+      "pipenv",
+      "jupyter"
+    ],
+    "source": "llm"
+  },
+  "ff0f22df21": {
+    "ner_primary_entity": "aws kinesis",
+    "ner_entities": [
+      "aws kinesis",
+      "aws cli"
+    ],
+    "source": "llm"
+  },
+  "363335a1ea": {
+    "ner_primary_entity": "pandas",
+    "ner_entities": [
+      "pandas",
+      "er"
+    ],
+    "source": "llm"
+  },
+  "405de99093": {
+    "ner_primary_entity": "pipfile.lock",
+    "ner_entities": [
+      "pipfile.lock",
+      "pi"
+    ],
+    "source": "llm"
+  },
+  "84eaad3372": {
+    "ner_primary_entity": "pipenv",
+    "ner_entities": [
+      "pipenv"
+    ],
+    "source": "llm"
+  },
+  "00b11da94b": {
+    "ner_primary_entity": "gsutil",
+    "ner_entities": [
+      "gsutil",
+      "google cloud platform"
+    ],
+    "source": "llm"
+  },
+  "e781391c86": {
+    "ner_primary_entity": "valueerror",
+    "ner_entities": [
+      "valueerror",
+      "cl"
+    ],
+    "source": "llm"
+  },
+  "81c82a4875": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "9ee43d55d0": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "69052b9af2": {
+    "ner_primary_entity": "pipfile.lock",
+    "ner_entities": [
+      "pipfile.lock",
+      "installationerror"
+    ],
+    "source": "llm"
+  },
+  "f192a133f7": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "mlflow"
+    ],
+    "source": "llm"
+  },
+  "d34afcb205": {
+    "ner_primary_entity": "invalidaccesskeyid",
+    "ner_entities": [
+      "putobject",
+      "invalidaccesskeyid"
+    ],
+    "source": "llm"
+  },
+  "5bf804473e": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker",
+      "light"
+    ],
+    "source": "llm"
+  },
+  "164b0e749d": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "ml",
+      "mlflow"
+    ],
+    "source": "llm"
+  },
+  "fa77367725": {
+    "ner_primary_entity": "notebook",
+    "ner_entities": [
+      "f",
+      "notebook"
+    ],
+    "source": "llm"
+  },
+  "af3774c8e2": {
+    "ner_primary_entity": "dict_vectorizer",
+    "ner_entities": [
+      "dict_vectorizer"
+    ],
+    "source": "llm"
+  },
+  "884bb9afb7": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "fd11200ead": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "b577c9ba98": {
+    "ner_primary_entity": "linux/arm64/v8",
+    "ner_entities": [
+      "warning",
+      "linux/arm64/v8"
+    ],
+    "source": "llm"
+  },
+  "d41cd73af9": {
+    "ner_primary_entity": "httperror",
+    "ner_entities": [
+      "http",
+      "httperror"
+    ],
+    "source": "llm"
+  },
+  "1355481387": {
+    "ner_primary_entity": "pipenv.patched.pip._vendor.urllib3.response",
+    "ner_entities": [
+      "pipenv.patched.pip._vendor.urllib3.response",
+      "modulenotfounderror"
+    ],
+    "source": "llm"
+  },
+  "b53176b742": {
+    "ner_primary_entity": "pipenv",
+    "ner_entities": [
+      "pipenv",
+      "pipe"
+    ],
+    "source": "llm"
+  },
+  "76ed2ad3e5": {
+    "ner_primary_entity": "namerror",
+    "ner_entities": [
+      "homework",
+      "namerror"
+    ],
+    "source": "llm"
+  },
+  "5a508f2d8c": {
+    "ner_primary_entity": "mage",
+    "ner_entities": [
+      "mage",
+      "er"
+    ],
+    "source": "llm"
+  },
+  "e6ffad6be5": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "2c007273b4": {
+    "ner_primary_entity": "pipenv",
+    "ner_entities": [
+      "pipenv"
+    ],
+    "source": "llm"
+  },
+  "00b076410d": {
+    "ner_primary_entity": "jupyter",
+    "ner_entities": [
+      "jupyter"
+    ],
+    "source": "llm"
+  },
+  "55fcf4bc86": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker",
+      "homework"
+    ],
+    "source": "llm"
+  },
+  "d00a9ac4ba": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "b9d82f5247": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "f831690b89": {
+    "ner_primary_entity": "aws ecr",
+    "ner_entities": [
+      "aws ecr",
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "78b515b003": {
+    "ner_primary_entity": "columnquantilemetric",
+    "ner_entities": [
+      "columnquantilemetric"
+    ],
+    "source": "llm"
+  },
+  "f71b6beef0": {
+    "ner_primary_entity": "grafana",
+    "ner_entities": [
+      "grafana"
+    ],
+    "source": "llm"
+  },
+  "8cb6b3176b": {
+    "ner_primary_entity": "linux",
+    "ner_entities": [
+      "linux"
+    ],
+    "source": "wikineural"
+  },
+  "9da67b7e6d": {
+    "ner_primary_entity": "keyerror",
+    "ner_entities": [
+      "keyerror"
+    ],
+    "source": "llm"
+  },
+  "b074e82488": {
+    "ner_primary_entity": "exit",
+    "ner_entities": [
+      "exit"
+    ],
+    "source": "llm"
+  },
+  "de13b97575": {
+    "ner_primary_entity": "valueerror",
+    "ner_entities": [
+      "valueerror"
+    ],
+    "source": "llm"
+  },
+  "c905f283d7": {
+    "ner_primary_entity": "regressionqualitymetric",
+    "ner_entities": [
+      "regressionqualitymetric"
+    ],
+    "source": "llm"
+  },
+  "481e174dd4": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "296ea7fed1": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "f385403427": {
+    "ner_primary_entity": "grafana",
+    "ner_entities": [
+      "grafana",
+      "graf"
+    ],
+    "source": "llm"
+  },
+  "13559b737e": {
+    "ner_primary_entity": "grafana",
+    "ner_entities": [
+      "grafana"
+    ],
+    "source": "llm"
+  },
+  "4afbb7db24": {
+    "ner_primary_entity": "prefect",
+    "ner_entities": [
+      "pre",
+      "prefect"
+    ],
+    "source": "llm"
+  },
+  "258d55402b": {
+    "ner_primary_entity": "docker",
+    "ner_entities": [
+      "docker"
+    ],
+    "source": "llm"
+  },
+  "007cc84471": {
+    "ner_primary_entity": "php_network_getaddresses",
+    "ner_entities": [
+      "php_network_getaddresses"
+    ],
+    "source": "llm"
+  },
+  "5c68f358c2": {
+    "ner_primary_entity": "evidently",
+    "ner_entities": [
+      "evidently",
+      "##ana"
+    ],
+    "source": "llm"
+  },
+  "ebd339f9a5": {
+    "ner_primary_entity": "numpy",
+    "ner_entities": [
+      "numpy",
+      "num"
+    ],
+    "source": "llm"
+  },
+  "beef541941": {
+    "ner_primary_entity": "postgres",
+    "ner_entities": [
+      "postgres",
+      "bind"
+    ],
+    "source": "llm"
+  },
+  "5ad72730d6": {
+    "ner_primary_entity": "grafana",
+    "ner_entities": [
+      "grafana"
+    ],
+    "source": "wikineural"
+  },
+  "26a7d0d9b6": {
+    "ner_primary_entity": "adminer",
+    "ner_entities": [
+      "adminer not loaded",
+      "adminer"
+    ],
+    "source": "llm"
+  },
+  "44a68a830c": {
+    "ner_primary_entity": "grafana",
+    "ner_entities": [
+      "grafana",
+      "ui changes"
+    ],
+    "source": "llm"
+  },
+  "982fa87351": {
+    "ner_primary_entity": "prefect",
+    "ner_entities": [
+      "runtime error : failed to reach api",
+      "prefect"
+    ],
+    "source": "llm"
+  },
+  "93dfb7d96c": {
+    "ner_primary_entity": "pq",
+    "ner_entities": [
+      "grafana",
+      "pq"
+    ],
+    "source": "llm"
+  },
+  "4d86e49240": {
+    "ner_primary_entity": "evidently",
+    "ner_entities": [
+      "evidently"
+    ],
+    "source": "llm"
+  },
+  "215ad00cfc": {
+    "ner_primary_entity": "dockerexception",
+    "ner_entities": [
+      "dockerexception"
+    ],
+    "source": "llm"
+  },
+  "f2458f5a26": {
+    "ner_primary_entity": "docker-compose",
+    "ner_entities": [
+      "docker",
+      "docker-compose"
+    ],
+    "source": "llm"
+  },
+  "b7625d600a": {
+    "ner_primary_entity": "psycopg",
+    "ner_entities": [
+      "operationalerror",
+      "psycopg"
+    ],
+    "source": "llm"
+  },
+  "6a3a0cc252": {
+    "ner_primary_entity": "adminer",
+    "ner_entities": [
+      "adminer ui",
+      "adminer"
+    ],
+    "source": "llm"
+  },
+  "f4dcbdd4ee": {
+    "ner_primary_entity": "evidently",
+    "ner_entities": [
+      "evidently"
+    ],
+    "source": "llm"
+  },
+  "28676cfdf9": {
+    "ner_primary_entity": "evidently ai",
+    "ner_entities": [
+      "evidently ai",
+      "evidently"
+    ],
+    "source": "llm"
+  },
+  "04411f29bb": {
+    "ner_primary_entity": "docker-compose",
+    "ner_entities": [
+      "grafana",
+      "docker-compose"
+    ],
+    "source": "llm"
+  },
+  "9dedd0bb1c": {
+    "ner_primary_entity": "import error",
+    "ner_entities": [
+      "import error"
+    ],
+    "source": "wikineural"
+  },
+  "ce86e574f1": {
+    "ner_primary_entity": "mlflow",
+    "ner_entities": [
+      "mlflow"
+    ],
+    "source": "llm"
+  },
+  "2ce73ee58a": {
+    "ner_primary_entity": "localstack",
+    "ner_entities": [
+      "localstack"
+    ],
+    "source": "llm"
+  },
+  "5137e6c204": {
+    "ner_primary_entity": null,
+    "ner_entities": [],
+    "source": "none"
+  },
+  "cb04adb824": {
+    "ner_primary_entity": "awsrequest",
+    "ner_entities": [
+      "awsrequest",
+      "a"
+    ],
+    "source": "llm"
+  },
+  "cc6b6f1481": {
+    "ner_primary_entity": "pre-commit",
+    "ner_entities": [
+      "pre-commit"
+    ],
+    "source": "llm"
+  },
+  "611e6f015f": {
+    "ner_primary_entity": "pytest",
+    "ner_entities": [
+      "pytest"
+    ],
+    "source": "wikineural"
+  },
+  "fa23739c18": {
+    "ner_primary_entity": "aws kinesis",
+    "ner_entities": [
+      "aws kinesis",
+      "empty records"
+    ],
+    "source": "llm"
+  },
+  "226f8425c4": {
+    "ner_primary_entity": "git",
+    "ner_entities": [
+      "git",
+      "powershell"
+    ],
+    "source": "llm"
+  },
+  "b55fea0fc7": {
+    "ner_primary_entity": "git",
+    "ner_entities": [
+      "git",
+      "g"
+    ],
+    "source": "llm"
+  },
+  "0cfb31c221": {
+    "ner_primary_entity": "pytest",
+    "ner_entities": [
+      "pytest"
+    ],
+    "source": "llm"
+  },
+  "02ff7e82ce": {
+    "ner_primary_entity": "pytest",
+    "ner_entities": [
+      "pytest"
+    ],
+    "source": "llm"
+  },
+  "a345ebd834": {
+    "ner_primary_entity": "github",
+    "ner_entities": [
+      "github"
+    ],
+    "source": "wikineural"
+  },
+  "560c0eb368": {
+    "ner_primary_entity": "docker-compose",
+    "ner_entities": [
+      "multiple docker container",
+      "docker-compose"
+    ],
+    "source": "llm"
+  },
+  "8e6e50be33": {
+    "ner_primary_entity": "botocore.awsrequest.awsrequest",
+    "ner_entities": [
+      "botocore.awsrequest.awsrequest",
+      "##ws"
+    ],
+    "source": "llm"
+  },
+  "16099520dd": {
+    "ner_primary_entity": "docker-compose",
+    "ner_entities": [
+      "a",
+      "docker-compose"
+    ],
+    "source": "llm"
+  },
+  "330f9005e2": {
+    "ner_primary_entity": "isort",
+    "ner_entities": [
+      "isort"
+    ],
+    "source": "llm"
+  },
+  "abb38848b5": {
+    "ner_primary_entity": "github actions",
+    "ner_entities": [
+      "github actions"
+    ],
+    "source": "llm"
+  },
+  "b396205ad7": {
+    "ner_primary_entity": "errno 13",
+    "ner_entities": [
+      "errno 13"
+    ],
+    "source": "llm"
+  },
+  "b0300fc9b8": {
+    "ner_primary_entity": "boto3",
+    "ner_entities": [
+      "boto3"
+    ],
+    "source": "llm"
+  },
+  "2eb2863faf": {
+    "ner_primary_entity": "valueerror",
+    "ner_entities": [
+      "data",
+      "valueerror"
+    ],
+    "source": "llm"
+  },
+  "ba23a5c708": {
+    "ner_primary_entity": "poetry",
+    "ner_entities": [
+      "runtimeerror",
+      "poetry"
+    ],
+    "source": "llm"
+  },
+  "716ff05962": {
+    "ner_primary_entity": "pytest",
+    "ner_entities": [
+      "pytest"
+    ],
+    "source": "wikineural"
+  },
+  "0d200c8c58": {
+    "ner_primary_entity": "homework",
+    "ner_entities": [
+      "homework"
+    ],
+    "source": "wikineural"
+  }
+}

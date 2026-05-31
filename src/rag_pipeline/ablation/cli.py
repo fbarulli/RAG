@@ -19,11 +19,33 @@ Examples:
 from configs.benchmark_cli import create_ablation_parser
 
 
+def _named_suite() -> dict:
+    from rag_pipeline.ablation.experiment import Patch
+    return {
+        "baseline":          Patch(),
+        "no_entity":         Patch(null_entity=True),
+        "no_category":       Patch(null_category=True),
+        "no_topics":         Patch(null_topics=True),
+        "no_generic_entity": Patch(null_generic_entities=True),
+        "low_conf_null_50":  Patch(null_low_confidence_topics=True, topic_prob_threshold=0.5),
+        "low_conf_null_40":  Patch(null_low_confidence_topics=True, topic_prob_threshold=0.4),
+        "no_cluster":        Patch(skip_cluster=True),
+        "no_rules":          Patch(skip_rules=True),
+        "empty_patterns":    Patch(empty_entity_patterns=True),
+        "no_url_expand":     Patch(skip_url_expand=True),
+    }
+
 def cmd_run(args) -> None:
     from rag_pipeline.ablation.experiment import Experiment, Patch
-    exp = Experiment(
-        name=args.name,
-        patch=Patch(
+    suite = _named_suite()
+    if args.name in suite and not any([
+        args.null_entity, args.null_category, args.null_topics, args.skip_ner,
+        args.empty_entity_patterns, args.skip_cluster, args.skip_rules,
+        args.null_generic_entity, args.null_low_confidence_topics,
+    ]):
+        patch = suite[args.name]
+    else:
+        patch = Patch(
             null_entity=args.null_entity,
             null_category=args.null_category,
             null_topics=args.null_topics,
@@ -34,7 +56,11 @@ def cmd_run(args) -> None:
             null_generic_entities=args.null_generic_entity,
             null_low_confidence_topics=args.null_low_confidence_topics,
             topic_prob_threshold=args.topic_prob_threshold,
-        ),
+            use_llm_ner=args.use_llm_ner,
+        )
+    exp = Experiment(
+        name=args.name,
+        patch=patch,
         configs=args.configs,
         model=args.model,
     )
@@ -85,6 +111,7 @@ def cmd_flow(args) -> None:
         ("no_cluster",       Patch(skip_cluster=True)),
         ("no_rules",         Patch(skip_rules=True)),
         ("empty_patterns",   Patch(empty_entity_patterns=True)),
+        ("no_url_expand",    Patch(skip_url_expand=True)),
     ]
 
     suite = fast + (slow if args.rerun else [])

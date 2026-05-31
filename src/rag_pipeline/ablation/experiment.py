@@ -45,6 +45,20 @@ class Experiment(BaseModel):
     encode_mode: EncodeMode = Field(default_factory=lambda: EncodeMode(Paths.defaults().get("production_encode_mode", "question")))
 
     def run(self) -> ExperimentResult:
+        import logging
+        log_path = Paths.ablation_results_dir() / f"{self.name}_run.log"
+        log_path.parent.mkdir(parents=True, exist_ok=True)
+        fh = logging.FileHandler(log_path, mode="w")
+        fh.setLevel(logging.INFO)
+        fh.setFormatter(logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s"))
+        logging.getLogger("rag_pipeline").addHandler(fh)
+        try:
+            return self._run_inner()
+        finally:
+            logging.getLogger("rag_pipeline").removeHandler(fh)
+            fh.close()
+
+    def _run_inner(self) -> ExperimentResult:
         logger.info("Running experiment: %s (patch=%s)", self.name, self.patch.label())
 
         assignments_path    = Paths.topic_assignments()

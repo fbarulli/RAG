@@ -21,6 +21,8 @@ class Patch(BaseModel, frozen=True):
     null_generic_entities: bool = False
     null_low_confidence_topics: bool = False
     topic_prob_threshold: float = 0.5
+    skip_url_expand: bool = False
+    use_llm_ner: bool = False
 
     @computed_field
     @property
@@ -30,9 +32,15 @@ class Patch(BaseModel, frozen=True):
             or self.empty_entity_patterns
             or self.skip_cluster
             or self.skip_rules
+            or self.skip_url_expand
         )
 
     def apply_to_assignments(self, assignments: list[dict]) -> list[dict]:
+        llm_map = None
+        if self.use_llm_ner:
+            import json
+            from rag_pipeline.core.paths import Paths
+            llm_map = json.load(open(Paths.experiments_dir() / "llm_ner_merged.json"))
         for a in assignments:
             if self.null_entity or self.skip_ner:
                 a["ner_primary_entity"] = None
@@ -47,10 +55,18 @@ class Patch(BaseModel, frozen=True):
             if self.null_low_confidence_topics:
                 if a.get("topic_probability", 1.0) < self.topic_prob_threshold:
                     a["topic"] = -1
+            if llm_map:
+                doc_id = a.get("id")
+                if doc_id in llm_map:
+                    a["ner_primary_entity"] = llm_map[doc_id]["ner_primary_entity"]
+                    a["ner_entities"] = llm_map[doc_id]["ner_entities"]
         return assignments
 
     def env(self) -> dict:
-        return {}
+        e = {}
+        if self.skip_url_expand:
+            e["RAG_SKIP_URL_EXPAND"] = "1"
+        return e
 
     def label(self) -> str:
         parts = []
@@ -63,6 +79,8 @@ class Patch(BaseModel, frozen=True):
         if self.skip_rules:                 parts.append("skip_rules")
         if self.null_generic_entities:      parts.append("no_generic_entity")
         if self.null_low_confidence_topics: parts.append(f"low_conf_{str(self.topic_prob_threshold).replace('.', '')}")
+        if self.use_llm_ner:               parts.append("llm_ner")
+        if self.skip_url_expand:            parts.append("no_url_expand")
         return "+".join(parts) if parts else "baseline"
 
 

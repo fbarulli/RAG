@@ -1,0 +1,6 @@
+2026-05-31 16:04:42,961 - rag_pipeline.ablation.experiment - INFO - Running experiment: baseline (patch=baseline)
+2026-05-31 16:04:45,864 - rag_pipeline.ablation.experiment - INFO - Assignments after patch: has_primary=1190 has_entities=1190 total=1207
+2026-05-31 16:05:02,261 - rag_pipeline.ablation.experiment - INFO - Collection after ingest (sample 100): has_primary=97 has_entities=97
+2026-05-31 16:05:23,078 - rag_pipeline.ablation.experiment - INFO - Restored original state
+2026-05-31 16:05:23,085 - rag_pipeline.ablation.experiment - INFO - Saved → /workspaces/RAG-a-muffin/experiments/results/ablation/baseline_meta.json
+2026-05-31 16:05:23,086 - rag_pipeline.ablation.experiment - INFO - Baseline snapshot → /workspaces/RAG-a-muffin/experiments/baseline.json

@@ -1,0 +1,5 @@
+2026-05-31 16:05:24,442 - rag_pipeline.ablation.experiment - INFO - Running experiment: no_entity (patch=no_entity)
+2026-05-31 16:05:27,413 - rag_pipeline.ablation.experiment - INFO - Assignments after patch: has_primary=0 has_entities=0 total=1207
+2026-05-31 16:05:38,881 - rag_pipeline.ablation.experiment - INFO - Collection after ingest (sample 100): has_primary=0 has_entities=0
+2026-05-31 16:05:59,883 - rag_pipeline.ablation.experiment - INFO - Restored original state
+2026-05-31 16:05:59,890 - rag_pipeline.ablation.experiment - INFO - Saved → /workspaces/RAG-a-muffin/experiments/results/ablation/no_entity_meta.json

@@ -200,6 +200,8 @@ def create_ablation_parser() -> argparse.ArgumentParser:
                    help="Null entity for generic values (no re-run)")
     g.add_argument("--null-low-confidence-topics", action="store_true", default=False,
                    help="Set topic=-1 for low-confidence assignments (no re-run)")
+    g.add_argument("--use-llm-ner",               action="store_true", default=False,
+                       help="Replace NER entities with LLM-extracted ones")
     g.add_argument("--topic-prob-threshold",       type=float, default=0.5,
                    help="Probability threshold for --null-low-confidence-topics")
     g2 = run_p.add_argument_group("model / config")
