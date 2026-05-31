@@ -1,0 +1,252 @@
+project: RAG-a-muffin
+description: >
+  FAQ retrieval pipeline using entity-boosted vector search.
+  spaCy NER tags documents and queries; Qdrant stores dense embeddings
+  with NER metadata; entity-boosted retrieval uses soft filters to
+  rank entity-matching documents higher.
+
+# ─────────────────────────────────────────────
+# CONFIG — single sources of truth
+# ─────────────────────────────────────────────
+config:
+  paths:    configs/paths.json       # all filesystem paths — use Paths.*
+  defaults: configs/defaults.json    # runtime defaults — use Paths.defaults()
+  models:   configs/models.json      # embedding model registry
+  retrieval: configs/retrieval_configs.json  # retrieval strategy configs
+  entities: configs/entity_patterns.json    # 632-term NER dictionary (5 categories)
+
+# ─────────────────────────────────────────────
+# DATA
+# ─────────────────────────────────────────────
+data:
+  corpus:
+    path: data/processed/clean.jsonl       # Paths.clean_jsonl()
+    schema: [id, question, answer, course, section]
+    size: 1207
+
+  test_set:
+    path: data/processed/test.jsonl        # Paths.test_jsonl()
+    query_types: [standard, chaos_monkey]
+
+# ─────────────────────────────────────────────
+# PIPELINE STAGES
+# ─────────────────────────────────────────────
+pipeline:
+
+  # ── 1. NER + TOPIC MODELING ─────────────────
+  - stage: topic_modeling
+    module: rag_pipeline.eda.topics.core.topic_modeling
+    command: >
+      uv run python -m rag_pipeline.eda.topics.core.topic_modeling
+      --embedding-model "BAAI/bge-base-en-v1.5" --run-all
+    inputs:
+      - data/processed/clean.jsonl
+      - configs/entity_patterns.json
+    outputs:
+      - src/rag_pipeline/eda/topics/experiments/topic_assignments_{slug}.json
+    key_functions:
+      _expand_urls:
+        desc: pre-process URL-buried tokens before spaCy pipe
+        note: only fires on actual URLs — regex pattern avoids general punctuation
+      _tag_ner:
+        desc: spaCy NER — emits full entity list via entity_ruler + dynamic patterns
+        output_fields: [category, primary_entity, entities, categories]
+      _build_assignments:
+        desc: combines BERTopic topics with NER output per document
+        output_fields: [id, topic, ner_category, ner_primary_entity, ner_entities, ner_categories]
+      reclassify_loop:
+        desc: rules-based reclassification of OTHER docs
+        caveat: extract_entity returns classification signals, not clean named entities — 257 docs affected
+    known_issues:
+      - noisy_primaries: reclassified docs get keyword signals as ner_primary_entity (e.g. "ask good questions")
+
+  # ── 2. TOPIC MERGE ───────────────────────────
+  - stage: topic_merge
+    module: rag_pipeline.eda.topics.core.topic_merge
+    command: >
+      python -c "from rag_pipeline.eda.topics.core.topic_merge import TopicMerger; TopicMerger().merge()"
+    inputs:
+      - src/rag_pipeline/eda/topics/experiments/topic_assignments_*.json
+    outputs:
+      - src/rag_pipeline/eda/topics/output/topic_assignments_all.json  # Paths.topic_assignments()
+    output_schema:
+      metadata: {models_merged: list}
+      results:
+        "{model_name}":
+          metadata: {model, total_documents, num_topics, ...}
+          assignments: [{id, topic, ner_category, ner_primary_entity, ner_entities, ner_categories, ...}]
+    notes:
+      - always validate JSON after merge (json.load check)
+      - aliased models must use copy.deepcopy — shared references corrupt JSON
+      - ablation runner reads from git HEAD — commit before running ablation
+
+  # ── 3. INGESTION ─────────────────────────────
+  - stage: ingestion
+    module: rag_pipeline.ingestion.ingest_models
+    command: >
+      uv run python -m rag_pipeline.ingestion.ingest_models
+      --model "BAAI/bge-base-en-v1.5" --encode-mode qa --no-skip-existing
+    inputs:
+      - data/processed/clean.jsonl
+      - src/rag_pipeline/eda/topics/output/topic_assignments_all.json
+      - experiments/embeddings/{short_name}{encode_mode_suffix}.npy  # cache
+    outputs:
+      - qdrant collection: faqs_{short_name}_{encode_mode}
+    key_functions:
+      _load_ner_map:
+        desc: reads assignments JSON → dict[str, DocNERInfo]
+        returns: DocNERInfo (Pydantic, frozen)
+        note: hard-fails if model missing from assignments
+      _prepare_payload:
+        desc: assembles Qdrant point payload from FAQDocument + DocNERInfo
+        qdrant_fields: [es_id, question, answer, course, section, ner_category, ner_primary_entity, ner_entities, topic, subtopic]
+    encode_modes:
+      question: encodes question text only (suffix: "")
+      qa:       encodes "question [SEP] answer" (suffix: "_qa")  ← production
+      answer:   encodes answer text only (suffix: "_answer")
+    collections:
+      faqs_bge_base_en_v1_5_qa:       {model: "BAAI/bge-base-en-v1.5",              dims: 768,  encode_mode: qa}
+      faqs_bge_large_en_v1_5_qa:      {model: "BAAI/bge-large-en-v1.5",             dims: 1024, encode_mode: qa}
+      faqs_mpnet_base_qa:              {model: "microsoft/mpnet-base",               dims: 768,  encode_mode: qa}
+      faqs_e5_large_v2_qa:             {model: "intfloat/e5-large-v2",               dims: 1024, encode_mode: qa}
+      faqs_bge_m3_qa:                  {model: "BAAI/bge-m3",                        dims: 1024, encode_mode: qa}
+      faqs_snowflake_arctic_embed_l_qa: {model: "Snowflake/snowflake-arctic-embed-l", dims: 1024, encode_mode: qa}
+
+  # ── 4. BENCHMARK ─────────────────────────────
+  - stage: benchmark
+    module: rag_pipeline.ingestion.benchmark
+    command: >
+      uv run python -m rag_pipeline.ingestion.benchmark
+      --model "BAAI/bge-base-en-v1.5"
+      --collection faqs_bge_base_en_v1_5_qa
+      --configs entity_boosted
+    inputs:
+      - data/processed/test.jsonl
+      - qdrant collection
+      - src/rag_pipeline/eda/topics/output/topic_assignments_all.json
+    outputs:
+      - experiments/results/                    # Paths.reranker_results_dir()
+      - experiments/mlflow/mlflow.db            # Paths.mlflow_db()  ← MLflow tracking
+    key_functions:
+      _build_query_context:
+        desc: reads ner_primary_entity, ner_entities, topic from topic_map per query
+      _run_retrieval:
+        desc: filters ner_entities by entity_freq_threshold, passes to retriever
+      run_entity_category_boosted_retrieval:
+        desc: one Qdrant should clause per entity in ner_entities list
+        matches_against: ner_primary_entity field in Qdrant payload
+      _build_query_result:
+        desc: assembles QueryResult with rank, hit_at_1/3/5, ner_entities
+      log_benchmark_run:
+        desc: logs aggregate metrics + per-query JSONL artifact to MLflow
+    mlflow_metrics: [h1, h3, h5, h10, mrr, ndcg_10, latency_p50, latency_p95, failure_rate, cross_course, rank_std]
+    mlflow_artifacts: [per_query/  →  JSONL with rank, hit_at_k, ner_entities per query]
+
+  # ── 5. ABLATION ──────────────────────────────
+  - stage: ablation
+    module: rag_pipeline.ablation
+    command: >
+      uv run python -m rag_pipeline.ablation flow --configs entity_boosted --rerun
+    note: reads topic_assignments from git HEAD — always commit first
+    outputs:
+      - experiments/results/ablation/          # Paths.ablation_results_dir()
+
+# ─────────────────────────────────────────────
+# PYDANTIC MODELS — single sources of truth
+# ─────────────────────────────────────────────
+pydantic_models:
+
+  DocNERInfo:
+    path: src/rag_pipeline/core/models/topics.py
+    frozen: true
+    fields: [ner_category, ner_primary_entity, ner_entities, topic, subtopic]
+    rule: add new NER fields here only — propagates automatically to ingest + eval
+
+  QueryResult:
+    path: src/rag_pipeline/ingestion/benchmark_types.py
+    frozen: true
+    fields: [query_id, query_text, expected_id, course, topic, subtopic,
+             hit_ids, hit_scores, latency_ms, code_integrity_ref,
+             query_type, hit_courses, reranker_latency_ms,
+             ner_primary_entity, ner_entities, rank, hit_at_1, hit_at_3, hit_at_5]
+
+  MetricSummary:
+    path: src/rag_pipeline/ingestion/benchmark_types.py
+    frozen: true
+    fields: [config_name, model_name, topic, subtopic, num_queries,
+             hit_rate_1, hit_rate_3, hit_rate_5, hit_rate_10, mrr, ndcg_10,
+             latency_p50, latency_p95, latency_p99, avg_code_integrity_ref,
+             cross_course_contamination, rank_std, failure_count, avg_failure_similarity]
+
+  TopicAssignment:
+    path: src/rag_pipeline/core/models/topics.py
+    frozen: true
+
+  SearchResult:
+    path: src/rag_pipeline/ingestion/benchmark_types.py
+    frozen: true
+
+# ─────────────────────────────────────────────
+# EMBEDDINGS
+# ─────────────────────────────────────────────
+embeddings:
+  cache_dir: experiments/embeddings/           # Paths._resolve("embeddings_cache_dir")
+  naming: "{short_name}{encode_mode_suffix}.npy"
+  gpu_raw: experiments/_embeddings_gpu/        # original GPU-trained files
+  categories:
+    dense:   standard SentenceTransformer encode
+    sparse:  SPLADE — requires AutoModelForMaskedLM + log(1+relu(logits)) aggregation
+    colbert: multi-vector — mean pool token embeddings for storage
+    ner:     encode questions (not answers) — for spaCy replacement experiments
+    topic:   encode questions — for BERTopic experiments
+
+# ─────────────────────────────────────────────
+# OPEN EXPERIMENTS (MLflow: rag-retrieval)
+# ─────────────────────────────────────────────
+experiments:
+  tracking: experiments/mlflow/mlflow.db
+  experiment_name: rag-retrieval
+
+  planned:
+    - name: baseline_no_url_expand
+      hypothesis: removing _expand_urls recovers the 92.2% baseline
+      change: disable _expand_urls in _tag_ner
+
+    - name: config_ner_vs_spacy
+      hypothesis: 632-term entity_patterns.json dict outperforms spaCy on this corpus
+      change: swap build_base_nlp for build_ner_from_config in _tag_ner
+
+    - name: no_rules_primary
+      hypothesis: not setting ner_primary_entity on reclassified docs reduces noise
+      change: skip extract_entity when classification_source == 'rules'
+
+    - name: sparse_retrieval
+      hypothesis: SPLADE sparse vectors improve recall on technical queries
+      change: wire sparse embeddings + Qdrant sparse vector support
+
+# ─────────────────────────────────────────────
+# KNOWN ISSUES
+# ─────────────────────────────────────────────
+known_issues:
+  - id: noisy_reclassified_primaries
+    severity: medium
+    desc: >
+      extract_entity() returns keyword signals as ner_primary_entity for 257 reclassified docs.
+      Pollutes Qdrant should clauses with phrases like "ask good questions", "could not".
+    fix: skip ner_primary_entity assignment when classification_source == 'rules'
+
+  - id: url_expand_regression
+    severity: medium
+    desc: >
+      _expand_urls shifted ner_primary_entity for 64 docs vs 92.2% baseline (commit 68fd559).
+      Current H@1: 89.6%. Gap unresolved.
+    fix: run baseline_no_url_expand experiment
+
+  - id: sparse_not_wired
+    severity: low
+    desc: SPLADE embeddings exist in _embeddings_gpu but Qdrant sparse vector support not implemented.
+
+  - id: reranker_results_dir_misnamed
+    severity: low
+    desc: Paths.reranker_results_dir() is actually the general benchmark output dir.
+    fix: rename to benchmark_results_dir (3 callers)

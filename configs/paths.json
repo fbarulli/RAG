@@ -10,7 +10,7 @@
   "models_config": "configs/models.json",
   "rerankers_config": "configs/rerankers.json",
   "embeddings_cache_dir": "experiments/embeddings",
-  "reranker_results_dir": "experiments/reranker_benchmarks",
+  "reranker_results_dir": "experiments/results",
   "input_mapping": {
     "parse": "data/processed/parsed.jsonl",
     "dedup": "data/processed/parsed.jsonl",
@@ -27,7 +27,8 @@
   "topics_rules_dir": "src/rag_pipeline/eda/topics/rules",
   "entity_patterns": "configs/entity_patterns.json",
   "topics_default_output": "src/rag_pipeline/eda/topics/experiments/topic_assignments.json",
-  "ablation_results_dir": "experiments/ablation_results",
+  "ablation_results_dir": "experiments/results/ablation",
   "configs_dir": "configs",
-  "mlflow_dir": "experiments/mlflow"
+  "mlflow_dir": "experiments/mlflow",
+  "output_dir": "experiments/results"
 }

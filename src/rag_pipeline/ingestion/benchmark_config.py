@@ -38,7 +38,7 @@ import argparse
 from functools import cached_property
 from pathlib import Path
 from typing import Any, Optional, List, Tuple
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, model_validator
 from rag_pipeline.core.paths import Paths
 from rag_pipeline.core.models import EncodeMode
 from rag_pipeline.logging import get_logger
@@ -140,6 +140,7 @@ class BenchmarkConfig(BaseModel):
             encode_batch_size=bench.get('encode_batch_size', 32),
             batch_size=ingest.get('batch_size', 100),
             quick=bench.get('quick', False),
+            encode_mode=EncodeMode(defaults.get('production_encode_mode', 'question')),
         )
 
     @classmethod
@@ -186,6 +187,33 @@ class BenchmarkConfig(BaseModel):
             v = getattr(args, key, None)
             return v if v is not None else getattr(self, attr)
         return BenchmarkConfig(test_set_path=_path('test_set_path', 'test_set'), clean_path=_path('clean_path'), topic_path=_path('topic_path'), configs_path=_path('configs_path'), output_dir=_path('output_dir'), cache_dir=_path('cache_dir'), qdrant_host=str(_val('qdrant_host')), qdrant_port=int(_val('qdrant_port')), es_host=_val('es_host') if _val('es_host') is not None else None, es_index=str(_val('es_index')), models=resolved_models, config=_val('config') if _val('config') is not None else None, top_k=int(_val('top_k')), encode_batch_size=int(_val('encode_batch_size')), batch_size=int(_val('batch_size')), quick=_bool_flag('quick'), force_encode=_bool_flag('force_encode'), skip_existing=_bool_flag('skip_existing'), no_detail=_bool_flag('no_detail'), auto_prepare=_bool_flag('auto_prepare'), resume=_bool_flag('resume'), reset=_bool_flag('reset'), fail_fast=_bool_flag('fail_fast'), model_timeout=int(_val('model_timeout', 'timeout')), encode_mode=EncodeMode(_val('encode_mode') or 'question'))
+
+    @model_validator(mode='after')
+    def check_encode_mode_cache_consistency(self) -> 'BenchmarkConfig':
+        """Raise immediately if any configured model is missing a cache file for encode_mode."""
+        if not self.cache_dir or not self.cache_dir.exists() or not self.models:
+            return self
+        from .benchmark_loader import load_model_registry, get_model_entry
+        suffix = self.encode_mode.suffix
+        errors = []
+        for model_name in self.models:
+            try:
+                entry = get_model_entry(model_name)
+            except Exception:
+                continue
+            short = entry['short_name']
+            cache = self.cache_dir / f'{short}{suffix}.npy'
+            if not cache.exists():
+                # check if a different suffix exists to give a helpful error
+                other = [s for s in ('_qa', '_answer', '') if s != suffix and (self.cache_dir / f'{short}{s}.npy').exists()]
+                hint = f" (found suffix {other} — wrong --encode-mode?)" if other else " (no cache at all — run ingest first)"
+                errors.append(f"  {model_name}: missing {cache.name}{hint}")
+        if errors:
+            raise ValueError(
+                "encode_mode=" + repr(self.encode_mode.value) + " cache mismatch — fix before running benchmark:\n"
+                + "\n".join(errors)
+            )
+        return self
 
     def validate(self) -> Tuple[bool, List[str]]:
         """Validate config before running benchmark. Returns (is_valid, issues)."""
@@ -269,7 +297,7 @@ class BenchmarkConfig(BaseModel):
             logger.info(f'Quick mode enabled: limiting to {limit} test queries')
         return test_set[:limit] if limit else test_set
 
-    def get_topic_map(self, model_name: str) -> dict[str, dict]:
+    def get_topic_map(self, model_name: str) -> dict[str, 'DocNERInfo']:
         """
         Load NER/topic assignments for *model_name*.
 

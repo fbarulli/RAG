@@ -100,7 +100,9 @@ def main() -> None:
     failed: list[str] = []
     for entry in model_entries:
         model_name = entry['name']
-        collection = entry['collection']
+        from rag_pipeline.core.paths import Paths
+        from rag_pipeline.core.models import EncodeMode
+        collection = Paths.collection_for_model(model_name, config.encode_mode)
         if not qdrant.collection_exists(collection):
             logger.warning(f"Collection '{collection}' not found — skipping '{model_name}'")
             failed.append(model_name)
@@ -126,7 +128,7 @@ def main() -> None:
                 continue
             logger.info(f'  Config: {cfg_name}')
             try:
-                results = evaluate_config(client=qdrant, collection=collection, model=model, test_set=test_set, topic_map=topic_map, config=cfg, top_k=config.top_k, es=es, es_index=config.es_index, encode_batch_size=config.encode_batch_size)
+                results = evaluate_config(client=qdrant, collection=collection, model=model, test_set=test_set, topic_map=topic_map, config=cfg, top_k=config.top_k, cache_dir=config.cache_dir, model_name=model_entry['name'], es=es, es_index=config.es_index, encode_batch_size=config.encode_batch_size)
             except Exception as e:
                 logger.error(f'  evaluate_config failed for {model_name}/{cfg_name}: {e}')
                 traceback.print_exc()

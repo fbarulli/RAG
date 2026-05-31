@@ -13,7 +13,7 @@ from .benchmark_report import print_full_benchmark_report
 from .benchmark_persistence import save_benchmark_results, save_performance_summary
 from .benchmark_config import BenchmarkConfig
 from configs.benchmark_cli import create_benchmark_parser
-from rag_pipeline.mlflow.logger import log_benchmark_run
+from rag_pipeline.mlflow.tracking import log_benchmark_run
 
 logger = get_logger(__name__)
 
@@ -106,9 +106,11 @@ def _run_config(cfg_name: str, cfg: dict, config: BenchmarkConfig,
     logger.info(f'  Running: {cfg_name}')
     logger.info(f'Config dict: {cfg}')
     logger.info(f'Collection: {model_entry["collection"]}')
+    from rag_pipeline.core.paths import Paths
+    collection = Paths.collection_for_model(model_entry['name'], config.encode_mode)
     results = evaluate_config(
         client=config.qdrant_client,
-        collection=model_entry['collection'],
+        collection=collection,
         model=model,
         test_set=test_set,
         topic_map=topic_map,
@@ -117,6 +119,8 @@ def _run_config(cfg_name: str, cfg: dict, config: BenchmarkConfig,
         es=config.es_client,
         es_index=config.es_index,
         encode_batch_size=config.encode_batch_size,
+        cache_dir=config.cache_dir,
+        model_name=model_entry['name'],
     )
     summary = aggregate_metrics(results, cfg_name, model_entry['name'])
     logger.info(f'    Hit@5={summary.hit_rate_5:.1%}  MRR={summary.mrr:.4f}')
@@ -145,7 +149,7 @@ def main():
             _save_query_results(results, name, config.output_dir)
             summaries.append(summary)
             results_map[name] = results
-            log_benchmark_run(name, summary, results, model_entry, tags={"collection": model_entry["collection"]})
+            log_benchmark_run(name, cfg, summary, results, model_entry, encode_mode=config.encode_mode.value, tags={"collection": model_entry["collection"]})
 
         print_full_benchmark_report(summaries, query_results_map=results_map)
         save_benchmark_results(summaries, config.output_dir)

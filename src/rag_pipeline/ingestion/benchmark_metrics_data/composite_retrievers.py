@@ -95,7 +95,7 @@ def run_hybrid_dbsf_retrieval(client, collection, query_vector, es, es_index, qu
         
     for did, score in zip(e_res.hit_ids, b_norm):
         combined[did] = combined.get(did, 0.0) + b_weight * score
-        if did not in id_info: id_info[did] = (e_res.hit_courses[0], '') # Simplified fallback
+        if did not in id_info: id_info[did] = (e_res.hit_courses[rank-1] if rank <= len(e_res.hit_courses) else '', '')
         
     sorted_ids = sorted(combined, key=lambda x: -combined[x])[:top_k]
     return SearchResult(

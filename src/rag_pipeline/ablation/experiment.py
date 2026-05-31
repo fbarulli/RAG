@@ -23,7 +23,7 @@ from rag_pipeline.core.models import Patch, ExperimentResult, GENERIC_ENTITIES, 
 from rag_pipeline.ingestion.benchmark_types import MetricSummary
 from rag_pipeline.core.paths import Paths
 from rag_pipeline.logging import get_logger
-from rag_pipeline.mlflow.ablation_logger import log_ablation_run
+from rag_pipeline.mlflow.tracking import log_ablation_run
 from rag_pipeline.db.store import save_experiment_result
 
 logger = get_logger(__name__)

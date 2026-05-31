@@ -33,7 +33,7 @@ def run_es_retrieval(es: 'Elasticsearch', index: str, query_text: str, course_fi
     hits = resp['hits']['hits']
     
     return SearchResult(
-        hit_ids=tuple(h['_source'].get('es_id', '') for h in hits),
+        hit_ids=tuple(str(h['_source'].get('es_id', '')) for h in hits),  # coerce legacy int es_ids
         hit_scores=tuple(float(h['_score']) for h in hits),
         hit_courses=tuple(h['_source'].get('course', '') for h in hits),
         top_answer=hits[0]['_source'].get('answer') if hits else None,

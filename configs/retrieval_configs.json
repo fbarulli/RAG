@@ -65,5 +65,29 @@
         "use_category": true,
         "use_topic": false,
         "use_section": true
+    },
+    "sparse_prithivida__Splade_PP_en_v1": {
+        "name": "Sparse (prithivida__Splade_PP_en_v1)",
+        "search_type": "sparse",
+        "sparse_vector_name": "sparse",
+        "sparse_model_key": "prithivida__Splade_PP_en_v1"
+    },
+    "sparse_prithivida__Splade_PP_en_v2": {
+        "name": "Sparse (prithivida__Splade_PP_en_v2)",
+        "search_type": "sparse",
+        "sparse_vector_name": "sparse",
+        "sparse_model_key": "prithivida__Splade_PP_en_v2"
+    },
+    "sparse_naver__splade_cocondenser_ensembledistil": {
+        "name": "Sparse (naver__splade-cocondenser-ensembledistil)",
+        "search_type": "sparse",
+        "sparse_vector_name": "sparse",
+        "sparse_model_key": "naver__splade-cocondenser-ensembledistil"
+    },
+    "sparse_naver__splade_v2_max": {
+        "name": "Sparse (naver__splade_v2_max)",
+        "search_type": "sparse",
+        "sparse_vector_name": "sparse",
+        "sparse_model_key": "naver__splade_v2_max"
     }
 }

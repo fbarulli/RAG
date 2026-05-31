@@ -144,13 +144,14 @@ def load_test_set(path: Path, clean_path: Optional[Path]=None) -> list[dict]:
         logger.info(f'  Including {ood_count} OOD queries (expected_id=None)')
     return tests
 
-def load_topic_assignments(path: Path, model: str) -> dict[str, dict]:
+def load_topic_assignments(path: Path, model: str) -> dict[str, 'DocNERInfo']:
     """
     Load topic/NER assignments keyed by document ID.
 
     Expects format: {results: {model_name: {assignments: [...]}}}
     Raises KeyError if model not found.
     """
+    from rag_pipeline.core.models import DocNERInfo
     if not path.exists():
         raise FileNotFoundError(f'Topic assignments not found: {path}')
     with path.open(encoding='utf-8') as f:
@@ -161,7 +162,16 @@ def load_topic_assignments(path: Path, model: str) -> dict[str, dict]:
         available = list(data['results'].keys())
         raise KeyError(f"Model '{model}' not found in topic assignments. Available: {available}")
     assignments_list = data['results'][model].get('assignments', [])
-    mapping = {a['id']: a for a in assignments_list}
+    mapping = {
+        a['id']: DocNERInfo(
+            ner_category=a.get('ner_category', 'OTHER'),
+            ner_primary_entity=a.get('ner_primary_entity'),
+            ner_entities=a.get('ner_entities', []),
+            topic=a.get('topic', -1),
+            subtopic=a.get('subtopic'),
+        )
+        for a in assignments_list
+    }
     logger.info(f"Loaded {len(mapping)} topic assignments for model '{model}' from {path}")
     return mapping
 

@@ -1,7 +1,7 @@
 """Pure Vector retrieval via Qdrant."""
 import time
 from typing import Optional, Any
-from qdrant_client.models import Filter, FieldCondition, MatchValue, SearchParams
+from qdrant_client.models import Filter, FieldCondition, MatchValue, SearchParams, SparseVector, NamedSparseVector
 from ..benchmark_types import SearchResult
 
 def build_qdrant_filter(course: Optional[str], must_configs: list = None, should_configs: list = None) -> Optional[Filter]:
@@ -23,7 +23,7 @@ def build_qdrant_filter(course: Optional[str], must_configs: list = None, should
 
 def parse_qdrant_points(points: Any, latency_ms: float) -> SearchResult:
     return SearchResult(
-        hit_ids=tuple(p.payload.get('es_id', '') for p in points),
+        hit_ids=tuple(str(p.payload.get('es_id', '')) for p in points),  # coerce legacy int es_ids
         hit_courses=tuple(p.payload.get('course', '') for p in points),
         hit_scores=tuple(float(p.score) if p.score is not None else 0.0 for p in points),
         top_answer=points[0].payload.get('answer') if points else None,
@@ -50,3 +50,17 @@ def run_vector_retrieval(client, collection: str, query_vector: list, course_fil
     
     return parse_qdrant_points(result.points, (time.perf_counter() - start) * 1000)
 
+
+
+def run_sparse_retrieval(client, collection: str, query_indices: list, query_values: list, course_filter: Optional[str], config: dict, top_k: int) -> SearchResult:
+    start = time.perf_counter()
+    query_filter = build_qdrant_filter(course_filter)
+    sparse_vector_name = config.get("sparse_vector_name", "sparse")
+    result = client.query_points(
+        collection_name=collection,
+        query=SparseVector(indices=query_indices, values=query_values),
+        using=sparse_vector_name,
+        limit=config.get("limit", top_k),
+        query_filter=query_filter,
+    )
+    return parse_qdrant_points(result.points, (time.perf_counter() - start) * 1000)

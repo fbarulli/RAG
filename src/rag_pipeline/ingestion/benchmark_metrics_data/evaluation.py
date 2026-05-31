@@ -9,7 +9,7 @@ from dataclasses import dataclass, field
 from typing import Any, Optional, TypedDict, TYPE_CHECKING
 from ..benchmark_types import QueryResult
 from .core import check_code_integrity
-from .retrievers import run_es_retrieval, run_vector_retrieval, run_vector_retrieval_with_reranker, run_hybrid_rrf_retrieval, run_entity_boosted_retrieval, run_hybrid_dbsf_retrieval, run_entity_category_boosted_retrieval
+from .retrievers import run_es_retrieval, run_vector_retrieval, run_vector_retrieval_with_reranker, run_hybrid_rrf_retrieval, run_entity_boosted_retrieval, run_hybrid_dbsf_retrieval, run_entity_category_boosted_retrieval, run_sparse_retrieval
 import numpy as np
 from ..embedding_cache import load_cached_embeddings, save_embeddings_cache
 if TYPE_CHECKING:
@@ -129,6 +129,12 @@ def _run_retrieval(rc: RetrievalConfig, query: str, query_vector: Optional[list]
         _threshold = rc.entity_freq_threshold
         _eff_entity = ner_primary_entity if (ner_primary_entity and rc.entity_freq_map.get(ner_primary_entity, 0) <= _threshold) else None
         return run_entity_category_boosted_retrieval(client=rc.client, collection=rc.collection, query_vector=query_vector, course_filter=course, config=rc.config, top_k=rc.retrieval_k, ner_category=ner_category, ner_primary_entity=_eff_entity, ner_entities=[e for e in (ner_entities or []) if rc.entity_freq_map.get(e, 0) <= _threshold], topic=topic, section=section)
+    if rc.search_type == 'sparse':
+        return run_sparse_retrieval(
+            client=rc.client, collection=rc.collection,
+            query_indices=query_vector['indices'], query_values=query_vector['values'],
+            course_filter=course, config=rc.config, top_k=rc.retrieval_k,
+        )
     if rc.use_reranker and rc.reranker_name:
         return run_vector_retrieval_with_reranker(client=rc.client, collection=rc.collection, query_vector=query_vector, query_text=query, course_filter=course, config=rc.config, top_k=rc.top_k, reranker_name=rc.reranker_name)
     return run_vector_retrieval(client=rc.client, collection=rc.collection, query_vector=query_vector, course_filter=course, config=rc.config, top_k=rc.top_k)
@@ -163,15 +169,16 @@ def _apply_reranking(search_result, rc: RetrievalConfig, query: str):
 def _build_query_context(idx: int, test: dict, topic_map: dict, query_vectors: Optional[list]) -> QueryContext:
     """Extract and return all per-query context fields."""
     expected_id = test['expected_id']
-    topic_info = topic_map.get(expected_id, {})
-    return {'query': test['query'], 'expected_id': expected_id, 'course': test['course'], 'topic': topic_info.get('topic'), 'subtopic': topic_info.get('subtopic'), 'ner_category': topic_info.get('ner_category'), 'ner_primary_entity': topic_info.get('ner_primary_entity'), 'ner_entities': topic_info.get('ner_entities', []), 'section': topic_info.get('section'), 'query_vector': query_vectors[idx] if query_vectors is not None else None}
+    from rag_pipeline.core.models.topics import DocNERInfo
+    topic_info = topic_map.get(expected_id)
+    ner = topic_info if isinstance(topic_info, DocNERInfo) else DocNERInfo()
+    return {'query': test['query'], 'expected_id': expected_id, 'course': test['course'], 'topic': ner.topic, 'subtopic': ner.subtopic, 'ner_category': ner.ner_category, 'ner_primary_entity': ner.ner_primary_entity, 'ner_entities': list(ner.ner_entities), 'section': test.get('section'), 'query_vector': query_vectors[idx] if query_vectors is not None else None}
 
 
 def _build_query_result(test: dict, ctx: QueryContext, search_result, hit_ids: tuple, hit_scores: tuple, reranker_latency_ms: float, integrity_cache: dict) -> QueryResult:
     """Assemble the final QueryResult from retrieval outputs."""
     expected_id = ctx['expected_id']
-    rank = (hit_ids.index(expected_id) + 1) if expected_id in hit_ids else None
-    return QueryResult(query_id=test['query_id'], query_text=ctx['query'], expected_id=expected_id, course=ctx['course'], topic=ctx['topic'], subtopic=ctx['subtopic'], query_type=test.get('query_type', 'unknown'), hit_ids=hit_ids, hit_scores=hit_scores, hit_courses=search_result.hit_courses, latency_ms=search_result.latency_ms, reranker_latency_ms=reranker_latency_ms, code_integrity_ref=float(integrity_cache.get(expected_id) or 0.0), code_integrity_retrieved=check_code_integrity(search_result.top_answer) if search_result.top_answer else None, ner_primary_entity=ctx.get('ner_primary_entity'), ner_entities=tuple(ctx.get('ner_entities') or []), rank=rank, hit_at_1=rank == 1, hit_at_3=rank is not None and rank <= 3, hit_at_5=rank is not None and rank <= 5)
+    return QueryResult(query_id=test['query_id'], query_text=ctx['query'], expected_id=expected_id, course=ctx['course'], topic=ctx['topic'], subtopic=ctx['subtopic'], query_type=test.get('query_type', 'unknown'), hit_ids=hit_ids, hit_scores=hit_scores, hit_courses=search_result.hit_courses, latency_ms=search_result.latency_ms, reranker_latency_ms=reranker_latency_ms, code_integrity_ref=float(integrity_cache.get(expected_id) or 0.0), code_integrity_retrieved=check_code_integrity(search_result.top_answer) if search_result.top_answer else None, ner_primary_entity=ctx.get('ner_primary_entity'), ner_entities=tuple(ctx.get('ner_entities') or []))
 
 def _evaluate_single(idx: int, test: dict, topic_map: dict, query_vectors: Optional[list], integrity_cache: dict[str, float], rc: RetrievalConfig) -> QueryResult:
     """
@@ -198,7 +205,7 @@ def _run_evaluation_loop(test_set: list[dict], topic_map: dict, query_vectors: O
     logger.info(f'Evaluation complete — {len(results)}/{total} queries succeeded.')
     return results
 
-def evaluate_config(client, collection: str, model, test_set: list[dict], topic_map: dict, config: dict, top_k: int, es: 'Elasticsearch | None'=None, es_index: str='faqs', encode_batch_size: int=32, cache_dir: Optional[Path] = None, model_name: Optional[str] = None) -> list[QueryResult]:
+def evaluate_config(client, collection: str, model, test_set: list[dict], topic_map: dict, config: dict, top_k: int, cache_dir: Path, model_name: str, es: 'Elasticsearch | None'=None, es_index: str='faqs', encode_batch_size: int=32) -> list[QueryResult]:
     """
     Evaluate one (config, model) pair against the full test set.
     Applies reranking post-retrieval for any search_type when config
@@ -209,7 +216,7 @@ def evaluate_config(client, collection: str, model, test_set: list[dict], topic_
     search_type = config.get('search_type', 'vector')
     from collections import Counter
     from rag_pipeline.core.paths import Paths as _Paths
-    entity_freq_map = Counter(v.get('ner_primary_entity') for v in topic_map.values() if v.get('ner_primary_entity'))
+    entity_freq_map = Counter(v.ner_primary_entity for v in topic_map.values() if v.ner_primary_entity)
     entity_freq_threshold = _Paths.defaults().get('entity_freq_threshold', 999)
     rc = RetrievalConfig(search_type=search_type, use_reranker=use_reranker, reranker_name=reranker_name, retrieval_k=top_k * 4 if use_reranker else top_k, top_k=top_k, client=client, collection=collection, config=config, es=es, es_index=es_index, entity_freq_map=dict(entity_freq_map), entity_freq_threshold=entity_freq_threshold)
     _validate_config(rc, model)
@@ -221,7 +228,7 @@ def evaluate_config(client, collection: str, model, test_set: list[dict], topic_
     if query_vectors is not None:
         logger.info(f'Vector check — dim={len(query_vectors[0])}, sample={query_vectors[0][:3]}')
         from ..benchmark_metrics_data.retrievers import run_entity_boosted_retrieval
-        test_result = run_entity_boosted_retrieval(client=rc.client, collection=rc.collection, query_vector=query_vectors[0], course_filter=test_set[0]['course'], config=rc.config, top_k=5, ner_category=None, ner_primary_entity=None)
+        test_result = run_entity_boosted_retrieval(client=rc.client, collection=rc.collection, query_vector=query_vectors[0], course_filter=test_set[0]['course'], config=rc.config, top_k=rc.top_k, ner_category=None, ner_primary_entity=None)
         logger.info(f'Test retrieval OK — hits={len(test_result.hit_ids)}')
     logger.info(f'Integrity cache built — {len(integrity_cache)} entries.')
     return _run_evaluation_loop(test_set=test_set, topic_map=topic_map, query_vectors=query_vectors, integrity_cache=integrity_cache, rc=rc)

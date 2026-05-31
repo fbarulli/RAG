@@ -7,7 +7,7 @@ No I/O, no logic — pure data definitions.
 """
 from __future__ import annotations
 from typing import Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, computed_field
 
 
 class SearchResult(BaseModel, frozen=True):
@@ -39,10 +39,26 @@ class QueryResult(BaseModel, frozen=True):
     reranker_latency_ms: Optional[float] = None
     ner_primary_entity: Optional[str] = None
     ner_entities: tuple[str, ...] = ()
-    rank: Optional[int] = None
-    hit_at_1: bool = False
-    hit_at_3: bool = False
-    hit_at_5: bool = False
+
+    @computed_field
+    @property
+    def rank(self) -> Optional[int]:
+        return (self.hit_ids.index(self.expected_id) + 1) if self.expected_id in self.hit_ids else None
+
+    @computed_field
+    @property
+    def hit_at_1(self) -> bool:
+        return self.expected_id in self.hit_ids[:1]
+
+    @computed_field
+    @property
+    def hit_at_3(self) -> bool:
+        return self.expected_id in self.hit_ids[:3]
+
+    @computed_field
+    @property
+    def hit_at_5(self) -> bool:
+        return self.expected_id in self.hit_ids[:5]
 
 
 class MetricSummary(BaseModel, frozen=True):
