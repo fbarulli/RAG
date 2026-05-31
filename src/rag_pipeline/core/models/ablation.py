@@ -36,6 +36,7 @@ class Patch(BaseModel, frozen=True):
         for a in assignments:
             if self.null_entity or self.skip_ner:
                 a["ner_primary_entity"] = None
+                a["ner_entities"] = []
             if self.null_category or self.skip_ner:
                 a["ner_category"] = "OTHER"
             if self.null_topics:

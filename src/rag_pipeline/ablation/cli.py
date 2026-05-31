@@ -103,7 +103,7 @@ def cmd_flow(args) -> None:
                 print(f"  {name:<25} {cfg:<25} H@1={h1_str}  MRR={mrr_str}")
         except Exception as e:
             print(f"  ERROR in {name}: {e}")
-            continue
+            raise
         from rag_pipeline.ablation.compare import breakdown_from_jsonl
         from rag_pipeline.core.paths import Paths
         results_dir = Paths.ablation_results_dir()

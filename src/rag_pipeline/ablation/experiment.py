@@ -25,6 +25,7 @@ from rag_pipeline.core.paths import Paths
 from rag_pipeline.logging import get_logger
 from rag_pipeline.mlflow.tracking import log_ablation_run
 from rag_pipeline.db.store import save_experiment_result
+from rag_pipeline.core.io import atomic_json_write
 
 logger = get_logger(__name__)
 
@@ -62,14 +63,14 @@ class Experiment(BaseModel):
             collection = Paths.collection_for_model(self.model, self.encode_mode)
             _run(
                 f'uv run python -m rag_pipeline.ingestion.benchmark '
-                f'--model "{self.model}" --configs {cfg_args} --collection "{collection}"'
+                f'--model "{self.model}" --configs {cfg_args} --collection "{collection}"',
+                run_id=self.name
             )
             metrics, result_files = _collect_results(self.name, self.configs, self.model)
 
         finally:
             # always restore original state
-            with open(assignments_path, "w", encoding="utf-8") as f:
-                json.dump(original_assignments, f, indent=2)
+            atomic_json_write(assignments_path, original_assignments, indent=2)
             entity_patterns_path.write_text(original_patterns, encoding="utf-8")
             logger.info("Restored original state")
 
@@ -99,14 +100,12 @@ class Experiment(BaseModel):
             corpus_size=corpus_size,
         )
         meta_path = Paths.ablation_results_dir() / f"{self.name}_meta.json"
-        with open(meta_path, "w", encoding="utf-8") as f:
-            json.dump(result.model_dump(), f, indent=2)
+        atomic_json_write(meta_path, result.model_dump(), indent=2)
         logger.info("Saved → %s", meta_path)
 
         if self.name == "baseline":
             baseline_path = Paths.experiments_dir() / "baseline.json"
-            with open(baseline_path, "w", encoding="utf-8") as f:
-                json.dump(result.model_dump(), f, indent=2)
+            atomic_json_write(baseline_path, result.model_dump(), indent=2)
             logger.info("Baseline snapshot → %s", baseline_path)
 
         log_ablation_run(result)
@@ -118,9 +117,12 @@ class Experiment(BaseModel):
         patched["results"][self.model]["assignments"] = self.patch.apply_to_assignments(
             patched["results"][self.model]["assignments"]
         )
-        with open(assignments_path, "w", encoding="utf-8") as f:
-            json.dump(patched, f, indent=2)
-        _run(f'uv run python -m rag_pipeline.ingestion.ingest_models --models "{self.model}" --encode-mode "{self.encode_mode.value}" --no-skip-existing')
+        atomic_json_write(assignments_path, patched, indent=2)
+        # verify patch was applied
+        _verify_assignments(assignments_path, self.model, self.patch)
+        _run(f'uv run python -m rag_pipeline.ingestion.ingest_models --models "{self.model}" --encode-mode "{self.encode_mode.value}" --no-skip-existing', run_id=self.name)
+        # verify ingest reflected patch
+        _verify_collection(self.model, self.encode_mode, self.patch)
 
     def _run_with_rerun(self, entity_patterns_path: Path) -> None:
         if self.patch.empty_entity_patterns:
@@ -136,13 +138,15 @@ class Experiment(BaseModel):
         _run(
             f'uv run python -m rag_pipeline.eda.topics.core.topic_modeling '
             f'--embedding-model "{self.model}" --output "{out}" '
-            f'{cluster_flag} {rules_flag}'.strip()
+            f'{cluster_flag} {rules_flag}'.strip(),
+            run_id=self.name
         )
         _run(
             f'uv run python -m rag_pipeline.eda.topics.core.topic_merge --only "{out}"',
             env=env,
+            run_id=self.name
         )
-        _run(f'uv run python -m rag_pipeline.ingestion.ingest_models --models "{self.model}" --encode-mode "{self.encode_mode.value}" --no-skip-existing')
+        _run(f'uv run python -m rag_pipeline.ingestion.ingest_models --models "{self.model}" --encode-mode "{self.encode_mode.value}" --no-skip-existing', run_id=self.name)
 
 
 # ---------------------------------------------------------------------------
@@ -160,17 +164,48 @@ def _load_from_git(path: Path) -> dict:
     return json.loads(result.stdout)
 
 
-def _run(cmd: str, env: dict = None) -> None:
-    result = subprocess.run(cmd, shell=True, cwd=Paths.base(), env=env or os.environ)
+def _verify_assignments(path: Path, model: str, patch: 'Patch') -> None:
+    import json
+    data = json.load(open(path))
+    assignments = data['results'][model]['assignments']
+    has_primary = sum(1 for a in assignments if a.get('ner_primary_entity'))
+    has_entities = sum(1 for a in assignments if a.get('ner_entities'))
+    logger.info("Assignments after patch: has_primary=%d has_entities=%d total=%d", has_primary, has_entities, len(assignments))
+    if patch.null_entity and (has_primary > 0 or has_entities > 0):
+        raise RuntimeError(f"Patch null_entity failed: has_primary={has_primary} has_entities={has_entities}")
+
+def _verify_collection(model: str, encode_mode, patch: 'Patch') -> None:
+    from qdrant_client import QdrantClient
+    from rag_pipeline.core.paths import Paths
+    collection = Paths.collection_for_model(model, encode_mode)
+    client = QdrantClient(host='localhost', port=6333)
+    result = client.scroll(collection, limit=100, with_payload=True, with_vectors=False)
+    points = result[0]
+    has_primary = sum(1 for p in points if p.payload.get('ner_primary_entity'))
+    has_entities = sum(1 for p in points if p.payload.get('ner_entities'))
+    logger.info("Collection after ingest (sample 100): has_primary=%d has_entities=%d", has_primary, has_entities)
+    if patch.null_entity and (has_primary > 0 or has_entities > 0):
+        raise RuntimeError(f"Collection still has entity data after null_entity patch: has_primary={has_primary} has_entities={has_entities}")
+
+def _run(cmd: str, env: dict = None, run_id: str = "unknown") -> None:
+    log_path = Paths.ablation_results_dir() / f"{run_id}_subprocess.log"
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    result = subprocess.run(cmd, shell=True, cwd=Paths.base(), env=env or os.environ, capture_output=True, text=True)
+    with open(log_path, "a") as f:
+        f.write(f"\n--- CMD: {cmd}\n")
+        f.write(f"--- RC: {result.returncode}\n")
+        if result.stdout: f.write(result.stdout)
+        if result.stderr: f.write(result.stderr)
     if result.returncode != 0:
-        raise RuntimeError(f"Command failed: {cmd}")
+        raise RuntimeError(f"Command failed (rc={result.returncode}): {cmd}\nSTDERR: {result.stderr[-2000:]}")
 
 
 def _collect_results(name: str, configs: list[str], model: str) -> tuple[dict, list[str]]:
-    bench_dir    = Paths.reranker_results_dir()
-    metrics      = {}
-    summary_path = bench_dir / "benchmark_results.json"
+    bench_dir = Paths.reranker_results_dir()
+    metrics = {}
 
+    # primary: read from benchmark_results.json written by benchmark.py
+    summary_path = bench_dir / "benchmark_results.json"
     if summary_path.exists():
         with open(summary_path, encoding="utf-8") as f:
             rows = json.load(f)
@@ -178,8 +213,32 @@ def _collect_results(name: str, configs: list[str], model: str) -> tuple[dict, l
             if row.get("model_name") == model and row.get("config_name") in configs:
                 metrics[row["config_name"]] = MetricSummary.from_benchmark_row(row)
 
+    # fallback: read from DB if benchmark_results.json missing
+    if not metrics:
+        import sqlite3
+        try:
+            con = sqlite3.connect(str(Paths.results_db()))
+            con.row_factory = sqlite3.Row
+            for cfg in configs:
+                run_id = f"{name}__{cfg}"
+                row = con.execute(
+                    "SELECT r.config, r.model, rm.* FROM runs r JOIN run_metrics rm ON r.run_id=rm.run_id WHERE r.run_id=?",
+                    (run_id,)
+                ).fetchone()
+                if row:
+                    d = dict(row)
+                    d["config_name"] = d.pop("config", cfg)
+                    d["model_name"]  = d.pop("model", model)
+                    metrics[cfg] = MetricSummary.from_benchmark_row(d)
+            con.close()
+        except Exception as e:
+            logger.error("DB read failed: %s", e)
+
+    if not metrics:
+        logger.warning("No metrics found for %s configs=%s", name, configs)
+
     result_files = []
-    results_dir  = Paths.ablation_results_dir()
+    results_dir = Paths.ablation_results_dir()
     for cfg in configs:
         src = bench_dir / f"{cfg}_query_results.jsonl"
         if src.exists():

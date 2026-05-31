@@ -1,0 +1,91 @@
+
+--- CMD: uv run python -m rag_pipeline.eda.topics.core.topic_modeling --embedding-model "BAAI/bge-base-en-v1.5" --output "/workspaces/RAG-a-muffin/src/rag_pipeline/eda/topics/experiments/topic_assignments_BAAI_bge_base_en_v1.5.json"  --skip-rules
+--- RC: 0
+[build_base_nlp] Added 104 token-based patterns (case-insensitive)
+Added 3 new token-based patterns from missed questions
+2026-05-31 15:43:33,943 - __main__ - INFO - Starting NER tagging for 1207 questions...
+2026-05-31 15:43:37,871 - __main__ - INFO - NER tagging complete.
+2026-05-31 15:43:37,871 - __main__ - INFO - Processing model: BAAI/bge-base-en-v1.5
+2026-05-31 15:43:37,880 - rag_pipeline.eda.topics.core.topic_cluster - INFO - TopicCluster initialized | model=BAAI/bge-base-en-v1.5
+2026-05-31 15:43:57,993 - rag_pipeline.eda.topics.core.topic_cluster - INFO - Fitting BERTopic | model=BAAI/bge-base-en-v1.5 docs=1207 min_topic_size=5
+2026-05-31 15:44:56,233 - rag_pipeline.eda.topics.core.topic_cluster - INFO - Clustering complete | topics=100 outliers=122
+2026-05-31 15:44:56,246 - rag_pipeline.eda.topics.classification.topic_rules - INFO - Loaded 189 signals for TOOL
+2026-05-31 15:44:56,247 - rag_pipeline.eda.topics.classification.topic_rules - INFO - Loaded 112 signals for ERROR
+2026-05-31 15:44:56,247 - rag_pipeline.eda.topics.classification.topic_rules - INFO - Loaded 130 signals for ADMIN
+2026-05-31 15:44:56,247 - rag_pipeline.eda.topics.classification.topic_rules - INFO - Loaded 180 signals for CONCEPT
+2026-05-31 15:44:56,247 - rag_pipeline.eda.topics.classification.topic_rules - INFO - Loaded 21 signals for LANGUAGE
+2026-05-31 15:44:56,361 - __main__ - INFO - Saved 1207 assignments → /workspaces/RAG-a-muffin/src/rag_pipeline/eda/topics/experiments/topic_assignments_BAAI_bge_base_en_v1.5.json
+
+--- CMD: uv run python -m rag_pipeline.eda.topics.core.topic_merge --only "/workspaces/RAG-a-muffin/src/rag_pipeline/eda/topics/experiments/topic_assignments_BAAI_bge_base_en_v1.5.json"
+--- RC: 0
+
+--- CMD: uv run python -m rag_pipeline.ingestion.ingest_models --models "BAAI/bge-base-en-v1.5" --encode-mode "qa" --no-skip-existing
+--- RC: 0
+2026-05-31 15:45:07,969 - rag_pipeline.ingestion.benchmark_loader - INFO - Loaded 11 model entries from /workspaces/RAG-a-muffin/configs/models.json
+2026-05-31 15:45:08,405 - __main__ - INFO - Loaded 1207 documents from /workspaces/RAG-a-muffin/data/processed/clean.jsonl (0 skipped)
+2026-05-31 15:45:08,501 - __main__ - INFO - Connected to Qdrant at localhost:6333
+2026-05-31 15:45:08,501 - rag_pipeline.ingestion.benchmark_loader - INFO - Loaded 11 model entries from /workspaces/RAG-a-muffin/configs/models.json
+2026-05-31 15:45:08,501 - __main__ - INFO - Ingesting 1 model(s): ['BAAI/bge-base-en-v1.5']
+2026-05-31 15:45:08,502 - __main__ - INFO - ============================================================
+2026-05-31 15:45:08,502 - __main__ - INFO - Model      : BAAI/bge-base-en-v1.5
+2026-05-31 15:45:08,502 - __main__ - INFO - Collection : faqs_bge_base_en_v1_5_qa
+2026-05-31 15:45:08,505 - __main__ - INFO - Loaded embeddings from cache: /workspaces/RAG-a-muffin/experiments/embeddings/bge_base_en_v1_5_qa.npy shape=(1207, 768)
+2026-05-31 15:45:08,505 - __main__ - INFO - Embedding dims: 768
+2026-05-31 15:45:08,542 - __main__ - INFO - Loaded NER enrichment for 1207 documents for 'BAAI/bge-base-en-v1.5'
+2026-05-31 15:45:08,545 - __main__ - INFO - ✅ NER coverage: 1207/1207 documents (100%)
+2026-05-31 15:45:08,550 - __main__ - INFO - Deleting existing collection: faqs_bge_base_en_v1_5_qa
+2026-05-31 15:45:08,645 - __main__ - INFO - Upserting 1207 points to Qdrant…
+
+Batches:   0%|          | 0/13 [00:00<?, ?it/s]
+Batches:  15%|█▌        | 2/13 [00:00<00:00, 12.41it/s]
+Batches:  31%|███       | 4/13 [00:00<00:00, 12.99it/s]
+Batches:  46%|████▌     | 6/13 [00:00<00:00, 13.34it/s]
+Batches:  62%|██████▏   | 8/13 [00:00<00:00, 13.64it/s]
+Batches:  77%|███████▋  | 10/13 [00:00<00:00, 13.76it/s]
+Batches:  92%|█████████▏| 12/13 [00:00<00:00, 13.74it/s]
+Batches: 100%|██████████| 13/13 [00:00<00:00, 14.43it/s]
+2026-05-31 15:45:09,555 - __main__ - INFO - ✅ Done: 1207 documents indexed in 'faqs_bge_base_en_v1_5_qa'
+2026-05-31 15:45:09,556 - __main__ - INFO - ============================================================
+2026-05-31 15:45:09,556 - __main__ - INFO - INGESTION COMPLETE
+2026-05-31 15:45:09,556 - __main__ - INFO - ============================================================
+2026-05-31 15:45:09,556 - __main__ - INFO - Successful: 1 models
+2026-05-31 15:45:09,556 - __main__ - INFO -    - BAAI/bge-base-en-v1.5
+2026-05-31 15:45:09,556 - __main__ - INFO - All models ingested successfully.
+
+--- CMD: uv run python -m rag_pipeline.ingestion.benchmark --model "BAAI/bge-base-en-v1.5" --configs entity_boosted --collection "faqs_bge_base_en_v1_5_qa"
+--- RC: 0
+[INFO] Running on 463 queries (full dataset: True)
+
+==============================================================================================================
+                                          RETRIEVAL BENCHMARK REPORT                                          
+==============================================================================================================
+
+Model                          Config                    H@1      H@5      MRR    p50(ms)
+------------------------------ -------------------- -------- -------- -------- ----------
+bge-base-en-v1.5               entity_boosted         86.2%   96.5%  0.9080       9.9
+
+==============================================================================================================
+OVERALL WINNER: bge-base-en-v1.5 | entity_boosted (MRR: 0.9080)
+==============================================================================================================
+2026-05-31 15:45:13,923 - rag_pipeline.ingestion.benchmark_loader - INFO - Loaded 11 model entries from /workspaces/RAG-a-muffin/configs/models.json
+2026-05-31 15:45:13,923 - rag_pipeline.ingestion.benchmark_loader - INFO - Loaded 14 retrieval configs from /workspaces/RAG-a-muffin/configs/retrieval_configs.json
+2026-05-31 15:45:13,923 - __main__ - INFO - Running configs subset: ['entity_boosted']
+2026-05-31 15:45:13,933 - rag_pipeline.ingestion.benchmark_loader - WARNING - Test set line 315: expected_id 'da9f03ae67' not in corpus - skipping
+2026-05-31 15:45:13,933 - rag_pipeline.ingestion.benchmark_loader - WARNING - Test set line 316: expected_id 'da9f03ae67' not in corpus - skipping
+2026-05-31 15:45:13,934 - rag_pipeline.ingestion.benchmark_loader - WARNING - Test set line 317: expected_id 'da9f03ae67' not in corpus - skipping
+2026-05-31 15:45:13,934 - rag_pipeline.ingestion.benchmark_loader - WARNING - Test set line 318: expected_id 'da9f03ae67' not in corpus - skipping
+2026-05-31 15:45:13,934 - rag_pipeline.ingestion.benchmark_loader - WARNING - Test set line 319: expected_id 'da9f03ae67' not in corpus - skipping
+2026-05-31 15:45:13,934 - rag_pipeline.ingestion.benchmark_loader - WARNING - Test set line 320: expected_id 'da9f03ae67' not in corpus - skipping
+2026-05-31 15:45:13,934 - rag_pipeline.ingestion.benchmark_loader - WARNING - Test set line 321: expected_id 'da9f03ae67' not in corpus - skipping
+2026-05-31 15:45:13,935 - rag_pipeline.ingestion.benchmark_loader - INFO - Loaded 463 test queries from /workspaces/RAG-a-muffin/data/processed/test.jsonl (7 skipped)
+2026-05-31 15:45:13,935 - rag_pipeline.ingestion.benchmark_loader - INFO - Loaded 11 model entries from /workspaces/RAG-a-muffin/configs/models.json
+2026-05-31 15:45:21,119 - rag_pipeline.ingestion.benchmark_loader - INFO - Loaded 1207 topic assignments for model 'BAAI/bge-base-en-v1.5' from /workspaces/RAG-a-muffin/src/rag_pipeline/eda/topics/output/topic_assignments_all.json
+2026-05-31 15:45:21,121 - __main__ - INFO - Evaluating BAAI/bge-base-en-v1.5 | Configs: ['entity_boosted']
+2026-05-31 15:45:21,121 - __main__ - INFO -   Running: entity_boosted
+2026-05-31 15:45:21,121 - __main__ - INFO - Config dict: {'name': 'Entity Boosted', 'search_type': 'entity_boosted', 'rrf_k': 60, 'boost_question': 5.0, 'boost_text': 5.0}
+2026-05-31 15:45:21,121 - __main__ - INFO - Collection: faqs_bge_base_en_v1_5_qa
+2026-05-31 15:45:21,293 - rag_pipeline.ingestion.embedding_cache - INFO - Loaded embeddings from cache: /workspaces/RAG-a-muffin/experiments/embeddings/queries_baai_bge_base_en_v1.5.npy shape=(463, 768)
+2026-05-31 15:45:26,222 - __main__ - INFO -     Hit@5=96.5%  MRR=0.9080
+2026-05-31 15:45:26,232 - __main__ - INFO - QueryResults saved → /workspaces/RAG-a-muffin/experiments/results/entity_boosted_query_results.jsonl
+2026-05-31 15:45:27,892 - rag_pipeline.ingestion.benchmark_persistence - INFO - Saved benchmark results to /workspaces/RAG-a-muffin/experiments/results/benchmark_results.json
+2026-05-31 15:45:27,893 - __main__ - INFO - ✅ Benchmark complete!

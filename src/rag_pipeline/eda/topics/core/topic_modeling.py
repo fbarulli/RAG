@@ -240,8 +240,12 @@ def process_model(
 
     report = _build_report(model_name, docs, topics, assignments, min_topic_size, min_samples)
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(output_path, "w", encoding="utf-8") as f:
+    tmp = output_path.with_suffix(".tmp")
+    with open(tmp, "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2)
+    import json as _json
+    _json.loads(tmp.read_text())
+    tmp.replace(output_path)
         
     logger.info("Saved %d assignments → %s", len(assignments), output_path)
     

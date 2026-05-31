@@ -23,8 +23,11 @@ def _load_model_file(path: Path) -> Dict[str, Any]:
 
 def _write_merged(data: Dict[str, Any], output_path: Path) -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(output_path, "w", encoding="utf-8") as f:
+    tmp = output_path.with_suffix(".tmp")
+    with open(tmp, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2)
+    json.loads(tmp.read_text())  # validate before replacing
+    tmp.replace(output_path)
 
 
 class TopicMerger:

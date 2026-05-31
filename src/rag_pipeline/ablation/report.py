@@ -44,7 +44,7 @@ def check_regressions(results: list[dict], ci: bool = False) -> bool:
         for cfg, m in r.get("metrics", {}).items():
             base_m = baseline.get("metrics", {}).get(cfg, {})
             base_h1 = base_m.get("h1")
-            exp_h1  = m.get("h1")
+            exp_h1  = m.get("hit_rate_1", m.get("h1"))
             if base_h1 is None or exp_h1 is None:
                 continue
             delta = exp_h1 - base_h1
@@ -88,20 +88,25 @@ def _qt_breakdown(name: str, cfg: str) -> dict:
     return {qt: sum(v) / len(v) for qt, v in buckets.items() if v}
 
 
+def _failure_rate(m: dict):
+    fc = m.get("failure_count")
+    nq = m.get("num_queries") or 1
+    return fc / nq if isinstance(fc, (int, float)) else m.get("failure_rate", "?")
+
 def _fmt_row(name, patch, cfg, m, qt_data, widths):
     E, P, C, qt_w = widths
-    h1      = m.get("h1",          "?")
-    h5      = m.get("h5",          "?")
+    h1      = m.get("hit_rate_1", m.get("h1", "?"))
+    h5      = m.get("hit_rate_5", m.get("h5", "?"))
     mrr     = m.get("mrr",         "?")
     ndcg    = m.get("ndcg_10",     "?")
     p50     = m.get("latency_p50", "?")
-    fail    = m.get("failure_rate","?")
+    fail    = _failure_rate(m)
     h1_str   = f"{h1:>7.1%}"   if isinstance(h1,   (int, float)) else f"{h1:>7}"
     h5_str   = f"{h5:>7.1%}"   if isinstance(h5,   (int, float)) else f"{h5:>7}"
     mrr_str  = f"{mrr:>8.4f}"  if isinstance(mrr,  (int, float)) else f"{mrr:>8}"
-    ndcg_str = f"{ndcg:>8.4f}" if isinstance(ndcg, (int, float)) else f"{ndcg:>8}"
-    p50_str  = f"{p50:>7.1f}"  if isinstance(p50,  (int, float)) else f"{p50:>7}"
-    fail_str = f"{fail:>7.1%}" if isinstance(fail, (int, float)) else f"{fail:>7}"
+    ndcg_str = f"{ndcg:>9.4f}" if isinstance(ndcg, (int, float)) else f"{ndcg:>9}"
+    p50_str  = f"{p50:>8.1f}"  if isinstance(p50,  (int, float)) else f"{p50:>8}"
+    fail_str = f"{fail:>8.1%}" if isinstance(fail, (int, float)) else f"{fail:>8}"
     qt_str = "".join(
         f" {qt_data[qt]:>{qt_w}.1%}" if qt in qt_data else f" {chr(8212):>{qt_w}}"
         for qt in QUERY_TYPES
@@ -120,7 +125,7 @@ def print_report(results: Optional[list[dict]] = None, ci: bool = False) -> None
     rows_data = []
     for r in results:
         for cfg, m in r.get("metrics", {}).items():
-            h1 = m.get("h1", 0.0)
+            h1 = m.get("hit_rate_1", m.get("h1", 0.0))
             qt_data = _qt_breakdown(r["name"], cfg)
             rows_data.append((r["name"], r["patch"], cfg, m, h1, qt_data))
 

@@ -5,7 +5,7 @@
     "entity_boosted"
   ],
   "model": "BAAI/bge-base-en-v1.5",
-  "timestamp": "2026-05-31T11:57:16.944626+00:00",
+  "timestamp": "2026-05-31T15:40:09.900365+00:00",
   "metrics": {
     "entity_boosted": {
       "config_name": "entity_boosted",
@@ -22,9 +22,9 @@
       "ndcg_5": 0.7000106727595411,
       "ndcg_10": 0.7028700763220436,
       "map_score": 0.6945935753711132,
-      "latency_p50": 9.88666800185456,
-      "latency_p95": 16.133067998453043,
-      "latency_p99": 21.912047999649076,
+      "latency_p50": 9.437767999770585,
+      "latency_p95": 13.614848001452629,
+      "latency_p99": 21.834156999830157,
       "avg_code_integrity_ref": 1.0,
       "avg_code_integrity_retrieved": 1.0,
       "cross_course_contamination": 0.0,
@@ -36,6 +36,6 @@
   "result_files": [
     "/workspaces/RAG-a-muffin/experiments/results/ablation/no_generic_entity__entity_boosted_query_results.jsonl"
   ],
-  "git_commit": "fb93af7daeca7b8f5c1abf17c78f9445e1fbdcbe",
+  "git_commit": "e3a76ab55070119c5edeeb035fd26c431d885fbe",
   "corpus_size": 1207
 }
