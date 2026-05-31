@@ -19,3 +19,4 @@ experiments/benchmark_state.json
 # Ignore ablation experiment results
 ablation/results/*.json
 ablation/results/*.jsonl
+_embeddings_gpu/

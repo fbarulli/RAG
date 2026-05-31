@@ -5,20 +5,37 @@
     "entity_boosted"
   ],
   "model": "BAAI/bge-base-en-v1.5",
-  "timestamp": "2026-05-30T17:56:35.316006+00:00",
+  "timestamp": "2026-05-31T09:05:30.146034+00:00",
   "metrics": {
     "entity_boosted": {
-      "h1": 0.8617710583153347,
-      "h3": 0.9352051835853131,
-      "h5": 0.9481641468682506,
-      "h10": 0.9568034557235421,
-      "mrr": 0.9009976344749564,
-      "p50_ms": 9.041651999723399
+      "config_name": "entity_boosted",
+      "model_name": "BAAI/bge-base-en-v1.5",
+      "topic": null,
+      "subtopic": null,
+      "num_queries": 463,
+      "hit_rate_1": 0.0,
+      "hit_rate_3": 0.0,
+      "hit_rate_5": 0.0,
+      "hit_rate_10": 0.0,
+      "mrr": 0.0,
+      "ndcg_1": 0.0,
+      "ndcg_5": 0.0,
+      "ndcg_10": 0.0,
+      "map_score": 0.0,
+      "latency_p50": 9.165785000732285,
+      "latency_p95": 13.543103000301926,
+      "latency_p99": 30.328812999869115,
+      "avg_code_integrity_ref": 1.0,
+      "avg_code_integrity_retrieved": null,
+      "cross_course_contamination": 0.0,
+      "rank_std": 0.0,
+      "failure_count": 463,
+      "avg_failure_similarity": null
     }
   },
   "result_files": [
     "/workspaces/RAG-a-muffin/experiments/ablation_results/no_entity__entity_boosted_query_results.jsonl"
   ],
-  "git_commit": "d04fe6c9e77447baeedc9cf6bf91fed1fbb6e2d4",
+  "git_commit": "9cc5dda18f246ad4cbdc8048e50febc818d55630",
   "corpus_size": 1207
 }

@@ -68,6 +68,61 @@
       "enabled": false,
       "tier": "experimental",
       "description": "Nomic 1.5, requires trust_remote_code. Disabled by default."
+    },
+    {
+      "name": "BAAI/bge-large-en-v1.5",
+      "short_name": "bge_large_en_v1_5",
+      "collection": "faqs_bge_large_en_v1_5",
+      "es_index": "faqs_bge_large_en_v1_5",
+      "dims": 1024,
+      "trust_remote_code": false,
+      "enabled": true,
+      "tier": "large",
+      "description": "Large BGE model, 1024d."
+    },
+    {
+      "name": "microsoft/mpnet-base",
+      "short_name": "mpnet_base",
+      "collection": "faqs_mpnet_base",
+      "es_index": "faqs_mpnet_base",
+      "dims": 768,
+      "trust_remote_code": false,
+      "enabled": true,
+      "tier": "balanced",
+      "description": "MPNet base, 768d."
+    },
+    {
+      "name": "intfloat/e5-large-v2",
+      "short_name": "e5_large_v2",
+      "collection": "faqs_e5_large_v2",
+      "es_index": "faqs_e5_large_v2",
+      "dims": 1024,
+      "trust_remote_code": false,
+      "enabled": true,
+      "tier": "large",
+      "description": "E5 large v2, 1024d."
+    },
+    {
+      "name": "BAAI/bge-m3",
+      "short_name": "bge_m3",
+      "collection": "faqs_bge_m3",
+      "es_index": "faqs_bge_m3",
+      "dims": 1024,
+      "trust_remote_code": true,
+      "enabled": true,
+      "tier": "large",
+      "description": "BGE-M3, 1024d. Multilingual, multi-functionality."
+    },
+    {
+      "name": "Snowflake/snowflake-arctic-embed-l",
+      "short_name": "arctic_embed_l",
+      "collection": "faqs_arctic_embed_l",
+      "es_index": "faqs_arctic_embed_l",
+      "dims": 1024,
+      "trust_remote_code": true,
+      "enabled": true,
+      "tier": "large",
+      "description": "Snowflake Arctic Embed Large, 1024d."
     }
   ],
   "embeddings_cache_dir": "experiments/embeddings",
