@@ -9,8 +9,8 @@ Run: uv run python -m rag_pipeline.cleaning.p00_load_llm_queries
 import argparse
 import json
 from pathlib import Path
-from rag_pipeline.logging import get_logger
-from rag_pipeline.core.paths import Paths
+from rag_pipeline.cleaning.core.logging import get_logger
+from rag_pipeline.cleaning.core.paths import Paths
 logger = get_logger(__name__)
 DEFAULT_INPUT = Paths.processed_dir().parent / 'old_gen/eval_queries.json'
 DEFAULT_OUTPUT = Paths.processed_dir() / 'test.jsonl'

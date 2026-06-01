@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import List, Dict
 import json
-from rag_pipeline.core.paths import Paths
+from rag_pipeline.eda.core.paths import Paths
 
 class TopicsConfig:
     """Topics pipeline configuration — single source of truth via central configs."""

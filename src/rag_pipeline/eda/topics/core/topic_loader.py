@@ -3,7 +3,7 @@ import json
 import logging
 from typing import Any, Dict, List
 
-from rag_pipeline.core.paths import Paths
+from rag_pipeline.eda.core.paths import Paths
 
 logger = logging.getLogger(__name__)
 

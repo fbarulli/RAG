@@ -14,9 +14,9 @@ import json
 import time
 from pathlib import Path
 from dotenv import load_dotenv
-from rag_pipeline.core.paths import Paths
-from rag_pipeline.core.multi_llm_client import call_with_fallback
-from rag_pipeline.logging import get_logger
+from rag_pipeline.eda.core.paths import Paths
+from rag_pipeline.eda.core.llm_client import call_with_fallback
+from rag_pipeline.eda.core.logging import get_logger
 
 load_dotenv(Paths.base() / ".env")
 logger = get_logger(__name__)

@@ -17,11 +17,11 @@ import hashlib
 import argparse
 from pathlib import Path
 from collections import Counter, defaultdict
-from rag_pipeline.core.paths import Paths
-from rag_pipeline.core.schemas import FAQDocument
+from rag_pipeline.eda.core.paths import Paths
+from rag_pipeline.eda.core.schemas import FAQDocument
 INPUT = Paths.input_file('eda')
 OUTPUT = Paths.output_file('eda')
-from rag_pipeline.logging import get_logger
+from rag_pipeline.eda.core.logging import get_logger
 logger = get_logger(__name__)
 STOPWORDS = {'the', 'a', 'an', 'how', 'do', 'i', 'my', 'to', 'is', 'in', 'of', 'and', 'it', 'me', 'for', 'with', 'can', 'what', 'why', 'when', 'using', 'use', 'get', 'that', 'this', 'not', 'on', 'be', 'so', 'but', 'or', 'we', 'you', 'are', 'does', 'have', 'has', 'been', 'will', 'would', 'should', 'could', 'just', 'all', 'if', 'no', 'am', 'up', 'out', 'some', 'any', 'very', 'really', 'need', 'go', 'going', 'way', 'also', 'as', 'at', 'its', 'from', 'like', 'make', 'more', 'than', 'too', 'one', 'about', 'which', 'there', 'their', 'them'}
 

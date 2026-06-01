@@ -27,8 +27,8 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from statistics import mean, median, stdev
 from typing import Any
-from rag_pipeline.logging import get_logger
-from rag_pipeline.core.paths import Paths
+from rag_pipeline.eda.core.logging import get_logger
+from rag_pipeline.eda.core.paths import Paths
 logger = get_logger(__name__)
 DEFAULT_INPUT = Paths.experiments_dir() / 'topic_assignments.json'
 DEFAULT_OUTPUT = Paths.experiments_dir() / 'topic_validation.json'

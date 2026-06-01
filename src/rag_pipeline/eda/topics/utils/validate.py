@@ -2,7 +2,7 @@
 Schema-aware dataset validation using FAQDocument.
 """
 from collections import Counter
-from rag_pipeline.core.schemas import FAQDocument
+from rag_pipeline.eda.core.schemas import FAQDocument
 from typing import Union
 
 def validate_dataset(docs: list[Union[dict, FAQDocument]], valid_courses: set[str] | None=None, min_answer_len: int=10) -> list[str]:

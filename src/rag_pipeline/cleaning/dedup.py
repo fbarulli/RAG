@@ -22,9 +22,9 @@ import re
 from collections import defaultdict
 from difflib import SequenceMatcher
 from pathlib import Path
-from rag_pipeline.core.paths import Paths
-from rag_pipeline.core.schemas import FAQDocument
-from rag_pipeline.logging import get_logger
+from rag_pipeline.cleaning.core.paths import Paths
+from rag_pipeline.cleaning.core.schemas import FAQDocument
+from rag_pipeline.cleaning.core.logging import get_logger
 logger = get_logger(__name__)
 DEFAULT_INPUT = Paths.processed_dir() / 'parsed.jsonl'
 DEFAULT_OUTPUT = Paths.processed_dir() / 'clean.jsonl'

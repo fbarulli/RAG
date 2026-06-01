@@ -1,4 +1,4 @@
-from rag_pipeline.core.paths import Paths
+from rag_pipeline.eda.core.paths import Paths
 """
 def load_questions(data_path: Path) -> List[str]:
 

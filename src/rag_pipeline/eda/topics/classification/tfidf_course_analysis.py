@@ -48,8 +48,8 @@ import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import sys
-from rag_pipeline.core.paths import Paths
-from rag_pipeline.logging import get_logger
+from rag_pipeline.eda.core.paths import Paths
+from rag_pipeline.eda.core.logging import get_logger
 from .tfidf_stopwords import BRIDGE_CONCEPT_WHITELIST, apply_code_stripping, balance_corpus, build_stopword_list, load_stopwords, save_stopwords
 logger = get_logger(__name__)
 VECTORIZER_PARAMS: dict = dict(ngram_range=(1, 2), min_df=2, max_df=0.85, sublinear_tf=True, strip_accents='unicode')

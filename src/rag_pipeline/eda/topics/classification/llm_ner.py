@@ -13,8 +13,8 @@ import json
 import logging
 from typing import Optional
 from pydantic import BaseModel, field_validator
-from rag_pipeline.core.llm_client import call_llm
-from rag_pipeline.core.paths import Paths
+from rag_pipeline.eda.core.llm_client import call_llm
+from rag_pipeline.eda.core.paths import Paths
 
 logger = logging.getLogger(__name__)
 

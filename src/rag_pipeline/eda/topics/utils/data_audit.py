@@ -12,9 +12,9 @@ import re
 import unicodedata
 from collections import Counter, defaultdict
 from pathlib import Path
-from rag_pipeline.core.paths import Paths
-from rag_pipeline.core.schemas import FAQDocument
-from rag_pipeline.logging import get_logger
+from rag_pipeline.eda.core.paths import Paths
+from rag_pipeline.eda.core.schemas import FAQDocument
+from rag_pipeline.eda.core.logging import get_logger
 logger = get_logger(__name__)
 
 def load_docs(path: Path) -> list[FAQDocument]:
@@ -192,7 +192,7 @@ def main():
     results = run_audit(args.input, args.sample)
     if args.json:
         import json
-        from rag_pipeline.core.paths import Paths
+        from rag_pipeline.eda.core.paths import Paths
         output = Paths.experiments_dir() / 'data_audit.json'
         output.parent.mkdir(parents=True, exist_ok=True)
         with open(output, 'w') as f:

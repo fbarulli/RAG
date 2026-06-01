@@ -10,8 +10,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from rag_pipeline.logging import get_logger
-from rag_pipeline.core.paths import Paths
+from rag_pipeline.eda.core.logging import get_logger
+from rag_pipeline.eda.core.paths import Paths
 
 logger = get_logger(__name__)
 

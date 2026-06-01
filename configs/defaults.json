@@ -1,44 +1,51 @@
 {
-    "_comment": "Default settings for the retrieval benchmark pipeline. All overridable via CLI.",
-    "qdrant": {
-        "host": "localhost",
-        "port": 6333,
-        "grpc_port": 6334,
-        "distance": "Cosine"
-    },
-    "elasticsearch": {
-        "host": "http://localhost:9200",
-        "index": "faqs",
-        "request_timeout": 30,
-        "bulk_timeout": 60
-    },
-    "benchmark": {
-        "top_k": 10,
-        "default_search_type": "vector",
-        "encode_batch_size": 32
-    },
-    "ingestion": {
-        "batch_size": 100,
-        "encode_batch_size": 64,
-        "show_progress_bar": true
-    },
-    "course_name_map": {
-        "ml-zoomcamp": "machine-learning-zoomcamp",
-        "de-zoomcamp": "data-engineering-zoomcamp",
-        "mlops-zoomcamp": "mlops-zoomcamp",
-        "llm-zoomcamp": "llm-zoomcamp"
-    },
-    "production_config": "entity_boosted",
-    "production_model": "BAAI/bge-base-en-v1.5",
-    "llm_model": "nvidia_nim/meta/llama-3.1-70b-instruct",
-    "static_llm_model": "nvidia_nim/meta/llama-3.1-8b-instruct",
-    "topic_modeling": {
-        "min_topic_size": 5,
-        "min_samples": 1,
-        "subtopic_threshold": 40,
-        "subtopic_min_size": 5,
-        "ner_batch_size": 5
-    },
-    "production_encode_mode": "qa",
-    "entity_freq_threshold": 999
+  "_comment": "Default settings for the retrieval benchmark pipeline. All overridable via CLI.",
+  "qdrant": {
+    "host": "localhost",
+    "port": 6333,
+    "grpc_port": 6334,
+    "distance": "Cosine"
+  },
+  "elasticsearch": {
+    "host": "http://localhost:9200",
+    "index": "faqs",
+    "request_timeout": 30,
+    "bulk_timeout": 60
+  },
+  "benchmark": {
+    "top_k": 10,
+    "default_search_type": "vector",
+    "encode_batch_size": 32
+  },
+  "ingestion": {
+    "batch_size": 100,
+    "encode_batch_size": 64,
+    "show_progress_bar": true
+  },
+  "course_name_map": {
+    "ml-zoomcamp": "machine-learning-zoomcamp",
+    "de-zoomcamp": "data-engineering-zoomcamp",
+    "mlops-zoomcamp": "mlops-zoomcamp",
+    "llm-zoomcamp": "llm-zoomcamp"
+  },
+  "production_config": "entity_boosted",
+  "production_model": "BAAI/bge-base-en-v1.5",
+  "llm_model": "nvidia_nim/meta/llama-3.1-70b-instruct",
+  "static_llm_model": "nvidia_nim/meta/llama-3.1-8b-instruct",
+  "topic_modeling": {
+    "min_topic_size": 5,
+    "min_samples": 1,
+    "subtopic_threshold": 40,
+    "subtopic_min_size": 5,
+    "ner_batch_size": 5
+  },
+  "production_encode_mode": "qa",
+  "entity_freq_threshold": 999,
+  "data_download_url": "https://github.com/DataTalksClub/faq/archive/refs/heads/main.zip",
+  "download_courses": [
+    "llm-zoomcamp",
+    "mlops-zoomcamp",
+    "data-engineering-zoomcamp",
+    "machine-learning-zoomcamp"
+  ]
 }

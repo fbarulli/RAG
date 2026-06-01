@@ -1,9 +1,9 @@
 
 from pathlib import Path
 import json
-from rag_pipeline.core.paths import Paths
-from rag_pipeline.logging import get_logger
-from rag_pipeline.core.schemas import TopicAssignments
+from rag_pipeline.cleaning.core.paths import Paths
+from rag_pipeline.cleaning.core.logging import get_logger
+from rag_pipeline.cleaning.topic_test.schemas import TopicAssignments
 
 logger = get_logger(__name__)
 
@@ -17,11 +17,11 @@ class TopicPipeline:
         """Main entry point - produces final topic_assignments_all.json"""
         print("🔄 Running Topic Pipeline...")
         
-        # For now: merge existing data (we can improve modeling later)
+        
         assignments = self._merge_existing()
         assignments.save()
         
-        print(f"✅ Topic pipeline finished → {self.paths.topic_assignments()}")
+        print(f"Topic pipeline finished → {self.paths.topic_assignments()}")
         return assignments
     
     def _merge_existing(self) -> TopicAssignments:

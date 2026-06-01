@@ -49,8 +49,8 @@ from bertopic.vectorizers import ClassTfidfTransformer
 from hdbscan import HDBSCAN
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics import silhouette_score, davies_bouldin_score
-from rag_pipeline.logging import get_logger
-from rag_pipeline.core.paths import Paths
+from rag_pipeline.eda.core.logging import get_logger
+from rag_pipeline.eda.core.paths import Paths
 logger = get_logger(__name__)
 DEFAULT_INPUT = Paths.processed_dir() / 'clean.jsonl'
 DEFAULT_OUTPUT_DIR = Paths.experiments_dir() / 'embedding_comparison'

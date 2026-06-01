@@ -2,7 +2,7 @@
 import logging
 from typing import Any
 
-from rag_pipeline.logging import get_logger
+from rag_pipeline.eda.core.logging import get_logger
 
 logger = get_logger(__name__)
 

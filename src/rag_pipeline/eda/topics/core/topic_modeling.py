@@ -14,8 +14,8 @@ import re
 from pathlib import Path
 from typing import Any, Optional
 
-from rag_pipeline.logging import get_logger
-from rag_pipeline.core.paths import Paths
+from rag_pipeline.eda.core.logging import get_logger
+from rag_pipeline.eda.core.paths import Paths
 from rag_pipeline.eda.topics.config import TopicsConfig
 from rag_pipeline.eda.topics.core.topic_cluster import TopicCluster
 from rag_pipeline.eda.topics.classification.tfidf_stopwords import load_stopwords

@@ -1,5 +1,5 @@
 ---
-id: '9506089527'
+id: 9506089527
 question: 'AWS Lambda: ''The image manifest, config or layer media type for the source image is not supported'''
 sort_order: 41
 ---
