@@ -2,6 +2,8 @@
 
 ---
 
+`torch_dtype` is deprecated! Use `dtype` instead!
+
 ## Branch
 `mlflow-tracking` (continued from Session 4)
 

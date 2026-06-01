@@ -1,0 +1,68 @@
+{
+  "name": "rerankers_v3_full",
+  "patch": "llm_ner",
+  "configs": [
+    "entity_boosted_tinybert",
+    "entity_boosted_minilm"
+  ],
+  "model": "BAAI/bge-base-en-v1.5",
+  "timestamp": "2026-06-01T14:51:35.340515+00:00",
+  "metrics": {
+    "entity_boosted_tinybert": {
+      "config_name": "entity_boosted_tinybert",
+      "model_name": "BAAI/bge-base-en-v1.5",
+      "topic": null,
+      "subtopic": null,
+      "num_queries": 463,
+      "hit_rate_1": 0.9006479481641468,
+      "hit_rate_3": 0.9676025917926566,
+      "hit_rate_5": 0.980561555075594,
+      "hit_rate_10": 0.9913606911447084,
+      "mrr": 0.9358257053721417,
+      "ndcg_1": 0.9006479481641468,
+      "ndcg_5": 0.9462104615131407,
+      "ndcg_10": 0.9495985828279161,
+      "map_score": 0.9358257053721417,
+      "latency_p50": 9.340748001704924,
+      "latency_p95": 11.756217998481588,
+      "latency_p99": 12.849008999182843,
+      "avg_code_integrity_ref": 1.0,
+      "avg_code_integrity_retrieved": 1.0,
+      "cross_course_contamination": 0.0,
+      "rank_std": 1.2802344740502596,
+      "failure_count": 4,
+      "avg_failure_similarity": 1.0
+    },
+    "entity_boosted_minilm": {
+      "config_name": "entity_boosted_minilm",
+      "model_name": "BAAI/bge-base-en-v1.5",
+      "topic": null,
+      "subtopic": null,
+      "num_queries": 463,
+      "hit_rate_1": 0.9200863930885529,
+      "hit_rate_3": 0.9827213822894169,
+      "hit_rate_5": 0.9892008639308856,
+      "hit_rate_10": 0.9935205183585313,
+      "mrr": 0.950077993760499,
+      "ndcg_1": 0.9200863930885529,
+      "ndcg_5": 0.9596608579783408,
+      "ndcg_10": 0.9609923803810398,
+      "map_score": 0.950077993760499,
+      "latency_p50": 9.597217998816632,
+      "latency_p95": 13.038017001235858,
+      "latency_p99": 17.641228001593845,
+      "avg_code_integrity_ref": 1.0,
+      "avg_code_integrity_retrieved": 1.0,
+      "cross_course_contamination": 0.0,
+      "rank_std": 1.030819208054483,
+      "failure_count": 3,
+      "avg_failure_similarity": 1.0
+    }
+  },
+  "result_files": [
+    "/workspaces/RAG-a-muffin/experiments/results/ablation/rerankers_v3_full__entity_boosted_tinybert_query_results.jsonl",
+    "/workspaces/RAG-a-muffin/experiments/results/ablation/rerankers_v3_full__entity_boosted_minilm_query_results.jsonl"
+  ],
+  "git_commit": "0e9d439c277c9e79f1adc837c9d66bd824c8d66e",
+  "corpus_size": 1207
+}

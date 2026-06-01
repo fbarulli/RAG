@@ -46,8 +46,8 @@ def build_dataset(triples: list[dict], split: float = 0.9):
 
     for t in triples[:cut]:
         train_rows.append({"query": t.query, "positive": t.positive, "negative": random.choice(t.hard_negatives)})
-    for t in triples[cut:]:
-        eval_rows.append({"query": t.query, "positive": t.positive, "negative": t.hard_negatives})
+    for t in triples[int(len(triples) * 0.9):]:
+        eval_rows.append({"query": t.query, "positive": t.positive, "negative": random.choice(t.hard_negatives)})
 
     logger.info(f"Train: {len(train_rows)} | Eval: {len(eval_rows)}")
     return Dataset.from_list(train_rows), Dataset.from_list(eval_rows)
@@ -75,8 +75,12 @@ def train(
 
     # Evaluator from eval split
     eval_samples = [
-        {"query": r["query"], "positive": [r["positive"]], "negative": r["negative"]}
-        for r in eval_dataset
+        {
+            "query": t.query,
+            "positive": [t.positive],
+            "negative": t.hard_negatives,
+        }
+        for t in triples[int(len(triples) * 0.9):]
     ]
     evaluator = CERerankingEvaluator(eval_samples, name="reranker_eval")
 
