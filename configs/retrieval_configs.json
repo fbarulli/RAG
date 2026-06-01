@@ -116,5 +116,14 @@
     "reranker": true,
     "name": "Entity Boosted + mxbai-xsmall",
     "reranker_name": "mxbai-xsmall"
+  },
+  "entity_boosted_tinybert_finetuned": {
+    "name": "Entity Boosted + TinyBERT",
+    "search_type": "entity_boosted",
+    "rrf_k": 60,
+    "boost_question": 5.0,
+    "boost_text": 5.0,
+    "reranker": true,
+    "reranker_name": "TinyBERT-finetuned"
   }
 }

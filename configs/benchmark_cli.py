@@ -272,3 +272,40 @@ def create_failure_analysis_parser() -> argparse.ArgumentParser:
     )
     return p
 
+
+def create_reranker_training_parser() -> argparse.ArgumentParser:
+    """
+    Parser for ``rag_pipeline.ingestion.reranker_training``.
+
+    Example::
+        python -m rag_pipeline.ingestion.reranker_training \
+            --model-keys TinyBERT MiniLM-L6 \
+            --triples experiments/reranker_training/triples_sample_965.json
+    """
+    from rag_pipeline.ingestion.reranker_config import load_reranker_config
+    cfg = load_reranker_config()
+    t = cfg.training
+
+    p = argparse.ArgumentParser(
+        description="Fine-tune one or more cross-encoder rerankers on domain triples.",
+    )
+    p.add_argument(
+        "--model-keys",
+        nargs="+",
+        default=[t.default_model_key],
+        help="One or more model keys from rerankers.json (default: %(default)s).",
+    )
+    p.add_argument(
+        "--triples",
+        type=Path,
+        default=Path("experiments/reranker_training/triples_sample_965.json"),
+        help="Path to training triples JSON (default: %(default)s).",
+    )
+    p.add_argument(
+        "--output-dir",
+        type=Path,
+        default=None,
+        help="Base output directory — model key appended as subdirectory (default: experiments/reranker_finetuned).",
+    )
+    return p
+

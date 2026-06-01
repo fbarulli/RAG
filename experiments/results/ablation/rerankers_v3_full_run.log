@@ -1,0 +1,3 @@
+2026-06-01 08:50:24,661 - rag_pipeline.ablation.experiment - INFO - Running experiment: rerankers_v3_full (patch=llm_ner)
+2026-06-01 08:50:27,174 - rag_pipeline.ablation.experiment - INFO - Assignments after patch: has_primary=1074 has_entities=1074 total=1207
+2026-06-01 08:50:48,394 - rag_pipeline.ablation.experiment - INFO - Collection after ingest (sample 100): has_primary=90 has_entities=90

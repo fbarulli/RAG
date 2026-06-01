@@ -1,49 +1,82 @@
 """
-rag_pipeline/ingestion/_reranker_config.py
-Uses your central Paths class from core
+rag_pipeline/ingestion/reranker_config.py
+Typed config loading for rerankers.json using Pydantic.
+All defaults live in rerankers.json — none here.
 """
-
 import json
-from typing import Any, Dict, List
-from ..core.paths import Paths   # Correct import path
+import logging
+from typing import Optional
+from pydantic import BaseModel
+from ..core.paths import Paths
 
-def load_reranker_config() -> Dict[str, Any]:
-    """Load rerankers.json using the central Paths class"""
-    try:
-        # Use Paths to resolve the config
-        rerankers_path = Paths.base() / "configs" / "rerankers.json"
-        
-        if rerankers_path.exists():
-            with open(rerankers_path, encoding="utf-8") as f:
-                data = json.load(f)
-            print(f"✅ Loaded reranker config from configs/rerankers.json")
-            return data
-        else:
-            print(f"⚠️ rerankers.json not found at {rerankers_path}")
-    except Exception as e:
-        print(f"Warning: Could not load rerankers config: {e}")
-    
-    # Fallback
-    print("Using fallback reranker config")
-    return {
-        "models": [
-            {"name": "MiniLM-L6", "model": "cross-encoder/ms-marco-MiniLM-L-6-v2", "max_length": 512}
-        ]
-    }
+logger = logging.getLogger(__name__)
 
 
-def get_model_config(model_key: str) -> Dict:
-    """Get config by model name/key (e.g. 'MiniLM-L6', 'bge-reranker-base')"""
-    models = load_reranker_config().get("models", [])
-    
-    for m in models:
-        if m.get("name") == model_key or m.get("model") == model_key:
-            return m.copy()  # return a copy to avoid accidental mutation
-    
-    print(f"Warning: Model key '{model_key}' not found → using fallback")
-    return {
-        "name": model_key,
-        "model": model_key,
-        "max_length": 512,
-        "reranker": True
-    }
+class RerankerModelConfig(BaseModel):
+    name: str
+    model: str
+    max_length: int
+    reranker: bool
+    quantization: bool
+
+
+class RerankerTrainingConfig(BaseModel):
+    default_model_key: str
+    max_candidates: int
+    num_hard_negatives: int
+    sample_size: int
+    min_sample_for_full_train: int
+    num_train_epochs: int
+    per_device_train_batch_size: int
+    per_device_train_batch_size_gpu: int
+    warmup_steps: int
+    logging_steps: int
+    save_steps: int
+    eval_steps: int
+    save_strategy: str
+    eval_strategy: str
+    load_best_model_at_end: bool
+    metric_for_best_model: str
+    greater_is_better: bool
+    save_total_limit: int
+    fp16: bool
+    dataloader_num_workers: int
+    overwrite_output_dir: bool
+    course_filter: Optional[str]
+    boost_question: float
+    boost_text: float
+    rrf_k: int
+
+
+class RerankerInferenceConfig(BaseModel):
+    providers_priority: list[str]
+    cpu_batch_size_small: int
+    cpu_batch_size_medium: int
+    cpu_batch_size_large: int
+    gpu_batch_size: int
+    cpu_threshold_small: int
+    cpu_threshold_medium: int
+
+
+class RerankerConfig(BaseModel):
+    models: list[RerankerModelConfig]
+    training: RerankerTrainingConfig
+    inference: RerankerInferenceConfig
+
+
+def load_reranker_config() -> RerankerConfig:
+    path = Paths.base() / "configs" / "rerankers.json"
+    data = json.load(open(path, encoding="utf-8"))
+    # strip comment key before validation
+    data.pop("_comment", None)
+    cfg = RerankerConfig.model_validate(data)
+    logger.info("Loaded reranker config from configs/rerankers.json")
+    return cfg
+
+
+def get_model_config(model_key: str) -> RerankerModelConfig:
+    cfg = load_reranker_config()
+    for m in cfg.models:
+        if m.name == model_key or m.model == model_key:
+            return m
+    raise KeyError(f"Model key '{model_key}' not found in rerankers.json. Available: {[m.name for m in cfg.models]}")

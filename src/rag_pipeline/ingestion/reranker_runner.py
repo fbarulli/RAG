@@ -18,8 +18,8 @@ class RerankerRunner:
 
     def __init__(self, model_key: str = "MiniLM-L6"):
         self.model_config = get_model_config(model_key)
-        self.model_name = self.model_config["model"]      # full HF name
-        self.max_length = self.model_config.get("max_length", 512)
+        self.model_name = self.model_config.model
+        self.max_length = self.model_config.max_length
         self.model_key = model_key
         self._onnx_reranker = None
 
@@ -31,7 +31,7 @@ class RerankerRunner:
                 model_name=self.model_name,
                 max_length=self.max_length,
                 provider="CPUExecutionProvider",
-                quantize=self.model_config.get("quantization", False)
+                quantize=self.model_config.quantization
             )
         return self._onnx_reranker
 
