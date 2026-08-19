@@ -1,6 +1,6 @@
 # RAG-a-muffin
 
-Production-grade RAG pipeline for the [DataTalks.Club](https://datatalks.club) FAQ knowledge base (4 courses: ML Zoomcamp, DE Zoomcamp, MLOps Zoomcamp, LLM Zoomcamp).
+Production-grade RAG pipeline FAQ knowledge base.
 
 **Architecture**: clean data → NER/topic metadata → context-enriched vector ingestion → benchmarked retrieval → LLM-as-judge evaluation → end-to-end answer generation.
 
